@@ -1,0 +1,924 @@
+{
+  "sections": {
+    "announcement-bar": {
+      "type": "duendes-announcement-bar",
+      "blocks": {
+        "msg-1": {
+          "type": "message",
+          "settings": {
+            "text": "Envío internacional DHL Express · 5 a 10 días puerta a puerta"
+          }
+        },
+        "msg-2": {
+          "type": "message",
+          "settings": {
+            "text": "Envíos en Uruguay con DAC · 5 a 7 días"
+          }
+        },
+        "msg-3": {
+          "type": "message",
+          "settings": {
+            "text": "Pago 100 % seguro · Todas las tarjetas · Cifrado SSL"
+          }
+        },
+        "msg-4": {
+          "type": "message",
+          "settings": {
+            "text": "Hecho a mano sin moldes · Cada pieza existe una sola vez"
+          }
+        },
+        "msg-5": {
+          "type": "message",
+          "settings": {
+            "text": "+15.000 Guardianes adoptados en 45 países · 10 años de magia"
+          }
+        },
+        "msg-elegidos": {
+          "type": "message",
+          "settings": {
+            "text": "Si alguna vez un Guardián te frenó en seco, sos de los Elegidos · descubrí qué significa"
+          }
+        }
+      },
+      "block_order": [
+        "msg-elegidos",
+        "msg-1",
+        "msg-2",
+        "msg-3",
+        "msg-4",
+        "msg-5"
+      ],
+      "settings": {}
+    },
+    "hero": {
+      "type": "duendes-hero",
+      "settings": {
+        "eyebrow": "Duendes del Uruguay",
+        "title_line1": "Vos no los elegís.",
+        "title_line2": "Ellos te eligen a vos.",
+        "subtitle": "Guardianes canalizados a mano en Piriápolis. Cada uno existe una sola vez.",
+        "video_url": "",
+        "hero_image": "shopify://shop_images/2319.jpg",
+        "cta_text": "Encontrar a mi Guardián",
+        "cta_url": "shopify://collections/tienda-magica",
+        "secondary_text": "¿No sabés por dónde empezar? Hacé el test gratuito",
+        "secondary_url": "shopify://pages/test-del-guardian"
+      }
+    },
+    "mi-magia-home": {
+      "type": "mi-magia-banner",
+      "settings": {
+        "eyebrow": "Para los Elegidos — tu portal exclusivo",
+        "title": "Mi Magia",
+        "subtitle": "Guías, meditaciones, tu carta canalizada y la comunidad de quienes adoptaron: todo lo que sigue después de recibir a tu Guardián.",
+        "cta_text": "Entrar a Mi Magia",
+        "cta_icon": "✦",
+        "cta_url": "/blogs/mi-magia"
+      }
+    },
+    "guardians-carousel": {
+      "type": "duendes-guardians-carousel",
+      "settings": {
+        "heading": "Cada Guardián tiene un alma",
+        "subheading": "Caminá despacio. Cuando uno te llame, no lo dejes pasar.",
+        "collection": "todos-los-guardianes"
+      }
+    },
+    "cinematic": {
+      "type": "duendes-cinematic-carousel",
+      "blocks": {
+        "cs1": {
+          "type": "slide",
+          "settings": {
+            "bg_image": "shopify://shop_images/1695.jpg",
+            "theme": "dark",
+            "eyebrow": "ARTE QUE TRASCIENDE",
+            "title": "Cada pieza es <em>irrepetible</em>",
+            "stat_number": "0",
+            "stat_label": "piezas idénticas en el mundo",
+            "body": "Sin moldes. Sin producción en masa. Cada Guardián se esculpe a mano en nuestro taller de Piriápolis. Cuando uno se va, no se repite.",
+            "cta_text": "VER GUARDIANES",
+            "cta_url": "shopify://collections/tienda-magica"
+          }
+        },
+        "cs2": {
+          "type": "slide",
+          "settings": {
+            "theme": "gold",
+            "eyebrow": "CANALIZACIÓN ENERGÉTICA",
+            "title": "Un mensaje que <em>solo vos</em> vas a entender",
+            "stat_number": "",
+            "stat_label": "",
+            "body": "Cada Guardián llega con una carta canalizada: un mensaje personal que nosotros no escribimos — fluye a través nuestro. Miles de Elegidos en 45 países lo confirman: las palabras siempre llegan donde tienen que llegar.",
+            "cta_text": "CÓMO FUNCIONA",
+            "cta_url": "shopify://pages/como-funciona"
+          }
+        },
+        "cs3": {
+          "type": "slide",
+          "settings": {
+            "bg_image": "shopify://shop_images/1773.jpg",
+            "theme": "forest",
+            "eyebrow": "UNA COMUNIDAD GLOBAL",
+            "title": "<em>+15.000</em> Guardianes ya encontraron hogar",
+            "stat_number": "45+",
+            "stat_label": "países",
+            "body": "De Piriápolis al mundo. Cada Guardián viaja por DHL Express si estás en el exterior, o DAC si estás en Uruguay, protegido como la obra de arte que es, con seguimiento en tiempo real.",
+            "cta_text": "TESTIMONIOS",
+            "cta_url": "shopify://pages/testimonios"
+          }
+        },
+        "cs4": {
+          "type": "slide",
+          "settings": {
+            "bg_image": "shopify://shop_images/IMG_1674.png",
+            "theme": "dark",
+            "eyebrow": "UN REGALO QUE TRANSFORMA",
+            "title": "Un regalo que <em>nadie olvida</em>",
+            "stat_number": "",
+            "stat_label": "",
+            "body": "Regalar uno de nuestros Guardianes no es un regalo común. Es una experiencia completa: carta canalizada personal, ritual de activación, certificado y portal digital. Quien lo recibe no olvida ese momento.",
+            "cta_text": "REGALAR UN GUARDIÁN",
+            "cta_url": "shopify://collections/tienda-magica"
+          }
+        }
+      },
+      "block_order": [
+        "cs1",
+        "cs2",
+        "cs3",
+        "cs4"
+      ],
+      "settings": {}
+    },
+    "experiencia": {
+      "type": "duendes-fullsplit",
+      "settings": {
+        "theme": "light",
+        "photo_position": "left",
+        "image": "shopify://shop_images/2.jpg",
+        "label": "La experiencia",
+        "title": "No comprás un objeto. Recibís un mensaje.",
+        "body": "Nuestros Guardianes más especiales llegan con una carta canalizada: palabras escritas exclusivamente para vos, que nosotros no controlamos ni elegimos. Miles de personas nos escriben diciendo lo mismo: \"¿Cómo supieron exactamente lo que necesitaba escuchar?\". Todo eso lo vas a tener en nuestra sección exclusiva para los Elegidos: \"Mi Magia\".",
+        "counter_text": "",
+        "small_text": "",
+        "quote": "\"Abrí el paquete, leí la carta y lloré. Decía exactamente lo que necesitaba escuchar. No sé cómo lo hacen.\"",
+        "quote_author": "María L. · Buenos Aires, Argentina",
+        "show_gift_options": false,
+        "cta_text": "Encontrar a mi Guardián",
+        "cta_url": "shopify://collections/tienda-magica"
+      }
+    },
+    "valor": {
+      "type": "duendes-value-strip",
+      "blocks": {
+        "v1": {
+          "type": "value_card",
+          "settings": {
+            "icon": "01",
+            "title": "Escultura modelada a mano",
+            "description": "Porcelana fría profesional, combinada con magias que la hacen flexible, imitando la piel. Cristales naturales, pintados, modelados y cosidos a mano. Entre 20 y 60 horas de trabajo por creación.",
+            "compare_them": "Rechazamos el molde industrial",
+            "compare_us": "Transformamos a mano, sin moldes"
+          }
+        },
+        "v2": {
+          "type": "value_card",
+          "settings": {
+            "icon": "02",
+            "title": "Canalización",
+            "description": "Nuestras creaciones atraviesan un proceso de canalización de 7 días en el que vos colaborás energéticamente, estés donde estés. Recibimos un mensaje de tu Guardián durante la canalización. Cada carta es única e irrepetible, como el Guardián que la trae. No solo recibís a tu Guardián… recibís el mensaje que tiene para vos.",
+            "compare_them": "Rechazamos darte algo vacío, sin vida, sin historia.",
+            "compare_us": "Hacemos el estudio de canalización personal y lo compartimos con vos."
+          }
+        },
+        "v3": {
+          "type": "value_card",
+          "settings": {
+            "icon": "03",
+            "title": "Cristales auténticos",
+            "description": "Cada Guardián y creación lleva cristales naturales elegidos por su esencia y propósito energético. Nada es sintético.",
+            "compare_them": "Rechazamos pintar plástico y decirte que son piedras reales.",
+            "compare_us": "Siempre vas a tener cristales 100 % reales"
+          }
+        },
+        "v4": {
+          "type": "value_card",
+          "settings": {
+            "icon": "04",
+            "title": "Certificado de autenticidad",
+            "description": "Nombre, esencia, elemento, cristales, poderes y la historia completa de tu Guardián documentada — todo en nuestro Portal Exclusivo.",
+            "compare_them": "Rechazamos entregar algo genérico, sin identidad.",
+            "compare_us": "Cada pieza llega firmada e identificada con su historia completa."
+          }
+        },
+        "v5": {
+          "type": "value_card",
+          "settings": {
+            "icon": "05",
+            "title": "Ritual de activación",
+            "description": "Guía paso a paso para sellar la conexión energética con tu Guardián cuando llega a tus manos. El momento más íntimo del proceso.",
+            "compare_them": "Para otros, esto no existe",
+            "compare_us": "Queremos darte una experiencia espiritual guiada y COMPLETA."
+          }
+        },
+        "v6": {
+          "type": "value_card",
+          "settings": {
+            "icon": "06",
+            "title": "Acceso al portal \"Mi Magia\"",
+            "description": "Acceso digital de por vida a guías, meditaciones y contenido exclusivo para profundizar la conexión con tu Guardián.",
+            "compare_them": "Nadie más está dispuesto a ofrecerte tanto cuando ya tenés tu Guardián",
+            "compare_us": "Creemos en nuestra Comunidad, por eso te damos contenido exclusivo."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5",
+        "v6"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "eyebrow": "POR QUÉ SOMOS DIFERENTES",
+        "title": "¿Por qué nuestros Guardianes cuestan lo que cuestan?",
+        "bottom_text": "<strong>Todo esto está incluido.</strong>",
+        "background_image": "shopify://shop_images/1310.jpg"
+      }
+    },
+    "escasez": {
+      "type": "duendes-fullsplit",
+      "settings": {
+        "theme": "dark",
+        "photo_position": "right",
+        "image": "shopify://shop_images/C9C8F91A-1720-40C1-9C82-0CCB5CB69D34.png",
+        "label": "Piezas únicas",
+        "title": "Cuando se van, no vuelven. Nunca.",
+        "body": "No hay stock repetido. No existe el \"lo veo después\". Cada Guardián que ves en esta página existe una sola vez en el mundo. Los medianos, grandes y gigantes son 100 % irrepetibles — cuando alguien los adopta, desaparecen para siempre.",
+        "counter_text": "Manifestá lo que anhelás, con la guía de un ser elemental",
+        "small_text": "Más de 15.000 Guardianes ya encontraron hogar en más de 45 países.",
+        "quote": "",
+        "quote_author": "",
+        "show_gift_options": false,
+        "cta_text": "Ver Guardianes disponibles",
+        "cta_url": "shopify://collections/tienda-magica"
+      }
+    },
+    "unboxing": {
+      "type": "duendes-unboxing",
+      "blocks": {
+        "um1": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/1339.jpg",
+            "alt": "El paquete llega por DHL",
+            "icon": "—"
+          }
+        },
+        "um2": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/1660.jpg",
+            "alt": "Abriendo la caja sellada",
+            "icon": "—"
+          }
+        },
+        "um3": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/1653.jpg",
+            "alt": "La carta canalizada adentro",
+            "icon": "—"
+          }
+        },
+        "um4": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/1310.jpg",
+            "alt": "El Guardián en tus manos",
+            "icon": "—"
+          }
+        },
+        "us1": {
+          "type": "step",
+          "settings": {
+            "text": "<strong>El paquete llega sellado</strong> con nuestro sello. Nadie lo tocó antes que vos. Ese momento es tuyo."
+          }
+        },
+        "us2": {
+          "type": "step",
+          "settings": {
+            "text": "<strong>La carta canalizada</strong> llega en un sobre sellado con lacre. Leela en silencio — las palabras de adentro son solo para vos."
+          }
+        },
+        "us3": {
+          "type": "step",
+          "settings": {
+            "text": "<strong>Tu Guardián va protegido</strong> en un empaque premium. Tomalo con las dos manos — es tu primer contacto con su energía."
+          }
+        },
+        "us4": {
+          "type": "step",
+          "settings": {
+            "text": "<strong>Seguí el ritual de activación:</strong> elegí un lugar especial, encendé una vela, leé en voz alta. Así empieza el vínculo."
+          }
+        }
+      },
+      "block_order": [
+        "um1",
+        "um2",
+        "um3",
+        "um4",
+        "us1",
+        "us2",
+        "us3",
+        "us4"
+      ],
+      "settings": {
+        "eyebrow": "ABRIRLO ES PARTE DE LA MAGIA",
+        "title": "El primer ritual empieza <em>con tus manos</em>",
+        "cta_text": "ELEGIR A MI GUARDIÁN",
+        "cta_url": "shopify://collections/tienda-magica"
+      }
+    },
+    "testimonios": {
+      "type": "duendes-testimonials",
+      "blocks": {
+        "testi-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Cuando leí el mensaje canalizado, lloré. Decía exactamente lo que necesitaba escuchar. No sé cómo lo hacen, pero es real.",
+            "name": "María L.",
+            "location": "Buenos Aires, Argentina"
+          }
+        },
+        "testi-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lo compré de regalo y mi amiga me dijo que era lo más especial que le habían dado. La canalización le llegó al alma.",
+            "name": "Carolina S.",
+            "location": "Montevideo, Uruguay"
+          }
+        },
+        "testi-3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Tengo tres. Cada vez que necesito uno nuevo, aparece en la web justo cuando lo necesito. Es como si supieran.",
+            "name": "Luciana R.",
+            "location": "Madrid, España"
+          }
+        },
+        "testi-4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Soy muy escéptica, pero algo de Aidan me llamó. La carta mencionaba cosas que nadie sabía. Desde que está conmigo, tomo mejores decisiones.",
+            "name": "Ana P.",
+            "location": "Santiago, Chile"
+          }
+        },
+        "testi-5": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Mi hijo de 12 años, autista, conectó con su Guardián de un modo en que casi no conecta con la gente. Su terapeuta está fascinada.",
+            "name": "Verónica M.",
+            "location": "Montevideo, Uruguay"
+          }
+        },
+        "testi-6": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Es el cuarto Guardián que adoptó. Mi familia piensa que estoy loca. Pero cada uno tiene su lugar y su propósito. Son arte, energía y compañía.",
+            "name": "Lucía F.",
+            "location": "La Paz, Bolivia"
+          }
+        }
+      },
+      "block_order": [
+        "testi-1",
+        "testi-2",
+        "testi-3",
+        "testi-4",
+        "testi-5",
+        "testi-6"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "eyebrow": "VOCES REALES",
+        "heading": "Historias de los Elegidos",
+        "background_image": "shopify://shop_images/1668.jpg"
+      }
+    },
+    "comunidad": {
+      "type": "duendes-ugc",
+      "blocks": {
+        "ug1": {
+          "type": "photo",
+          "settings": {
+            "photo": "shopify://shop_images/Gemini_Generated_Image_l9shkml9shkml9sh.png",
+            "name": "Valentina M.",
+            "caption": "Con Cedric — Buenos Aires"
+          }
+        },
+        "ug2": {
+          "type": "photo",
+          "settings": {
+            "photo": "shopify://shop_images/416.jpg",
+            "name": "Carolina S.",
+            "caption": "Unboxing — Santiago"
+          }
+        },
+        "ug3": {
+          "type": "photo",
+          "settings": {
+            "photo": "shopify://shop_images/IMG_0243.jpg",
+            "name": "Ana P.",
+            "caption": "Su altar con 3 Guardianes — Madrid"
+          }
+        },
+        "ug4": {
+          "type": "photo",
+          "settings": {
+            "photo": "shopify://shop_images/1771.jpg",
+            "name": "Roberto L.",
+            "caption": "Primer día juntos — Ciudad de México"
+          }
+        },
+        "ug5": {
+          "type": "photo",
+          "settings": {
+            "photo": "shopify://shop_images/1-4.jpg",
+            "name": "Lucía F.",
+            "caption": "Colección completa — La Paz"
+          }
+        },
+        "ug6": {
+          "type": "photo",
+          "settings": {
+            "photo": "shopify://shop_images/1264.jpg",
+            "name": "Mariana D.",
+            "caption": "Regalo de cumpleaños — Bogotá"
+          }
+        },
+        "ug7": {
+          "type": "photo",
+          "settings": {
+            "photo": "shopify://shop_images/1658.jpg",
+            "name": "Diego R.",
+            "caption": "En su escritorio — Lima"
+          }
+        },
+        "ug8": {
+          "type": "photo",
+          "settings": {
+            "photo": "shopify://shop_images/Gemini_Generated_Image_avw4exavw4exavw4.png",
+            "name": "Sofía T.",
+            "caption": "Con su Pixie — Montevideo"
+          }
+        }
+      },
+      "block_order": [
+        "ug1",
+        "ug2",
+        "ug3",
+        "ug4",
+        "ug5",
+        "ug6",
+        "ug7",
+        "ug8"
+      ],
+      "settings": {
+        "eyebrow": "LA COMUNIDAD ELEMENTAL",
+        "title": "Cómo los reciben <em>en todo el mundo</em>",
+        "subtitle": "Los Elegidos. Momentos reales. Guardianes que ya encontraron hogar.",
+        "cta_text": "Seguinos en Instagram",
+        "cta_url": "https://www.instagram.com/duendesdeluruguay/"
+      }
+    },
+    "senales": {
+      "type": "duendes-signals",
+      "blocks": {
+        "s1": {
+          "type": "signal",
+          "settings": {
+            "text": "Le das todo a los demás y al final no te queda nada para vos."
+          }
+        },
+        "s2": {
+          "type": "signal",
+          "settings": {
+            "text": "Cargás emociones que no son tuyas y tu cuerpo lo paga."
+          }
+        },
+        "s3": {
+          "type": "signal",
+          "settings": {
+            "text": "Sentís un vacío que vuelve aunque todo esté \"bien\"."
+          }
+        },
+        "s4": {
+          "type": "signal",
+          "settings": {
+            "text": "Tenés presentimientos que siempre terminan acertando."
+          }
+        },
+        "s5": {
+          "type": "signal",
+          "settings": {
+            "text": "Encontrás plumas, horas espejo, tréboles de cuatro hojas… y no sabés por qué."
+          }
+        },
+        "s6": {
+          "type": "signal",
+          "settings": {
+            "text": "La gente te cuenta sus cosas sin saber por qué confía en vos."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "s6"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/IMG_1890.png",
+        "label": "Sincronicidades",
+        "heading_start": "Marcá las que",
+        "heading_italic": "te pasan a vos",
+        "subheading": "Si marcás más de dos, esto no es casualidad. El universo te está hablando.",
+        "cta_text": "DESCUBRÍ CUÁL TE ESTÁ BUSCANDO",
+        "cta_url": "shopify://pages/test-del-guardian"
+      }
+    },
+    "founders": {
+      "type": "duendes-founders",
+      "settings": {
+        "color_scheme": "",
+        "heading": "Quiénes somos",
+        "subheading": "Una familia que transformó su vida canalizando energía elemental.",
+        "photo_1": "shopify://shop_images/vintage_plant_garden_portrait_1f0cdf63-af63-6bf0-bcf0-493023560006_0_0.png",
+        "photo_2": "shopify://shop_images/tranquil_forest_portrait_1f0cdfbd-310e-62f0-b735-9826e7022bb4_1_1.png",
+        "story": "Somos Gabriel y Thibisay. Una familia de 5 que eligió vivir en Piriápolis — la ciudad alquimista de Uruguay — y que en 2015 descubrió algo que no estaba en ningún plan: la capacidad de canalizar seres elementales a través del uso y la transformación de distintos materiales.\n\nSin formación artística formal, sin inversores, sin fórmulas. Solo intuición, silencio y la certeza de que lo que fluía por nuestras manos era magia pura. Cada pieza que creamos, desde el primer día, nació con nombre, historia y propósito. Y cada persona que recibió una nos dijo lo mismo: \"¿Cómo supieron exactamente lo que necesitaba?\"\n\nHoy, más de 15.000 Guardianes viven en más de 45 países. Todo sigue hecho a mano. Todo sigue saliendo del mismo taller. Y cada carta canalizada sigue llegando exactamente donde tiene que llegar.",
+        "signature": "Con amor desde Piriápolis · Gabriel y Thibisay · Desde 2015"
+      }
+    },
+    "regalar": {
+      "type": "duendes-fullsplit",
+      "blocks": {
+        "g1": {
+          "type": "gift_option",
+          "settings": {
+            "title": "Regalo especial",
+            "description": "Le mandamos el formulario de canalización a quien lo va a recibir. Aunque ya sepa que le van a hacer un regalo… el mensaje va a ser 100 % personal para esa persona, y se va a sorprender."
+          }
+        },
+        "g2": {
+          "type": "gift_option",
+          "settings": {
+            "title": "Regalo sorpresa",
+            "description": "Si querés que sea 100 % sorpresa… vos completás un formulario especial sobre la persona. Preparamos nuestras magias y solo se entera cuando abre el paquete."
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2"
+      ],
+      "settings": {
+        "theme": "light",
+        "photo_position": "left",
+        "image": "shopify://shop_images/36F7C457-3C5B-45F4-9FDA-5FE507BE3997.png",
+        "label": "Magia para regalar… SÍ, los Guardianes los podés comprar vos, o recibirlos de regalo de otra persona.",
+        "title": "El regalo que cambia el día. Y a veces, una vida.",
+        "body": "Regalar uno de nuestros Guardianes no es un regalo común. Es una experiencia completa: carta canalizada personal, ritual de activación, certificado y portal digital. Quien lo recibe no olvida el momento en que recibió este detalle tan especial.",
+        "counter_text": "",
+        "small_text": "",
+        "quote": "",
+        "quote_author": "",
+        "show_gift_options": true,
+        "cta_text": "Regalar un Guardián",
+        "cta_url": "shopify://collections/tienda-magica"
+      }
+    },
+    "proceso": {
+      "type": "duendes-process",
+      "blocks": {
+        "p1": {
+          "type": "step",
+          "settings": {
+            "icon": "search",
+            "title": "1. Elegí a tu Guardián",
+            "description": "Recorré la tienda o hacé el Test del Guardián. Cuando uno (o más) te frene, no lo ignores — esa es la señal."
+          }
+        },
+        "p2": {
+          "type": "step",
+          "settings": {
+            "icon": "form",
+            "title": "2. Contanos tu momento",
+            "description": "Después de la compra recibís un formulario breve. Tu respuesta es la base de la canalización."
+          }
+        },
+        "p3": {
+          "type": "step",
+          "settings": {
+            "icon": "channel",
+            "title": "3. Canalizamos tu mensaje",
+            "description": "Nos conectamos con la energía de tu Guardián. Lo que fluye es una carta que solo tiene sentido para vos."
+          }
+        },
+        "p4": {
+          "type": "step",
+          "settings": {
+            "icon": "letter",
+            "title": "4. Tu carta personal",
+            "description": "Una carta sellada con palabras que nosotros no elegimos. Leela en un momento de silencio — vas a entender por qué."
+          }
+        },
+        "p5": {
+          "type": "step",
+          "settings": {
+            "icon": "ship",
+            "title": "5. Llega a tu puerta",
+            "description": "DHL Express internacional (5-10 días después de la canalización) o DAC en Uruguay (2-3 días después de la canalización). Con seguimiento completo."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "eyebrow": "DEL TALLER A TU CASA",
+        "heading": "De nuestro taller a tus manos",
+        "background_image": "shopify://shop_images/1049.jpg"
+      }
+    },
+    "incluye": {
+      "type": "duendes-incluye",
+      "blocks": {
+        "inc1": {
+          "type": "item",
+          "settings": {
+            "icon": "guardian",
+            "title": "Tu Guardián irrepetible",
+            "description": "Escultura hecha enteramente a mano. Cada uno existe una sola vez en el mundo. Con cristales naturales auténticos."
+          }
+        },
+        "inc2": {
+          "type": "item",
+          "settings": {
+            "icon": "letter",
+            "title": "Carta canalizada personal",
+            "description": "Un mensaje que nosotros no escribimos — fluye a través nuestro para vos. Las palabras siempre llegan donde tienen que llegar."
+          }
+        },
+        "inc3": {
+          "type": "item",
+          "settings": {
+            "icon": "crystal",
+            "title": "Certificado de autenticidad",
+            "description": "Nombre, esencia, elemento, cristales, poderes e historia completa de tu Guardián. Firmado y documentado."
+          }
+        },
+        "inc4": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "Ritual de activación",
+            "description": "Guía paso a paso para sellar la conexión con tu Guardián. El momento más íntimo y poderoso de toda la experiencia."
+          }
+        },
+        "inc5": {
+          "type": "item",
+          "settings": {
+            "icon": "heart",
+            "title": "Empaque premium",
+            "description": "Caja artesanal. Tu Guardián viaja como la obra de arte que es. El unboxing es parte del ritual."
+          }
+        },
+        "inc6": {
+          "type": "item",
+          "settings": {
+            "icon": "star",
+            "title": "Portal Mi Magia",
+            "description": "Acceso de por vida a guías, rituales, meditaciones y contenido exclusivo para quienes adoptaron. La conexión no termina — se profundiza."
+          }
+        }
+      },
+      "block_order": [
+        "inc1",
+        "inc2",
+        "inc3",
+        "inc4",
+        "inc5",
+        "inc6"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "eyebrow": "TODO ESTO ES TUYO",
+        "title": "Qué recibís con tu Guardián",
+        "subtitle": "No recibís \"una figura decorativa\" — recibís una experiencia completa de conexión que incluye todo lo que necesitás.",
+        "side_image": "shopify://shop_images/1412.jpg"
+      }
+    },
+    "garantia": {
+      "type": "duendes-guarantee",
+      "settings": {
+        "color_scheme": "",
+        "title": "Tu Guardián llega en perfecto estado a cualquier parte del mundo.",
+        "subtitle": "Cada pieza viaja con un empaque pensado para protegerla. Si algo sale mal en el camino (aunque honestamente… nunca nos pasó), lo resolvemos.",
+        "background_image": "shopify://shop_images/1329.jpg"
+      }
+    },
+    "faq": {
+      "type": "duendes-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "¿Qué es un Guardián canalizado?",
+            "answer": "Un ser elemental esculpido a mano, que atraviesa procesos de alquimia y transformación, y llega con una carta canalizada personal — un mensaje que fluye a través nuestro y solo tiene sentido para vos… deja de ser una figura decorativa simple y se convierte en un aliado con la energía de la Madre Tierra que buscó conectar con vos para caminar juntos una parte de tu evolución y la suya, porque es una colaboración mutua."
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "¿Hacen envíos a todo el mundo?",
+            "answer": "Sí. Enviamos a todo el mundo. Tu Guardián viaja con protección premium."
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "¿Puedo elegir lo que dice la carta?",
+            "answer": "No. La carta está canalizada — nosotros no elegimos las palabras. Lo que llega es exactamente lo que necesitás escuchar, aunque todavía no lo sepas."
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "¿Puedo regalarlo?",
+            "answer": "Sí, y es el regalo más transformador que existe. Viene con una carta canalizada personalizada para quien lo recibe. Podés elegir regalo sorpresa o regalo abierto."
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "¿Por qué cada Guardián es único?",
+            "answer": "Porque se esculpen a mano sin moldes, entre 20 y 60 horas cada uno. Nuestra intención es darte algo auténtico, irrepetible y excepcional."
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "eyebrow": "RESPUESTAS",
+        "heading": "Lo que más nos preguntan"
+      }
+    },
+    "cta-final": {
+      "type": "duendes-cta-final",
+      "blocks": {
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "icon": "shield",
+            "text": "PAGO SEGURO SSL"
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "icon": "card",
+            "text": "MERCADOPAGO · DLOCAL · SHOPIFY PAYMENTS"
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "icon": "check",
+            "text": "+15.000 GUARDIANES ADOPTADOS"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "eyebrow": "SIN REPOSICIÓN",
+        "title_line1": "¿Vas a dejar que",
+        "title_line2": "otro se los lleve?",
+        "subtitle": "Si llegaste hasta acá, algo te trajo. Hay Guardianes que desaparecen el mismo día en que nacen — y otros que esperan meses a la persona indicada. El tuyo está ahí. Pero no va a esperar para siempre — acordate que ellos también buscan evolucionar y no pueden dejar pasar oportunidades, como vos tampoco deberías.",
+        "shipping_text": "DHL Express a todo el mundo · DAC en Uruguay · Seguimiento completo",
+        "primary_text": "Encontrar a mi Guardián",
+        "primary_url": "shopify://collections/tienda-magica",
+        "secondary_text": "Hacer el test gratuito",
+        "secondary_url": "shopify://pages/test-del-guardian",
+        "background_image": "shopify://shop_images/2.jpg"
+      }
+    },
+    "whatsapp": {
+      "type": "duendes-whatsapp",
+      "settings": {
+        "phone": "59898690629",
+        "text": "¿Dudas? Escribinos",
+        "subtext": "Respondemos a la brevedad. Puede haber demoras si hay mucho volumen de mensajes."
+      }
+    },
+    "social-proof": {
+      "type": "duendes-social-proof",
+      "settings": {
+        "enabled": true
+      }
+    },
+    "sticky-cta": {
+      "type": "duendes-sticky-cta",
+      "settings": {
+        "highlight": "12 guardianes",
+        "text": "disponibles ahora",
+        "cta_text": "VER GUARDIANES",
+        "cta_url": "shopify://collections/tienda-magica"
+      }
+    },
+    "ddu-nuevos-guardianes": {
+      "type": "duendes-nuevos-guardianes",
+      "settings": {
+        "badge": "Recién llegados · mayo 2026",
+        "title": "Recién bajaron al Bosque.",
+        "subtitle": "Cuarenta y seis recién canalizados. Cada uno irrepetible, hecho a mano una sola vez. El tuyo ya está acá, esperando.",
+        "cta_text": "Ver quiénes llegaron",
+        "cta_url": "/collections/nuevos-guardianes",
+        "see_all_text": "Ver los 46",
+        "collection": "nuevos-guardianes",
+        "rotate_seconds": 5
+      }
+    },
+    "ddu-te-eligen": {
+      "type": "duendes-te-eligen",
+      "settings": {
+        "badge": "Te lleva 2 minutos",
+        "title": "Vos no elegís. Ellos te eligen a vos.",
+        "subtitle": "El que llega a tu casa no es el que más te gustó en la pantalla. Es el que reconoció tu energía. Hacé el Test del Guardián y mirá cuáles ya saben tu nombre.",
+        "cta_text": "Hacer el test",
+        "cta_url": "/pages/test-del-guardian"
+      }
+    },
+    "ddu-llegaron-hadas": {
+      "type": "duendes-llegaron-hadas",
+      "settings": {
+        "badge": "Nueva categoría en el Bosque",
+        "title": "Por primera vez: las Hadas.",
+        "subtitle": "Doce hadas medianas. Una energía más fina que la de un Guardián, más liviana que la de un Pixie. Hace meses que pedían su turno. Ya están acá.",
+        "cta_text": "Conocer a las Hadas",
+        "cta_url": "/collections/hadas-medianas",
+        "collection": "hadas-medianas"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "hero",
+    "mi-magia-home",
+    "ddu-nuevos-guardianes",
+    "ddu-te-eligen",
+    "guardians-carousel",
+    "cinematic",
+    "ddu-llegaron-hadas",
+    "experiencia",
+    "valor",
+    "escasez",
+    "unboxing",
+    "testimonios",
+    "comunidad",
+    "senales",
+    "founders",
+    "regalar",
+    "proceso",
+    "incluye",
+    "garantia",
+    "faq",
+    "cta-final",
+    "whatsapp",
+    "social-proof",
+    "sticky-cta"
+  ]
+}

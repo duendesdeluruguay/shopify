@@ -47,7 +47,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<h2>Join our elemental community<\/h2>",
+                "text": "<h2>Comunidad elemental · Elemental community<\/h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -72,7 +72,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>Receive news, exclusive launches, and messages from the elemental world.<\/p>",
+                "text": "<p>Novedades, lanzamientos y mensajes del mundo elemental · News, launches & messages from the elemental world.<\/p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -115,7 +115,7 @@
             "input_type_preset": "paragraph",
             "style_class": "button-unstyled",
             "display_type": "arrow",
-            "label": "Subscribe",
+            "label": "Suscribirme · Subscribe",
             "integrated_button": true,
             "button_type_preset": "paragraph",
             "padding-block-start": 0,

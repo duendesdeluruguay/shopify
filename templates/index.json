@@ -65,6 +65,17 @@
         "secondary_url": "shopify://pages/test-del-guardian"
       }
     },
+    "mi-magia-home": {
+      "type": "mi-magia-banner",
+      "settings": {
+        "eyebrow": "For The Chosen — your exclusive portal",
+        "title": "Mi Magia",
+        "subtitle": "Guides, meditations, your channeled letter, and the adopters community — everything after you welcome your Guardian.",
+        "cta_text": "Enter Mi Magia",
+        "cta_icon": "✦",
+        "cta_url": "/blogs/mi-magia"
+      }
+    },
     "guardians-carousel": {
       "type": "duendes-guardians-carousel",
       "settings": {
@@ -886,6 +897,7 @@
   "order": [
     "announcement-bar",
     "hero",
+    "mi-magia-home",
     "ddu-nuevos-guardianes",
     "ddu-te-eligen",
     "guardians-carousel",
