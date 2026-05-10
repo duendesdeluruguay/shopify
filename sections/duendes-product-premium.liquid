@@ -4,6 +4,12 @@
 {% endcomment %}
 
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<script>
+  window.__DPP_I18N = {
+    connecting: {{ 'duendes.product.js_connecting' | t | json }},
+    toBeRevealed: {{ 'duendes.product.to_be_revealed' | t | json }}
+  };
+</script>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&display=swap');
@@ -497,7 +503,7 @@
     {%- if product.type != blank -%}<div class="dpp-hero__type">{{ product.type }}</div>{%- endif -%}
     {%- assign size_tag_lower = guardian_size | downcase -%}
     {%- unless size_tag_lower == 'mini' or size_tag_lower == 'pixie' -%}
-      <p class="dpp-hero__eyebrow">You didn&apos;t choose them. They chose you.</p>
+      <p class="dpp-hero__eyebrow">{{ 'duendes.product.hero_eyebrow' | t }}</p>
     {%- endunless -%}
     <h1 class="dpp-hero__title">{{ product.title }}</h1>
     {%- if channeled_phrase != '' -%}
@@ -505,9 +511,9 @@
     {%- endif -%}
     <div class="dpp-hero__line"></div>
     {%- if size_tag_lower == 'mini' or size_tag_lower == 'pixie' -%}
-      <p class="dpp-hero__scarcity" style="font-size:14px;color:#fff;">Created especially for you. There are no two alike.</p>
+      <p class="dpp-hero__scarcity" style="font-size:14px;color:#fff;">{{ 'duendes.product.hero_scarcity_1' | t }}</p>
     {%- else -%}
-      <p class="dpp-hero__scarcity">Exists only once. Once it&apos;s gone, it doesn&apos;t come back.</p>
+      <p class="dpp-hero__scarcity">{{ 'duendes.product.hero_scarcity_2' | t }}</p>
     {%- endif -%}
   </div>
 </div>
@@ -527,7 +533,7 @@
         {%- if product.images.size > 1 -%}
           <div class="dpp-gallery__thumbs" id="dpp-thumbs">
             {%- for image in product.images -%}
-              <button class="dpp-gallery__thumb{% if forloop.first %} dpp-active{% endif %}" data-src="{{ image | image_url: width: 900 }}" data-alt="{{ image.alt | escape }}" aria-label="View image {{ forloop.index }}">
+              <button class="dpp-gallery__thumb{% if forloop.first %} dpp-active{% endif %}" data-src="{{ image | image_url: width: 900 }}" data-alt="{{ image.alt | escape }}" aria-label="{{ 'duendes.product.gallery_view' | t: index: forloop.index | escape }}">
                 <img src="{{ image | image_url: width: 160 }}" alt="{{ image.alt | escape }}" loading="lazy">
               </button>
             {%- endfor -%}
@@ -545,9 +551,9 @@
             <span class="dpp-badge">{{ guardian_size }}</span>
           {%- endif -%}
           {%- if is_unique -%}
-            <span class="dpp-badge">One-of-a-kind &middot; Unrepeatable</span>
+            <span class="dpp-badge">{{ 'duendes.product.badge_unique' | t }}</span>
           {%- else -%}
-            <span class="dpp-badge">Recreated</span>
+            <span class="dpp-badge">{{ 'duendes.product.badge_recreated' | t }}</span>
           {%- endif -%}
         </div>
 
@@ -557,9 +563,9 @@
           loss aversion + obligación moral. Solo si product es 'is_unique'.
         {%- endcomment -%}
         {%- if is_unique -%}
-          <div class="duendes-unique-badge" aria-label="One-of-a-kind, unrepeatable piece">
+          <div class="duendes-unique-badge" aria-label="{{ 'duendes.product.unique_badge_aria' | t | escape }}">
             <span class="duendes-unique-badge__mark" aria-hidden="true">✦</span>
-            <span class="duendes-unique-badge__text">1 of 1 · unique existence</span>
+            <span class="duendes-unique-badge__text">{{ 'duendes.product.unique_badge_text' | t }}</span>
           </div>
           {%- assign canalizado_date = product.metafields.custom.canalizado_el | default: product.published_at | default: product.created_at -%}
           {%- if canalizado_date != blank -%}
@@ -567,20 +573,16 @@
             {%- assign cdate_s = canalizado_date | date: '%s' | times: 1 -%}
             {%- assign elapsed_days = now_s | minus: cdate_s | divided_by: 86400 -%}
             {%- if elapsed_days >= 0 and elapsed_days < 730 -%}
-              {%- comment -%} DDU 2026-05-01: shop locale es US/inglés, mapeamos mes manualmente para mostrarlo en español {%- endcomment -%}
-              {%- assign cd_month_num = canalizado_date | date: '%-m' | plus: 0 -%}
-              {%- assign cd_month_names = 'January,February,March,April,May,June,July,August,September,October,November,December' | split: ',' -%}
-              {%- assign cd_month_index = cd_month_num | minus: 1 -%}
-              {%- assign cd_month_name = cd_month_names[cd_month_index] -%}
+              {%- assign cd_date_fmt = canalizado_date | date: '%-d/%m/%Y' -%}
               <p class="duendes-unique-date">
-                Channeled on {{ cd_month_name }} {{ canalizado_date | date: '%-d' }}, {{ canalizado_date | date: '%Y' }}
+                {{ 'duendes.product.channeled_on_short' | t: date: cd_date_fmt }}
                 {%- if elapsed_days < 7 -%}
-                  <em>· just arrived at the studio</em>
+                  <em>{{ 'duendes.product.wait_arrived' | t }}</em>
                 {%- elsif elapsed_days < 30 -%}
-                  <em>· waiting for you for {{ elapsed_days }} days</em>
+                  <em>{{ 'duendes.product.wait_days' | t: count: elapsed_days }}</em>
                 {%- else -%}
                   {%- assign elapsed_weeks = elapsed_days | divided_by: 7 -%}
-                  <em>· waiting for you for {{ elapsed_weeks }} weeks</em>
+                  <em>{{ 'duendes.product.wait_weeks' | t: count: elapsed_weeks }}</em>
                 {%- endif -%}
               </p>
             {%- endif -%}
@@ -604,26 +606,26 @@
           completo antes de procesar el ticket.
         {%- endcomment -%}
         {%- if current_variant.available -%}
-          <ul class="duendes-includes" aria-label="What your adoption includes">
+          <ul class="duendes-includes" aria-label="{{ 'duendes.product.includes_ul_aria' | t | escape }}">
             <li class="duendes-includes__item">
               <span class="duendes-includes__glyph" aria-hidden="true">✦</span>
-              <span class="duendes-includes__text"><strong>One-of-a-kind, unrepeatable piece</strong> · channeled only for you</span>
+              <span class="duendes-includes__text">{{ 'duendes.product.short_inc_1' | t }}</span>
             </li>
             <li class="duendes-includes__item">
               <span class="duendes-includes__glyph" aria-hidden="true">✉</span>
-              <span class="duendes-includes__text"><strong>Personal channeled letter</strong> · handwritten for this adoption</span>
+              <span class="duendes-includes__text">{{ 'duendes.product.short_inc_2' | t }}</span>
             </li>
             <li class="duendes-includes__item">
               <span class="duendes-includes__glyph" aria-hidden="true">◈</span>
-              <span class="duendes-includes__text"><strong>Certificate of authenticity</strong> · name, essence, crystals</span>
+              <span class="duendes-includes__text">{{ 'duendes.product.short_inc_3' | t }}</span>
             </li>
             <li class="duendes-includes__item">
               <span class="duendes-includes__glyph" aria-hidden="true">☾</span>
-              <span class="duendes-includes__text"><strong>Lifetime access to Mi Magia</strong> · 7-day channeling, Oracle, Journal, the rituals of the forest</span>
+              <span class="duendes-includes__text">{{ 'duendes.product.short_inc_4' | t }}</span>
             </li>
             <li class="duendes-includes__item">
               <span class="duendes-includes__glyph" aria-hidden="true">◇</span>
-              <span class="duendes-includes__text"><strong>Cinematic packaging</strong> · DHL Express shipping with tracking</span>
+              <span class="duendes-includes__text">{{ 'duendes.product.short_inc_5' | t }}</span>
             </li>
           </ul>
         {%- endif -%}
@@ -645,47 +647,47 @@
             <details class="dpp-gift-toggle" id="dpp-gift-toggle">
               <summary class="dpp-gift-toggle__summary">
                 <span class="dpp-gift-toggle__icon">✦</span>
-                <span class="dpp-gift-toggle__label">Is it a gift? Personalize the recipient</span>
+                <span class="dpp-gift-toggle__label">{{ 'duendes.product.gift_toggle' | t }}</span>
               </summary>
               <div class="dpp-gift-panel">
                 <fieldset class="dpp-gift-radio">
-                  <legend class="dpp-gift-radio__legend">Who is {{ product.title | escape }} for?</legend>
+                  <legend class="dpp-gift-radio__legend">{{ 'duendes.product.gift_who_for' | t: title: product.title }}</legend>
                   <label class="dpp-gift-radio__opt">
                     <input type="radio" name="dpp_adoption_choice" value="self" checked>
-                    <span>For me</span>
+                    <span>{{ 'duendes.product.gift_me' | t }}</span>
                   </label>
                   <label class="dpp-gift-radio__opt">
                     <input type="radio" name="dpp_adoption_choice" value="gift_known">
-                    <span>It&apos;s a gift and I know the recipient&apos;s details</span>
+                    <span>{{ 'duendes.product.gift_known' | t }}</span>
                   </label>
                   <label class="dpp-gift-radio__opt">
                     <input type="radio" name="dpp_adoption_choice" value="gift_surprise">
-                    <span>It&apos;s a surprise, I&apos;ll deliver it</span>
+                    <span>{{ 'duendes.product.gift_surprise' | t }}</span>
                   </label>
                 </fieldset>
 
                 <div class="dpp-gift-recipient" id="dpp-gift-recipient" hidden>
                   <label class="dpp-gift-field">
-                    <span class="dpp-gift-field__label">Recipient&apos;s name</span>
+                    <span class="dpp-gift-field__label">{{ 'duendes.product.recipient_name' | t }}</span>
                     <input type="text" name="properties[_gift_recipient_name]" id="dpp-prop-recipient-name" autocomplete="off" placeholder="e.g. Maria">
                   </label>
                   <label class="dpp-gift-field">
-                    <span class="dpp-gift-field__label">Recipient&apos;s email</span>
+                    <span class="dpp-gift-field__label">{{ 'duendes.product.recipient_email' | t }}</span>
                     <input type="email" name="properties[_gift_recipient_email]" id="dpp-prop-recipient-email" autocomplete="off" placeholder="email@example.com">
                   </label>
-                  <p class="dpp-gift-help">The Forest will send them the ritual at this email when it is ready.</p>
+                  <p class="dpp-gift-help">{{ 'duendes.product.gift_help' | t }}</p>
                 </div>
               </div>
             </details>
-            <button type="button" class="dpp-atc-btn" id="dpp-atc-btn">Adopt This Guardian</button>
+            <button type="button" class="dpp-atc-btn" id="dpp-atc-btn">{{ 'duendes.product.btn_adopt' | t }}</button>
           {%- else -%}
-            <button type="button" class="dpp-atc-btn" disabled>Adopted</button>
+            <button type="button" class="dpp-atc-btn" disabled>{{ 'duendes.product.btn_adopted' | t }}</button>
           {%- endif -%}
         </form>
 
         {%- assign size_tag_lower = guardian_size | downcase -%}
         {%- if size_tag_lower == 'mediano' or size_tag_lower == 'grande' or size_tag_lower == 'gigante' or size_tag_lower == 'pixie' -%}
-          <p class="dpp-canalizacion-note">✦ Includes channeling study</p>
+          <p class="dpp-canalizacion-note">{{ 'duendes.product.channeling_note' | t }}</p>
         {%- endif -%}
 
         <div class="dpp-trust">
@@ -693,19 +695,19 @@
             <span class="dpp-trust__icon">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
             </span>
-            International Shipping
+            {{ 'duendes.product.trust_shipping' | t }}
           </div>
           <div class="dpp-trust__item">
             <span class="dpp-trust__icon">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 9.5l10 7.5 10-7.5L12 2zm0 3l6.5 4.5L12 14 5.5 9.5 12 5z"/><path d="M12 17l-6.5-4.5L2 14.5 12 22l10-7.5-3.5-2L12 17z"/></svg>
             </span>
-            Unrepeatable Piece
+            {{ 'duendes.product.trust_unique' | t }}
           </div>
           <div class="dpp-trust__item">
             <span class="dpp-trust__icon">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
             </span>
-            Mi Magia Portal
+            {{ 'duendes.product.trust_portal' | t }}
           </div>
         </div>
       </div>
@@ -721,7 +723,7 @@
 ═══════════════════════════════════════ -->
 <div class="dpp-story">
   <div class="dpp-container duendes-reveal">
-    <h2 class="dpp-story__title dpp-cinzel">The Story of {{ product.title }}</h2>
+    <h2 class="dpp-story__title dpp-cinzel">{{ 'duendes.product.story_title' | t: title: product.title }}</h2>
     <div class="dpp-story__line"></div>
     <div class="dpp-story__body" id="dpp-story-body">
       {{ product.description }}
@@ -760,28 +762,28 @@
     </svg>
   </div>
   <div class="dpp-container duendes-reveal">
-    <h2 class="dpp-ficha__title dpp-cinzel">{{ product.title }} — Profile</h2>
+    <h2 class="dpp-ficha__title dpp-cinzel">{{ 'duendes.product.profile_heading' | t: title: product.title }}</h2>
     <div class="dpp-ficha__line"></div>
     <div class="dpp-ficha__grid">
       <div class="dpp-ficha__card">
         <div class="dpp-ficha__card-icon">&#9671;</div>
-        <div class="dpp-ficha__card-label">Purpose</div>
+        <div class="dpp-ficha__card-label">{{ 'duendes.product.label_purpose' | t }}</div>
         <div class="dpp-ficha__card-value">{{ product.type | default: 'Guardian' }}</div>
       </div>
       <div class="dpp-ficha__card">
         <div class="dpp-ficha__card-icon">&#9671;</div>
-        <div class="dpp-ficha__card-label">Size</div>
+        <div class="dpp-ficha__card-label">{{ 'duendes.product.label_size' | t }}</div>
         <div class="dpp-ficha__card-value" id="dpp-ficha-size">{%- if guardian_size != '' -%}{{ guardian_size }}{%- assign size_lower = guardian_size | downcase -%}{%- if size_lower == 'mini' or size_lower == 'pixie' -%}: 9 a 13 cm aprox.{%- elsif guardian_height_cm -%}: {{ guardian_height_cm }} cm{%- endif -%}{%- else -%}Por descubrir{%- endif -%}</div>
       </div>
       <div class="dpp-ficha__card">
         <div class="dpp-ficha__card-icon">&#9671;</div>
-        <div class="dpp-ficha__card-label">Guardian Stone</div>
-        <div class="dpp-ficha__card-value" id="dpp-ficha-crystal">To be revealed</div>
+        <div class="dpp-ficha__card-label">{{ 'duendes.product.label_stone' | t }}</div>
+        <div class="dpp-ficha__card-value" id="dpp-ficha-crystal">{{ 'duendes.product.to_be_revealed' | t }}</div>
       </div>
       <div class="dpp-ficha__card">
         <div class="dpp-ficha__card-icon">&#9671;</div>
-        <div class="dpp-ficha__card-label">Mission</div>
-        <div class="dpp-ficha__card-value" id="dpp-ficha-mission" style="font-style:italic;font-size:15px;">To be revealed</div>
+        <div class="dpp-ficha__card-label">{{ 'duendes.product.label_mission' | t }}</div>
+        <div class="dpp-ficha__card-value" id="dpp-ficha-mission" style="font-style:italic;font-size:15px;">{{ 'duendes.product.to_be_revealed' | t }}</div>
       </div>
     </div>
   </div>
@@ -792,42 +794,42 @@
 ═══════════════════════════════════════ -->
 <div class="dpp-includes">
   <div class="dpp-container">
-    <h2 class="dpp-includes__title dpp-cinzel">What Your Adoption Includes</h2>
+    <h2 class="dpp-includes__title dpp-cinzel">{{ 'duendes.product.includes_title' | t }}</h2>
     <div class="dpp-includes__line"></div>
     <ul class="dpp-includes__list" id="dpp-checklist">
       <li class="dpp-includes__item">
         <div class="dpp-includes__check"><svg class="dpp-includes__check-svg" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
         <div class="dpp-includes__text">
-          <div class="dpp-includes__item-title">Channeled Guardian</div>
-          <p class="dpp-includes__item-desc">Hand-sculpted polymer clay with natural crystals. Each piece exists only once in the world.</p>
+          <div class="dpp-includes__item-title">{{ 'duendes.product.inc_1_title' | t }}</div>
+          <p class="dpp-includes__item-desc">{{ 'duendes.product.inc_1_desc' | t }}</p>
         </div>
       </li>
       <li class="dpp-includes__item">
         <div class="dpp-includes__check"><svg class="dpp-includes__check-svg" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
         <div class="dpp-includes__text">
-          <div class="dpp-includes__item-title">Channeling Letter</div>
-          <p class="dpp-includes__item-desc">Personal handwritten message after the 7-day ritual. It only makes sense to you.</p>
+          <div class="dpp-includes__item-title">{{ 'duendes.product.inc_2_title' | t }}</div>
+          <p class="dpp-includes__item-desc">{{ 'duendes.product.inc_2_desc' | t }}</p>
         </div>
       </li>
       <li class="dpp-includes__item">
         <div class="dpp-includes__check"><svg class="dpp-includes__check-svg" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
         <div class="dpp-includes__text">
-          <div class="dpp-includes__item-title">Mi Magia Portal</div>
-          <p class="dpp-includes__item-desc">Lifetime access to the digital portal with guides, rituals, and exclusive content.</p>
+          <div class="dpp-includes__item-title">{{ 'duendes.product.inc_3_title' | t }}</div>
+          <p class="dpp-includes__item-desc">{{ 'duendes.product.inc_3_desc' | t }}</p>
         </div>
       </li>
       <li class="dpp-includes__item">
         <div class="dpp-includes__check"><svg class="dpp-includes__check-svg" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
         <div class="dpp-includes__text">
-          <div class="dpp-includes__item-title">Certificate of Origin</div>
-          <p class="dpp-includes__item-desc">Document that certifies the authenticity and origin of your Guardian from Piriápolis.</p>
+          <div class="dpp-includes__item-title">{{ 'duendes.product.inc_4_title' | t }}</div>
+          <p class="dpp-includes__item-desc">{{ 'duendes.product.inc_4_desc' | t }}</p>
         </div>
       </li>
       <li class="dpp-includes__item">
         <div class="dpp-includes__check"><svg class="dpp-includes__check-svg" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
         <div class="dpp-includes__text">
-          <div class="dpp-includes__item-title">Activation Guide</div>
-          <p class="dpp-includes__item-desc">Instructions to seal the energetic bond and begin your path with the Guardian.</p>
+          <div class="dpp-includes__item-title">{{ 'duendes.product.inc_5_title' | t }}</div>
+          <p class="dpp-includes__item-desc">{{ 'duendes.product.inc_5_desc' | t }}</p>
         </div>
       </li>
     </ul>
@@ -860,37 +862,37 @@
   </div>
   <div class="dpp-container">
     <div class="dpp-seal__card duendes-reveal">
-      <p class="dpp-seal__eyebrow">Channeled in Piri&aacute;polis</p>
-      <h2 class="dpp-seal__title">Every Guardian Is Born with a Message</h2>
+      <p class="dpp-seal__eyebrow">{{ 'duendes.product.seal_eyebrow' | t }}</p>
+      <h2 class="dpp-seal__title">{{ 'duendes.product.seal_title' | t }}</h2>
       <div class="dpp-seal__line"></div>
-      <p class="dpp-seal__text">This isn&apos;t a sculpture. It is a being channeled in deep meditation, in Piri&aacute;polis &mdash; an energetic point recognized worldwide. Despu&eacute;s de que adopt&aacute;s, comienza un ritual de 7 d&iacute;as. Conectamos con tu energ&iacute;a y la del guardi&aacute;n. El resultado es una carta escrita a mano &mdash; un mensaje que solo tiene sentido para vos.</p>
-      <p class="dpp-seal__text">It isn&apos;t generic. It doesn&apos;t repeat. It can&apos;t be forced. More than 15,000 people in 45 countries received theirs. Many cried when they read it.</p>
+      <p class="dpp-seal__text">{{ 'duendes.product.seal_p1' | t }}</p>
+      <p class="dpp-seal__text">{{ 'duendes.product.seal_p2' | t }}</p>
 
       <div class="dpp-seal__steps">
         <div class="dpp-seal__step">
-          <div class="dpp-seal__step-day">Day 1&ndash;3</div>
-          <div class="dpp-seal__step-name">Connection</div>
-          <p class="dpp-seal__step-desc">The Guardian tunes into your energy</p>
+          <div class="dpp-seal__step-day">{{ 'duendes.product.seal_d1' | t }}</div>
+          <div class="dpp-seal__step-name">{{ 'duendes.product.seal_s1' | t }}</div>
+          <p class="dpp-seal__step-desc">{{ 'duendes.product.seal_s1d' | t }}</p>
         </div>
         <div class="dpp-seal__step">
-          <div class="dpp-seal__step-day">Day 4&ndash;5</div>
-          <div class="dpp-seal__step-name">Channeling</div>
-          <p class="dpp-seal__step-desc">The message reveals itself. A unique phrase is born for you</p>
+          <div class="dpp-seal__step-day">{{ 'duendes.product.seal_d2' | t }}</div>
+          <div class="dpp-seal__step-name">{{ 'duendes.product.seal_s2' | t }}</div>
+          <p class="dpp-seal__step-desc">{{ 'duendes.product.seal_s2d' | t }}</p>
         </div>
         <div class="dpp-seal__step">
-          <div class="dpp-seal__step-day">Day 6&ndash;7</div>
-          <div class="dpp-seal__step-name">Consecration</div>
-          <p class="dpp-seal__step-desc">The bond is sealed. Ready to depart for its new home</p>
+          <div class="dpp-seal__step-day">{{ 'duendes.product.seal_d3' | t }}</div>
+          <div class="dpp-seal__step-name">{{ 'duendes.product.seal_s3' | t }}</div>
+          <p class="dpp-seal__step-desc">{{ 'duendes.product.seal_s3d' | t }}</p>
         </div>
       </div>
 
-      <p class="dpp-seal__final">Each letter is one-of-a-kind. Each message, unrepeatable.</p>
+      <p class="dpp-seal__final">{{ 'duendes.product.seal_final' | t }}</p>
       <div class="dpp-seal__signature-wrap" id="dpp-sig-wrap">
         <div class="dpp-seal__sig-glow"></div>
         <div class="dpp-seal__signature">Thibisay &amp; Gabriel</div>
         <div class="dpp-seal__sig-line"></div>
       </div>
-      <div class="dpp-seal__signature-role">From Piri&aacute;polis &middot; Channelers</div>
+      <div class="dpp-seal__signature-role">{{ 'duendes.product.seal_role' | t }}</div>
     </div>
   </div>
 </div>
@@ -900,7 +902,7 @@
 ═══════════════════════════════════════ -->
 <div class="dpp-recs">
   <div class="dpp-container duendes-reveal">
-    <h2 class="dpp-recs__title dpp-cinzel">Other Guardians Waiting for a Home</h2>
+    <h2 class="dpp-recs__title dpp-cinzel">{{ 'duendes.product.recs_title' | t }}</h2>
     <div class="dpp-recs__line"></div>
     <div class="dpp-recs__scroll" id="dpp-recs-scroll">
       <!-- Populated by JS from recommendations API -->
@@ -1070,7 +1072,7 @@
         }
       }
       atcBtn.disabled = true;
-      atcBtn.textContent = 'Connecting...';
+      atcBtn.textContent = (window.__DPP_I18N && window.__DPP_I18N.connecting) || 'Connecting...';
       playAdoptSound();
       spawnGoldenSpores(atcBtn);
       setTimeout(function() {
@@ -1193,7 +1195,8 @@
     var fichaSize = document.getElementById('dpp-ficha-size');
     if (heightMatch && fichaSize) {
       var currentSize = fichaSize.textContent.trim();
-      if (currentSize && currentSize !== 'To be revealed') {
+      var tbr = (window.__DPP_I18N && window.__DPP_I18N.toBeRevealed) || 'To be revealed';
+      if (currentSize && currentSize !== tbr && currentSize !== 'To be revealed' && currentSize !== 'Por revelar') {
         fichaSize.textContent = currentSize + ' · ' + heightMatch[1] + ' cm';
       } else {
         fichaSize.textContent = heightMatch[1] + ' cm';
@@ -1290,9 +1293,9 @@
         type="button"
         class="duendes-product-sticky__btn"
         id="dppStickySubmit"
-        aria-label="Adoptar {{ product.title | escape }}"
+        aria-label="{{ 'duendes.product.sticky_aria' | t: title: product.title | escape }}"
       >
-        ADOPTAR
+        {{ 'duendes.product.sticky_btn' | t }}
       </button>
     </div>
   </div>

@@ -327,7 +327,7 @@
               {% endif %}
               {%- if is_coleccion -%}
                 <div class="dc-badges">
-                  <span class="dc-badge dc-badge--completo">Protection · Abundance · Love · Spiritual</span>
+                  <span class="dc-badge dc-badge--completo">{{ 'duendes.collection_badge_complete' | t }}</span>
                 </div>
               {%- elsif p_badges != blank -%}
                 <div class="dc-badges">
@@ -349,14 +349,14 @@
                 <span class="duendes-g-card__type-badge">{{ product.type }}</span>
               {%- endif -%}
               {% unless product.available %}
-                <span class="duendes-g-card__sold-badge">Adopted</span>
+                <span class="duendes-g-card__sold-badge">{{ 'duendes.card_adopted' | t }}</span>
               {% endunless %}
             </div>
             <div class="duendes-g-card__info">
               <h3>{{ product.title }}</h3>
               <p class="duendes-g-card__essence">{{ product.metafields.custom.esencia | default: product.type }}</p>
               <p class="duendes-g-card__price">{{ product.price | money }}</p>
-              <span class="duendes-g-card__btn">Meet this Guardian</span>
+              <span class="duendes-g-card__btn">{{ 'duendes.meet_this_guardian' | t }}</span>
             </div>
           </a>{% endif %}
         {% endfor %}
@@ -402,7 +402,7 @@
               {% endif %}
               {%- if is_coleccion -%}
                 <div class="dc-badges">
-                  <span class="dc-badge dc-badge--completo">Protection · Abundance · Love · Spiritual</span>
+                  <span class="dc-badge dc-badge--completo">{{ 'duendes.collection_badge_complete' | t }}</span>
                 </div>
               {%- elsif p_badges != blank -%}
                 <div class="dc-badges">
@@ -424,14 +424,14 @@
                 <span class="duendes-g-card__type-badge">{{ product.type }}</span>
               {%- endif -%}
               {% unless product.available %}
-                <span class="duendes-g-card__sold-badge">Adopted</span>
+                <span class="duendes-g-card__sold-badge">{{ 'duendes.card_adopted' | t }}</span>
               {% endunless %}
             </div>
             <div class="duendes-g-card__info">
               <h3>{{ product.title }}</h3>
               <p class="duendes-g-card__essence">{{ product.metafields.custom.esencia | default: product.type }}</p>
               <p class="duendes-g-card__price">{{ product.price | money }}</p>
-              <span class="duendes-g-card__btn">Meet this Guardian</span>
+              <span class="duendes-g-card__btn">{{ 'duendes.meet_this_guardian' | t }}</span>
             </div>
           </a>{% endif %}
         {% endfor %}
@@ -439,7 +439,7 @@
     </div>
   </div>
 
-  <p class="duendes-guardians__pause-hint">Hover over a Guardian to stop the carousel</p>
+  <p class="duendes-guardians__pause-hint">{{ 'duendes.carousel_pause_hint' | t }}</p>
 </section>
 
 <div class="duendes-gold-line"></div>
