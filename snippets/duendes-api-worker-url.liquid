@@ -1,0 +1,17 @@
+{%- comment -%}
+  Snippet técnico: devuelve la URL del API que el dueño configuró en
+  Tema → Ajustes del tema → Duendes → "URL del API".
+  Si ese campo está vacío en el futuro, el tema usa un valor por defecto interno.
+  Parámetro format (solo para quien edita código):
+  - sin format o "raw" → texto tal cual;
+  - "json" → mismo texto pero escapado para meterlo dentro de comillas en JavaScript.
+{%- endcomment -%}
+{%- liquid
+  assign duendes_api_fallback = 'https://duendes-api.bitter-voice-d5fb.workers.dev/exec'
+  assign duendes_base = settings.duendes_api_worker_url | default: duendes_api_fallback
+-%}
+{%- if format == 'json' -%}
+{{- duendes_base | json -}}
+{%- else -%}
+{{- duendes_base -}}
+{%- endif -%}

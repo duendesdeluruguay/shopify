@@ -2284,5 +2284,35 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Duendes",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Aquí controlás tres cosas del portal Duendes: (1) si alguien que entra por la portada en otro idioma puede ir solo a la versión en español según su país, (2) si se muestra una barrita con precios aproximados en otra moneda, y (3) la dirección web del servidor donde corren las respuestas de Mi Magia y el Rito. Si no sabés qué poner en la URL, dejá el valor que ya viene."
+      },
+      {
+        "type": "checkbox",
+        "id": "duendes_enable_geo_redirect",
+        "label": "Redirección geo al español (solo inicio)",
+        "default": true,
+        "info": "Encendido (recomendado): un visitante que entra por la página de inicio puede ser enviado automáticamente a la tienda en español de su región (por ejemplo de la portada en inglés a la misma tienda en /es-mx/), si en Admin tenés mercados o idiomas configurados. Apagado: nadie es redirigido; todos ven la portada tal cual la abrieron. En el editor del tema (Personalizar) esto no afecta para que puedas editar tranquilo."
+      },
+      {
+        "type": "checkbox",
+        "id": "duendes_enable_currency_bar",
+        "label": "Barra y conversión aproximada de moneda",
+        "default": true,
+        "info": "Encendido: si el visitante ve precios en una moneda y su país usa otra, puede aparecer una barra informativa con un equivalente aproximado (es orientativo, no cambia el cobro real de Shopify). Apagado: no se muestra esa barra. Ejemplo: tienda en dólares y visitante de México puede ver una referencia en pesos aproximados."
+      },
+      {
+        "type": "text",
+        "id": "duendes_api_worker_url",
+        "label": "URL del API (Cloudflare Worker)",
+        "default": "https://duendes-api.bitter-voice-d5fb.workers.dev/exec",
+        "info": "Es la dirección donde el tema pide las respuestas de Mi Magia, el Rito y formularios vinculados. Un solo campo: si lo cambiás acá, todo el portal usa la nueva dirección. Ejemplo de formato correcto: https://tu-worker.workers.dev/exec (con /exec al final). Si alguien del equipo te pasó una URL de prueba, pegala aquí; si no, no la toques."
+      }
+    ]
   }
 ]

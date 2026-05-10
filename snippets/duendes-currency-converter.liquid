@@ -1,9 +1,37 @@
 {%- comment -%}
-  Duendes Currency Converter
-  Detects visitor country via geojs.io, converts displayed prices to local currency.
-  Works with any Shopify theme. Cache-proof (pure JS, no server-side).
-  Store base currency is set via Liquid variable below.
+  --- Para el dueño de la tienda (no hace falta tocar este archivo) ---
+  Encender o apagar la barra de moneda: Tema → Ajustes del tema →
+  grupo "Duendes" → casilla "Barra y conversión aproximada de moneda".
+  El texto de ayuda en el editor explica con un ejemplo qué verá el cliente.
+
+  Detalle técnico: usa geo para país y la moneda del mercado (Markets);
+  la barra es orientativa, no reemplaza el precio de cobro en checkout.
 {%- endcomment -%}
+
+{%- liquid
+  assign ddu_currency_enabled = settings.duendes_enable_currency_bar
+  if ddu_currency_enabled == nil
+    assign ddu_currency_enabled = true
+  endif
+-%}
+
+{%- if request.design_mode -%}
+{%- comment -%} Editor de tema: omitir barra y script. {%- endcomment -%}
+{%- elsif ddu_currency_enabled == false -%}
+{%- comment -%} Desactivado en Personalizar tema. {%- endcomment -%}
+{%- else -%}
+
+{%- liquid
+  assign dc_presentment_currency = localization.country.currency.iso_code | default: shop.currency
+  assign dc_lang = localization.language.iso_code | default: 'en' | slice: 0, 2
+  if dc_lang == 'es'
+    assign dc_bar_template = 'Precios en <strong>%CURRENCY%</strong> (tipo de cambio aproximado)'
+    assign dc_aria_close = 'Cerrar'
+  else
+    assign dc_bar_template = 'Prices in <strong>%CURRENCY%</strong> (approximate exchange rate)'
+    assign dc_aria_close = 'Close'
+  endif
+-%}
 
 <style>
   .dc-currency-bar {
@@ -59,13 +87,16 @@
 <div class="dc-currency-bar" id="dc-currency-bar">
   <span class="dc-currency-bar__flag" id="dc-flag"></span>
   <span class="dc-currency-bar__text" id="dc-text"></span>
-  <button class="dc-currency-bar__close" id="dc-close" aria-label="Cerrar">&times;</button>
+  <button class="dc-currency-bar__close" id="dc-close" aria-label="{{ dc_aria_close | escape }}">&times;</button>
 </div>
 
 <script>
 (function() {
   /* ── Config ── */
-  var BASE_CURRENCY = {{ shop.currency | json }};
+  var BASE_CURRENCY = {{ dc_presentment_currency | json }};
+  var SHOP_CURRENCY = {{ shop.currency | json }};
+  var FORMAT_LOCALE = {{ dc_lang | json }};
+  var BAR_TEMPLATE = {{ dc_bar_template | json }};
   var CACHE_KEY = 'duendes_fx_v2';
   var CACHE_TTL = 3600000; /* 1 hour */
   var GEO_CACHE_KEY = 'duendes_geo_v2';
@@ -182,7 +213,7 @@
     var sym = SYMBOLS[currency] || currency + ' ';
     if (amount >= 1000) {
       /* No decimals for large amounts */
-      var formatted = Math.round(amount).toLocaleString('es');
+      var formatted = Math.round(amount).toLocaleString(FORMAT_LOCALE);
       return sym + formatted;
     }
     return sym + amount.toFixed(2);
@@ -211,7 +242,7 @@
         var text = document.getElementById('dc-text');
 
         flag.textContent = FLAGS[countryCode] || '';
-        text.innerHTML = 'Precios en <strong>' + targetCurrency + '</strong> (tipo de cambio actual)';
+        text.innerHTML = BAR_TEMPLATE.replace('%CURRENCY%', targetCurrency);
 
         setTimeout(function() { bar.classList.add('visible'); }, 1500);
 
@@ -244,7 +275,7 @@
           if (isNaN(basePrice) || basePrice <= 0) return;
 
           /* For UYU prices that come as whole numbers (e.g., "8.000" = 8000 UYU) */
-          if (BASE_CURRENCY === 'UYU' && basePrice < 100) {
+          if (BASE_CURRENCY === 'UYU' && SHOP_CURRENCY === 'UYU' && basePrice < 100) {
             /* Likely already divided — multiply back */
             basePrice = basePrice * 1000;
           }
@@ -269,3 +300,5 @@
   }
 })();
 </script>
+
+{%- endif -%}

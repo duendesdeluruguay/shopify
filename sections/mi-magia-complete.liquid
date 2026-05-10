@@ -1339,7 +1339,8 @@
 // CONFIGURATION & CONSTANTS
 // ============================================================================
 
-const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzIrYV45EsFj4w9QzXB1ItBMlCYUBsu9bPpzhSLXJ-En_Y9lM9QlXTO8Ecd7Yn5VEw-RQ/exec';
+/** API: Cloudflare Worker — URL en Personalizar tema → Duendes */
+const DUENDES_API_URL = {% render 'duendes-api-worker-url', format: 'json' %};
 
 let currentCustomer = null;
 let currentLanguage = 'es';
@@ -1451,13 +1452,13 @@ async function loadCustomerData() {
   const initialName = currentCustomer.firstName || 'Adoptante';
   document.getElementById('dashboard-name').textContent = 'Bienvenida, ' + initialName;
 
-  // Fetch customer data from GAS backend
+  // Fetch customer data desde el Worker (API)
   try {
     const email = currentCustomer.email;
     if (!email) { renderGuardians([]); return; }
 
     console.log('Mi Magia: Fetching data for', email);
-    const url = GAS_WEB_APP_URL + '?action=get_customer_data&email=' + encodeURIComponent(email);
+    const url = DUENDES_API_URL + '?action=get_customer_data&email=' + encodeURIComponent(email);
 
     const response = await fetch(url, { redirect: 'follow' });
     console.log('Mi Magia: Response status', response.status, response.ok);
@@ -1704,9 +1705,9 @@ async function submitFormulario(e) {
     responses: Object.fromEntries(formData)
   };
 
-  // Submit to GAS
+  // Submit al Worker (API)
   try {
-    const response = await fetch(GAS_WEB_APP_URL + '?action=submit_form', {
+    const response = await fetch(DUENDES_API_URL + '?action=submit_form', {
       method: 'POST',
       body: JSON.stringify(data)
     });
@@ -1726,7 +1727,7 @@ async function submitFormulario(e) {
 // ============================================================================
 
 function loadChannelingData() {
-  // Fetch from GAS
+  // Fetch desde el Worker
   // For now, show locked state
   document.getElementById('channeling-locked').style.display = 'block';
   document.getElementById('channeling-published').style.display = 'none';
@@ -1770,13 +1771,13 @@ function toggleRitualDay(index) {
   const card = checkbox.closest('.ritual-day');
   card.classList.toggle('completed');
 
-  // Submit to GAS
+  // Submit al Worker (API)
   updateRitualProgress(index, checkbox.classList.contains('checked'));
 }
 
 async function updateRitualProgress(dayIndex, completed) {
   try {
-    await fetch(GAS_WEB_APP_URL + '?action=update_ritual', {
+    await fetch(DUENDES_API_URL + '?action=update_ritual', {
       method: 'POST',
       body: JSON.stringify({
         email: currentCustomer.email,
@@ -1800,7 +1801,7 @@ async function submitBienvenida(e) {
   const dob = document.getElementById('bienvenida-dob').value;
 
   try {
-    const response = await fetch(GAS_WEB_APP_URL + '?action=submit_bienvenida', {
+    const response = await fetch(DUENDES_API_URL + '?action=submit_bienvenida', {
       method: 'POST',
       body: JSON.stringify({
         email: currentCustomer.email,
@@ -1821,7 +1822,7 @@ async function submitBienvenida(e) {
 }
 
 function generateSoulName(name) {
-  // In production, this would call Claude AI via GAS
+  // En producción: Claude u otro modelo vía Worker (Cloudflare)
   const soulNames = ['Thyraleth Verdania', 'Aelindor Luminar', 'Celestria Dorada', 'Silvanus Encantado', 'Miriel Etérea'];
   const randomSoulName = soulNames[Math.floor(Math.random() * soulNames.length)];
 

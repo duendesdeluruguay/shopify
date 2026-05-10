@@ -73,7 +73,20 @@ section[class*="mm-hero"] [class*="vignette"] { display: none !important; }
   font-weight: 600 !important;
   opacity: 1 !important;
 }
-.mm-hero-soul {
+/* Nombre del alma en hero: brillo dorado (gradiente), sin color sólido que rompa el clip */
+.mm-hero-soul.mm-soul-gold.mm-gold-shimmer {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+  font-family: 'Tangerine', cursive !important;
+  font-size: clamp(40px, 8vw, 64px) !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  opacity: 1 !important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+.mm-hero-soul:not(.mm-gold-shimmer) {
   color: #ffd96b !important;
   text-shadow: 0 4px 24px rgba(0,0,0,1), 0 0 12px rgba(0,0,0,1), 0 0 40px rgba(255,217,107,0.6) !important;
   font-weight: 700 !important;
@@ -129,12 +142,16 @@ section[class*="mm-hero"] [class*="vignette"] { display: none !important; }
 
 :root {
   --white: #FFFFFF;
-  --cream: #FEFDFB;
-  --gold: #B8973B;
+  --cream: #FAF8F4;
+  --gold: #C9A44C;
+  --gold-bright: #E8D48C;
   --gold-soft: #D4BC7C;
-  --gold-pale: rgba(184, 151, 59, 0.08);
-  --black: #111111;
-  --black-soft: #1A1A1A;
+  --gold-pale: rgba(201, 164, 76, 0.12);
+  --gold-glow: rgba(232, 212, 140, 0.45);
+  --mystery: #0D1210;
+  --forest-deep: #07140f;
+  --black: #0A0A0A;
+  --black-soft: #141816;
   --text: #1A1A1A;
   --text-mid: #555555;
   --text-light: #888888;
@@ -143,7 +160,7 @@ section[class*="mm-hero"] [class*="vignette"] { display: none !important; }
   --line-dark: #2A2A2A;
   --red: #B85A5A;
   --deep: #FEFDFB;
-  --surface: #F5F3EE;
+  --surface: #F3F1EC;
   --surface-elevated: #FFFFFF;
 }
 
@@ -169,12 +186,28 @@ body {
   to { transform: rotate(360deg); }
 }
 .mm-gold-shimmer {
-  background: linear-gradient(105deg, var(--gold) 0%, #E8D48C 25%, var(--gold) 50%, #F0E2A0 75%, var(--gold) 100%);
-  background-size: 200% auto;
+  background: linear-gradient(110deg, #9A7B2E 0%, var(--gold-bright) 22%, #FFF6D4 38%, var(--gold) 52%, var(--gold-bright) 68%, #9A7B2E 100%);
+  background-size: 220% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: goldShimmer 4s ease-in-out infinite;
+  animation: goldShimmer 5.5s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 20px rgba(201, 164, 76, 0.35)) drop-shadow(0 2px 24px rgba(0, 0, 0, 0.65));
+}
+.mm-gate .mm-gold-shimmer {
+  filter: drop-shadow(0 2px 12px rgba(201, 164, 76, 0.22));
+}
+/* Nombres de alma / identidad — mismo lenguaje visual */
+.mm-soul-gold.mm-gold-shimmer {
+  will-change: background-position;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mm-gold-shimmer,
+  .mm-soul-gold.mm-gold-shimmer {
+    animation: none !important;
+    filter: drop-shadow(0 1px 12px rgba(0, 0, 0, 0.5));
+    background-position: 50% center;
+  }
 }
 .mm-gold-border-shimmer {
   position: relative;
@@ -3123,10 +3156,16 @@ header.header, footer.footer,
 .mm-cine-card.mm-card-oraculo {
   --card-bg: url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=1200&auto=format&fit=crop&q=80');
   --card-orb: #c8a5ff; --card-tint: rgba(58,26,58,0.5);
+  box-shadow: 0 0 0 1px rgba(201, 164, 76, 0.35), 0 12px 40px rgba(13, 18, 16, 0.12);
 }
 .mm-cine-card.mm-card-rito {
   --card-bg: url('https://images.unsplash.com/photo-1528255671579-01b9e182ed1d?w=1200&auto=format&fit=crop&q=80');
   --card-orb: #ffb07a; --card-tint: rgba(58,26,26,0.58);
+  box-shadow: 0 0 0 1px rgba(201, 164, 76, 0.35), 0 12px 40px rgba(13, 18, 16, 0.12);
+}
+.mm-cine-card.mm-card-oraculo:hover,
+.mm-cine-card.mm-card-rito:hover {
+  box-shadow: 0 0 0 2px rgba(201, 164, 76, 0.5), 0 18px 48px rgba(201, 164, 76, 0.15);
 }
 .mm-cine-card.mm-card-senales {
   --card-bg: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&auto=format&fit=crop&q=80');
@@ -3252,6 +3291,252 @@ header.header, footer.footer,
   color: #f0d88c;
 }
 
+/* ═══ VIP: accesos cero fricción + Tus Revelaciones ═══ */
+.mm-vip-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  max-width: 920px;
+  margin: -28px auto 0;
+  padding: 0 24px 28px;
+  position: relative;
+  z-index: 8;
+}
+.mm-vip-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 20px 22px;
+  border-radius: 4px;
+  border: 1px solid rgba(201, 164, 76, 0.35);
+  background: linear-gradient(165deg, rgba(255,255,255,0.98) 0%, rgba(245,241,232,0.96) 100%);
+  box-shadow: 0 12px 40px rgba(10, 18, 16, 0.12), 0 0 0 1px rgba(255,255,255,0.6) inset;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  font-family: 'Lato', sans-serif;
+  min-height: 112px;
+}
+.mm-vip-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 48px rgba(10, 18, 16, 0.16), 0 0 28px rgba(201, 164, 76, 0.18);
+  border-color: rgba(201, 164, 76, 0.55);
+}
+.mm-vip-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.mm-vip-btn-kicker {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+.mm-vip-btn-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--mystery);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.mm-vip-btn-hint {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.35;
+}
+.mm-vip-btn--rito .mm-vip-btn-title { color: #3d2a1a; }
+
+.mm-revelaciones {
+  max-width: 960px;
+  margin: 0 auto 48px;
+  padding: 0 24px 8px;
+  position: relative;
+  z-index: 6;
+}
+.mm-revelaciones[hidden] { display: none !important; }
+.mm-rev-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.mm-rev-kicker {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.mm-rev-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400;
+  color: var(--mystery);
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+.mm-rev-sub {
+  font-size: 15px;
+  color: var(--text-mid);
+  margin-top: 12px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+.mm-rev-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.mm-rev-ritual-banner {
+  padding: 24px 26px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #1a1510 0%, #2a2218 50%, #1a1510 100%);
+  border: 1px solid rgba(201, 164, 76, 0.4);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.25), 0 0 40px rgba(201, 164, 76, 0.12);
+  color: #f5f0e6;
+}
+.mm-rev-ritual-kicker {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.mm-rev-ritual-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.mm-rev-ritual-desc {
+  font-size: 14px;
+  opacity: 0.88;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+.mm-rev-card {
+  padding: 22px 24px;
+  background: var(--surface-elevated);
+  border: 1px solid rgba(201, 164, 76, 0.22);
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(13, 18, 16, 0.08);
+}
+.mm-rev-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: var(--mystery);
+}
+.mm-rev-actions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mm-rev-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 4px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.mm-rev-link:hover {
+  border-color: rgba(201, 164, 76, 0.45);
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(201, 164, 76, 0.1);
+}
+.mm-rev-link:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.mm-rev-link-icon {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.mm-rev-link-icon--tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: rgba(201, 164, 76, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(201, 164, 76, 0.35);
+  line-height: 1;
+}
+.mm-rev-link-label {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+.mm-rev-link-meta {
+  display: block;
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
+  font-weight: 400;
+}
+.mm-rev-cta {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.mm-rev-cta--primary {
+  background: linear-gradient(110deg, var(--gold), var(--gold-bright));
+  color: #1a1510;
+  box-shadow: 0 6px 24px rgba(201, 164, 76, 0.35);
+}
+.mm-rev-cta--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(201, 164, 76, 0.45);
+}
+.mm-rev-cta:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+/* Shimmer en nombres dentro de fichas (anula color sólido heredado) */
+.mm-guardian-detail-name.mm-soul-gold.mm-gold-shimmer,
+.mm-identity-soul-name.mm-soul-gold.mm-gold-shimmer,
+.mm-identity-block-name.mm-soul-gold.mm-gold-shimmer,
+.mm-ch-soul-name.mm-soul-gold.mm-gold-shimmer {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+@media (max-width: 720px) {
+  .mm-vip-strip {
+    grid-template-columns: 1fr;
+    margin-top: -16px;
+    padding-bottom: 20px;
+  }
+  .mm-vip-btn { min-height: auto; }
+}
+
 /* Mobile tweaks */
 @media (max-width: 640px) {
   .mm-hero-cinematic { height: 240px; }
@@ -3303,6 +3588,10 @@ header.header, footer.footer,
       <a class="mm-menu-link" onclick="mmNavMenu('dashboard')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
         Inicio
+      </a>
+      <a class="mm-menu-link" href="#mm-revelaciones" onclick="mmGoToRevelaciones(); mmCloseMenu(); return false;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l1.9 5.8h6l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8-4.9-3.6h6z"></path></svg>
+        Tus Revelaciones
       </a>
       <a class="mm-menu-link" onclick="mmNavMenu('identidad')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
@@ -3429,7 +3718,13 @@ header.header, footer.footer,
   <section id="mm-dashboard" class="mm-page">
 
     <!-- ═══ CINEMATIC HERO ═══ -->
-    <div class="mm-hero-cinematic">
+    <div class="mm-hero-cinematic" id="mm-hero-cinematic">
+      <div class="mm-forest-depth" aria-hidden="true">
+        <div class="mm-forest-layer mm-forest-layer--far"></div>
+        <div class="mm-forest-layer mm-forest-layer--mid"></div>
+        <div class="mm-forest-layer mm-forest-layer--fog"></div>
+        <div class="mm-forest-spotlight"></div>
+      </div>
   <div class="mm-forest-bg day"></div>
   <div class="mm-forest-bg night"></div>
 
@@ -3440,7 +3735,7 @@ header.header, footer.footer,
       <div class="mm-hero-content">
         <p class="mm-hero-label">Tu portal personal</p>
         <h1 class="mm-hero-greeting" id="mm-welcome">Tu magia te espera</h1>
-        <div class="mm-hero-soul" id="mm-welcome-soul" style="display:none;"></div>
+        <div class="mm-hero-soul mm-soul-gold mm-gold-shimmer" id="mm-welcome-soul" style="display:none;"></div>
         <p class="mm-hero-subtitle">El reino elemental te est&aacute; esperando.</p>
       </div>
     </div>
@@ -3453,6 +3748,30 @@ header.header, footer.footer,
       </div>
       <a id="mm-pending-form-link" href="/pages/rito-reconocimiento" onclick="mmGoToRito(); return false;">Abrir el Rito &rarr;</a>
     </div>
+
+    <!-- Accesos VIP: Oráculo + Rito (siempre visibles, un toque) -->
+    <nav class="mm-vip-strip" aria-label="Accesos prioritarios del portal">
+      <button type="button" class="mm-vip-btn mm-vip-btn--oracle" onclick="mmNav('oraculo'); mmTrackPortal('vip_oracle');">
+        <span class="mm-vip-btn-kicker">Consulta privada</span>
+        <span class="mm-vip-btn-title">El Or&aacute;culo</span>
+        <span class="mm-vip-btn-hint">Pregunt&aacute; lo que tu alma necesita saber del reino elemental.</span>
+      </button>
+      <button type="button" class="mm-vip-btn mm-vip-btn--rito" onclick="mmGoToRito(); mmTrackPortal('vip_rito');">
+        <span class="mm-vip-btn-kicker">Tu huella en el portal</span>
+        <span class="mm-vip-btn-title">Rito de Reconocimiento</span>
+        <span class="mm-vip-btn-hint">Personalizamos la canalizaci&oacute;n cuando nos cont&aacute;s qui&eacute;n sos.</span>
+      </button>
+    </nav>
+
+    <!-- Entregas digitales: flipbook, PDF, etc. (API: flipbookUrl, pdfUrl, deliverables[]) -->
+    <section class="mm-revelaciones" id="mm-revelaciones" hidden aria-labelledby="mm-rev-title">
+      <div class="mm-rev-header">
+        <p class="mm-rev-kicker">Solo para vos</p>
+        <h2 class="mm-rev-title" id="mm-rev-title">Tus Revelaciones</h2>
+        <p class="mm-rev-sub">Flipbooks, PDF y materiales exclusivos vinculados a tu guardi&aacute;n. Todo en un solo lugar.</p>
+      </div>
+      <div class="mm-rev-grid" id="mm-revelaciones-list"></div>
+    </section>
 
     <!-- Guardian of the Week -->
     <div class="mm-gotw" id="mm-guardian-week">
@@ -3490,8 +3809,8 @@ header.header, footer.footer,
     <!-- ═══ CINEMATIC CARDS GRID ═══ -->
     <section class="mm-cards-section">
       <div class="mm-cards-section-header">
-        <p class="mm-cards-section-label">Tu portal elemental</p>
-        <h2 class="mm-cards-section-title">Entr&aacute; donde tu alma te llame</h2>
+        <p class="mm-cards-section-label">El resto de tu reino</p>
+        <h2 class="mm-cards-section-title">Explor&aacute; todo el portal</h2>
         <div class="mm-cards-section-divider"></div>
       </div>
 
@@ -4307,6 +4626,9 @@ header.header, footer.footer,
       <p class="mm-section-intro">
         El Rito de Reconocimiento se activa cuando realiz&aacute;s una adopci&oacute;n. Ah&iacute; vas a compartir con nosotros lo que necesitamos saber para canalizar tu guardi&aacute;n de forma personalizada.
       </p>
+      <p class="mm-rito-route-hint" style="max-width:520px;margin:0 auto 24px;font-size:14px;color:var(--text-mid);line-height:1.55;">
+        Desde el <strong>inicio del portal</strong> tambi&eacute;n ten&eacute;s el bot&oacute;n grande <strong>Rito de Reconocimiento</strong> (junto al Or&aacute;culo) para entrar en un toque.
+      </p>
       <a href="/pages/rito-reconocimiento" class="mm-btn-outline" id="mm-rito-generic-link" onclick="mmGoToRito(); return false;">Abrir el Rito</a>
     </div>
   </section>
@@ -4363,6 +4685,9 @@ header.header, footer.footer,
         <p>
           El Or&aacute;culo es el espacio donde la comunidad elemental pregunta y la magia responde. Dej&aacute; tu consulta y cada día, tu pregunta resonante recibir&aacute;n una respuesta canalizada a trav&eacute;s de la inteligencia del reino elemental.
         </p>
+        <p class="mm-oraculo-route-hint" style="margin-top:16px;font-size:14px;color:var(--text-mid);line-height:1.55;max-width:560px;">
+          <strong style="color:var(--text);">C&oacute;mo volver ac&aacute;:</strong> en la pantalla de inicio ten&eacute;s el bot&oacute;n grande <strong>El Or&aacute;culo</strong> (arriba de todo, junto al Rito). Tambi&eacute;n pod&eacute;s abrir el men&uacute; <span aria-hidden="true">☰</span> y elegir <strong>El Or&aacute;culo</strong>.
+        </p>
       </div>
 
       <!-- Submit question -->
@@ -4401,6 +4726,7 @@ header.header, footer.footer,
      JAVASCRIPT
      ═══════════════════════════════════════════════════ -->
 
+<script>window.__DUENDES_EXEC_URL__ = {% render 'duendes-api-worker-url', format: 'json' %};</script>
 <script id="cowork-api-shim-v1">
 // SHIM: Transform snake_case API response to camelCase so renderers work — Cowork 2026-04-27
 (function() {
@@ -4435,7 +4761,8 @@ header.header, footer.footer,
   
   window.fetch = function(url, opts) {
     var u = (typeof url === 'string') ? url : (url && url.url) || '';
-    var isOurApi = u.indexOf('duendes-api.bitter-voice-d5fb.workers.dev') >= 0;
+    var base = (typeof window.__DUENDES_EXEC_URL__ === 'string') ? window.__DUENDES_EXEC_URL__.split('?')[0] : '';
+    var isOurApi = !!(base && u.indexOf(base) === 0) || u.indexOf('duendes-api.bitter-voice-d5fb.workers.dev') >= 0;
     return origFetch.apply(this, arguments).then(function(resp) {
       if (!isOurApi) return resp;
       return resp.clone().json().then(function(data) {
@@ -4455,7 +4782,8 @@ header.header, footer.footer,
 </script>
 
 <script>
-const GAS_URL = 'https://duendes-api.bitter-voice-d5fb.workers.dev/exec';
+/** API: Cloudflare Worker — URL global en Personalizar tema → Duendes */
+const DUENDES_API_URL = {% render 'duendes-api-worker-url', format: 'json' %};
 let mmCustomer = null;
 let mmChannelings = [];
 
@@ -4797,7 +5125,7 @@ function mmDismissRitoFloating() {
 }
 
 /**
- * mmTrackPortal(section) — Dispara evento de tracking hacia GAS (que lo reenvía
+ * mmTrackPortal(section) — Dispara evento de tracking hacia el Worker (Cloudflare) que lo reenvía
  * a Klaviyo como custom event para segmentar y automatizar flows).
  * NO bloquea la navegación — fire & forget.
  */
@@ -4812,7 +5140,7 @@ function mmTrackPortal(section) {
       timestamp: new Date().toISOString()
     };
     // fire & forget — no esperamos respuesta
-    fetch(GAS_URL, {
+    fetch(DUENDES_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload),
@@ -4912,7 +5240,7 @@ async function mmLogin() {
 
   try {
     // Verify email against backend before showing dashboard
-    const url = GAS_URL + '?action=get_customer_data&email=' + encodeURIComponent(email);
+    const url = DUENDES_API_URL + '?action=get_customer_data&email=' + encodeURIComponent(email);
     const response = await fetch(url, { redirect: 'follow' });
     const text = await response.text();
 
@@ -5002,7 +5330,7 @@ function mmLogout() {
 async function mmLoadData() {
   if (!mmCustomer || !mmCustomer.email) return;
   try {
-    const url = GAS_URL + '?action=get_customer_data&email=' + encodeURIComponent(mmCustomer.email);
+    const url = DUENDES_API_URL + '?action=get_customer_data&email=' + encodeURIComponent(mmCustomer.email);
     const response = await fetch(url, { redirect: 'follow' });
     const text = await response.text();
     let data;
@@ -5045,6 +5373,8 @@ async function mmLoadData() {
       mmAddNotification('El guardián espera', toastText, function() { mmGoToRito(); });
       // Recordatorio flotante cinematográfico + badge pulsante en la card del Rito
       mmShowRitoFloating();
+    } else {
+      window.mmPendingOrders = [];
     }
 
     // NEW v2: Rito completado pero canalización aún no publicada → mostrar estado positivo "canalizando"
@@ -5065,8 +5395,10 @@ async function mmLoadData() {
     // Load ritual state for each channeling (detect if they completed the ritual)
     mmLoadRitualStates();
 
+    mmRenderRevelaciones(mmChannelings && mmChannelings.length ? mmChannelings : (data.channelings || []), data);
+
     mmLoadRecommendations();
-  } catch(err) { mmRenderGuardians([]); mmRenderChannelings([]); }
+  } catch(err) { mmRenderGuardians([]); mmRenderChannelings([]); mmRenderRevelaciones([], {}); window.mmPendingOrders = []; }
 }
 
 // RENDER GUARDIANS
@@ -5115,7 +5447,9 @@ function mmViewGuardianDetail(idx) {
       detailInitialEl.style.display = 'flex';
     }
   }
-  document.getElementById('mm-detail-name').textContent = ch.guardianName || 'Guardian';
+  var dn = document.getElementById('mm-detail-name');
+  dn.textContent = ch.guardianName || 'Guardian';
+  dn.className = 'mm-guardian-detail-name mm-soul-gold mm-gold-shimmer';
   document.getElementById('mm-detail-type').textContent = ch.guardianType || 'Ser Elemental';
   
   var msgSection = document.getElementById('mm-detail-message');
@@ -5192,11 +5526,118 @@ function mmUpdateProgress(containerId, type, guardianName, totalTasks) {
   if (label) label.textContent = completed + ' de ' + totalTasks + ' completados';
 }
 
-// Fix encoding issues from Google Sheets (e.g. "Guardiv°n" → "Guardián")
+// Normaliza caracteres raros que a veces vienen del backend / exportaciones (ej. "Guardiv°n" → "Guardián")
 function mmFixEncoding(str) {
   if (!str) return str;
   return str.replace(/v\u00b0/g, 'á').replace(/√°/g, 'á').replace(/√≠/g, 'í')
     .replace(/√©/g, 'é').replace(/√∫/g, 'ú').replace(/√±/g, 'ñ').replace(/√≥/g, 'ó');
+}
+
+function mmEscapeHtml(str) {
+  if (str == null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function mmEscapeAttr(str) {
+  return mmEscapeHtml(str).replace(/'/g, '&#39;');
+}
+
+/** URLs de entrega desde el backend (extendible sin tocar el worker) */
+function mmCollectDeliverables(ch) {
+  if (!ch || typeof ch !== 'object') return [];
+  var items = [];
+  function pushUrl(url, label, kind) {
+    if (!url || typeof url !== 'string') return;
+    var u = url.trim();
+    if (u.indexOf('http://') !== 0 && u.indexOf('https://') !== 0) return;
+    items.push({ url: u, label: label || 'Abrir enlace', kind: kind || 'link' });
+  }
+  var map = [
+    ['flipbookUrl', 'Guía flipbook interactiva', 'flipbook'],
+    ['flipbook_url', 'Guía flipbook interactiva', 'flipbook'],
+    ['heyzineUrl', 'Flipbook (Heyzine)', 'flipbook'],
+    ['flipHtmlUrl', 'Libro digital interactivo', 'flipbook'],
+    ['pdfUrl', 'Descargar PDF', 'pdf'],
+    ['pdf_url', 'Descargar PDF', 'pdf'],
+    ['letterPdfUrl', 'Carta en PDF', 'pdf'],
+    ['canalizacionPdfUrl', 'Canalización en PDF', 'pdf'],
+    ['guiaUrl', 'Guía digital', 'link'],
+    ['libroUrl', 'Libro / guía', 'link'],
+    ['digitalGuideUrl', 'Material exclusivo', 'link'],
+    ['extraUrl', 'Recurso exclusivo', 'link']
+  ];
+  for (var mi = 0; mi < map.length; mi++) {
+    pushUrl(ch[map[mi][0]], map[mi][1], map[mi][2]);
+  }
+  if (ch.deliverables && Array.isArray(ch.deliverables)) {
+    ch.deliverables.forEach(function(d) {
+      if (d && d.url) pushUrl(d.url, d.label || 'Entregable', d.type || 'link');
+    });
+  }
+  return items;
+}
+
+function mmRenderRevelaciones(channelings, data) {
+  var section = document.getElementById('mm-revelaciones');
+  var list = document.getElementById('mm-revelaciones-list');
+  if (!section || !list) return;
+  var html = '';
+  var hasAny = false;
+  var pending = (data && data.formStatus && data.formStatus.pendingOrders && data.formStatus.pendingOrders.length > 0);
+  if (pending) {
+    hasAny = true;
+    html += '<div class="mm-rev-ritual-banner" role="region" aria-label="Rito pendiente">';
+    html += '<p class="mm-rev-ritual-kicker">Tu siguiente paso</p>';
+    html += '<p class="mm-rev-ritual-title">El Rito de Reconocimiento te est&aacute; esperando</p>';
+    html += '<p class="mm-rev-ritual-desc">Sin este paso no podemos canalizar con tu huella personal. Es r&aacute;pido, &iacute;ntimo y solo lo ves vos.</p>';
+    html += '<button type="button" class="mm-rev-cta mm-rev-cta--primary" onclick="mmGoToRito(); mmTrackPortal(\'revelaciones_rito\');">Abrir el Rito ahora</button>';
+    html += '</div>';
+  }
+  (channelings || []).forEach(function(ch) {
+    var dels = mmCollectDeliverables(ch);
+    if (dels.length === 0) return;
+    hasAny = true;
+    var gname = mmFixEncoding(ch.guardianName || 'Tu guardi\u00e1n');
+    html += '<article class="mm-rev-card">';
+    html += '<h3 class="mm-rev-card-title"><span class="mm-soul-gold mm-gold-shimmer">' + mmEscapeHtml(gname) + '</span></h3>';
+    html += '<ul class="mm-rev-actions">';
+    dels.forEach(function(d) {
+      var iconLabel = d.kind === 'pdf' ? 'PDF' : (d.kind === 'flipbook' ? 'Lib' : '\u2605');
+      var hint = d.kind === 'pdf' ? 'Descarga o abre el archivo' : 'Se abre en una pesta\u00f1a nueva';
+      html += '<li><a class="mm-rev-link" href="' + mmEscapeAttr(d.url) + '" target="_blank" rel="noopener noreferrer">';
+      html += '<span class="mm-rev-link-icon mm-rev-link-icon--tag" aria-hidden="true">' + iconLabel + '</span><span>';
+      html += '<span class="mm-rev-link-label">' + mmEscapeHtml(d.label) + '</span>';
+      html += '<span class="mm-rev-link-meta">' + hint + '</span>';
+      html += '</span></a></li>';
+    });
+    html += '</ul></article>';
+  });
+  if (!hasAny) {
+    section.setAttribute('hidden', 'hidden');
+    section.style.display = 'none';
+    list.innerHTML = '';
+    return;
+  }
+  section.removeAttribute('hidden');
+  section.style.display = 'block';
+  list.innerHTML = html;
+}
+
+function mmGoToRevelaciones() {
+  mmNav('dashboard');
+  setTimeout(function() {
+    var el = document.getElementById('mm-revelaciones');
+    var vip = document.querySelector('.mm-vip-strip');
+    if (el && !el.hasAttribute('hidden') && el.style.display !== 'none') {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (vip) {
+      vip.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 120);
 }
 
 function mmRenderGuardians(channelings) {
@@ -5392,14 +5833,14 @@ function mmRenderChannelings(channelings) {
         html += '<div class="mm-ch-souls">';
         if (soulGuardian) {
           html += '<div class="mm-ch-soul-block"><span class="mm-ch-soul-label">Nombre \u00e1lmico del guardi\u00e1n</span>';
-          html += '<p class="mm-ch-soul-name">' + soulGuardian + '</p>';
-          if (soulGuardianMeaning) html += '<p class="mm-ch-soul-meaning">' + soulGuardianMeaning + '</p>';
+          html += '<p class="mm-ch-soul-name mm-soul-gold mm-gold-shimmer">' + mmEscapeHtml(mmFixEncoding(soulGuardian)) + '</p>';
+          if (soulGuardianMeaning) html += '<p class="mm-ch-soul-meaning">' + mmEscapeHtml(mmFixEncoding(soulGuardianMeaning)) + '</p>';
           html += '</div>';
         }
         if (soulName) {
           html += '<div class="mm-ch-soul-block"><span class="mm-ch-soul-label">Tu nombre \u00e1lmico</span>';
-          html += '<p class="mm-ch-soul-name">' + soulName + '</p>';
-          if (soulMeaning) html += '<p class="mm-ch-soul-meaning">' + soulMeaning + '</p>';
+          html += '<p class="mm-ch-soul-name mm-soul-gold mm-gold-shimmer">' + mmEscapeHtml(mmFixEncoding(soulName)) + '</p>';
+          if (soulMeaning) html += '<p class="mm-ch-soul-meaning">' + mmEscapeHtml(mmFixEncoding(soulMeaning)) + '</p>';
           html += '</div>';
         }
         html += '</div>';
@@ -5497,15 +5938,15 @@ function mmRenderIdentityCards(channelings) {
     if (card.soulName) {
       html += '<div class="mm-identity-block">';
       html += '<div class="mm-identity-block-label">Tu nombre \u00e1lmico</div>';
-      html += '<div class="mm-identity-block-name">' + card.soulName + '</div>';
-      if (card.soulMeaning) html += '<div class="mm-identity-block-meaning">' + card.soulMeaning + '</div>';
+      html += '<div class="mm-identity-block-name mm-soul-gold mm-gold-shimmer">' + mmEscapeHtml(card.soulName) + '</div>';
+      if (card.soulMeaning) html += '<div class="mm-identity-block-meaning">' + mmEscapeHtml(card.soulMeaning) + '</div>';
       html += '</div>';
     }
     if (card.soulGuardian) {
       html += '<div class="mm-identity-block">';
       html += '<div class="mm-identity-block-label">Nombre \u00e1lmico del guardi\u00e1n</div>';
-      html += '<div class="mm-identity-block-name">' + card.soulGuardian + '</div>';
-      if (card.soulGuardianMeaning) html += '<div class="mm-identity-block-meaning">' + card.soulGuardianMeaning + '</div>';
+      html += '<div class="mm-identity-block-name mm-soul-gold mm-gold-shimmer">' + mmEscapeHtml(card.soulGuardian) + '</div>';
+      if (card.soulGuardianMeaning) html += '<div class="mm-identity-block-meaning">' + mmEscapeHtml(card.soulGuardianMeaning) + '</div>';
       html += '</div>';
     }
     html += '</div>'; // pair
@@ -5529,7 +5970,7 @@ function mmSubmitOracleQuestion() {
   statusEl.textContent = 'Enviando al Or\u00e1culo...';
 
   var email = mmCustomer ? mmCustomer.email : 'anon';
-  fetch(GAS_URL + '?action=submit_oracle_question', {
+  fetch(DUENDES_API_URL + '?action=submit_oracle_question', {
     method: 'POST',
     redirect: 'follow',
     headers: { 'Content-Type': 'text/plain' },
@@ -5543,7 +5984,7 @@ function mmSubmitOracleQuestion() {
     })
     .catch(function(e) {
       statusEl.textContent = '';
-      // Still show success — GAS might not have the handler yet but question will work once deployed
+      // Still show success — el Worker puede no devolver JSON aún; la pregunta queda registrada al desplegar el handler
       textarea.value = '';
       successEl.style.display = 'block';
       setTimeout(function() { successEl.style.display = 'none'; }, 8000);
@@ -5556,7 +5997,7 @@ function mmLoadOracleAnswers() {
   var emptyEl = document.getElementById('mm-oraculo-empty');
   if (!container) return;
 
-  fetch(GAS_URL + '?action=get_oracle_answers', { redirect: 'follow' })
+  fetch(DUENDES_API_URL + '?action=get_oracle_answers', { redirect: 'follow' })
     .then(function(r) { return r.text(); })
     .then(function(t) {
       try {
@@ -5710,7 +6151,7 @@ async function mmTryMagicLink() {
     const params = new URLSearchParams(window.location.search);
     const token = params.get('t');
     if (!token) return false;
-    const resp = await fetch(GAS_URL, {
+    const resp = await fetch(DUENDES_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({ action: 'magic_lookup', token: token })
@@ -5757,7 +6198,7 @@ function mmStopAutoRefresh() {
 
 /**
  * mmRefreshData(silent)
- * Re-fetches all data from GAS backend (which queries Shopify in real-time)
+ * Re-fetches all data from Cloudflare Worker / API (p. ej. consultas a Shopify en tiempo real)
  * Clears old notifications and re-evaluates based on current state
  * silent=true: no visual feedback. silent=false: shows subtle refresh indicator
  */
@@ -5772,7 +6213,7 @@ async function mmRefreshData(silent) {
   }
 
   try {
-    const url = GAS_URL + '?action=get_customer_data&email=' + encodeURIComponent(mmCustomer.email);
+    const url = DUENDES_API_URL + '?action=get_customer_data&email=' + encodeURIComponent(mmCustomer.email);
     const response = await fetch(url, { redirect: 'follow' });
     const text = await response.text();
     let data;
@@ -5836,6 +6277,8 @@ async function mmRefreshData(silent) {
         mmShowToast('El portal está abierto', toastText, function() { mmGoToRito(); }, 'Abrir el rito');
       }
       mmAddNotification('El guardián espera', toastText, function() { mmGoToRito(); });
+    } else {
+      window.mmPendingOrders = [];
     }
 
     // NEW v2: Rito completado → "Canalizando" badge (reemplaza el error de pendiente)
@@ -5871,6 +6314,8 @@ async function mmRefreshData(silent) {
         }
       }
     }
+
+    mmRenderRevelaciones(mmChannelings && mmChannelings.length ? mmChannelings : (data.channelings || []), data);
 
     // Update last refresh timestamp
     var lastRefreshEl = document.getElementById('mm-last-refresh');
@@ -5910,7 +6355,7 @@ function mmClearNotifications() {
 
 /**
  * mmLoadRitualStates()
- * Fetch ritual state for each channeling from GAS
+ * Fetch ritual state for each channeling from el API (Worker)
  * States: not_filled, in_progress, review, published
  */
 async function mmLoadRitualStates() {
@@ -5922,8 +6367,8 @@ async function mmLoadRitualStates() {
     // If no guardianName, skip (legacy issue)
     if (!ch.guardianName) return;
 
-    // Call GAS to get ritual state for this specific guardian
-    var url = GAS_URL + '?action=get_ritual_state&email=' + encodeURIComponent(mmCustomer.email)
+    // Llamada al Worker para el estado del rito de este guardián
+    var url = DUENDES_API_URL + '?action=get_ritual_state&email=' + encodeURIComponent(mmCustomer.email)
       + '&guardianName=' + encodeURIComponent(ch.guardianName);
 
     fetch(url, { redirect: 'follow' })
@@ -6161,7 +6606,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       const parsedSession = JSON.parse(saved);
       // Re-verify the session email against backend (real-time Shopify check)
       try {
-        const url = GAS_URL + '?action=get_customer_data&email=' + encodeURIComponent(parsedSession.email);
+        const url = DUENDES_API_URL + '?action=get_customer_data&email=' + encodeURIComponent(parsedSession.email);
         const response = await fetch(url, { redirect: 'follow' });
         const text = await response.text();
         const data = JSON.parse(text);
@@ -6261,7 +6706,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 // Bosque animado día/noche — Cowork 2026-04-27
 (function() {
   function setForestMode() {
-    var hero = document.querySelector('.mm-hero');
+    var hero = document.querySelector('.mm-hero-cinematic') || document.querySelector('.mm-hero');
     if (!hero) return;
     
     // Crear divs de fondo si no existen
@@ -6330,36 +6775,130 @@ document.addEventListener('DOMContentLoaded', async function() {
   position: relative;
   overflow: hidden;
   min-height: 75vh;
-  background: linear-gradient(180deg, #0a1810 0%, #1a3322 40%, #0c1f15 100%);
+  background: linear-gradient(180deg, #030806 0%, #0c1f14 28%, #152a1c 55%, #070f0c 100%) !important;
+}
+
+/* Profundidad: capas + paralaje (transform vía JS; sin movimiento si prefers-reduced-motion) */
+.mm-forest-depth {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.mm-forest-layer {
+  position: absolute;
+  inset: -8%;
+  will-change: transform;
+}
+.mm-forest-layer--far {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(18, 42, 28, 0.95) 0%, transparent 58%),
+    radial-gradient(ellipse 90% 55% at 18% 88%, rgba(8, 22, 14, 0.9) 0%, transparent 45%),
+    radial-gradient(ellipse 90% 55% at 82% 88%, rgba(8, 22, 14, 0.9) 0%, transparent 45%);
+  opacity: 0.95;
+  animation: mmForestParallaxFar 20s ease-in-out infinite alternate;
+}
+.mm-forest-layer--mid {
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.25) 100%),
+    radial-gradient(ellipse 70% 50% at 50% 95%, rgba(12, 35, 22, 0.85), transparent 50%);
+  opacity: 0.9;
+  animation: mmForestParallaxMid 14s ease-in-out infinite alternate;
+}
+.mm-forest-layer--fog {
+  background:
+    radial-gradient(ellipse 55% 35% at 50% 62%, rgba(200, 220, 200, 0.14), transparent 72%),
+    radial-gradient(ellipse 45% 28% at 72% 48%, rgba(180, 210, 190, 0.1), transparent 70%),
+    radial-gradient(ellipse 40% 25% at 28% 52%, rgba(170, 200, 185, 0.09), transparent 68%);
+  animation: mmFogDrift 24s ease-in-out infinite;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+.mm-forest-spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 85% 70% at 50% 42%, transparent 0%, transparent 35%, rgba(0, 0, 0, 0.5) 100%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.mm-hero-cinematic .mm-forest-bg,
+.mm-hero .mm-forest-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.mm-forest-bg.day {
+  background: linear-gradient(180deg, rgba(40, 72, 48, 0.35) 0%, rgba(12, 28, 18, 0.55) 100%);
+}
+.mm-forest-bg.night {
+  background: linear-gradient(180deg, rgba(25, 40, 72, 0.3) 0%, rgba(6, 12, 28, 0.6) 100%);
+}
+.mm-hero-cinematic .mm-forest-bg.active,
+.mm-hero .mm-forest-bg.active {
+  opacity: 1;
+}
+@keyframes mmForestParallaxFar {
+  0% { transform: translate3d(0, 0, 0) scale(1.02); }
+  100% { transform: translate3d(-12px, -6px, 0) scale(1.05); }
+}
+@keyframes mmForestParallaxMid {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(10px, -8px, 0); }
+}
+@keyframes mmFogDrift {
+  0%, 100% { transform: translate3d(-3%, 0, 0); opacity: 0.75; }
+  50% { transform: translate3d(3%, -2%, 0); opacity: 0.95; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mm-forest-layer--far,
+  .mm-forest-layer--mid,
+  .mm-forest-layer--fog {
+    animation: none !important;
+  }
+}
+/* Paralaje por scroll: JS desactiva keyframes para no competir con transform */
+.mm-hero-cinematic.mm-parallax-on .mm-forest-layer--far,
+.mm-hero-cinematic.mm-parallax-on .mm-forest-layer--mid,
+.mm-hero-cinematic.mm-parallax-on .mm-forest-layer--fog {
+  animation: none !important;
 }
 
 /* Capa 1 — siluetas de árboles atrás (parallax lento) */
 .mm-hero-cinematic::before,
 .mm-hero::before {
+  display: block !important;
   content: '';
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(ellipse at 20% 100%, rgba(34, 70, 48, 0.85), transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(20, 50, 35, 0.85), transparent 55%),
-    radial-gradient(circle at 50% 110%, rgba(45, 90, 60, 0.6), transparent 60%);
+    radial-gradient(ellipse at 50% 115%, rgba(20, 55, 35, 0.75), transparent 52%),
+    radial-gradient(ellipse at 20% 100%, rgba(28, 58, 38, 0.88), transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(16, 42, 28, 0.9), transparent 55%),
+    radial-gradient(circle at 50% 40%, rgba(60, 95, 65, 0.08), transparent 45%);
   animation: forestSway 18s ease-in-out infinite alternate;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
 }
 
 /* Capa 2 — niebla flotando */
 .mm-hero-cinematic::after,
 .mm-hero::after {
+  display: block !important;
   content: '';
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(ellipse 70% 30% at 30% 60%, rgba(180, 220, 200, 0.12), transparent 70%),
-    radial-gradient(ellipse 60% 25% at 70% 40%, rgba(200, 230, 210, 0.08), transparent 70%);
+    radial-gradient(ellipse 55% 28% at 50% 52%, rgba(210, 235, 215, 0.1), transparent 68%),
+    radial-gradient(ellipse 70% 30% at 30% 60%, rgba(180, 220, 200, 0.1), transparent 70%),
+    radial-gradient(ellipse 60% 25% at 70% 40%, rgba(200, 230, 210, 0.07), transparent 70%);
   animation: mistFloat 22s ease-in-out infinite;
   pointer-events: none;
-  z-index: 2;
+  z-index: 4;
 }
 
 @keyframes forestSway {
@@ -6427,7 +6966,22 @@ document.addEventListener('DOMContentLoaded', async function() {
 /* Modo NOCHE — más oscuro, partículas azuladas, luna */
 html[data-mm-time="night"] .mm-hero,
 html[data-mm-time="night"] .mm-hero-cinematic {
-  background: linear-gradient(180deg, #050b14 0%, #0c1428 50%, #060c14 100%);
+  background: linear-gradient(180deg, #020408 0%, #081018 38%, #0a1624 62%, #04080e 100%) !important;
+}
+html[data-mm-time="night"] .mm-forest-layer--far {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(12, 22, 38, 0.96) 0%, transparent 58%),
+    radial-gradient(ellipse 90% 55% at 15% 90%, rgba(4, 12, 24, 0.95) 0%, transparent 48%),
+    radial-gradient(ellipse 90% 55% at 85% 90%, rgba(4, 12, 24, 0.95) 0%, transparent 48%);
+}
+html[data-mm-time="night"] .mm-forest-layer--fog {
+  background:
+    radial-gradient(ellipse 50% 32% at 48% 58%, rgba(160, 190, 220, 0.12), transparent 72%),
+    radial-gradient(ellipse 40% 26% at 70% 45%, rgba(140, 170, 210, 0.08), transparent 70%);
+  mix-blend-mode: screen;
+}
+html[data-mm-time="night"] .mm-forest-spotlight {
+  background: radial-gradient(ellipse 88% 72% at 50% 40%, transparent 0%, transparent 32%, rgba(0, 4, 12, 0.62) 100%);
 }
 html[data-mm-time="night"] .mm-hero::before,
 html[data-mm-time="night"] .mm-hero-cinematic::before {
@@ -6447,7 +7001,7 @@ html[data-mm-time="night"] .mm-light-rays {
 
 /* Hero contenido sobre las capas */
 .mm-hero-content,
-.mm-hero-cinematic > *:not(.mm-particles-layer):not(.mm-light-rays) {
+.mm-hero-cinematic > *:not(.mm-particles-layer):not(.mm-light-rays):not(.mm-forest-depth):not(.mm-forest-bg) {
   position: relative;
   z-index: 5;
 }
@@ -6498,6 +7052,46 @@ html[data-mm-time="night"] .mm-light-rays {
     document.addEventListener('DOMContentLoaded', build);
   } else {
     build();
+  }
+})();
+</script>
+<script>
+/* Paralaje ligero en capas del bosque — respeta prefers-reduced-motion */
+(function mmForestParallax() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function bind() {
+    var hero = document.getElementById('mm-hero-cinematic') || document.querySelector('.mm-hero-cinematic');
+    if (!hero) return setTimeout(bind, 200);
+    var far = hero.querySelector('.mm-forest-layer--far');
+    var mid = hero.querySelector('.mm-forest-layer--mid');
+    var fog = hero.querySelector('.mm-forest-layer--fog');
+    if (!far || !mid) return;
+    var ticking = false;
+    function frame() {
+      ticking = false;
+      var rect = hero.getBoundingClientRect();
+      var vh = window.innerHeight || 1;
+      var t = 1 - Math.max(0, Math.min(1, (rect.top + rect.height * 0.35) / (vh + rect.height * 0.5)));
+      var y = (t - 0.5) * 28;
+      far.style.transform = 'translate3d(0,' + (y * 0.35) + 'px,0)';
+      mid.style.transform = 'translate3d(0,' + (y * 0.65) + 'px,0)';
+      if (fog) fog.style.transform = 'translate3d(' + (y * 0.15) + 'px,' + (y * 0.2) + 'px,0)';
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(frame);
+      }
+    }
+    hero.classList.add('mm-parallax-on');
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    frame();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
   }
 })();
 </script>

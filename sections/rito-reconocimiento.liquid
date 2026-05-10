@@ -864,9 +864,13 @@ html, body {
   </div>
 </div>
 
+{% capture duendes_theme_api %}{% render 'duendes-api-worker-url' %}{% endcapture %}
+{%- assign rito_api_url = section.settings.duendes_api_url | default: section.settings.gas_endpoint | default: duendes_theme_api | strip -%}
 <script>
 (function() {
   'use strict';
+
+  var DUENDES_API_URL = {{ rito_api_url | json }};
 
   const QUESTIONS_DATA = {
     capa1: [
@@ -1162,7 +1166,7 @@ html, body {
       if (layer3Question) {
         questionText = layer3Question;
       } else {
-        // Fetch from GAS
+        // Fetch desde el Worker
         fetchLayer3Question();
         return;
       }
@@ -1192,7 +1196,7 @@ html, body {
     const customerEmail = document.documentElement.getAttribute('data-customer-email') || 'user@example.com';
     const archetype = selectedArchetype;
 
-    fetch('https://duendes-api.bitter-voice-d5fb.workers.dev/exec', {
+    fetch(DUENDES_API_URL, {
       method: 'POST',
       body: JSON.stringify({
         action: 'generate_layer3_question',
@@ -1202,7 +1206,7 @@ html, body {
       }),
       mode: 'no-cors'
     }).then(() => {
-      // GAS doesn't return JSON in no-cors mode, so we just wait a bit
+      // no-cors: el Worker no expone JSON legible al navegador; esperamos y usamos fallback
       setTimeout(() => {
         const promptEl = document.querySelector('.rito-screen.active .rito-question__prompt');
         if (promptEl && !promptEl.textContent.includes('?')) {
@@ -1375,7 +1379,7 @@ html, body {
     };
 
     try {
-      await fetch('https://duendes-api.bitter-voice-d5fb.workers.dev/exec', {
+      await fetch(DUENDES_API_URL, {
         method: 'POST',
         body: JSON.stringify(payload),
         mode: 'no-cors'
@@ -1426,9 +1430,10 @@ html, body {
   "settings": [
     {
       "type": "text",
-      "id": "gas_endpoint",
-      "label": "Google Apps Script Endpoint",
-      "default": "https://duendes-api.bitter-voice-d5fb.workers.dev/exec"
+      "id": "duendes_api_url",
+      "label": "URL del API (solo esta sección)",
+      "default": "",
+      "info": "Dejalo vacío en el día a día: el Rito usará la misma URL que configuraste en Tema → Ajustes del tema → Duendes → URL del API. Solo pegá una URL aquí si querés que esta página use otro servidor (por ejemplo una prueba). Ejemplo: https://mi-prueba.workers.dev/exec. Si completás este campo, gana sobre la URL global solo en el Rito."
     }
   ],
   "presets": [

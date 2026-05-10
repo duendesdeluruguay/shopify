@@ -1,9 +1,17 @@
 {%- comment -%}
+  --- Para el dueño de la tienda (no hace falta tocar este archivo) ---
+  Encender o apagar: Tema → Ajustes del tema → grupo "Duendes" →
+  casilla "Redirección geo al español (solo inicio)". Ahí el tema
+  explica con ejemplos qué hace cada opción.
+
   ============================================================
   DDU AUTO-GEO REDIRECT 2026-05-08
   Redirige automáticamente al subfolder español según el país
   detectado por IP del visitante. La principal queda en inglés
   (Shopify lo exige), pero los hispanohablantes ven español.
+
+  Solo activo si hay Markets/idiomas configurados en Admin (evita
+  URLs /es-*/ inexistentes). En el editor del tema no corre.
   ============================================================
 
   Estrategia híbrida (lo más rápido y robusto):
@@ -27,6 +35,25 @@
     CO → /es-co/    BR → /es-br/    ES → /es-es/
     LATAM (BO, CR, EC, SV, GT, HN, NI, PA, PY, PE, DO, VE) → /es-lat/
 {%- endcomment -%}
+
+{%- liquid
+  assign ddu_geo_enabled = settings.duendes_enable_geo_redirect
+  if ddu_geo_enabled == nil
+    assign ddu_geo_enabled = true
+  endif
+  assign ddu_geo_markets_ready = false
+  if localization.available_countries.size > 1 or localization.available_languages.size > 1
+    assign ddu_geo_markets_ready = true
+  endif
+-%}
+
+{%- unless ddu_geo_enabled -%}
+  {%- comment -%} Desactivado en Personalizar tema. {%- endcomment -%}
+{%- elsif ddu_geo_markets_ready == false -%}
+  {%- comment -%} Un solo país e idioma: sin redirección hasta que configures Mercados. {%- endcomment -%}
+{%- elsif request.design_mode -%}
+  {%- comment -%} Editor de tema: no redirigir. {%- endcomment -%}
+{%- else -%}
 
 {%- liquid
   assign ddu_geo_target = blank
@@ -119,3 +146,5 @@
   })();
 </script>
 {%- endif -%}
+
+{%- endunless -%}

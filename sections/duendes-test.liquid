@@ -336,7 +336,7 @@
     document.querySelectorAll('.dt-intro [data-delay]').forEach(function(el){ el.classList.add('show'); });
   }, 400);
 
-  var API_BASE = 'https://duendes-api.bitter-voice-d5fb.workers.dev/exec';
+  var API_BASE = {% render 'duendes-api-worker-url', format: 'json' %};
 
   function detectLocale(){
     var html = document.documentElement.lang || '';
