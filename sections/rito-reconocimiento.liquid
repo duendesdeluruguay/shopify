@@ -865,7 +865,13 @@ html, body {
 </div>
 
 {% capture duendes_theme_api %}{% render 'duendes-api-worker-url' %}{% endcapture %}
-{%- assign rito_api_url = section.settings.duendes_api_url | default: section.settings.gas_endpoint | default: duendes_theme_api | strip -%}
+{%- assign rito_api_url = section.settings.duendes_api_url | strip -%}
+{%- if rito_api_url == blank -%}
+  {%- assign rito_api_url = section.settings.gas_endpoint | strip -%}
+{%- endif -%}
+{%- if rito_api_url == blank -%}
+  {%- assign rito_api_url = duendes_theme_api | strip -%}
+{%- endif -%}
 <script>
 (function() {
   'use strict';
@@ -1432,8 +1438,7 @@ html, body {
       "type": "text",
       "id": "duendes_api_url",
       "label": "URL del API (solo esta sección)",
-      "default": "",
-      "info": "Dejalo vacío en el día a día: el Rito usará la misma URL que configuraste en Tema → Ajustes del tema → Duendes → URL del API. Solo pegá una URL aquí si querés que esta página use otro servidor (por ejemplo una prueba). Ejemplo: https://mi-prueba.workers.dev/exec. Si completás este campo, gana sobre la URL global solo en el Rito."
+      "info": "Dejá el campo vacío en el editor de la sección para usar solo la URL global (Tema → Ajustos del tema → Duendes). Si pegás otra URL aquí, el Rito usará esa solo en esta página (ej. pruebas: https://mi-prueba.workers.dev/exec)."
     }
   ],
   "presets": [
