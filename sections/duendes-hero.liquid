@@ -1,0 +1,316 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  :root {
+    --black-deep: #0a0c06;
+    --gold: #c9a84c;
+    --gold-lt: #dfc472;
+    --serif: 'Cormorant Garamond', serif;
+  }
+  .duendes-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+    background: var(--black-deep);
+  }
+  .duendes-hero__video-wrap {
+    position: relative;
+    width: 50%;
+    overflow: hidden;
+  }
+  .duendes-hero__video-wrap video,
+  .duendes-hero__video-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+    transition: transform .1s linear;
+  }
+  .duendes-hero__content {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 60px;
+    position: relative;
+    background: linear-gradient(135deg, rgba(8,10,6,.95), rgba(20,22,16,.9));
+  }
+  .duendes-hero__eyebrow {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .duendes-hero__title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .duendes-hero__title em {
+    font-style: italic;
+    color: var(--gold-lt);
+  }
+  .duendes-hero__subtitle {
+    font-size: 17px;
+    color: #FAFAF7;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 440px;
+    position: relative;
+  }
+  .duendes-hero__ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    position: relative;
+  }
+  .duendes-hero__link {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: color .3s;
+  }
+
+  /* === TABLET === */
+  @media (max-width: 1024px) {
+    .duendes-hero__content { padding: 32px 20px; }
+    .duendes-hero__title { font-size: clamp(22px, 3.5vw, 36px); margin-bottom: 16px; }
+    .duendes-hero__subtitle { font-size: 14px; margin-bottom: 24px; max-width: 100%; }
+  }
+  /* === MOBILE: texto superpuesto sobre la imagen === */
+  @media (max-width: 768px) {
+    .duendes-hero {
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+    }
+    .duendes-hero__video-wrap {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .duendes-hero__content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      min-height: 100vh;
+      padding: 0 20px 44px;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,12,6,0.1) 0%,
+        rgba(10,12,6,0.4) 40%,
+        rgba(10,12,6,0.85) 70%,
+        rgba(10,12,6,0.95) 100%
+      );
+      justify-content: flex-end;
+    }
+    .duendes-hero__eyebrow { font-size: 10px; letter-spacing: 3px; margin-bottom: 14px; }
+    .duendes-hero__title { font-size: clamp(26px, 7.5vw, 36px); margin-bottom: 14px; }
+    .duendes-hero__subtitle { font-size: 14px; line-height: 1.6; margin-bottom: 24px; max-width: 100%; }
+    .duendes-hero__link { font-size: 13px; }
+    .duendes-hero__ctas .duendes-btn-gold { padding: 14px 32px; font-size: 12px; width: 100%; }
+  }
+</style>
+
+<section class="duendes-hero" id="duendes-hero">
+  <div class="duendes-hero__video-wrap">
+    {% if section.settings.video_url != blank %}
+      {% if section.settings.hero_image != blank %}
+        <img src="{{ section.settings.hero_image | image_url: width: 1600 }}" 
+             alt="{{ section.settings.hero_image.alt | default: 'Duendes del Uruguay' }}"
+             loading="eager" fetchpriority="high">
+      {% elsif section.settings.video_url != blank %}
+        <video autoplay muted loop playsinline>
+          <source src="{{ section.settings.video_url }}" type="video/mp4">
+        </video>
+      {% endif %}
+    {% elsif section.settings.hero_image != blank %}
+      {{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', class: 'duendes-hero__img' }}
+    {% else %}
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a14,#2a2a20);display:flex;align-items:center;justify-content:center">
+        <span style="font-family:var(--serif);color:var(--gold);font-size:18px;font-style:italic">Upload your video or image</span>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="duendes-hero__content">
+    <div class="duendes-orb" style="width:300px;height:300px;top:-80px;right:-60px"></div>
+
+    <span class="duendes-hero__eyebrow duendes-reveal">{{ section.settings.eyebrow }}</span>
+
+    <h1 class="duendes-hero__title duendes-reveal duendes-reveal-delay-1">
+      {{ section.settings.title_line1 }}<br>
+      <em>{{ section.settings.title_line2 }}</em>
+    </h1>
+
+    <p class="duendes-hero__subtitle duendes-reveal duendes-reveal-delay-2">
+      {{ section.settings.subtitle }}
+    </p>
+
+    <div class="duendes-hero__ctas duendes-reveal duendes-reveal-delay-3">
+      {% if section.settings.cta_text != blank %}
+        <a href="{{ section.settings.cta_url }}" class="duendes-btn-gold">{{ section.settings.cta_text }}</a>
+      {% endif %}
+      {% if section.settings.secondary_text != blank %}
+        <a href="{{ section.settings.secondary_url }}" class="duendes-hero__link">{{ section.settings.secondary_text }} &rarr;</a>
+      {% endif %}
+    </div>
+
+    {%- comment -%} Fix 5 (2026-05-01) — botón Test del Guardián siempre visible como segundo CTA {%- endcomment -%}
+    <div class="duendes-hero__test-cta-wrap duendes-reveal duendes-reveal-delay-3">
+      <a href="/pages/test-del-guardian" class="duendes-hero__btn-test">
+        Not sure which one is looking for you? · Free Test &rarr;
+      </a>
+    </div>
+
+    {%- comment -%} Trust signals (2026-05-01) — autoridad inmediata above-the-fold {%- endcomment -%}
+    <ul class="duendes-hero__trust duendes-reveal duendes-reveal-delay-3" aria-label="Pruebas de autoridad de la marca">
+      <li class="duendes-hero__trust-item">
+        <strong class="duendes-hero__trust-num">+15.000</strong>
+        <span class="duendes-hero__trust-label">guardianes adoptados</span>
+      </li>
+      <li class="duendes-hero__trust-item">
+        <strong class="duendes-hero__trust-num">45</strong>
+        <span class="duendes-hero__trust-label">countries in the world</span>
+      </li>
+      <li class="duendes-hero__trust-item">
+        <strong class="duendes-hero__trust-num">desde 2015</strong>
+        <span class="duendes-hero__trust-label">channeling in Piriápolis</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="duendes-divider">&#10022;</div>
+
+<script>
+  /* Hero parallax */
+  (function() {
+    var video = document.querySelector('.duendes-hero__video-wrap video, .duendes-hero__video-wrap img');
+    if (!video) return;
+    window.addEventListener('scroll', function() {
+      var s = window.scrollY;
+      if (s < window.innerHeight) {
+        video.style.transform = 'scale(1.05) translateY(' + s * 0.15 + 'px)';
+      }
+    }, { passive: true });
+  })();
+
+  /* Reveal observer — progressive enhancement */
+  (function() {
+    if (window.Shopify && window.Shopify.designMode) return;
+    document.documentElement.classList.add('duendes-reveal-ready');
+
+    function initReveal() {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.duendes-reveal').forEach(function(el) {
+          el.classList.add('visible');
+        });
+        return;
+      }
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.duendes-reveal').forEach(function(el) {
+        observer.observe(el);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initReveal);
+    } else {
+      initReveal();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes Hero",
+  "tag": "section",
+  "class": "duendes-hero-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto superior (eyebrow)",
+      "default": "Guardianes del Uruguay"
+    },
+    {
+      "type": "text",
+      "id": "title_line1",
+      "label": "Título línea 1",
+      "default": "No lo elegís vos."
+    },
+    {
+      "type": "text",
+      "id": "title_line2",
+      "label": "Título línea 2 (itálica dorada)",
+      "default": "Él te elige a vos."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Guardianes canalizados a mano en Piriápolis. Cada uno existe una sola vez."
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "URL del video (MP4)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagen hero (si no hay video)"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto botón principal",
+      "default": "Encontrar Mi Guardián"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Link botón principal"
+    },
+    {
+      "type": "text",
+      "id": "secondary_text",
+      "label": "Texto link secundario",
+      "default": "¿No sabés cuál? Hacer el Test"
+    },
+    {
+      "type": "url",
+      "id": "secondary_url",
+      "label": "Link secundario"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes Hero"
+    }
+  ]
+}
+{% endschema %}

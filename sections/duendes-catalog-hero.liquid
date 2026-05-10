@@ -1,0 +1,209 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .dc-hero {
+    background: #0D0B08;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Cinematic layered background */
+  .dc-hero__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(201,169,110,.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(201,169,110,.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, rgba(201,169,110,.08) 0%, transparent 60%),
+      linear-gradient(180deg, #0D0B08 0%, #141210 40%, #0D0B08 100%);
+    pointer-events: none;
+  }
+  /* Animated gold particles */
+  .dc-hero__particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    border-radius: 50%;
+    background: var(--gold, #C9A96E);
+    opacity: 0;
+    animation: dc-particle 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .dc-hero__particle:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+  .dc-hero__particle:nth-child(2) { top: 60%; left: 75%; animation-delay: 2s; }
+  .dc-hero__particle:nth-child(3) { top: 30%; left: 85%; animation-delay: 4s; }
+  .dc-hero__particle:nth-child(4) { top: 70%; left: 25%; animation-delay: 6s; }
+  .dc-hero__particle:nth-child(5) { top: 45%; left: 50%; animation-delay: 1s; width: 3px; height: 3px; }
+  @keyframes dc-particle {
+    0%, 100% { opacity: 0; transform: scale(1) translateY(0); }
+    50% { opacity: .6; transform: scale(1.5) translateY(-10px); }
+  }
+  /* Top and bottom gold line accents */
+  .dc-hero::before, .dc-hero::after {
+    content: '';
+    position: absolute;
+    left: 15%; right: 15%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,169,110,.15), transparent);
+  }
+  .dc-hero::before { top: 0; }
+  .dc-hero::after { bottom: 0; }
+
+  .dc-hero__content {
+    position: relative;
+    z-index: 1;
+    padding: 80px 24px 64px;
+  }
+  .dc-hero__eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold, #C9A96E);
+    margin-bottom: 20px;
+    opacity: .7;
+  }
+  .dc-hero__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300;
+    color: #FAFAF8;
+    line-height: 1.05;
+    margin: 0 0 20px;
+    letter-spacing: -1px;
+  }
+  .dc-hero__subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(16px, 2vw, 20px);
+    font-style: italic;
+    color: rgba(250,250,248,.5);
+    max-width: 500px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+  /* Gold decorative line */
+  .dc-hero__accent {
+    width: 40px; height: 1px;
+    background: var(--gold, #C9A96E);
+    margin: 0 auto 40px;
+    opacity: .4;
+  }
+
+  /* Category Pills */
+  .dc-hero__nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .dc-hero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 20px;
+    border: 1px solid rgba(201,169,110,.2);
+    border-radius: 100px;
+    background: rgba(255,255,255,.03);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .35s cubic-bezier(.25,.8,.25,1);
+  }
+  .dc-hero__pill:hover {
+    border-color: var(--gold, #C9A96E);
+    background: rgba(201,169,110,.08);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,169,110,.1);
+  }
+  .dc-hero__pill-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--gold, #C9A96E); opacity: .5;
+    transition: opacity .3s;
+  }
+  .dc-hero__pill:hover .dc-hero__pill-dot { opacity: 1; }
+  .dc-hero__pill-label {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 13px; font-weight: 500; letter-spacing: .5px;
+    color: rgba(250,250,248,.65);
+    transition: color .3s;
+  }
+  .dc-hero__pill:hover .dc-hero__pill-label { color: var(--gold-lt, #D6BD7B); }
+
+  @media (max-width: 768px) {
+    .dc-hero { min-height: 300px; }
+    .dc-hero__content { padding: 60px 16px 48px; }
+    .dc-hero__nav {
+      flex-wrap: nowrap; justify-content: flex-start;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; padding-bottom: 8px; gap: 8px; max-width: 100%;
+    }
+    .dc-hero__nav::-webkit-scrollbar { display: none; }
+    .dc-hero__pill { flex-shrink: 0; padding: 8px 16px; }
+  }
+</style>
+
+<section class="dc-hero" id="catalogo-hero">
+  <div class="dc-hero__bg"></div>
+  <span class="dc-hero__particle"></span>
+  <span class="dc-hero__particle"></span>
+  <span class="dc-hero__particle"></span>
+  <span class="dc-hero__particle"></span>
+  <span class="dc-hero__particle"></span>
+
+  <div class="dc-hero__content">
+    <p class="dc-hero__eyebrow duendes-reveal">{{ section.settings.eyebrow }}</p>
+    <h1 class="dc-hero__title duendes-reveal">{{ section.settings.title }}</h1>
+    <p class="dc-hero__subtitle duendes-reveal">{{ section.settings.subtitle }}</p>
+    <div class="dc-hero__accent duendes-reveal"></div>
+
+    <nav class="dc-hero__nav duendes-reveal">
+      {%- for block in section.blocks -%}
+        <a href="#cat-{{ block.settings.anchor }}" class="dc-hero__pill" {{ block.shopify_attributes }}>
+          <span class="dc-hero__pill-dot"></span>
+          <span class="dc-hero__pill-label">{{ block.settings.label }}</span>
+        </a>
+      {%- endfor -%}
+    </nav>
+  </div>
+</section>
+
+<script>
+(function(){
+  document.querySelectorAll('.dc-hero__pill[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var t = document.querySelector(this.getAttribute('href'));
+      if(t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 20, behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Tienda Magica Hero",
+  "tag": "section",
+  "class": "dc-hero-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Bienvenido" },
+    { "type": "text", "id": "title", "label": "Titulo", "default": "Tienda Magica" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitulo", "default": "Cada guardian elige a su persona. Encontra al que te esta buscando." }
+  ],
+  "blocks": [
+    {
+      "type": "category_nav",
+      "name": "Categoria",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Nombre", "default": "Minis" },
+        { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "minis" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Tienda Magica Hero" }]
+}
+{% endschema %}

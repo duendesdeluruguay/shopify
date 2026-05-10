@@ -1,0 +1,316 @@
+<!--LIQUID_START-->{% comment %}
+  Pacto de los Elegidos · Order Confirmation Shopify Liquid
+  Spec: PACTO-T3-TEMPLATES-EMAIL.md sección A
+
+  CÓMO PEGAR ESTO:
+  1. Shopify Admin (US store) → Settings → Notifications → Order confirmation → Edit code
+  2. Reemplazar TODO el contenido con este archivo
+  3. Subject del email: "Tu pedido entró al círculo · próximos pasos del Pacto ✦"
+  4. Save → Preview con un pedido test → Send test
+
+  Variables Liquid disponibles:
+  - {{ customer.first_name }}
+  - {{ customer.email }}
+  - {{ order.order_number }}
+  - {{ line_items }} (array)
+
+  Spec voz: cinematográfico, voseo rioplatense, dorado #c9a961, fondo #0a0a0a, ivory #f4ecd8
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu pedido entró al círculo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0a0a0a;
+      color: #f4ecd8;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+    }
+    .wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .ornament {
+      text-align: center;
+      color: #c9a961;
+      letter-spacing: 0.4em;
+      font-size: 13px;
+      margin-bottom: 24px;
+      opacity: 0.85;
+    }
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      color: #f4ecd8;
+    }
+    h1 {
+      font-size: 28px;
+      text-align: center;
+      margin: 0 0 24px;
+      line-height: 1.3;
+    }
+    h2 {
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #c9a961;
+      margin: 32px 0 12px;
+      text-align: center;
+    }
+    h3 {
+      font-size: 18px;
+      color: #c9a961;
+      margin: 0 0 8px;
+      letter-spacing: 0.04em;
+    }
+    p {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 16px;
+      color: #d8d2c4;
+      line-height: 1.65;
+      margin: 0 0 14px;
+    }
+    .order-block {
+      border: 2px solid #c9a961;
+      padding: 24px;
+      text-align: center;
+      margin: 28px 0;
+      border-radius: 4px;
+    }
+    .order-label {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      color: #c9a961;
+      opacity: 0.85;
+      margin: 0 0 6px;
+      text-transform: uppercase;
+      font-family: 'Inter', sans-serif;
+    }
+    .order-num {
+      font-size: 32px;
+      color: #c9a961;
+      font-weight: 600;
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .items {
+      background: rgba(20, 17, 15, 0.5);
+      border-left: 2px solid #c9a961;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    .items p {
+      margin: 6px 0;
+      font-size: 15px;
+      color: #f4ecd8;
+    }
+    .paso {
+      margin: 24px 0;
+      padding: 20px 22px;
+      background: rgba(20, 17, 15, 0.4);
+      border-radius: 6px;
+      border: 1px solid rgba(201, 169, 97, 0.18);
+    }
+    .paso-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: #c9a961;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .cta-primary {
+      display: inline-block;
+      background: #c9a961;
+      color: #0a0a0a !important;
+      padding: 18px 36px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      margin: 16px 0 0;
+      font-weight: 600;
+    }
+    .cta-block {
+      text-align: center;
+      margin: 32px 0;
+    }
+    .urgencia {
+      background: #1a1a0a;
+      border-left: 4px solid #c9a961;
+      padding: 20px 22px;
+      margin: 32px 0;
+      border-radius: 4px;
+    }
+    .urgencia h3 {
+      font-family: 'Inter', sans-serif;
+      color: #c9a961;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+      font-weight: 600;
+    }
+    .urgencia p {
+      font-size: 15px;
+      color: #f4ecd8;
+      margin: 6px 0;
+    }
+    .urgencia strong {
+      color: #c9a961;
+    }
+    .firma {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(201, 169, 97, 0.18);
+    }
+    .firma .signature {
+      font-family: 'Cormorant Garamond', serif;
+      color: #c9a961;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      margin-top: 12px;
+    }
+    .firma a {
+      color: #c9a961;
+      text-decoration: underline;
+    }
+    .footer-note {
+      text-align: center;
+      color: #6b6b6b;
+      font-size: 12px;
+      margin-top: 32px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="ornament">✦ ✦ ✦</div>
+  <p style="text-align:center; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:0.4em; color:#c9a961; margin: 0 0 32px; text-transform: uppercase;">
+    DUENDES DEL URUGUAY
+  </p>
+
+  <!-- SALUDO -->
+  <h1>{{ customer.first_name | default: "Alma elegida" }}, te recibimos.</h1>
+  <p style="text-align:center;">Tu pedido entró al círculo. Acá está lo que viene.</p>
+
+  <!-- NÚMERO DE PEDIDO -->
+  <div class="order-block">
+    <p class="order-label">Tu número de pedido</p>
+    <p class="order-num">#{{ order.order_number }}</p>
+  </div>
+
+  <!-- LISTA DE GUARDIANES -->
+  <h2>Lo que adoptaste</h2>
+  <div class="items">
+    {% for line in line_items %}
+      <p>· {{ line.title }}{% if line.variant.title and line.variant.title != "Default Title" %} <span style="opacity:0.7;">({{ line.variant.title }})</span>{% endif %}{% if line.quantity > 1 %} ×{{ line.quantity }}{% endif %} · {{ line.final_line_price | money }}</p>
+    {% endfor %}
+  </div>
+
+  <!-- 4 PASOS DEL PACTO -->
+  <h2>El pacto que empieza hoy</h2>
+
+  <div class="paso">
+    <div class="paso-num">PASO 1 · Tu Encuentro · 4 minutos</div>
+    <h3>Lo primero: contarnos quién sos</h3>
+    <p>Lo que escribís en el formulario es lo que canalizamos. Cuando lo llenes, empieza tu proceso. Sin él, no podemos arrancar.</p>
+    <div class="cta-block">
+      <a class="cta-primary" href="https://duendesdeluruguay.com/encuentro?order={{ order.order_number }}&email={{ customer.email | url_encode }}">
+        EMPEZAR EL PROCESO ✦
+      </a>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="paso-num">PASO 2 · Canalización · 24 a 48 horas</div>
+    <h3>El círculo de cristales</h3>
+    <p>No es automático ni rápido. Es un estudio profundo donde nos sentamos en círculo con cristales, meditamos, y dejamos que tu guardián se exprese a través nuestro. Es el corazón del Pacto.</p>
+  </div>
+
+  <div class="paso">
+    <div class="paso-num">PASO 3 · Ritual de los 7 días · una semana</div>
+    <h3>El goteo cinematográfico</h3>
+    <p>Una vez canalizado tu guardián, te llega un email por día durante 7 días. Cada uno con algo distinto. El día 7 es la revelación completa: tu nombre álmico, el de tu guardián, los propósitos compartidos.</p>
+  </div>
+
+  <div class="paso">
+    <div class="paso-num">PASO 4 · Envío DHL · viernes siguiente</div>
+    <h3>El viaje físico</h3>
+    <p>El primer viernes después de cumplido el día 7, tu guardián viaja físicamente a tus manos. DHL Express, tracking puro. Recibís el guardián canalizado en mano.</p>
+  </div>
+
+  <!-- ATENCIÓN URGENCIA POSITIVA -->
+  <div class="urgencia">
+    <h3>ATENCIÓN — LEER ESTO</h3>
+    <p>Si llenás el Encuentro <strong>hoy</strong>: recibís tu guardián en aproximadamente <strong>15 días</strong>.</p>
+    <p>Si lo llenás en <strong>3 días</strong>: lo recibís en aproximadamente <strong>22 días</strong>.</p>
+    <p style="margin-top:12px;">Cada día sin llenarlo, atrasa una semana tu envío.</p>
+    <p style="margin-top:8px; font-style: italic; opacity:0.85;"><em>No es presión — es un pacto.</em></p>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div class="cta-block">
+    <a class="cta-primary" href="https://duendesdeluruguay.com/encuentro?order={{ order.order_number }}&email={{ customer.email | url_encode }}">
+      EMPEZAR AHORA ✦
+    </a>
+  </div>
+
+  <!-- BOTÓN "NO ME LLEGÓ EL EMAIL DEL ENCUENTRO" — Centro de Mando v1 cliente alert -->
+  <div style="margin-top:48px; padding:20px 22px; border:1px dashed rgba(201,169,97,0.45); border-radius:6px; text-align:center;">
+    <p style="font-size:13px; color:#c9a961; letter-spacing:0.15em; text-transform:uppercase; margin:0 0 8px; font-family:'Inter',sans-serif;">
+      ✦ IMPORTANTE
+    </p>
+    <p style="font-size:14px; color:#d8d2c4; margin:0 0 12px;">
+      Si no recibís el email aparte con tu Encuentro en las próximas 6 horas (chequeá spam primero):
+    </p>
+    {% comment %}
+      El token HMAC se genera por orden via /api/admin/orders/:n/report-token. Para
+      Liquid no podemos computar HMAC — pegar acá manualmente cuando lo prepares,
+      o (futuro) leer de un metafield poblado por webhook al crear orden.
+      Workaround simple: usar el `order.order_token` de Shopify (32 chars unique) que el
+      Worker valida lookup contra la orden en D1 (ver /api/customer/report-missing-email).
+    {% endcomment %}
+    <a href="https://duendes-api.bitter-voice-d5fb.workers.dev/api/customer/report-missing-email?order={{ order.order_number }}&token=PEGAR_TOKEN_AQUI&type=encuentro"
+       style="display:inline-block; padding:10px 20px; background:transparent; border:1px solid #c9a961; color:#c9a961; text-decoration:none; border-radius:4px; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; font-family:'Inter',sans-serif;">
+      No me llegó el Encuentro
+    </a>
+    <p style="font-size:11px; color:#6b6b6b; margin:12px 0 0; font-family:'Inter',sans-serif;">
+      Te lo mandamos a mano en menos de 2 horas.
+    </p>
+  </div>
+
+  <!-- FIRMA + FOOTER -->
+  <div class="firma">
+    <p style="font-style: italic; color: #d8d2c4; font-size: 14px;">
+      Cualquier duda: <a href="mailto:info@duendesdeluruguay.com">info@duendesdeluruguay.com</a>
+    </p>
+    <p class="signature">
+      Con vos en este umbral,<br>
+      <strong style="color:#c9a961;">Thibisay & Gabriel</strong>
+    </p>
+  </div>
+
+  <div class="footer-note">
+    Duendes del Uruguay · arte canalizado, hecho a mano en Piriápolis<br>
+    <a href="https://duendesdeluruguay.com" style="color:#6b6b6b;">duendesdeluruguay.com</a>
+  </div>
+
+</div>
+
+</body>
+</html>
+<!--LIQUID_END-->

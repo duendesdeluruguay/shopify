@@ -1,0 +1,129 @@
+{%- comment -%}
+  Sección "Llegaron las Hadas" — Pacto homepage 2026-05-04
+  Hero estático + carrusel 12 hadas medianas.
+  Copy y especificación: handoff Cowork msg_1777858049130.
+{%- endcomment -%}
+
+{%- liquid
+  assign sec = section.settings
+  assign coll = collections[sec.collection]
+-%}
+
+<section id="ddu-hadas-{{ section.id }}" class="ddu-hadas">
+  <div class="ddu-hadas__hero">
+    {%- if sec.hero_image -%}
+      <img class="ddu-hadas__hero-img" src="{{ sec.hero_image | image_url: width: 1600 }}" alt="" loading="lazy">
+    {%- elsif coll.products.first -%}
+      <img class="ddu-hadas__hero-img" src="{{ coll.products.first.featured_image | image_url: width: 1600 }}" alt="" loading="lazy">
+    {%- endif -%}
+    <div class="ddu-hadas__hero-overlay">
+      {%- if sec.badge != blank -%}
+        <span class="ddu-hadas__badge">{{ sec.badge }}</span>
+      {%- endif -%}
+      <h2 class="ddu-hadas__title">{{ sec.title }}</h2>
+      <p class="ddu-hadas__subtitle">{{ sec.subtitle }}</p>
+      {%- if sec.cta_text != blank and sec.cta_url != blank -%}
+        <a class="ddu-hadas__cta" href="{{ sec.cta_url }}">{{ sec.cta_text }} →</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if coll.products.size > 0 -%}
+    <div class="ddu-hadas__carousel-wrap">
+      <button class="ddu-hadas__nav ddu-hadas__nav--prev" aria-label="Anterior" data-dir="prev">‹</button>
+      <button class="ddu-hadas__nav ddu-hadas__nav--next" aria-label="Siguiente" data-dir="next">›</button>
+      <div class="ddu-hadas__carousel" tabindex="0" aria-label="Carrusel de hadas">
+        {%- for p in coll.products -%}
+          <a class="ddu-hadas__card" href="{{ p.url }}">
+            <div class="ddu-hadas__card-img">
+              <img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ p.title | escape }}" loading="lazy">
+            </div>
+            <div class="ddu-hadas__card-info">
+              <span class="ddu-hadas__card-title">{{ p.title | replace: ' - Hada', '' }}</span>
+              <span class="ddu-hadas__card-cta">Conocerla →</span>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{%- style -%}
+  #ddu-hadas-{{ section.id }} { position: relative; background: #1a0e1f; color: #f4ecd8; padding: 0 0 64px; overflow: hidden; }
+  .ddu-hadas__hero { position: relative; width: 100%; height: 88vh; min-height: 500px; max-height: 820px; overflow: hidden; }
+  .ddu-hadas__hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ddu-hadas__hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,14,31,.45) 0%, rgba(26,14,31,.1) 35%, rgba(26,14,31,.9) 100%); pointer-events: none; }
+  .ddu-hadas__hero-overlay { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 64px 24px 56px; text-align: center; }
+  .ddu-hadas__badge { display: inline-block; font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: #c9a4d6; padding: 6px 14px; border: 1px solid rgba(201,164,214,.4); border-radius: 999px; margin-bottom: 18px; backdrop-filter: blur(6px); background: rgba(26,14,31,.3); }
+  .ddu-hadas__title { font-family: 'Cinzel', 'Playfair Display', serif; font-size: clamp(28px, 6vw, 56px); font-weight: 500; line-height: 1.1; margin: 0 0 14px; color: #f4ecd8; }
+  .ddu-hadas__subtitle { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(15px, 2.2vw, 19px); font-style: italic; line-height: 1.5; max-width: 560px; margin: 0 0 26px; color: rgba(244,236,216,.92); }
+  .ddu-hadas__cta { display: inline-block; font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: #1a0e1f; background: #c9a4d6; padding: 14px 28px; border-radius: 4px; text-decoration: none; transition: transform .3s, background .3s; }
+  .ddu-hadas__cta:hover { background: #d9b4e6; transform: translateY(-2px); }
+
+  .ddu-hadas__carousel-wrap { position: relative; margin-top: 48px; }
+  .ddu-hadas__carousel { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 24px 24px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .ddu-hadas__carousel::-webkit-scrollbar { display: none; }
+  .ddu-hadas__card { flex: 0 0 78%; max-width: 320px; scroll-snap-align: start; background: #2a1a30; border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: transform .35s ease; cursor: grab; }
+  .ddu-hadas__card:active { cursor: grabbing; }
+  .ddu-hadas__card:hover { transform: translateY(-4px) scale(1.01); }
+  .ddu-hadas__card-img { aspect-ratio: 4 / 5; overflow: hidden; background: #110718; }
+  .ddu-hadas__card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+  .ddu-hadas__card:hover .ddu-hadas__card-img img { transform: scale(1.04); }
+  .ddu-hadas__card-info { padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+  .ddu-hadas__card-title { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: #f4ecd8; }
+  .ddu-hadas__card-cta { font-family: 'Playfair Display', serif; font-size: 13px; font-style: italic; color: #c9a4d6; }
+
+  .ddu-hadas__nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(244,236,216,.3); background: rgba(26,14,31,.6); color: #f4ecd8; font-size: 22px; line-height: 1; cursor: pointer; backdrop-filter: blur(8px); transition: background .25s, border-color .25s; display: none; }
+  .ddu-hadas__nav:hover { background: rgba(201,164,214,.15); border-color: #c9a4d6; }
+  .ddu-hadas__nav--prev { left: 12px; }
+  .ddu-hadas__nav--next { right: 12px; }
+
+  @media (min-width: 768px) {
+    .ddu-hadas__hero { height: 70vh; min-height: 560px; }
+    .ddu-hadas__hero-overlay { padding: 80px 48px 72px; }
+    .ddu-hadas__card { flex-basis: 32%; max-width: 360px; }
+    .ddu-hadas__nav { display: block; }
+  }
+  @media (min-width: 1280px) {
+    .ddu-hadas__card { flex-basis: 26%; }
+  }
+{%- endstyle -%}
+
+<script>
+(function(){
+  var root = document.getElementById('ddu-hadas-{{ section.id }}');
+  if (!root) return;
+  var car = root.querySelector('.ddu-hadas__carousel');
+  var prev = root.querySelector('[data-dir="prev"]');
+  var next = root.querySelector('[data-dir="next"]');
+  if (car && prev && next) {
+    var step = function(){ var c = car.querySelector('.ddu-hadas__card'); return c ? c.offsetWidth + 16 : 320; };
+    prev.addEventListener('click', function(){ car.scrollBy({left: -step(), behavior: 'smooth'}); });
+    next.addEventListener('click', function(){ car.scrollBy({left:  step(), behavior: 'smooth'}); });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Llegaron las Hadas",
+  "tag": "section",
+  "class": "section-ddu-hadas",
+  "settings": [
+    { "type": "header", "content": "Texto" },
+    { "type": "text",      "id": "badge",    "label": "Badge (microtexto sobre hero)",   "default": "Categoría nueva en el bosque" },
+    { "type": "text",      "id": "title",    "label": "Título (H2)",                      "default": "Por primera vez: las hadas." },
+    { "type": "textarea",  "id": "subtitle", "label": "Subtítulo",                        "default": "Doce hadas medianas. Energía más fina que la de un duende, más liviana que la de una pixie. Pidieron pista hace meses. Ya están." },
+    { "type": "text",      "id": "cta_text", "label": "Texto del botón",                  "default": "Conocer las hadas" },
+    { "type": "url",       "id": "cta_url",  "label": "URL del botón" },
+    { "type": "header", "content": "Productos" },
+    { "type": "collection","id": "collection", "label": "Colección a mostrar" },
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Imagen del hero (si vacío usa la primera del catálogo)" }
+  ],
+  "presets": [
+    { "name": "Llegaron las Hadas" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,122 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .df2 { position: relative; overflow: hidden; padding: clamp(80px, 10vw, 120px) 0; background: var(--misty, #F4F1EC); color: var(--text, #1a1a14); }
+  .df2__bg-pattern { position: absolute; inset: 0; opacity: .03; background-image: radial-gradient(circle at 25% 25%, var(--gold, #C6A55A) 1px, transparent 1px), radial-gradient(circle at 75% 75%, var(--gold, #C6A55A) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .df2__container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  .df2__heading { text-align: center; margin-bottom: clamp(48px, 6vw, 64px); }
+  .df2__eyebrow { font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: 12px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold, #C6A55A); margin-bottom: 20px; font-style: italic; }
+  .df2__heading h2 { font-family: var(--font-heading-family, 'Cinzel', serif); font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; color: var(--color-foreground, var(--text, #1a1a14)); line-height: 1.2; letter-spacing: 1px; }
+  .df2__diamond { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; }
+  .df2__diamond::before, .df2__diamond::after { content: ''; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold, #C6A55A), transparent); opacity: .4; }
+  .df2__diamond-icon { width: 8px; height: 8px; background: var(--gold, #C6A55A); transform: rotate(45deg); flex-shrink: 0; }
+  .df2__list { max-width: 800px; margin: 0 auto; }
+  .df2__item { margin-bottom: 12px; border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.04); border: 1px solid rgba(198,165,90,.06); transition: all .3s; }
+  .df2__item:hover { box-shadow: 0 4px 20px rgba(0,0,0,.07); }
+  .df2__item.open { border-left: 3px solid var(--gold, #C6A55A); box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+  .df2__q { display: flex; justify-content: space-between; align-items: center; padding: clamp(18px, 2.5vw, 26px) clamp(24px, 3vw, 32px); cursor: pointer; gap: 16px; transition: background .3s; border: none; background: none; width: 100%; text-align: left; font-family: inherit; }
+  .df2__q:hover { background: rgba(198,165,90,.03); }
+  .df2__q h3 { font-family: var(--font-heading-family, 'Cinzel', serif); font-size: clamp(16px, 1.8vw, 20px); font-weight: 500; flex: 1; color: var(--color-foreground, var(--text, #1a1a14)); margin: 0; letter-spacing: .3px; line-height: 1.4; }
+  .df2__icon { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--gold, #C6A55A); color: var(--gold, #C6A55A); display: flex; align-items: center; justify-content: center; font-size: 22px; transition: all .4s cubic-bezier(.25,.8,.25,1); flex-shrink: 0; font-family: var(--font-heading-family, 'Cinzel', serif); line-height: 1; }
+  .df2__item.open .df2__icon { transform: rotate(45deg); background: var(--gold, #C6A55A); color: #fff; box-shadow: 0 4px 12px rgba(198,165,90,.3); }
+  .df2__a { max-height: 0; overflow: hidden; transition: max-height .5s cubic-bezier(.25,.8,.25,1), padding .3s; }
+  .df2__item.open .df2__a { max-height: 500px; }
+  .df2__a-inner { padding: 0 clamp(24px, 3vw, 32px) clamp(20px, 2.5vw, 28px); font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: 17px; color: var(--text-light, rgba(26,26,20,.85)); line-height: 1.75; font-style: italic; }
+  @media (max-width: 768px) { .df2__q h3 { font-size: 17px; } .df2__a-inner { font-size: 16px; } }
+  @media (max-width: 480px) { .df2 { padding: 64px 0; } }
+</style>
+
+<section class="df2" id="duendes-faq">
+  <div class="df2__bg-pattern"></div>
+
+  <div class="df2__container">
+    <div class="df2__heading duendes-reveal">
+      {% if section.settings.eyebrow != blank %}
+        <p class="df2__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2>{{ section.settings.heading }}</h2>
+      <div class="df2__diamond"><span class="df2__diamond-icon"></span></div>
+    </div>
+
+    <div class="df2__list">
+      {% for block in section.blocks %}
+        <div class="df2__item duendes-reveal" {{ block.shopify_attributes }}>
+          <button class="df2__q" aria-expanded="false">
+            <h3>{{ block.settings.question }}</h3>
+            <span class="df2__icon">+</span>
+          </button>
+          <div class="df2__a">
+            <div class="df2__a-inner">{{ block.settings.answer }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="duendes-gold-line"></div>
+<div class="duendes-divider"><span class="duendes-divider-diamond"></span></div>
+
+<script>
+(function(){
+  var items = document.querySelectorAll('#duendes-faq .df2__item');
+  items.forEach(function(item){
+    var btn = item.querySelector('.df2__q');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      var wasOpen = item.classList.contains('open');
+      /* Auto-cerrar todos los demas */
+      items.forEach(function(other){
+        if(other !== item && other.classList.contains('open')){
+          other.classList.remove('open');
+          var ob = other.querySelector('.df2__q');
+          if(ob) ob.setAttribute('aria-expanded','false');
+        }
+      });
+      /* Toggle el actual */
+      if(wasOpen){
+        item.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      } else {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes FAQ",
+  "tag": "section",
+  "class": "duendes-faq-section",
+  "settings": [
+    {"type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1"},
+    {"type": "text", "id": "eyebrow", "label": "Etiqueta superior", "default": "RESPUESTAS"},
+    {"type": "text", "id": "heading", "label": "Titulo", "default": "Preguntas Frecuentes"}
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Pregunta",
+      "settings": [
+        {"type": "text", "id": "question", "label": "Pregunta", "default": "\u00bfQu\u00e9 es un guardi\u00e1n canalizado?"},
+        {"type": "textarea", "id": "answer", "label": "Respuesta", "default": "Es una escultura de porcelana hecha a mano por Gabriel, acompa\u00f1ada de un mensaje personal canalizado por Thibisay. No es un adorno: es un compa\u00f1ero energ\u00e9tico que llega con una carta escrita exclusivamente para vos."}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "\u00bfQu\u00e9 es un guardi\u00e1n canalizado?", "answer": "Es una escultura de porcelana hecha a mano por Gabriel, acompa\u00f1ada de un mensaje personal canalizado por Thibisay. No es un adorno: es un compa\u00f1ero energ\u00e9tico que llega con una carta escrita exclusivamente para vos." } },
+        { "type": "question", "settings": { "question": "\u00bfHacen env\u00edos internacionales?", "answer": "S\u00ed. Enviamos a todo el mundo por DHL Express (5 a 10 d\u00edas, puerta a puerta con seguimiento). En Uruguay enviamos por DAC (5 a 7 d\u00edas). Cada guardi\u00e1n viaja con protecci\u00f3n especial." } },
+        { "type": "question", "settings": { "question": "\u00bfPuedo elegir el mensaje canalizado?", "answer": "No. El mensaje es canalizado por Thibisay espec\u00edficamente para vos (o para la persona que lo recibe). No es un mensaje gen\u00e9rico ni elegible. Es exactamente lo que necesit\u00e1s escuchar." } },
+        { "type": "question", "settings": { "question": "\u00bfPuedo regalarlo?", "answer": "S\u00ed, y es uno de los regalos m\u00e1s especiales que existen. Ten\u00e9s dos opciones: regalo sorpresa (vos complet\u00e1s un formulario sobre la persona) o regalo no sorpresa (le mandamos el formulario directamente)." } },
+        { "type": "question", "settings": { "question": "\u00bfPor qu\u00e9 cada guardi\u00e1n es \u00fanico?", "answer": "Gabriel esculpe cada pieza a mano, sin moldes, durante 20 a 60 horas. Usa porcelana profesional y cristales naturales seleccionados uno por uno. Es f\u00edsicamente imposible hacer dos iguales." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

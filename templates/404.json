@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "duendes-404",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

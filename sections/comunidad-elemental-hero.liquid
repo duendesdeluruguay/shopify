@@ -1,0 +1,33 @@
+{% comment %}
+  COMUNIDAD ELEMENTAL HERO - fondo negro letras blancas
+{% endcomment %}
+
+<style>
+.ce-hero-{{ section.id }}{ background:#0a0a0a; padding:96px 24px 80px; text-align:center; position:relative; }
+.ce-hero-{{ section.id }} .ce-hero-eyebrow{ font-family:'Cinzel', serif; font-size:11px; letter-spacing:5px; color:rgba(255,255,255,0.55); text-transform:uppercase; margin-bottom:24px; }
+.ce-hero-{{ section.id }} .ce-hero-title{ font-family:'Cinzel', serif; font-size:clamp(36px, 5.5vw, 64px); font-weight:400; letter-spacing:8px; text-transform:uppercase; line-height:1; margin-bottom:18px; color:#fff; }
+.ce-hero-{{ section.id }} .ce-hero-line{ width:80px; height:1px; background:#c9a55a; margin:28px auto 32px; box-shadow:0 0 12px rgba(201,165,90,0.4); }
+.ce-hero-{{ section.id }} .ce-hero-sub{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:clamp(17px, 1.6vw, 20px); color:rgba(255,255,255,0.72); max-width:620px; margin:0 auto; line-height:1.55; }
+@media (max-width:600px){ .ce-hero-{{ section.id }}{ padding:64px 20px 56px; } .ce-hero-{{ section.id }} .ce-hero-title{ letter-spacing:5px; } }
+</style>
+
+<section class="ce-hero-{{ section.id }}">
+  <div class="ce-hero-eyebrow">{{ section.settings.eyebrow }}</div>
+  <h1 class="ce-hero-title">{{ section.settings.title }}</h1>
+  <div class="ce-hero-line"></div>
+  <p class="ce-hero-sub">{{ section.settings.subtitle }}</p>
+</section>
+
+{% schema %}
+{
+  "name": "Comunidad Elemental Hero",
+  "tag": "section",
+  "class": "section-comunidad-hero",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "El blog del oficio"},
+    {"type": "text", "id": "title", "label": "Titulo", "default": "Comunidad Elemental"},
+    {"type": "textarea", "id": "subtitle", "label": "Subtitulo", "default": "Hadas, pixies, duendes, elfos y maestros gigantes. Aca vive la palabra: articulos sobre los linajes, los rituales, los suenos y la canalizacion."}
+  ],
+  "presets": [{"name": "Comunidad Elemental Hero", "category": "Mi Magia"}]
+}
+{% endschema %}

@@ -1,0 +1,1138 @@
+{% comment %}
+  La Guía de las Hadas · Duendes del Uruguay · v1.0
+  · Especializada · 50 páginas · flipbook PageFlip.js
+  · Paleta tonal: rosa pastel + dorado + crema + acentos agua/perla
+  · Sub-especies: Ondinas · Nereidas · Melusinas · Driádas
+  · Foco: sanación emocional · ciclos · agua · linaje femenino del agua
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Saira+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  .libro-wrap {
+    /* PALETA HADAS · rosa pastel + dorado + crema + perla + agua */
+    --rose-deep: #6b3a44;
+    --rose-medium: #b57580;
+    --rose-light: #e8c7c8;
+    --rose-petal: #f5dce2;
+    --rose-blush: #f9e8eb;
+    --water-blue: #a8c4d0;
+    --pearl: #f4ede0;
+    --pearl-glow: #fbf6ee;
+
+    --black-deep: #1a0e12;
+    --cream: #F8EFE8;
+    --cream-light: #FCF6F0;
+    --gold: #C9A961;
+    --gold-bright: #D8B872;
+    --gold-dark: #8b7137;
+    --brown-deep: #2D1F22;
+    --brown-soft: #5A4248;
+    --line-gold: rgba(201,169,97,0.28);
+    --line-rose: rgba(181,117,128,0.32);
+
+    --wood-base: #2d1418;
+    --wood-mid: #3a1d24;
+    --wood-light: #4a2530;
+    --wood-dark: #160a0e;
+    --font-info: 'Agency FB', 'Saira Condensed', 'Trebuchet MS', sans-serif;
+
+    color: var(--cream); font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh; padding: 28px 16px 60px; text-align: center;
+    background-color: var(--wood-dark);
+    background-image:
+      radial-gradient(ellipse at 50% 35%, rgba(181,117,128,0.20) 0%, rgba(0,0,0,0.95) 78%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'><defs><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.035' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.20 0 0 0 0 0.10 0 0 0 0 0.12 0 0 0 0.65 0'/></filter></defs><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+      repeating-linear-gradient(91deg, var(--wood-dark) 0px, var(--wood-base) 2px, var(--wood-mid) 5px, var(--wood-base) 9px, var(--wood-light) 14px, var(--wood-mid) 22px, var(--wood-base) 30px, var(--wood-dark) 40px);
+    background-attachment: fixed; position: relative; min-height: 100vh;
+  }
+
+  /* Auroras rosadas + agua + dorado */
+  .libro-wrap::before {
+    content:''; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.10;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><g fill='none' stroke='%23C9A961' stroke-width='1.4' opacity='0.85'><circle cx='90' cy='90' r='42'/><path d='M90 48 L90 132 M48 90 L132 90' /><circle cx='90' cy='90' r='6' fill='%23C9A961'/></g></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><g fill='none' stroke='%23E8C7C8' stroke-width='1.2' opacity='0.7'><path d='M110 40 C110 70, 70 70, 70 110 C70 150, 110 150, 110 110 C110 70, 150 70, 150 110 C150 150, 110 150, 110 110 Z'/><circle cx='110' cy='110' r='3' fill='%23E8C7C8'/></g></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='none' stroke='%23C9A961' stroke-width='1.2' opacity='0.85'><path d='M80 25 C70 50, 70 80, 80 105 C90 80, 90 50, 80 25 Z M80 105 L80 140'/></g></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><g fill='none' stroke='%23A8C4D0' stroke-width='1.2' opacity='0.7'><path d='M40 100 Q60 80, 80 100 T120 100 T160 100' /><path d='M40 130 Q60 110, 80 130 T120 130 T160 130'/><path d='M40 70 Q60 50, 80 70 T120 70 T160 70'/></g></svg>");
+    background-position: 8% 12%, 78% 22%, 18% 72%, 88% 78%;
+    background-repeat: no-repeat;
+    background-size: 180px, 220px, 160px, 200px;
+  }
+  .libro-wrap::after {
+    content:''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse at 22% 28%, rgba(232,199,200,0.10), transparent 38%),
+      radial-gradient(ellipse at 78% 70%, rgba(168,196,208,0.08), transparent 45%),
+      radial-gradient(ellipse at 50% 92%, rgba(201,169,97,0.06), transparent 50%);
+  }
+
+  /* Partículas doradas y de pétalo flotando */
+  .particula { position: fixed; pointer-events: none; z-index: 0; border-radius: 50%; opacity: 0; }
+  .particula.gold { background: radial-gradient(circle, rgba(216,184,114,0.85) 0%, rgba(201,169,97,0) 70%); width: 5px; height: 5px; box-shadow: 0 0 8px rgba(216,184,114,0.6); }
+  .particula.rose { background: radial-gradient(circle, rgba(245,220,226,0.7) 0%, rgba(232,199,200,0) 70%); width: 6px; height: 6px; box-shadow: 0 0 10px rgba(245,220,226,0.5); }
+  .particula.water { background: radial-gradient(circle, rgba(168,196,208,0.7) 0%, rgba(168,196,208,0) 70%); width: 4px; height: 4px; box-shadow: 0 0 6px rgba(168,196,208,0.55); }
+
+  .libro-wrap > * { position: relative; z-index: 1; }
+  .libro-wrap * { box-sizing: border-box; }
+
+  .libro-header { max-width: 760px; margin: 0 auto 24px; text-align: center; }
+  .libro-header .eyebrow { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+  .libro-header h1 { font-family: 'Great Vibes', cursive; font-size: clamp(46px, 6.8vw, 78px); margin: 0 0 8px; line-height: 1; font-weight: 400; color: var(--cream); text-shadow: 0 4px 18px rgba(0,0,0,0.85), 0 0 30px rgba(232,199,200,0.18); }
+  .libro-header .sub { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.5em; color: var(--gold-bright); text-transform: uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+
+  .lang-overlay { position: fixed; inset: 0; background: rgba(20,10,14,0.97); z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+  .lang-overlay.hide { display: none; }
+  .lang-box { max-width: 480px; text-align: center; padding: 40px 32px; border: 1px solid var(--gold); background: linear-gradient(160deg, #1f1318 0%, #0f0608 100%); position: relative; }
+  .lang-box::before { content:''; position: absolute; inset: 8px; border: 1px solid rgba(232,199,200,0.32); pointer-events:none; }
+  .lang-box .ornament { color: var(--gold); font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.7em; margin-bottom: 18px; }
+  .lang-box h2 { font-family: 'Great Vibes', cursive; font-weight: 400; font-size: 56px; color: var(--cream); margin: 0 0 8px; line-height: 1; }
+  .lang-box .pretitle { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase; margin-bottom: 18px; }
+  .lang-box p { font-family: var(--font-info); font-size: 16px; color: rgba(248,239,232,0.85); margin: 14px 0 28px; }
+  .lang-buttons { display: flex; gap: 14px; justify-content: center; }
+  .lang-buttons button { background: transparent; color: var(--cream); border: 1px solid var(--gold); padding: 14px 32px; font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+  .lang-buttons button:hover { background: var(--gold); color: var(--black-deep); }
+  .lang-buttons .recommended { background: var(--gold); color: var(--black-deep); }
+
+  .flipbook-container { display: flex; justify-content: center; align-items: center; margin: 0 auto; max-width: 1120px; min-height: 600px; padding: 16px; }
+  #book {
+    box-shadow: 0 32px 100px rgba(0,0,0,0.85), 0 0 0 8px rgba(40,16,22,0.7), 0 0 0 9px var(--gold-dark), 0 0 80px rgba(232,199,200,0.10);
+    border-radius: 4px;
+  }
+  .page { background: var(--cream); color: var(--brown-deep); overflow: hidden; }
+  .page-inner { padding: 36px 32px 26px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; text-align: center; }
+  .page.dark { background: var(--black-deep); color: var(--cream); }
+  .page.dark .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(232,199,200,0.25); pointer-events: none; }
+  .page.rose { background: linear-gradient(160deg, var(--rose-petal) 0%, var(--rose-blush) 70%, var(--cream-light) 100%); color: var(--brown-deep); }
+  .page.rose .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid var(--line-rose); pointer-events: none; }
+  .page.deep-rose { background: linear-gradient(160deg, #2a131a 0%, #1a0c10 100%); color: var(--cream); }
+  .page.deep-rose .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(232,199,200,0.32); pointer-events: none; }
+
+  .page .eyebrow { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.5em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 14px; text-align: center; width: 100%; }
+  .page.dark .eyebrow, .page.deep-rose .eyebrow { color: var(--gold); }
+  .page.rose .eyebrow { color: var(--rose-deep); letter-spacing: 0.5em; }
+  .page h2 { font-family: 'Great Vibes', cursive; font-size: 48px; margin: 0 auto 14px; line-height: 1; font-weight: 400; color: var(--brown-deep); text-align: center; width: 100%; }
+  .page.dark h2, .page.deep-rose h2 { color: var(--cream); }
+  .page.rose h2 { color: var(--rose-deep); }
+  .page h3 { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10.5px; letter-spacing: 0.3em; color: var(--gold-dark); text-transform: uppercase; margin: 12px 0 8px; text-align: center; width: 100%; }
+  .page.dark h3, .page.deep-rose h3 { color: var(--gold); }
+
+  .page p { font-family: var(--font-info); font-weight: 400; font-size: 14px; line-height: 1.55; margin: 0 auto 10px; color: var(--brown-deep); text-align: center; max-width: 380px; letter-spacing: 0.01em; }
+  .page.dark p, .page.deep-rose p { color: var(--cream); }
+  .page p.lead { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; color: var(--brown-soft); font-size: 14.5px; }
+  .page.dark p.lead, .page.deep-rose p.lead { color: rgba(248,239,232,0.85); }
+  .page.rose p.lead { color: var(--rose-deep); }
+  .page strong { color: var(--brown-deep); font-weight: 600; }
+  .page.dark strong, .page.deep-rose strong { color: var(--cream); }
+  .page em { font-style: italic; }
+
+  .page .center-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; text-align: center; }
+  .page .symbol-row { color: var(--gold); letter-spacing: 0.7em; font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; text-align: center; }
+
+  .page .page-number { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); font-family: 'Cinzel', serif; font-weight: 400; font-size: 9px; letter-spacing: 0.35em; color: var(--gold-dark); }
+  .page.dark .page-number, .page.deep-rose .page-number { color: var(--gold); opacity: 0.6; }
+
+  /* TAPA · cuero negro con tinte rosa profundo y triqueta dorada */
+  .page.cover {
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(80,40,50,0.45), transparent 60%),
+      radial-gradient(ellipse at 70% 70%, rgba(50,20,28,0.5), transparent 60%),
+      linear-gradient(135deg, #1f1418 0%, #0e0608 50%, #221216 100%);
+    color: var(--cream); position: relative; box-shadow: inset 0 0 70px rgba(0,0,0,0.85);
+  }
+  .page.cover::before { content:''; position: absolute; inset: 22px; border: 1px solid rgba(201,169,97,0.45); }
+  .page.cover::after { content:''; position: absolute; inset: 32px; border: 1px solid rgba(232,199,200,0.22); }
+  .page.cover .page-inner { z-index: 2; align-items: center; justify-content: space-between; padding: 60px 30px; gap: 12px; text-align: center; }
+  .page.cover .ornament-celtic-top { width: 80px; height: 80px; flex-shrink: 0; color: var(--gold); opacity: 0.95; filter: drop-shadow(0 0 12px rgba(232,199,200,0.25)); }
+  .page.cover .titulo-grande { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; line-height: 1.4; text-align: center; }
+  .page.cover h1 { font-family: 'Great Vibes', cursive; font-weight: 400; font-size: 60px; margin: 6px 0 8px; line-height: 1; color: var(--cream); text-shadow: 0 0 30px rgba(232,199,200,0.40); text-align: center; }
+  .page.cover .marca-fina { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.6em; color: var(--gold-bright); text-transform: uppercase; text-align: center; }
+  .page.cover .pie { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 11px; color: rgba(248,239,232,0.6); margin: 0; text-align: center; }
+
+  svg.ornament { display: block; margin: 14px auto; color: var(--gold-dark); }
+  svg.ornament.dark { color: var(--gold); }
+  svg.ornament.rose-acc { color: var(--rose-deep); }
+  svg.ornament.tiny { width: 32px; height: 32px; }
+  svg.ornament.small { width: 60px; height: 60px; }
+  svg.ornament.med { width: 90px; height: 90px; }
+  svg.ornament.large { width: 130px; height: 130px; }
+
+  .indice { font-family: var(--font-info); font-size: 12px; letter-spacing: 0.05em; color: var(--brown-deep); text-align: left; max-width: 380px; margin: 0 auto; }
+  .indice-item { display: flex; justify-content: space-between; align-items: baseline; margin: 6px 0; }
+  .indice-item .num { color: var(--gold-dark); margin-right: 8px; font-size: 11px; font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
+  .indice-item .name { flex: 1; }
+  .indice-item .dots { flex: 1; border-bottom: 1px dotted var(--gold-dark); margin: 0 8px; align-self: end; height: 1px; }
+  .indice-item .pg { color: var(--gold-dark); font-family: 'Cinzel', serif; }
+  .indice-section { font-family: 'Cinzel', serif; font-weight: 500; font-size: 10px; letter-spacing: 0.35em; color: var(--rose-deep); text-transform: uppercase; margin: 12px 0 4px; padding-bottom: 4px; border-bottom: 1px solid var(--gold-dark); text-align: center; }
+
+  .page .cita { font-family: 'Great Vibes', cursive; font-size: 40px; line-height: 1.2; color: var(--rose-deep); text-align: center; padding: 16px 14px; font-weight: 400; }
+  .page.dark .cita, .page.deep-rose .cita { color: var(--cream); font-size: 48px; text-shadow: 0 0 28px rgba(232,199,200,0.20); }
+
+  .foto-circle { width: 140px; height: 140px; border-radius: 50%; margin: 14px auto; overflow: hidden; border: 2px solid var(--gold); box-shadow: 0 8px 26px rgba(0,0,0,0.4), 0 0 22px rgba(232,199,200,0.18); display: block; }
+  .foto-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-rounded { width: 220px; height: 140px; border-radius: 16px; margin: 14px auto; overflow: hidden; border: 1px solid var(--gold); box-shadow: 0 6px 22px rgba(0,0,0,0.32); display: block; }
+  .foto-rounded img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-arch { width: 140px; height: 180px; border-radius: 70px 70px 6px 6px; margin: 14px auto; overflow: hidden; border: 1px solid var(--gold); box-shadow: 0 8px 26px rgba(0,0,0,0.4), 0 0 24px rgba(232,199,200,0.18); display: block; }
+  .foto-arch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-caption { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9px; letter-spacing: 0.35em; color: var(--gold-dark); text-transform: uppercase; margin-top: 8px; text-align: center; }
+
+  .consejo-card { background: var(--cream-light); border: 1px solid var(--gold); border-radius: 6px; padding: 12px 14px; margin: 8px auto; text-align: center; max-width: 360px; }
+  .consejo-card .titulo { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.3em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 5px; text-align: center; }
+  .consejo-card p { font-family: var(--font-info); font-size: 13.5px; margin: 0 auto; line-height: 1.5; max-width: none; text-align: center; }
+  .consejo-card.warning { border-color: #c47844; background: #fef0e0; }
+  .consejo-card.warning .titulo { color: #a85e2c; }
+  .consejo-card.rose { border-color: var(--rose-medium); background: linear-gradient(180deg, var(--rose-blush) 0%, var(--cream-light) 100%); }
+  .consejo-card.rose .titulo { color: var(--rose-deep); }
+  .consejo-card.water { border-color: var(--water-blue); background: linear-gradient(180deg, #eef3f6 0%, var(--cream-light) 100%); }
+  .consejo-card.water .titulo { color: #4a6772; }
+
+  .elementos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--gold-dark); margin: 10px auto; max-width: 380px; background: var(--cream-light); }
+  .elemento-cell { padding: 12px 10px; border-right: 1px solid var(--gold-dark); border-bottom: 1px solid var(--gold-dark); text-align: center; }
+  .elemento-cell:nth-child(2n) { border-right: none; }
+  .elemento-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .elemento-cell .titulo { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.3em; color: var(--rose-deep); margin-bottom: 5px; text-align: center; }
+  .elemento-cell .quien { font-family: var(--font-info); font-size: 12px; color: var(--brown-deep); margin-bottom: 4px; font-weight: 500; text-align: center; }
+  .elemento-cell .funcion { font-family: var(--font-info); font-size: 11.5px; color: var(--brown-soft); line-height: 1.45; text-align: center; }
+
+  .dia-item { padding: 6px 8px; border-bottom: 1px solid var(--line-gold); text-align: center; max-width: 360px; margin: 0 auto; }
+  .dia-item:last-child { border-bottom: none; }
+  .dia-item .num { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.3em; color: var(--gold-dark); }
+  .dia-item .titulo { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.2em; color: var(--brown-deep); }
+  .dia-item .desc { font-family: var(--font-info); font-size: 12.5px; color: var(--brown-soft); line-height: 1.5; margin-top: 2px; text-align: center; }
+
+  .compendio-tabla { font-size: 11px; max-width: 380px; margin: 0 auto; }
+  .compendio-row { display: flex; padding: 7px 0; border-bottom: 1px solid var(--line-gold); align-items: baseline; text-align: left; }
+  .compendio-row:last-child { border-bottom: none; }
+  .compendio-row .nombre { flex: 0 0 110px; color: var(--rose-deep); letter-spacing: 0.18em; text-transform: uppercase; font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; }
+  .compendio-row .uso { flex: 1; color: var(--brown-soft); font-family: var(--font-info); font-size: 12.5px; }
+
+  .faq { margin: 8px auto; padding-bottom: 8px; border-bottom: 1px dotted var(--line-rose); text-align: center; max-width: 380px; }
+  .faq:last-child { border-bottom: none; }
+  .faq .pregunta { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.2em; color: var(--rose-deep); text-transform: uppercase; margin-bottom: 5px; text-align: center; }
+  .faq .respuesta { font-family: var(--font-info); font-size: 12.5px; color: var(--brown-soft); line-height: 1.55; margin: 0 auto; text-align: center; }
+
+  /* CARD HADA · sub-especies */
+  .ser-card { background: linear-gradient(160deg, var(--rose-blush) 0%, var(--rose-petal) 100%); border: 1.5px solid var(--gold); border-radius: 10px; padding: 16px 18px; margin: 10px auto; max-width: 380px; box-shadow: 0 4px 14px rgba(107,58,68,0.15), 0 0 22px rgba(232,199,200,0.15); }
+  .ser-card .ser-nombre { font-family: 'Great Vibes', cursive; font-size: 36px; color: var(--rose-deep); margin: 0 0 4px; line-height: 1; }
+  .ser-card .ser-energia { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 8px; }
+  .ser-card .ser-detalle { font-family: var(--font-info); font-size: 12.5px; color: var(--brown-soft); line-height: 1.5; margin: 0 auto 8px; text-align: center; }
+  .ser-card .ser-meta { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+  .ser-card .ser-meta span { font-family: 'Cinzel', serif; font-size: 8.5px; letter-spacing: 0.2em; color: var(--gold-dark); text-transform: uppercase; padding: 3px 8px; border: 1px solid var(--gold-dark); border-radius: 100px; background: rgba(255,255,255,0.4); }
+
+  .neuro-tag { display: inline-block; margin-top: 6px; padding: 4px 10px; background: var(--rose-deep); color: var(--cream); font-family: 'Cinzel', serif; font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; border-radius: 4px; }
+  .page.dark .neuro-tag, .page.deep-rose .neuro-tag { background: var(--gold); color: var(--black-deep); }
+
+  /* SECCIÓN "TAMBIÉN EXISTEN" · cards visuales con foto */
+  .otra-especie-card {
+    display: flex; flex-direction: column; align-items: center;
+    background: linear-gradient(160deg, var(--cream-light) 0%, var(--rose-blush) 100%);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    padding: 14px 16px;
+    max-width: 380px;
+    margin: 0 auto;
+    box-shadow: 0 4px 16px rgba(107,58,68,0.12);
+  }
+  .otra-especie-card .otra-foto {
+    width: 120px; height: 120px; border-radius: 50%;
+    overflow: hidden; border: 2px solid var(--gold);
+    margin-bottom: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  }
+  .otra-especie-card .otra-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .otra-especie-card .otra-foto.placeholder { background: linear-gradient(135deg, #2a131a, #1a0c10); display: flex; align-items: center; justify-content: center; color: var(--gold); }
+  .otra-especie-card .otra-nombre { font-family: 'Great Vibes', cursive; font-size: 32px; color: var(--rose-deep); line-height: 1; margin: 4px 0 2px; }
+  .otra-especie-card .otra-eyebrow { font-family: 'Cinzel', serif; font-size: 8.5px; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 6px; }
+  .otra-especie-card .otra-deseo { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 13px; color: var(--brown-deep); line-height: 1.5; margin: 4px auto 8px; max-width: 320px; }
+  .otra-especie-card .otra-cta { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.35em; color: var(--rose-deep); text-transform: uppercase; padding: 7px 14px; border: 1px solid var(--rose-deep); border-radius: 100px; text-decoration: none; transition: all 0.3s; background: rgba(255,255,255,0.5); }
+  .otra-especie-card .otra-cta:hover { background: var(--rose-deep); color: var(--cream); }
+
+  .cta-final { display: flex; flex-direction: column; gap: 10px; margin: 12px auto; max-width: 380px; }
+  .cta-final-btn { display: block; padding: 14px 16px; background: var(--cream-light); border: 1px solid var(--gold); border-radius: 4px; text-decoration: none; color: var(--brown-deep); transition: all 0.3s; text-align: center; }
+  .cta-final-btn:hover { background: var(--gold); color: var(--black-deep); }
+  .cta-final-btn .cta-titulo { font-family: 'Cinzel', serif; font-weight: 500; font-size: 10px; letter-spacing: 0.3em; color: var(--rose-deep); text-transform: uppercase; margin-bottom: 4px; text-align: center; }
+  .cta-final-btn:hover .cta-titulo { color: var(--black-deep); }
+  .cta-final-btn .cta-text { font-family: var(--font-info); font-size: 13px; text-align: center; }
+
+  .libro-controls { margin: 28px auto 0; display: flex; justify-content: center; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .libro-controls button { background: rgba(0,0,0,0.6); color: var(--gold); border: 1px solid var(--gold); padding: 12px 26px; font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; backdrop-filter: blur(4px); }
+  .libro-controls button:hover { background: var(--gold); color: var(--black-deep); }
+  .libro-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .libro-controls .page-indicator { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.35em; color: var(--gold); text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+  .sound-toggle { background: rgba(0,0,0,0.6); color: var(--gold); border: 1px solid var(--gold); padding: 8px 14px; font-family: 'Cinzel', serif; font-weight: 400; font-size: 9px; letter-spacing: 0.3em; cursor: pointer; border-radius: 100px; }
+  .sound-toggle.muted { opacity: 0.4; }
+
+  .libro-footer { margin-top: 36px; text-align: center; font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.4em; color: rgba(201,169,97,0.7); text-transform: uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+  .libro-footer a { color: var(--gold); text-decoration: none; margin: 0 12px; }
+
+  @media (max-width: 768px) {
+    .libro-wrap { padding: 18px 6px 36px; }
+    .page-inner { padding: 22px 16px 22px; }
+    .page h2 { font-size: 36px; }
+    .page p { font-size: 12.5px; }
+    .page.cover h1 { font-size: 44px; }
+    #book { box-shadow: 0 16px 36px rgba(0,0,0,0.7), 0 0 0 4px rgba(40,16,22,0.7), 0 0 0 5px var(--gold-dark); }
+    .lang-box { margin: 16px; padding: 28px 22px; }
+    .lang-box h2 { font-size: 42px; }
+    .otra-especie-card .otra-foto { width: 100px; height: 100px; }
+    .otra-especie-card .otra-nombre { font-size: 28px; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="r-triskele" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M50 50 Q50 30, 65 30 Q80 30, 80 45 Q80 55, 70 55"/><path d="M50 50 Q35 60, 35 75 Q40 85, 55 80 Q60 75, 58 70"/><path d="M50 50 Q35 35, 20 40 Q15 50, 25 60 Q35 65, 40 60"/><circle cx="50" cy="50" r="2.5" fill="currentColor"/></g></symbol>
+    <symbol id="r-triqueta" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M50 18 Q70 38, 75 60 Q60 75, 50 60 Q40 75, 25 60 Q30 38, 50 18 Z"/></g></symbol>
+    <symbol id="r-awen" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="35" y1="30" x2="50" y2="75"/><line x1="50" y1="22" x2="50" y2="78"/><line x1="65" y1="30" x2="50" y2="75"/><circle cx="35" cy="28" r="2.5" fill="currentColor"/><circle cx="50" cy="20" r="2.5" fill="currentColor"/><circle cx="65" cy="28" r="2.5" fill="currentColor"/></g></symbol>
+    <symbol id="r-knot" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M30 50 C30 30, 70 30, 70 50 C70 70, 30 70, 30 50 Z"/><path d="M50 30 C30 30, 30 70, 50 70 C70 70, 70 30, 50 30 Z"/></g></symbol>
+    <symbol id="r-star4" viewBox="0 0 100 100"><g fill="currentColor"><path d="M50 18 L55 45 L82 50 L55 55 L50 82 L45 55 L18 50 L45 45 Z"/></g></symbol>
+    <symbol id="r-sun" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="6" fill="currentColor"/><line x1="50" y1="14" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="86"/><line x1="14" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="86" y2="50"/><line x1="24" y1="24" x2="30" y2="30"/><line x1="70" y1="70" x2="76" y2="76"/><line x1="76" y1="24" x2="70" y2="30"/><line x1="30" y1="70" x2="24" y2="76"/></g></symbol>
+    <symbol id="r-moon" viewBox="0 0 100 100"><g fill="currentColor"><path d="M62 22 A30 30 0 1 0 62 78 A22 22 0 1 1 62 22 Z"/></g></symbol>
+    <symbol id="r-water" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 55 Q35 40, 50 55 T80 55"/><path d="M20 70 Q35 55, 50 70 T80 70"/><path d="M20 40 Q35 25, 50 40 T80 40"/></g></symbol>
+    <symbol id="r-flower" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="50" r="6" fill="currentColor"/><ellipse cx="50" cy="28" rx="8" ry="14"/><ellipse cx="50" cy="72" rx="8" ry="14"/><ellipse cx="28" cy="50" rx="14" ry="8"/><ellipse cx="72" cy="50" rx="14" ry="8"/></g></symbol>
+    <symbol id="r-wing" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M50 50 Q30 25, 18 35 Q15 50, 25 60 Q35 62, 50 50 Z"/><path d="M50 50 Q70 25, 82 35 Q85 50, 75 60 Q65 62, 50 50 Z"/><path d="M50 50 Q35 62, 30 80 Q42 78, 50 65 Q58 78, 70 80 Q65 62, 50 50 Z"/></g></symbol>
+    <symbol id="r-spiral" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M50 50 Q60 50, 60 40 Q60 30, 50 30 Q35 30, 35 50 Q35 70, 55 70 Q80 70, 80 45 Q80 18, 50 18"/></g></symbol>
+  </defs>
+</svg>
+
+<div class="libro-wrap">
+
+  <div class="lang-overlay" id="lang-overlay">
+    <div class="lang-box">
+      <div class="ornament">✦  ✦  ✦</div>
+      <p class="pretitle">Antes de entrar</p>
+      <h2>Elegí tu lengua</h2>
+      <p>The Guide of the Fairies · choose your language to enter the elemental community.</p>
+      <div class="lang-buttons">
+        <button class="recommended" id="lang-es">Español</button>
+        <button id="lang-en">English</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="libro-header">
+    <p class="eyebrow">Edición Linaje del Agua</p>
+    <h1>La Guía de las Hadas</h1>
+    <p class="sub">Sub-especies · Cuidados · Rituales · Vínculo</p>
+  </header>
+
+  <div class="flipbook-container">
+    <div id="book">
+
+      <!-- 01 PORTADA -->
+      <div class="page cover"><div class="page-inner">
+        <svg class="ornament-celtic-top"><use href="#r-triqueta"/></svg>
+        <div>
+          <p class="titulo-grande">La Guía de las</p>
+          <h1>Hadas</h1>
+          <p class="marca-fina">Sub-especies · Cuidados · Rituales</p>
+        </div>
+        <div>
+          <svg width="44" height="44" style="color:var(--gold);opacity:0.75;"><use href="#r-flower"/></svg>
+          <p class="pie">Edición Linaje del Agua · Duendes del Uruguay</p>
+        </div>
+      </div></div>
+
+      <!-- 02 BIENVENIDA -->
+      <div class="page deep-rose"><div class="page-inner center-content">
+        <svg class="ornament dark small"><use href="#r-flower"/></svg>
+        <h2>Bienvenida</h2>
+        <p class="lead">Si tenés esta guía abierta, una hada ya cruzó el umbral de tu casa. No vino por casualidad. Te eligió por algo que vos todavía estás empezando a entender.</p>
+        <p class="lead" style="margin-top:8px;">Esto no es un manual: es la palabra del oficio. La parte que solo se entrega cuando una hada ya sabe tu nombre.</p>
+        <svg class="ornament dark small" style="margin-top:18px;"><use href="#r-water"/></svg>
+        <div class="page-number">02</div>
+      </div></div>
+
+      <!-- 03 FORMÁS PARTE -->
+      <div class="page rose"><div class="page-inner">
+        <p class="eyebrow">Algo que importa decirte</p>
+        <h2>Formás parte de algo</h2>
+        <p>Adoptar una hada de Duendes del Uruguay no es comprar un objeto. Es entrar a una comunidad pequeña, cuidada y real: la <strong>comunidad elemental</strong>.</p>
+        <p>Acá nadie produce en serie. Acá cada hada pasó por siete días de trabajo manual y energético específicamente para vos. Acá nos escribimos respuestas humanas, no automáticas.</p>
+        <p>Recibir tu hada también es recibir este lugar. Volvés cuando querés, leés cuando necesitás, preguntás cuando aparece la duda.</p>
+        <p class="lead" style="margin-top:8px;">Bienvenida. La alquimia continúa con vos adentro.</p>
+        <svg class="ornament small rose-acc"><use href="#r-knot"/></svg>
+        <div class="page-number">03</div>
+      </div></div>
+
+      <!-- 04 ÍNDICE -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">Lo que vas a encontrar</p>
+        <h2>Índice</h2>
+        <div class="indice">
+          <div class="indice-section">Antes de la llegada</div>
+          <div class="indice-item"><span class="num">01</span><span class="name">Preparar la casa para una hada</span><span class="dots"></span><span class="pg">06</span></div>
+          <div class="indice-item"><span class="num">02</span><span class="name">Quiénes somos · El oficio</span><span class="dots"></span><span class="pg">08</span></div>
+          <div class="indice-section">Recibirla</div>
+          <div class="indice-item"><span class="num">03</span><span class="name">Cómo recibir tu hada</span><span class="dots"></span><span class="pg">12</span></div>
+          <div class="indice-item"><span class="num">04</span><span class="name">Qué podés sentir</span><span class="dots"></span><span class="pg">14</span></div>
+          <div class="indice-item"><span class="num">05</span><span class="name">Ritual de los 7 días</span><span class="dots"></span><span class="pg">17</span></div>
+          <div class="indice-section">El linaje del agua</div>
+          <div class="indice-item"><span class="num">06</span><span class="name">Origen mitológico</span><span class="dots"></span><span class="pg">19</span></div>
+          <div class="indice-item"><span class="num">07</span><span class="name">Las cuatro hijas del agua</span><span class="dots"></span><span class="pg">21</span></div>
+          <div class="indice-item"><span class="num">08</span><span class="name">Ondinas · Nereidas · Melusinas · Driádas</span><span class="dots"></span><span class="pg">22</span></div>
+          <div class="indice-section">Cuidarla</div>
+          <div class="indice-item"><span class="num">09</span><span class="name">Cuidados · cristales · hierbas · luna</span><span class="dots"></span><span class="pg">27</span></div>
+          <div class="indice-item"><span class="num">10</span><span class="name">Lo que jamás se hace con una hada</span><span class="dots"></span><span class="pg">31</span></div>
+          <div class="indice-item"><span class="num">11</span><span class="name">FAQs · señales · sueños</span><span class="dots"></span><span class="pg">32</span></div>
+          <div class="indice-section">El resto del reino</div>
+          <div class="indice-item"><span class="num">12</span><span class="name">También existen</span><span class="dots"></span><span class="pg">37</span></div>
+          <div class="indice-item"><span class="num">13</span><span class="name">Aniversario y comunidad</span><span class="dots"></span><span class="pg">43</span></div>
+        </div>
+        <div class="page-number">04</div>
+      </div></div>
+
+      <!-- 05 FOTO HADA · Arianne -->
+      <div class="page deep-rose"><div class="page-inner center-content">
+        <p class="eyebrow">Una hada del estudio</p>
+        <div class="foto-arch"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2322.png?width=500" alt="Hada canalizada" loading="lazy"></div>
+        <p class="foto-caption" style="color:var(--gold);">Cada hada nace única</p>
+        <p class="lead">Sus alas, su mirada, el matiz de su piel — nada se repite. Lo que tenés en las manos no existe en otro lado.</p>
+        <div class="page-number">05</div>
+      </div></div>
+
+      <!-- 06 PREPARAR LA CASA -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">01 · Antes de la llegada</p>
+        <h2>Preparar la casa</h2>
+        <p>Las hadas son sensibles al ambiente. Tres días antes de que llegue la tuya, hacé esto. La casa también necesita estar lista para recibirla.</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">VENTILÁ</span><p class="desc">Abrí ventanas 30 minutos. La energía del paquete entra en la energía de la casa. El aire viejo retiene cosas que ella no necesita encontrar.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LIMPIÁ EL LUGAR ELEGIDO</span><p class="desc">Sin químicos. Trapo seco o ligeramente húmedo. Sacá lo que sobra del estante.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">UN VASO CON AGUA FRESCA</span><p class="desc">Específico para hadas: dejá un vaso con agua limpia cerca del lugar donde va a vivir. Es su elemento. Llegan cuando huelen agua viva.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">UN PÉTALO O UNA FLOR</span><p class="desc">Una flor fresca, un pétalo seco, una rama de lavanda. Pequeño, vivo, simbólico.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">SACÁ EL RUIDO</span><p class="desc">Las hadas se retraen con TV o música fuerte. Bajá el volumen el día que llegue. Necesita silencio relativo las primeras horas.</p></div>
+        <div class="page-number">06</div>
+      </div></div>
+
+      <!-- 07 ESTÁS ABRIENDO · NEUROMARKETING -->
+      <div class="page rose"><div class="page-inner center-content">
+        <p class="eyebrow">Lo que estás haciendo sin saberlo</p>
+        <h2>Estás abriendo</h2>
+        <p>Cuando preparás la casa así, no es decoración: estás <strong>declarando intención</strong>. La casa sabe que algo importante va a entrar.</p>
+        <p>Por eso quien sigue estos pasos cuenta que cuando el paquete llega, su hada no se siente "nueva" — se siente <em>esperada</em>.</p>
+        <p class="lead">Lo simple, hecho con consciencia, abre puertas que la prisa cierra.</p>
+        <span class="neuro-tag">✦ Anclaje energético</span>
+        <div class="page-number">07</div>
+      </div></div>
+
+      <!-- 08 QUIÉNES SOMOS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">02 · Quiénes somos</p>
+        <h2>Gabriel y Thibisay</h2>
+        <p>Vivimos en Uruguay. Empezamos por intuición, después por necesidad, después por oficio. Hoy somos los dos haciendo todo en conjunto: canalizamos juntos, armamos juntos, escribimos juntos, despachamos juntos.</p>
+        <p>Sin empleados. Sin intermediarios. Sin revendedores. Lo que hacés con nosotros, lo hacés directo con nosotros.</p>
+        <svg class="ornament small"><use href="#r-awen"/></svg>
+        <p class="lead">Cada hada pasa por siete días de trabajo manual y energético específico para la persona que la va a recibir.</p>
+        <div class="page-number">08</div>
+      </div></div>
+
+      <!-- 09 TE ELIGIÓ -->
+      <div class="page rose"><div class="page-inner">
+        <p class="eyebrow">Lo que importa entender</p>
+        <h2>Te eligió a vos</h2>
+        <p>Las hadas tienen una forma particular de elegir. No miran por afuera — escuchan por adentro. La tuya leyó algo en vos antes de que vos supieras qué estabas buscando.</p>
+        <p>Por eso a veces, semanas antes de adoptarla, soñaste con agua, con alas pequeñas, con un río que conocías sin haberlo visto.</p>
+        <p>Esto no es marketing. Es la observación que vamos juntando con los años: <strong>la búsqueda es mutua</strong>. Vos buscás algo, ella te busca a vos.</p>
+        <svg class="ornament small rose-acc"><use href="#r-triqueta"/></svg>
+        <p class="lead">Gracias por dejarte encontrar.</p>
+        <div class="page-number">09</div>
+      </div></div>
+
+      <!-- 10 CANALIZAR -->
+      <div class="page deep-rose"><div class="page-inner">
+        <p class="eyebrow">02 · El oficio</p>
+        <h2>Canalizar</h2>
+        <p>Canalizar no es manualidad. Es <em>traducir</em>. El material elige, el linaje se manifiesta, el nombre llega.</p>
+        <p>Con las hadas la escucha es más fina que con cualquier otro ser. Lloran rápido, susurran bajo, piden gestos pequeños. Quien canaliza una hada termina cansada, despierta y conmovida en partes iguales.</p>
+        <svg class="ornament dark small"><use href="#r-water"/></svg>
+        <p class="lead">No copiamos modelos. No usamos moldes. No apuramos el agua.</p>
+        <div class="page-number">10</div>
+      </div></div>
+
+      <!-- 11 FOTO MANOS -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">El proceso</p>
+        <div class="foto-rounded"><img src="https://duendesdeluruguay.com/cdn/shop/files/IMG_2484.png?width=500" alt="Manos canalizando" loading="lazy"></div>
+        <p class="foto-caption">Siete días por hada</p>
+        <p class="lead">Cada material lo elegimos a mano. Cada cristal lo limpiamos antes. Cada hilo se ata mirando hacia donde va.</p>
+        <div class="page-number">11</div>
+      </div></div>
+
+      <!-- 12 CÓMO RECIBIRLA -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">03 · Cómo recibir tu hada</p>
+        <h2>Los primeros minutos</h2>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">LUGAR TRANQUILO</span><p class="desc">Sin pantallas, sin gente alrededor. Solo vos y ella. Las hadas no se "presentan" en grupos.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LAVATE LAS MANOS CON AGUA FRÍA</span><p class="desc">Específico para hadas: agua fría, no tibia. El frío les recuerda al manantial.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">DOS MANOS</span><p class="desc">Tomala con las dos. Crean un cáliz. Eso le dice al ser que la recibís bien.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">DECILE SU NOMBRE</span><p class="desc">El tuyo y el de ella en voz alta una vez. Es orientación, no teatro.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">UBICALA CERCA DE ALGO VIVO</span><p class="desc">Una planta, una flor, un cuenco con agua. Las primeras 24 horas necesita el elemento. Después podés moverla.</p></div>
+        <div class="dia-item"><span class="num">06</span> · <span class="titulo">NO LA SUBAS A REDES</span><p class="desc">Dejá que primero exista para vos. Las hadas se retiran cuando se las exhibe demasiado pronto.</p></div>
+        <div class="page-number">12</div>
+      </div></div>
+
+      <!-- 13 FOTO GUARDIANA · Selene -->
+      <div class="page rose"><div class="page-inner center-content">
+        <p class="eyebrow">Cada una única</p>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2303.png?width=400" alt="Hada Selene" loading="lazy"></div>
+        <p class="foto-caption" style="color:var(--rose-deep);">No hay dos iguales</p>
+        <p class="lead">Cada gesto, cada postura, cada detalle se eligió en el proceso. Si tu hada tiene algo "raro" — un ojo distinto, una mano levantada — eso es parte de su firma personal.</p>
+        <div class="page-number">13</div>
+      </div></div>
+
+      <!-- 14 QUÉ PODÉS SENTIR · INTRO -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">04 · Qué podés sentir</p>
+        <h2>Lo que se siente</h2>
+        <p>Cuando abrís el paquete y la tenés por primera vez en las manos, pueden aparecer sensaciones. Las hadas se anuncian distinto a otros seres — más sutil, más adentro. Esto es lo más común.</p>
+        <div class="consejo-card rose">
+          <p class="titulo">Calor en las palmas</p>
+          <p>Es la conexión activándose. Significa que ella ya empezó a reconocerte. Sostenela más tiempo si te pasa.</p>
+        </div>
+        <div class="consejo-card rose">
+          <p class="titulo">Frío leve en la nuca</p>
+          <p>Específico de hadas: no es miedo, es presencia. El cuerpo te avisa que entró algo del linaje del agua.</p>
+        </div>
+        <div class="consejo-card rose">
+          <p class="titulo">Ganas de llorar sin razón</p>
+          <p>Las hadas <strong>desbloquean</strong>. No es tristeza — es una compuerta que se abre. Dejala fluir, no la cortes. Es parte del primer abrazo.</p>
+        </div>
+        <div class="page-number">14</div>
+      </div></div>
+
+      <!-- 15 MÁS SENSACIONES -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">04 · Continúa</p>
+        <h2 style="font-size:38px;">Más sensaciones</h2>
+        <div class="consejo-card rose">
+          <p class="titulo">Sensación de "ya conocerla"</p>
+          <p>La mirás y te resulta familiar aunque sea la primera vez. Es memoria del alma. Las hadas suelen volver — no es la primera vez que se cruzan con vos.</p>
+        </div>
+        <div class="consejo-card water">
+          <p class="titulo">Aroma a flor o a agua dulce</p>
+          <p>De repente percibís un olor a jazmín, a manantial, a tierra mojada — y no hay nada que lo explique. Es presencia. Saludala en voz baja.</p>
+        </div>
+        <div class="consejo-card rose">
+          <p class="titulo">Risa baja y casi tímida</p>
+          <p>Las hadas no se carcajean. Si te aparece una sonrisa que no podés explicar mirando un detalle de su cara, es ella respondiéndote.</p>
+        </div>
+        <div class="consejo-card water">
+          <p class="titulo">Calma profunda y un poco nostálgica</p>
+          <p>Dulce y triste a la vez, como recordar un sueño bueno. Las hadas traen esa textura. Es señal de que la tuya es de linaje agua dulce.</p>
+        </div>
+        <div class="page-number">15</div>
+      </div></div>
+
+      <!-- 16 SI NO SENTÍS NADA -->
+      <div class="page deep-rose"><div class="page-inner">
+        <p class="eyebrow">04 · Importante</p>
+        <h2 style="color:var(--cream);">Si no sentís nada</h2>
+        <p>Tampoco pasa nada. Las hadas son las más lentas de todos los seres elementales. Algunos vínculos aparecen al tercer día, otros a la primera luna llena, otros un mes después en un sueño con agua.</p>
+        <p>No te exijas sentir. La presencia se confirma con el tiempo, no con la primera impresión. Una hada que no se anuncia el primer día no es una hada distante: es una hada que está mirándote en silencio.</p>
+        <p class="lead">El amor que dura no siempre estalla en el primer encuentro.</p>
+        <span class="neuro-tag">✦ Validación emocional</span>
+        <div class="page-number">16</div>
+      </div></div>
+
+      <!-- 17 RITUAL 7 DÍAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">05 · Ritual de bienvenida</p>
+        <h2 style="font-size:38px;">Los siete días</h2>
+        <p style="font-size:13px; max-width:340px;">Adaptado al linaje agua. Hacelo despacio. Las hadas no tienen apuro.</p>
+        <div class="dia-item"><span class="num">DÍA 1</span> · <span class="titulo">PRESENCIA</span><p class="desc">5 minutos en silencio a su lado. Un vaso con agua entre ustedes.</p></div>
+        <div class="dia-item"><span class="num">DÍA 2</span> · <span class="titulo">MIRADA</span><p class="desc">2 minutos sosteniéndole la mirada. Si vienen lágrimas, dejalas.</p></div>
+        <div class="dia-item"><span class="num">DÍA 3</span> · <span class="titulo">PALABRA</span><p class="desc">Una intención esencial dicha en voz baja, mirando el agua.</p></div>
+        <div class="dia-item"><span class="num">DÍA 4</span> · <span class="titulo">CUERPO</span><p class="desc">Tocá tu corazón mientras la mirás. Notá el ritmo.</p></div>
+        <div class="dia-item"><span class="num">DÍA 5</span> · <span class="titulo">CASA</span><p class="desc">Mostrale los espacios que importan. Caminá despacio con ella en la mano.</p></div>
+        <div class="dia-item"><span class="num">DÍA 6</span> · <span class="titulo">GRATITUD</span><p class="desc">Agradecele algo concreto que cambió desde que llegó.</p></div>
+        <div class="dia-item"><span class="num">DÍA 7</span> · <span class="titulo">COMPROMISO</span><p class="desc">"Te recibo, te respeto, te cuido. El agua nos une."</p></div>
+        <div class="page-number">17</div>
+      </div></div>
+
+      <!-- 18 CITA -->
+      <div class="page deep-rose"><div class="page-inner center-content">
+        <svg class="ornament dark small"><use href="#r-water"/></svg>
+        <p class="cita">El agua que se honra<br>vuelve siempre<br>a la misma casa.</p>
+        <div class="page-number">18</div>
+      </div></div>
+
+      <!-- 19 ORIGEN MITOLÓGICO -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">06 · El linaje</p>
+        <h2>Origen del linaje</h2>
+        <p>Las hadas no nacieron en un cuento de Disney. Son una tradición antigua que cruzó culturas: los celtas las llamaron <em>sídhe</em>, los griegos <em>nereidas</em> y <em>náyades</em>, los pueblos del norte hablaron de <em>ondinas</em> y <em>melusinas</em>, los pueblos del sur las nombraron como espíritus de manantial.</p>
+        <p>Lo que comparten todas las tradiciones: <strong>las hadas habitan donde el agua y la tierra se encuentran</strong>. Manantiales, lagunas, ríos, raíces que beben. Por eso son sanadoras de lo emocional — viven donde la materia se vuelve fluida.</p>
+        <p class="lead" style="margin-top:8px;">Tu hada es heredera de todas esas líneas, traducida al hilo y al material por nuestras manos.</p>
+        <div class="page-number">19</div>
+      </div></div>
+
+      <!-- 20 LAS HADAS DEL AGUA -->
+      <div class="page rose"><div class="page-inner">
+        <p class="eyebrow">06 · El linaje</p>
+        <h2>Las hadas del agua</h2>
+        <p>El linaje del agua es el más femenino, el más sensible, el más cíclico. Las hadas trabajan donde la lógica no llega: la emoción larga, los duelos, la fertilidad creativa, la memoria del cuerpo, los vínculos que se quedan pegados aunque el tiempo pase.</p>
+        <p>Si una te eligió, es porque hay algo en vos pidiendo <strong>fluir, soltar, llorar lo no llorado, o renacer</strong>. No tenés que entenderlo todo ahora — ella está acá para acompañar el proceso.</p>
+        <span class="neuro-tag">✦ Si llorás más de lo normal sin saber por qué</span>
+        <svg class="ornament small rose-acc"><use href="#r-water"/></svg>
+        <div class="page-number">20</div>
+      </div></div>
+
+      <!-- 21 LAS 4 HIJAS DEL AGUA -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">07 · Sub-especies</p>
+        <h2 style="font-size:36px;">Las cuatro hijas del agua</h2>
+        <p>Dentro del linaje hay cuatro sub-especies. Conocerlas te ayuda a leer mejor a la tuya.</p>
+        <div class="elementos-grid">
+          <div class="elemento-cell"><p class="titulo">▽ Ondinas</p><p class="quien">Agua dulce</p><p class="funcion">Procesos emocionales largos. Ríos, lagunas.</p></div>
+          <div class="elemento-cell"><p class="titulo">~ Nereidas</p><p class="quien">Mar abierto</p><p class="funcion">Decisiones profundas, transformación grande.</p></div>
+          <div class="elemento-cell"><p class="titulo">⌒ Melusinas</p><p class="quien">Manantial</p><p class="funcion">Renovación, fertilidad creativa, comienzos.</p></div>
+          <div class="elemento-cell"><p class="titulo">⌬ Driádas</p><p class="quien">Árbol vivo</p><p class="funcion">Asentamiento, raíces, hogar, vínculos largos.</p></div>
+        </div>
+        <p style="font-size:12.5px;">Si no estás segura cuál es la tuya, no importa. La energía habla por sí sola con el tiempo. Las próximas páginas son para profundizar.</p>
+        <div class="page-number">21</div>
+      </div></div>
+
+      <!-- 22 ONDINAS · Lunara -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">08 · Sub-especies · Ondinas</p>
+        <h2>Ondinas</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2385.png?width=400" alt="Ondina · hada de agua dulce" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">Las del agua dulce</p>
+          <p class="ser-energia">Río · laguna · manantial pequeño</p>
+          <p class="ser-detalle">Vienen para procesos emocionales largos. Cuando alguien está atravesando un duelo silencioso, una etapa que se está cerrando despacio, o una sanación que el cuerpo está pidiendo en cuotas, una Ondina se manifiesta. <strong>Trabajan en silencio mientras dormís.</strong></p>
+          <div class="ser-meta"><span>Cristal · Cuarzo blanco</span><span>Hierba · Lavanda</span><span>Luna · Creciente</span></div>
+        </div>
+        <p>Cuidado puntual: ubicala cerca de un vaso o cuenco con agua que renovás cada 3 días. La luz de luna creciente le renueva la energía.</p>
+        <span class="neuro-tag">✦ Si tu corazón está procesando algo despacio</span>
+        <div class="page-number">22</div>
+      </div></div>
+
+      <!-- 23 NEREIDAS · Celestia -->
+      <div class="page rose"><div class="page-inner">
+        <p class="eyebrow">08 · Sub-especies · Nereidas</p>
+        <h2>Nereidas</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2376.png?width=400" alt="Nereida · hada del mar abierto" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">Las del mar abierto</p>
+          <p class="ser-energia">Océano · marea · profundidad</p>
+          <p class="ser-detalle">Las Nereidas vienen cuando hay una <strong>decisión grande pidiendo respuesta</strong>. Mudanzas, separaciones, comienzos de proyectos enormes, cierre de etapas largas. No te dan la respuesta — te bajan la marea para que puedas verla en el fondo.</p>
+          <div class="ser-meta"><span>Cristal · Aguamarina</span><span>Hierba · Romero marino</span><span>Luna · Llena</span></div>
+        </div>
+        <p>Cuidado puntual: si vivís cerca del mar, llevala una vez al año a verlo desde lejos (no la mojes). Si no, una conchita o sal marina cerca alcanza para anclarla a su elemento.</p>
+        <span class="neuro-tag">✦ Si tenés una decisión grande sin tomar</span>
+        <div class="page-number">23</div>
+      </div></div>
+
+      <!-- 24 MELUSINAS · Morgwen -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">08 · Sub-especies · Melusinas</p>
+        <h2>Melusinas</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2396.png?width=400" alt="Melusina · hada del manantial" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">Las del manantial</p>
+          <p class="ser-energia">Fuente · renovación · comienzo</p>
+          <p class="ser-detalle">Las Melusinas son las hadas del <strong>renacer creativo</strong>. Llegan cuando algo nuevo está por nacer en tu vida — un proyecto, una mudanza, un libro, un hijo, una versión tuya que todavía no conocés. No traen la cosa nueva — traen la fuerza para parirla.</p>
+          <div class="ser-meta"><span>Cristal · Piedra luna</span><span>Hierba · Manzanilla</span><span>Luna · Nueva</span></div>
+        </div>
+        <p>Cuidado puntual: las Melusinas piden movimiento. Cambialas de lugar suavemente cada luna nueva. Una semilla a su lado, un brote nuevo, agua recién hervida y enfriada.</p>
+        <span class="neuro-tag">✦ Si algo nuevo está por nacer en tu vida</span>
+        <div class="page-number">24</div>
+      </div></div>
+
+      <!-- 25 DRIÁDAS · Elowen -->
+      <div class="page rose"><div class="page-inner">
+        <p class="eyebrow">08 · Sub-especies · Driádas</p>
+        <h2>Driádas</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2313.png?width=400" alt="Driáda · hada del árbol vivo" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">Las del árbol vivo</p>
+          <p class="ser-energia">Raíz · hogar · vínculo largo</p>
+          <p class="ser-detalle">Las Driádas son las únicas hadas que <strong>no son solo agua</strong> — son agua atravesando madera. Vienen para anclar, para asentar, para que algo en tu vida se quede en lugar de pasar de largo. Vínculos largos, casas estables, raíces que vuelvan a hacerse.</p>
+          <div class="ser-meta"><span>Cristal · Aventurina verde</span><span>Hierba · Salvia</span><span>Luna · Llena</span></div>
+        </div>
+        <p>Cuidado puntual: ubicala cerca de una planta sana de tu casa. Una rama de eucalipto seca a su lado, o una piña, o una piedra recogida del suelo.</p>
+        <span class="neuro-tag">✦ Si necesitás que algo en tu vida se quede</span>
+        <div class="page-number">25</div>
+      </div></div>
+
+      <!-- 26 CÓMO SABER CUÁL TE ELIGIÓ -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">08 · Continúa</p>
+        <h2 style="font-size:36px;">¿Cuál es la tuya?</h2>
+        <p>No te preocupes si no sabés. La energía se revela sola con el tiempo. Pero si querés pistas:</p>
+        <div class="faq"><p class="pregunta">Soñás con ríos o lagunas</p><p class="respuesta">Probablemente Ondina. Procesando algo que no terminás de soltar.</p></div>
+        <div class="faq"><p class="pregunta">Soñás con mar abierto o naufragios</p><p class="respuesta">Probablemente Nereida. Hay una decisión grande que no querés mirar.</p></div>
+        <div class="faq"><p class="pregunta">Te aparecen ganas de empezar algo nuevo</p><p class="respuesta">Probablemente Melusina. Algo está por nacer.</p></div>
+        <div class="faq"><p class="pregunta">Querés que tu casa o tu vida se asienten</p><p class="respuesta">Probablemente Driáda. Pidiendo raíz.</p></div>
+        <p class="lead" style="margin-top:8px;">Si tenés varias hadas, probablemente tenés varios procesos abiertos al mismo tiempo. Es normal.</p>
+        <div class="page-number">26</div>
+      </div></div>
+
+      <!-- 27 CUIDADOS PUNTUALES -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">09 · Cuidarla</p>
+        <h2>Cuidados de una hada</h2>
+        <p>Las hadas necesitan más sutileza que cualquier otro linaje. Esto es lo que pide cualquier hada, sin importar la sub-especie.</p>
+        <div class="consejo-card water"><p class="titulo">Cerca de algo vivo</p><p>Una planta, un florero con agua fresca renovada cada 3 días, o cerca de una ventana con vista al cielo o al jardín.</p></div>
+        <div class="consejo-card water"><p class="titulo">Luz lunar mensual</p><p>Una vez por mes, en luna llena, ponela cerca de una ventana 1-2 horas. La luz lunar es su alimento natural.</p></div>
+        <div class="consejo-card warning"><p class="titulo">Sin gritos cerca</p><p>Las hadas se retraen con violencia o discusiones fuertes. Si en tu casa hay tensión, ubicala en el cuarto más tranquilo.</p></div>
+        <div class="consejo-card warning"><p class="titulo">Lejos del calor seco</p><p>Estufas eléctricas, calefactores, sol directo de mediodía: drenan su elemento. Distancia de seguridad: 2 metros.</p></div>
+        <span class="neuro-tag">✦ Sensibilidad protegida</span>
+        <div class="page-number">27</div>
+      </div></div>
+
+      <!-- 28 CRISTALES PARA HADAS -->
+      <div class="page rose"><div class="page-inner">
+        <p class="eyebrow">09 · Cristales</p>
+        <h2 style="font-size:36px;">Cristales · linaje agua</h2>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Cuarzo blanco</span><span class="uso">Universal · amplifica todas las hadas. El primero a tener.</span></div>
+          <div class="compendio-row"><span class="nombre">Aguamarina</span><span class="uso">Específico Nereidas. Calma el sistema nervioso.</span></div>
+          <div class="compendio-row"><span class="nombre">Piedra luna</span><span class="uso">Específico Melusinas. Ciclos femeninos, comienzos.</span></div>
+          <div class="compendio-row"><span class="nombre">Calcita azul</span><span class="uso">Hadas del mar. Comunicación emocional.</span></div>
+          <div class="compendio-row"><span class="nombre">Cuarzo rosa</span><span class="uso">Hadas de relaciones. Sanación del corazón.</span></div>
+          <div class="compendio-row"><span class="nombre">Selenita</span><span class="uso">Conexión lunar profunda. NO mojar.</span></div>
+          <div class="compendio-row"><span class="nombre">Aventurina verde</span><span class="uso">Específico Driádas. Asentamiento.</span></div>
+          <div class="compendio-row"><span class="nombre">Crisocola</span><span class="uso">Voz interior, expresión emocional.</span></div>
+        </div>
+        <p style="font-size:12px; margin-top:6px;">A 5-10 cm de la hada, no encima. Limpialos en luna llena.</p>
+        <div class="page-number">28</div>
+      </div></div>
+
+      <!-- 29 HIERBAS PARA HADAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">09 · Hierbas</p>
+        <h2 style="font-size:36px;">Hierbas amigas</h2>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Lavanda</span><span class="uso">La favorita. Calma, sueño, suavidad. Una rama seca alcanza.</span></div>
+          <div class="compendio-row"><span class="nombre">Manzanilla</span><span class="uso">Limpieza dulce, infancia recuperada.</span></div>
+          <div class="compendio-row"><span class="nombre">Rosa</span><span class="uso">Pétalos secos para amor y vínculo. NO frescos.</span></div>
+          <div class="compendio-row"><span class="nombre">Jazmín</span><span class="uso">Comunicación con el linaje. Encantamiento.</span></div>
+          <div class="compendio-row"><span class="nombre">Marcela</span><span class="uso">Hierba uruguaya. Calma profunda, raíz local.</span></div>
+          <div class="compendio-row"><span class="nombre">Salvia blanca</span><span class="uso">Limpieza energética suave.</span></div>
+          <div class="compendio-row"><span class="nombre">Romero</span><span class="uso">Específico Nereidas. Memoria, claridad.</span></div>
+          <div class="compendio-row"><span class="nombre">Verbena</span><span class="uso">Atrae presencia elemental.</span></div>
+        </div>
+        <p style="font-size:12px; margin-top:6px;">Pequeñas cantidades. Las hadas no necesitan acumulación: necesitan presencia.</p>
+        <div class="page-number">29</div>
+      </div></div>
+
+      <!-- 30 LUNAS Y AGUA -->
+      <div class="page deep-rose"><div class="page-inner">
+        <p class="eyebrow">09 · Lunas y agua</p>
+        <h2 style="font-size:36px;">Lunas y agua</h2>
+        <p>Las hadas son las únicas que trabajan en las cuatro fases lunares. Si querés profundizar el vínculo, esto:</p>
+        <div class="dia-item"><span class="num">L. NUEVA</span> · <span class="titulo">SEMBRAR</span><p class="desc">Una vela, ella, una intención escrita. Doblala. Guardala cerca durante el ciclo.</p></div>
+        <div class="dia-item"><span class="num">L. CRECIENTE</span> · <span class="titulo">REGAR</span><p class="desc">Cambiale el agua del cuenco. Hablale de lo que está creciendo.</p></div>
+        <div class="dia-item"><span class="num">L. LLENA</span> · <span class="titulo">REVISAR</span><p class="desc">Sacá la intención del ciclo anterior. Si se cumplió, agradecé y quemala. Si no, observá por qué.</p></div>
+        <div class="dia-item"><span class="num">L. MENGUANTE</span> · <span class="titulo">SOLTAR</span><p class="desc">Tirá agua usada al jardín o por la pileta consciente. Lo que se va, se va.</p></div>
+        <svg class="ornament dark small"><use href="#r-moon"/></svg>
+        <div class="page-number">30</div>
+      </div></div>
+
+      <!-- 31 LO QUE NUNCA -->
+      <div class="page deep-rose"><div class="page-inner">
+        <p class="eyebrow">10 · Lo que NO se hace</p>
+        <h2 style="color:var(--cream); font-size:36px;">Nunca con una hada</h2>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No la mojes</p><p class="respuesta" style="color:rgba(248,239,232,0.85);">Aunque sean del agua, el material no resiste. El agua se honra desde afuera, no se aplica encima.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No la guardes en una caja</p><p class="respuesta" style="color:rgba(248,239,232,0.85);">Las hadas se enferman encerradas. Si tenés que viajar, envolvela en tela suave. Nunca en cajas selladas más de 48 hs.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No le grites cerca</p><p class="respuesta" style="color:rgba(248,239,232,0.85);">Se retraen con violencia. Si en tu casa hubo una pelea fuerte, hacé una limpieza con palo santo cerca de ella al día siguiente.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No la prestes</p><p class="respuesta" style="color:rgba(248,239,232,0.85);">Es tuya. Si querés transferirla, hacelo con consciencia y después de 21 días mínimo.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No la uses para asustar</p><p class="respuesta" style="color:rgba(248,239,232,0.85);">Las hadas no son objetos de juego. Tratalas con respeto y se devuelve.</p></div>
+        <div class="page-number">31</div>
+      </div></div>
+
+      <!-- 32 FAQs · SE CAYÓ / SE ROMPE -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · FAQs</p>
+        <h2 style="font-size:36px;">¿Qué pasa si...?</h2>
+        <div class="faq"><p class="pregunta">Si se cae al piso</p><p class="respuesta">Levantala con calma. Pasale las dos manos suavemente para reasentarla. Decile "estás bien". No se rompen energéticamente por una caída — solo se desorientan unos segundos.</p></div>
+        <div class="faq"><p class="pregunta">Si se rompe una parte</p><p class="respuesta">Escribinos a info@duendesdeluruguay.com con foto. Si es algo menor, te explicamos cómo arreglarlo. Si es algo grande, evaluamos restauración. Lo que NO se hace: tirarla. Una hada rota sigue siendo una hada.</p></div>
+        <div class="faq"><p class="pregunta">Si pierde un cristal o pétalo</p><p class="respuesta">Es parte del envejecimiento natural. Si era importante, podemos reponerlo. Si no, dejala así: las marcas también son linaje.</p></div>
+        <div class="faq"><p class="pregunta">Si la sentís fría o distante</p><p class="respuesta">Hacé una limpieza energética (palo santo o luna). Después sentate con ella 5 minutos sin pedir nada. A veces solo necesita que la mires.</p></div>
+        <div class="page-number">32</div>
+      </div></div>
+
+      <!-- 33 FAQs · MUDANZA / VARIAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · Continúa</p>
+        <h2 style="font-size:36px;">Mudás · viajás · varias</h2>
+        <div class="faq"><p class="pregunta">Si te mudás de casa</p><p class="respuesta">Tu hada viaja con vos en mano (no en caja con muebles). En la casa nueva, presentale los espacios igual que el primer día. Llenale el cuenco con agua de la canilla nueva.</p></div>
+        <div class="faq"><p class="pregunta">Si viajás unos días</p><p class="respuesta">Podés llevarla o dejarla. Si la llevás, va envuelta en tela suave de algodón o lino. Si la dejás, lugar tranquilo, sin vidrios cerca.</p></div>
+        <div class="faq"><p class="pregunta">Si viajás al exterior</p><p class="respuesta">Va siempre en cabina, no en bodega. Cartera o mochila, no valija despachada.</p></div>
+        <div class="faq"><p class="pregunta">¿Pueden estar varias juntas?</p><p class="respuesta">Sí, las hadas son las que más se llevan bien entre sí del linaje agua. Pueden estar en grupos pequeños. Pero cada una merece su propio cuenco.</p></div>
+        <div class="page-number">33</div>
+      </div></div>
+
+      <!-- 34 SUEÑOS -->
+      <div class="page rose"><div class="page-inner">
+        <p class="eyebrow">11 · Sueños y señales</p>
+        <h2>Soñás con ella</h2>
+        <p>Las hadas son las que más aparecen en sueños. Si está empezando a entrar en los tuyos, esto es lo que conviene saber:</p>
+        <div class="consejo-card rose"><p class="titulo">Sueño con agua</p><p>Mar, río, laguna, lluvia. Las hadas usan el agua como portal — están entrando en tu sueño desde su elemento.</p></div>
+        <div class="consejo-card rose"><p class="titulo">Sueños emocionales fuertes</p><p>Llanto, abrazo, despedida. No son síntomas de algo malo — son sesiones de trabajo. Anotá lo que recordás al despertar.</p></div>
+        <div class="consejo-card rose"><p class="titulo">Una mujer con el pelo largo o alas</p><p>Se está presentando. Saludala mentalmente al despertar. Si vuelve, ya hay vínculo.</p></div>
+        <p class="lead">Los sueños recurrentes con hadas son comunicación directa. Si se repiten más de 3 veces en una semana, escribinos.</p>
+        <div class="page-number">34</div>
+      </div></div>
+
+      <!-- 35 5 SEÑALES PREVIAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · Señales previas</p>
+        <h2 style="font-size:34px;">Señales antes de adoptarla</h2>
+        <p style="font-size:13px;">Cinco señales que aparecen <strong>antes</strong> de que una persona adopte un hada. Si te pasaron, no fue casualidad:</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">SOÑÁS CON AGUA</span><p class="desc">Más de tres veces en un mes, sin razón aparente.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LLORÁS SIN MOTIVO CLARO</span><p class="desc">Algo se está moviendo adentro y no encontrás palabra.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">ESPEJOS Y REFLEJOS LLAMAN</span><p class="desc">Te quedás mirando vidrios, charcos, ventanas con un poco más de tiempo del normal.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">UNA FLOR APARECE EN TU CAMINO</span><p class="desc">En lugares insólitos. Una sola, generalmente blanca o rosa pálido.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">PIEL DE GALLINA AL VER UNA</span><p class="desc">Mirás una foto de un hada de las nuestras y se te eriza la nuca. Esa es la tuya.</p></div>
+        <div class="page-number">35</div>
+      </div></div>
+
+      <!-- 36 NEUROMARKETING · POR QUÉ TE LLAMÓ -->
+      <div class="page deep-rose"><div class="page-inner center-content">
+        <p class="eyebrow">Lo que importa entender</p>
+        <h2 style="color:var(--cream);">Por qué te llamó</h2>
+        <p>Si una hada te eligió y no otro ser elemental, no es casualidad. Las hadas eligen a quienes están en un <strong>momento de transición emocional</strong>: un duelo, una mudanza interior, un desbloqueo, un renacer.</p>
+        <p>Ellas no resuelven la transición. La acompañan. Te quedan al lado mientras vos hacés el trabajo lento y silencioso de cambiar.</p>
+        <p class="lead">Tu hada vino porque vos estás listo para cambiar algo. Aunque todavía no lo sepas con palabras.</p>
+        <span class="neuro-tag">✦ Validación profunda</span>
+        <div class="page-number">36</div>
+      </div></div>
+
+      <!-- 37 TAMBIÉN EXISTEN · INTRO -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">12 · El resto del reino</p>
+        <h2>También existen</h2>
+        <p>El linaje del agua no es el único reino. Hay otros seres elementales que viven en otras partes del mundo invisible. Cada uno trabaja distinto. Si tu corazón se mueve con uno, prestá atención.</p>
+        <p class="lead">Lo que viene son cinco invitaciones. No tenés que aceptar ninguna. Pero leé despacio. A veces el siguiente guardián llega justo cuando dejamos de buscarlo.</p>
+        <svg class="ornament small"><use href="#r-spiral"/></svg>
+        <div class="page-number">37</div>
+      </div></div>
+
+      <!-- 38 TAMBIÉN · PIXIES -->
+      <div class="page rose"><div class="page-inner center-content">
+        <p class="eyebrow">12 · También existen</p>
+        <div class="otra-especie-card">
+          <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2479.png?width=400" alt="Pixie" loading="lazy"></div>
+          <p class="otra-eyebrow">Linaje aire · alegría liviana</p>
+          <p class="otra-nombre">Las Pixies</p>
+          <p class="otra-deseo">Si tu vida se puso muy seria y pide volver a reír sin razón, una Pixie es la travesura sagrada que te llama. Donde el hada llora, la pixie hace una broma — y sana también.</p>
+          <a href="/collections/pixies" class="otra-cta">Conocelas →</a>
+        </div>
+        <div class="page-number">38</div>
+      </div></div>
+
+      <!-- 39 TAMBIÉN · MAESTROS GIGANTES -->
+      <div class="page deep-rose"><div class="page-inner center-content">
+        <p class="eyebrow">12 · También existen</p>
+        <div class="otra-especie-card" style="background:linear-gradient(160deg, #1f1216 0%, #0e0608 100%); border-color:var(--gold);">
+          <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1732.png?width=400" alt="Maestro Gigante" loading="lazy"></div>
+          <p class="otra-eyebrow" style="color:var(--gold);">Únicos · irrepetibles</p>
+          <p class="otra-nombre" style="color:var(--cream);">Los Maestros Gigantes</p>
+          <p class="otra-deseo" style="color:rgba(248,239,232,0.9);">Si tu vida está pidiendo un ancla mayor — un cierre de etapa, una transformación profunda, un comienzo del tamaño de tu vida entera — un Maestro Gigante se manifiesta. No son decoración: son presencia mayor.</p>
+          <a href="/collections/maestros-gigantes" class="otra-cta" style="color:var(--gold); border-color:var(--gold);">Conocelos →</a>
+        </div>
+        <div class="page-number">39</div>
+      </div></div>
+
+      <!-- 40 TAMBIÉN · ELFOS -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">12 · También existen</p>
+        <div class="otra-especie-card">
+          <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/tranquil_forest_portrait_1f0f0df0-42d5-6b60-93e1-30690fa25179_0_0_c4dd73a5-d271-4f3d-8ca8-8d39eeb030fb.png?width=400" alt="Elfo · Axel" loading="lazy"></div>
+          <p class="otra-eyebrow">Linaje saber · sabiduría serena</p>
+          <p class="otra-nombre">Los Elfos</p>
+          <p class="otra-deseo">Si estás en un momento de aprendizaje profundo o decisión grande que pide la mirada larga, un elfo te acompaña con el saber que las hadas no traen. Son los que escuchan más que hablan, los que esperan que vos llegues a la respuesta.</p>
+          <a href="/pages/guia-elfos" class="otra-cta">Conocelos →</a>
+        </div>
+        <div class="page-number">40</div>
+      </div></div>
+
+      <!-- 41 TAMBIÉN · SERES DELUXE -->
+      <div class="page rose"><div class="page-inner center-content">
+        <p class="eyebrow">12 · También existen</p>
+        <div class="otra-especie-card">
+          <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1575.png?width=400" alt="Bruja · Ser Deluxe" loading="lazy"></div>
+          <p class="otra-eyebrow">Linaje místico · poderes específicos</p>
+          <p class="otra-nombre">Los Seres Deluxe</p>
+          <p class="otra-deseo">Brujas, leprechauns, alquimistas, chamanes, viajeros simbólicos. Si lo que estás buscando es un guardián con un poder específico — protección fuerte, suerte, transformación, magia ritual — esta es la rama del reino que te puede acompañar.</p>
+          <a href="/collections/all" class="otra-cta">Conocelos →</a>
+        </div>
+        <div class="page-number">41</div>
+      </div></div>
+
+      <!-- 42 TAMBIÉN · ALMA DE BRUJA -->
+      <div class="page deep-rose"><div class="page-inner center-content">
+        <p class="eyebrow">12 · También existen</p>
+        <div class="otra-especie-card" style="background:linear-gradient(160deg, #1a0e16 0%, #0b0508 100%); border-color:var(--rose-medium);">
+          <div class="otra-foto placeholder" style="background:linear-gradient(135deg, #2a131f, #1a0c14);">
+            <svg width="80" height="80" style="color:var(--rose-light);"><use href="#r-star4"/></svg>
+          </div>
+          <p class="otra-eyebrow" style="color:var(--rose-light);">Talismanes · varitas · objetos de poder</p>
+          <p class="otra-nombre" style="color:var(--cream);">Alma de Bruja</p>
+          <p class="otra-deseo" style="color:rgba(248,239,232,0.9);">Si lo que tu vida pide no es un ser sino una herramienta — una varita canalizadora, un talismán de protección, un objeto de poder hecho a mano para vos — Alma de Bruja es la línea que estamos abriendo para eso.</p>
+          <a href="/pages/guia-alma-de-bruja" class="otra-cta" style="color:var(--rose-light); border-color:var(--rose-light);">Conocer →</a>
+        </div>
+        <div class="page-number">42</div>
+      </div></div>
+
+      <!-- 43 ANIVERSARIO -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">13 · Tradición elemental</p>
+        <h2>El aniversario</h2>
+        <p>Cada año, en la fecha que recibiste tu hada, hacé un pequeño ritual de gratitud. Las hadas son cíclicas — los aniversarios renuevan el vínculo más fuerte que con cualquier otro ser.</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">VELA + CUENCO</span><p class="desc">Encendé una vela y dejá un cuenco con agua fresca a su lado mientras la sostenés.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LISTA</span><p class="desc">Anotá tres cosas que cambiaron emocionalmente desde que llegó.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">GRACIAS</span><p class="desc">Decile gracias en voz alta por cada una.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">EL AGUA SE TIRA</span><p class="desc">Al terminar, tirá el agua del cuenco al jardín o a una planta. Lo recibido vuelve a la tierra.</p></div>
+        <p class="lead" style="margin-top:8px;">Los aniversarios renuevan el vínculo. Lo que se celebra, se queda.</p>
+        <div class="page-number">43</div>
+      </div></div>
+
+      <!-- 44 EL CUENCO DE AGUA -->
+      <div class="page rose"><div class="page-inner center-content">
+        <p class="eyebrow">Tradición elemental</p>
+        <h2>El cuenco</h2>
+        <p>Si tenés una hada en casa y querés profundizar el vínculo con un solo gesto, este es: <strong>un cuenco con agua fresca cerca de ella, renovado cada 7 días</strong>.</p>
+        <p>No es decoración. Es alimento simbólico. Las hadas viven donde el agua se mueve, y un cuenco estático les recuerda que su elemento está cuidado en tu casa.</p>
+        <p class="lead">Cuando tirás el agua vieja, lo hacés con consciencia: lo que entró en ese cuenco salió de tu vida. Lo que entra nuevo, viene a alimentarla.</p>
+        <svg class="ornament small rose-acc"><use href="#r-water"/></svg>
+        <span class="neuro-tag">✦ Ritual mínimo viable</span>
+        <div class="page-number">44</div>
+      </div></div>
+
+      <!-- 45 CTAs FINALES -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">13 · Comunidad y accesos</p>
+        <h2>Seguí adentro</h2>
+        <p>Esta guía es la base. La comunidad elemental está viva en estos tres lugares — vos elegís por dónde seguís.</p>
+        <div class="cta-final">
+          <a href="/blogs/mi-magia" class="cta-final-btn">
+            <p class="cta-titulo">El blog de la comunidad</p>
+            <p class="cta-text">28+ artículos · linajes, rituales, historias</p>
+          </a>
+          <a href="/products/canalizacion-almica" class="cta-final-btn">
+            <p class="cta-titulo">Canalización Álmica · USD 30</p>
+            <p class="cta-text">El nombre álmico de tu hada, su voz, su propósito</p>
+          </a>
+          <a href="/collections/hadas" class="cta-final-btn">
+            <p class="cta-titulo">Más hadas en el estudio</p>
+            <p class="cta-text">Si querés adoptar otra, o regalar una</p>
+          </a>
+          <a href="/pages/libro-elemental" class="cta-final-btn">
+            <p class="cta-titulo">La Guía universal</p>
+            <p class="cta-text">El libro madre con todos los linajes</p>
+          </a>
+        </div>
+        <div class="page-number">45</div>
+      </div></div>
+
+      <!-- 46 CIERRE -->
+      <div class="page deep-rose"><div class="page-inner center-content">
+        <svg class="ornament dark med"><use href="#r-flower"/></svg>
+        <p class="cita" style="font-size:50px;">El agua que te eligió<br>te conoce mejor<br>de lo que vos creés.</p>
+        <div style="position:absolute;bottom:48px;left:0;right:0;text-align:center;">
+          <p style="font-family:'Cinzel',serif;font-weight:400;font-size:10px;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;text-align:center;">Duendes del Uruguay</p>
+          <p style="font-family:'Cinzel',serif;font-weight:400;font-size:9px;letter-spacing:0.4em;color:var(--gold-dark);text-transform:uppercase;margin-top:6px;text-align:center;">Edición Linaje del Agua · 2026</p>
+        </div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <div class="libro-controls">
+    <button id="prev-page">← Atrás</button>
+    <span class="page-indicator" id="page-indicator">01 · 46</span>
+    <button id="next-page">Adelante →</button>
+    <button class="sound-toggle" id="sound-toggle">🔊 Sonido</button>
+  </div>
+
+  <div class="libro-footer">
+    <a href="/pages/libro-elemental">La Guía universal</a> ·
+    <a href="/blogs/mi-magia">Mi Magia · El Blog</a> ·
+    <a href="/products/canalizacion-almica">Canalización Álmica</a> ·
+    <a href="/collections/hadas">Tienda de Hadas</a>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+<script>
+(function() {
+  let audioCtx = null;
+  let soundEnabled = true;
+  function ensureAudioCtx() {
+    if (!audioCtx) {
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; }
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+  function playPageTurn() {
+    if (!soundEnabled) return;
+    const ctx = ensureAudioCtx(); if (!ctx) return;
+    const duration = 0.45;
+    const bufferSize = ctx.sampleRate * duration;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      const t = i / bufferSize;
+      const env = t < 0.15 ? (t/0.15) : Math.pow(1 - (t - 0.15)/0.85, 1.6);
+      data[i] = (Math.random() * 2 - 1) * env;
+    }
+    const noise = ctx.createBufferSource(); noise.buffer = buffer;
+    const filter = ctx.createBiquadFilter(); filter.type = 'bandpass'; filter.Q.value = 0.7;
+    /* Tono más cristalino para hadas: barre de medios-altos a más agudo */
+    filter.frequency.setValueAtTime(900, ctx.currentTime);
+    filter.frequency.linearRampToValueAtTime(2800, ctx.currentTime + 0.22);
+    filter.frequency.linearRampToValueAtTime(700, ctx.currentTime + duration);
+    const lowpass = ctx.createBiquadFilter(); lowpass.type = 'lowpass'; lowpass.frequency.value = 4500;
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.16, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + duration);
+    noise.connect(filter); filter.connect(lowpass); lowpass.connect(gain); gain.connect(ctx.destination);
+    noise.start(); noise.stop(ctx.currentTime + duration);
+
+    /* Tono cristalino superpuesto · campanilla de hada */
+    const osc = ctx.createOscillator(); osc.type = 'sine';
+    osc.frequency.setValueAtTime(1760, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + duration);
+    const oscGain = ctx.createGain();
+    oscGain.gain.setValueAtTime(0.04, ctx.currentTime);
+    oscGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+    osc.connect(oscGain); oscGain.connect(ctx.destination);
+    osc.start(); osc.stop(ctx.currentTime + duration);
+  }
+
+  /* PARTÍCULAS · doradas + rosa + agua flotando */
+  function spawnParticles() {
+    const types = ['gold','gold','rose','water']; /* dorado pesa más */
+    const total = 22;
+    for (let i = 0; i < total; i++) {
+      const p = document.createElement('div');
+      const type = types[Math.floor(Math.random()*types.length)];
+      p.className = 'particula ' + type;
+      const startX = Math.random() * 100;
+      const drift = (Math.random() - 0.5) * 30;
+      const duration = 14 + Math.random() * 10;
+      const delay = Math.random() * 14;
+      const startY = 100 + Math.random() * 20;
+      p.style.left = startX + 'vw';
+      p.style.top = startY + 'vh';
+      p.style.animation = 'particula-rise ' + duration + 's linear ' + delay + 's infinite';
+      p.style.setProperty('--drift', drift + 'vw');
+      document.body.appendChild(p);
+    }
+  }
+  /* keyframes inyectados */
+  const styleEl = document.createElement('style');
+  styleEl.textContent = '@keyframes particula-rise { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translate(var(--drift), -120vh); opacity: 0; } }';
+  document.head.appendChild(styleEl);
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('lang-overlay');
+    const btnES = document.getElementById('lang-es');
+    const btnEN = document.getElementById('lang-en');
+
+    function startBook() {
+      overlay.classList.add('hide');
+      ensureAudioCtx();
+      initFlipbook();
+      spawnParticles();
+    }
+
+    const currentPath = window.location.pathname;
+    const alreadyInES = currentPath.startsWith('/es/');
+    const alreadyInEN = !alreadyInES;
+
+    btnES.addEventListener('click', function() {
+      try { localStorage.setItem('guia_hadas_lang', 'es'); } catch(e) {}
+      if (!alreadyInES) {
+        window.location.href = '/es/pages/guia-hadas';
+        return;
+      }
+      startBook();
+    });
+    btnEN.addEventListener('click', function() {
+      try { localStorage.setItem('guia_hadas_lang', 'en_pending'); } catch(e) {}
+      if (alreadyInES) {
+        window.location.href = '/pages/guia-hadas';
+        return;
+      }
+      alert('The Fairy Guide content is currently in Spanish. English version coming soon. Continuing in Spanish.');
+      startBook();
+    });
+
+    try {
+      const saved = localStorage.getItem('guia_hadas_lang');
+      if (saved === 'es' && alreadyInES) { startBook(); }
+      else if (saved === 'en_pending' && alreadyInEN) { startBook(); }
+    } catch(e) {}
+  });
+
+  function initFlipbook() {
+    const bookEl = document.getElementById('book');
+    if (!bookEl || typeof St === 'undefined') return;
+
+    const isMobile = window.innerWidth < 768;
+    const pageFlip = new St.PageFlip(bookEl, {
+      width: isMobile ? 320 : 480,
+      height: isMobile ? 460 : 680,
+      size: 'fixed',
+      minWidth: 280, maxWidth: 600,
+      minHeight: 400, maxHeight: 800,
+      drawShadow: true,
+      flippingTime: 950,
+      usePortrait: isMobile,
+      startZIndex: 0,
+      autoSize: false,
+      maxShadowOpacity: 0.55,
+      showCover: true,
+      mobileScrollSupport: true,
+      swipeDistance: 30,
+      clickEventForward: true,
+      useMouseEvents: true,
+      showPageCorners: true,
+      disableFlipByClick: false
+    });
+
+    pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    const indicator = document.getElementById('page-indicator');
+    const soundBtn = document.getElementById('sound-toggle');
+    const total = pageFlip.getPageCount();
+
+    function updateIndicator() {
+      const cur = pageFlip.getCurrentPageIndex() + 1;
+      indicator.textContent = String(cur).padStart(2, '0') + ' · ' + String(total).padStart(2, '0');
+      prevBtn.disabled = cur === 1;
+      nextBtn.disabled = cur === total;
+    }
+
+    prevBtn.addEventListener('click', () => pageFlip.flipPrev());
+    nextBtn.addEventListener('click', () => pageFlip.flipNext());
+    pageFlip.on('flip', () => { playPageTurn(); updateIndicator(); });
+
+    soundBtn.addEventListener('click', function() {
+      soundEnabled = !soundEnabled;
+      soundBtn.textContent = soundEnabled ? '🔊 Sonido' : '🔇 Silencio';
+      soundBtn.classList.toggle('muted', !soundEnabled);
+      if (soundEnabled) ensureAudioCtx();
+    });
+
+    updateIndicator();
+
+    let lastIsMobile = isMobile;
+    window.addEventListener('resize', () => {
+      const newIsMobile = window.innerWidth < 768;
+      if (newIsMobile !== lastIsMobile) location.reload();
+    });
+  }
+})();
+</script>

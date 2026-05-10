@@ -1,0 +1,1867 @@
+{% style %}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --primary-dark: #080a06;
+    --gold: #C6A55A;
+    --gold-light: #E8D4A8;
+    --green-accent: #2D5F3F;
+    --text-light: #F5F1E8;
+    --text-muted: #B8B5AA;
+    --border-gold: rgba(198, 165, 90, 0.3);
+    --border-gold-solid: rgba(198, 165, 90, 0.6);
+  }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+  }
+
+  #mi-magia-portal {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* FIREFLIES BACKGROUND ANIMATION */
+  .fireflies-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .firefly {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, var(--gold) 0%, rgba(198, 165, 90, 0.5) 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--gold), 0 0 12px rgba(198, 165, 90, 0.5);
+    animation: float var(--duration) infinite ease-in-out;
+  }
+
+  .firefly.green {
+    background: radial-gradient(circle, var(--green-accent) 0%, rgba(45, 95, 63, 0.5) 70%);
+    box-shadow: 0 0 6px var(--green-accent), 0 0 12px rgba(45, 95, 63, 0.5);
+  }
+
+  .firefly.white {
+    background: radial-gradient(circle, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 70%);
+    box-shadow: 0 0 6px #FFFFFF, 0 0 12px rgba(255, 255, 255, 0.5);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    50% { transform: translate(var(--tx), var(--ty)) scale(1.2); opacity: 1; }
+  }
+
+  /* HEADER NAV */
+  .mi-magia-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: rgba(8, 10, 6, 0.95);
+    border-bottom: 1px solid var(--border-gold);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+  }
+
+  .mi-magia-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+
+  .mi-magia-nav {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+  }
+
+  .nav-link:hover, .nav-link.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(8, 10, 6, 0.98);
+    border: 1px solid var(--border-gold-solid);
+    border-radius: 4px;
+    min-width: 200px;
+    margin-top: 8px;
+    display: none;
+    flex-direction: column;
+    z-index: 1001;
+  }
+
+  .dropdown-menu.active {
+    display: flex;
+  }
+
+  .dropdown-item {
+    padding: 12px 20px;
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    border-bottom: 1px solid rgba(198, 165, 90, 0.1);
+  }
+
+  .dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  .dropdown-item:hover {
+    background-color: rgba(198, 165, 90, 0.1);
+    color: var(--gold);
+  }
+
+  .nav-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .lang-toggle {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+
+  .lang-toggle.active {
+    color: var(--gold);
+  }
+
+  .nav-button {
+    padding: 8px 16px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    cursor: pointer;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+  }
+
+  .nav-button:hover {
+    background: var(--gold);
+    color: var(--primary-dark);
+    box-shadow: 0 0 20px rgba(198, 165, 90, 0.4);
+  }
+
+  /* CONTENT AREA */
+  .mi-magia-content {
+    flex: 1;
+    margin-top: 80px;
+    padding: 60px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section {
+    display: none;
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .section.active {
+    display: block;
+  }
+
+  .gate-section.active {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* GATE / LOGIN SECTION */
+  .gate-section {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .gate-card {
+    background: rgba(8, 10, 6, 0.8);
+    border: 1px solid var(--border-gold-solid);
+    border-radius: 8px;
+    padding: 60px 40px;
+    max-width: 400px;
+    width: 100%;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+
+  .gate-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+
+  .gate-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: #FFFFFF;
+    border: 1px solid var(--border-gold);
+    border-radius: 4px;
+    color: #1a1a1a;
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--gold);
+    box-shadow: 0 0 12px rgba(198, 165, 90, 0.3);
+  }
+
+  .form-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .form-submit {
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--gold);
+    color: var(--primary-dark);
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(198, 165, 90, 0.4);
+  }
+
+  .form-submit:hover {
+    background: var(--gold-light);
+    box-shadow: 0 0 30px rgba(198, 165, 90, 0.6);
+    transform: translateY(-2px);
+  }
+
+  /* DASHBOARD SECTION */
+  .dashboard-hero {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(198, 165, 90, 0.3);
+  }
+
+  .dashboard-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 60px;
+  }
+
+  .guardian-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  .guardian-card {
+    background: rgba(198, 165, 90, 0.05);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .guardian-card:hover {
+    background: rgba(198, 165, 90, 0.1);
+    border-color: var(--gold);
+    box-shadow: 0 8px 32px rgba(198, 165, 90, 0.2);
+    transform: translateY(-4px);
+  }
+
+  .guardian-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .guardian-type {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .guardian-meta {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+  }
+
+  .empty-state-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  /* FORMULARIO SECTION */
+  .form-mode-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .mode-button {
+    padding: 20px;
+    background: rgba(198, 165, 90, 0.05);
+    border: 2px solid var(--border-gold);
+    border-radius: 8px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .mode-button:hover, .mode-button.active {
+    background: rgba(198, 165, 90, 0.15);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .form-section {
+    background: rgba(198, 165, 90, 0.05);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  .form-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .form-row.full {
+    grid-template-columns: 1fr;
+  }
+
+  .gender-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .gender-button {
+    flex: 1;
+    padding: 10px;
+    background: rgba(198, 165, 90, 0.05);
+    border: 1px solid var(--border-gold);
+    border-radius: 4px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .gender-button:hover, .gender-button.active {
+    background: var(--gold);
+    color: var(--primary-dark);
+    border-color: var(--gold);
+  }
+
+  .frequency-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 16px;
+    background: rgba(198, 165, 90, 0.05);
+    border: 1px solid var(--border-gold);
+    border-radius: 4px;
+  }
+
+  .toggle-switch {
+    width: 40px;
+    height: 24px;
+    background: rgba(198, 165, 90, 0.3);
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .toggle-switch.active {
+    background: var(--gold);
+  }
+
+  .toggle-thumb {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: left 0.3s ease;
+  }
+
+  .toggle-switch.active .toggle-thumb {
+    left: 18px;
+  }
+
+  .frequency-label {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  /* CANALIZACION SECTION */
+  .canalizacion-hero {
+    background: linear-gradient(135deg, rgba(198, 165, 90, 0.1) 0%, rgba(45, 95, 63, 0.05) 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    padding: 60px 40px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .canalizacion-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  .guardian-name-large {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(198, 165, 90, 0.3);
+  }
+
+  .guardian-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+  }
+
+  .channeling-content {
+    background: rgba(198, 165, 90, 0.05);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    padding: 40px;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  .channeling-content p {
+    margin-bottom: 16px;
+  }
+
+  .channeling-locked {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+  }
+
+  .channeling-locked-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  .care-guides {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .care-card {
+    background: rgba(198, 165, 90, 0.05);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    padding: 24px;
+  }
+
+  .care-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .care-content {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+
+  /* RITUAL SECTION */
+  .ritual-hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .ritual-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    color: var(--gold);
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+
+  .progress-bar-container {
+    margin: 40px 0;
+  }
+
+  .progress-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(198, 165, 90, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--green-accent) 100%);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(198, 165, 90, 0.5);
+  }
+
+  .ritual-days {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .ritual-day {
+    background: rgba(198, 165, 90, 0.05);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .ritual-day:hover {
+    background: rgba(198, 165, 90, 0.1);
+    border-color: var(--gold);
+  }
+
+  .ritual-day.completed {
+    background: rgba(45, 95, 63, 0.1);
+    border-color: var(--green-accent);
+  }
+
+  .day-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .day-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  .day-description {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .day-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gold);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .checkbox.checked {
+    background: var(--gold);
+  }
+
+  .checkbox.checked::after {
+    content: '✓';
+    color: var(--primary-dark);
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .checkbox-label {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  /* INICIACION SECTION */
+  .soul-name-display {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .soul-name-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  .soul-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(198, 165, 90, 0.4);
+  }
+
+  .soul-name-meaning {
+    font-size: 14px;
+    color: var(--text-light);
+    max-width: 500px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+
+  .elemental-chosen {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  /* BIENVENIDA SECTION */
+  .bienvenida-hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .bienvenida-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    color: var(--gold);
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+
+  .bienvenida-form {
+    max-width: 400px;
+    margin: 0 auto;
+    background: rgba(198, 165, 90, 0.05);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    padding: 30px;
+  }
+
+  /* ELEGIDOS / CUIDADOS SECTIONS */
+  .content-page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    color: var(--gold);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+
+  .page-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+  }
+
+  .page-content {
+    line-height: 1.8;
+    font-size: 15px;
+    color: var(--text-light);
+  }
+
+  .page-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--gold);
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .page-content p {
+    margin-bottom: 16px;
+  }
+
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 768px) {
+    .mi-magia-header {
+      padding: 0 20px;
+      height: 60px;
+    }
+
+    .mi-magia-nav {
+      gap: 20px;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      gap: 4px;
+    }
+
+    .mi-magia-content {
+      padding: 40px 20px;
+      margin-top: 60px;
+    }
+
+    .dashboard-hero {
+      font-size: 32px;
+    }
+
+    .guardian-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .guardian-name-large {
+      font-size: 32px;
+    }
+
+    .canalizacion-hero {
+      padding: 40px 20px;
+    }
+
+    .ritual-days {
+      grid-template-columns: 1fr;
+    }
+
+    .form-mode-selector {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mi-magia-header {
+      flex-direction: column;
+      gap: 10px;
+      height: auto;
+      padding: 12px 16px;
+    }
+
+    .mi-magia-nav {
+      width: 100%;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      font-size: 11px;
+    }
+
+    .nav-right {
+      width: 100%;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .mi-magia-content {
+      padding: 20px;
+      margin-top: auto;
+    }
+
+    .dashboard-hero {
+      font-size: 24px;
+    }
+
+    .form-section {
+      padding: 20px;
+    }
+
+    .gate-card {
+      padding: 30px 20px;
+    }
+  }
+
+  /* ANIMATIONS */
+  .shimmer {
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { text-shadow: 0 0 20px rgba(198, 165, 90, 0.3); }
+    50% { text-shadow: 0 0 30px rgba(198, 165, 90, 0.6); }
+  }
+
+  .sigil {
+    font-size: 24px;
+    animation: sigil-pulse 2s infinite;
+  }
+
+  @keyframes sigil-pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+{% endstyle %}
+
+<div id="mi-magia-portal">
+  <!-- FIREFLIES BACKGROUND -->
+  <div class="fireflies-container" id="fireflies-container"></div>
+
+  <!-- HEADER NAV -->
+  <header class="mi-magia-header">
+    <div class="mi-magia-logo" onclick="switchSection('#dashboard')">✦ DUENDES</div>
+
+    <nav class="mi-magia-nav">
+      <div class="nav-link" onclick="switchSection('#dashboard')" data-es="Mi Magia" data-en="My Magic">Mi Magia</div>
+      <div class="nav-link" onclick="switchSection('#formulario')" data-es="Formulario" data-en="Form">Formulario</div>
+      <div class="nav-link" onclick="switchSection('#canalizacion')" data-es="Mi Canalización" data-en="My Channeling">Mi Canalización</div>
+      <div class="nav-link" onclick="switchSection('#ritual')" data-es="Ritual" data-en="Ritual">Ritual</div>
+
+      <div class="nav-dropdown">
+        <div class="nav-dropdown-toggle" onclick="toggleDropdown()">
+          <span data-es="Más" data-en="More">Más</span> ▾
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu">
+          <div class="dropdown-item" onclick="switchSection('#iniciacion')" data-es="Iniciación" data-en="Initiation">Iniciación</div>
+          <div class="dropdown-item" onclick="switchSection('#elegidos')" data-es="Los Elegidos" data-en="The Chosen">Los Elegidos</div>
+          <div class="dropdown-item" onclick="switchSection('#cuidados')" data-es="Cuidados" data-en="Care Guide">Cuidados</div>
+          <div class="dropdown-item" onclick="openLink('https://duendesdeluruguay.com')" data-es="Tienda" data-en="Shop">Tienda</div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="nav-right">
+      <div class="lang-toggle active" id="lang-es" onclick="setLanguage('es')">ES</div>
+      <div class="lang-toggle" id="lang-en" onclick="setLanguage('en')">EN</div>
+      <button class="nav-button" id="logout-btn" onclick="logout()" data-es="Salir" data-en="Logout">Salir</button>
+    </div>
+  </header>
+
+  <!-- CONTENT SECTIONS -->
+  <div class="mi-magia-content">
+
+    <!-- GATE / LOGIN -->
+    <section id="gate" class="section gate-section active">
+      <div class="gate-card">
+        <h1 class="gate-title">✦</h1>
+        <p class="gate-subtitle" data-es="Portal Elemental" data-en="Elemental Portal">Portal Elemental</p>
+
+        <div class="form-group">
+          <label class="form-label" data-es="Correo Electrónico" data-en="Email">Correo Electrónico</label>
+          <input type="email" id="login-email" class="form-input" placeholder="tu@email.com" />
+        </div>
+
+        <button class="form-submit" onclick="loginWithShopify()" data-es="Acceder" data-en="Access">Acceder</button>
+
+        <p style="text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 20px; line-height: 1.6;">
+          <span data-es="Usa tu correo de compra en Duendes del Uruguay" data-en="Use your purchase email from Duendes del Uruguay">Usa tu correo de compra en Duendes del Uruguay</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="section">
+      <div class="dashboard-hero shimmer" data-es="Bienvenida" data-en="Welcome">Bienvenida</div>
+      <p class="dashboard-subtitle" id="dashboard-name"></p>
+
+      <div id="guardians-container"></div>
+
+      <div id="empty-guardians" style="display: none;">
+        <div class="empty-state">
+          <div class="empty-state-icon">✦</div>
+          <p data-es="Aún no has adoptado un guardián" data-en="You haven't adopted a guardian yet">Aún no has adoptado un guardián</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULARIO -->
+    <section id="formulario" class="section">
+      <h2 class="dashboard-hero" data-es="Formulario de Canalización" data-en="Channeling Form">Formulario de Canalización</h2>
+
+      <div class="form-mode-selector">
+        <div class="mode-button active" onclick="selectMode('para-mi')" data-es="Para mí" data-en="For me">Para mí</div>
+        <div class="mode-button" onclick="selectMode('regalo-lleno-yo')" data-es="Regalo (yo lleno)" data-en="Gift (I fill)">Regalo (yo lleno)</div>
+        <div class="mode-button" onclick="selectMode('regalo-llena-receptor')" data-es="Regalo (llena receptor)" data-en="Gift (recipient fills)">Regalo (llena receptor)</div>
+        <div class="mode-button" onclick="selectMode('para-nino')" data-es="Para un niño/a" data-en="For a child">Para un niño/a</div>
+      </div>
+
+      <form id="formulario-form" onsubmit="submitFormulario(event)">
+
+        <!-- MODO PARA MI -->
+        <div id="modo-para-mi" class="form-mode-content">
+          <div class="form-section">
+            <h3 class="form-section-title" data-es="Sobre ti" data-en="About you">Sobre ti</h3>
+
+            <div class="gender-selector">
+              <div class="gender-button active" onclick="selectGender('femenino')" data-es="Querida / Femenino" data-en="Feminine">Querida</div>
+              <div class="gender-button" onclick="selectGender('masculino')" data-es="Querido / Masculino" data-en="Masculine">Querido</div>
+              <div class="gender-button" onclick="selectGender('neutro')" data-es="Sin preferencia" data-en="No preference">Sin preferencia</div>
+            </div>
+            <input type="hidden" id="selected-gender" value="femenino" />
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿En qué momento de tu vida te encontrás ahora?" data-en="Where are you in your life right now?">¿En qué momento de tu vida te encontrás ahora?</label>
+              <textarea class="form-input" name="q1" rows="4" placeholder="Contanos..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Si pudieras pedirle algo al universo, ¿qué sería?" data-en="If you could ask the universe for something, what would it be?">Si pudieras pedirle algo al universo, ¿qué sería?</label>
+              <textarea class="form-input" name="q2" rows="4" placeholder="Contanos..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿Qué necesitás soltar?" data-en="What do you need to let go of?">¿Qué necesitás soltar?</label>
+              <textarea class="form-input" name="q3" rows="4" placeholder="Contanos..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿Qué sentís que te falta?" data-en="What do you feel is missing?">¿Qué sentís que te falta?</label>
+              <textarea class="form-input" name="q4" rows="4" placeholder="Contanos..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODO REGALO - YO LLENO -->
+        <div id="modo-regalo-lleno-yo" class="form-mode-content" style="display: none;">
+          <div class="form-section">
+            <h3 class="form-section-title" data-es="Sobre quien recibe el regalo" data-en="About the gift recipient">Sobre quien recibe el regalo</h3>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Nombre de quien recibe" data-en="Recipient's name">Nombre de quien recibe</label>
+              <input type="text" class="form-input" name="recipient-name" placeholder="Nombre" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿Cuál es tu relación con esta persona?" data-en="What's your relationship?">¿Cuál es tu relación con esta persona?</label>
+              <textarea class="form-input" name="relation" rows="3" placeholder="Contanos..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Contanos sobre esta persona" data-en="Tell us about them">Contanos sobre esta persona</label>
+              <textarea class="form-input" name="about-recipient" rows="4" placeholder="Cómo es, qué le gusta, cómo la ves..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿Qué sentís que necesita en este momento?" data-en="What do they need right now?">¿Qué sentís que necesita en este momento?</label>
+              <textarea class="form-input" name="needs" rows="4" placeholder="Contanos..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿Por qué elegiste regalarle un guardián elemental?" data-en="Why did you choose this gift?">¿Por qué elegiste regalarle un guardián elemental?</label>
+              <textarea class="form-input" name="why-gift" rows="4" placeholder="Contanos..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODO REGALO - RECEPTOR LLENA -->
+        <div id="modo-regalo-llena-receptor" class="form-mode-content" style="display: none;">
+          <div class="form-section">
+            <h3 class="form-section-title" data-es="Datos del receptor" data-en="Recipient info">Datos del receptor</h3>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Email de quien recibe" data-en="Recipient's email">Email de quien recibe</label>
+              <input type="email" class="form-input" name="recipient-email" placeholder="receptor@email.com" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Nombre de quien recibe" data-en="Recipient's name">Nombre de quien recibe</label>
+              <input type="text" class="form-input" name="recipient-name-2" placeholder="Nombre" />
+            </div>
+
+            <h3 class="form-section-title" data-es="Contexto del regalo" data-en="Gift context">Contexto del regalo</h3>
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿Quién te regala este guardián?" data-en="Who is gifting you?">¿Quién te regala este guardián?</label>
+              <input type="text" class="form-input" name="gifter-name" placeholder="Nombre" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿Cuál es la relación?" data-en="Your relationship?">¿Cuál es la relación?</label>
+              <textarea class="form-input" name="relation-2" rows="3" placeholder="Contanos..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿Por qué crees que te regaló un guardián?" data-en="Why do you think you received this?">¿Por qué crees que te regaló un guardián?</label>
+              <textarea class="form-input" name="why-received" rows="4" placeholder="Contanos..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODO PARA NIÑO -->
+        <div id="modo-para-nino" class="form-mode-content" style="display: none;">
+          <div class="form-section">
+            <h3 class="form-section-title" data-es="Sobre el niño o niña" data-en="About the child">Sobre el niño o niña</h3>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Nombre del niño o niña" data-en="Child's name">Nombre del niño o niña</label>
+              <input type="text" class="form-input" name="child-name" placeholder="Nombre" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Edad" data-en="Age">Edad</label>
+              <input type="number" class="form-input" name="child-age" placeholder="Edad" min="1" max="18" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="Contanos cómo es" data-en="Tell us about them">Contanos cómo es</label>
+              <textarea class="form-input" name="child-description" rows="4" placeholder="Cómo es el niño/a, sus intereses, su personalidad..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿Qué sentís que necesita?" data-en="What does the child need?">¿Qué sentís que necesita?</label>
+              <textarea class="form-input" name="child-needs" rows="4" placeholder="Contanos..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-es="¿Qué desearías para él o ella?" data-en="What do you wish for them?">¿Qué desearías para él o ella?</label>
+              <textarea class="form-input" name="child-wishes" rows="4" placeholder="Contanos..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- FREQUENCY TOGGLE (ALL MODES) -->
+        <div class="frequency-toggle">
+          <div class="toggle-switch" id="frequency-toggle" onclick="toggleFrequency()">
+            <div class="toggle-thumb"></div>
+          </div>
+          <span class="frequency-label" data-es="Activar frecuencia 963Hz" data-en="Activate 963Hz frequency">Activar frecuencia 963Hz</span>
+        </div>
+        <input type="hidden" id="frequency-963" value="false" />
+
+        <!-- SUBMIT -->
+        <button type="submit" class="form-submit" style="margin-top: 30px;" data-es="Enviar Formulario" data-en="Send Form">Enviar Formulario</button>
+      </form>
+    </section>
+
+    <!-- CANALIZACION -->
+    <section id="canalizacion" class="section">
+      <div class="canalizacion-hero">
+        <p class="canalizacion-subtitle shimmer" data-es="Tu Mensaje Personal" data-en="Your Personal Message">Tu Mensaje Personal</p>
+        <h2 class="guardian-name-large" id="channeling-guardian-name">—</h2>
+        <p class="guardian-label" data-es="Tu Guardián Elemental" data-en="Your Elemental Guardian">Tu Guardián Elemental</p>
+      </div>
+
+      <div id="channeling-locked" style="display: none;">
+        <div class="channeling-locked">
+          <div class="channeling-locked-icon">✦</div>
+          <p data-es="Tu canalización se está preparando..." data-en="Your channeling is being prepared...">Tu canalización se está preparando...</p>
+          <p style="font-size: 12px; margin-top: 12px; color: var(--text-muted);" data-es="Recibirás un email cuando esté lista" data-en="You'll receive an email when it's ready">Recibirás un email cuando esté lista</p>
+        </div>
+      </div>
+
+      <div id="channeling-published" style="display: none;">
+        <div class="channeling-content" id="channeling-text"></div>
+
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold); margin: 40px 0 20px; text-transform: uppercase; letter-spacing: 1px;" data-es="Guía de Convivencia" data-en="Care & Connection Guide">Guía de Convivencia</h3>
+
+        <div class="care-guides">
+          <div class="care-card">
+            <h4 class="care-title" data-es="Cómo cuidarme" data-en="How to care for me">Cómo cuidarme</h4>
+            <div class="care-content" id="care-guide-1">
+              <p data-es="Cuidados básicos del guardián" data-en="Basic care instructions">Cuidados básicos del guardián</p>
+            </div>
+          </div>
+
+          <div class="care-card">
+            <h4 class="care-title" data-es="Señales de que estoy activo" data-en="Signs I'm active">Señales de que estoy activo</h4>
+            <div class="care-content" id="care-guide-2">
+              <p data-es="Cómo detectar su actividad" data-en="How to sense my presence">Cómo detectar su actividad</p>
+            </div>
+          </div>
+
+          <div class="care-card">
+            <h4 class="care-title" data-es="Sincronías y Señales" data-en="Synchronicities">Sincronías y Señales</h4>
+            <div class="care-content" id="care-guide-3">
+              <p data-es="Conexiones y alineaciones" data-en="Connections and alignments">Conexiones y alineaciones</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 30px; border-top: 1px solid var(--border-gold);">
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Con amor y alquimia</p>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--gold);">Thibisay & Gabriel</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 12px;">DUENDES DEL URUGUAY</p>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 20px;" id="channeling-date"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RITUAL -->
+    <section id="ritual" class="section">
+      <div class="ritual-hero">
+        <h2 class="ritual-title" data-es="Ritual de 7 Días" data-en="7-Day Ritual">Ritual de 7 Días</h2>
+      </div>
+
+      <div class="progress-bar-container">
+        <p class="progress-label"><span data-es="Tu Progreso" data-en="Your Progress">Tu Progreso</span> <span id="ritual-progress">0</span> de 7</p>
+        <div class="progress-bar">
+          <div class="progress-fill" id="ritual-progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="ritual-days" id="ritual-days-container"></div>
+    </section>
+
+    <!-- INICIACION -->
+    <section id="iniciacion" class="section">
+      <div class="soul-name-display">
+        <p class="soul-name-label" data-es="Tu Nombre Álmico" data-en="Your Soul Name">Tu Nombre Álmico</p>
+        <h2 class="soul-name" id="soul-name-display">Thyraleth Verdania</h2>
+        <p class="soul-name-meaning" id="soul-name-meaning">Este nombre fue otorgado una única vez y es tuyo para siempre. Representa tu esencia elemental y tu conexión con el reino de los seres de luz.</p>
+        <p class="elemental-chosen" data-es="Elegida/o del Reino Elemental" data-en="Chosen of the Elemental Kingdom">✦ Elegida/o del Reino Elemental ✦</p>
+      </div>
+    </section>
+
+    <!-- BIENVENIDA -->
+    <section id="bienvenida" class="section">
+      <div class="bienvenida-hero">
+        <h2 class="bienvenida-title" data-es="Bienvenida al Portal" data-en="Welcome to the Portal">Bienvenida al Portal</h2>
+      </div>
+
+      <form class="bienvenida-form" onsubmit="submitBienvenida(event)">
+        <div class="form-group">
+          <label class="form-label" data-es="Tu Nombre" data-en="Your Name">Tu Nombre</label>
+          <input type="text" id="bienvenida-name" class="form-input" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-es="Fecha de Nacimiento" data-en="Birth Date">Fecha de Nacimiento</label>
+          <input type="date" id="bienvenida-dob" class="form-input" required />
+        </div>
+
+        <button type="submit" class="form-submit" data-es="Comenzar mi Experiencia" data-en="Begin My Experience">Comenzar mi Experiencia</button>
+      </form>
+    </section>
+
+    <!-- ELEGIDOS -->
+    <section id="elegidos" class="section">
+      <div class="content-page">
+        <h2 class="page-title" data-es="Los Elegidos" data-en="The Chosen">Los Elegidos</h2>
+        <p class="page-subtitle" data-es="Comunidad Global" data-en="Global Community">Comunidad Global</p>
+
+        <div class="page-content">
+          <h3 data-es="Capítulo I" data-en="Chapter I">Capítulo I</h3>
+          <p data-es="Eres parte de una comunidad global de adoptantes que ha elegido conectar con los seres elementales. Cada guardián que habita un hogar crea una red de energía y luz en todo el planeta." data-en="You are part of a global community of guardians adopters who have chosen to connect with elemental beings. Each guardian in a home creates a network of energy and light across the planet.">Eres parte de una comunidad global de adoptantes que ha elegido conectar con los seres elementales. Cada guardián que habita un hogar crea una red de energía y luz en todo el planeta.</p>
+
+          <p data-es="Juntos formamos un círculo invisible, una alianza elemental que trabaja en armonía con las fuerzas naturales del universo. Tu guardián es parte de esta red, y tú también." data-en="Together we form an invisible circle, an elemental alliance that works in harmony with the natural forces of the universe. Your guardian is part of this network, and so are you.">Juntos formamos un círculo invisible, una alianza elemental que trabaja en armonía con las fuerzas naturales del universo. Tu guardián es parte de esta red, y tú también.</p>
+
+          <p data-es="Cada adopción es una celebración de la magia que existe en el mundo. Cada formulario completado es un acto de fe. Cada canalización recibida es un mensaje directo del universo hacia ti." data-en="Every adoption is a celebration of the magic that exists in the world. Every form filled is an act of faith. Every channeling received is a direct message from the universe to you.">Cada adopción es una celebración de la magia que existe en el mundo. Cada formulario completado es un acto de fe. Cada canalización recibida es un mensaje directo del universo hacia ti.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUIDADOS -->
+    <section id="cuidados" class="section">
+      <div class="content-page">
+        <h2 class="page-title" data-es="Guía Esencial" data-en="Essential Guide">Guía Esencial</h2>
+        <p class="page-subtitle" data-es="Cuidados de tu Guardián" data-en="Guardian Care">Cuidados de tu Guardián</p>
+
+        <div class="page-content">
+          <h3 data-es="Cómo honrar y conectar con tu compañero elemental" data-en="How to honor and connect with your elemental companion">Cómo honrar y conectar con tu compañero elemental</h3>
+
+          <p data-es="Tu guardián es un ser vivo en el plano etéreo. Aunque no lo ves con los ojos físicos, su presencia es real y su conexión contigo es tangible." data-en="Your guardian is a living being in the etheric plane. Although you don't see it with physical eyes, its presence is real and its connection with you is tangible.">Tu guardián es un ser vivo en el plano etéreo. Aunque no lo ves con los ojos físicos, su presencia es real y su conexión contigo es tangible.</p>
+
+          <h3 data-es="Limpieza Energética" data-en="Energetic Cleansing">Limpieza Energética</h3>
+          <p data-es="Coloca a tu guardián en la luz lunar una vez al mes para renovar su energía. También puedes pasar incienso de palo santo alrededor suyo con intención de limpieza y protección." data-en="Place your guardian in moonlight once a month to renew its energy. You can also pass palo santo incense around it with the intention of cleansing and protection.">Coloca a tu guardián en la luz lunar una vez al mes para renovar su energía. También puedes pasar incienso de palo santo alrededor suyo con intención de limpieza y protección.</p>
+
+          <h3 data-es="Espacio Sagrado" data-en="Sacred Space">Espacio Sagrado</h3>
+          <p data-es="Crea un espacio especial para tu guardián en tu hogar. Puede ser un rincón con flores, cristales, o cualquier objeto que te hable del reino elemental. Este espacio es un puente entre mundos." data-en="Create a special space for your guardian in your home. It can be a corner with flowers, crystals, or any object that speaks to you of the elemental realm. This space is a bridge between worlds.">Crea un espacio especial para tu guardián en tu hogar. Puede ser un rincón con flores, cristales, o cualquier objeto que te hable del reino elemental. Este espacio es un puente entre mundos.</p>
+
+          <h3 data-es="Conversación Consciente" data-en="Conscious Conversation">Conversación Consciente</h3>
+          <p data-es="Habla con tu guardián. Cuéntale tus alegrías, tus preocupaciones, tus sueños. El acto de comunicar con intención abre canales de conexión profunda." data-en="Talk to your guardian. Tell it your joys, your worries, your dreams. The act of communicating with intention opens channels of deep connection.">Habla con tu guardián. Cuéntale tus alegrías, tus preocupaciones, tus sueños. El acto de comunicar con intención abre canales de conexión profunda.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</div>
+
+<script>
+// ============================================================================
+// CONFIGURATION & CONSTANTS
+// ============================================================================
+
+const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzIrYV45EsFj4w9QzXB1ItBMlCYUBsu9bPpzhSLXJ-En_Y9lM9QlXTO8Ecd7Yn5VEw-RQ/exec';
+
+let currentCustomer = null;
+let currentLanguage = 'es';
+
+// Ritual 7 días data
+const ritualDays = [
+  { name: 'Encuentro', description: 'Tu primer encuentro con el ser elemental', instructions: 'Encuentra un momento de calma. Respira profundo. Visualiza al guardián llegando a tu hogar.' },
+  { name: 'Nombre', description: 'Descubre el nombre verdadero del guardián', instructions: 'Medita sobre qué nombre resuena con la energía que sientes. Escucha la intuición.' },
+  { name: 'Intención', description: 'Define la intención compartida', instructions: 'Escribe la intención que deseas manifestar junto a tu guardián.' },
+  { name: 'Soltar', description: 'Suelta lo que ya no te sirve', instructions: 'Escribe en un papel lo que deseas soltar y quémalo con seguridad.' },
+  { name: 'Gratitud', description: 'Cultiva la gratitud compartida', instructions: 'Agradece por la presencia del guardián y por todo lo que manifiestas.' },
+  { name: 'Señales', description: 'Observa las señales del universo', instructions: 'Presta atención a sincronías, números, animales, cualquier señal mágica.' },
+  { name: 'Conexión', description: 'Consolidate la conexión permanente', instructions: 'Realiza un pequeño ritual personal que selle tu alianza con el ser elemental.' }
+];
+
+// ============================================================================
+// INITIALIZATION
+// ============================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  initializeFireflies();
+  checkAuthentication();
+  initializeLanguageToggle();
+  renderRitualDays();
+
+  // Listen for hash changes
+  window.addEventListener('hashchange', handleHashChange);
+});
+
+function initializeFireflies() {
+  const container = document.getElementById('fireflies-container');
+  const firefliesCount = window.innerWidth > 768 ? 20 : 10;
+
+  for (let i = 0; i < firefliesCount; i++) {
+    const firefly = document.createElement('div');
+    firefly.className = 'firefly';
+
+    const colors = ['gold', 'green', 'white'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    if (randomColor !== 'gold') firefly.classList.add(randomColor);
+
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const duration = 8 + Math.random() * 12;
+    const tx = (Math.random() - 0.5) * 200;
+    const ty = (Math.random() - 0.5) * 200;
+
+    firefly.style.left = x + '%';
+    firefly.style.top = y + '%';
+    firefly.style.setProperty('--duration', duration + 's');
+    firefly.style.setProperty('--tx', tx + 'px');
+    firefly.style.setProperty('--ty', ty + 'px');
+
+    container.appendChild(firefly);
+  }
+}
+
+function initializeLanguageToggle() {
+  document.querySelectorAll('[data-es]').forEach(el => {
+    el.setAttribute('data-es', el.getAttribute('data-es') || el.textContent);
+    if (!el.getAttribute('data-en')) {
+      el.setAttribute('data-en', el.textContent);
+    }
+  });
+}
+
+function checkAuthentication() {
+  // Check if customer is logged in via Shopify session
+  if (Shopify && Shopify.customer && Shopify.customer.id) {
+    currentCustomer = {
+      id: Shopify.customer.id,
+      email: Shopify.customer.email,
+      firstName: Shopify.customer.first_name
+    };
+    loadCustomerData();
+  } else {
+    // Show gate
+    switchSection('#gate');
+  }
+}
+
+// ============================================================================
+// AUTHENTICATION
+// ============================================================================
+
+function loginWithShopify() {
+  const email = document.getElementById('login-email').value.trim();
+
+  if (!email) {
+    alert('Por favor ingresa tu email');
+    return;
+  }
+
+  // Set customer with email - name will be updated from backend
+  currentCustomer = {
+    email: email,
+    firstName: 'Adoptante'
+  };
+
+  // Save to localStorage for demo
+  localStorage.setItem('mi-magia-customer', JSON.stringify(currentCustomer));
+
+  loadCustomerData();
+  switchSection('#dashboard');
+}
+
+async function loadCustomerData() {
+  // Set initial name from email while we load backend data
+  const initialName = currentCustomer.firstName || 'Adoptante';
+  document.getElementById('dashboard-name').textContent = 'Bienvenida, ' + initialName;
+
+  // Fetch customer data from GAS backend
+  try {
+    const email = currentCustomer.email;
+    if (!email) { renderGuardians([]); return; }
+
+    console.log('Mi Magia: Fetching data for', email);
+    const url = GAS_WEB_APP_URL + '?action=get_customer_data&email=' + encodeURIComponent(email);
+
+    const response = await fetch(url, { redirect: 'follow' });
+    console.log('Mi Magia: Response status', response.status, response.ok);
+
+    const text = await response.text();
+    console.log('Mi Magia: Raw response length', text.length);
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (parseErr) {
+      console.log('Mi Magia: JSON parse error, response text:', text.substring(0, 200));
+      renderGuardians([]);
+      return;
+    }
+
+    console.log('Mi Magia: Parsed data', JSON.stringify(data).substring(0, 300));
+
+    // Update name from backend (Bienvenida sheet) if available
+    if (data.bienvenida && data.bienvenida.name) {
+      currentCustomer.firstName = data.bienvenida.name;
+      document.getElementById('dashboard-name').textContent = 'Bienvenida, ' + data.bienvenida.name;
+    }
+
+    if (data.success && data.channelings && data.channelings.length > 0) {
+      console.log('Mi Magia: Rendering', data.channelings.length, 'guardians');
+      renderGuardians(data.channelings);
+
+      // Load ritual progress if available
+      if (data.ritual) {
+        updateRitualDisplay(data.ritual);
+      }
+
+      // Load channeling content if available
+      if (data.channelings[0]) {
+        loadChannelingContent(data.channelings[0]);
+      }
+    } else {
+      console.log('Mi Magia: No channelings found', data);
+      renderGuardians([]);
+    }
+  } catch (err) {
+    console.log('Mi Magia: Error loading data from backend', err);
+    renderGuardians([]);
+  }
+}
+
+function logout() {
+  currentCustomer = null;
+  localStorage.removeItem('mi-magia-customer');
+  switchSection('#gate');
+  document.getElementById('login-email').value = '';
+}
+
+// ============================================================================
+// SECTION NAVIGATION
+// ============================================================================
+
+function switchSection(sectionId) {
+  // Hide all sections
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+  // Show selected section
+  const section = document.querySelector(sectionId);
+  if (section) {
+    section.classList.add('active');
+  }
+
+  // Update nav links
+  document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+
+  // Close dropdown
+  const dropdown = document.getElementById('dropdown-menu');
+  if (dropdown) dropdown.classList.remove('active');
+}
+
+function handleHashChange() {
+  const hash = window.location.hash || '#dashboard';
+  switchSection(hash);
+}
+
+function toggleDropdown() {
+  const dropdown = document.getElementById('dropdown-menu');
+  dropdown.classList.toggle('active');
+}
+
+function openLink(url) {
+  window.open(url, '_blank');
+}
+
+// ============================================================================
+// GUARDIANS RENDERING
+// ============================================================================
+
+function renderGuardians(channelings) {
+  const container = document.getElementById('guardians-container');
+  const emptyState = document.getElementById('empty-guardians');
+  const countEl = document.getElementById('guardian-count');
+  const typesEl = document.getElementById('guardian-types');
+
+  if (!channelings || channelings.length === 0) {
+    emptyState.style.display = 'block';
+    container.innerHTML = '';
+    if (countEl) countEl.textContent = '0';
+    if (typesEl) typesEl.textContent = '0';
+    return;
+  }
+
+  emptyState.style.display = 'none';
+  if (countEl) countEl.textContent = channelings.length;
+
+  const types = new Set(channelings.map(c => c.guardianType));
+  if (typesEl) typesEl.textContent = types.size;
+
+  let html = '<div class="guardian-grid">';
+
+  channelings.forEach((ch, i) => {
+    const name = ch.guardianName || 'Guardián Elemental';
+    const type = ch.guardianType || 'Ser Elemental';
+    const soulName = ch.soulName || '';
+    const dateStr = ch.date ? new Date(ch.date).toLocaleDateString('es-ES') : '';
+    const status = ch.status || 'completado';
+
+    html += '<div class="guardian-card" onclick="viewChanneling(' + i + ')" style="cursor:pointer;">';
+    html += '<div class="guardian-name">' + name + '</div>';
+    if (soulName) html += '<div class="guardian-soul-name" style="color:var(--gold);font-style:italic;font-size:14px;margin-bottom:8px;">' + soulName + '</div>';
+    html += '<div class="guardian-type">' + type + '</div>';
+    html += '<div class="guardian-meta">';
+    if (dateStr) html += '<p><strong>Canalizado:</strong> ' + dateStr + '</p>';
+    html += '<p><strong>Estado:</strong> <span style="color:var(--gold);">' + status + '</span></p>';
+    html += '</div>';
+    html += '</div>';
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+
+  // Store channelings for detail view
+  window._channelings = channelings;
+}
+
+function viewChanneling(index) {
+  const ch = window._channelings && window._channelings[index];
+  if (!ch) return;
+
+  // Populate channeling section
+  const nameEl = document.getElementById('channeling-guardian-name');
+  const typeEl = document.getElementById('channeling-guardian-type');
+  const soulEl = document.getElementById('channeling-soul-name');
+  const soulMeaningEl = document.getElementById('channeling-soul-meaning');
+  const textEl = document.getElementById('channeling-text');
+  const careEl = document.getElementById('channeling-care');
+  const signsEl = document.getElementById('channeling-signs');
+
+  if (nameEl) nameEl.textContent = ch.guardianName || '';
+  if (typeEl) typeEl.textContent = ch.guardianType || '';
+  if (soulEl) soulEl.textContent = ch.soulName || '';
+  if (soulMeaningEl) soulMeaningEl.textContent = ch.soulNameMeaning || '';
+  if (textEl) textEl.innerHTML = (ch.channelingText || '').replace(/\n/g, '<br>');
+
+  // Parse care info if JSON
+  if (ch.careInfo) {
+    try {
+      const care = typeof ch.careInfo === 'string' ? JSON.parse(ch.careInfo) : ch.careInfo;
+      if (careEl) careEl.innerHTML = (care.how_to_care || '').replace(/\n/g, '<br>');
+      if (signsEl) signsEl.innerHTML = (care.activity_signs || '').replace(/\n/g, '<br>');
+    } catch(e) {
+      if (careEl) careEl.innerHTML = String(ch.careInfo).replace(/\n/g, '<br>');
+    }
+  }
+
+  // Show published content, hide locked state
+  const publishedEl = document.getElementById('channeling-published');
+  const lockedEl = document.getElementById('channeling-locked');
+  if (publishedEl) publishedEl.style.display = 'block';
+  if (lockedEl) lockedEl.style.display = 'none';
+
+  switchSection('#canalizacion');
+}
+
+function updateRitualDisplay(ritual) {
+  if (!ritual) return;
+  const completedDays = ritual.completedDays || 0;
+  // Update ritual day indicators
+  for (let i = 0; i < 7; i++) {
+    const dayEl = document.getElementById('ritual-day-' + (i + 1));
+    if (dayEl) {
+      if (i < completedDays) {
+        dayEl.classList.add('completed');
+      }
+    }
+  }
+}
+
+function loadChannelingContent(ch) {
+  // Pre-load the first channeling data for quick access
+  if (!ch) return;
+  console.log('Mi Magia: Channeling loaded for', ch.guardianName);
+}
+
+// ============================================================================
+// FORMULARIO
+// ============================================================================
+
+function selectMode(mode) {
+  // Hide all modes
+  document.querySelectorAll('.form-mode-content').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.mode-button').forEach(btn => btn.classList.remove('active'));
+
+  // Show selected mode
+  const modeEl = document.getElementById('modo-' + mode);
+  if (modeEl) modeEl.style.display = 'block';
+
+  // Mark button as active
+  event.target.classList.add('active');
+}
+
+function selectGender(gender) {
+  document.querySelectorAll('.gender-button').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('selected-gender').value = gender;
+}
+
+function toggleFrequency() {
+  const toggle = document.getElementById('frequency-toggle');
+  const hidden = document.getElementById('frequency-963');
+
+  toggle.classList.toggle('active');
+  hidden.value = toggle.classList.contains('active') ? 'true' : 'false';
+}
+
+async function submitFormulario(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  // Collect all form data
+  const data = {
+    email: currentCustomer.email,
+    firstName: currentCustomer.firstName,
+    mode: document.querySelector('.form-mode-content:not([style*="display: none"])') ? 'para-mi' : 'unknown',
+    frequency963: document.getElementById('frequency-963').value === 'true',
+    responses: Object.fromEntries(formData)
+  };
+
+  // Submit to GAS
+  try {
+    const response = await fetch(GAS_WEB_APP_URL + '?action=submit_form', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      alert('Formulario enviado. Tu canalización comenzará ahora.');
+      switchSection('#canalizacion');
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('Error al enviar el formulario. Por favor, intenta de nuevo.');
+  }
+}
+
+// ============================================================================
+// CANALIZACION
+// ============================================================================
+
+function loadChannelingData() {
+  // Fetch from GAS
+  // For now, show locked state
+  document.getElementById('channeling-locked').style.display = 'block';
+  document.getElementById('channeling-published').style.display = 'none';
+}
+
+// ============================================================================
+// RITUAL
+// ============================================================================
+
+function renderRitualDays() {
+  const container = document.getElementById('ritual-days-container');
+  let html = '';
+
+  ritualDays.forEach((day, index) => {
+    html += `
+      <div class="ritual-day" onclick="toggleRitualDay(${index})">
+        <div class="day-number">${index + 1}</div>
+        <div class="day-name">${currentLanguage === 'es' ? day.name : 'Day ' + (index + 1)}</div>
+        <div class="day-description">${day.description}</div>
+        <div class="day-checkbox">
+          <div class="checkbox" id="ritual-checkbox-${index}"></div>
+          <span class="checkbox-label" data-es="Completado" data-en="Completed">Completado</span>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+function toggleRitualDay(index) {
+  const checkbox = document.getElementById('ritual-checkbox-' + index);
+  checkbox.classList.toggle('checked');
+
+  // Update progress
+  const completed = document.querySelectorAll('.ritual-day .checkbox.checked').length;
+  document.getElementById('ritual-progress').textContent = completed;
+  document.getElementById('ritual-progress-fill').style.width = (completed / 7 * 100) + '%';
+
+  // Update parent card
+  const card = checkbox.closest('.ritual-day');
+  card.classList.toggle('completed');
+
+  // Submit to GAS
+  updateRitualProgress(index, checkbox.classList.contains('checked'));
+}
+
+async function updateRitualProgress(dayIndex, completed) {
+  try {
+    await fetch(GAS_WEB_APP_URL + '?action=update_ritual', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: currentCustomer.email,
+        dayIndex: dayIndex,
+        completed: completed
+      })
+    });
+  } catch (error) {
+    console.error('Error updating ritual:', error);
+  }
+}
+
+// ============================================================================
+// BIENVENIDA
+// ============================================================================
+
+async function submitBienvenida(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('bienvenida-name').value;
+  const dob = document.getElementById('bienvenida-dob').value;
+
+  try {
+    const response = await fetch(GAS_WEB_APP_URL + '?action=submit_bienvenida', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: currentCustomer.email,
+        name: name,
+        dateOfBirth: dob
+      })
+    });
+
+    if (response.ok) {
+      // Generate soul name
+      generateSoulName(name);
+      switchSection('#dashboard');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al guardar información');
+  }
+}
+
+function generateSoulName(name) {
+  // In production, this would call Claude AI via GAS
+  const soulNames = ['Thyraleth Verdania', 'Aelindor Luminar', 'Celestria Dorada', 'Silvanus Encantado', 'Miriel Etérea'];
+  const randomSoulName = soulNames[Math.floor(Math.random() * soulNames.length)];
+
+  document.getElementById('soul-name-display').textContent = randomSoulName;
+}
+
+// ============================================================================
+// LANGUAGE
+// ============================================================================
+
+function setLanguage(lang) {
+  currentLanguage = lang;
+
+  // Update language toggle
+  document.getElementById('lang-es').classList.toggle('active');
+  document.getElementById('lang-en').classList.toggle('active');
+
+  // Update all content
+  document.querySelectorAll('[data-es]').forEach(el => {
+    const content = lang === 'es' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+    el.textContent = content;
+  });
+
+  // Re-render ritual days if visible
+  if (document.getElementById('ritual').classList.contains('active')) {
+    renderRitualDays();
+  }
+}
+
+// ============================================================================
+// LOAD ON READY
+// ============================================================================
+
+// Check if customer data is available on page load
+window.addEventListener('load', () => {
+  const savedCustomer = localStorage.getItem('mi-magia-customer');
+  if (savedCustomer) {
+    currentCustomer = JSON.parse(savedCustomer);
+    loadCustomerData();
+    switchSection('#dashboard');
+  }
+});
+</script>

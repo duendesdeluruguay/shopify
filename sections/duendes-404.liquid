@@ -1,0 +1,39 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  404 page custom branded — Duendes del Uruguay
+  Creado 2026-05-01. Reemplaza el 404 default genérico de Horizon.
+  Voz Duendes: voseo, premisa contraintuitiva, restraint cinematográfico.
+{%- endcomment -%}
+
+<section class="duendes-404">
+  <div class="duendes-404__inner">
+    <div class="duendes-404__glyph" aria-hidden="true">✦</div>
+    <p class="duendes-404__eyebrow">404 · NO ESTABA AHÍ</p>
+    <h1 class="duendes-404__title">
+      Esta página se fue por el bosque.
+      <em>Pero el guardián que te buscaba sigue acá.</em>
+    </h1>
+    <p class="duendes-404__text">
+      A veces los enlaces se cortan. A veces los guardianes que estaban acá
+      ya encontraron su hogar. Probá uno de estos caminos — el bosque siempre
+      tiene puerta.
+    </p>
+    <div class="duendes-404__actions">
+      <a href="/collections/todos-los-guardianes" class="duendes-404__btn duendes-404__btn--primary">
+        Ver guardianes disponibles
+      </a>
+      <a href="/pages/test-del-guardian" class="duendes-404__btn duendes-404__btn--ghost">
+        Hacer el Test
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes 404",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "test": {
+      "type": "duendes-test",
+      "settings": {}
+    }
+  },
+  "order": [
+    "test"
+  ]
+}

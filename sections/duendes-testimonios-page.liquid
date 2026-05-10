@@ -1,0 +1,257 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+:root{--tm-light:#FAFAF7;--tm-dark:#0d0f09;--tm-text:#1a1a14;--tm-text-inv:#FAFAF7;--tm-serif:'Cormorant Garamond',serif;--tm-pad:clamp(48px,6vw,80px)}
+
+/* === HERO === */
+.tm-hero{background:var(--tm-dark);padding:var(--tm-pad) 24px;text-align:center;position:relative;overflow:hidden}
+.tm-hero-img{position:absolute;inset:0}
+.tm-hero-img img{width:100%;height:100%;object-fit:cover;opacity:.25}
+.tm-hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,15,9,.5),rgba(13,15,9,.9))}
+.tm-hero-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
+.tm-hero-eyebrow{font-family:var(--tm-serif);font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(250,250,247,.45);margin-bottom:16px}
+.tm-hero-title{font-family:var(--tm-serif);font-size:clamp(32px,5vw,56px);font-weight:400;color:var(--tm-text-inv);line-height:1.15;margin:0 0 12px}
+.tm-hero-sub{font-family:var(--tm-serif);font-size:clamp(16px,2vw,20px);font-style:italic;color:rgba(250,250,247,.55);max-width:520px;margin:0 auto 40px;line-height:1.6}
+.tm-hero-stats{display:flex;gap:48px;justify-content:center;flex-wrap:wrap}
+.tm-hero-stats div{text-align:center}
+.tm-hero-stats strong{display:block;font-family:var(--tm-serif);font-size:clamp(28px,4vw,44px);font-weight:400;color:var(--tm-text-inv)}
+.tm-hero-stats span{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(250,250,247,.35)}
+
+/* === FILTER === */
+.tm-filter{background:#fff;padding:32px 24px 0;text-align:center}
+.tm-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:720px;margin:0 auto}
+.tm-pill{padding:7px 18px;border:1px solid var(--tm-text);border-radius:20px;font-size:13px;letter-spacing:.3px;cursor:pointer;transition:background .25s,color .25s;background:transparent;color:var(--tm-text);font-family:var(--tm-serif)}
+.tm-pill:hover,.tm-pill.active{background:var(--tm-dark);color:var(--tm-text-inv);border-color:var(--tm-dark)}
+
+/* === FEATURED === */
+.tm-featured{background:var(--tm-light);padding:var(--tm-pad) 24px}
+.tm-featured-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.tm-featured-img{border-radius:4px;overflow:hidden;aspect-ratio:4/5}
+.tm-featured-img img{width:100%;height:100%;object-fit:cover}
+.tm-featured-img .tm-placeholder{width:100%;height:100%;min-height:380px;display:flex;align-items:center;justify-content:center;background:rgba(26,26,20,.04);color:rgba(26,26,20,.25);font-family:var(--tm-serif);font-style:italic;font-size:14px}
+.tm-featured-text .tm-feat-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(26,26,20,.4);margin-bottom:20px;display:block}
+.tm-featured-text blockquote{font-family:var(--tm-serif);font-size:clamp(18px,2.2vw,24px);font-style:italic;line-height:1.7;color:var(--tm-text);margin:0 0 28px;padding:0;border:none}
+.tm-featured-text blockquote::before{content:'\201C';display:block;font-family:var(--tm-serif);font-size:48px;line-height:1;color:rgba(26,26,20,.15);margin-bottom:8px}
+
+/* === GRID === */
+.tm-grid-section{background:#fff;padding:var(--tm-pad) 24px}
+.tm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;max-width:1200px;margin:0 auto}
+
+.tm-card{background:var(--tm-light);border:1px solid rgba(26,26,20,.1);border-radius:4px;overflow:hidden;transition:border-color .3s}
+.tm-card:hover{border-color:rgba(26,26,20,.3)}
+.tm-card-photo{aspect-ratio:3/2;overflow:hidden;background:rgba(26,26,20,.03)}
+.tm-card-photo img{width:100%;height:100%;object-fit:cover}
+.tm-card-body{padding:24px}
+.tm-stars{color:var(--tm-text);font-size:13px;letter-spacing:2px;margin-bottom:12px;opacity:.5}
+.tm-quote{font-family:var(--tm-serif);font-size:16px;line-height:1.75;color:var(--tm-text);margin:0 0 20px;font-style:italic}
+.tm-author{display:flex;align-items:center;gap:12px}
+.tm-author-avatar{width:36px;height:36px;border-radius:50%;overflow:hidden;background:var(--tm-dark);display:flex;align-items:center;justify-content:center;font-family:var(--tm-serif);color:var(--tm-text-inv);font-size:16px;flex-shrink:0}
+.tm-author-avatar img{width:100%;height:100%;object-fit:cover}
+.tm-author-info h4{font-family:var(--tm-serif);font-size:15px;font-weight:600;margin:0;color:var(--tm-text)}
+.tm-author-info p{font-size:12px;color:rgba(26,26,20,.5);margin:2px 0 0}
+.tm-guardian-tag{display:inline-block;margin-top:6px;padding:3px 10px;border-radius:3px;background:rgba(26,26,20,.06);font-size:11px;color:rgba(26,26,20,.55);letter-spacing:.3px}
+
+/* === CTA === */
+.tm-cta{background:var(--tm-dark);padding:var(--tm-pad) 24px;text-align:center}
+.tm-cta-text{font-family:var(--tm-serif);font-size:clamp(20px,3vw,28px);font-style:italic;color:rgba(250,250,247,.7);margin:0 0 32px;line-height:1.5;max-width:600px;margin-left:auto;margin-right:auto}
+.tm-cta-btn{display:inline-block;padding:14px 36px;border:1px solid var(--tm-text-inv);color:var(--tm-text-inv);font-family:var(--tm-serif);font-size:15px;letter-spacing:.5px;text-decoration:none;border-radius:3px;transition:background .3s,color .3s}
+.tm-cta-btn:hover{background:var(--tm-text-inv);color:var(--tm-dark)}
+
+/* === REVEAL === */
+.tm-reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.tm-reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  .tm-grid{grid-template-columns:1fr}
+  .tm-featured-inner{grid-template-columns:1fr}
+  .tm-hero-stats{gap:24px}
+}
+</style>
+
+{%- comment -%}=== HERO ==={%- endcomment -%}
+<section class="tm-hero">
+  {%- if section.settings.hero_image -%}
+    <div class="tm-hero-img">
+      <img src="{{ section.settings.hero_image | image_url: width: 1800 }}" alt="{{ section.settings.title }}" loading="eager">
+    </div>
+  {%- endif -%}
+  <div class="tm-hero-inner tm-reveal">
+    <div class="tm-hero-eyebrow">{{ section.settings.eyebrow }}</div>
+    <h1 class="tm-hero-title">{{ section.settings.title }}</h1>
+    <p class="tm-hero-sub">{{ section.settings.subtitle }}</p>
+    <div class="tm-hero-stats">
+      <div>
+        <strong>{{ section.settings.stat_adoptions }}</strong>
+        <span>Adopciones</span>
+      </div>
+      <div>
+        <strong>{{ section.settings.stat_countries }}</strong>
+        <span>Countries</span>
+      </div>
+      <div>
+        <strong>{{ section.settings.stat_stars }}</strong>
+        <span>Estrellas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%}=== FILTER PILLS ==={%- endcomment -%}
+<div class="tm-filter">
+  <div class="tm-pills">
+    <button class="tm-pill active" data-filter="all">Todos</button>
+    <button class="tm-pill" data-filter="transformacion">Transformation</button>
+    <button class="tm-pill" data-filter="proteccion">Protection</button>
+    <button class="tm-pill" data-filter="sanacion">Healing</button>
+    <button class="tm-pill" data-filter="conexion">Connection</button>
+    <button class="tm-pill" data-filter="magia">Magia cotidiana</button>
+  </div>
+</div>
+
+{%- comment -%}=== FEATURED TESTIMONIAL ==={%- endcomment -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'featured' -%}
+    <section class="tm-featured tm-reveal" {{ block.shopify_attributes }}>
+      <div class="tm-featured-inner">
+        <div class="tm-featured-img">
+          {%- if block.settings.photo -%}
+            <img src="{{ block.settings.photo | image_url: width: 800 }}" alt="{{ block.settings.name }}" loading="lazy">
+          {%- else -%}
+            <div class="tm-placeholder">Foto del adoptante</div>
+          {%- endif -%}
+        </div>
+        <div class="tm-featured-text">
+          <span class="tm-feat-label">Historia destacada</span>
+          <blockquote>{{ block.settings.quote }}</blockquote>
+          <div class="tm-author">
+            <div class="tm-author-avatar">{{ block.settings.name | slice: 0 }}</div>
+            <div class="tm-author-info">
+              <h4>{{ block.settings.name }}</h4>
+              <p>{{ block.settings.location }}</p>
+              {%- if block.settings.guardian != blank -%}
+                <span class="tm-guardian-tag">Guardian: {{ block.settings.guardian }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}=== TESTIMONIAL GRID ==={%- endcomment -%}
+<section class="tm-grid-section">
+  <div class="tm-grid" id="tmGrid">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'testimonial' -%}
+        <div class="tm-card tm-reveal" data-category="{{ block.settings.category | handleize }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.photo -%}
+            <div class="tm-card-photo">
+              <img src="{{ block.settings.photo | image_url: width: 700 }}" alt="{{ block.settings.name }}" loading="lazy">
+            </div>
+          {%- endif -%}
+          <div class="tm-card-body">
+            <div class="tm-stars">★★★★★</div>
+            <p class="tm-quote">{{ block.settings.quote }}</p>
+            <div class="tm-author">
+              <div class="tm-author-avatar">{{ block.settings.name | slice: 0 }}</div>
+              <div class="tm-author-info">
+                <h4>{{ block.settings.name }}</h4>
+                <p>{{ block.settings.location }}</p>
+                {%- if block.settings.guardian != blank -%}
+                  <span class="tm-guardian-tag">Guardian: {{ block.settings.guardian }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{%- comment -%}=== CTA ==={%- endcomment -%}
+<section class="tm-cta">
+  <div class="tm-reveal">
+    <p class="tm-cta-text">{{ section.settings.cta_text }}</p>
+    <a href="/collections/todos-los-guardianes" class="tm-cta-btn">Find your Guardian</a>
+  </div>
+</section>
+
+<script>
+(function(){
+  /* Reveal on scroll */
+  var els=document.querySelectorAll('.tm-reveal');
+  if(els.length){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+    },{threshold:0.08});
+    els.forEach(function(el,i){el.style.transitionDelay=(i%6)*60+'ms';obs.observe(el)});
+  }
+
+  /* Filter pills */
+  var pills=document.querySelectorAll('.tm-pill');
+  var cards=document.querySelectorAll('.tm-card[data-category]');
+  pills.forEach(function(pill){
+    pill.addEventListener('click',function(){
+      pills.forEach(function(p){p.classList.remove('active')});
+      pill.classList.add('active');
+      var f=pill.getAttribute('data-filter');
+      cards.forEach(function(card){
+        if(f==='all'||card.getAttribute('data-category')===f){
+          card.style.display='';
+          card.style.opacity='0';
+          card.style.transform='translateY(15px)';
+          setTimeout(function(){card.style.opacity='1';card.style.transform='translateY(0)'},50);
+        }else{
+          card.style.display='none';
+        }
+      });
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes Testimonios",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "TESTIMONIOS"},
+    {"type": "text", "id": "title", "label": "Título", "default": "Lo que dicen los Adoptantes"},
+    {"type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Historias reales de quienes ya encontraron a su guardián."},
+    {"type": "image_picker", "id": "hero_image", "label": "Imagen hero"},
+    {"type": "text", "id": "stat_adoptions", "label": "Stat adopciones", "default": "2,000+"},
+    {"type": "text", "id": "stat_countries", "label": "Stat países", "default": "45+"},
+    {"type": "text", "id": "stat_stars", "label": "Stat estrellas", "default": "5.0"},
+    {"type": "textarea", "id": "cta_text", "label": "Texto CTA", "default": "Cada guardián encuentra a su persona. ¿Será tu turno?"}
+  ],
+  "blocks": [
+    {
+      "type": "featured",
+      "name": "Testimonio destacado",
+      "limit": 2,
+      "settings": [
+        {"type": "textarea", "id": "quote", "label": "Cita"},
+        {"type": "text", "id": "name", "label": "Nombre", "default": "Nombre"},
+        {"type": "text", "id": "location", "label": "Ubicación", "default": "País"},
+        {"type": "text", "id": "guardian", "label": "Guardián"},
+        {"type": "image_picker", "id": "photo", "label": "Foto"}
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonio",
+      "settings": [
+        {"type": "textarea", "id": "quote", "label": "Cita"},
+        {"type": "text", "id": "name", "label": "Nombre", "default": "Nombre"},
+        {"type": "text", "id": "location", "label": "Ubicación", "default": "País"},
+        {"type": "text", "id": "guardian", "label": "Guardián"},
+        {"type": "text", "id": "category", "label": "Categoría", "default": "transformacion", "info": "transformacion, proteccion, sanacion, conexion, magia"},
+        {"type": "image_picker", "id": "photo", "label": "Foto"}
+      ]
+    }
+  ],
+  "presets": [{"name": "Duendes Testimonios"}]
+}
+{% endschema %}
+

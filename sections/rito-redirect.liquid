@@ -1,0 +1,115 @@
+{%- comment -%}
+  REDIRECT — /pages/rito-reconocimiento → magia.duendesdeluruguay.com/encuentro
+  Creado 2026-05-01. La URL vieja sigue activa para clientes con bookmarks o
+  links en emails Klaviyo viejos. Esta sección los redirige al flow nuevo
+  (Hydrogen, full-screen, sin footer del theme).
+
+  Estrategia:
+    1) Meta refresh inmediato (server-side, funciona sin JS)
+    2) Canonical apuntando a la URL nueva (SEO consolidación)
+    3) JavaScript redirect (más rápido cuando JS está activo)
+    4) Pantalla cinematográfica de transición que NUNCA se ve si todo va bien,
+       pero protege si JS y meta refresh fallan.
+{%- endcomment -%}
+
+<meta http-equiv="refresh" content="0; url=https://magia.duendesdeluruguay.com/encuentro">
+<link rel="canonical" href="https://magia.duendesdeluruguay.com/encuentro">
+
+<style>
+  .rito-redirect-stage {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% -10%, rgba(42, 74, 54, 0.45), transparent 65%),
+      radial-gradient(ellipse 60% 40% at 50% 110%, rgba(201, 163, 91, 0.10), transparent 70%),
+      linear-gradient(180deg, #0a1810 0%, #06120c 100%);
+    color: #f5e6c8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+    z-index: 99999;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+  .rito-redirect-glyph {
+    font-size: 36px;
+    color: #c9a35b;
+    margin-bottom: 16px;
+    letter-spacing: 0.4em;
+    animation: ritoPulse 2s ease-in-out infinite;
+  }
+  @keyframes ritoPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  .rito-redirect-title {
+    font-family: 'Cinzel', 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 14px;
+    color: #f5e6c8;
+    letter-spacing: 0.04em;
+  }
+  .rito-redirect-text {
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(245, 230, 200, 0.65);
+    line-height: 1.6;
+    max-width: 420px;
+    margin: 0 0 28px;
+  }
+  .rito-redirect-link {
+    display: inline-block;
+    padding: 14px 32px;
+    background: transparent;
+    border: 1.5px solid #c9a35b;
+    color: #e0bf7a;
+    text-decoration: none;
+    border-radius: 999px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+  }
+  .rito-redirect-link:hover {
+    background: #c9a35b;
+    color: #0a1810;
+  }
+</style>
+
+<div class="rito-redirect-stage" role="status" aria-live="polite">
+  <span class="rito-redirect-glyph" aria-hidden="true">✦</span>
+  <p class="rito-redirect-title">Te llevamos al portal correcto…</p>
+  <p class="rito-redirect-text">
+    El Encuentro ahora vive en Mi Magia. Si no te lleva en un instante,
+    seguí desde acá.
+  </p>
+  <a href="https://magia.duendesdeluruguay.com/encuentro" class="rito-redirect-link">
+    Abrir el Encuentro
+  </a>
+</div>
+
+<script>
+  (function() {
+    // Fallback JS — ejecuta inmediatamente, antes que el meta-refresh
+    var target = 'https://magia.duendesdeluruguay.com/encuentro';
+    // Preservar query params (?token=xxx, ?email=xxx, etc.) si vienen del email Klaviyo viejo
+    var qs = window.location.search || '';
+    if (qs) target += qs;
+    window.location.replace(target);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Rito Redirect",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

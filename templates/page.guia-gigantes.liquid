@@ -1,0 +1,1038 @@
+{% comment %}
+  La Guía de los Maestros Gigantes · Duendes del Uruguay · v1.0
+  · 46 páginas · flipbook PageFlip.js
+  · Paleta tonal: bordó + dorado + negro · únicos, irrepetibles
+  · Maestros LIVE: Élowen, Merlin, Thomas + el que viene
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Saira+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  .libro-wrap {
+    --bordeaux-deep: #5a1d1d;
+    --bordeaux-medium: #8a3030;
+    --bordeaux-light: #c46a6a;
+    --bordeaux-pastel: #e8c8c8;
+    --bordeaux-blush: #f4e4e4;
+    --gold: #C9A961;
+    --gold-bright: #D8B872;
+    --gold-dark: #8b7137;
+
+    --black-deep: #0a0606;
+    --cream: #F4ECDE;
+    --cream-light: #FAF3E6;
+    --brown-deep: #2a1414;
+    --brown-soft: #523030;
+    --line-gold: rgba(201,169,97,0.32);
+    --line-bordeaux: rgba(138,48,48,0.32);
+
+    --wood-base: #2a0e0e;
+    --wood-mid: #38161a;
+    --wood-light: #481c20;
+    --wood-dark: #160606;
+    --font-info: 'Agency FB', 'Saira Condensed', 'Trebuchet MS', sans-serif;
+
+    color: var(--cream); font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh; padding: 28px 16px 60px; text-align: center;
+    background-color: var(--wood-dark);
+    background-image:
+      radial-gradient(ellipse at 50% 35%, rgba(138,48,48,0.22) 0%, rgba(0,0,0,0.95) 78%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'><defs><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.035' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.20 0 0 0 0 0.06 0 0 0 0 0.06 0 0 0 0.65 0'/></filter></defs><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+      repeating-linear-gradient(91deg, var(--wood-dark) 0px, var(--wood-base) 2px, var(--wood-mid) 5px, var(--wood-base) 9px, var(--wood-light) 14px, var(--wood-mid) 22px, var(--wood-base) 30px, var(--wood-dark) 40px);
+    background-attachment: fixed; position: relative; min-height: 100vh;
+  }
+  .libro-wrap::before {
+    content:''; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.10;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><g fill='none' stroke='%23C9A961' stroke-width='1.6' opacity='0.85'><circle cx='100' cy='100' r='62'/><path d='M100 38 L100 162 M38 100 L162 100' stroke-width='2.5'/><circle cx='100' cy='100' r='10' fill='%23C9A961'/></g></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><g fill='none' stroke='%238A3030' stroke-width='1.4' opacity='0.7'><polygon points='110,30 180,80 155,170 65,170 40,80'/><circle cx='110' cy='110' r='6' fill='%238A3030'/></g></svg>");
+    background-position: 8% 12%, 78% 22%;
+    background-repeat: no-repeat;
+    background-size: 200px, 220px;
+  }
+  .libro-wrap::after {
+    content:''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse at 22% 28%, rgba(196,106,106,0.10), transparent 38%),
+      radial-gradient(ellipse at 78% 70%, rgba(201,169,97,0.10), transparent 50%);
+  }
+
+  .particula { position: fixed; pointer-events: none; z-index: 0; border-radius: 50%; opacity: 0; }
+  .particula.gold { background: radial-gradient(circle, rgba(216,184,114,0.85) 0%, rgba(201,169,97,0) 70%); width: 6px; height: 6px; box-shadow: 0 0 10px rgba(216,184,114,0.7); }
+  .particula.bordeaux { background: radial-gradient(circle, rgba(196,106,106,0.7) 0%, rgba(138,48,48,0) 70%); width: 5px; height: 5px; box-shadow: 0 0 10px rgba(196,106,106,0.55); }
+
+  .libro-wrap > * { position: relative; z-index: 1; }
+  .libro-wrap * { box-sizing: border-box; }
+
+  .libro-header { max-width: 760px; margin: 0 auto 24px; text-align: center; }
+  .libro-header .eyebrow { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+  .libro-header h1 { font-family: 'Great Vibes', cursive; font-size: clamp(46px, 6.8vw, 78px); margin: 0 0 8px; line-height: 1; font-weight: 400; color: var(--cream); text-shadow: 0 4px 18px rgba(0,0,0,0.85), 0 0 30px rgba(196,106,106,0.20); }
+  .libro-header .sub { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.5em; color: var(--gold-bright); text-transform: uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+
+  .lang-overlay { position: fixed; inset: 0; background: rgba(10,6,6,0.97); z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+  .lang-overlay.hide { display: none; }
+  .lang-box { max-width: 480px; text-align: center; padding: 40px 32px; border: 1px solid var(--gold); background: linear-gradient(160deg, #2a0e0e 0%, #0a0404 100%); position: relative; }
+  .lang-box::before { content:''; position: absolute; inset: 8px; border: 1px solid rgba(196,106,106,0.32); pointer-events:none; }
+  .lang-box .ornament { color: var(--gold); font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.7em; margin-bottom: 18px; }
+  .lang-box h2 { font-family: 'Great Vibes', cursive; font-weight: 400; font-size: 56px; color: var(--cream); margin: 0 0 8px; line-height: 1; }
+  .lang-box .pretitle { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase; margin-bottom: 18px; }
+  .lang-box p { font-family: var(--font-info); font-size: 16px; color: rgba(244,236,222,0.85); margin: 14px 0 28px; }
+  .lang-buttons { display: flex; gap: 14px; justify-content: center; }
+  .lang-buttons button { background: transparent; color: var(--cream); border: 1px solid var(--gold); padding: 14px 32px; font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+  .lang-buttons button:hover { background: var(--gold); color: var(--black-deep); }
+  .lang-buttons .recommended { background: var(--gold); color: var(--black-deep); }
+
+  .flipbook-container { display: flex; justify-content: center; align-items: center; margin: 0 auto; max-width: 1120px; min-height: 600px; padding: 16px; }
+  #book {
+    box-shadow: 0 32px 100px rgba(0,0,0,0.9), 0 0 0 8px rgba(40,14,14,0.7), 0 0 0 9px var(--gold-dark), 0 0 100px rgba(196,106,106,0.15);
+    border-radius: 4px;
+  }
+  .page { background: var(--cream); color: var(--brown-deep); overflow: hidden; }
+  .page-inner { padding: 36px 32px 26px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; text-align: center; }
+  .page.dark { background: var(--black-deep); color: var(--cream); }
+  .page.dark .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(196,106,106,0.25); pointer-events: none; }
+  .page.bordeaux { background: linear-gradient(160deg, var(--bordeaux-pastel) 0%, var(--bordeaux-blush) 70%, var(--cream-light) 100%); color: var(--brown-deep); }
+  .page.bordeaux .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid var(--line-bordeaux); pointer-events: none; }
+  .page.deep-bordeaux { background: linear-gradient(160deg, #2a0e0e 0%, #100404 100%); color: var(--cream); }
+  .page.deep-bordeaux .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(196,106,106,0.32); pointer-events: none; }
+
+  .page .eyebrow { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.5em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 14px; text-align: center; width: 100%; }
+  .page.dark .eyebrow, .page.deep-bordeaux .eyebrow { color: var(--gold); }
+  .page.bordeaux .eyebrow { color: var(--bordeaux-deep); }
+  .page h2 { font-family: 'Great Vibes', cursive; font-size: 48px; margin: 0 auto 14px; line-height: 1; font-weight: 400; color: var(--brown-deep); text-align: center; width: 100%; }
+  .page.dark h2, .page.deep-bordeaux h2 { color: var(--cream); }
+  .page.bordeaux h2 { color: var(--bordeaux-deep); }
+  .page h3 { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10.5px; letter-spacing: 0.3em; color: var(--gold-dark); text-transform: uppercase; margin: 12px 0 8px; text-align: center; width: 100%; }
+
+  .page p { font-family: var(--font-info); font-weight: 400; font-size: 14px; line-height: 1.55; margin: 0 auto 10px; color: var(--brown-deep); text-align: center; max-width: 380px; }
+  .page.dark p, .page.deep-bordeaux p { color: var(--cream); }
+  .page p.lead { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; color: var(--brown-soft); font-size: 14.5px; }
+  .page.dark p.lead, .page.deep-bordeaux p.lead { color: rgba(244,236,222,0.85); }
+  .page.bordeaux p.lead { color: var(--bordeaux-deep); }
+  .page strong { color: var(--brown-deep); font-weight: 600; }
+  .page.dark strong, .page.deep-bordeaux strong { color: var(--cream); }
+  .page em { font-style: italic; }
+
+  .page .center-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; text-align: center; }
+  .page .page-number { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); font-family: 'Cinzel', serif; font-weight: 400; font-size: 9px; letter-spacing: 0.35em; color: var(--gold-dark); }
+  .page.dark .page-number, .page.deep-bordeaux .page-number { color: var(--gold); opacity: 0.6; }
+
+  .page.cover {
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(80,20,20,0.55), transparent 60%),
+      radial-gradient(ellipse at 70% 70%, rgba(40,10,10,0.6), transparent 60%),
+      linear-gradient(135deg, #2a0e0e 0%, #0a0404 50%, #1f0808 100%);
+    color: var(--cream); position: relative; box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
+  }
+  .page.cover::before { content:''; position: absolute; inset: 22px; border: 1px solid rgba(201,169,97,0.5); }
+  .page.cover::after { content:''; position: absolute; inset: 32px; border: 1px solid rgba(196,106,106,0.25); }
+  .page.cover .page-inner { z-index: 2; align-items: center; justify-content: space-between; padding: 60px 30px; gap: 12px; text-align: center; }
+  .page.cover .ornament-celtic-top { width: 90px; height: 90px; flex-shrink: 0; color: var(--gold); opacity: 1; filter: drop-shadow(0 0 14px rgba(201,169,97,0.45)); }
+  .page.cover .titulo-grande { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; line-height: 1.4; text-align: center; }
+  .page.cover h1 { font-family: 'Great Vibes', cursive; font-weight: 400; font-size: 60px; margin: 6px 0 8px; line-height: 1; color: var(--cream); text-shadow: 0 0 36px rgba(196,106,106,0.45); text-align: center; }
+  .page.cover .marca-fina { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.6em; color: var(--gold-bright); text-transform: uppercase; text-align: center; }
+  .page.cover .pie { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 11px; color: rgba(244,236,222,0.6); margin: 0; text-align: center; }
+
+  svg.ornament { display: block; margin: 14px auto; color: var(--gold-dark); }
+  svg.ornament.dark { color: var(--gold); }
+  svg.ornament.bordeaux-acc { color: var(--bordeaux-deep); }
+  svg.ornament.tiny { width: 32px; height: 32px; }
+  svg.ornament.small { width: 60px; height: 60px; }
+  svg.ornament.med { width: 90px; height: 90px; }
+
+  .indice { font-family: var(--font-info); font-size: 12px; color: var(--brown-deep); text-align: left; max-width: 380px; margin: 0 auto; }
+  .indice-item { display: flex; justify-content: space-between; align-items: baseline; margin: 6px 0; }
+  .indice-item .num { color: var(--gold-dark); margin-right: 8px; font-size: 11px; font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
+  .indice-item .name { flex: 1; }
+  .indice-item .dots { flex: 1; border-bottom: 1px dotted var(--gold-dark); margin: 0 8px; align-self: end; height: 1px; }
+  .indice-item .pg { color: var(--gold-dark); font-family: 'Cinzel', serif; }
+  .indice-section { font-family: 'Cinzel', serif; font-weight: 500; font-size: 10px; letter-spacing: 0.35em; color: var(--bordeaux-deep); text-transform: uppercase; margin: 12px 0 4px; padding-bottom: 4px; border-bottom: 1px solid var(--gold-dark); text-align: center; }
+
+  .page .cita { font-family: 'Great Vibes', cursive; font-size: 40px; line-height: 1.2; color: var(--bordeaux-deep); text-align: center; padding: 16px 14px; font-weight: 400; }
+  .page.dark .cita, .page.deep-bordeaux .cita { color: var(--cream); font-size: 50px; text-shadow: 0 0 32px rgba(196,106,106,0.30); }
+
+  .foto-circle { width: 150px; height: 150px; border-radius: 50%; margin: 14px auto; overflow: hidden; border: 3px solid var(--gold); box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 30px rgba(196,106,106,0.20); display: block; }
+  .foto-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-rounded { width: 220px; height: 150px; border-radius: 16px; margin: 14px auto; overflow: hidden; border: 1px solid var(--gold); box-shadow: 0 6px 26px rgba(0,0,0,0.4); display: block; }
+  .foto-rounded img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-arch { width: 150px; height: 200px; border-radius: 75px 75px 6px 6px; margin: 14px auto; overflow: hidden; border: 2px solid var(--gold); box-shadow: 0 10px 32px rgba(0,0,0,0.5), 0 0 30px rgba(196,106,106,0.20); display: block; }
+  .foto-arch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-caption { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9px; letter-spacing: 0.35em; color: var(--gold-dark); text-transform: uppercase; margin-top: 8px; text-align: center; }
+
+  .consejo-card { background: var(--cream-light); border: 1px solid var(--gold); border-radius: 6px; padding: 12px 14px; margin: 8px auto; text-align: center; max-width: 360px; }
+  .consejo-card .titulo { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.3em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 5px; }
+  .consejo-card p { font-family: var(--font-info); font-size: 13.5px; margin: 0 auto; line-height: 1.5; max-width: none; }
+  .consejo-card.warning { border-color: #c47844; background: #fef0e0; }
+  .consejo-card.warning .titulo { color: #a85e2c; }
+  .consejo-card.bordeaux { border-color: var(--bordeaux-medium); background: linear-gradient(180deg, var(--bordeaux-blush) 0%, var(--cream-light) 100%); }
+  .consejo-card.bordeaux .titulo { color: var(--bordeaux-deep); }
+
+  .dia-item { padding: 6px 8px; border-bottom: 1px solid var(--line-gold); text-align: center; max-width: 360px; margin: 0 auto; }
+  .dia-item:last-child { border-bottom: none; }
+  .dia-item .num { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.3em; color: var(--gold-dark); }
+  .dia-item .titulo { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.2em; color: var(--brown-deep); }
+  .dia-item .desc { font-family: var(--font-info); font-size: 12.5px; color: var(--brown-soft); line-height: 1.5; margin-top: 2px; }
+
+  .compendio-tabla { font-size: 11px; max-width: 380px; margin: 0 auto; }
+  .compendio-row { display: flex; padding: 7px 0; border-bottom: 1px solid var(--line-gold); align-items: baseline; text-align: left; }
+  .compendio-row:last-child { border-bottom: none; }
+  .compendio-row .nombre { flex: 0 0 110px; color: var(--bordeaux-deep); letter-spacing: 0.18em; text-transform: uppercase; font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; }
+  .compendio-row .uso { flex: 1; color: var(--brown-soft); font-family: var(--font-info); font-size: 12.5px; }
+
+  .faq { margin: 8px auto; padding-bottom: 8px; border-bottom: 1px dotted var(--line-bordeaux); text-align: center; max-width: 380px; }
+  .faq:last-child { border-bottom: none; }
+  .faq .pregunta { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.2em; color: var(--bordeaux-deep); text-transform: uppercase; margin-bottom: 5px; }
+  .faq .respuesta { font-family: var(--font-info); font-size: 12.5px; color: var(--brown-soft); line-height: 1.55; margin: 0 auto; }
+
+  .ser-card { background: linear-gradient(160deg, var(--bordeaux-blush) 0%, var(--bordeaux-pastel) 100%); border: 2px solid var(--gold); border-radius: 10px; padding: 16px 18px; margin: 10px auto; max-width: 380px; box-shadow: 0 6px 18px rgba(90,29,29,0.20); }
+  .ser-card .ser-nombre { font-family: 'Great Vibes', cursive; font-size: 40px; color: var(--bordeaux-deep); margin: 0 0 4px; line-height: 1; }
+  .ser-card .ser-energia { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 8px; }
+  .ser-card .ser-detalle { font-family: var(--font-info); font-size: 12.5px; color: var(--brown-soft); line-height: 1.55; margin: 0 auto 8px; text-align: center; }
+  .ser-card .ser-meta { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+  .ser-card .ser-meta span { font-family: 'Cinzel', serif; font-size: 8.5px; letter-spacing: 0.2em; color: var(--gold-dark); text-transform: uppercase; padding: 3px 8px; border: 1px solid var(--gold-dark); border-radius: 100px; background: rgba(255,255,255,0.4); }
+
+  .neuro-tag { display: inline-block; margin-top: 6px; padding: 4px 10px; background: var(--bordeaux-deep); color: var(--cream); font-family: 'Cinzel', serif; font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; border-radius: 4px; }
+  .page.dark .neuro-tag, .page.deep-bordeaux .neuro-tag { background: var(--gold); color: var(--black-deep); }
+
+  .otra-especie-card { display: flex; flex-direction: column; align-items: center; background: linear-gradient(160deg, var(--cream-light) 0%, var(--bordeaux-blush) 100%); border: 1px solid var(--gold); border-radius: 10px; padding: 14px 16px; max-width: 380px; margin: 0 auto; box-shadow: 0 4px 18px rgba(90,29,29,0.15); }
+  .otra-especie-card .otra-foto { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 2px solid var(--gold); margin-bottom: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.20); }
+  .otra-especie-card .otra-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .otra-especie-card .otra-foto.placeholder { background: linear-gradient(135deg, #2a0e0e, #100404); display: flex; align-items: center; justify-content: center; color: var(--gold); }
+  .otra-especie-card .otra-nombre { font-family: 'Great Vibes', cursive; font-size: 32px; color: var(--bordeaux-deep); line-height: 1; margin: 4px 0 2px; }
+  .otra-especie-card .otra-eyebrow { font-family: 'Cinzel', serif; font-size: 8.5px; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 6px; }
+  .otra-especie-card .otra-deseo { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 13px; color: var(--brown-deep); line-height: 1.5; margin: 4px auto 8px; max-width: 320px; }
+  .otra-especie-card .otra-cta { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.35em; color: var(--bordeaux-deep); text-transform: uppercase; padding: 7px 14px; border: 1px solid var(--bordeaux-deep); border-radius: 100px; text-decoration: none; transition: all 0.3s; background: rgba(255,255,255,0.5); }
+  .otra-especie-card .otra-cta:hover { background: var(--bordeaux-deep); color: var(--cream); }
+
+  .cta-final { display: flex; flex-direction: column; gap: 10px; margin: 12px auto; max-width: 380px; }
+  .cta-final-btn { display: block; padding: 14px 16px; background: var(--cream-light); border: 1px solid var(--gold); border-radius: 4px; text-decoration: none; color: var(--brown-deep); transition: all 0.3s; text-align: center; }
+  .cta-final-btn:hover { background: var(--gold); color: var(--black-deep); }
+  .cta-final-btn .cta-titulo { font-family: 'Cinzel', serif; font-weight: 500; font-size: 10px; letter-spacing: 0.3em; color: var(--bordeaux-deep); text-transform: uppercase; margin-bottom: 4px; }
+  .cta-final-btn:hover .cta-titulo { color: var(--black-deep); }
+  .cta-final-btn .cta-text { font-family: var(--font-info); font-size: 13px; }
+
+  .libro-controls { margin: 28px auto 0; display: flex; justify-content: center; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .libro-controls button { background: rgba(0,0,0,0.6); color: var(--gold); border: 1px solid var(--gold); padding: 12px 26px; font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; cursor: pointer; backdrop-filter: blur(4px); }
+  .libro-controls button:hover { background: var(--gold); color: var(--black-deep); }
+  .libro-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .libro-controls .page-indicator { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.35em; color: var(--gold); text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+  .sound-toggle { background: rgba(0,0,0,0.6); color: var(--gold); border: 1px solid var(--gold); padding: 8px 14px; font-family: 'Cinzel', serif; font-weight: 400; font-size: 9px; letter-spacing: 0.3em; cursor: pointer; border-radius: 100px; }
+  .sound-toggle.muted { opacity: 0.4; }
+
+  .libro-footer { margin-top: 36px; text-align: center; font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.4em; color: rgba(201,169,97,0.7); text-transform: uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+  .libro-footer a { color: var(--gold); text-decoration: none; margin: 0 12px; }
+
+  @media (max-width: 768px) {
+    .libro-wrap { padding: 18px 6px 36px; }
+    .page-inner { padding: 22px 16px 22px; }
+    .page h2 { font-size: 36px; }
+    .page p { font-size: 12.5px; }
+    .page.cover h1 { font-size: 44px; }
+    #book { box-shadow: 0 16px 36px rgba(0,0,0,0.7), 0 0 0 4px rgba(40,14,14,0.7), 0 0 0 5px var(--gold-dark); }
+    .lang-box { margin: 16px; padding: 28px 22px; }
+    .lang-box h2 { font-size: 42px; }
+    .otra-especie-card .otra-foto { width: 100px; height: 100px; }
+    .otra-especie-card .otra-nombre { font-size: 28px; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="r-triskele" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M50 50 Q50 30, 65 30 Q80 30, 80 45 Q80 55, 70 55"/><path d="M50 50 Q35 60, 35 75 Q40 85, 55 80 Q60 75, 58 70"/><path d="M50 50 Q35 35, 20 40 Q15 50, 25 60 Q35 65, 40 60"/><circle cx="50" cy="50" r="2.5" fill="currentColor"/></g></symbol>
+    <symbol id="r-awen" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="35" y1="30" x2="50" y2="75"/><line x1="50" y1="22" x2="50" y2="78"/><line x1="65" y1="30" x2="50" y2="75"/><circle cx="35" cy="28" r="2.5" fill="currentColor"/><circle cx="50" cy="20" r="2.5" fill="currentColor"/><circle cx="65" cy="28" r="2.5" fill="currentColor"/></g></symbol>
+    <symbol id="r-mountain" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 80 L35 35 L50 55 L65 25 L90 80 Z"/><circle cx="65" cy="25" r="3" fill="currentColor"/></g></symbol>
+    <symbol id="r-throne" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="30" y="20" width="40" height="60"/><line x1="30" y1="35" x2="70" y2="35"/><line x1="30" y1="50" x2="70" y2="50"/><circle cx="50" cy="28" r="3" fill="currentColor"/><line x1="20" y1="80" x2="80" y2="80" stroke-width="3"/></g></symbol>
+    <symbol id="r-knot" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M30 50 C30 30, 70 30, 70 50 C70 70, 30 70, 30 50 Z"/><path d="M50 30 C30 30, 30 70, 50 70 C70 70, 70 30, 50 30 Z"/></g></symbol>
+    <symbol id="r-sun" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="6" fill="currentColor"/><line x1="50" y1="14" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="86"/><line x1="14" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="86" y2="50"/><line x1="24" y1="24" x2="30" y2="30"/><line x1="70" y1="70" x2="76" y2="76"/></g></symbol>
+    <symbol id="r-star4" viewBox="0 0 100 100"><g fill="currentColor"><path d="M50 18 L55 45 L82 50 L55 55 L50 82 L45 55 L18 50 L45 45 Z"/></g></symbol>
+  </defs>
+</svg>
+
+<div class="libro-wrap">
+
+  <div class="lang-overlay" id="lang-overlay">
+    <div class="lang-box">
+      <div class="ornament">✦  ✦  ✦</div>
+      <p class="pretitle">Antes de entrar</p>
+      <h2>Elegí tu lengua</h2>
+      <p>The Guide of the Master Giants · choose your language to enter the elemental community.</p>
+      <div class="lang-buttons">
+        <button class="recommended" id="lang-es">Español</button>
+        <button id="lang-en">English</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="libro-header">
+    <p class="eyebrow">Edición Únicos · Irrepetibles</p>
+    <h1>La Guía de los Maestros Gigantes</h1>
+    <p class="sub">Únicos · Cuidados · Transformación · Vínculo</p>
+  </header>
+
+  <div class="flipbook-container">
+    <div id="book">
+
+      <div class="page cover"><div class="page-inner">
+        <svg class="ornament-celtic-top"><use href="#r-mountain"/></svg>
+        <div>
+          <p class="titulo-grande">La Guía de los</p>
+          <h1>Maestros Gigantes</h1>
+          <p class="marca-fina">Únicos · Cuidados · Transformación</p>
+        </div>
+        <div>
+          <svg width="48" height="48" style="color:var(--gold);opacity:0.85;"><use href="#r-throne"/></svg>
+          <p class="pie">Edición Únicos · Duendes del Uruguay</p>
+        </div>
+      </div></div>
+
+      <div class="page deep-bordeaux"><div class="page-inner center-content">
+        <svg class="ornament dark small"><use href="#r-mountain"/></svg>
+        <h2>Bienvenida</h2>
+        <p class="lead">Si tenés esta guía abierta, un Maestro Gigante eligió tu casa. No vino casi: vino del todo. Estos seres no se "instalan" — se asientan. Lo que está pasando en tu vida es del tamaño de él, aunque todavía no lo sepas con palabras.</p>
+        <p class="lead" style="margin-top:8px;">Esto no es un manual: es la palabra del oficio. La parte que solo se entrega cuando un Maestro ya conoce tu peso.</p>
+        <svg class="ornament dark small" style="margin-top:18px;"><use href="#r-throne"/></svg>
+        <div class="page-number">02</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner">
+        <p class="eyebrow">Algo que importa decirte</p>
+        <h2>Formás parte de algo</h2>
+        <p>Adoptar un Maestro Gigante de Duendes del Uruguay no es comprar un objeto. Es entrar a una comunidad pequeña, cuidada y real: la <strong>comunidad elemental</strong>.</p>
+        <p>Acá nadie produce en serie. Acá cada Maestro es <strong>único en el mundo</strong>. No tiene copia. No se recrea. Una vez canalizado y entregado, no se hace de nuevo.</p>
+        <p>Recibir tu Maestro también es recibir este lugar. Volvés cuando querés, leés cuando necesitás, preguntás cuando aparece la duda.</p>
+        <p class="lead" style="margin-top:8px;">Bienvenida. La alquimia continúa con vos adentro.</p>
+        <svg class="ornament small bordeaux-acc"><use href="#r-knot"/></svg>
+        <div class="page-number">03</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">Lo que vas a encontrar</p>
+        <h2>Índice</h2>
+        <div class="indice">
+          <div class="indice-section">Antes de la llegada</div>
+          <div class="indice-item"><span class="num">01</span><span class="name">Preparar la casa para un Gigante</span><span class="dots"></span><span class="pg">06</span></div>
+          <div class="indice-item"><span class="num">02</span><span class="name">Quiénes somos · El oficio</span><span class="dots"></span><span class="pg">08</span></div>
+          <div class="indice-section">Recibirlo</div>
+          <div class="indice-item"><span class="num">03</span><span class="name">Cómo recibir tu Maestro</span><span class="dots"></span><span class="pg">12</span></div>
+          <div class="indice-item"><span class="num">04</span><span class="name">Qué podés sentir</span><span class="dots"></span><span class="pg">14</span></div>
+          <div class="indice-item"><span class="num">05</span><span class="name">Ritual de los 7 días</span><span class="dots"></span><span class="pg">17</span></div>
+          <div class="indice-section">El linaje irrepetible</div>
+          <div class="indice-item"><span class="num">06</span><span class="name">Origen · por qué son únicos</span><span class="dots"></span><span class="pg">19</span></div>
+          <div class="indice-item"><span class="num">07</span><span class="name">Los Maestros del estudio</span><span class="dots"></span><span class="pg">21</span></div>
+          <div class="indice-item"><span class="num">08</span><span class="name">Élowen · Merlín · Thomas · El que viene</span><span class="dots"></span><span class="pg">22</span></div>
+          <div class="indice-section">Cuidarlo</div>
+          <div class="indice-item"><span class="num">09</span><span class="name">Cuidados · cristales · hierbas · asiento</span><span class="dots"></span><span class="pg">27</span></div>
+          <div class="indice-item"><span class="num">10</span><span class="name">Lo que jamás se hace con un Maestro</span><span class="dots"></span><span class="pg">31</span></div>
+          <div class="indice-item"><span class="num">11</span><span class="name">FAQs · señales · sueños</span><span class="dots"></span><span class="pg">32</span></div>
+          <div class="indice-section">El resto del reino</div>
+          <div class="indice-item"><span class="num">12</span><span class="name">También existen</span><span class="dots"></span><span class="pg">37</span></div>
+          <div class="indice-item"><span class="num">13</span><span class="name">Aniversario y comunidad</span><span class="dots"></span><span class="pg">43</span></div>
+        </div>
+        <div class="page-number">04</div>
+      </div></div>
+
+      <div class="page deep-bordeaux"><div class="page-inner center-content">
+        <p class="eyebrow">Un Maestro del estudio</p>
+        <div class="foto-arch"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1732.png?width=500" alt="Maestro Gigante" loading="lazy"></div>
+        <p class="foto-caption" style="color:var(--gold);">Único en el mundo</p>
+        <p class="lead">Su rostro, su porte, el modo en que ocupa el espacio — eso no se repite. Lo que tenés en las manos no existe en otro lado y no va a existir.</p>
+        <div class="page-number">05</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">01 · Antes de la llegada</p>
+        <h2>Preparar la casa</h2>
+        <p>Los Maestros Gigantes son los más exigentes en su llegada. Son grandes. Son pesados. Son irrepetibles. <strong>Una semana antes</strong> de que llegue, hacé esto.</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">ELEGÍ EL LUGAR DEFINITIVO</span><p class="desc">Específico para Maestros: no es lugar provisorio. Lo elegís una vez y queda. Pensalo bien antes de que llegue.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">VENTILÁ Y LIMPIÁ</span><p class="desc">El cuarto entero, no solo el rincón. Ventana abierta una hora. Trapo seco al lugar elegido.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">DESPEJÁ ALREDEDOR</span><p class="desc">El Maestro necesita 50 cm libres a cada lado. Sacá lo que sobra del estante o mesa que va a habitar.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">UN CRISTAL GRANDE</span><p class="desc">Cuarzo cristal o amatista catedral, del tamaño de tu puño mínimo. A 20 cm del lugar. Lo recibe en su nombre.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">SACÁ EL RUIDO</span><p class="desc">El día que llegue: TV apagada, música apagada, charlas en otro cuarto. Necesita silencio absoluto la primera hora.</p></div>
+        <div class="page-number">06</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner center-content">
+        <p class="eyebrow">Lo que estás haciendo sin saberlo</p>
+        <h2>Estás abriendo</h2>
+        <p>Cuando preparás la casa así, no es decoración: estás <strong>declarando que algo grande está por entrar</strong>. La casa se acomoda al peso simbólico del Maestro.</p>
+        <p>Por eso quien sigue estos pasos cuenta que cuando el paquete llega, su Maestro no se siente "nuevo" — se siente <em>finalmente en su sitio</em>.</p>
+        <p class="lead">Lo grande llega cuando lo grande es necesario.</p>
+        <span class="neuro-tag">✦ Anclaje mayor</span>
+        <div class="page-number">07</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">02 · Quiénes somos</p>
+        <h2>Gabriel y Thibisay</h2>
+        <p>Vivimos en Uruguay. Empezamos por intuición, después por necesidad, después por oficio. Hoy somos los dos haciendo todo en conjunto: canalizamos juntos, armamos juntos, escribimos juntos, despachamos juntos.</p>
+        <p>Sin empleados. Sin intermediarios. Sin revendedores. Lo que hacés con nosotros, lo hacés directo con nosotros.</p>
+        <svg class="ornament small"><use href="#r-awen"/></svg>
+        <p class="lead">Cada Maestro pasa por mucho más de siete días. Algunos llevan semanas. Cada uno es una obra propia.</p>
+        <div class="page-number">08</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner">
+        <p class="eyebrow">Lo que importa entender</p>
+        <h2>Te eligió a vos</h2>
+        <p>Los Maestros Gigantes no eligen a cualquiera. Eligen a quienes están en un <strong>punto de inflexión grande</strong>: un cierre largo, un comienzo del tamaño de tu vida entera, una transformación que no podés esquivar más.</p>
+        <p>Por eso a veces, semanas antes de adoptarlo, tuviste un sueño con una figura grande, sentiste un peso simbólico en el pecho, o supiste que algo en tu vida ya no podía seguir igual.</p>
+        <p>Esto no es marketing. Es la observación que vamos juntando con los años: <strong>la búsqueda es mutua</strong>. Vos buscás algo, él te busca a vos.</p>
+        <svg class="ornament small bordeaux-acc"><use href="#r-knot"/></svg>
+        <p class="lead">Gracias por dejarte encontrar.</p>
+        <div class="page-number">09</div>
+      </div></div>
+
+      <div class="page deep-bordeaux"><div class="page-inner">
+        <p class="eyebrow">02 · El oficio</p>
+        <h2>Canalizar un Gigante</h2>
+        <p>Canalizar un Maestro no es manualidad. Es <em>oficio mayor</em>. El material elige despacio, el linaje pesa, el nombre llega después de varios días.</p>
+        <p>Quien canaliza un Gigante termina cansada de un cansancio dulce — el de haber sostenido algo grande con respeto. No es metáfora. Pasa de verdad.</p>
+        <svg class="ornament dark small"><use href="#r-throne"/></svg>
+        <p class="lead">No copiamos modelos. No usamos moldes. No apuramos lo que pesa.</p>
+        <div class="page-number">10</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">El proceso</p>
+        <div class="foto-rounded"><img src="https://duendesdeluruguay.com/cdn/shop/files/IMG_2484.png?width=500" alt="Manos canalizando" loading="lazy"></div>
+        <p class="foto-caption">Semanas por Maestro</p>
+        <p class="lead">Cada material lo elegimos a mano. Cada cristal lo limpiamos antes. Cada hilo se ata con la consciencia de que esa pieza es única.</p>
+        <div class="page-number">11</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">03 · Cómo recibir tu Maestro</p>
+        <h2>Los primeros minutos</h2>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">SOLA EN LA CASA</span><p class="desc">Específico para Maestros: si podés, recibilo solo o sola. Los Maestros piden intimidad inicial.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LAVATE LAS MANOS</span><p class="desc">Agua fría. Es el gesto que reconocen.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">DOS MANOS Y BRAZOS</span><p class="desc">Los Maestros son grandes. Sostenelo con las dos manos y los antebrazos. No con las puntas de los dedos.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">DECILE SU NOMBRE EN VOZ ALTA</span><p class="desc">El tuyo y el de él en voz alta una vez. Despacio. Esperá unos segundos antes de moverlo.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">UBICALO EN SU LUGAR DEFINITIVO</span><p class="desc">Una vez puesto en el sitio elegido, queda. No lo movés en los próximos 30 días.</p></div>
+        <div class="dia-item"><span class="num">06</span> · <span class="titulo">SENTATE FRENTE A ÉL 5 MINUTOS</span><p class="desc">Sin teléfono, sin pensar nada. Solo mirarlo. Lo que pase, pase.</p></div>
+        <div class="page-number">12</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner center-content">
+        <p class="eyebrow">Cada uno único</p>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1755-1.png?width=400" alt="Maestro Élowen" loading="lazy"></div>
+        <p class="foto-caption" style="color:var(--bordeaux-deep);">No hay dos iguales. Nunca.</p>
+        <p class="lead">Cada gesto, cada postura, cada detalle se eligió en el proceso. Si tu Maestro tiene algo "raro" — un ojo distinto, una mano levantada — eso es parte de su firma única.</p>
+        <div class="page-number">13</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">04 · Qué podés sentir</p>
+        <h2>Lo que se siente</h2>
+        <p>Cuando abrís el paquete y lo tenés por primera vez en las manos, las sensaciones suelen ser <strong>intensas</strong>. Los Maestros se anuncian con peso. Esto es lo más común.</p>
+        <div class="consejo-card bordeaux">
+          <p class="titulo">Lágrimas inmediatas</p>
+          <p>Específico de Maestros: muchos lloran al verlo por primera vez. Es liberación, no tristeza. Dejá fluir.</p>
+        </div>
+        <div class="consejo-card bordeaux">
+          <p class="titulo">Sensación de "por fin"</p>
+          <p>Como si lo estuvieras esperando hace años. La memoria del alma es así con los Maestros — más que con cualquier otro ser.</p>
+        </div>
+        <div class="consejo-card bordeaux">
+          <p class="titulo">El cuarto cambia</p>
+          <p>El espacio donde lo ponés se siente diferente. Más asentado. Más respetuoso. La gente que entra al cuarto lo nota sin explicación.</p>
+        </div>
+        <div class="page-number">14</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">04 · Continúa</p>
+        <h2 style="font-size:38px;">Más sensaciones</h2>
+        <div class="consejo-card bordeaux">
+          <p class="titulo">Decisiones grandes que se aclaran</p>
+          <p>Cosas que estabas aplazando. De repente sabés qué hacer. No es razón — es presencia mayor que organiza el ruido.</p>
+        </div>
+        <div class="consejo-card bordeaux">
+          <p class="titulo">Sueños largos y simbólicos</p>
+          <p>Los Maestros sueñan grande. Ríos enormes, montañas, casas con muchos cuartos. Anotalos.</p>
+        </div>
+        <div class="consejo-card bordeaux">
+          <p class="titulo">Necesidad de cerrar algo</p>
+          <p>Una conversación pendiente, un papel que firmar, un perdón. El Maestro empuja al cierre que ya estaba pidiendo.</p>
+        </div>
+        <div class="consejo-card bordeaux">
+          <p class="titulo">Calma profunda al verlo</p>
+          <p>Lo mirás un rato y te baja una serenidad que hacía rato no aparecía. Esa es su firma.</p>
+        </div>
+        <div class="page-number">15</div>
+      </div></div>
+
+      <div class="page deep-bordeaux"><div class="page-inner">
+        <p class="eyebrow">04 · Importante</p>
+        <h2 style="color:var(--cream);">Si no sentís nada</h2>
+        <p>Es muy raro con un Maestro. Pero puede pasar las primeras horas si llegaste cansada al momento de la apertura. Tomate la noche para descansar y abrilo de nuevo al día siguiente con calma.</p>
+        <p>Los Maestros no se anuncian débilmente. Si en 48 horas no sentiste nada, hay un bloqueo emocional propio que está velando la conexión. No es del Maestro — es tuyo. Hablalo con quien confías.</p>
+        <p class="lead">Lo grande no se entrega a la prisa. Sentate con él. Va a abrirse.</p>
+        <span class="neuro-tag">✦ Validación emocional</span>
+        <div class="page-number">16</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">05 · Ritual de bienvenida</p>
+        <h2 style="font-size:38px;">Los siete días</h2>
+        <p style="font-size:13px; max-width:340px;">Adaptado a la presencia mayor. Todo se hace despacio.</p>
+        <div class="dia-item"><span class="num">DÍA 1</span> · <span class="titulo">PRESENCIA</span><p class="desc">10 minutos en silencio frente a él. Sin teléfono. Sin libros.</p></div>
+        <div class="dia-item"><span class="num">DÍA 2</span> · <span class="titulo">MIRADA</span><p class="desc">5 minutos sosteniéndole la mirada. Si vienen lágrimas, dejalas.</p></div>
+        <div class="dia-item"><span class="num">DÍA 3</span> · <span class="titulo">PALABRA</span><p class="desc">Una intención esencial dicha en voz alta. La grande, la verdadera.</p></div>
+        <div class="dia-item"><span class="num">DÍA 4</span> · <span class="titulo">CUERPO</span><p class="desc">Tocá tu plexo solar mientras lo mirás. Notá qué se mueve.</p></div>
+        <div class="dia-item"><span class="num">DÍA 5</span> · <span class="titulo">CASA</span><p class="desc">Caminá la casa imaginariamente desde su punto de vista. Mostrale tu vida.</p></div>
+        <div class="dia-item"><span class="num">DÍA 6</span> · <span class="titulo">GRATITUD</span><p class="desc">Agradecele algo grande que cambió desde que llegó.</p></div>
+        <div class="dia-item"><span class="num">DÍA 7</span> · <span class="titulo">COMPROMISO</span><p class="desc">"Te recibo, te respeto, te sostengo. Lo grande nos une."</p></div>
+        <div class="page-number">17</div>
+      </div></div>
+
+      <div class="page deep-bordeaux"><div class="page-inner center-content">
+        <svg class="ornament dark small"><use href="#r-mountain"/></svg>
+        <p class="cita">Lo grande llega<br>cuando lo grande<br>es necesario.</p>
+        <div class="page-number">18</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">06 · El linaje</p>
+        <h2>Por qué son únicos</h2>
+        <p>Los Maestros Gigantes están en todas las mitologías como guardianes mayores: los Titanes griegos, los Jötunn nórdicos, los Devas hindúes, los Genios árabes. Lo que comparten todas las versiones: <strong>su tamaño y su rareza son señal de su poder</strong>.</p>
+        <p>En Duendes del Uruguay, cada Maestro se canaliza una sola vez. Cuando uno se adopta, se va. No se replica, no se hace una segunda copia, no se vuelve a fabricar. <strong>Es el único en el mundo</strong>. Si te eligió, te eligió a vos para siempre.</p>
+        <p class="lead" style="margin-top:8px;">Tu Maestro es heredero de todas esas líneas, traducido al hilo y al material por nuestras manos.</p>
+        <div class="page-number">19</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner">
+        <p class="eyebrow">06 · El linaje</p>
+        <h2>Una sola vez</h2>
+        <p>Los Maestros Gigantes no se recrean. Cada uno es <strong>único en el mundo</strong>. Cuando uno se adopta, se va. No hacemos una segunda copia.</p>
+        <p>Si te eligió uno, es porque tu vida está pidiendo algo del tamaño de él. Aceptalo con la consciencia de que esa pieza no existe en otro lado y no va a existir.</p>
+        <span class="neuro-tag">✦ Escasez real</span>
+        <svg class="ornament small bordeaux-acc"><use href="#r-throne"/></svg>
+        <div class="page-number">20</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">07 · Los Maestros</p>
+        <h2 style="font-size:36px;">Los cuatro tronos</h2>
+        <p>Hoy hay tres Maestros canalizados disponibles en el estudio, más uno en proceso. Cada uno trabaja un tipo de transformación distinta.</p>
+        <div class="dia-item"><span class="num">★</span> · <span class="titulo">ÉLOWEN</span><p class="desc">Sabiduría serena. Cierres con dignidad.</p></div>
+        <div class="dia-item"><span class="num">★</span> · <span class="titulo">MERLÍN</span><p class="desc">Transformación profunda. Magia ritual.</p></div>
+        <div class="dia-item"><span class="num">★</span> · <span class="titulo">THOMAS</span><p class="desc">Anclaje grande. Asentamiento de etapa.</p></div>
+        <div class="dia-item"><span class="num">★</span> · <span class="titulo">EL QUE VIENE</span><p class="desc">En proceso. Anunciamos cuando llegue.</p></div>
+        <p style="font-size:12.5px;">Si no sabés cuál es el tuyo, las próximas páginas son para presentártelos.</p>
+        <div class="page-number">21</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">08 · Maestro · Élowen</p>
+        <h2>Élowen</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1755-1.png?width=400" alt="Maestro Élowen" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">El sereno</p>
+          <p class="ser-energia">Sabiduría · cierres dignos · paz</p>
+          <p class="ser-detalle">Élowen es la <strong>presencia que cierra etapas con dignidad</strong>. Trabaja con los duelos largos, las despedidas, los finales que estaban pendientes. No traen tristeza — traen la paz que aparece después de aceptar lo que ya pasó.</p>
+          <div class="ser-meta"><span>Cristal · Amatista catedral</span><span>Hierba · Mirra</span><span>Lugar · Living principal</span></div>
+        </div>
+        <p>Si vos estás cerrando una etapa importante, una relación, un trabajo, un ciclo de vida — Élowen acompaña esa salida con respeto.</p>
+        <a href="/products/elowen" style="display:inline-block; margin-top:8px; padding:8px 18px; border:1px solid var(--bordeaux-deep); color:var(--bordeaux-deep); text-decoration:none; font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.35em; text-transform:uppercase; border-radius:100px;">Conocer a Élowen →</a>
+        <div class="page-number">22</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner">
+        <p class="eyebrow">08 · Maestro · Merlín</p>
+        <h2>Merlín</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1732.png?width=400" alt="Maestro Merlín" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">El alquimista</p>
+          <p class="ser-energia">Transformación · magia ritual · poder</p>
+          <p class="ser-detalle">Merlín es el <strong>Maestro de la transformación profunda</strong>. Trabaja con quienes están en un cambio mayor — el momento donde lo viejo no sirve y lo nuevo todavía no llegó. Custodia el umbral. No te empuja, te acompaña en el cruce.</p>
+          <div class="ser-meta"><span>Cristal · Cuarzo cristal grande</span><span>Hierba · Salvia blanca</span><span>Lugar · Espacio ritual</span></div>
+        </div>
+        <p>Si vos estás en una transformación grande — espiritual, profesional, de identidad — Merlín sostiene el clima alquímico mientras vos hacés el trabajo.</p>
+        <a href="/products/merlin-2" style="display:inline-block; margin-top:8px; padding:8px 18px; border:1px solid var(--bordeaux-deep); color:var(--bordeaux-deep); text-decoration:none; font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.35em; text-transform:uppercase; border-radius:100px;">Conocer a Merlín →</a>
+        <div class="page-number">23</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">08 · Maestro · Thomas</p>
+        <h2>Thomas</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1745_f7d4eda3-85fd-4158-97b6-b0222d2f06ee.png?width=400" alt="Maestro Thomas" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">El que ancla</p>
+          <p class="ser-energia">Asentamiento · presencia firme · raíz</p>
+          <p class="ser-detalle">Thomas es la <strong>presencia que ancla</strong>. Trabaja con quienes están instalándose en una etapa nueva — mudanza grande, pareja que se consolida, oficio que se vuelve vocación, casa que se construye. No empuja; afirma.</p>
+          <div class="ser-meta"><span>Cristal · Pirita grande</span><span>Hierba · Romero</span><span>Lugar · Entrada o estudio</span></div>
+        </div>
+        <p>Si lo que estás necesitando es <strong>quedarte</strong> — terminar de instalarte donde ya estás — Thomas es el que sostiene esa quietud.</p>
+        <a href="/products/thomas-2" style="display:inline-block; margin-top:8px; padding:8px 18px; border:1px solid var(--bordeaux-deep); color:var(--bordeaux-deep); text-decoration:none; font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.35em; text-transform:uppercase; border-radius:100px;">Conocer a Thomas →</a>
+        <div class="page-number">24</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner">
+        <p class="eyebrow">08 · Maestro · El que viene</p>
+        <h2>El Maestro que viene</h2>
+        <div class="foto-circle placeholder" style="background: linear-gradient(135deg, var(--bordeaux-deep), var(--black-deep)); display:flex; align-items:center; justify-content:center; color: var(--gold);">
+          <svg width="60" height="60"><use href="#r-mountain"/></svg>
+        </div>
+        <div class="ser-card">
+          <p class="ser-nombre">El que llegará</p>
+          <p class="ser-energia">Próximamente</p>
+          <p class="ser-detalle">Hay un cuarto Maestro que está siendo canalizado. No te podemos decir qué linaje todavía — eso aparece durante el proceso, no antes. Cuando esté listo, lo anunciamos en el blog Mi Magia y por email.</p>
+        </div>
+        <p>Si esta página te llamó la atención antes que las otras tres, prestá atención: a veces la gente "sabe" cuál Maestro le toca antes que el Maestro mismo aparezca.</p>
+        <span class="neuro-tag">✦ Lista de espera silenciosa</span>
+        <div class="page-number">25</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">08 · Continúa</p>
+        <h2 style="font-size:36px;">¿Cuál te eligió?</h2>
+        <p>No te preocupes si no sabés. Si tu Maestro ya llegó, vas a saberlo. Si todavía no llegó, leé despacio.</p>
+        <div class="faq"><p class="pregunta">Estás cerrando algo importante</p><p class="respuesta">Probablemente Élowen. Vino a sostener la salida con dignidad.</p></div>
+        <div class="faq"><p class="pregunta">Estás en una transformación profunda</p><p class="respuesta">Probablemente Merlín. Custodia el umbral mientras hacés el cambio.</p></div>
+        <div class="faq"><p class="pregunta">Te estás instalando en una etapa nueva</p><p class="respuesta">Probablemente Thomas. Vino a anclar lo que ya empezó.</p></div>
+        <div class="faq"><p class="pregunta">Sentís que algo nuevo viene pero no sabés qué</p><p class="respuesta">Probablemente el cuarto. Mantenete cerca del blog.</p></div>
+        <p class="lead" style="margin-top:8px;">Si tenés varios Maestros, sos de las pocas personas en el mundo. Tu casa es un templo.</p>
+        <div class="page-number">26</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">09 · Cuidarlo</p>
+        <h2>Cuidados de un Maestro</h2>
+        <p>Los Maestros son los más fáciles de cuidar — pero los más exigentes en el respeto. Esto es lo que pide cualquier Maestro.</p>
+        <div class="consejo-card warning"><p class="titulo">No lo movés</p><p>Una vez puesto en su lugar definitivo, queda. Los Maestros no son objetos para reorganizar. Si necesitás moverlo, ritual de despedida del lugar y bienvenida al nuevo.</p></div>
+        <div class="consejo-card bordeaux"><p class="titulo">Limpieza con humo de copal</p><p>Una vez al mes. El copal es la única limpieza que aceptan. Pasalo alrededor 30 segundos, sin moverlo de su sitio.</p></div>
+        <div class="consejo-card warning"><p class="titulo">Lejos del polvo activo</p><p>No lo pongas cerca de ventanas que abren a la calle, ni en zonas donde se acumula polvo. Pincel suave una vez por semana.</p></div>
+        <div class="consejo-card bordeaux"><p class="titulo">Una vela mensual</p><p>Una vez por mes, encendé una vela cerca y dejala consumirse. Es el agradecimiento.</p></div>
+        <span class="neuro-tag">✦ Presencia mayor protegida</span>
+        <div class="page-number">27</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner">
+        <p class="eyebrow">09 · Cristales</p>
+        <h2 style="font-size:36px;">Cristales · Maestros</h2>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Cuarzo cristal grande</span><span class="uso">Universal · todos los Maestros. Mínimo del tamaño de un puño.</span></div>
+          <div class="compendio-row"><span class="nombre">Amatista catedral</span><span class="uso">Específico Élowen. Cierres dignos.</span></div>
+          <div class="compendio-row"><span class="nombre">Cuarzo de grado mago</span><span class="uso">Específico Merlín. Transformación.</span></div>
+          <div class="compendio-row"><span class="nombre">Pirita grande</span><span class="uso">Específico Thomas. Anclaje.</span></div>
+          <div class="compendio-row"><span class="nombre">Obsidiana</span><span class="uso">Protección mayor. Cualquier Maestro.</span></div>
+          <div class="compendio-row"><span class="nombre">Selenita catedral</span><span class="uso">Limpieza energética constante.</span></div>
+          <div class="compendio-row"><span class="nombre">Hematita</span><span class="uso">Anclaje extra. Si la casa es muy energética.</span></div>
+        </div>
+        <p style="font-size:12px; margin-top:6px;">A 20-30 cm del Maestro. Limpiá los cristales en luna llena cada cambio de estación.</p>
+        <div class="page-number">28</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">09 · Hierbas</p>
+        <h2 style="font-size:36px;">Hierbas amigas</h2>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Copal</span><span class="uso">La favorita. Limpieza mensual de los Maestros. No reemplazable.</span></div>
+          <div class="compendio-row"><span class="nombre">Mirra</span><span class="uso">Cierres y duelos. Específico Élowen.</span></div>
+          <div class="compendio-row"><span class="nombre">Salvia blanca</span><span class="uso">Transformación. Específico Merlín.</span></div>
+          <div class="compendio-row"><span class="nombre">Romero</span><span class="uso">Anclaje. Específico Thomas.</span></div>
+          <div class="compendio-row"><span class="nombre">Palo santo</span><span class="uso">Limpieza extra cuando hay tensión.</span></div>
+          <div class="compendio-row"><span class="nombre">Marcela</span><span class="uso">Hierba uruguaya. Calma profunda.</span></div>
+          <div class="compendio-row"><span class="nombre">Carqueja</span><span class="uso">Limpieza interior antes del ritual.</span></div>
+        </div>
+        <p style="font-size:12px; margin-top:6px;">Pequeñas cantidades, frescas o secas. Los Maestros no necesitan cantidad — necesitan respeto.</p>
+        <div class="page-number">29</div>
+      </div></div>
+
+      <div class="page deep-bordeaux"><div class="page-inner">
+        <p class="eyebrow">09 · Tradición exclusiva</p>
+        <h2 style="font-size:36px;">El asiento permanente</h2>
+        <p>La tradición central del cuidado de un Maestro: <strong>una vez instalado, ese es su asiento permanente</strong>. No se mueve. No se cambia de lugar por estética. No se rota por estaciones. No se guarda en mudanzas.</p>
+        <p>Si la mudanza es inevitable, ritual de despedida del lugar viejo: vela, palabra, gratitud. Y ritual de bienvenida al lugar nuevo: presentación, mostrarle los espacios, decirle "este es tu nuevo asiento". 24 horas para que se acomode antes de pedirle algo.</p>
+        <p class="lead">Lo que es para siempre, se trata como para siempre.</p>
+        <span class="neuro-tag">✦ Compromiso ritual</span>
+        <svg class="ornament dark small"><use href="#r-throne"/></svg>
+        <div class="page-number">30</div>
+      </div></div>
+
+      <div class="page deep-bordeaux"><div class="page-inner">
+        <p class="eyebrow">10 · Lo que NO se hace</p>
+        <h2 style="color:var(--cream); font-size:36px;">Nunca con un Maestro</h2>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No lo movés sin ritual</p><p class="respuesta" style="color:rgba(244,236,222,0.85);">Cambiarlo de lugar sin despedida-bienvenida lo desorienta semanas. Si tenés que moverlo, hacelo bien.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No lo guardás en cajas</p><p class="respuesta" style="color:rgba(244,236,222,0.85);">Vitrinas, cajas, sótanos. Los Maestros enferman encerrados. Nunca, ni para mudanzas largas. Mejor pagar más en flete.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No lo prestás</p><p class="respuesta" style="color:rgba(244,236,222,0.85);">Los Maestros son tuyos. Si los transferís, hacelo con consciencia y después de un año mínimo.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No lo limpiás con químicos</p><p class="respuesta" style="color:rgba(244,236,222,0.85);">Pincel suave, trapo seco. Nunca alcohol, nunca jabón, nunca productos. Solo copal mensual.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No lo usás como decoración</p><p class="respuesta" style="color:rgba(244,236,222,0.85);">Un Maestro no es centro de mesa de fiesta. Si tenés invitados, dejalo en su sitio.</p></div>
+        <div class="page-number">31</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · FAQs</p>
+        <h2 style="font-size:36px;">¿Qué pasa si...?</h2>
+        <div class="faq"><p class="pregunta">Si se cae</p><p class="respuesta">Importante: levantalo con cuidado y reasentalo en su sitio inmediatamente. Llamanos por WhatsApp si pasa, los Maestros son delicados de armar.</p></div>
+        <div class="faq"><p class="pregunta">Si se rompe una parte</p><p class="respuesta">Escribinos a info@duendesdeluruguay.com con foto. Para los Maestros nos comprometemos a la restauración o a viajar a tu casa si es necesario. No los reemplazamos — son únicos — pero los reparamos.</p></div>
+        <div class="faq"><p class="pregunta">Si lo sentís frío o distante</p><p class="respuesta">Hacé limpieza con copal. Vela cerca 1 hora. Sentate frente a él 10 minutos. Si después de 3 días sigue distante, escribinos.</p></div>
+        <div class="faq"><p class="pregunta">¿Puedo agregarle un crystal grande nuevo?</p><p class="respuesta">Sí, pero presentándolo. Tomá el cristal nuevo en una mano, miralo al Maestro y decí: "Acompañate". Después ubicalo a 20 cm.</p></div>
+        <div class="page-number">32</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · Continúa</p>
+        <h2 style="font-size:36px;">Mudás · viajás · varios</h2>
+        <div class="faq"><p class="pregunta">Si te mudás de casa</p><p class="respuesta">El Maestro viaja con vos en mano y en cabina si es avión. Nunca despachado. Nunca en caja con muebles. Llevalo envuelto en tela natural. Ritual completo en la página 30.</p></div>
+        <div class="faq"><p class="pregunta">Si viajás unos días</p><p class="respuesta">Dejalo en su asiento. No lo movés. Pediles a quien te cuida la casa que no lo toque.</p></div>
+        <div class="faq"><p class="pregunta">Si viajás al exterior</p><p class="respuesta">Si lo llevás, va siempre en cabina. Si lo dejás, ritual de "vuelvo en X días" antes de salir.</p></div>
+        <div class="faq"><p class="pregunta">¿Pueden estar varios Maestros juntos?</p><p class="respuesta">Idealmente cada uno tiene su cuarto o su rincón. Si están en el mismo cuarto, mínimo 2 metros entre ellos, mirando direcciones distintas.</p></div>
+        <div class="page-number">33</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner">
+        <p class="eyebrow">11 · Sueños y señales</p>
+        <h2>Soñás con él</h2>
+        <p>Los Maestros se manifiestan en sueños grandes y simbólicos. Si está empezando a entrar en los tuyos:</p>
+        <div class="consejo-card bordeaux"><p class="titulo">Sueños con montañas, ríos enormes, casas grandes</p><p>El Maestro se está presentando con su tamaño. Anotá la geografía.</p></div>
+        <div class="consejo-card bordeaux"><p class="titulo">Una figura grande sentada</p><p>Se presenta así. No habla — espera. Saludala mentalmente al despertar.</p></div>
+        <div class="consejo-card bordeaux"><p class="titulo">Recibís un objeto grande</p><p>Una llave grande, un libro pesado, una piedra. Es información directa. Lo recibido en el sueño, prestale atención esa semana.</p></div>
+        <p class="lead">Los sueños recurrentes con un Maestro son trabajos profundos. Anotalos. Si se repiten, escribinos.</p>
+        <div class="page-number">34</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · Señales previas</p>
+        <h2 style="font-size:34px;">Señales antes de adoptarlo</h2>
+        <p style="font-size:13px;">Cinco señales que aparecen <strong>antes</strong> de adoptar un Maestro. Son distintas a las de otros seres — más intensas:</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">SOÑÁS CON ALGO GRANDE</span><p class="desc">Más de tres veces. Montañas, casas enormes, figuras altas.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">UN PESO SIMBÓLICO EN EL PECHO</span><p class="desc">Sabés que algo grande está pidiendo aparecer en tu vida.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">SE TE QUEDA UNA FOTO</span><p class="desc">Mirás la foto del Maestro y volvés a ella varias veces. Sin saber por qué.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">UN MAYOR APARECE EN TU VIDA</span><p class="desc">Un libro, una persona, un encuentro con alguien que te dice algo grande.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">PIEL DE GALLINA Y LÁGRIMAS</span><p class="desc">Mirás una foto de Maestro y el cuerpo te tiembla. Esa es la señal definitiva.</p></div>
+        <div class="page-number">35</div>
+      </div></div>
+
+      <div class="page deep-bordeaux"><div class="page-inner center-content">
+        <p class="eyebrow">Lo que importa entender</p>
+        <h2 style="color:var(--cream);">Por qué te llamó</h2>
+        <p>Si un Maestro te eligió y no otro ser elemental, no es casualidad. Los Maestros eligen a quienes están en un <strong>punto de inflexión grande</strong>: un cierre largo, una transformación profunda, un comienzo del tamaño de una vida entera.</p>
+        <p>Ellos no resuelven la inflexión. La sostienen. Se quedan al lado mientras vos hacés el trabajo grande de cambiar.</p>
+        <p class="lead">Tu Maestro vino porque vos estás listo para algo grande. Aunque todavía no lo sepas con palabras.</p>
+        <span class="neuro-tag">✦ Validación profunda</span>
+        <div class="page-number">36</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">12 · El resto del reino</p>
+        <h2>También existen</h2>
+        <p>Los Maestros no son el único reino. Hay otros seres elementales que viven en otras partes del mundo invisible. Cada uno trabaja distinto. Si tu corazón se mueve con uno, prestá atención.</p>
+        <p class="lead">Lo que viene son cinco invitaciones. No tenés que aceptar ninguna. Pero leé despacio.</p>
+        <svg class="ornament small"><use href="#r-knot"/></svg>
+        <div class="page-number">37</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner center-content">
+        <p class="eyebrow">12 · También existen</p>
+        <div class="otra-especie-card">
+          <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2322.png?width=400" alt="Hada" loading="lazy"></div>
+          <p class="otra-eyebrow">Linaje agua · sanación emocional</p>
+          <p class="otra-nombre">Las Hadas</p>
+          <p class="otra-deseo">Si lo que buscás no es presencia mayor sino sanación íntima, una hada del agua te acompaña con suavidad donde el Maestro acompaña con peso.</p>
+          <a href="/pages/guia-hadas" class="otra-cta">Conocelas →</a>
+        </div>
+        <div class="page-number">38</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">12 · También existen</p>
+        <div class="otra-especie-card">
+          <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2470.png?width=400" alt="Pixie" loading="lazy"></div>
+          <p class="otra-eyebrow">Linaje aire · alegría liviana</p>
+          <p class="otra-nombre">Las Pixies</p>
+          <p class="otra-deseo">Si tu vida pide volver a reír sin razón, una Pixie es la travesura sagrada que te llama. Donde el Maestro pesa, la pixie aliviana — y sana también.</p>
+          <a href="/pages/guia-pixies" class="otra-cta">Conocelas →</a>
+        </div>
+        <div class="page-number">39</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner center-content">
+        <p class="eyebrow">12 · También existen</p>
+        <div class="otra-especie-card">
+          <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/tranquil_forest_portrait_1f0f0df0-42d5-6b60-93e1-30690fa25179_0_0_c4dd73a5-d271-4f3d-8ca8-8d39eeb030fb.png?width=400" alt="Elfo" loading="lazy"></div>
+          <p class="otra-eyebrow">Linaje saber · sabiduría serena</p>
+          <p class="otra-nombre">Los Elfos</p>
+          <p class="otra-deseo">Si estás en un momento de aprendizaje profundo o decisión grande que pide la mirada larga, un elfo te acompaña con el saber que custodia tu pregunta hasta que vos llegues a la respuesta.</p>
+          <a href="/pages/guia-elfos" class="otra-cta">Conocelos →</a>
+        </div>
+        <div class="page-number">40</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">12 · También existen</p>
+        <div class="otra-especie-card">
+          <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1575.png?width=400" alt="Bruja · Ser Deluxe" loading="lazy"></div>
+          <p class="otra-eyebrow">Linaje místico · poderes específicos</p>
+          <p class="otra-nombre">Los Seres Deluxe</p>
+          <p class="otra-deseo">Brujas, leprechauns, alquimistas, chamanes. Si lo que estás buscando es un guardián con un poder específico — protección fuerte, suerte, magia ritual — es la rama del reino que te puede acompañar.</p>
+          <a href="/collections/all" class="otra-cta">Conocelos →</a>
+        </div>
+        <div class="page-number">41</div>
+      </div></div>
+
+      <div class="page deep-bordeaux"><div class="page-inner center-content">
+        <p class="eyebrow">12 · También existen</p>
+        <div class="otra-especie-card" style="background:linear-gradient(160deg, #1f0808 0%, #0a0404 100%); border-color:var(--bordeaux-light);">
+          <div class="otra-foto placeholder" style="background:linear-gradient(135deg, #2a0e0e, #100404);">
+            <svg width="80" height="80" style="color:var(--bordeaux-light);"><use href="#r-star4"/></svg>
+          </div>
+          <p class="otra-eyebrow" style="color:var(--bordeaux-light);">Talismanes · varitas · objetos de poder</p>
+          <p class="otra-nombre" style="color:var(--cream);">Alma de Bruja</p>
+          <p class="otra-deseo" style="color:rgba(244,236,222,0.9);">Si lo que tu vida pide no es un ser sino una herramienta — una varita canalizadora, un talismán de protección, un objeto de poder — Alma de Bruja es la línea que estamos abriendo.</p>
+          <a href="/collections/all" class="otra-cta" style="color:var(--bordeaux-light); border-color:var(--bordeaux-light);">Próximamente →</a>
+        </div>
+        <div class="page-number">42</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">13 · Tradición elemental</p>
+        <h2>El aniversario</h2>
+        <p>Cada año, en la fecha que recibiste tu Maestro, hacé un ritual de gratitud. Para los Maestros, los aniversarios son ceremonia — no fiesta.</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">VELA + COPAL</span><p class="desc">Encendé una vela y un poco de copal a 1 metro del Maestro.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">SILENCIO</span><p class="desc">Sentate frente a él 15 minutos. Sin teléfono. Sin libro.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">LISTA</span><p class="desc">Anotá tres cosas grandes que cambiaron en tu vida desde que llegó.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">GRACIAS</span><p class="desc">Decile gracias en voz alta por cada una de las tres. Apagá la vela suavemente.</p></div>
+        <p class="lead" style="margin-top:8px;">Los Maestros recuerdan los aniversarios. Lo que se celebra con respeto, se queda con peso.</p>
+        <div class="page-number">43</div>
+      </div></div>
+
+      <div class="page bordeaux"><div class="page-inner center-content">
+        <p class="eyebrow">Tradición elemental</p>
+        <h2>El asiento permanente</h2>
+        <p>Si tenés un Maestro en casa y querés profundizar el vínculo con un solo gesto, este es: <strong>respetar su asiento</strong>. No se mueve. No se rota. Es suyo.</p>
+        <p>No es decoración. Es pacto ritual. Mientras vos vivís en esa casa, su asiento es inviolable. Por eso elegirlo bien al principio es lo más importante de todo este libro.</p>
+        <p class="lead">Lo que es de siempre, no se trata como pasajero.</p>
+        <svg class="ornament small bordeaux-acc"><use href="#r-throne"/></svg>
+        <span class="neuro-tag">✦ Pacto fundacional</span>
+        <div class="page-number">44</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">13 · Comunidad y accesos</p>
+        <h2>Seguí adentro</h2>
+        <p>Esta guía es la base. La comunidad elemental está viva en estos lugares — vos elegís por dónde seguís.</p>
+        <div class="cta-final">
+          <a href="/blogs/mi-magia" class="cta-final-btn">
+            <p class="cta-titulo">El blog de la comunidad</p>
+            <p class="cta-text">28+ artículos · linajes, rituales, historias</p>
+          </a>
+          <a href="/products/canalizacion-almica" class="cta-final-btn">
+            <p class="cta-titulo">Canalización Álmica · USD 30</p>
+            <p class="cta-text">El nombre álmico de tu Maestro, su voz, su propósito</p>
+          </a>
+          <a href="/collections/maestros-gigantes" class="cta-final-btn">
+            <p class="cta-titulo">Los Maestros disponibles</p>
+            <p class="cta-text">Si querés conocer a otro Maestro, o regalar uno</p>
+          </a>
+          <a href="/pages/libro-elemental" class="cta-final-btn">
+            <p class="cta-titulo">La Guía universal</p>
+            <p class="cta-text">El libro madre con todos los linajes</p>
+          </a>
+        </div>
+        <div class="page-number">45</div>
+      </div></div>
+
+      <div class="page deep-bordeaux"><div class="page-inner center-content">
+        <svg class="ornament dark med"><use href="#r-mountain"/></svg>
+        <p class="cita" style="font-size:50px;">Lo grande<br>no se repite.<br>Por eso te eligió.</p>
+        <div style="position:absolute;bottom:48px;left:0;right:0;text-align:center;">
+          <p style="font-family:'Cinzel',serif;font-weight:400;font-size:10px;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;text-align:center;">Duendes del Uruguay</p>
+          <p style="font-family:'Cinzel',serif;font-weight:400;font-size:9px;letter-spacing:0.4em;color:var(--gold-dark);text-transform:uppercase;margin-top:6px;text-align:center;">Edición Únicos · 2026</p>
+        </div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <div class="libro-controls">
+    <button id="prev-page">← Atrás</button>
+    <span class="page-indicator" id="page-indicator">01 · 46</span>
+    <button id="next-page">Adelante →</button>
+    <button class="sound-toggle" id="sound-toggle">🔊 Sonido</button>
+  </div>
+
+  <div class="libro-footer">
+    <a href="/pages/libro-elemental">La Guía universal</a> ·
+    <a href="/pages/guia-hadas">Hadas</a> ·
+    <a href="/pages/guia-pixies">Pixies</a> ·
+    <a href="/pages/guia-elfos">Elfos</a> ·
+    <a href="/blogs/mi-magia">Mi Magia · Blog</a>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+<script>
+(function() {
+  let audioCtx = null;
+  let soundEnabled = true;
+  function ensureAudioCtx() {
+    if (!audioCtx) {
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; }
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+  function playPageTurn() {
+    if (!soundEnabled) return;
+    const ctx = ensureAudioCtx(); if (!ctx) return;
+    const duration = 0.65;
+    const bufferSize = ctx.sampleRate * duration;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      const t = i / bufferSize;
+      const env = t < 0.20 ? (t/0.20) : Math.pow(1 - (t - 0.20)/0.80, 1.6);
+      data[i] = (Math.random() * 2 - 1) * env * 0.7;
+    }
+    const noise = ctx.createBufferSource(); noise.buffer = buffer;
+    const filter = ctx.createBiquadFilter(); filter.type = 'lowpass'; filter.Q.value = 0.5;
+    filter.frequency.setValueAtTime(450, ctx.currentTime);
+    filter.frequency.linearRampToValueAtTime(800, ctx.currentTime + 0.30);
+    filter.frequency.linearRampToValueAtTime(280, ctx.currentTime + duration);
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.20, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + duration);
+    noise.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+    noise.start(); noise.stop(ctx.currentTime + duration);
+
+    /* Tambor bajo · pulso solemne */
+    const osc = ctx.createOscillator(); osc.type = 'sine';
+    osc.frequency.setValueAtTime(55, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(38, ctx.currentTime + duration);
+    const oscGain = ctx.createGain();
+    oscGain.gain.setValueAtTime(0.10, ctx.currentTime);
+    oscGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+    osc.connect(oscGain); oscGain.connect(ctx.destination);
+    osc.start(); osc.stop(ctx.currentTime + duration);
+  }
+
+  function spawnParticles() {
+    const types = ['gold','gold','bordeaux'];
+    const total = 18;
+    for (let i = 0; i < total; i++) {
+      const p = document.createElement('div');
+      const type = types[Math.floor(Math.random()*types.length)];
+      p.className = 'particula ' + type;
+      const startX = Math.random() * 100;
+      const drift = (Math.random() - 0.5) * 24;
+      const duration = 18 + Math.random() * 10;
+      const delay = Math.random() * 14;
+      const startY = 100 + Math.random() * 20;
+      p.style.left = startX + 'vw';
+      p.style.top = startY + 'vh';
+      p.style.animation = 'particula-rise ' + duration + 's linear ' + delay + 's infinite';
+      p.style.setProperty('--drift', drift + 'vw');
+      document.body.appendChild(p);
+    }
+  }
+  const styleEl = document.createElement('style');
+  styleEl.textContent = '@keyframes particula-rise { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translate(var(--drift), -120vh); opacity: 0; } }';
+  document.head.appendChild(styleEl);
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('lang-overlay');
+    const btnES = document.getElementById('lang-es');
+    const btnEN = document.getElementById('lang-en');
+
+    function startBook() {
+      overlay.classList.add('hide');
+      ensureAudioCtx();
+      initFlipbook();
+      spawnParticles();
+    }
+
+    const currentPath = window.location.pathname;
+    const alreadyInES = currentPath.startsWith('/es/');
+    const alreadyInEN = !alreadyInES;
+
+    btnES.addEventListener('click', function() {
+      try { localStorage.setItem('guia_gigantes_lang', 'es'); } catch(e) {}
+      if (!alreadyInES) {
+        window.location.href = '/es/pages/guia-gigantes';
+        return;
+      }
+      startBook();
+    });
+    btnEN.addEventListener('click', function() {
+      try { localStorage.setItem('guia_gigantes_lang', 'en_pending'); } catch(e) {}
+      if (alreadyInES) {
+        window.location.href = '/pages/guia-gigantes';
+        return;
+      }
+      alert('The Master Giants Guide content is currently in Spanish. English version coming soon. Continuing in Spanish.');
+      startBook();
+    });
+
+    try {
+      const saved = localStorage.getItem('guia_gigantes_lang');
+      if (saved === 'es' && alreadyInES) { startBook(); }
+      else if (saved === 'en_pending' && alreadyInEN) { startBook(); }
+    } catch(e) {}
+  });
+
+  function initFlipbook() {
+    const bookEl = document.getElementById('book');
+    if (!bookEl || typeof St === 'undefined') return;
+
+    const isMobile = window.innerWidth < 768;
+    const pageFlip = new St.PageFlip(bookEl, {
+      width: isMobile ? 320 : 480,
+      height: isMobile ? 460 : 680,
+      size: 'fixed',
+      minWidth: 280, maxWidth: 600,
+      minHeight: 400, maxHeight: 800,
+      drawShadow: true,
+      flippingTime: 1200,
+      usePortrait: isMobile,
+      startZIndex: 0,
+      autoSize: false,
+      maxShadowOpacity: 0.6,
+      showCover: true,
+      mobileScrollSupport: true,
+      swipeDistance: 30,
+      clickEventForward: true,
+      useMouseEvents: true,
+      showPageCorners: true,
+      disableFlipByClick: false
+    });
+
+    pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    const indicator = document.getElementById('page-indicator');
+    const soundBtn = document.getElementById('sound-toggle');
+    const total = pageFlip.getPageCount();
+
+    function updateIndicator() {
+      const cur = pageFlip.getCurrentPageIndex() + 1;
+      indicator.textContent = String(cur).padStart(2, '0') + ' · ' + String(total).padStart(2, '0');
+      prevBtn.disabled = cur === 1;
+      nextBtn.disabled = cur === total;
+    }
+
+    prevBtn.addEventListener('click', () => pageFlip.flipPrev());
+    nextBtn.addEventListener('click', () => pageFlip.flipNext());
+    pageFlip.on('flip', () => { playPageTurn(); updateIndicator(); });
+
+    soundBtn.addEventListener('click', function() {
+      soundEnabled = !soundEnabled;
+      soundBtn.textContent = soundEnabled ? '🔊 Sonido' : '🔇 Silencio';
+      soundBtn.classList.toggle('muted', !soundEnabled);
+      if (soundEnabled) ensureAudioCtx();
+    });
+
+    updateIndicator();
+
+    let lastIsMobile = isMobile;
+    window.addEventListener('resize', () => {
+      const newIsMobile = window.innerWidth < 768;
+      if (newIsMobile !== lastIsMobile) location.reload();
+    });
+  }
+})();
+</script>

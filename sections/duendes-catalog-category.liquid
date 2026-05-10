@@ -1,0 +1,482 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign theme = section.settings.theme | default: 'light'
+  assign tag_filter = section.settings.tag_filter
+  assign col_handle = section.settings.collection_handle
+  assign max_products = section.settings.max_products | default: 12
+  assign show_hero_card = section.settings.show_hero_card
+  assign price_min = section.settings.price_min | default: 0
+  assign price_max = section.settings.price_max | default: 99999900
+  assign name_contains = section.settings.name_contains
+  assign name_excludes = section.settings.name_excludes
+  assign is_unique = section.settings.is_unique
+
+  assign use_collection = false
+  if col_handle != blank
+    assign cat_col = collections[col_handle]
+    if cat_col and cat_col.products.size > 0
+      assign use_collection = true
+    endif
+  endif
+
+  comment
+    Filtro por arquetipo: leemos current_tags (variable global de Shopify)
+    populada desde la URL /collections/tienda-magica/[arquetipo].
+    Si hay arquetipo seleccionado, cada sección por tamaño solo muestra
+    productos cuyo tag (case-insensitive) coincide con el arquetipo.
+  endcomment
+  assign archetype_filter = ''
+  if current_tags.size > 0
+    assign archetype_filter = current_tags | first | downcase
+  endif
+-%}
+
+<style>
+  .dc-cat { padding: 56px 0 48px; position: relative; }
+  .dc-cat--light { background: #FAFAF8; }
+  .dc-cat--dark { background: #0D0B08; }
+  .dc-cat__inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── Thin elegant banner ── */
+  .dc-cat__banner { margin-bottom: 32px; text-align: center; }
+  .dc-cat__banner-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--gold, #C9A96E);
+  }
+  .dc-cat__banner-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 0 0 6px;
+  }
+  .dc-cat--light .dc-cat__banner-title { color: var(--text, #1a1a14); }
+  .dc-cat--dark .dc-cat__banner-title { color: #FAFAF8; }
+  .dc-cat__banner-meta {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .dc-cat--light .dc-cat__banner-meta { color: rgba(26,26,20,.55); }
+  .dc-cat--dark .dc-cat__banner-meta { color: rgba(250,250,248,.5); }
+  .dc-cat__banner-desc {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .dc-cat--light .dc-cat__banner-desc { color: #1a1a14; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+  .dc-cat--dark .dc-cat__banner-desc { color: #fff; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+
+  /* ── Product Grid: 4col desktop, 3 tablet, 2 mobile ── */
+  .dc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 1024px) { .dc-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+  @media (max-width: 640px) { .dc-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+
+  /* ── Compact elegant card ── */
+  .dc-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: transform .4s cubic-bezier(.25,.8,.25,1), box-shadow .4s;
+  }
+  .dc-cat--light .dc-card { background: #fff; }
+  .dc-cat--dark .dc-card { background: rgba(255,255,255,.04); }
+  .dc-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,.1);
+  }
+  /* Gold border on hover */
+  .dc-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: border-color .4s;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .dc-card:hover::after { border-color: rgba(201,169,110,.3); }
+
+  /* Hero card spans 2 cols */
+  .dc-card--hero { grid-column: span 2; }
+  @media (max-width: 640px) { .dc-card--hero { grid-column: span 2; } }
+
+  /* Card image — square aspect ratio, compact */
+  .dc-card__img {
+    position: relative;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+  }
+  .dc-card--hero .dc-card__img { aspect-ratio: 4/3; }
+  .dc-card__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .6s cubic-bezier(.25,.8,.25,1);
+  }
+  .dc-card:hover .dc-card__img img { transform: scale(1.04); }
+  .dc-card__placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: #f0ede7;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    color: #bbb;
+    font-size: 13px;
+  }
+
+  /* Overlay on hover */
+  .dc-card__overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 32px 12px 10px;
+    background: linear-gradient(to top, rgba(0,0,0,.45) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity .4s;
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .dc-card:hover .dc-card__overlay { opacity: 1; }
+  .dc-card__cta {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(4px);
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,.12);
+  }
+
+  /* Badges — minimal, floating */
+  .dc-badge {
+    position: absolute;
+    z-index: 2;
+    font-family: 'Lato', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 100px;
+    pointer-events: none;
+  }
+  .dc-badge--cat {
+    top: 8px; left: 8px;
+    background: rgba(13,11,8,.75);
+    backdrop-filter: blur(4px);
+    color: #FAFAF8;
+  }
+  .dc-badges {
+    position: absolute; top: 8px; left: 8px; z-index: 2;
+    display: flex; flex-wrap: wrap; gap: 3px; max-width: calc(100% - 16px);
+    pointer-events: none;
+  }
+  .dc-badges .dc-badge { position: static; }
+  .dc-badge--abundancia    { background:#C9A96E; color:#0D0B08; }
+  .dc-badge--amor          { background:#D4868A; color:#fff; }
+  .dc-badge--proteccion    { background:#5B6E8A; color:#fff; }
+  .dc-badge--espiritualidad{ background:#8B7BB5; color:#fff; }
+  .dc-badge--salud         { background:#6A9E6B; color:#fff; }
+  .dc-badge--autoestima    { background:#D4955A; color:#fff; }
+  .dc-badge--compania      { background:#A0826D; color:#fff; }
+  .dc-badge--salud-mental  { background:#5A9E9E; color:#fff; }
+  .dc-badge--sombra        { background:#5C5C6E; color:#fff; }
+  .dc-badge--abrecaminos   { background:#C4A73A; color:#0D0B08; }
+  .dc-badge--suerte        { background:#4A8C5C; color:#fff; }
+  .dc-badge--nuevos        { background:#6AAED6; color:#fff; }
+  .dc-badge--sabiduria     { background:#6B5B8A; color:#fff; }
+  .dc-badge--linaje        { background:#8A4A5A; color:#fff; }
+  .dc-badge--estudio       { background:#4A5A7A; color:#fff; }
+  .dc-badge--emprendedores { background:#A67C4A; color:#fff; }
+  .dc-badge--uruguay       { background:#4A7AC4; color:#fff; }
+  .dc-badge--completo {
+    background: linear-gradient(135deg, #C9A96E, #D6BD7B); color: #0D0B08;
+    font-size: 6px; letter-spacing: .8px;
+  }
+  .dc-badge--more {
+    background: rgba(13,11,8,.6); color: #FAFAF8;
+    backdrop-filter: blur(4px);
+  }
+  @media (max-width: 640px) {
+    .dc-badges .dc-badge { font-size: 6px; padding: 2px 6px; letter-spacing: .8px; }
+    .dc-badges { gap: 2px; }
+    .dc-badge--completo { font-size: 5px; }
+  }
+
+  /* Card info — compact */
+  .dc-card__info { padding: 10px 12px 14px; }
+  .dc-card__name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 2px;
+  }
+  .dc-cat--light .dc-card__name { color: var(--text, #1a1a14); }
+  .dc-cat--dark .dc-card__name { color: #FAFAF8; }
+  .dc-card__essence {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic; font-size: 12px; margin: 0 0 4px;
+  }
+  .dc-cat--light .dc-card__essence { color: rgba(26,26,20,.4); }
+  .dc-cat--dark .dc-card__essence { color: rgba(250,250,248,.35); }
+  .dc-card__bottom { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .dc-card__price {
+    font-family: 'Lato', sans-serif;
+    font-size: 13px; font-weight: 700; margin: 0;
+  }
+  .dc-cat--light .dc-card__price { color: var(--gold-dk, #A38640); }
+  .dc-cat--dark .dc-card__price { color: var(--gold, #C9A96E); }
+  .dc-card__avail {
+    display: flex; align-items: center; gap: 4px;
+    font-family: 'Lato', sans-serif; font-size: 9px; letter-spacing: .3px;
+  }
+  .dc-cat--light .dc-card__avail { color: rgba(26,26,20,.35); }
+  .dc-cat--dark .dc-card__avail { color: rgba(250,250,248,.3); }
+  .dc-card__dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #5a9a5a; display: inline-block;
+    animation: dc-pulse 2s ease-in-out infinite;
+  }
+  @keyframes dc-pulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+
+  /* Scarcity text */
+  .dc-scarcity {
+    text-align: center; margin-top: 10px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic; font-size: 13px;
+  }
+  .dc-cat--light .dc-scarcity { color: rgba(26,26,20,.3); }
+  .dc-cat--dark .dc-scarcity { color: rgba(250,250,248,.25); }
+
+  /* CTA button */
+  .dc-cat__cta-wrap { text-align: center; margin-top: 28px; }
+  .dc-cat__cta {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none;
+    padding: 11px 28px;
+    border-radius: 100px;
+    transition: all .3s;
+  }
+  .dc-cat--light .dc-cat__cta { background: #0D0B08; color: #FAFAF8; }
+  .dc-cat--light .dc-cat__cta:hover { background: #1a1c16; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+  .dc-cat--dark .dc-cat__cta { background: #FAFAF8; color: #0D0B08; }
+  .dc-cat--dark .dc-cat__cta:hover { background: #fff; box-shadow: 0 6px 24px rgba(255,255,255,.08); }
+
+  /* Section divider */
+  .dc-cat__divider {
+    width: 60px; height: 1px; margin: 48px auto 0;
+    background: linear-gradient(90deg, transparent, rgba(201,169,110,.25), transparent);
+  }
+
+  /* Empty state */
+  .dc-cat__empty {
+    text-align: center; padding: 32px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic; font-size: 15px;
+  }
+  .dc-cat--light .dc-cat__empty { color: rgba(26,26,20,.25); }
+  .dc-cat--dark .dc-cat__empty { color: rgba(250,250,248,.2); }
+
+  /* ── Issue 3: Remove any white glare/gradient overlays on grid ── */
+  .dc-cat__inner::before,
+  .dc-cat__inner::after,
+  .dc-grid::before,
+  .dc-grid::after {
+    content: none !important;
+    display: none !important;
+  }
+  .dc-cat-section::before,
+  .dc-cat-section::after {
+    content: none !important;
+    display: none !important;
+  }
+  .dc-grid {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  /* ── Issue 4: Golden glow animation on cards ── */
+  .dc-card {
+    transition: transform .4s cubic-bezier(.25,.8,.25,1), box-shadow .8s ease, border-color .8s ease;
+  }
+  .dc-card--glow {
+    box-shadow: 0 0 20px rgba(201,169,110,0.3), 0 0 40px rgba(201,169,110,0.1) !important;
+    transition: box-shadow 0.8s ease, border-color 0.8s ease;
+  }
+  .dc-card--glow::after {
+    border-color: rgba(201,169,110,0.5) !important;
+  }
+</style>
+
+<section class="dc-cat dc-cat--{{ theme }}" id="cat-{{ section.settings.anchor }}">
+  <div class="dc-cat__inner">
+
+    <div class="dc-cat__banner duendes-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="dc-cat__banner-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="dc-cat__banner-title">{{ section.settings.title }}</h2>
+      {%- if section.settings.meta != blank -%}
+        <p class="dc-cat__banner-meta">{{ section.settings.meta }}</p>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="dc-cat__banner-desc">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- assign rendered = 0 -%}
+    {%- assign has_products = false -%}
+
+    <div class="dc-grid">
+      {%- if use_collection -%}
+        {%- paginate cat_col.products by 250 -%}
+          {%- for product in cat_col.products -%}
+            {%- if rendered >= max_products -%}{%- break -%}{%- endif -%}
+            {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+            {%- if archetype_filter != blank -%}
+              {%- assign passes_archetype = false -%}
+              {%- assign tags_lower = product.tags | join: '||' | downcase | split: '||' -%}
+              {%- if tags_lower contains archetype_filter -%}
+                {%- assign passes_archetype = true -%}
+              {%- endif -%}
+              {%- unless passes_archetype -%}{%- continue -%}{%- endunless -%}
+            {%- endif -%}
+            {%- assign has_products = true -%}
+            {%- assign rendered = rendered | plus: 1 -%}
+            {%- assign hero_flag = false -%}
+            {%- if rendered == 1 and show_hero_card -%}{%- assign hero_flag = true -%}{%- endif -%}
+            {%- render 'duendes-catalog-card', product: product, category: section.settings.badge_text, is_hero: hero_flag, is_unique: section.settings.is_unique -%}
+          {%- endfor -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        {%- paginate collections.all.products by 250 -%}
+          {%- for product in collections.all.products -%}
+            {%- if rendered >= max_products -%}{%- break -%}{%- endif -%}
+            {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+            {%- if product.price < price_min or product.price > price_max -%}{%- continue -%}{%- endif -%}
+            {%- if tag_filter != blank -%}
+              {%- unless product.tags contains tag_filter -%}{%- continue -%}{%- endunless -%}
+            {%- endif -%}
+            {%- if name_contains != blank -%}
+              {%- unless product.title contains name_contains -%}{%- continue -%}{%- endunless -%}
+            {%- endif -%}
+            {%- if name_excludes != blank -%}
+              {%- if product.title contains name_excludes -%}{%- continue -%}{%- endif -%}
+            {%- endif -%}
+            {%- if archetype_filter != blank -%}
+              {%- assign passes_archetype = false -%}
+              {%- assign tags_lower = product.tags | join: '||' | downcase | split: '||' -%}
+              {%- if tags_lower contains archetype_filter -%}
+                {%- assign passes_archetype = true -%}
+              {%- endif -%}
+              {%- unless passes_archetype -%}{%- continue -%}{%- endunless -%}
+            {%- endif -%}
+            {%- assign has_products = true -%}
+            {%- assign rendered = rendered | plus: 1 -%}
+            {%- assign hero_flag = false -%}
+            {%- if rendered == 1 and show_hero_card -%}{%- assign hero_flag = true -%}{%- endif -%}
+            {%- render 'duendes-catalog-card', product: product, category: section.settings.badge_text, is_hero: hero_flag, is_unique: section.settings.is_unique -%}
+          {%- endfor -%}
+        {%- endpaginate -%}
+      {%- endif -%}
+    </div>
+
+    {%- unless has_products -%}
+      <div class="dc-cat__empty duendes-reveal" style="padding: 40px 20px; text-align:center;">
+        <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:20px; font-style:italic; margin:0 0 10px; opacity:0.6;">
+          Todos estos guardianes ya encontraron su hogar ✦
+        </p>
+        <p style="font-family:'Lato',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; opacity:0.35; margin:0;">
+          Volvé pronto — nuevos seres elementales están siendo canalizados
+        </p>
+      </div>
+    {%- endunless -%}
+
+    {%- if has_products and section.settings.scarcity_text != blank -%}
+      <p class="dc-scarcity duendes-reveal">{{ section.settings.scarcity_text }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.cta_text != blank and col_handle != blank and has_products -%}
+      {%- assign cta_url = cat_col.url -%}
+      {%- if cta_url == blank -%}
+        {%- assign cta_url = '/collections/' | append: col_handle -%}
+      {%- endif -%}
+      <div class="dc-cat__cta-wrap duendes-reveal">
+        <a href="{{ cta_url }}" class="dc-cat__cta">{{ section.settings.cta_text }}</a>
+      </div>
+    {%- endif -%}
+
+    <div class="dc-cat__divider"></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  /* Issue 4: Random golden highlight on carousel/grid cards */
+  var grids = document.querySelectorAll('.dc-grid');
+  grids.forEach(function(grid) {
+    var cards = grid.querySelectorAll('.dc-card');
+    if (cards.length < 2) return;
+    var currentHighlight = -1;
+    setInterval(function() {
+      if (currentHighlight >= 0) cards[currentHighlight].classList.remove('dc-card--glow');
+      var next;
+      do { next = Math.floor(Math.random() * cards.length); } while (next === currentHighlight && cards.length > 1);
+      cards[next].classList.add('dc-card--glow');
+      currentHighlight = next;
+    }, 3000);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Tienda Magica Categoria",
+  "tag": "section",
+  "class": "dc-cat-section",
+  "settings": [
+    { "type": "select", "id": "theme", "label": "Tema", "options": [{"value":"light","label":"Claro"},{"value":"dark","label":"Oscuro"}], "default": "light" },
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "categoria" },
+    { "type": "text", "id": "collection_handle", "label": "Handle coleccion" },
+    { "type": "text", "id": "tag_filter", "label": "Filtrar por tag" },
+    { "type": "number", "id": "price_min", "label": "Precio minimo (centavos)", "default": 0 },
+    { "type": "number", "id": "price_max", "label": "Precio maximo (centavos)", "default": 99999900 },
+    { "type": "text", "id": "name_contains", "label": "Titulo contiene" },
+    { "type": "text", "id": "name_excludes", "label": "Titulo excluye" },
+    { "type": "checkbox", "id": "is_unique", "label": "Piezas unicas", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Categoria" },
+    { "type": "text", "id": "title", "label": "Titulo", "default": "Guardianes" },
+    { "type": "text", "id": "meta", "label": "Info", "default": "~10cm · Desde $70 USD" },
+    { "type": "textarea", "id": "description", "label": "Descripcion" },
+    { "type": "text", "id": "badge_text", "label": "Badge en cards", "default": "Mini" },
+    { "type": "text", "id": "scarcity_text", "label": "Texto escasez" },
+    { "type": "text", "id": "cta_text", "label": "Texto boton", "default": "Explorar" },
+    { "type": "checkbox", "id": "show_hero_card", "label": "Card destacada", "default": false },
+    { "type": "range", "id": "max_products", "label": "Productos", "min": 3, "max": 80, "step": 1, "default": 12 }
+  ],
+  "presets": [{ "name": "Tienda Magica Categoria" }]
+}
+{% endschema %}

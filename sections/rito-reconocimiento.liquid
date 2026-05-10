@@ -1,0 +1,1440 @@
+{% comment %}
+  El Encuentro de Reconocimiento — Canalización post-compra cinematográfica
+  Duendes del Uruguay — Self-contained Shopify section
+  Paleta: Oscuridad profunda + dorado cinematográfico
+  Arquitectura: 10 pantallas (hero → 4 capa1 → transición → 3 capa2 → 1 capa3 → mensaje final → confirmación)
+  Sin dependencias externas — vanilla JS + CSS3 + localStorage
+  Última actualización: 2026-04-19
+{% endcomment %}
+
+{% style %}
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --color-bg-primary: #080a06;
+  --color-bg-warm: #0d0f0b;
+  --color-gold-primary: #C6A55A;
+  --color-gold-light: #FFF8DC;
+  --color-gold-accent: #FFD700;
+  --color-text-primary: #F5F5DC;
+  --color-text-secondary: #B8B8A8;
+  --color-error: #D4714C;
+  --color-success: #A4C7A8;
+  --gradient-progress: linear-gradient(90deg, #C6A55A 0%, #FFF8DC 50%, #C6A55A 100%);
+  --gradient-light-fall: radial-gradient(circle at 50% -20%, rgba(198, 165, 90, 0.3), transparent 60%);
+  --font-serif: 'Crimson Text', 'Garamond', 'Georgia', serif;
+  --font-sans: 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg-primary);
+  overflow: hidden;
+}
+
+#rito-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ════════════════════════════════════════
+   PARTICLES — Ambient floats
+   ════════════════════════════════════════ */
+.rito-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.rito-particle {
+  position: absolute;
+  background: #C6A55A;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════
+   SCREEN BASE
+   ════════════════════════════════════════ */
+.rito-screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.rito-screen.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ════════════════════════════════════════
+   SCREEN 0: HERO
+   ════════════════════════════════════════ */
+.rito-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+  max-width: 600px;
+}
+
+.rito-hero__title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 52px);
+  font-weight: 700;
+  color: var(--color-gold-light);
+  letter-spacing: -0.02em;
+  animation: fadeInDown 0.8s ease-out 0.4s both;
+}
+
+.rito-hero__subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 5vw, 24px);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+  max-width: 500px;
+}
+
+.rito-hero__instruction {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 3vw, 16px);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+  max-width: 480px;
+}
+
+.rito-hero__footer {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(181, 181, 168, 0.7);
+  animation: fadeInUp 0.8s ease-out 1s both;
+  margin-top: 16px;
+}
+
+/* ════════════════════════════════════════
+   SCREENS 1-8: QUESTIONS
+   ════════════════════════════════════════ */
+.rito-question-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  max-width: 700px;
+  width: 100%;
+  padding: max(20px, env(safe-area-inset-left))
+           max(20px, env(safe-area-inset-top))
+           max(20px, env(safe-area-inset-right))
+           max(20px, env(safe-area-inset-bottom));
+}
+
+.rito-question__progress-bar {
+  height: 3px;
+  background: var(--gradient-progress);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12.5%;
+  border-radius: 0;
+  box-shadow: 0 0 15px rgba(198, 165, 90, 0.6);
+  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 100;
+}
+
+/* Mobile progress indicator — visible counter + step dots */
+.rito-progress-mobile {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  padding: 12px 20px;
+  background: linear-gradient(to bottom, rgba(8,10,6,0.95), rgba(8,10,6,0.7));
+  z-index: 99;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid rgba(198, 165, 90, 0.15);
+}
+
+.rito-progress-counter {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  min-width: 100px;
+}
+
+.rito-progress-steps {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.rito-step {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(198, 165, 90, 0.25);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rito-step.active {
+  background: var(--color-gold-primary);
+  width: 16px;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(198, 165, 90, 0.4);
+}
+
+.rito-question__progress-counter {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.05em;
+  animation: fadeInDown 0.6s ease-out both;
+}
+
+.rito-question__prompt {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 6vw, 28px);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  text-align: center;
+  max-width: 600px;
+}
+
+.rito-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.rito-input {
+  min-height: 100px;
+  max-height: 300px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(15, 18, 16, 0.8), rgba(13, 15, 11, 0.9));
+  border: 1px solid transparent;
+  border-bottom: 2px solid rgba(198, 165, 90, 0.3);
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  resize: vertical;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  caret-color: var(--color-gold-primary);
+  animation: slideUpFade 0.6s ease-out 0.2s both;
+}
+
+.rito-input:focus {
+  outline: none;
+  border-bottom: 2px solid var(--color-gold-primary);
+  background: linear-gradient(135deg, rgba(15, 18, 16, 1), rgba(13, 15, 11, 1));
+  box-shadow: inset 0 0 20px rgba(198, 165, 90, 0.15), 0 0 20px rgba(198, 165, 90, 0.1);
+}
+
+.rito-input::placeholder {
+  color: rgba(181, 181, 168, 0.6);
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.rito-input--final {
+  min-height: 150px;
+  max-height: 400px;
+  padding: 24px;
+  font-size: 16px;
+  line-height: 1.7;
+  box-shadow: inset 0 0 30px rgba(198, 165, 90, 0.2);
+  border: 2px solid rgba(198, 165, 90, 0.2);
+}
+
+.rito-input--final:focus {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: inset 0 0 40px rgba(198, 165, 90, 0.3), 0 0 30px rgba(198, 165, 90, 0.2);
+}
+
+.rito-input__footer {
+  display: flex;
+  justify-content: flex-end;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.rito-input__counter {
+  transition: color 0.2s;
+}
+
+.rito-input__counter.warning {
+  color: var(--color-gold-accent);
+  font-weight: 600;
+}
+
+.rito-form__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.rito-form__hint {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+}
+
+/* ════════════════════════════════════════
+   BUTTONS
+   ════════════════════════════════════════ */
+.rito-button {
+  padding: 16px 40px;
+  background: transparent;
+  border: 2px solid var(--color-gold-primary);
+  color: var(--color-gold-primary);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-transform: uppercase;
+  animation: slideUpFade 0.6s ease-out 0.6s both;
+}
+
+.rito-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-gold-primary);
+  z-index: -1;
+  clip-path: polygon(0 0, 0% 0, 0 100%, 0% 100%);
+  transition: clip-path 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rito-button:hover {
+  color: var(--color-bg-primary);
+}
+
+.rito-button:hover::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.rito-button:active {
+  transform: scale(0.98);
+}
+
+.rito-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  position: relative;
+  pointer-events: none;
+  box-shadow: inset 0 0 10px rgba(198, 165, 90, 0.15);
+}
+
+.rito-button:disabled::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(198, 165, 90, 0.1);
+  animation: disabledPulse 0.8s ease-in-out infinite;
+  border-radius: 0;
+  z-index: -1;
+}
+
+@keyframes disabledPulse {
+  0%, 100% { background: rgba(198, 165, 90, 0.1); }
+  50% { background: rgba(198, 165, 90, 0.2); }
+}
+
+.rito-button--pulse {
+  animation: buttonPulse 2s ease-in-out infinite;
+}
+
+
+  /* FIX #5: Archetype selection feedback */
+  .rito-archetype-option {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+  }
+  
+  .rito-archetype-option:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px rgba(198, 165, 90, 0.25);
+  }
+  
+  .rito-archetype-option.selected::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border: 2px solid var(--color-gold);
+    border-radius: 4px;
+    animation: glowPulse 1.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(198, 165, 90, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(198, 165, 90, 0.6); }
+  }
+
+  @keyframes buttonPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(198, 165, 90, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(198, 165, 90, 0.6); }
+}
+
+/* ════════════════════════════════════════
+   ARCHETYPE SELECTION (Screen 4.5)
+   ════════════════════════════════════════ */
+.rito-archetype-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.rito-archetype-card {
+  aspect-ratio: 1;
+  padding: 16px;
+  background: rgba(13, 15, 11, 0.6);
+  border: 2px solid rgba(198, 165, 90, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: slideUpFade 0.6s ease-out both;
+}
+
+.rito-archetype-card:nth-child(1) { animation-delay: 0.2s; }
+.rito-archetype-card:nth-child(2) { animation-delay: 0.3s; }
+.rito-archetype-card:nth-child(3) { animation-delay: 0.4s; }
+.rito-archetype-card:nth-child(4) { animation-delay: 0.5s; }
+.rito-archetype-card:nth-child(5) { animation-delay: 0.6s; }
+.rito-archetype-card:nth-child(6) { animation-delay: 0.7s; }
+.rito-archetype-card:nth-child(7) { animation-delay: 0.8s; }
+.rito-archetype-card:nth-child(8) { animation-delay: 0.9s; }
+
+.rito-archetype-card:hover {
+  border-color: var(--color-gold-primary);
+  background: rgba(13, 15, 11, 0.9);
+  box-shadow: 0 0 20px rgba(198, 165, 90, 0.2);
+  transform: translateY(-4px);
+}
+
+.rito-archetype-card.selected {
+  border-color: var(--color-gold-primary);
+  background: rgba(198, 165, 90, 0.15);
+  box-shadow: 0 0 30px rgba(198, 165, 90, 0.3);
+}
+
+.rito-archetype-icon {
+  font-size: 28px;
+  height: 28px;
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rito-archetype-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ════════════════════════════════════════
+   TRANSITION SCREEN
+   ════════════════════════════════════════ */
+.rito-transition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.rito-transition__text {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: var(--color-text-primary);
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.rito-transition__loader {
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-primary), transparent);
+  border-radius: 2px;
+  animation: slideLoadLeft 2s ease-in-out infinite;
+}
+
+@keyframes slideLoadLeft {
+  0% { transform: translateX(-100px); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(100px); opacity: 0; }
+}
+
+/* ════════════════════════════════════════
+   FINAL MESSAGE SCREEN
+   ════════════════════════════════════════ */
+.rito-final-message {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 700px;
+  width: 100%;
+}
+
+.rito-final-message__prompt {
+  text-align: center;
+}
+
+.rito-final-message__prompt h2 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+  animation: slideUpFade 0.6s ease-out both;
+}
+
+.rito-final-message__description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  animation: slideUpFade 0.6s ease-out 0.2s both;
+}
+
+/* ════════════════════════════════════════
+   CONFIRMATION SCREEN
+   ════════════════════════════════════════ */
+.rito-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+  max-width: 600px;
+}
+
+.rito-confirmation__mandala {
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--color-gold-primary);
+  border-radius: 50%;
+  position: relative;
+  animation: spin 3s linear infinite;
+}
+
+.rito-confirmation__mandala::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(198, 165, 90, 0.5);
+  border-radius: 50%;
+}
+
+.rito-confirmation__mandala::after {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  border: 1px dashed rgba(198, 165, 90, 0.3);
+  border-radius: 50%;
+}
+
+.rito-confirmation__title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--color-gold-light);
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.rito-confirmation__subtitle {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--color-text-primary);
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.rito-confirmation__message {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  animation: fadeInUp 0.8s ease-out 0.9s both;
+}
+
+.rito-confirmation__footer {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(181, 181, 168, 0.7);
+  animation: fadeInUp 0.8s ease-out 1.2s both;
+}
+
+/* ════════════════════════════════════════
+   ANIMATIONS
+   ════════════════════════════════════════ */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+/* ════════════════════════════════════════
+   MOBILE RESPONSIVE
+   ════════════════════════════════════════ */
+@media (max-width: 639px) {
+  .rito-question__prompt {
+    font-size: 22px;
+  }
+
+  .rito-input {
+    min-height: 120px;
+    padding: 16px;
+  }
+
+  .rito-button {
+    width: 100%;
+    padding: 14px 32px;
+  }
+
+  .rito-archetype-selector {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .rito-archetype-card {
+    padding: 12px;
+  }
+
+  .rito-hero__title {
+    font-size: 32px;
+  }
+}
+
+/* WCAG Focus visible */
+.rito-button:focus-visible,
+.rito-input:focus-visible {
+  outline: 2px solid var(--color-gold-primary);
+  outline-offset: 2px;
+}
+
+/* ════════════════════════════════════════
+   SOUND TOGGLE — Ambient audio control
+   ════════════════════════════════════════ */
+.rito-sound-toggle {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  background: rgba(198, 165, 90, 0.1);
+  border: 2px solid rgba(198, 165, 90, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: var(--color-gold-primary);
+  font-size: 20px;
+}
+
+.rito-sound-toggle:hover {
+  background: rgba(198, 165, 90, 0.15);
+  border-color: var(--color-gold-primary);
+  box-shadow: 0 0 15px rgba(198, 165, 90, 0.2);
+}
+
+.rito-sound-toggle.active {
+  background: rgba(198, 165, 90, 0.2);
+  box-shadow: 0 0 20px rgba(198, 165, 90, 0.3);
+}
+
+.rito-sound-toggle.pulse {
+  animation: soundPulse 2.5s ease-in-out 3;
+}
+
+@keyframes soundPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(198, 165, 90, 0.4); }
+}
+
+@media (max-width: 639px) {
+  .rito-sound-toggle {
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rito-sound-toggle,
+  .rito-sound-toggle.pulse {
+    animation: none;
+  }
+}
+{% endstyle %}
+
+<div id="rito-container">
+  <div class="rito-particles" id="particles-container"></div>
+
+  {% comment %} SOUND TOGGLE {% endcomment %}
+  <button class="rito-sound-toggle pulse" id="sound-toggle" aria-label="Activar ambiente sonoro" title="Activar ambiente sonoro">🔔</button>
+  <audio id="ambient-audio" preload="none" loop><source src="https://cdn.pixabay.com/audio/2023/10/18/audio_0c3c7b2c04.mp3" type="audio/mpeg"></audio>
+
+  {% comment %} SCREEN 0: HERO {% endcomment %}
+  <div class="rito-screen active" data-screen="0">
+    <div class="rito-hero">
+      <h1 class="rito-hero__title">El Encuentro de Reconocimiento</h1>
+      <p class="rito-hero__subtitle">No es una encuesta. Es el primer diálogo entre vos y quien va a acompañarte.</p>
+      <p class="rito-hero__instruction">Responde con sinceridad. No hay respuestas "correctas". Solo tu verdad y su espejo.</p>
+      <button type="button" class="rito-button" data-action="enter-rite">Abrir el Encuentro</button>
+      <p class="rito-hero__footer">Los 7 días comienzan después de este encuentro.</p>
+    </div>
+  </div>
+
+  {% comment %} SCREENS 1-4: LAYER 1 QUESTIONS (and 4.5: ARCHETYPE SELECTION) {% endcomment %}
+  <div class="rito-screen" data-screen="1">
+    <div class="rito-question-container">
+      <div class="rito-question__progress-bar" id="progress-bar"></div>
+      <div class="rito-question__progress-counter">Pregunta <span class="rito-counter__current">1</span> de 8</div>
+      <h2 class="rito-question__prompt" id="question-prompt"></h2>
+      <form class="rito-form" data-question-index="0" data-layer="1">
+        <textarea class="rito-input rito-input--question" placeholder="Tu respuesta aquí..." maxlength="500" autocomplete="off" spellcheck="false"></textarea>
+        <div class="rito-input__footer">
+          <span class="rito-input__counter">0/500</span>
+        </div>
+        <div class="rito-form__actions">
+          <button type="submit" class="rito-button rito-button--pulse">Continuar</button>
+          <p class="rito-form__hint">O presiona Enter</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {% comment %} SCREEN 4.5: ARCHETYPE SELECTION {% endcomment %}
+  <div class="rito-screen" data-screen="4.5">
+    <div class="rito-question-container">
+      <h2 class="rito-question__prompt">¿Cuál es el guardián que adoptaste?</h2>
+      <div class="rito-archetype-selector" id="archetype-selector"></div>
+      <button type="button" class="rito-button" data-action="continue-after-archetype">Continuar</button>
+    </div>
+  </div>
+
+  {% comment %} TRANSITION SCREEN {% endcomment %}
+  <div class="rito-screen" data-screen="transition">
+    <div class="rito-transition">
+      <p class="rito-transition__text">Profundizamos...</p>
+      <div class="rito-transition__loader"></div>
+    </div>
+  </div>
+
+  {% comment %} SCREEN 5-7: LAYER 2 QUESTIONS {% endcomment %}
+  <div class="rito-screen" data-screen="5">
+    <div class="rito-question-container">
+      <div class="rito-question__progress-bar"></div>
+      <div class="rito-question__progress-counter">Pregunta <span class="rito-counter__current">5</span> de 8</div>
+      <h2 class="rito-question__prompt" id="question-prompt"></h2>
+      <form class="rito-form" data-question-index="4" data-layer="2">
+        <textarea class="rito-input rito-input--question" placeholder="Tu respuesta aquí..." maxlength="500" autocomplete="off" spellcheck="false"></textarea>
+        <div class="rito-input__footer">
+          <span class="rito-input__counter">0/500</span>
+        </div>
+        <div class="rito-form__actions">
+          <button type="submit" class="rito-button rito-button--pulse">Continuar</button>
+          <p class="rito-form__hint">O presiona Enter</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {% comment %} SCREEN 8: LAYER 3 (IA) OR FINAL MESSAGE {% endcomment %}
+  <div class="rito-screen" data-screen="8">
+    <div class="rito-question-container">
+      <div class="rito-question__progress-bar"></div>
+      <div class="rito-question__progress-counter">Pregunta <span class="rito-counter__current">8</span> de 8</div>
+      <h2 class="rito-question__prompt" id="question-prompt"></h2>
+      <form class="rito-form" data-question-index="7" data-layer="3">
+        <textarea class="rito-input rito-input--question" placeholder="Tu respuesta aquí..." maxlength="500" autocomplete="off" spellcheck="false"></textarea>
+        <div class="rito-input__footer">
+          <span class="rito-input__counter">0/500</span>
+        </div>
+        <div class="rito-form__actions">
+          <button type="submit" class="rito-button rito-button--pulse">Continuar</button>
+          <p class="rito-form__hint">O presiona Enter</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {% comment %} SCREEN 9: FINAL MESSAGE {% endcomment %}
+  <div class="rito-screen" data-screen="9">
+    <div class="rito-final-message">
+      <div class="rito-final-message__prompt">
+        <h2>¿Querés agregar algo que solo <span id="final-guardian-name">tu guardián</span> debería saber?</h2>
+        <p class="rito-final-message__description">Un secreto. Un deseo. Una promesa. O nada.</p>
+      </div>
+      <textarea class="rito-input rito-input--final" placeholder="(Opcional)" maxlength="1000"></textarea>
+      <div class="rito-input__footer">
+        <span class="rito-input__counter">0/1000</span>
+      </div>
+      <p class="rito-final-message__note">Tu respuesta se enviará inmediatamente a <span id="final-guardian-name-note">tu guardián</span>.</p>
+      <button type="button" class="rito-button" data-action="close-rite">Cerrar el Encuentro</button>
+    </div>
+  </div>
+
+  {% comment %} SCREEN 10: CONFIRMATION {% endcomment %}
+  <div class="rito-screen" data-screen="10">
+    <div class="rito-confirmation">
+      <div class="rito-confirmation__mandala"></div>
+      <h1 class="rito-confirmation__title">Tu voz ha sido grabada</h1>
+      <p class="rito-confirmation__subtitle"><span id="conf-guardian-name">Tu guardián</span> te escuchó.</p>
+      <p class="rito-confirmation__message">Los 7 días comienzan ahora.</p>
+      <p class="rito-confirmation__footer">Redirigiendo a tu Portal Mágico...</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const QUESTIONS_DATA = {
+    capa1: [
+      "¿Dónde sentís que vive la energía ahora mismo — en el pecho, el vientre, la garganta, los pies?",
+      "Hay algo que no le pedís a nadie. Algo que no está en tu lista de pendientes, pero que en la noche aparece. ¿Qué es?",
+      "Hace poco pasó algo — grande o pequeño — que cambió cómo ves una parte de tu vida. ¿Qué fue?",
+      "Si en 7 días te despertás y algo cambió sin que hagas nada, ¿qué cambió?"
+    ],
+    capa2: {
+      protector: [
+        "Hay momentos donde te falta una presencia sólida — alguien que simplemente esté, sin arreglarte. ¿Cuándo es eso?",
+        "Si tuvieras que defender algo o a alguien mañana — ¿lo harías? ¿Qué te cuesta más: ser fuerte o permitirte fragilidad?",
+        "Hay un \"no\" que llevás tiempo queriendo decir. ¿Cuál es, y quién es la persona?"
+      ],
+      abrecaminos: [
+        "Hay algo en tu vida que no avanza desde hace tiempo — no es grave, pero está congelado. ¿Qué es?",
+        "¿Qué puerta te da miedo cruzar? No porque sea peligrosa, sino porque del otro lado todo cambia.",
+        "Si todo lo que está frenado se destraba en los próximos 7 días, ¿qué te asusta más: que pase o que no pase?"
+      ],
+      abundancia: [
+        "¿De qué tienes miedo de falta? (Plata, tiempo, amor, paz. Lo primero que aparezca.)",
+        "Hay algo que querés pero que \"no es para vos\" o \"es demasiado\". ¿Qué es, y de dónde viene esa creencia?",
+        "Si el dinero, el tiempo, el amor fluyeran sin restricción por una semana, ¿qué sería lo primero que harías?"
+      ],
+      sabiduria: [
+        "Hay una pregunta importante que estás evitando hacerte. ¿Qué pregunta es?",
+        "¿Qué \"verdad incómoda\" sobre vos o tu vida ya conocés pero no querés admitir?",
+        "Si pusieras en silencio tu cabeza por 24 horas y solo escucharas tu intuición, ¿qué te diría sobre lo que estás viviendo?"
+      ],
+      amor: [
+        "¿A quién le dirías \"te amo\" si supieras que no hay riesgo de rechazo?",
+        "Hay una relación que importa mucho y que al mismo tiempo duele. ¿Cuál es, y qué necesita?",
+        "Si pudieras amar sin miedo — sin protegerte, sin calcular, sin guardar distancia — ¿cómo sería diferente tu vida?"
+      ],
+      sanador: [
+        "Hay un dolor en tu cuerpo o tu corazón que estás acostumbrado a llevar. ¿De qué es esa herida?",
+        "¿Qué necesitas soltar? (Un resentimiento, una culpa, una versión vieja de vos, un \"debería\".)",
+        "Si pudieras sanar una sola cosa — física, emocional, relacional — en los próximos meses, ¿qué sería?"
+      ],
+      compania: [
+        "¿En qué momentos sentís más soledad — y te gustaría no sentirla?",
+        "Hay algo que pasás solo/a que en el fondo necesitarías compartir. ¿Qué es?",
+        "¿Qué significa para vos \"no estar solo\"? ¿Es compañía física, ser entendido, ser visto, algo más?"
+      ],
+      autoestima: [
+        "¿Cuál es la crítica más dura que llevas adentro sobre vos? (La que nadie sabe que escuchas.)",
+        "Hay algo que querés hacer, decir, ser — pero no te animas porque \"qué dirán\". ¿Qué es?",
+        "Si de verdad creyeras que sos suficiente tal como estás — sin cambios, sin mejoras, sin más logros — ¿qué harías diferente?"
+      ]
+    }
+  };
+
+  const ARCHETYPES = [
+    { id: 'protector', label: 'Protector', icon: '🛡️' },
+    { id: 'abrecaminos', label: 'Abrecaminos', icon: '🚪' },
+    { id: 'abundancia', label: 'Abundancia', icon: '💰' },
+    { id: 'sabiduria', label: 'Sabiduría', icon: '🔮' },
+    { id: 'amor', label: 'Amor', icon: '💖' },
+    { id: 'sanador', label: 'Sanador', icon: '✨' },
+    { id: 'compania', label: 'Compañía', icon: '🌙' },
+    { id: 'autoestima', label: 'Autoestima', icon: '👑' }
+  ];
+
+  // STATE
+  let currentScreen = 0;
+  let responses = [];
+  let selectedArchetype = null;
+  let finalMessage = '';
+  let layer3Question = null;
+  let ritualStartTime = null;
+  let audioElement = null;
+
+  // AUTO-DETECT from query params (when coming from Mi Magia)
+  const urlParams = new URLSearchParams(window.location.search);
+  const presetArchetype = urlParams.get('arquetipo');
+  const presetEmail = urlParams.get('email');
+  const presetOrderId = urlParams.get('orderId');
+  const presetGuardianName = urlParams.get('guardian');
+  const presetStore = urlParams.get('store') || 'US';
+
+  // META PIXEL + GA4 + KLAVIYO TRACKING
+  function trackMetaPixelEvent(eventName, data = {}) {
+    if (typeof analytics !== 'undefined') {
+      analytics.publish('custom_event', {
+        event_name: eventName,
+        ...data
+      });
+    }
+    if (typeof gtag !== 'undefined') {
+      gtag('event', eventName, data);
+    }
+    // Klaviyo tracking (LEGACY _learnq DEPRECATED in 2025+ — Klaviyo 2026 uses Shopify Customer Events natively)
+    if (typeof _learnq !== 'undefined') {
+      var klaviyoEventMap = {
+        'ritual_started': 'Started Ritual',
+        'ritual_layer1_complete': 'Completed Layer 1',
+        'ritual_archetype_selected': 'Selected Archetype',
+        'ritual_layer2_complete': 'Completed Layer 2',
+        'ritual_layer3_complete': 'Completed Layer 3',
+        'ritual_completed': 'Completed Ritual'
+      };
+      var klName = klaviyoEventMap[eventName];
+      if (klName) {
+        _learnq.push(['track', klName, data || {}]);
+      }
+    }
+  }
+
+  // Audio control
+  function initAudio() {
+    audioElement = document.getElementById('ambient-audio');
+    const soundToggle = document.getElementById('sound-toggle');
+
+    if (!audioElement || !soundToggle) return;
+
+    soundToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isActive = soundToggle.classList.toggle('active');
+
+      if (isActive) {
+        audioElement.volume = 0;
+        audioElement.play().catch(() => {
+          // Autoplay blocked — user needs to interact again
+          soundToggle.classList.remove('active');
+        });
+
+        // Fade in
+        let vol = 0;
+        const fadeIn = setInterval(() => {
+          vol += 0.03;
+          if (vol >= 0.15) {
+            audioElement.volume = 0.15;
+            clearInterval(fadeIn);
+          } else {
+            audioElement.volume = vol;
+          }
+        }, 50);
+      } else {
+        // Fade out
+        let vol = audioElement.volume;
+        const fadeOut = setInterval(() => {
+          vol -= 0.05;
+          if (vol <= 0) {
+            audioElement.pause();
+            audioElement.currentTime = 0;
+            clearInterval(fadeOut);
+          } else {
+            audioElement.volume = vol;
+          }
+        }, 50);
+      }
+    });
+
+    // Remove pulse animation after 3 seconds
+    setTimeout(() => {
+      soundToggle.classList.remove('pulse');
+    }, 3000);
+  }
+
+  // Init
+  function init() {
+    ritualStartTime = Date.now();
+
+    // If archetype pre-selected via query param, auto-set it
+    if (presetArchetype) {
+      const validArchetypes = ARCHETYPES.map(a => a.id);
+      if (validArchetypes.includes(presetArchetype)) {
+        selectedArchetype = presetArchetype;
+      }
+    }
+
+    const savedProgress = localStorage.getItem('rito-progress');
+    if (savedProgress) {
+      try {
+        const data = JSON.parse(savedProgress);
+        showRecoveryPrompt(data);
+      } catch (e) {
+        // Corrupted, start fresh
+        localStorage.removeItem('rito-progress');
+      }
+    }
+    initParticles();
+    initAudio();
+    attachEventListeners();
+  }
+
+  // Particles
+  function initParticles() {
+    const container = document.getElementById('particles-container');
+    for (let i = 0; i < 35; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'rito-particle';
+      const size = Math.random() * 3 + 1;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.opacity = Math.random() * 0.6 + 0.2;
+      container.appendChild(particle);
+    }
+  }
+
+  // Event listeners
+  function attachEventListeners() {
+    document.addEventListener('click', handleClick);
+    document.addEventListener('keydown', handleKeydown);
+  }
+
+  function handleClick(e) {
+    const target = e.target.closest('[data-action], .rito-button, .rito-archetype-card');
+    if (!target) return;
+
+    if (target.dataset.action === 'enter-rite') {
+      trackMetaPixelEvent('ritual_started', {
+        arquetipo_preview: selectedArchetype || 'none'
+      });
+      goToScreen(1);
+    } else if (target.dataset.action === 'close-rite') {
+      submitRitual();
+    } else if (target.dataset.action === 'continue-after-archetype') {
+      if (!selectedArchetype) {
+        alert('Por favor, selecciona un guardián');
+        return;
+      }
+      trackMetaPixelEvent('ritual_archetype_selected', {
+        arquetipo: selectedArchetype
+      });
+      goToScreen('transition');
+    } else if (target.classList.contains('rito-archetype-card')) {
+      selectArchetype(target.dataset.archetype);
+    }
+  }
+
+  function handleKeydown(e) {
+    if (e.key === 'Enter' && e.target.classList.contains('rito-input')) {
+      const form = e.target.closest('.rito-form');
+      if (form) {
+        e.preventDefault();
+        handleFormSubmit({ preventDefault: () => {}, target: form });
+      }
+    }
+  }
+
+  // Screen navigation
+  function validateBeforeScreenChange(screenNum) { return true; }
+  function goToScreen(screenNum) {
+    if (!validateBeforeScreenChange(screenNum)) return;
+    const screens = document.querySelectorAll('.rito-screen');
+    screens.forEach(s => s.classList.remove('active'));
+
+    let targetScreen;
+    if (screenNum === 'transition') {
+      targetScreen = document.querySelector('[data-screen="transition"]');
+      targetScreen.classList.add('active');
+      setTimeout(() => {
+        const nextIdx = selectedArchetype ? 5 : 8;
+        goToScreen(nextIdx);
+      }, 1500);  // Reduced timeout for faster progression on slow networks
+      return;
+    } else {
+      targetScreen = document.querySelector(`[data-screen="${screenNum}"]`);
+      targetScreen.classList.add('active');
+    }
+
+    if (screenNum >= 1 && screenNum <= 8) {
+      updateProgressBar();
+      loadQuestion();
+      setTimeout(() => {
+        const textarea = targetScreen.querySelector('textarea');
+        if (textarea) textarea.focus();
+      }, 300);
+    }
+
+    currentScreen = screenNum;
+    saveProgress();
+  }
+
+  // Question loading
+  function loadQuestion() {
+    const form = document.querySelector(`.rito-screen.active .rito-form`);
+    if (!form) return;
+
+    const layer = form.dataset.layer;
+    const qIndex = parseInt(form.dataset.questionIndex);
+    let questionText = '';
+
+    if (layer === '1') {
+      questionText = QUESTIONS_DATA.capa1[qIndex];
+    } else if (layer === '2' && selectedArchetype) {
+      const capa2Index = qIndex - 4;
+      questionText = QUESTIONS_DATA.capa2[selectedArchetype][capa2Index];
+    } else if (layer === '3') {
+      if (layer3Question) {
+        questionText = layer3Question;
+      } else {
+        // Fetch from GAS
+        fetchLayer3Question();
+        return;
+      }
+    }
+
+    const promptEl = document.querySelector('.rito-screen.active .rito-question__prompt');
+    if (promptEl) {
+      promptEl.textContent = questionText;
+    }
+
+    const counterEl = document.querySelector('.rito-screen.active .rito-counter__current');
+    if (counterEl) {
+      counterEl.textContent = qIndex + 1;
+    }
+
+    const textarea = form.querySelector('textarea');
+    if (textarea && responses[qIndex]) {
+      textarea.value = responses[qIndex];
+      updateCounter(textarea);
+    }
+
+    form.addEventListener('submit', handleFormSubmit);
+    textarea.addEventListener('input', handleTextareaInput);
+  }
+
+  function fetchLayer3Question() {
+    const customerEmail = document.documentElement.getAttribute('data-customer-email') || 'user@example.com';
+    const archetype = selectedArchetype;
+
+    fetch('https://duendes-api.bitter-voice-d5fb.workers.dev/exec', {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'generate_layer3_question',
+        email: customerEmail,
+        archetype: archetype,
+        responses_1_7: responses
+      }),
+      mode: 'no-cors'
+    }).then(() => {
+      // GAS doesn't return JSON in no-cors mode, so we just wait a bit
+      setTimeout(() => {
+        const promptEl = document.querySelector('.rito-screen.active .rito-question__prompt');
+        if (promptEl && !promptEl.textContent.includes('?')) {
+          // Fallback: skip to final message
+          goToScreen(9);
+        }
+      }, 2000);
+    }).catch(() => {
+      // Timeout or error: skip to final message
+      goToScreen(9);
+    });
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const textarea = form.querySelector('textarea');
+    const value = textarea.value.trim();
+
+    if (!value) {
+      textarea.classList.add('shake');
+      setTimeout(() => textarea.classList.remove('shake'), 400);
+      return;
+    }
+
+    const qIndex = parseInt(form.dataset.questionIndex);
+    responses[qIndex] = value;
+    saveProgress();
+
+    const currentQ = parseInt(form.dataset.questionIndex);
+    let nextQ;
+
+    if (currentQ === 3) {
+      // After Q4, show archetype selector
+      trackMetaPixelEvent('ritual_layer1_complete', {
+        arquetipo: selectedArchetype || 'pending'
+      });
+      goToScreen(4.5);
+    } else if (currentQ === 6) {
+      // After Q7, try to load Q8 (Layer 3)
+      trackMetaPixelEvent('ritual_layer2_complete', {
+        arquetipo: selectedArchetype
+      });
+      goToScreen(8);
+    } else if (currentQ === 7) {
+      // After Q8, show processing screen before final message
+      trackMetaPixelEvent('ritual_layer3_complete', {
+        arquetipo: selectedArchetype
+      });
+      showProcessingScreen();
+      setTimeout(() => {
+        hideProcessingScreen();
+        goToScreen(9);
+      }, 1500);
+    } else {
+      nextQ = currentQ + 1;
+      goToScreen(nextQ);
+    }
+  }
+
+  function handleTextareaInput(e) {
+    const textarea = e.target;
+    updateCounter(textarea);
+    const counterEl = textarea.closest('.rito-form').querySelector('.rito-input__counter');
+    if (counterEl) {
+      const len = textarea.value.length;
+      const max = parseInt(textarea.maxLength);
+      const percent = Math.floor((len / max) * 100);
+      counterEl.textContent = `${len}/${max}`;
+      if (percent >= 80) {
+        counterEl.classList.add('warning');
+      } else {
+        counterEl.classList.remove('warning');
+      }
+    }
+  }
+
+  function updateCounter(textarea) {
+    const counterEl = textarea.closest('.rito-form')?.querySelector('.rito-input__counter');
+    if (counterEl) {
+      const len = textarea.value.length;
+      const max = parseInt(textarea.maxLength);
+      counterEl.textContent = `${len}/${max}`;
+    }
+  }
+
+  function updateProgressBar() {
+    const bar = document.querySelector('#progress-bar');
+    if (bar) {
+      const percent = (currentScreen / 8) * 100;
+      bar.style.width = Math.max(percent, 12.5) + '%';
+    }
+  }
+
+  // Archetype selection
+  function selectArchetype(archetypeId) {
+    selectedArchetype = archetypeId;
+    const cards = document.querySelectorAll('.rito-archetype-card');
+    cards.forEach(card => {
+      if (card.dataset.archetype === archetypeId) {
+        card.classList.add('selected');
+      } else {
+        card.classList.remove('selected');
+      }
+    });
+  }
+
+  function renderArchetypeSelector() {
+    const selector = document.getElementById('archetype-selector');
+    selector.innerHTML = '';
+    ARCHETYPES.forEach(arch => {
+      const card = document.createElement('div');
+      card.className = 'rito-archetype-card';
+      if (selectedArchetype === arch.id) card.classList.add('selected');
+      card.dataset.archetype = arch.id;
+      card.innerHTML = `
+        <div class="rito-archetype-icon">${arch.icon}</div>
+        <div class="rito-archetype-label">${arch.label}</div>
+      `;
+      selector.appendChild(card);
+    });
+
+    // If archetype came pre-selected from Mi Magia, show a hint
+    if (presetArchetype && selectedArchetype) {
+      const hint = document.createElement('p');
+      hint.style.cssText = 'color: var(--color-gold-primary); font-family: var(--font-serif); font-style: italic; text-align: center; margin-top: 1rem; font-size: 0.95rem;';
+      hint.textContent = '✦ Tu guardián ya eligió su camino. Podés cambiarlo si sentís otro llamado.';
+      selector.appendChild(hint);
+    }
+  }
+
+  // Ritual submission
+  async function submitRitual() {
+    const finalTextarea = document.querySelector('[data-screen="9"] .rito-input--final');
+    finalMessage = finalTextarea ? finalTextarea.value.trim() : '';
+
+    const timeSpentSeconds = Math.floor((Date.now() - ritualStartTime) / 1000);
+
+    // Meta Pixel tracking for ritual completion
+    trackMetaPixelEvent('ritual_completed', {
+      arquetipo: selectedArchetype,
+      has_private_message: finalMessage.length > 0,
+      time_spent_seconds: timeSpentSeconds
+    });
+
+    const payload = {
+      action: 'submit_ritual_answers',
+      email: presetEmail || document.documentElement.getAttribute('data-customer-email') || '',
+      orderId: presetOrderId || document.documentElement.getAttribute('data-order-id') || '',
+      store: presetStore || 'US',
+      nombre: presetGuardianName || '',
+      arquetipo: selectedArchetype,
+      capa1: {
+        cuerpo_anclaje: responses[0],
+        necesidad_silenciosa: responses[1],
+        momento_quiebre: responses[2],
+        direccion_brujula: responses[3]
+      },
+      capa2: {
+        pregunta_1: responses[4],
+        pregunta_2: responses[5],
+        pregunta_3: responses[6]
+      },
+      capa3: {
+        pregunta_ia: layer3Question || 'N/A',
+        respuesta_ia: responses[7] || ''
+      },
+      mensaje_privado: finalMessage,
+      version: '2.0'
+    };
+
+    try {
+      await fetch('https://duendes-api.bitter-voice-d5fb.workers.dev/exec', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        mode: 'no-cors'
+      });
+    } catch (e) {
+      console.error('Submit error:', e);
+    }
+
+    localStorage.removeItem('rito-progress');
+    goToScreen(10);
+
+    setTimeout(() => {
+      window.location.href = '/pages/mi-magia';
+    }, 3500);
+  }
+
+  // Progress save/restore
+  function saveProgress() {
+    localStorage.setItem('rito-progress', JSON.stringify({
+      currentScreen,
+      responses,
+      selectedArchetype,
+      timestamp: Date.now()
+    }));
+  }
+
+  function showRecoveryPrompt(data) {
+    const recovered = confirm('Tu rito quedó a mitad. ¿Volver a donde estabas?');
+    if (recovered) {
+      currentScreen = data.currentScreen;
+      responses = data.responses;
+      selectedArchetype = data.selectedArchetype;
+      goToScreen(currentScreen);
+    } else {
+      localStorage.removeItem('rito-progress');
+      location.reload();
+    }
+  }
+
+  // Run
+  window.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Encuentro Reco",
+  "settings": [
+    {
+      "type": "text",
+      "id": "gas_endpoint",
+      "label": "Google Apps Script Endpoint",
+      "default": "https://duendes-api.bitter-voice-d5fb.workers.dev/exec"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Encuentro Reco"
+    }
+  ]
+}
+{% endschema %}

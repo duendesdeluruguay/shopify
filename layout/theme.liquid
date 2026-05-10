@@ -1,0 +1,431 @@
+<!doctype html>
+<html
+  {% if request.design_mode %}
+    class="shopify-design-mode"
+  {% endif %}
+  lang="{{ request.locale.iso_code }}"
+>
+  <head>
+    {%- comment -%}
+      DDU SEO 2026-05-01 — refactor full-stack:
+      * Quitados meta http-equiv Cache-Control que rompían SEO/velocidad
+        (el script BFCache buster al final del head ya maneja Safari iOS).
+      * Theme-color real para mobile browsers (status bar dorado).
+      * Favicons completos: 32 + apple-touch-icon (con fallback a logo).
+      * Schema.org Organization + WebSite + Product (página producto)
+        + BreadcrumbList. Inyectado más abajo en el head.
+      * Open Graph default image fallback.
+      * Meta description robusta con fallback (shop.description o tagline marca).
+      * Robots policy — index,follow para páginas reales; noindex para
+        carrito/checkout/cuenta (lo maneja Shopify nativo).
+    {%- endcomment -%}
+    <meta name="ddu-theme-version" content="v9-seo-2026-05-01">
+    <!-- DDU Build: {{ 'now' | date: '%Y-%m-%d %H:%M %Z' }} | Theme V9 SEO | LIVE info@ -->
+
+    {%- comment -%}
+      Favicons — orden de preferencia:
+      1) settings.favicon (dueña sube uno específico) → PNG 32+16+apple touch
+      2) shop.brand.squared_logo (Branding logo cuadrado) → PNG
+      3) assets/favicon.svg generado por theme (símbolo ✦ de marca, dorado sobre negro)
+      4) settings.logo como último fallback
+    {%- endcomment -%}
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{{ settings.favicon | image_url: width: 16, height: 16 }}">
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+    {%- elsif shop.brand.squared_logo != blank -%}
+      <link rel="icon" type="image/png" sizes="32x32" href="{{ shop.brand.squared_logo | image_url: width: 32, height: 32 }}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{{ shop.brand.squared_logo | image_url: width: 16, height: 16 }}">
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ shop.brand.squared_logo | image_url: width: 180, height: 180 }}">
+    {%- else -%}
+      {%- comment -%} Favicon SVG brand-generated — escala perfecto a cualquier tamaño {%- endcomment -%}
+      <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+      <link rel="alternate icon" type="image/png" sizes="32x32" href="{{ settings.logo | image_url: width: 32, height: 32 }}">
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.logo | image_url: width: 180, height: 180 }}">
+    {%- endif -%}
+    <link rel="mask-icon" href="{{ 'favicon.svg' | asset_url }}" color="#c9a84c">
+
+    {%- comment -%}
+      Preload de la imagen del Hero — mejora LCP (Largest Contentful Paint),
+      uno de los Core Web Vitals con peso en ranking de Google. Solo en home.
+      Lee el setting `hero_image` de la sección `duendes-hero` si está configurado.
+    {%- endcomment -%}
+    {%- if template == 'index' -%}
+      {%- assign hero_section = settings.hero_image_preload -%}
+      {%- comment -%} Si hay metafield o setting global no, intentamos leer del template JSON de index dinámicamente vía sección {%- endcomment -%}
+      {%- if shop.brand.cover_image != blank -%}
+        <link rel="preload" as="image" href="{{ shop.brand.cover_image | image_url: width: 1600 }}" fetchpriority="high">
+      {%- endif -%}
+    {%- endif -%}
+
+    {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
+    {% if settings.transition_to_main_product or settings.page_transition_enabled %}
+      <link
+        rel="expect"
+        href="#MainContent"
+        blocking="render"
+        id="view-transition-render-blocker"
+      >
+    {% endif %}
+
+    {%- render 'meta-tags' -%}
+    {%- render 'stylesheets' -%}
+    {%- render 'fonts' -%}
+    {%- render 'scripts' -%}
+    {%- render 'theme-styles-variables' -%}
+    {%- render 'color-schemes' -%}
+
+    {% if request.design_mode %}
+      {%- render 'theme-editor' -%}
+    {% endif %}
+
+    <meta name="facebook-domain-verification" content="6djinf9fyg6krnfazbl7pej71j0ohw" />
+
+    {%- comment -%}
+      DDU SEO BLOCK 2026-05-01
+      Robusto, modern y completo. Apunta a:
+      - Sitelinks search box en Google (Schema.org WebSite)
+      - Knowledge panel con marca (Schema.org Organization)
+      - Rich result en producto (Schema.org Product con offers)
+      - Preview decente al compartir (OG image fallback al logo)
+      - Meta description SIEMPRE presente
+    {%- endcomment -%}
+
+    {%- liquid
+      comment
+        Fuentes de descripción y branding, en orden de preferencia:
+        1) shop.brand.short_description (Settings > General > Branding) — campo moderno, lo que la dueña carga en admin
+        2) shop.description (campo legacy)
+        3) brand_tagline hardcoded como último fallback para que NUNCA quede vacío
+      endcomment
+      assign brand_tagline = 'Guardianes elementales canalizados a mano en Piriápolis, Uruguay. +15.000 guardianes en 45 países. Pieza única e irrepetible.'
+      assign default_desc = shop.brand.short_description | default: shop.description | default: brand_tagline
+
+      comment
+        OG default image, en orden:
+        1) settings.share_image (theme setting — opcional, si lo subió específico para social)
+        2) shop.brand.cover_image (Settings > General > Branding > Imagen de portada) — campo nuevo, la imagen cinematográfica
+        3) shop.brand.squared_logo o shop.brand.logo
+        4) settings.logo (theme)
+      endcomment
+      assign og_default_image = ''
+      if settings.share_image != blank
+        assign og_default_image = settings.share_image | image_url: width: 1200, height: 630
+      elsif shop.brand.cover_image != blank
+        assign og_default_image = shop.brand.cover_image | image_url: width: 1200, height: 630
+      elsif shop.brand.squared_logo != blank
+        assign og_default_image = shop.brand.squared_logo | image_url: width: 1200
+      elsif shop.brand.logo != blank
+        assign og_default_image = shop.brand.logo | image_url: width: 1200
+      elsif settings.logo != blank
+        assign og_default_image = settings.logo | image_url: width: 1200
+      endif
+
+      comment
+        Logo URL canónico para Schema.org Organization.
+        Mismo orden de preferencia.
+      endcomment
+      assign org_logo_url = ''
+      if shop.brand.logo != blank
+        assign org_logo_url = shop.brand.logo | image_url: width: 600
+      elsif shop.brand.squared_logo != blank
+        assign org_logo_url = shop.brand.squared_logo | image_url: width: 600
+      elsif settings.logo != blank
+        assign org_logo_url = settings.logo | image_url: width: 600
+      endif
+    -%}
+
+    {%- comment -%} Meta description fallback global — SIEMPRE presente, nunca queda página sin description {%- endcomment -%}
+    {%- unless page_description -%}
+      <meta name="description" content="{{ default_desc | escape }}">
+    {%- endunless -%}
+
+    {%- comment -%} OG image default si la página no tiene una propia {%- endcomment -%}
+    {%- unless page_image -%}
+      {%- if og_default_image != blank -%}
+        <meta property="og:image" content="https:{{ og_default_image }}">
+        <meta property="og:image:secure_url" content="https:{{ og_default_image }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta name="twitter:image" content="https:{{ og_default_image }}">
+      {%- endif -%}
+    {%- endunless -%}
+
+    {%- comment -%} Hreflang — el sitio es es-UY pero acepta visitantes globales {%- endcomment -%}
+    <link rel="alternate" hreflang="es" href="{{ canonical_url | default: shop.url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url | default: shop.url }}">
+
+    {%- comment -%} Schema.org Organization — knowledge panel + branding en Google {%- endcomment -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Duendes del Uruguay",
+      "alternateName": "DDU",
+      "url": "https://duendesdeluruguay.com",
+      "logo": "{% if org_logo_url != blank %}https:{{ org_logo_url }}{% else %}{{ shop.url }}/cdn/shop/files/logo-duendes.png{% endif %}",
+      "description": "{{ default_desc | escape }}",
+      "foundingDate": "2015",
+      "founder": [
+        { "@type": "Person", "name": "Gabriel" },
+        { "@type": "Person", "name": "Thibisay" }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Piriápolis",
+        "addressCountry": "UY"
+      },
+      "sameAs": [
+        "https://www.instagram.com/duendesdeluruguay",
+        "https://www.facebook.com/duendesdeluruguay",
+        "https://www.tiktok.com/@duendesdeluruguay"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info@duendesdeluruguay.com",
+        "contactType": "customer service",
+        "availableLanguage": ["Spanish", "English"]
+      }
+    }
+    </script>
+
+    {%- comment -%} Schema.org WebSite — sitelinks search box {%- endcomment -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Duendes del Uruguay",
+      "url": "https://duendesdeluruguay.com",
+      "inLanguage": "es-UY",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://duendesdeluruguay.com/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    {%- comment -%} Schema.org Product — para rich result en página de producto (Fix 12) {%- endcomment -%}
+    {%- if request.page_type == 'product' and product != blank -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": {{ product.title | json }},
+        "description": {{ product.description | strip_html | truncate: 280 | json }},
+        "image": [
+          {%- for img in product.images limit: 4 -%}"https:{{ img | image_url: width: 1200 }}"{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
+        ],
+        "sku": {{ product.selected_or_first_available_variant.sku | json }},
+        "brand": { "@type": "Brand", "name": "Duendes del Uruguay" },
+        "url": "{{ shop.url }}{{ product.url }}",
+        "offers": {
+          "@type": "Offer",
+          "url": "{{ shop.url }}{{ product.url }}",
+          "priceCurrency": "{{ cart.currency.iso_code }}",
+          "price": "{{ product.selected_or_first_available_variant.price | money_without_currency | replace: ',', '' }}",
+          "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+          "itemCondition": "https://schema.org/NewCondition",
+          "seller": { "@type": "Organization", "name": "Duendes del Uruguay" }
+        }
+      }
+      </script>
+
+      {%- comment -%} Override del title + description en producto para SEO ultra específico {%- endcomment -%}
+      {%- assign seo_title_p = product.title | append: ' — Guardián ' | append: product.type | append: ' · Duendes del Uruguay' -%}
+      {%- assign seo_desc_p = 'Guardián canalizado ' | append: product.title | append: ' — ' | append: product.type | append: '. Hecho a mano en Piriápolis, Uruguay. Pieza única e irrepetible. Carta canalizada personal incluida. +15.000 guardianes en 45 países.' -%}
+      <meta name="description" content="{{ seo_desc_p | escape | truncate: 160 }}">
+      <meta property="og:title" content="{{ seo_title_p | escape | truncate: 70 }}">
+      <meta property="og:description" content="{{ product.description | strip_html | truncate: 200 | escape }}">
+      <meta property="og:image" content="{{ product.featured_image | image_url: width: 1200, height: 1200 }}">
+      <meta property="og:url" content="{{ shop.url }}{{ product.url }}">
+      <meta property="og:type" content="product">
+      <meta name="twitter:card" content="summary_large_image">
+    {%- endif -%}
+
+    {%- comment -%} Schema.org BreadcrumbList — mejor UX en SERP {%- endcomment -%}
+    {%- if request.page_type == 'product' and product != blank -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "{{ shop.url }}" },
+          { "@type": "ListItem", "position": 2, "name": "Tienda Mágica", "item": "{{ shop.url }}/collections/tienda-magica" },
+          { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
+        ]
+      }
+      </script>
+    {%- elsif request.page_type == 'collection' and collection != blank -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "{{ shop.url }}" },
+          { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": "{{ shop.url }}{{ collection.url }}" }
+        ]
+      }
+      </script>
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+  {{ 'custom-cinzel.css' | asset_url | stylesheet_tag }}
+
+
+<!-- DDU Performance 2026-04-25: dns-prefetch + preconnect a CDNs críticos (reduce latencia inicial 100-300ms en mobile lento) -->
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://static.klaviyo.com">
+<link rel="dns-prefetch" href="https://a.klaviyo.com">
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="preconnect" href="https://static.klaviyo.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Google Analytics 4 - Duendes del Uruguay -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBB2049Q0M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZBB2049Q0M');
+</script>
+
+<!-- Klaviyo Onsite Tracking -->
+<script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=XFasYy"></script>
+<script>var _learnq = _learnq || [];</script>
+
+
+<!-- DDU Performance 2026-05-01 — instant.page: prefetch on hover/touch, navegación instantánea entre páginas. ~1 KB, zero risk. -->
+<link rel="dns-prefetch" href="https://instant.page">
+<script src="//instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+
+<script>
+  // DDU BFCache buster 2026-04-25 — fuerza recarga si Safari iOS (u otros) sirve la pagina desde back-forward cache.
+  // Sin esto, clientes recurrentes pueden ver contenido viejo aunque hayamos pusheado cambios al theme.
+  (function(){
+    window.addEventListener('pageshow', function(e){
+      if (e.persisted) { window.location.reload(); }
+    });
+  })();
+</script>
+
+{%- comment -%} DDU SEO 2026-04-26 — fallback meta description (Horizon default theme solo renderiza og:description, no name=description). Cadena de prioridad: metafield page.global.description_tag > page_description > shop.description > shop.name {%- endcomment -%}
+{%- liquid
+  assign meta_desc = page_description | default: shop.description | default: shop.name
+  if template == 'page' and page.metafields.global.description_tag != blank
+    assign meta_desc = page.metafields.global.description_tag
+  elsif template contains 'product' and product.metafields.global.description_tag != blank
+    assign meta_desc = product.metafields.global.description_tag
+  elsif template contains 'collection' and collection.metafields.global.description_tag != blank
+    assign meta_desc = collection.metafields.global.description_tag
+  endif
+-%}
+<meta name="description" content="{{ meta_desc | strip_html | strip_newlines | escape }}">
+
+    {%- comment -%} DDU Auto-Geo Redirect 2026-05-08 — redirige a subfolder español según país detectado {%- endcomment -%}
+    {%- render 'duendes-auto-geo-redirect' -%}
+  </head>
+
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+    {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
+    <div id="header-group">
+      {% sections 'header-group' %}
+    </div>
+
+    <script>
+      // Inline header height and menu style calculations to prevent layout shift
+      // Note: Updates in calculateHeaderGroupHeight(), updateTransparentHeaderOffset() and setHeaderMenuStyle() utilities.js should be kept in sync with this function
+      (function setHeaderHeighCustomProperties() {
+        /*
+         * Header calculation functions for maintaining CSS variables
+         * Mimic calculateHeaderGroupHeight() in utilities.js
+         */
+        const header = document.querySelector('header-component');
+        const headerGroup = document.querySelector('#header-group');
+        const hasHeaderSection = headerGroup?.querySelector('.header-section');
+
+        if (!header || !headerGroup) return;
+
+        const headerTopRow = header.querySelector('.header__row--top');
+        const headerHeight = header.offsetHeight;
+
+        // Calculate the total height of the header group
+        let headerGroupHeight = 0;
+        const children = headerGroup.children;
+        for (let i = 0; i < children.length; i++) {
+          const element = children[i];
+          if (element === header || !(element instanceof HTMLElement)) continue;
+          headerGroupHeight += element.offsetHeight;
+        }
+
+        // Check for transparent header special case
+        if (header.hasAttribute('transparent') && header.parentElement?.nextElementSibling) {
+          headerGroupHeight += headerHeight;
+        }
+
+        // Set CSS variables
+        document.body.style.setProperty('--header-height', `${headerHeight}px`);
+        document.body.style.setProperty('--header-group-height', `${headerGroupHeight}px`);
+
+        if (headerTopRow) {
+          window.requestAnimationFrame(function () {
+            document.body.style.setProperty('--top-row-height', `${headerTopRow.offsetHeight}px`);
+          });
+        }
+
+        /**
+         * Updates CSS custom properties for transparent header offset calculation
+         * Mimic updateTransparentHeaderOffset() in utilities.js
+         */
+
+        if (!hasHeaderSection || !header?.hasAttribute('transparent')) {
+          document.body.style.setProperty('--transparent-header-offset-boolean', '0');
+          return;
+        }
+
+        const hasImmediateSection = hasHeaderSection.nextElementSibling?.classList.contains('shopify-section');
+
+        const shouldApplyOffset = !hasImmediateSection ? '1' : '0';
+        document.body.style.setProperty('--transparent-header-offset-boolean', shouldApplyOffset);
+      })();
+
+      (function setHeaderMenuStyle() {
+        const headerComponent = document.querySelector('#header-component');
+        if (headerComponent) {
+          const isTouchDevice = 'ontouchstart' in window && navigator.maxTouchPoints > 0;
+          const overflowList = headerComponent?.querySelector('overflow-list');
+          const hasReachedMinimum = overflowList && overflowList.hasAttribute('minimum-reached');
+          headerComponent.dataset.menuStyle = isTouchDevice || hasReachedMinimum ? 'drawer' : 'menu';
+        }
+      })();
+    </script>
+
+    <main
+      id="MainContent"
+      class="content-for-layout"
+      role="main"
+      data-page-transition-enabled="{{ settings.page_transition_enabled }}"
+      data-product-transition="{{ settings.transition_to_main_product }}"
+      data-template="{{ template }}"
+    >
+      {{ content_for_layout }}
+    </main>
+
+    <footer>
+      {% sections 'footer-group' %}
+    </footer>
+
+    {% render 'search-modal' %}
+
+    {% if settings.quick_add or settings.mobile_quick_add %}
+      {% render 'quick-add-modal' %}
+    {% endif %}
+    {% render 'duendes-currency-converter' %}
+    {% section 'duendes-portal-popup' %}
+  </body>
+</html>

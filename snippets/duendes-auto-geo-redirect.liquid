@@ -1,0 +1,121 @@
+{%- comment -%}
+  ============================================================
+  DDU AUTO-GEO REDIRECT 2026-05-08
+  Redirige automáticamente al subfolder español según el país
+  detectado por IP del visitante. La principal queda en inglés
+  (Shopify lo exige), pero los hispanohablantes ven español.
+  ============================================================
+
+  Estrategia híbrida (lo más rápido y robusto):
+  1. SERVER-SIDE primero: usa localization.country.iso_code que
+     Shopify ya tiene resuelto antes de renderizar la página
+     → cero flash, redirect inmediato.
+  2. CLIENT-SIDE fallback: si el server no detectó (caché,
+     CDN edge, etc.), reutiliza el cache `duendes_geo_v2` que
+     ya setea duendes-currency-converter.liquid.
+  3. ÚLTIMA OPCIÓN: llama a geojs.io con timeout 2.5s.
+
+  Reglas:
+  - Solo en home (path = "/") — no rompe links profundos.
+  - Respeta elección manual del usuario (?lang=en, ?keep_lang=1).
+  - Una sola redirección por sesión (sessionStorage flag).
+  - Países sin mapeo (USA, Europa no hispana, Asia, etc.) quedan
+    en root inglés. Eso ES lo correcto.
+
+  Mapa de países hispanohablantes → subfolder de su mercado:
+    UY → /es-uy/    MX → /es-mx/    AR → /es-ar/    CL → /es-cl/
+    CO → /es-co/    BR → /es-br/    ES → /es-es/
+    LATAM (BO, CR, EC, SV, GT, HN, NI, PA, PY, PE, DO, VE) → /es-lat/
+{%- endcomment -%}
+
+{%- liquid
+  assign ddu_geo_target = blank
+  assign country_iso = localization.country.iso_code
+
+  case country_iso
+    when 'UY'
+      assign ddu_geo_target = '/es-uy/'
+    when 'MX'
+      assign ddu_geo_target = '/es-mx/'
+    when 'AR'
+      assign ddu_geo_target = '/es-ar/'
+    when 'CL'
+      assign ddu_geo_target = '/es-cl/'
+    when 'CO'
+      assign ddu_geo_target = '/es-co/'
+    when 'BR'
+      assign ddu_geo_target = '/es-br/'
+    when 'ES'
+      assign ddu_geo_target = '/es-es/'
+    when 'BO','CR','EC','SV','GT','HN','NI','PA','PY','PE','DO','VE'
+      assign ddu_geo_target = '/es-lat/'
+  endcase
+-%}
+
+{%- if request.path == '/' or request.path == '' -%}
+<script>
+  // DDU Auto-Geo Redirect 2026-05-08 (server-detected: {{ country_iso | default: 'unknown' }})
+  (function() {
+    try {
+      // Solo en home — no rompe links profundos compartidos por redes/email
+      var path = window.location.pathname.replace(/\/+$/, '');
+      if (path !== '' && path !== '/') return;
+
+      // Respeto la elección manual del usuario
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('locale') === 'en' || params.get('lang') === 'en' || params.get('keep_lang') === '1') return;
+
+      // Una sola redirección por sesión — no insistir si ya pasó
+      if (sessionStorage.getItem('dduGeoRedirected') === '1') return;
+
+      // Mapa país → subfolder español (mismo mapeo que el server-side de arriba)
+      var ESP_REDIRECTS = {
+        UY: '/es-uy/', MX: '/es-mx/', AR: '/es-ar/', CL: '/es-cl/',
+        CO: '/es-co/', BR: '/es-br/', ES: '/es-es/',
+        BO: '/es-lat/', CR: '/es-lat/', EC: '/es-lat/', SV: '/es-lat/',
+        GT: '/es-lat/', HN: '/es-lat/', NI: '/es-lat/', PA: '/es-lat/',
+        PY: '/es-lat/', PE: '/es-lat/', DO: '/es-lat/', VE: '/es-lat/'
+      };
+
+      function doRedirect(target) {
+        if (!target) return;
+        sessionStorage.setItem('dduGeoRedirected', '1');
+        // Mantener query string y hash si los hay
+        window.location.replace(target + window.location.search + window.location.hash);
+      }
+
+      // 1) Server-side detected (preferido — sin latencia ni flash)
+      var serverTarget = {{ ddu_geo_target | json }};
+      if (serverTarget && serverTarget !== '') {
+        doRedirect(serverTarget);
+        return;
+      }
+
+      // 2) Cache de geojs.io que ya pone duendes-currency-converter
+      var cachedCountry = sessionStorage.getItem('duendes_geo_v2');
+      if (cachedCountry && ESP_REDIRECTS[cachedCountry]) {
+        doRedirect(ESP_REDIRECTS[cachedCountry]);
+        return;
+      }
+
+      // 3) Última opción: llamar a geojs.io ahora (con timeout)
+      var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+      var tid = setTimeout(function() { if (ctrl) ctrl.abort(); }, 2500);
+
+      fetch('https://get.geojs.io/v1/ip/country.json', ctrl ? { signal: ctrl.signal } : {})
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(data) {
+          clearTimeout(tid);
+          var code = (data && data.country) ? data.country : null;
+          if (code) {
+            sessionStorage.setItem('duendes_geo_v2', code);
+            if (ESP_REDIRECTS[code]) doRedirect(ESP_REDIRECTS[code]);
+          }
+        })
+        .catch(function() { clearTimeout(tid); });
+    } catch (e) {
+      // Nunca romper el sitio por una redirección que falle
+    }
+  })();
+</script>
+{%- endif -%}

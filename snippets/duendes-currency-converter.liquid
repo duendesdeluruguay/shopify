@@ -1,0 +1,271 @@
+{%- comment -%}
+  Duendes Currency Converter
+  Detects visitor country via geojs.io, converts displayed prices to local currency.
+  Works with any Shopify theme. Cache-proof (pure JS, no server-side).
+  Store base currency is set via Liquid variable below.
+{%- endcomment -%}
+
+<style>
+  .dc-currency-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9998;
+    background: rgba(13,11,8,.92);
+    backdrop-filter: blur(8px);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    color: rgba(250,250,248,.7);
+    transform: translateY(100%);
+    transition: transform .4s ease;
+  }
+  .dc-currency-bar.visible { transform: translateY(0); }
+  .dc-currency-bar__flag { font-size: 16px; }
+  .dc-currency-bar__text { letter-spacing: .3px; }
+  .dc-currency-bar__text strong {
+    color: var(--gold, #C9A96E);
+    font-weight: 600;
+  }
+  .dc-currency-bar__close {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(250,250,248,.4);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+  .dc-currency-bar__close:hover { color: #fff; }
+
+  /* Price conversion styling */
+  .dc-converted {
+    display: inline;
+    font-size: .85em;
+    color: var(--gold, #C9A96E);
+    opacity: .8;
+  }
+</style>
+
+<div class="dc-currency-bar" id="dc-currency-bar">
+  <span class="dc-currency-bar__flag" id="dc-flag"></span>
+  <span class="dc-currency-bar__text" id="dc-text"></span>
+  <button class="dc-currency-bar__close" id="dc-close" aria-label="Cerrar">&times;</button>
+</div>
+
+<script>
+(function() {
+  /* ── Config ── */
+  var BASE_CURRENCY = {{ shop.currency | json }};
+  var CACHE_KEY = 'duendes_fx_v2';
+  var CACHE_TTL = 3600000; /* 1 hour */
+  var GEO_CACHE_KEY = 'duendes_geo_v2';
+
+  /* Country → currency mapping (LATAM + major) */
+  var COUNTRY_CURRENCY = {
+    AR:'ARS', BO:'BOB', BR:'BRL', CL:'CLP', CO:'COP', CR:'CRC',
+    EC:'USD', SV:'USD', GT:'GTQ', HN:'HNL', MX:'MXN', NI:'NIO',
+    PA:'USD', PY:'PYG', PE:'PEN', DO:'DOP', VE:'VES', UY:'UYU',
+    US:'USD', CA:'CAD', GB:'GBP', EU:'EUR', DE:'EUR', FR:'EUR',
+    ES:'EUR', IT:'EUR', PT:'EUR', NL:'EUR', BE:'EUR', AT:'EUR',
+    IE:'EUR', FI:'EUR', GR:'EUR', AU:'AUD', NZ:'NZD', JP:'JPY',
+    KR:'KRW', CN:'CNY', IN:'INR', IL:'ILS', ZA:'ZAR', AE:'AED',
+    SA:'SAR', TR:'TRY', PL:'PLN', CZ:'CZK', SE:'SEK', NO:'NOK',
+    DK:'DKK', CH:'CHF', RO:'RON', HU:'HUF', BG:'BGN', HR:'EUR',
+    TW:'TWD', TH:'THB', MY:'MYR', SG:'SGD', PH:'PHP', ID:'IDR',
+    VN:'VND', EG:'EGP', NG:'NGN', KE:'KES', GH:'GHS'
+  };
+
+  /* Currency symbols */
+  var SYMBOLS = {
+    USD:'US$', UYU:'$', ARS:'AR$', BRL:'R$', CLP:'CL$', COP:'CO$',
+    MXN:'MX$', PEN:'S/', PYG:'Gs', EUR:'€', GBP:'£', CAD:'CA$',
+    AUD:'AU$', JPY:'¥', CNY:'¥', INR:'₹', KRW:'₩', ZAR:'R',
+    TRY:'₺', PLN:'zl', SEK:'kr', NOK:'kr', DKK:'kr', CHF:'CHF',
+    ILS:'₪', AED:'AED', SAR:'SAR', TWD:'NT$', THB:'฿', SGD:'S$',
+    NZD:'NZ$', CRC:'₡', GTQ:'Q', HNL:'L', BOB:'Bs', DOP:'RD$',
+    NIO:'C$', VES:'Bs.S', CZK:'Kc', HUF:'Ft', BGN:'лв', RON:'lei',
+    MYR:'RM', PHP:'₱', IDR:'Rp', VND:'₫', EGP:'£E', NGN:'₦',
+    KES:'KSh', GHS:'₵'
+  };
+
+  /* Country flags (emoji) */
+  var FLAGS = {
+    AR:'🇦🇷', BR:'🇧🇷', CL:'🇨🇱', CO:'🇨🇴', MX:'🇲🇽', PE:'🇵🇪',
+    UY:'🇺🇾', US:'🇺🇸', CA:'🇨🇦', GB:'🇬🇧', DE:'🇩🇪', FR:'🇫🇷',
+    ES:'🇪🇸', IT:'🇮🇹', PT:'🇵🇹', AU:'🇦🇺', JP:'🇯🇵', NZ:'🇳🇿',
+    CR:'🇨🇷', EC:'🇪🇨', PY:'🇵🇾', BO:'🇧🇴', GT:'🇬🇹', DO:'🇩🇴',
+    PA:'🇵🇦', HN:'🇭🇳', SV:'🇸🇻', NI:'🇳🇮', VE:'🇻🇪', IN:'🇮🇳',
+    CN:'🇨🇳', KR:'🇰🇷', ZA:'🇿🇦', TR:'🇹🇷', IL:'🇮🇱', AE:'🇦🇪',
+    CH:'🇨🇭', SE:'🇸🇪', NO:'🇳🇴', PL:'🇵🇱'
+  };
+
+  /* ── Detect country (2026-05-01 fix: el JSON-P viejo de geojs.io
+     definía una global `countryip` que ya no existe. Migrado a fetch JSON
+     puro, sin dependencia de globals, con timeout de 3s y fallback null) ── */
+  function detectCountry(cb) {
+    var cached = sessionStorage.getItem(GEO_CACHE_KEY);
+    if (cached) return cb(cached);
+
+    var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timeoutId = setTimeout(function() { if (ctrl) ctrl.abort(); }, 3000);
+
+    fetch('https://get.geojs.io/v1/ip/country.json', ctrl ? { signal: ctrl.signal } : {})
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(data) {
+        clearTimeout(timeoutId);
+        var code = (data && data.country) ? data.country : null;
+        if (code) sessionStorage.setItem(GEO_CACHE_KEY, code);
+        cb(code);
+      })
+      .catch(function() {
+        clearTimeout(timeoutId);
+        cb(null);
+      });
+  }
+
+  /* ── dLocal Go rates (exact rates customers will be charged) ── */
+  var DLOCAL_RATES_USD = {"BRL": 5.64, "CLP": 981.94, "COP": 3969.87, "MXN": 18.76, "PEN": 3.66, "UYU": 40.6, "ARS": 1622.88, "PYG": 6827.72, "BOB": 10.93, "DOP": 64.93, "EUR": 0.91, "GTQ": 8.1, "CRC": 495.76, "MYR": 4.15, "IDR": 18173.94, "KES": 137.82, "NGN": 2557.11};
+
+  /* ── Fetch exchange rates ── */
+  function getRates(cb) {
+    var cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      var data = JSON.parse(cached);
+      if (Date.now() - data.ts < CACHE_TTL) return cb(data.rates);
+    }
+
+    /* Primary: dLocal Go embedded rates (updated periodically via theme push) */
+    if (BASE_CURRENCY === 'USD') {
+      /* Store is in USD — dLocal rates are already from USD */
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), rates: DLOCAL_RATES_USD }));
+      cb(DLOCAL_RATES_USD);
+      return;
+    }
+
+    if (BASE_CURRENCY === 'UYU' && DLOCAL_RATES_USD['UYU']) {
+      /* Store is in UYU — convert dLocal USD rates to UYU-based */
+      var uyuPerUsd = DLOCAL_RATES_USD['UYU'];
+      var uyuRates = {};
+      for (var cur in DLOCAL_RATES_USD) {
+        if (cur !== 'UYU') {
+          uyuRates[cur.toLowerCase()] = DLOCAL_RATES_USD[cur] / uyuPerUsd;
+        }
+      }
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), rates: uyuRates }));
+      cb(uyuRates);
+      return;
+    }
+
+    /* Fallback: free API */
+    fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/' + BASE_CURRENCY.toLowerCase() + '.json')
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        var rates = d[BASE_CURRENCY.toLowerCase()] || {};
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), rates: rates }));
+        cb(rates);
+      })
+      .catch(function() { cb(null); });
+  }
+
+  /* ── Format number by locale ── */
+  function formatPrice(amount, currency) {
+    var sym = SYMBOLS[currency] || currency + ' ';
+    if (amount >= 1000) {
+      /* No decimals for large amounts */
+      var formatted = Math.round(amount).toLocaleString('es');
+      return sym + formatted;
+    }
+    return sym + amount.toFixed(2);
+  }
+
+  /* ── Main ── */
+  function init() {
+    if (localStorage.getItem('dc_currency_dismissed') === 'yes') return;
+
+    detectCountry(function(countryCode) {
+      if (!countryCode) return;
+
+      var targetCurrency = COUNTRY_CURRENCY[countryCode];
+      if (!targetCurrency || targetCurrency === BASE_CURRENCY) return;
+
+      getRates(function(rates) {
+        if (!rates) return;
+
+        var rateKey = targetCurrency.toLowerCase();
+        var rate = rates[rateKey];
+        if (!rate || rate <= 0) return;
+
+        /* Show the currency bar */
+        var bar = document.getElementById('dc-currency-bar');
+        var flag = document.getElementById('dc-flag');
+        var text = document.getElementById('dc-text');
+
+        flag.textContent = FLAGS[countryCode] || '';
+        text.innerHTML = 'Precios en <strong>' + targetCurrency + '</strong> (tipo de cambio actual)';
+
+        setTimeout(function() { bar.classList.add('visible'); }, 1500);
+
+        /* Close button */
+        document.getElementById('dc-close').addEventListener('click', function() {
+          bar.classList.remove('visible');
+          localStorage.setItem('dc_currency_dismissed', 'yes');
+        });
+
+        /* Convert visible prices — find all money-formatted elements */
+        var priceSelectors = [
+          '.dc-card__price',           /* catalog cards */
+          '.duendes-g-card__price',    /* carousel cards */
+          '.price__current .money',    /* theme price elements */
+          '.price .money',
+          'span.money',
+          '.product-price .money',
+          '.price-item--regular',
+          '.price-item--sale'
+        ];
+
+        var els = document.querySelectorAll(priceSelectors.join(','));
+        els.forEach(function(el) {
+          if (el.dataset.dcConverted) return;
+          el.dataset.dcConverted = '1';
+
+          /* Extract numeric price from text */
+          var text = el.textContent.replace(/[^\d.,]/g, '').replace(/\./g, '').replace(',', '.');
+          var basePrice = parseFloat(text);
+          if (isNaN(basePrice) || basePrice <= 0) return;
+
+          /* For UYU prices that come as whole numbers (e.g., "8.000" = 8000 UYU) */
+          if (BASE_CURRENCY === 'UYU' && basePrice < 100) {
+            /* Likely already divided — multiply back */
+            basePrice = basePrice * 1000;
+          }
+
+          var converted = basePrice * rate;
+          var formatted = formatPrice(converted, targetCurrency);
+
+          /* Add converted price below */
+          var span = document.createElement('span');
+          span.className = 'dc-converted';
+          span.textContent = ' ≈ ' + formatted;
+          el.parentNode.insertBefore(span, el.nextSibling);
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>

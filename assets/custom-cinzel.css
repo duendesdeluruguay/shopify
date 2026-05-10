@@ -1,0 +1,218 @@
+/* ============================================================================
+   DUENDES DEL URUGUAY - FONT & TEXT OVERRIDES
+   Horizon Theme - Cleaned v3 (works WITH theme settings)
+   ============================================================================
+   The Horizon theme settings handle: heading font (Cinzel), body font
+   (Cormorant Garamond), accent font, all heading sizes, and color schemes.
+   This file only provides:
+   1. Google Fonts @import (backup/fallback for custom weights)
+   2. -webkit-text-fill-color fix (Horizon transparency issue)
+   3. Mobile drawer menu font overrides (not covered by theme settings)
+   ============================================================================ */
+
+/* 1. GOOGLE FONTS IMPORT (fallback for weights theme doesn't load) */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Lato:wght@300;400;700&display=swap');
+
+/* 2. TEXT FILL COLOR FIX
+   Horizon uses -webkit-text-fill-color: transparent for gradient text effects.
+   This causes all text to appear invisible in some contexts.
+   Force currentColor so text is always visible. */
+*,
+*::before,
+*::after {
+  -webkit-text-fill-color: currentColor;
+}
+
+/* 3. MOBILE DRAWER MENU - Cinzel
+   The Horizon drawer/hamburger menu doesn't inherit theme heading fonts.
+   These overrides ensure Cinzel is used in the mobile navigation. */
+.menu-drawer,
+.menu-drawer a,
+.menu-drawer button,
+.menu-drawer__menu-item,
+.menu-drawer__menu-item a,
+.menu-drawer__menu-item span,
+.menu-drawer__submenu a,
+.menu-drawer__submenu button,
+.menu-drawer__utility-links a,
+.menu-drawer summary,
+.menu-drawer details summary,
+drawer-component a,
+menu-drawer a,
+[id*="menu-drawer"] a {
+  font-family: 'Cinzel', var(--font-heading-family, serif);
+}
+
+/* Drawer menu sizing */
+.menu-drawer__menu-item,
+.menu-drawer__menu-item a,
+.menu-drawer summary {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+
+.menu-drawer__submenu a,
+.menu-drawer__submenu button {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.menu-drawer__utility-links a {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* 4. HEADER & FOOTER OPACITY FIX
+   Ensure no transparency on structural elements */
+.header *,
+.footer *,
+.announcement-bar * {
+  opacity: 1;
+}
+
+/* 5. MOBILE RESPONSIVE DRAWER */
+@media (max-width: 768px) {
+  .menu-drawer__menu-item,
+  .menu-drawer__menu-item a {
+    font-size: 15px;
+    padding: 12px 20px;
+  }
+  .menu-drawer__submenu a {
+    font-size: 13px;
+    padding: 10px 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-drawer__menu-item,
+  .menu-drawer__menu-item a {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+}
+
+/* ============================================================================
+   6. PREMIUM MENU STYLING - Horizon Theme
+   Golden accents, elegant hover effects, refined navigation
+   ============================================================================ */
+
+/* Desktop menu links */
+.menu-list__link,
+.menu-list__link-title {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #1a1a14 !important;
+  transition: color 0.3s ease !important;
+}
+
+/* The link wrapper - for the underline effect */
+.menu-list__link {
+  position: relative !important;
+  text-decoration: none !important;
+}
+
+/* Golden underline animated from center */
+.menu-list__link::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 50% !important;
+  width: 0 !important;
+  height: 1px !important;
+  background: #C9A96E !important;
+  transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.menu-list__link:hover::after {
+  width: 100% !important;
+  left: 0 !important;
+}
+
+.menu-list__link:hover,
+.menu-list__link:hover .menu-list__link-title {
+  color: #C9A96E !important;
+}
+
+/* Active page */
+.menu-list__link--active,
+.menu-list__link--active .menu-list__link-title {
+  color: #C9A96E !important;
+}
+.menu-list__link--active::after {
+  width: 60% !important;
+  left: 20% !important;
+  background: #C9A96E !important;
+}
+
+/* Header bottom border - subtle gold */
+.header,
+section-header .header__wrapper {
+  border-bottom: 1px solid rgba(201, 169, 110, 0.12) !important;
+}
+
+/* Cart, search, account icons - gold on hover */
+.header-actions__action:hover,
+.header__icon:hover {
+  color: #C9A96E !important;
+}
+
+/* Announcement bar */
+.header-announcements,
+.announcement-bar {
+  background: #0d0f09 !important;
+}
+.header-announcements *,
+.announcement-bar * {
+  color: #C9A96E !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  letter-spacing: 2px !important;
+}
+
+/* Golden particle on hover */
+@keyframes duendesMenuGlow {
+  0% { opacity: 0; transform: translateY(0) scale(0.5); }
+  40% { opacity: 0.8; }
+  100% { opacity: 0; transform: translateY(-12px) scale(0); }
+}
+
+.menu-list__link:hover::before {
+  content: '✦' !important;
+  position: absolute !important;
+  bottom: -4px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  font-size: 5px !important;
+  color: #C9A96E !important;
+  animation: duendesMenuGlow 0.7s ease-out forwards !important;
+  pointer-events: none !important;
+}
+
+/* 7. MOBILE DRAWER - Dark premium */
+.header__drawer,
+.menu-drawer,
+drawer-component,
+.header-drawer {
+  background: #0d0f09 !important;
+}
+.header__drawer a,
+.header__drawer button,
+.header__drawer span,
+.menu-drawer a,
+.menu-drawer button,
+.menu-drawer span {
+  color: #FAFAF7 !important;
+  font-family: 'Cormorant Garamond', serif !important;
+}
+.header__drawer a:hover,
+.menu-drawer a:hover {
+  color: #C9A96E !important;
+}
+.menu-list__item,
+.menu-list__list-item {
+  border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+}

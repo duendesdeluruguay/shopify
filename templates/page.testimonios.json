@@ -1,0 +1,390 @@
+{
+  "sections": {
+    "main": {
+      "type": "duendes-testimonios-page",
+      "blocks": {
+        "feat_1": {
+          "type": "featured",
+          "settings": {
+            "quote": "When I opened the package and read my letter, I cried. It was exactly what I needed to hear at that moment in my life. My Guardian Cedric is now on my altar and I speak to him every morning. I can't explain the peace I've felt since he arrived.",
+            "name": "Mariana",
+            "location": "Buenos Aires, Argentina",
+            "guardian": "Cedric — Guardian of Intuition",
+            "photo": "shopify://shop_images/Gemini_Generated_Image_l9shkml9shkml9sh.png"
+          }
+        },
+        "t01": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I ordered Abraham for my mom who was going through a difficult time. When she read the channeled letter, she broke down crying. She said she felt someone finally understood her. Since that day he sits on her bedside table.",
+            "name": "Valentina",
+            "location": "Montevideo, Uruguay",
+            "guardian": "Abraham — Guardian of Strength",
+            "category": "sanacion"
+          }
+        },
+        "t02": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I'm very skeptical about these things, but something about Aidan called me. When the letter arrived, it mentioned things no one knew. Coincidence or not, since he's been with me I make better decisions.",
+            "name": "Carolina",
+            "location": "Santiago, Chile",
+            "guardian": "Aidan — Guardian of the Inner Fire",
+            "category": "transformacion"
+          }
+        },
+        "t03": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My 8-year-old daughter chose Luna without me saying anything. She says Luna watches over her when she sleeps. The way she connects with something magical moves me deeply.",
+            "name": "Sofía",
+            "location": "Lima, Perú",
+            "guardian": "Luna — Guardian of Dreams",
+            "category": "conexion"
+          }
+        },
+        "t04": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I already have three Guardians and each one arrived at the exact right moment. I don't look for them — they find me. Thibisay's channeling is a gift.",
+            "name": "Diego",
+            "location": "Bogotá, Colombia",
+            "guardian": "Collection of 3 Guardians",
+            "category": "magia"
+          }
+        },
+        "t05": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I bought it as decoration. I'm not spiritual. But there's something about these duendes that makes you stop and think. My office feels different since Rowan has been there.",
+            "name": "Martín",
+            "location": "Mexico City, Mexico",
+            "guardian": "Rowan — Guardian of Wisdom",
+            "category": "magia"
+          }
+        },
+        "t06": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The tracking said Thursday and it arrived Wednesday. DHL was flawless. The package came beautiful, all protected. The unboxing experience is part of the magic.",
+            "name": "Fernanda",
+            "location": "São Paulo, Brasil",
+            "guardian": "Ivy — Guardian of Growth",
+            "category": "magia"
+          }
+        },
+        "t07": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I gave a Guardian to my best friend when she lost her father. The channeled letter spoke of him without anyone telling us. We were both in shock. It's inexplicable.",
+            "name": "Ana",
+            "location": "Madrid, Spain",
+            "guardian": "Sage — Guardian of Comfort",
+            "category": "sanacion"
+          }
+        },
+        "t08": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I took the Guardian Test and got Briar. I read his story and cried. It was exactly my situation. When he arrived, my home felt safer. There's no other way to describe it.",
+            "name": "Camila",
+            "location": "Quito, Ecuador",
+            "guardian": "Briar — Guardian of Protection",
+            "category": "proteccion"
+          }
+        },
+        "t09": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I've worked with crystals and reiki for 15 years. I can say the energy of these Guardians is real. It's not spiritual merchandising — there's something genuine in every piece.",
+            "name": "Isabel",
+            "location": "Medellín, Colombia",
+            "guardian": "Thorne — Guardian of Boundaries",
+            "category": "conexion"
+          }
+        },
+        "t10": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My husband gave me Willow for our anniversary. The letter said things about our relationship no one would know. Now he wants his own too.",
+            "name": "Laura",
+            "location": "Asunción, Paraguay",
+            "guardian": "Willow — Guardian of Love",
+            "category": "conexion"
+          }
+        },
+        "t11": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I was afraid it would break in shipping. It arrived perfect. The packaging is incredible and the activation ritual was a moment I shared with my daughter. Complete experience.",
+            "name": "Patricia",
+            "location": "San José, Costa Rica",
+            "guardian": "Fern — Guardian of Renewal",
+            "category": "magia"
+          }
+        },
+        "t12": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I adopted Hazel when I started therapy. My therapist says having a connection object helps the process. I don't know if it's the duende or the therapy, but I'm better than ever.",
+            "name": "Daniela",
+            "location": "Caracas, Venezuela",
+            "guardian": "Hazel — Guardian of Clarity",
+            "category": "sanacion"
+          }
+        },
+        "t13": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I'm an artist and I understand the work behind every piece. Cold porcelain worked like this, with real crystals embedded... this isn't a product, it's a work of art.",
+            "name": "Gabriel M.",
+            "location": "Punta del Este, Uruguay",
+            "guardian": "Moss — Guardian of Creativity",
+            "category": "magia"
+          }
+        },
+        "t14": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I bought from the United States with DHL shipping. In 6 days it was at my door. The process was crystal clear and the WhatsApp support was excellent.",
+            "name": "Jennifer",
+            "location": "Miami, FL, USA",
+            "guardian": "Elm — Guardian of Stability",
+            "category": "magia"
+          }
+        },
+        "t15": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My Guardian arrived the week I quit my job to start my own business. The letter spoke of releasing fear and trusting. It was the confirmation I needed. Hoy mi negocio crece.",
+            "name": "Roberto",
+            "location": "Panama City, Panama",
+            "guardian": "Phoenix — Guardian of Rebirth",
+            "category": "transformacion"
+          }
+        },
+        "t16": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My 82-year-old grandmother has Oakley in her room. She says that since he arrived she sleeps better and feels someone is accompanying her. That's priceless.",
+            "name": "Miguel",
+            "location": "Guadalajara, Mexico",
+            "guardian": "Oakley — Guardian of Rest",
+            "category": "proteccion",
+            "photo": "shopify://shop_images/1264.jpg"
+          }
+        },
+        "t17": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I was between two Guardians and couldn't decide. I wrote on WhatsApp and Thibisay helped me choose. Her recommendation was perfect. That personalized attention makes the difference.",
+            "name": "Andrea",
+            "location": "Córdoba, Argentina",
+            "guardian": "Clover — Guardian of Luck",
+            "category": "conexion",
+            "photo": "shopify://shop_images/Gemini_Generated_Image_avw4exavw4exavw4.png"
+          }
+        },
+        "t18": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My meditation group was fascinated when I brought Ember. Now three of them have their own. The Guardians create community without trying.",
+            "name": "Alejandra",
+            "location": "Monterrey, Mexico",
+            "guardian": "Ember — Guardian of Courage",
+            "category": "conexion",
+            "photo": "shopify://shop_images/1613.jpg"
+          }
+        },
+        "t19": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I gifted a Guardian to my therapist. She, who helps so many, also needs someone to take care of her. She told me it was the most meaningful gift she's received in years.",
+            "name": "Paula",
+            "location": "Rosario, Argentina",
+            "guardian": "Birch — Guardian of Balance",
+            "category": "sanacion"
+          }
+        },
+        "t20": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I've lived alone for 5 years. It sounds weird, but since I got Grove, I feel like my apartment has a different energy. I come home from work and I feel welcomed.",
+            "name": "Tomás",
+            "location": "Valparaíso, Chile",
+            "guardian": "Grove — Guardian of the Home",
+            "category": "proteccion"
+          }
+        },
+        "t21": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I lost my 14-year-old dog and a friend sent me to Willow. The letter spoke of letting go with love. I cried all night but for the first time I felt like I could move on.",
+            "name": "María José",
+            "location": "Santo Domingo, Rep. Dominicana",
+            "guardian": "Willow — Guardian of Love",
+            "category": "sanacion"
+          }
+        },
+        "t22": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Fourth Guardian I&apos;ve adopted. My family thinks I&apos;m crazy. But each one has its place and its purpose in my home. They are art, energy, and company. No pienso parar.",
+            "name": "Lucía",
+            "location": "La Paz, Bolivia",
+            "guardian": "Collection of 4 Guardians",
+            "category": "magia"
+          }
+        },
+        "t23": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I bought Flint when I was diagnosed with anxiety. I don't know if it's placebo or what, but touching it during a crisis calms me. My psychiatrist says anchor objects work.",
+            "name": "Andrés",
+            "location": "Guayaquil, Ecuador",
+            "guardian": "Flint — Guardian of Calm",
+            "category": "sanacion"
+          }
+        },
+        "t24": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My mom collects figures and when she saw the quality of the Guardian she said she had never seen anything like it. The crystals, the details, the paint... it's another level.",
+            "name": "Santiago",
+            "location": "Mendoza, Argentina",
+            "guardian": "Reed — Guardian of Adaptation",
+            "category": "magia"
+          }
+        },
+        "t25": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I work in a hospital and the days are tough. My Guardian is in my locker and before every shift I touch it. It's my ritual. It helps me remember why I do what I do.",
+            "name": "Natalia",
+            "location": "Bogotá, Colombia",
+            "guardian": "Ash — Guardian of Resilience",
+            "category": "proteccion"
+          }
+        },
+        "t26": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The activation ritual was a beautiful moment I shared with my partner. We lit the candle, read the letter together. It was like a small marriage with magic.",
+            "name": "Claudia",
+            "location": "Curitiba, Brasil",
+            "guardian": "Glen — Guardian of Harmony",
+            "category": "conexion"
+          }
+        },
+        "t27": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I never write reviews but this deserves it. The channeled letter described my situation with a precision that scared me. Whatever Thibisay does, it's real.",
+            "name": "Fernando",
+            "location": "Tegucigalpa, Honduras",
+            "guardian": "Sterling — Guardian of Truth",
+            "category": "transformacion"
+          }
+        },
+        "t28": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My 12-year-old autistic son connected with Moss in a way he doesn't with people. He takes him everywhere. His therapist is fascinated by the bond they've created.",
+            "name": "Verónica",
+            "location": "Montevideo, Uruguay",
+            "guardian": "Moss — Guardian of Creativity",
+            "category": "conexion"
+          }
+        },
+        "t29": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The Mi Magia Portal is a detail I wasn't expecting. The guides, the meditations, the exclusive content... you buy a Guardian and you receive an entire universe.",
+            "name": "Renata",
+            "location": "Mexico City, Mexico",
+            "guardian": "Ivy — Guardian of Growth",
+            "category": "magia"
+          }
+        },
+        "t30": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I moved to a new country alone, and my Guardian was the first thing I put in my new apartment. It's my little piece of home. When I look at it, I know I'm not entirely alone.",
+            "name": "Valeria",
+            "location": "Barcelona, Spain",
+            "guardian": "Linden — Guardian of New Beginnings",
+            "category": "transformacion"
+          }
+        },
+        "t31": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My boyfriend didn't believe in any of this. I gave him Flint. Now he's the one telling me he talks to it before sleeping. Magic doesn't ask permission.",
+            "name": "Romina",
+            "location": "Santa Cruz, Bolivia",
+            "guardian": "Flint — Guardian of Calm",
+            "category": "transformacion"
+          }
+        },
+        "t32": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I'm a collector of art toys and figures. This is in another league. The craftsmanship, the crystals, the story behind it... my friends can't believe it comes from Uruguay.",
+            "name": "Matías",
+            "location": "Buenos Aires, Argentina",
+            "guardian": "Alder — Guardian of Vision",
+            "category": "magia"
+          }
+        }
+      },
+      "block_order": [
+        "feat_1",
+        "t01",
+        "t02",
+        "t03",
+        "t04",
+        "t05",
+        "t06",
+        "t07",
+        "t08",
+        "t09",
+        "t10",
+        "t11",
+        "t12",
+        "t13",
+        "t14",
+        "t15",
+        "t16",
+        "t17",
+        "t18",
+        "t19",
+        "t20",
+        "t21",
+        "t22",
+        "t23",
+        "t24",
+        "t25",
+        "t26",
+        "t27",
+        "t28",
+        "t29",
+        "t30",
+        "t31",
+        "t32"
+      ],
+      "settings": {
+        "eyebrow": "STORIES THAT ARE NOT MADE UP",
+        "title": "No te lo contamos nosotros. Te lo cuentan ellos.",
+        "subtitle": "Thousands of families in 45 countries already feel what you are about to discover.",
+        "hero_image": "shopify://shop_images/1310.jpg",
+        "stat_adoptions": "15000+",
+        "stat_countries": "45+",
+        "stat_stars": "5.0",
+        "cta_text": "If you reached this far reading, your Guardian is already looking for you."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

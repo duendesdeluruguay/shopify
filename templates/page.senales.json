@@ -1,0 +1,168 @@
+{
+  "sections": {
+    "main": {
+      "type": "duendes-senales-page",
+      "blocks": {
+        "cat1": {
+          "type": "category_header",
+          "settings": {
+            "eyebrow": "YOUR BODY KNOWS",
+            "title": "Signs you feel in the body and in the world",
+            "subtitle": ""
+          }
+        },
+        "c1": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "Numbers that follow you",
+            "description": "11:11 on the clock. 22:22 before sleep. 3:33 when you wake up. It's not your brain playing tricks on you — it's a code someone is using to get your attention.",
+            "image": "shopify://shop_images/1771.jpg"
+          }
+        },
+        "c2": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "Coincidences that leave you speechless",
+            "description": "You think of someone and they write you in that second. You talk about something and it appears in front of you. Those synchronicities aren't noise — they're direct messages you don't yet know how to read.",
+            "image": "shopify://shop_images/1776.jpg"
+          }
+        },
+        "c3": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "Animals choose you",
+            "description": "Birds landing near you. Cats that won't leave. Butterflies appearing at key moments. Animals sense a frequency you're emitting without knowing.",
+            "image": "shopify://shop_images/1765.jpg"
+          }
+        },
+        "c4": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "Objects that appear on their own",
+            "description": "Feathers on your path. Coins where they shouldn't be. Stones that catch your eye. They appear just when you need them most — and no, it's not your imagination.",
+            "image": "shopify://shop_images/389.jpg"
+          }
+        },
+        "c5": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "An inner voice that won't go quiet",
+            "description": "You feel something guiding you but you can't explain what. A silent certainty pushing you toward certain decisions — even when logic says otherwise.",
+            "image": "shopify://shop_images/1770.jpg"
+          }
+        },
+        "cat2": {
+          "type": "category_header",
+          "settings": {
+            "eyebrow": "YOUR SOUL SPEAKS",
+            "title": "Emotional signs you can no longer ignore",
+            "subtitle": ""
+          }
+        },
+        "c6": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "You know things without knowing how",
+            "description": "You have hunches that always come true. You know who's calling before looking at your phone. Your intuition is more powerful than you let yourself believe.",
+            "image": "shopify://shop_images/1287.jpg"
+          }
+        },
+        "c7": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "You feel too much — and it drains you",
+            "description": "You get emotional about things others don't register. You feel the energy of places, people, situations. That's not weakness. It's a gift you haven't learned to use yet.",
+            "image": "shopify://shop_images/1659.jpg"
+          }
+        },
+        "c8": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "You are ready for something that doesn&apos;t yet have a name",
+            "description": "You feel there's something bigger waiting for you, but you don't know what form it takes. That restlessness isn't anxiety — it's your next level calling you.",
+            "image": "shopify://shop_images/1582.jpg"
+          }
+        },
+        "c9": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "You look for answers where no one else looks",
+            "description": "You read things your friends don't. You search in places others ignore. You feel the answer is close but you can't quite grasp it yet.",
+            "image": "shopify://shop_images/1362.jpg"
+          }
+        },
+        "c10": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "Something big is about to happen",
+            "description": "You feel it in the body. In the chest. In the skin. Something tells you your life is about to change — and this time it is serious.",
+            "image": "shopify://shop_images/1643.jpg"
+          }
+        },
+        "cat3": {
+          "type": "category_header",
+          "settings": {
+            "eyebrow": "YOUR PROTECTION",
+            "title": "When the weight you carry needs a Guardian",
+            "subtitle": ""
+          }
+        },
+        "c11": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "You carry energy that isn&apos;t yours",
+            "description": "You absorb others' pain. You always give more than you receive. You get exhausted without knowing why. A Guardian doesn't take your burden away — it helps it not crush you.",
+            "image": "shopify://shop_images/1050.jpg"
+          }
+        },
+        "c12": {
+          "type": "signal_card",
+          "settings": {
+            "icon": "",
+            "title": "You need something to take care of you",
+            "description": "Protection, clarity, or a profound change. If you feel something is missing that you can't buy anywhere — maybe it's not a thing. Maybe it's a someone.",
+            "image": "shopify://shop_images/1048.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "cat1",
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "cat2",
+        "c6",
+        "c7",
+        "c8",
+        "c9",
+        "c10",
+        "cat3",
+        "c11",
+        "c12"
+      ],
+      "settings": {
+        "eyebrow": "THIS IS NOT A COINCIDENCE",
+        "title": "The signs that brought you here",
+        "intro": "If you are on this page, something brought you. It wasn&apos;t the algorithm. It wasn&apos;t chance. Something inside you recognizes what you are about to read.",
+        "hero_image": "shopify://shop_images/2327.jpg",
+        "cta_text": "If you nodded along to more than three, your Guardian is already looking for you. All that&apos;s left is for you to open the door."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

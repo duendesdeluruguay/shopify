@@ -1,0 +1,197 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .dc-curio-section {
+    padding: 48px 0;
+    position: relative;
+  }
+  .dc-curio-section--light { background: #FAFAF8; }
+  .dc-curio-section--dark { background: #0D0B08; }
+  .dc-curio-section__inner { max-width: 600px; margin: 0 auto; padding: 0 24px; }
+
+  .dc-curio-section__title {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold, #C9A96E);
+    margin-bottom: 24px;
+    opacity: .7;
+  }
+
+  /* Slideshow container */
+  .dc-curio-show {
+    position: relative;
+    min-height: 140px;
+    overflow: hidden;
+  }
+  .dc-curio-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .6s ease, transform .6s ease;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .dc-curio-slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+    pointer-events: auto;
+  }
+
+  /* Card */
+  .dc-curio-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+  }
+  .dc-curio-section--dark .dc-curio-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(201,169,110,.08);
+  }
+  .dc-curio-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 32px; right: 32px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold, #C9A96E), transparent);
+    opacity: .3;
+  }
+  .dc-curio-card__label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold, #C9A96E);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .dc-curio-card__text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    font-style: italic;
+    margin: 0;
+  }
+  .dc-curio-section--light .dc-curio-card__text { color: var(--text, #1a1a14); }
+  .dc-curio-section--dark .dc-curio-card__text { color: rgba(250,250,248,.8); }
+
+  /* Dots */
+  .dc-curio-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .dc-curio-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: all .3s;
+    padding: 0;
+  }
+  .dc-curio-section--light .dc-curio-dot { background: rgba(26,26,20,.15); }
+  .dc-curio-section--dark .dc-curio-dot { background: rgba(250,250,248,.15); }
+  .dc-curio-dot.active {
+    background: var(--gold, #C9A96E);
+    width: 20px;
+    border-radius: 3px;
+  }
+
+  @media (max-width: 640px) {
+    .dc-curio-card { padding: 22px 20px; }
+    .dc-curio-card__text { font-size: 15px; }
+  }
+</style>
+
+<section class="dc-curio-section dc-curio-section--{{ section.settings.theme }}" id="curiosidades">
+  <div class="dc-curio-section__inner">
+    <p class="dc-curio-section__title duendes-reveal">{{ section.settings.title }}</p>
+
+    <div class="dc-curio-show" data-curio-show>
+      {%- for block in section.blocks -%}
+        <div class="dc-curio-slide {% if forloop.first %}active{% endif %}" data-curio-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="dc-curio-card">
+            {%- if block.settings.label != blank -%}
+              <span class="dc-curio-card__label">{{ block.settings.label }}</span>
+            {%- endif -%}
+            <p class="dc-curio-card__text">{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="dc-curio-dots" data-curio-dots>
+      {%- for block in section.blocks -%}
+        <button class="dc-curio-dot {% if forloop.first %}active{% endif %}" data-curio-goto="{{ forloop.index0 }}" aria-label="Curiosidad {{ forloop.index }}"></button>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var show = document.querySelector('[data-curio-show]');
+  if(!show) return;
+  var slides = show.querySelectorAll('.dc-curio-slide');
+  var dots = document.querySelectorAll('[data-curio-goto]');
+  if(slides.length < 2) return;
+
+  var current = 0, timer;
+
+  function goTo(idx){
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = idx % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function next(){ goTo(current + 1); }
+
+  function startTimer(){ timer = setInterval(next, 5000); }
+  function resetTimer(){ clearInterval(timer); startTimer(); }
+
+  dots.forEach(function(dot){
+    dot.addEventListener('click', function(){
+      goTo(parseInt(this.getAttribute('data-curio-goto')));
+      resetTimer();
+    });
+  });
+
+  startTimer();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Curiosidades Slideshow",
+  "tag": "section",
+  "class": "dc-curio-section-wrap",
+  "settings": [
+    { "type": "select", "id": "theme", "label": "Tema", "options": [{"value":"light","label":"Claro"},{"value":"dark","label":"Oscuro"}], "default": "light" },
+    { "type": "text", "id": "title", "label": "Titulo", "default": "Curiosidades de nuestras creaciones" }
+  ],
+  "blocks": [
+    {
+      "type": "curiosidad",
+      "name": "Curiosidad",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Etiqueta" },
+        { "type": "textarea", "id": "text", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Curiosidades Slideshow" }]
+}
+{% endschema %}
+

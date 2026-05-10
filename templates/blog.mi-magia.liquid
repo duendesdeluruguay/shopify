@@ -1,0 +1,303 @@
+{% comment %}
+  Mi Magia · Blog público · v6.0 (post destacado + categorías + search + tag bar grande)
+  Template asignable al blog "Mi Magia" en Shopify.
+  SIN gating — público para SEO. Extras condicionales solo para compradores.
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+  .blog-wrap {
+    --black-deep: #0a0a0a;
+    --black-soft: #16110d;
+    --cream: #F5F0E1;
+    --cream-light: #FAF6EE;
+    --gold: #C9A961;
+    --gold-bright: #D8B872;
+    --gold-dark: #8b7137;
+    --brown-deep: #2A2620;
+    --brown-soft: #5A5048;
+    --line-gold: rgba(201,169,97,0.25);
+    background: var(--cream);
+    color: var(--brown-deep);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    line-height: 1.7;
+    font-size: 18px;
+  }
+  .blog-wrap * { box-sizing: border-box; }
+
+  /* BANNER NOVEDAD · solo compradores */
+  .blog-wrap .mm-novedad { background: var(--black-soft); color: var(--cream); border-bottom: 1px solid var(--gold-dark); padding: 12px 24px; text-align: center; }
+  .blog-wrap .mm-novedad a { color: var(--cream); text-decoration: none; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .blog-wrap .mm-novedad .badge { background: var(--gold); color: var(--black-deep); padding: 3px 10px; font-size: 9px; letter-spacing: 0.4em; }
+  .blog-wrap .mm-novedad .arrow { color: var(--gold); transition: transform 0.3s; }
+  .blog-wrap .mm-novedad a:hover .arrow { transform: translateX(4px); }
+
+  .blog-wrap .mm-badge-comunidad { background: var(--cream-light); border-bottom: 1px solid var(--line-gold); text-align: center; padding: 10px 24px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; }
+  .blog-wrap .mm-badge-comunidad .star { color: var(--gold); margin-right: 8px; }
+
+  /* HERO · banner editorial fino */
+  .blog-wrap .blog-hero { background: var(--black-deep); color: var(--cream); padding: 56px 24px 60px; text-align: center; position: relative; overflow: hidden; }
+  .blog-wrap .blog-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(201,169,97,0.15) 0%, transparent 65%); }
+  .blog-wrap .blog-hero::after { content: ''; position: absolute; inset: 12px; border: 1px solid rgba(201,169,97,0.28); pointer-events: none; }
+  .blog-wrap .blog-hero-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
+  .blog-wrap .blog-hero .eyebrow { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 14px; text-transform: uppercase; }
+  .blog-wrap .blog-hero h1 { font-family: 'Great Vibes', cursive; font-size: clamp(54px, 9vw, 92px); color: var(--cream); margin: 0 0 4px; line-height: 1; font-weight: 400; }
+  .blog-wrap .blog-hero .sub { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.55em; color: var(--gold); text-transform: uppercase; margin-top: 12px; }
+  .blog-wrap .blog-hero p.lead { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 17px; color: rgba(245,240,225,0.82); margin: 18px auto 0; max-width: 560px; line-height: 1.55; }
+
+  /* MÓDULO CATEGORÍAS */
+  .blog-wrap .categorias-modulo { background: var(--cream-light); border-bottom: 1px solid var(--line-gold); padding: 36px 24px; text-align: center; }
+  .blog-wrap .categorias-modulo h2 { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.5em; color: var(--gold-dark); text-transform: uppercase; margin: 0 0 22px; font-weight: 500; }
+  .blog-wrap .categorias-modulo .cat-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 0; max-width: 1200px; margin: 0 auto; border: 1px solid var(--brown-deep); }
+  .blog-wrap .categorias-modulo a { flex: 1; min-width: 180px; padding: 18px 22px; background: #fff; color: var(--brown-deep); text-decoration: none; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; border-right: 1px solid var(--brown-deep); transition: all 0.3s ease; text-align: center; }
+  .blog-wrap .categorias-modulo a:last-child { border-right: none; }
+  .blog-wrap .categorias-modulo a:hover { background: var(--black-deep); color: var(--gold); }
+  @media (max-width: 880px) {
+    .blog-wrap .categorias-modulo .cat-grid { flex-direction: column; }
+    .blog-wrap .categorias-modulo a { border-right: none; border-bottom: 1px solid var(--brown-deep); }
+    .blog-wrap .categorias-modulo a:last-child { border-bottom: none; }
+  }
+
+  /* SEARCH BAR */
+  .blog-wrap .blog-search { max-width: 640px; margin: 36px auto 0; padding: 0 24px; display: flex; gap: 0; }
+  .blog-wrap .blog-search input[type="search"] { flex: 1; padding: 14px 18px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 17px; font-style: italic; color: var(--brown-deep); border: 1px solid var(--brown-deep); border-right: none; background: #fff; outline: none; }
+  .blog-wrap .blog-search input[type="search"]::placeholder { color: var(--brown-soft); opacity: 0.7; }
+  .blog-wrap .blog-search input[type="search"]:focus { border-color: var(--gold-dark); }
+  .blog-wrap .blog-search button { background: var(--black-deep); color: var(--gold); border: 1px solid var(--brown-deep); padding: 0 24px; font-family: 'Cinzel', serif; font-size: 18px; cursor: pointer; transition: background 0.3s ease; }
+  .blog-wrap .blog-search button:hover { background: var(--gold-dark); color: var(--cream); }
+
+  /* TAG BAR · más grande y legible */
+  .blog-wrap .tag-bar { background: var(--cream); padding: 40px 24px 36px; text-align: center; max-width: 1200px; margin: 0 auto; }
+  .blog-wrap .tag-bar-title { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.5em; color: var(--gold-dark); text-transform: uppercase; margin: 0 0 18px; font-weight: 500; }
+  .blog-wrap .tag-bar a { display: inline-block; margin: 6px 8px; padding: 14px 28px; font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--brown-deep); border: 1px solid var(--gold-dark); text-decoration: none; transition: all 0.3s ease; background: #fff; }
+  .blog-wrap .tag-bar a:hover, .blog-wrap .tag-bar a.active { background: var(--black-deep); color: var(--gold); border-color: var(--gold); }
+
+  /* POST DESTACADO · full-width arriba */
+  .blog-wrap .destacado-wrap { max-width: 1200px; margin: 0 auto; padding: 36px 24px 0; }
+  .blog-wrap .destacado-card { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; background: #fff; border: 1px solid var(--brown-deep); overflow: hidden; transition: box-shadow 0.4s ease; }
+  .blog-wrap .destacado-card:hover { box-shadow: 0 22px 52px rgba(167,129,64,0.18); }
+  .blog-wrap .destacado-card .img-wrap { aspect-ratio: 16 / 10; overflow: hidden; background: var(--cream-light); }
+  .blog-wrap .destacado-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+  .blog-wrap .destacado-card:hover .img-wrap img { transform: scale(1.04); }
+  .blog-wrap .destacado-card .body { padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; }
+  .blog-wrap .destacado-card .destacado-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--gold); display: inline-block; align-self: flex-start; }
+  .blog-wrap .destacado-card .meta { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.35em; color: var(--gold-dark); text-transform: uppercase; margin: 0 0 16px; }
+  .blog-wrap .destacado-card h2 { font-family: 'Great Vibes', cursive; font-size: clamp(40px, 4.5vw, 60px); line-height: 1.05; color: var(--brown-deep); margin: 0 0 22px; font-weight: 400; }
+  .blog-wrap .destacado-card h2 a { color: inherit; text-decoration: none; }
+  .blog-wrap .destacado-card h2 a:hover { color: var(--gold-dark); }
+  .blog-wrap .destacado-card .excerpt { font-style: italic; font-size: 17px; line-height: 1.7; color: var(--brown-soft); margin: 0 0 28px; }
+  .blog-wrap .destacado-card .cta { display: inline-block; padding: 16px 38px; font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase; text-decoration: none; color: var(--cream); background: var(--black-deep); border: 1px solid var(--gold); transition: all 0.3s ease; align-self: flex-start; }
+  .blog-wrap .destacado-card .cta:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
+  @media (max-width: 880px) {
+    .blog-wrap .destacado-card { grid-template-columns: 1fr; }
+    .blog-wrap .destacado-card .body { padding: 32px 24px; }
+  }
+
+  /* GRID DE ARTÍCULOS */
+  .blog-wrap .blog-list { max-width: 1200px; margin: 0 auto; padding: 48px 24px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 32px; }
+  .blog-wrap .article-card { background: #fff; border: 1px solid var(--line-gold); text-decoration: none; color: var(--brown-deep); transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; display: flex; flex-direction: column; overflow: hidden; }
+  .blog-wrap .article-card:hover { transform: translateY(-6px); box-shadow: 0 22px 48px rgba(167,129,64,0.15); border-color: var(--gold); }
+  .blog-wrap .article-card .img-wrap { aspect-ratio: 16 / 10; overflow: hidden; background: var(--cream-light); position: relative; }
+  .blog-wrap .article-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+  .blog-wrap .article-card:hover .img-wrap img { transform: scale(1.04); }
+  .blog-wrap .article-card .img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 28px; opacity: .55; background: linear-gradient(135deg, var(--cream-light), var(--cream)); letter-spacing: 0.6em; }
+  .blog-wrap .article-card .body { padding: 28px 28px 32px; flex: 1; display: flex; flex-direction: column; }
+  .blog-wrap .article-card .cat { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.45em; color: var(--gold-dark); text-transform: uppercase; margin: 0 0 10px; }
+  .blog-wrap .article-card .meta-row { display: flex; gap: 14px; align-items: center; font-family: 'Cinzel', serif; font-size: 9.5px; letter-spacing: 0.3em; color: var(--brown-soft); text-transform: uppercase; margin: 0 0 14px; }
+  .blog-wrap .article-card .meta-row .dot { color: var(--gold-dark); }
+  .blog-wrap .article-card h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 23px; line-height: 1.3; margin: 0 0 14px; font-weight: 500; color: var(--brown-deep); letter-spacing: 0.2px; }
+  .blog-wrap .article-card .excerpt { font-style: italic; color: var(--brown-soft); font-size: 16px; margin: 0 0 22px; flex: 1; line-height: 1.65; }
+  .blog-wrap .article-card .read-more { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em; color: var(--gold-dark); text-transform: uppercase; align-self: flex-start; padding-bottom: 4px; border-bottom: 1px solid var(--gold); transition: color 0.3s ease, border-color 0.3s ease; }
+  .blog-wrap .article-card:hover .read-more { color: var(--brown-deep); border-color: var(--brown-deep); }
+
+  /* PAGINACIÓN */
+  .blog-wrap .pagination { grid-column: 1 / -1; text-align: center; padding: 40px 0 0; border-top: 1px solid var(--line-gold); margin-top: 24px; }
+  .blog-wrap .pagination a, .blog-wrap .pagination span { display: inline-block; padding: 10px 16px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.3em; color: var(--gold-dark); text-decoration: none; text-transform: uppercase; }
+  .blog-wrap .pagination a:hover { color: var(--brown-deep); }
+  .blog-wrap .pagination span.current { color: var(--brown-deep); font-weight: 600; }
+
+  /* CTA UPSELL CIERRE */
+  .blog-wrap .blog-upsell { background: var(--cream-light); border-top: 1px solid var(--line-gold); border-bottom: 1px solid var(--line-gold); padding: 56px 24px 64px; text-align: center; }
+  .blog-wrap .blog-upsell-inner { max-width: 720px; margin: 0 auto; }
+  .blog-wrap .blog-upsell .eyebrow { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.5em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 12px; }
+  .blog-wrap .blog-upsell h2 { font-family: 'Great Vibes', cursive; font-size: clamp(40px, 5.5vw, 60px); color: var(--brown-deep); margin: 0 0 16px; line-height: 1; font-weight: 400; }
+  .blog-wrap .blog-upsell p { font-style: italic; font-size: 16px; color: var(--brown-soft); max-width: 560px; margin: 0 auto 26px; line-height: 1.65; }
+  .blog-wrap .blog-upsell .cta { display: inline-block; padding: 15px 36px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; text-decoration: none; color: var(--cream); background: var(--black-deep); border: 1px solid var(--gold); transition: all 0.3s ease; }
+  .blog-wrap .blog-upsell .cta:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
+
+  .blog-wrap .empty { grid-column: 1/-1; text-align: center; padding: 80px 24px; font-style: italic; color: var(--brown-soft); }
+
+  @media (max-width: 640px) {
+    .blog-wrap .blog-hero { padding: 36px 16px 40px; }
+    .blog-wrap .blog-list { padding: 36px 16px 60px; gap: 24px; grid-template-columns: 1fr; }
+    .blog-wrap .blog-upsell { padding: 44px 16px 50px; }
+    .blog-wrap .destacado-wrap { padding: 24px 16px 0; }
+  }
+</style>
+
+<div class="blog-wrap">
+
+{%- assign es_comprador = false -%}
+{%- if customer -%}
+  {%- if customer.orders_count > 0 -%}{%- assign es_comprador = true -%}{%- endif -%}
+  {%- if customer.tags contains 'comprador' -%}{%- assign es_comprador = true -%}{%- endif -%}
+{%- endif -%}
+
+{%- if es_comprador -%}
+<div class="mm-novedad">
+  <a href="/products/canalizacion-almica">
+    <span class="badge">✦ Novedad</span>
+    <span>Canalización Álmica · escuchá su voz · USD 30 por guardián</span>
+    <span class="arrow">→</span>
+  </a>
+</div>
+<div class="mm-badge-comunidad">
+  <span class="star">✦</span>Comunidad Elemental · {{ customer.first_name | default: 'Adoptante' }}
+</div>
+{%- endif -%}
+
+<section class="blog-hero">
+  <div class="blog-hero-inner">
+    <p class="eyebrow">Comunidad Elemental Esotérica</p>
+    <h1>Mi Magia</h1>
+    <p class="sub">El Blog del Oficio</p>
+    <p class="lead">Acá vive la palabra: artículos sobre los seres elementales, los linajes, los rituales, los sueños y la canalización. Volvé cuando quieras.</p>
+  </div>
+</section>
+
+<section class="categorias-modulo">
+  <h2>Por categoría</h2>
+  <div class="cat-grid">
+    <a href="/blogs/mi-magia/tagged/quienes-son">Quiénes son</a>
+    <a href="/blogs/mi-magia/tagged/como-se-canaliza">Cómo se canaliza</a>
+    <a href="/blogs/mi-magia/tagged/linajes">Linajes</a>
+    <a href="/blogs/mi-magia/tagged/rituales">Rituales</a>
+    <a href="/blogs/mi-magia/tagged/cuando-te-elige">Cuándo te elige</a>
+    <a href="/blogs/mi-magia/tagged/oficio">El oficio</a>
+    <a href="/blogs/mi-magia/tagged/compendio">Compendio</a>
+  </div>
+</section>
+
+<form action="/search" method="get" class="blog-search" role="search">
+  <input type="hidden" name="type" value="article">
+  <input type="search" name="q" placeholder="Buscar en el blog..." aria-label="Buscar artículos">
+  <button type="submit" aria-label="Buscar">✦</button>
+</form>
+
+{%- comment -%} POST DESTACADO {%- endcomment -%}
+{%- assign destacado = nil -%}
+{%- for article in blog.articles -%}
+  {%- if article.tags contains 'destacado' or article.tags contains 'Destacado' -%}
+    {%- assign destacado = article -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if destacado == nil and blog.articles.size > 0 -%}
+  {%- assign destacado = blog.articles.first -%}
+{%- endif -%}
+
+{%- if destacado -%}
+<div class="destacado-wrap">
+  <article class="destacado-card">
+    <a href="{{ destacado.url }}" class="img-wrap" aria-label="{{ destacado.title }}">
+      {%- if destacado.image -%}
+        <img src="{{ destacado.image | image_url: width: 1200 }}" alt="{{ destacado.image.alt | escape | default: destacado.title }}" loading="eager">
+      {%- else -%}
+        <div class="img-placeholder">✦</div>
+      {%- endif -%}
+    </a>
+    <div class="body">
+      <span class="destacado-label">✦ Destacado</span>
+      <p class="meta">
+        {{ destacado.published_at | date: "%d de %B, %Y" }}
+        {%- if destacado.tags.size > 0 -%} · {{ destacado.tags.first }}{%- endif -%}
+        · {{ destacado.content | strip_html | number_of_words | divided_by: 200 | plus: 1 }} min de lectura
+      </p>
+      <h2><a href="{{ destacado.url }}">{{ destacado.title }}</a></h2>
+      <p class="excerpt">{{ destacado.excerpt_or_content | strip_html | truncate: 280 }}</p>
+      <a href="{{ destacado.url }}" class="cta">Leer ahora</a>
+    </div>
+  </article>
+</div>
+{%- endif -%}
+
+{%- if blog.all_tags.size > 0 -%}
+<nav class="tag-bar">
+  <p class="tag-bar-title">Filtrar por etiqueta</p>
+  <a href="{{ blog.url }}" {% if current_tags == blank %}class="active"{% endif %}>Todos</a>
+  {%- for tag in blog.all_tags -%}
+    {%- assign tag_lower = tag | downcase -%}
+    {%- unless tag_lower == 'destacado' -%}
+      <a href="{{ blog.url }}/tagged/{{ tag | handle }}" {% if current_tags contains tag %}class="active"{% endif %}>{{ tag }}</a>
+    {%- endunless -%}
+  {%- endfor -%}
+</nav>
+{%- endif -%}
+
+<div class="blog-list">
+  {%- paginate blog.articles by 12 -%}
+    {%- if blog.articles.size > 0 -%}
+      {%- for article in blog.articles -%}
+        {%- if destacado and article.id == destacado.id and current_tags == blank -%}{%- continue -%}{%- endif -%}
+        <a href="{{ article.url }}" class="article-card">
+          <div class="img-wrap">
+            {%- if article.image -%}
+              <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape | default: article.title }}" loading="lazy">
+            {%- else -%}
+              <div class="img-placeholder">✦</div>
+            {%- endif -%}
+          </div>
+          <div class="body">
+            {%- if article.tags.size > 0 -%}
+              {%- for t in article.tags -%}
+                {%- assign tlow = t | downcase -%}
+                {%- unless tlow == 'destacado' -%}
+                  <p class="cat">{{ t }}</p>
+                  {%- break -%}
+                {%- endunless -%}
+              {%- endfor -%}
+            {%- else -%}
+              <p class="cat">Mi Magia</p>
+            {%- endif -%}
+            <p class="meta-row">
+              <span>{{ article.published_at | date: "%d %b %Y" }}</span>
+              <span class="dot">·</span>
+              <span>{{ article.content | strip_html | number_of_words | divided_by: 200 | plus: 1 }} min de lectura</span>
+            </p>
+            <h3>{{ article.title }}</h3>
+            <p class="excerpt">{{ article.excerpt_or_content | strip_html | truncate: 240 }}</p>
+            <span class="read-more">Leer artículo →</span>
+          </div>
+        </a>
+      {%- endfor -%}
+
+      {%- if paginate.pages > 1 -%}
+        <div class="pagination">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">← Anterior</a>{%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}<a href="{{ part.url }}">{{ part.title }}</a>{%- else -%}<span class="current">{{ part.title }}</span>{%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Siguiente →</a>{%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <p class="empty">El mundo está despertando. Pronto vas a leer lo que se está escribiendo.</p>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{%- unless es_comprador -%}
+<section class="blog-upsell">
+  <div class="blog-upsell-inner">
+    <p class="eyebrow">¿Querés más profundidad?</p>
+    <h2>Adoptá tu guardián</h2>
+    <p>Lo que leés acá es la palabra del oficio. Lo verdadero pasa cuando un guardián elemental llega a tu casa, te elige, y arranca el vínculo. Cada uno es único, hecho a mano, canalizado en 7 días.</p>
+    <a href="/collections/all" class="cta">Conocer los guardianes</a>
+  </div>
+</section>
+{%- endunless -%}
+
+</div>

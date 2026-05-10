@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Fondo Duendes negro profundo -->
+  <rect width="64" height="64" rx="12" fill="#0a0c06"/>
+  <!-- Estrella de 4 puntas dorada (símbolo brand ✦) -->
+  <g transform="translate(32 32)">
+    <!-- Glow exterior sutil -->
+    <circle r="22" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.18"/>
+    <!-- 4 puntas: vertical + horizontal -->
+    <path d="M0 -22 L3 -3 L22 0 L3 3 L0 22 L-3 3 L-22 0 L-3 -3 Z" fill="#dfc472"/>
+    <!-- Pequeño centro luminoso -->
+    <circle r="2.2" fill="#fff8dc"/>
+  </g>
+</svg>

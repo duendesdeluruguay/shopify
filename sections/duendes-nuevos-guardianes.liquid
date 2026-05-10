@@ -1,0 +1,178 @@
+{%- comment -%}
+  Sección "Nuevos Guardianes" — Pacto homepage 2026-05-04
+  Hero rotativo (3-5 imágenes fade) + carrusel manual de productos.
+  Copy y especificación: handoff Cowork msg_1777858049130.
+{%- endcomment -%}
+
+{%- liquid
+  assign sec = section.settings
+  assign coll = collections[sec.collection]
+  assign hero_imgs = ''
+  for i in (1..5)
+    assign key = 'hero_image_' | append: i
+    assign img = sec[key]
+    if img
+      if hero_imgs == ''
+        assign hero_imgs = img | image_url: width: 1600
+      else
+        assign hero_imgs = hero_imgs | append: '|' | append: img | image_url: width: 1600
+      endif
+    endif
+  endfor
+-%}
+
+<section id="ddu-nuevos-{{ section.id }}" class="ddu-nuevos">
+  <div class="ddu-nuevos__hero" data-rotate="{{ sec.rotate_seconds }}">
+    {%- if hero_imgs != '' -%}
+      {%- assign imgs_arr = hero_imgs | split: '|' -%}
+      {%- for src in imgs_arr -%}
+        <img class="ddu-nuevos__hero-img{% if forloop.first %} is-active{% endif %}"
+             src="{{ src }}" alt="" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+             {% if forloop.first %}fetchpriority="high"{% endif %}>
+      {%- endfor -%}
+    {%- elsif coll.products.first -%}
+      <img class="ddu-nuevos__hero-img is-active"
+           src="{{ coll.products.first.featured_image | image_url: width: 1600 }}"
+           alt="" loading="eager" fetchpriority="high">
+    {%- endif -%}
+    <div class="ddu-nuevos__hero-overlay">
+      {%- if sec.badge != blank -%}
+        <span class="ddu-nuevos__badge">{{ sec.badge }}</span>
+      {%- endif -%}
+      <h2 class="ddu-nuevos__title">{{ sec.title }}</h2>
+      <p class="ddu-nuevos__subtitle">{{ sec.subtitle }}</p>
+      {%- if sec.cta_text != blank and sec.cta_url != blank -%}
+        <a class="ddu-nuevos__cta" href="{{ sec.cta_url }}">{{ sec.cta_text }} →</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if coll.products.size > 0 -%}
+    <div class="ddu-nuevos__carousel-wrap">
+      <button class="ddu-nuevos__nav ddu-nuevos__nav--prev" aria-label="Anterior" data-dir="prev">‹</button>
+      <button class="ddu-nuevos__nav ddu-nuevos__nav--next" aria-label="Siguiente" data-dir="next">›</button>
+      <div class="ddu-nuevos__carousel" tabindex="0" aria-label="Carrusel de nuevos guardianes">
+        {%- for p in coll.products limit: 20 -%}
+          <a class="ddu-nuevos__card" href="{{ p.url }}">
+            <div class="ddu-nuevos__card-img">
+              <img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ p.title | escape }}" loading="lazy">
+            </div>
+            <div class="ddu-nuevos__card-info">
+              <span class="ddu-nuevos__card-title">{{ p.title }}</span>
+              <span class="ddu-nuevos__card-cta">Conocelo →</span>
+            </div>
+          </a>
+        {%- endfor -%}
+        {%- if sec.cta_url != blank -%}
+          <a class="ddu-nuevos__card ddu-nuevos__card--more" href="{{ sec.cta_url }}">
+            <div class="ddu-nuevos__card-info ddu-nuevos__card-info--more">
+              <span class="ddu-nuevos__card-arrow">→</span>
+              <span class="ddu-nuevos__card-more-text">{{ sec.see_all_text | default: 'Ver los 46' }}</span>
+            </div>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{%- style -%}
+  .ddu-nuevos { position: relative; background: #0e0a08; color: #f4ecd8; padding: 0 0 64px; overflow: hidden; }
+  .ddu-nuevos__hero { position: relative; width: 100%; height: 90vh; min-height: 520px; max-height: 880px; overflow: hidden; }
+  .ddu-nuevos__hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1500ms ease; }
+  .ddu-nuevos__hero-img.is-active { opacity: 1; }
+  .ddu-nuevos__hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,10,8,.55) 0%, rgba(14,10,8,.15) 35%, rgba(14,10,8,.85) 100%); pointer-events: none; }
+  .ddu-nuevos__hero-overlay { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 64px 24px 56px; text-align: center; }
+  .ddu-nuevos__badge { display: inline-block; font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: #d6b366; padding: 6px 14px; border: 1px solid rgba(214,179,102,.4); border-radius: 999px; margin-bottom: 18px; backdrop-filter: blur(6px); background: rgba(14,10,8,.3); }
+  .ddu-nuevos__title { font-family: 'Cinzel', 'Playfair Display', serif; font-size: clamp(28px, 6vw, 56px); font-weight: 500; letter-spacing: .01em; line-height: 1.1; margin: 0 0 14px; color: #f4ecd8; }
+  .ddu-nuevos__subtitle { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(15px, 2.2vw, 19px); font-style: italic; line-height: 1.5; max-width: 560px; margin: 0 0 26px; color: rgba(244,236,216,.92); }
+  .ddu-nuevos__cta { display: inline-block; font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: #0e0a08; background: #d6b366; padding: 14px 28px; border-radius: 4px; text-decoration: none; transition: transform .3s ease, background .3s ease; }
+  .ddu-nuevos__cta:hover { background: #e6c378; transform: translateY(-2px); }
+
+  .ddu-nuevos__carousel-wrap { position: relative; margin-top: 48px; padding: 0 0 0 0; }
+  .ddu-nuevos__carousel { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 24px; padding: 8px 24px 24px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .ddu-nuevos__carousel::-webkit-scrollbar { display: none; }
+  .ddu-nuevos__card { flex: 0 0 78%; max-width: 320px; scroll-snap-align: start; background: #1a1310; border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: transform .35s ease; cursor: grab; }
+  .ddu-nuevos__card:active { cursor: grabbing; }
+  .ddu-nuevos__card:hover { transform: translateY(-4px) scale(1.01); }
+  .ddu-nuevos__card-img { aspect-ratio: 4 / 5; overflow: hidden; background: #0a0706; }
+  .ddu-nuevos__card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+  .ddu-nuevos__card:hover .ddu-nuevos__card-img img { transform: scale(1.04); }
+  .ddu-nuevos__card-info { padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+  .ddu-nuevos__card-title { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: #f4ecd8; }
+  .ddu-nuevos__card-cta { font-family: 'Playfair Display', serif; font-size: 13px; font-style: italic; color: #d6b366; }
+  .ddu-nuevos__card--more .ddu-nuevos__card-img { display: none; }
+  .ddu-nuevos__card--more .ddu-nuevos__card-info--more { aspect-ratio: 4 / 5; align-items: center; justify-content: center; text-align: center; gap: 14px; padding: 32px 24px; background: linear-gradient(135deg, #1a1310 0%, #2a1f18 100%); }
+  .ddu-nuevos__card-arrow { font-size: 48px; color: #d6b366; line-height: 1; }
+  .ddu-nuevos__card-more-text { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: .15em; text-transform: uppercase; color: #f4ecd8; }
+
+  .ddu-nuevos__nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(244,236,216,.3); background: rgba(14,10,8,.6); color: #f4ecd8; font-size: 22px; line-height: 1; cursor: pointer; backdrop-filter: blur(8px); transition: background .25s, border-color .25s; display: none; }
+  .ddu-nuevos__nav:hover { background: rgba(214,179,102,.15); border-color: #d6b366; }
+  .ddu-nuevos__nav--prev { left: 12px; }
+  .ddu-nuevos__nav--next { right: 12px; }
+
+  @media (min-width: 768px) {
+    .ddu-nuevos__hero { height: 70vh; min-height: 560px; }
+    .ddu-nuevos__hero-overlay { padding: 80px 48px 72px; }
+    .ddu-nuevos__card { flex-basis: 32%; max-width: 360px; }
+    .ddu-nuevos__nav { display: block; }
+  }
+  @media (min-width: 1280px) {
+    .ddu-nuevos__card { flex-basis: 26%; }
+  }
+{%- endstyle -%}
+
+<script>
+(function(){
+  var root = document.getElementById('ddu-nuevos-{{ section.id }}');
+  if (!root) return;
+  var hero = root.querySelector('.ddu-nuevos__hero');
+  var imgs = hero ? hero.querySelectorAll('.ddu-nuevos__hero-img') : [];
+  if (imgs.length > 1) {
+    var rotateMs = (parseFloat(hero.dataset.rotate) || 4.5) * 1000;
+    var idx = 0;
+    setInterval(function(){
+      imgs[idx].classList.remove('is-active');
+      idx = (idx + 1) % imgs.length;
+      imgs[idx].classList.add('is-active');
+    }, rotateMs);
+  }
+  var car = root.querySelector('.ddu-nuevos__carousel');
+  var prev = root.querySelector('[data-dir="prev"]');
+  var next = root.querySelector('[data-dir="next"]');
+  if (car && prev && next) {
+    var step = function(){ var c = car.querySelector('.ddu-nuevos__card'); return c ? c.offsetWidth + 16 : 320; };
+    prev.addEventListener('click', function(){ car.scrollBy({left: -step(), behavior: 'smooth'}); });
+    next.addEventListener('click', function(){ car.scrollBy({left:  step(), behavior: 'smooth'}); });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Nuevos Guardianes",
+  "tag": "section",
+  "class": "section-ddu-nuevos",
+  "settings": [
+    { "type": "header", "content": "Texto" },
+    { "type": "text",      "id": "badge",    "label": "Badge (microtexto sobre hero)",   "default": "Recién llegados · Mayo 2026" },
+    { "type": "text",      "id": "title",    "label": "Título (H2)",                      "default": "Acaban de bajar al bosque." },
+    { "type": "textarea",  "id": "subtitle", "label": "Subtítulo",                        "default": "Cuarenta y seis recién canalizados. Cada uno único, hecho a mano una sola vez. El que es para vos ya está acá esperando." },
+    { "type": "text",      "id": "cta_text", "label": "Texto del botón",                  "default": "Ver quiénes llegaron" },
+    { "type": "url",       "id": "cta_url",  "label": "URL del botón / última card" },
+    { "type": "text",      "id": "see_all_text", "label": "Texto última card del carrusel", "default": "Ver los 46" },
+    { "type": "header", "content": "Productos" },
+    { "type": "collection","id": "collection", "label": "Colección a mostrar" },
+    { "type": "header", "content": "Hero rotativo (1-5 imágenes, opcional)" },
+    { "type": "image_picker", "id": "hero_image_1", "label": "Imagen 1" },
+    { "type": "image_picker", "id": "hero_image_2", "label": "Imagen 2" },
+    { "type": "image_picker", "id": "hero_image_3", "label": "Imagen 3" },
+    { "type": "image_picker", "id": "hero_image_4", "label": "Imagen 4" },
+    { "type": "image_picker", "id": "hero_image_5", "label": "Imagen 5" },
+    { "type": "range", "id": "rotate_seconds", "label": "Segundos por imagen", "min": 3, "max": 10, "step": 1, "default": 5, "unit": "s" }
+  ],
+  "presets": [
+    { "name": "Nuevos Guardianes" }
+  ]
+}
+{% endschema %}

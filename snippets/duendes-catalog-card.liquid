@@ -1,0 +1,93 @@
+{%- comment -%}
+  Duendes Catalog Card — multi-badge with colors, mobile-optimized
+{%- endcomment -%}
+
+{%- liquid
+  assign cat_label = category | default: ''
+  assign hero = is_hero | default: false
+  assign is_coleccion = false
+  if product.tags contains 'Colección Completa'
+    assign is_coleccion = true
+  endif
+
+  assign theme_tags = 'Abundancia y Dinero,Amor y Corazón,Protección,Espiritualidad,Salud y Sanación,Autoestima y Empoderamiento,Compañía y Apoyo Emocional,Ansiedad y Salud Mental,Sombra e Integración,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje y Transgeneracional,Estudio y Concentración,Emprendedores,Identidad Uruguaya' | split: ','
+  assign theme_short = 'Abundancia,Amor,Protección,Espiritualidad,Salud,Autoestima,Compañía,Salud Mental,Sombra,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje,Estudio,Emprendedores,Uruguay' | split: ','
+  assign theme_css = 'abundancia,amor,proteccion,espiritualidad,salud,autoestima,compania,salud-mental,sombra,abrecaminos,suerte,nuevos,sabiduria,linaje,estudio,emprendedores,uruguay' | split: ','
+
+  assign badge_count = 0
+  assign p_badges = ''
+  unless is_coleccion
+    for tt in theme_tags
+      assign clean_tt = tt | strip
+      if product.tags contains clean_tt
+        assign badge_count = badge_count | plus: 1
+        assign short = theme_short[forloop.index0]
+        assign css = theme_css[forloop.index0]
+        if p_badges == ''
+          assign p_badges = short | append: '|' | append: css
+        else
+          assign p_badges = p_badges | append: ',' | append: short | append: '|' | append: css
+        endif
+      endif
+    endfor
+  endunless
+-%}
+
+<a href="{{ product.url }}" class="dc-card {% if hero %}dc-card--hero{% endif %} duendes-reveal" aria-label="{{ product.title }}">
+  <div class="dc-card__img">
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 800 }}"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}"
+        loading="lazy"
+        width="400"
+        height="500"
+      >
+    {%- else -%}
+      <div class="dc-card__placeholder">
+        <span>Sin imagen</span>
+      </div>
+    {%- endif -%}
+
+    {%- if is_coleccion -%}
+      <div class="dc-badges">
+        <span class="dc-badge dc-badge--completo">Protección · Abundancia · Amor · Espiritual</span>
+      </div>
+    {%- elsif p_badges != blank -%}
+      <div class="dc-badges">
+        {%- assign badge_pairs = p_badges | split: ',' -%}
+        {%- assign shown = 0 -%}
+        {%- for pair in badge_pairs -%}
+          {%- assign parts = pair | split: '|' -%}
+          {%- if shown < 3 -%}
+            <span class="dc-badge dc-badge--{{ parts[1] }}">{{ parts[0] }}</span>
+            {%- assign shown = shown | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign remaining = badge_count | minus: 3 -%}
+        {%- if remaining > 0 -%}
+          <span class="dc-badge dc-badge--more">+{{ remaining }}</span>
+        {%- endif -%}
+      </div>
+    {%- elsif cat_label != blank -%}
+      <span class="dc-badge dc-badge--cat" style="position:absolute;top:8px;left:8px;">{{ cat_label }}</span>
+    {%- endif -%}
+
+    <div class="dc-card__overlay">
+      <span class="dc-card__cta">Meet this Guardian</span>
+    </div>
+  </div>
+
+  <div class="dc-card__info">
+    <h3 class="dc-card__name">{{ product.title }}</h3>
+    {%- if hero and product.metafields.custom.esencia != blank -%}
+      <p class="dc-card__essence">{{ product.metafields.custom.esencia }}</p>
+    {%- endif -%}
+    <div class="dc-card__bottom">
+      <p class="dc-card__price">{{ product.price | money_without_trailing_zeros }}</p>
+      {%- if product.available -%}
+        <span class="dc-card__avail"><span class="dc-card__dot"></span>Available</span>
+      {%- endif -%}
+    </div>
+  </div>
+</a>

@@ -1,0 +1,36 @@
+{% comment %}
+  Mi Magia · Page → Redirect a /blogs/mi-magia
+  Esta página queda como compatibilidad. Mi Magia ahora ES el blog (en /blogs/mi-magia).
+  Si querés eliminar la page completamente, hacelo desde Shopify Admin → Online Store → Pages → Mi Magia → Delete.
+  Mejor opción: crear un URL Redirect en Shopify (Online Store → Navigation → URL redirects):
+    From:  /pages/mi-magia
+    To:    /blogs/mi-magia
+  Esto da redirect 301 limpio para SEO.
+{% endcomment %}
+
+<meta http-equiv="refresh" content="0; url=/blogs/mi-magia">
+<link rel="canonical" href="/blogs/mi-magia">
+
+<style>
+  body { background: #0a0a0a; color: #F5F0E1; font-family: Georgia, serif; margin: 0; }
+  .redir-wrap { min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 60px 24px; }
+  .redir-inner { max-width: 480px; }
+  .redir-symbol { color: #C9A961; font-size: 28px; margin-bottom: 24px; opacity: .85; letter-spacing: 0.6em; }
+  .redir-title { font-family: 'Great Vibes', cursive; font-size: clamp(48px, 8vw, 80px); margin: 0 0 16px; font-weight: 400; color: #F5F0E1; }
+  .redir-text { font-style: italic; font-size: 17px; color: rgba(245,240,225,0.78); margin: 0 0 28px; line-height: 1.6; }
+  .redir-cta { display: inline-block; padding: 14px 30px; color: #F5F0E1; border: 1px solid #C9A961; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; }
+  .redir-cta:hover { background: #8b7137; border-color: #8b7137; }
+</style>
+
+<div class="redir-wrap">
+  <div class="redir-inner">
+    <div class="redir-symbol">✦</div>
+    <h1 class="redir-title">Mi Magia se mudó</h1>
+    <p class="redir-text">Mi Magia ahora vive como blog completo. Te llevamos en un instante. Si no carga sola, tocá el botón.</p>
+    <a href="/blogs/mi-magia" class="redir-cta">Entrar a Mi Magia</a>
+  </div>
+</div>
+
+<script>
+  setTimeout(function(){ window.location.replace('/blogs/mi-magia'); }, 800);
+</script>

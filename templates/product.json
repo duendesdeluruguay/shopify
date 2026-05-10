@@ -1,0 +1,1 @@
+{ "sections": { "main": { "type": "duendes-product-premium", "settings": {} }, "guardian-story": { "type": "guardian-story", "settings": {} } }, "order": [ "main", "guardian-story" ] }

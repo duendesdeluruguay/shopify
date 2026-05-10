@@ -1,0 +1,1129 @@
+{% comment %}
+  La Guía de los Duendes del Uruguay · v4.0 BIBLIA
+  · Tipografía: Cinzel (títulos) + Great Vibes (display) + Agency FB / Saira Condensed (body)
+  · Todo el texto centrado
+  · 50 páginas · tipos de seres + cuidados puntuales + sentires + preparar casa
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Saira+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  .libro-wrap {
+    --black-deep: #0a0a0a; --cream: #F5F0E1; --cream-light: #FAF6EE;
+    --gold: #C9A961; --gold-bright: #D8B872; --gold-dark: #8b7137;
+    --brown-deep: #2A2620; --brown-soft: #5A5048;
+    --line-gold: rgba(201,169,97,0.25);
+    --wood-base: #2d1d11; --wood-mid: #3a2618; --wood-light: #4a3022; --wood-dark: #1a0f08;
+    --font-info: 'Agency FB', 'Saira Condensed', 'Trebuchet MS', sans-serif;
+
+    color: var(--cream); font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh; padding: 28px 16px 60px; text-align: center;
+    background-color: #0a0806;
+    background-image:
+      radial-gradient(ellipse at 50% 30%, rgba(80,55,30,0.35) 0%, rgba(0,0,0,0.92) 70%),
+      radial-gradient(circle at 12% 88%, rgba(201,169,97,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 88% 12%, rgba(201,169,97,0.10) 0%, transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'><g fill='none' stroke='%23C9A961' stroke-width='1.5' opacity='0.06'><text x='300' y='180' text-anchor='middle' font-family='serif' font-style='italic' font-size='44' fill='%23C9A961' opacity='0.9'>Duendes del Uruguay</text><text x='300' y='220' text-anchor='middle' font-family='serif' font-size='14' letter-spacing='8' fill='%23C9A961' opacity='0.85'>%E2%9C%A6  %E2%9C%A6  %E2%9C%A6</text><text x='300' y='460' text-anchor='middle' font-family='serif' font-style='italic' font-size='44' fill='%23C9A961' opacity='0.9'>Duendes del Uruguay</text><text x='300' y='500' text-anchor='middle' font-family='serif' font-size='14' letter-spacing='8' fill='%23C9A961' opacity='0.85'>%E2%9C%A6  %E2%9C%A6  %E2%9C%A6</text></g></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><defs><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.79 0 0 0 0 0.66 0 0 0 0 0.38 0 0 0 0.04 0'/></filter></defs><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-size: cover, cover, cover, 600px 600px, 400px 400px;
+    background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat;
+    background-attachment: fixed; position: relative; min-height: 100vh; overflow-x: hidden;
+  }
+
+  /* GLOW dorado sutil en esquinas */
+  .libro-wrap::before {
+    content:''; position: fixed; top: -100px; right: -100px; width: 500px; height: 500px; pointer-events: none; z-index: 0;
+    background: radial-gradient(circle at center, rgba(201,169,97,0.18) 0%, rgba(201,169,97,0.05) 40%, transparent 70%);
+    animation: glowPulse 9s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+  .libro-wrap::after {
+    content:''; position: fixed; bottom: -80px; left: -80px; width: 400px; height: 400px; pointer-events: none; z-index: 0;
+    background: radial-gradient(circle at center, rgba(201,169,97,0.12) 0%, rgba(201,169,97,0.04) 50%, transparent 75%);
+    animation: glowPulse 11s ease-in-out infinite reverse;
+  }
+    100% { background-position: -50% 8%, 200% 26%; }
+  }
+
+  .libro-wrap > * { position: relative; z-index: 1; }
+  .libro-wrap * { box-sizing: border-box; }
+
+  .libro-header { max-width: 760px; margin: 0 auto 24px; text-align: center; }
+  .libro-header .eyebrow { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+  .libro-header h1 { font-family: 'Great Vibes', cursive; font-size: clamp(44px, 6.5vw, 72px); margin: 0 0 8px; line-height: 1; font-weight: 400; color: var(--cream); text-shadow: 0 4px 18px rgba(0,0,0,0.8); }
+  .libro-header .sub { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.5em; color: var(--gold-bright); text-transform: uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+
+  .lang-overlay { position: fixed; inset: 0; background: rgba(10,8,6,0.97); z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+  .lang-overlay.hide { display: none; }
+  .lang-box { max-width: 480px; text-align: center; padding: 40px 32px; border: 1px solid var(--gold); background: linear-gradient(160deg, #16110d 0%, #0a0806 100%); position: relative; }
+  .lang-box::before { content:''; position: absolute; inset: 8px; border: 1px solid rgba(201,169,97,0.3); pointer-events:none; }
+  .lang-box .ornament { color: var(--gold); font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.7em; margin-bottom: 18px; }
+  .lang-box h2 { font-family: 'Great Vibes', cursive; font-weight: 400; font-size: 56px; color: var(--cream); margin: 0 0 8px; line-height: 1; }
+  .lang-box .pretitle { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase; margin-bottom: 18px; }
+  .lang-box p { font-family: var(--font-info); font-size: 16px; color: rgba(245,240,225,0.85); margin: 14px 0 28px; }
+  .lang-buttons { display: flex; gap: 14px; justify-content: center; }
+  .lang-buttons button { background: transparent; color: var(--cream); border: 1px solid var(--gold); padding: 14px 32px; font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+  .lang-buttons button:hover { background: var(--gold); color: var(--black-deep); }
+  .lang-buttons .recommended { background: var(--gold); color: var(--black-deep); }
+
+  .flipbook-container { display: flex; justify-content: center; align-items: center; margin: 0 auto; max-width: 1120px; min-height: 600px; padding: 16px; }
+  #book {
+    box-shadow: 0 32px 100px rgba(0,0,0,0.85), 0 0 0 8px rgba(20,12,6,0.7), 0 0 0 9px var(--gold-dark);
+    border-radius: 4px;
+  }
+  .page { background: var(--cream); color: var(--brown-deep); overflow: hidden; }
+  .page-inner { padding: 32px 30px 28px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; text-align: center; gap: 6px; }
+  .page.dark { background: var(--black-deep); color: var(--cream); }
+  .page.dark .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(201,169,97,0.22); pointer-events: none; }
+
+  .page .eyebrow { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.5em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 14px; text-align: center; width: 100%; }
+  .page.dark .eyebrow { color: var(--gold); }
+  .page h2 { font-family: 'Great Vibes', cursive; font-size: 48px; margin: 0 auto 14px; line-height: 1; font-weight: 400; color: var(--brown-deep); text-align: center; width: 100%; }
+  .page.dark h2 { color: var(--cream); }
+  .page h3 { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10.5px; letter-spacing: 0.3em; color: var(--gold-dark); text-transform: uppercase; margin: 12px 0 8px; text-align: center; width: 100%; }
+  .page.dark h3 { color: var(--gold); }
+
+  /* TEXTO DE INFO · Agency / Saira Condensed */
+  .page p { font-family: var(--font-info); font-weight: 400; font-size: 14px; line-height: 1.55; margin: 0 auto 10px; color: var(--brown-deep); text-align: center; max-width: 380px; letter-spacing: 0.01em; }
+  .page.dark p { color: var(--cream); }
+  .page p.lead { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; color: var(--brown-soft); font-size: 14.5px; }
+  .page.dark p.lead { color: rgba(245,240,225,0.85); }
+  .page strong { color: var(--brown-deep); font-weight: 600; }
+  .page.dark strong { color: var(--cream); }
+  .page em { font-style: italic; }
+
+  .page .center-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; text-align: center; }
+  .page .symbol-row { color: var(--gold); letter-spacing: 0.7em; font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; text-align: center; }
+
+  .page .page-number { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); font-family: 'Cinzel', serif; font-weight: 400; font-size: 9px; letter-spacing: 0.35em; color: var(--gold-dark); }
+  .page.dark .page-number { color: var(--gold); opacity: 0.55; }
+
+  /* TAPA */
+  .page.cover {
+    background: radial-gradient(ellipse at 30% 30%, rgba(50,40,30,0.4), transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(40,30,20,0.5), transparent 60%), linear-gradient(135deg, #161210 0%, #0a0806 50%, #1a1410 100%);
+    color: var(--cream); position: relative; box-shadow: inset 0 0 70px rgba(0,0,0,0.8);
+  }
+  .page.cover::before { content:''; position: absolute; inset: 22px; border: 1px solid rgba(201,169,97,0.45); }
+  .page.cover::after { content:''; position: absolute; inset: 32px; border: 1px solid rgba(201,169,97,0.18); }
+  .page.cover .page-inner { z-index: 2; align-items: center; justify-content: space-between; padding: 60px 30px; gap: 12px; text-align: center; }
+  .page.cover .ornament-celtic-top { width: 80px; height: 80px; flex-shrink: 0; color: var(--gold); opacity: 0.95; }
+  .page.cover .titulo-grande { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; line-height: 1.4; text-align: center; }
+  .page.cover h1 { font-family: 'Great Vibes', cursive; font-weight: 400; font-size: 58px; margin: 6px 0 8px; line-height: 1; color: var(--cream); text-shadow: 0 0 28px rgba(201,169,97,0.35); text-align: center; }
+  .page.cover .marca-fina { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.6em; color: var(--gold-bright); text-transform: uppercase; text-align: center; }
+  .page.cover .pie { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 11px; color: rgba(245,240,225,0.55); margin: 0; text-align: center; }
+
+  svg.ornament { display: block; margin: 14px auto; color: var(--gold-dark); }
+  svg.ornament.dark { color: var(--gold); }
+  svg.ornament.tiny { width: 32px; height: 32px; }
+  svg.ornament.small { width: 60px; height: 60px; }
+  svg.ornament.med { width: 90px; height: 90px; }
+
+  .indice { font-family: var(--font-info); font-size: 12px; letter-spacing: 0.05em; color: var(--brown-deep); text-align: left; max-width: 380px; margin: 0 auto; }
+  .indice-item { display: flex; justify-content: space-between; align-items: baseline; margin: 6px 0; }
+  .indice-item .num { color: var(--gold-dark); margin-right: 8px; font-size: 11px; font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
+  .indice-item .name { flex: 1; }
+  .indice-item .dots { flex: 1; border-bottom: 1px dotted var(--gold-dark); margin: 0 8px; align-self: end; height: 1px; }
+  .indice-item .pg { color: var(--gold-dark); font-family: 'Cinzel', serif; }
+  .indice-section { font-family: 'Cinzel', serif; font-weight: 500; font-size: 10px; letter-spacing: 0.35em; color: var(--gold); text-transform: uppercase; margin: 12px 0 4px; padding-bottom: 4px; border-bottom: 1px solid var(--gold-dark); text-align: center; }
+
+  .page .cita { font-family: 'Great Vibes', cursive; font-size: 40px; line-height: 1.2; color: var(--gold-dark); text-align: center; padding: 16px 14px; font-weight: 400; }
+  .page.dark .cita { color: var(--cream); font-size: 48px; }
+
+  .foto-circle { width: 130px; height: 130px; border-radius: 50%; margin: 14px auto; overflow: hidden; border: 2px solid var(--gold); box-shadow: 0 8px 26px rgba(0,0,0,0.35); display: block; }
+  .foto-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-rounded { width: 200px; height: 130px; border-radius: 16px; margin: 14px auto; overflow: hidden; border: 1px solid var(--gold); box-shadow: 0 6px 22px rgba(0,0,0,0.3); display: block; }
+  .foto-rounded img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-arch { width: 130px; height: 170px; border-radius: 65px 65px 6px 6px; margin: 14px auto; overflow: hidden; border: 1px solid var(--gold); box-shadow: 0 8px 26px rgba(0,0,0,0.35); display: block; }
+  .foto-arch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-caption { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9px; letter-spacing: 0.35em; color: var(--gold-dark); text-transform: uppercase; margin-top: 8px; text-align: center; }
+
+  .consejo-card { background: var(--cream-light); border: 1px solid var(--gold); border-radius: 6px; padding: 12px 14px; margin: 8px auto; text-align: center; max-width: 360px; }
+  .consejo-card .titulo { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.3em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 5px; text-align: center; }
+  .consejo-card p { font-family: var(--font-info); font-size: 13.5px; margin: 0 auto; line-height: 1.5; max-width: none; text-align: center; }
+  .consejo-card.warning { border-color: #c47844; background: #fef0e0; }
+  .consejo-card.warning .titulo { color: #a85e2c; }
+  .consejo-card.elemento { background: linear-gradient(180deg, var(--cream-light) 0%, #f0e7d3 100%); border-width: 1.5px; }
+
+  .elementos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--gold-dark); margin: 10px auto; max-width: 380px; }
+  .elemento-cell { padding: 12px 10px; border-right: 1px solid var(--gold-dark); border-bottom: 1px solid var(--gold-dark); text-align: center; }
+  .elemento-cell:nth-child(2n) { border-right: none; }
+  .elemento-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .elemento-cell .titulo { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.3em; color: var(--gold-dark); margin-bottom: 5px; text-align: center; }
+  .elemento-cell .quien { font-family: var(--font-info); font-size: 12px; color: var(--brown-deep); margin-bottom: 4px; font-weight: 500; text-align: center; }
+  .elemento-cell .funcion { font-family: var(--font-info); font-size: 11.5px; color: var(--brown-soft); line-height: 1.45; text-align: center; }
+
+  .dia-item { padding: 6px 8px; border-bottom: 1px solid var(--line-gold); text-align: center; max-width: 360px; margin: 0 auto; }
+  .dia-item:last-child { border-bottom: none; }
+  .dia-item .num { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.3em; color: var(--gold-dark); }
+  .dia-item .titulo { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.2em; color: var(--brown-deep); }
+  .dia-item .desc { font-family: var(--font-info); font-size: 12.5px; color: var(--brown-soft); line-height: 1.5; margin-top: 2px; text-align: center; }
+
+  .compendio-tabla { font-size: 11px; max-width: 380px; margin: 0 auto; }
+  .compendio-row { display: flex; padding: 7px 0; border-bottom: 1px solid var(--line-gold); align-items: baseline; text-align: left; }
+  .compendio-row:last-child { border-bottom: none; }
+  .compendio-row .nombre { flex: 0 0 110px; color: var(--brown-deep); letter-spacing: 0.18em; text-transform: uppercase; font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; }
+  .compendio-row .uso { flex: 1; color: var(--brown-soft); font-family: var(--font-info); font-size: 12.5px; }
+
+  .faq { margin: 8px auto; padding-bottom: 8px; border-bottom: 1px dotted var(--line-gold); text-align: center; max-width: 380px; }
+  .faq:last-child { border-bottom: none; }
+  .faq .pregunta { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.2em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 5px; text-align: center; }
+  .faq .respuesta { font-family: var(--font-info); font-size: 12.5px; color: var(--brown-soft); line-height: 1.55; margin: 0 auto; text-align: center; }
+
+  /* TIPO DE SER · card destacada */
+  .ser-card { background: linear-gradient(160deg, var(--cream-light) 0%, #ede2c8 100%); border: 1.5px solid var(--gold); border-radius: 8px; padding: 14px 16px; margin: 8px auto; max-width: 380px; box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+  .ser-card .ser-nombre { font-family: 'Great Vibes', cursive; font-size: 32px; color: var(--brown-deep); margin: 0 0 4px; line-height: 1; }
+  .ser-card .ser-energia { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 8px; }
+  .ser-card .ser-detalle { font-family: var(--font-info); font-size: 12.5px; color: var(--brown-soft); line-height: 1.5; margin: 0 auto 8px; text-align: center; }
+  .ser-card .ser-meta { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+  .ser-card .ser-meta span { font-family: 'Cinzel', serif; font-size: 8.5px; letter-spacing: 0.2em; color: var(--gold-dark); text-transform: uppercase; padding: 3px 8px; border: 1px solid var(--gold-dark); border-radius: 100px; }
+
+  .neuro-tag { display: inline-block; margin-top: 6px; padding: 4px 10px; background: var(--brown-deep); color: var(--gold); font-family: 'Cinzel', serif; font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; border-radius: 4px; }
+
+  .cta-final { display: flex; flex-direction: column; gap: 10px; margin: 12px auto; max-width: 380px; }
+  .cta-final-btn { display: block; padding: 14px 16px; background: var(--cream-light); border: 1px solid var(--gold); border-radius: 4px; text-decoration: none; color: var(--brown-deep); transition: all 0.3s; text-align: center; }
+  .cta-final-btn:hover { background: var(--gold); color: var(--black-deep); }
+  .cta-final-btn .cta-titulo { font-family: 'Cinzel', serif; font-weight: 500; font-size: 10px; letter-spacing: 0.3em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 4px; text-align: center; }
+  .cta-final-btn:hover .cta-titulo { color: var(--black-deep); }
+  .cta-final-btn .cta-text { font-family: var(--font-info); font-size: 13px; text-align: center; }
+
+  .libro-controls { margin: 28px auto 0; display: flex; justify-content: center; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .libro-controls button { background: rgba(0,0,0,0.6); color: var(--gold); border: 1px solid var(--gold); padding: 12px 26px; font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; backdrop-filter: blur(4px); }
+  .libro-controls button:hover { background: var(--gold); color: var(--black-deep); }
+  .libro-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .libro-controls .page-indicator { font-family: 'Cinzel', serif; font-weight: 400; font-size: 11px; letter-spacing: 0.35em; color: var(--gold); text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+  .sound-toggle { background: rgba(0,0,0,0.6); color: var(--gold); border: 1px solid var(--gold); padding: 8px 14px; font-family: 'Cinzel', serif; font-weight: 400; font-size: 9px; letter-spacing: 0.3em; cursor: pointer; border-radius: 100px; }
+  .sound-toggle.muted { opacity: 0.4; }
+
+  .libro-footer { margin-top: 36px; text-align: center; font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.4em; color: rgba(201,169,97,0.7); text-transform: uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+  .libro-footer a { color: var(--gold); text-decoration: none; margin: 0 12px; }
+
+  /* AURORAS · luces de otro mundo */
+  .auroras {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    mix-blend-mode: screen;
+  }
+  .auroras .luz {
+    position: absolute; width: 720px; height: 720px; border-radius: 50%;
+    filter: blur(140px); opacity: 0; will-change: opacity, transform;
+    animation: auroraRespirar 22s ease-in-out infinite;
+  }
+  .luz-magenta {
+    background: radial-gradient(circle at 50% 50%, rgba(220,90,180,0.70) 0%, rgba(220,90,180,0.30) 35%, transparent 70%);
+    top: -160px; left: -120px; animation-delay: 0s;
+  }
+  .luz-celeste {
+    background: radial-gradient(circle at 50% 50%, rgba(110,200,240,0.65) 0%, rgba(110,200,240,0.25) 35%, transparent 70%);
+    top: 8%; right: -180px; animation-delay: 5s; width: 680px; height: 680px;
+  }
+  .luz-dorada {
+    background: radial-gradient(circle at 50% 50%, rgba(255,210,130,0.60) 0%, rgba(255,200,110,0.25) 35%, transparent 70%);
+    bottom: -180px; right: 18%; animation-delay: 9s;
+  }
+  .luz-violeta {
+    background: radial-gradient(circle at 50% 50%, rgba(160,100,230,0.55) 0%, rgba(160,100,230,0.22) 35%, transparent 70%);
+    bottom: 5%; left: -160px; animation-delay: 13s; width: 760px; height: 760px;
+  }
+  .luz-rosa {
+    background: radial-gradient(circle at 50% 50%, rgba(255,140,200,0.55) 0%, rgba(255,140,200,0.22) 35%, transparent 70%);
+    top: 45%; left: 30%; animation-delay: 7s; width: 600px; height: 600px;
+  }
+  .luz-cian {
+    background: radial-gradient(circle at 50% 50%, rgba(120,230,220,0.55) 0%, rgba(120,230,220,0.22) 35%, transparent 70%);
+    top: 60%; right: 8%; animation-delay: 16s; width: 640px; height: 640px;
+  }
+  @keyframes auroraRespirar {
+    0%   { opacity: 0;    transform: scale(0.85) translate(0, 0); }
+    18%  { opacity: 0.55; transform: scale(1)    translate(40px, -30px); }
+    50%  { opacity: 0.7;  transform: scale(1.12) translate(-50px, 60px); }
+    82%  { opacity: 0.4;  transform: scale(1.18) translate(30px, -20px); }
+    100% { opacity: 0;    transform: scale(1.25) translate(0, 0); }
+  }
+
+  /* Capa de partículas doradas */
+  .particulas { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  /* Partículas doradas (polen / luz) */
+  .particulas { position: absolute; inset: 0; pointer-events: none; }
+  .particulas span {
+    position: absolute; width: 5px; height: 5px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,230,140,0.9), rgba(255,200,100,0.3) 60%, transparent 100%);
+    box-shadow: 0 0 8px rgba(255,220,140,0.8);
+    animation: flotar 12s linear infinite;
+    bottom: -20px;
+  }
+  .particulas span:nth-child(1) { left: 8%; animation-delay: 0s; animation-duration: 14s; }
+  .particulas span:nth-child(2) { left: 18%; animation-delay: 1s; animation-duration: 11s; width: 4px; height: 4px; }
+  .particulas span:nth-child(3) { left: 28%; animation-delay: 4s; animation-duration: 13s; width: 6px; height: 6px; }
+  .particulas span:nth-child(4) { left: 38%; animation-delay: 2s; animation-duration: 12s; }
+  .particulas span:nth-child(5) { left: 48%; animation-delay: 6s; animation-duration: 15s; width: 3px; height: 3px; }
+  .particulas span:nth-child(6) { left: 58%; animation-delay: 3s; animation-duration: 10s; }
+  .particulas span:nth-child(7) { left: 68%; animation-delay: 5s; animation-duration: 13s; width: 5px; height: 5px; }
+  .particulas span:nth-child(8) { left: 78%; animation-delay: 7s; animation-duration: 14s; }
+  .particulas span:nth-child(9) { left: 88%; animation-delay: 0.5s; animation-duration: 12s; width: 4px; height: 4px; }
+  .particulas span:nth-child(10) { left: 92%; animation-delay: 8s; animation-duration: 16s; }
+  .particulas span:nth-child(11) { left: 12%; animation-delay: 9s; animation-duration: 11s; width: 3px; height: 3px; }
+  .particulas span:nth-child(12) { left: 32%; animation-delay: 10s; animation-duration: 13s; }
+  .particulas span:nth-child(13) { left: 52%; animation-delay: 11s; animation-duration: 12s; width: 5px; height: 5px; }
+  .particulas span:nth-child(14) { left: 72%; animation-delay: 4.5s; animation-duration: 14s; }
+  .particulas span:nth-child(15) { left: 84%; animation-delay: 7.5s; animation-duration: 13s; width: 4px; height: 4px; }
+
+  /* Duende saludando en esquina */
+  .duende-saludando {
+    position: fixed; bottom: 80px; right: 24px; width: 130px; height: 170px; z-index: 1; pointer-events: none;
+    transform-origin: bottom center;
+    animation: saludo 4s ease-in-out infinite;
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
+  }
+  .duende-saludando img {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+  }
+
+  /* Animaciones */
+    50% { transform: rotate(2.5deg); }
+  }
+  @keyframes flotar {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    8% { opacity: 1; }
+    92% { opacity: 1; }
+    100% { transform: translateY(-110vh) translateX(40px); opacity: 0; }
+  }
+    50% { transform: rotate(3deg) translateY(-4px); }
+  }
+
+  @media (max-width: 768px) {
+    .libro-wrap { padding: 18px 6px 36px; }
+    .page-inner { padding: 22px 16px 22px; }
+    .page h2 { font-size: 36px; }
+    .page p { font-size: 12.5px; }
+    .page.cover h1 { font-size: 42px; }
+    #book { box-shadow: 0 16px 36px rgba(0,0,0,0.7), 0 0 0 4px rgba(20,12,6,0.7), 0 0 0 5px var(--gold-dark); }
+    .lang-box { margin: 16px; padding: 28px 22px; }
+    .lang-box h2 { font-size: 42px; }
+    .auroras .luz { width: 440px; height: 440px; filter: blur(90px); }
+    .luz-cian, .luz-rosa, .luz-violeta, .luz-celeste { width: 380px; height: 380px; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="r-triskele" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M50 50 Q50 30, 65 30 Q80 30, 80 45 Q80 55, 70 55"/><path d="M50 50 Q35 60, 35 75 Q40 85, 55 80 Q60 75, 58 70"/><path d="M50 50 Q35 35, 20 40 Q15 50, 25 60 Q35 65, 40 60"/><circle cx="50" cy="50" r="2.5" fill="currentColor"/></g></symbol>
+    <symbol id="r-triqueta" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M50 18 Q70 38, 75 60 Q60 75, 50 60 Q40 75, 25 60 Q30 38, 50 18 Z"/></g></symbol>
+    <symbol id="r-awen" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="35" y1="30" x2="50" y2="75"/><line x1="50" y1="22" x2="50" y2="78"/><line x1="65" y1="30" x2="50" y2="75"/><circle cx="35" cy="28" r="2.5" fill="currentColor"/><circle cx="50" cy="20" r="2.5" fill="currentColor"/><circle cx="65" cy="28" r="2.5" fill="currentColor"/></g></symbol>
+    <symbol id="r-knot" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M30 50 C30 30, 70 30, 70 50 C70 70, 30 70, 30 50 Z"/><path d="M50 30 C30 30, 30 70, 50 70 C70 70, 70 30, 50 30 Z"/></g></symbol>
+    <symbol id="r-star4" viewBox="0 0 100 100"><g fill="currentColor"><path d="M50 18 L55 45 L82 50 L55 55 L50 82 L45 55 L18 50 L45 45 Z"/></g></symbol>
+    <symbol id="r-sun" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="6" fill="currentColor"/><line x1="50" y1="14" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="86"/><line x1="14" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="86" y2="50"/><line x1="24" y1="24" x2="30" y2="30"/><line x1="70" y1="70" x2="76" y2="76"/><line x1="76" y1="24" x2="70" y2="30"/><line x1="30" y1="70" x2="24" y2="76"/></g></symbol>
+    <symbol id="r-moon" viewBox="0 0 100 100"><g fill="currentColor"><path d="M62 22 A30 30 0 1 0 62 78 A22 22 0 1 1 62 22 Z"/></g></symbol>
+  </defs>
+</svg>
+
+<div class="libro-wrap">
+
+  <!-- AURORAS · luces etéreas de otro mundo -->
+  <div class="auroras" aria-hidden="true">
+    <span class="luz luz-magenta"></span>
+    <span class="luz luz-celeste"></span>
+    <span class="luz luz-dorada"></span>
+    <span class="luz luz-violeta"></span>
+    <span class="luz luz-rosa"></span>
+    <span class="luz luz-cian"></span>
+  </div>
+
+  <!-- Partículas doradas flotando -->
+  <div class="particulas" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="lang-overlay" id="lang-overlay">
+    <div class="lang-box">
+      <div class="ornament">✦  ✦  ✦</div>
+      <p class="pretitle">Antes de entrar</p>
+      <h2>Elegí tu lengua</h2>
+      <p>The Guide of the Duendes del Uruguay · choose your language to enter the elemental community.</p>
+      <div class="lang-buttons">
+        <button class="recommended" id="lang-es">Español</button>
+        <button id="lang-en">English</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="libro-header">
+    <p class="eyebrow">Edición de la Comunidad Elemental</p>
+    <h1>La Guía de los Duendes</h1>
+    <p class="sub">Cuidados · Tipos · Rituales · Vínculo</p>
+  </header>
+
+  <div class="flipbook-container">
+    <div id="book">
+
+      <!-- 1 PORTADA -->
+      <div class="page cover"><div class="page-inner">
+        <svg class="ornament-celtic-top"><use href="#r-triskele"/></svg>
+        <div>
+          <p class="titulo-grande">La Guía de los</p>
+          <h1>Duendes del Uruguay</h1>
+          <p class="marca-fina">Cuidados · Tipos · Rituales</p>
+        </div>
+        <div>
+          <svg width="40" height="40" style="color:var(--gold);opacity:0.7;"><use href="#r-star4"/></svg>
+          <p class="pie">Edición de la Comunidad Elemental</p>
+        </div>
+      </div></div>
+
+      <!-- 2 BIENVENIDA -->
+      <div class="page dark"><div class="page-inner center-content">
+        <svg class="ornament dark small"><use href="#r-star4"/></svg>
+        <h2>Bienvenida</h2>
+        <p class="lead">Si estás leyendo esto, alguien ya te eligió. Un guardián salió de nuestro estudio buscándote a vos específicamente.</p>
+        <p class="lead" style="margin-top:8px;">Esta guía es para que sepas cuidarlo, vivirlo y disfrutarlo. La parte que solo se entrega después de la adopción.</p>
+        <svg class="ornament dark small" style="margin-top:18px;"><use href="#r-triqueta"/></svg>
+        <div class="page-number">02</div>
+      </div></div>
+
+      <!-- 3 FORMÁS PARTE -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">Algo que importa decirte</p>
+        <h2>Formás parte de algo</h2>
+        <p>Adoptar un guardián de Duendes del Uruguay no es comprar un objeto. Es entrar a una comunidad pequeña, cuidada y real: la <strong>comunidad elemental</strong>.</p>
+        <p>Acá nadie produce en serie. Acá cada guardián pasó por siete días de trabajo manual. Acá nos escribimos respuestas humanas, no automáticas. Acá vamos lento.</p>
+        <p>Cuando recibís tu guardián, recibís también este lugar. Volvés cuando querés, leés cuando necesitás, preguntás cuando aparece la duda.</p>
+        <p class="lead" style="margin-top:8px;">Bienvenida. La alquimia continúa con vos adentro.</p>
+        <svg class="ornament small"><use href="#r-knot"/></svg>
+        <div class="page-number">03</div>
+      </div></div>
+
+      <!-- 4 ÍNDICE -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">Lo que vas a encontrar</p>
+        <h2>Índice</h2>
+        <div class="indice">
+          <div class="indice-section">Antes de la llegada</div>
+          <div class="indice-item"><span class="num">01</span><span class="name">Cómo preparar la casa</span><span class="dots"></span><span class="pg">06</span></div>
+          <div class="indice-item"><span class="num">02</span><span class="name">Quiénes somos · El oficio</span><span class="dots"></span><span class="pg">08</span></div>
+          <div class="indice-section">Recibirlo</div>
+          <div class="indice-item"><span class="num">03</span><span class="name">Cómo recibirlo</span><span class="dots"></span><span class="pg">12</span></div>
+          <div class="indice-item"><span class="num">04</span><span class="name">Qué podés sentir</span><span class="dots"></span><span class="pg">14</span></div>
+          <div class="indice-item"><span class="num">05</span><span class="name">Ritual de los 7 días</span><span class="dots"></span><span class="pg">17</span></div>
+          <div class="indice-section">Tipos de seres</div>
+          <div class="indice-item"><span class="num">06</span><span class="name">Duendes de abundancia</span><span class="dots"></span><span class="pg">19</span></div>
+          <div class="indice-item"><span class="num">07</span><span class="name">Duendes del amor</span><span class="dots"></span><span class="pg">20</span></div>
+          <div class="indice-item"><span class="num">08</span><span class="name">Hadas · 4 tipos</span><span class="dots"></span><span class="pg">21</span></div>
+          <div class="indice-item"><span class="num">09</span><span class="name">Pixies · Elfos · Gigantes</span><span class="dots"></span><span class="pg">23</span></div>
+          <div class="indice-section">Cuidarlo</div>
+          <div class="indice-item"><span class="num">10</span><span class="name">Cuidados básicos · Limpieza</span><span class="dots"></span><span class="pg">27</span></div>
+          <div class="indice-item"><span class="num">11</span><span class="name">Cristales y hierbas</span><span class="dots"></span><span class="pg">31</span></div>
+          <div class="indice-item"><span class="num">12</span><span class="name">Lunas y rituales</span><span class="dots"></span><span class="pg">35</span></div>
+          <div class="indice-section">Vivirlo</div>
+          <div class="indice-item"><span class="num">13</span><span class="name">Qué pasa si...</span><span class="dots"></span><span class="pg">37</span></div>
+          <div class="indice-item"><span class="num">14</span><span class="name">Sueños y señales</span><span class="dots"></span><span class="pg">43</span></div>
+          <div class="indice-item"><span class="num">15</span><span class="name">Comunidad y accesos</span><span class="dots"></span><span class="pg">45</span></div>
+        </div>
+        <div class="page-number">04</div>
+      </div></div>
+
+      <!-- 5 FOTO ESTUDIO -->
+      <div class="page dark"><div class="page-inner center-content">
+        <p class="eyebrow">El estudio</p>
+        <div class="foto-arch"><img src="https://duendesdeluruguay.com/cdn/shop/files/IMG_2487.png?width=400" alt="Estudio" loading="lazy"></div>
+        <p class="foto-caption" style="color:var(--gold);">Donde nacen los guardianes</p>
+        <p class="lead">Mesa de madera baja. Cristales en cuencos. Lanas naturales. Una vela encendida. Manos trabajando despacio, sin apuro.</p>
+        <div class="page-number">05</div>
+      </div></div>
+
+      <!-- 6 PREPARAR LA CASA -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">01 · Antes de la llegada</p>
+        <h2>Preparar la casa</h2>
+        <p>Tres días antes de que llegue tu guardián, hacé esto. La casa también necesita estar lista para recibirlo.</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">VENTILÁ</span><p class="desc">Abrí ventanas durante 30 minutos para renovar el aire. La energía del paquete entra en la energía de la casa.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LIMPIÁ EL LUGAR ELEGIDO</span><p class="desc">Sin productos químicos. Trapo seco o ligeramente húmedo. Sacá lo que sobra del estante donde va a vivir.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">PALO SANTO O LAVANDA</span><p class="desc">Pasá humo de palo santo o frotá lavanda en el lugar. 30 segundos alcanza. Limpia la energía vieja.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">UN CRISTAL DE BIENVENIDA</span><p class="desc">Si tenés un cuarzo cristal, ponelo en el lugar donde va a estar. Lo recibe en su nombre.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">SACÁ EL RUIDO</span><p class="desc">Si vivís con TV o música constante, bajá el volumen el día que llegue. Necesita silencio relativo las primeras horas.</p></div>
+        <div class="page-number">06</div>
+      </div></div>
+
+      <!-- 7 PREPARAR · NEUROMARKETING -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">Lo que estás haciendo sin saberlo</p>
+        <h2>Estás abriendo</h2>
+        <p>Cuando preparás la casa así, no es decoración: estás <strong>declarando intención</strong>. La casa sabe que algo importante va a entrar.</p>
+        <p>Por eso la gente que sigue estos pasos cuenta que cuando el paquete llega, el guardián no se siente "nuevo" — se siente <em>esperado</em>.</p>
+        <p class="lead">Lo simple, hecho con consciencia, abre puertas que la prisa cierra.</p>
+        <span class="neuro-tag">✦ Anclaje energético</span>
+        <div class="page-number">07</div>
+      </div></div>
+
+      <!-- 8 NUESTRA HISTORIA · página 1 -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">02 · Nuestra historia</p>
+        <h2>Cómo empezó todo</h2>
+        <p>Una tarde cualquiera, en una casa cualquiera de Uruguay, empezamos a armar pequeñas figuras con materiales que teníamos cerca: alambre, retazos de tela, ramitas. Lo hacíamos para regalar. Sin nombre, sin marca, sin idea de que esto iba a ser un oficio.</p>
+        <p>Hasta que una de las personas que recibió un duende nos llamó llorando: nos contó cosas que ese ser "le había dicho" — cosas íntimas, específicas, que nosotros no sabíamos. Ahí entendimos que lo que pasaba en nuestras manos no era manualidad.</p>
+        <p class="lead">Era canalización. Y desde ese día, dejamos de improvisar.</p>
+        <svg class="ornament small"><use href="#r-awen"/></svg>
+        <div class="page-number">08</div>
+      </div></div>
+
+      <!-- 9 NUESTRA HISTORIA · página 2 (foto + presente) -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">Hoy</p>
+        <div class="foto-rounded" style="margin-bottom:14px;"><img src="https://duendesdeluruguay.com/cdn/shop/files/IMG_2502.png?width=500" alt="Nuestro estudio" loading="lazy"></div>
+        <h2 style="font-size:42px;">Somos los dos</h2>
+        <p>Gabriel y Thibisay. Un equipo familiar, hecho de los dos. Cada guardián que sale del estudio lleva nuestras dos manos: las que canalizan, las que arman, las que envuelven, las que escriben el email cuando algo importante tiene que decirte.</p>
+        <p>Sin empleados. Sin revendedores. Sin moldes industriales. Lo que hacés con nosotros, lo hacés directo con nosotros — leés un mensaje y del otro lado contesta una persona, no un bot.</p>
+        <p class="lead">Estamos registrados en Uruguay, también en Estados Unidos como LLC. Pero seguimos sintiéndonos un oficio, no una empresa.</p>
+        <div class="page-number">09</div>
+      </div></div>
+
+      <!-- 10 TE ELIGIÓ -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">Lo que importa entender</p>
+        <h2>Te eligió a vos</h2>
+        <p>El guardián que tenés en tus manos no era para nadie más. Cuando lo armábamos en el estudio, ya estaba apuntando hacia tu casa.</p>
+        <p>Por eso a veces, semanas antes de adoptarlo, soñaste con algo parecido o lo viste sin verlo en una foto que pasó de largo. La búsqueda fue mutua: vos lo buscaste, él te buscó.</p>
+        <p>Esto no es marketing. Es lo que vamos confirmando con los años cada vez que alguien nos escribe: "no sé cómo, pero supe que era para mí".</p>
+        <svg class="ornament small"><use href="#r-triqueta"/></svg>
+        <p class="lead">Gracias por dejarte encontrar.</p>
+        <div class="page-number">10</div>
+      </div></div>
+
+      <!-- 10 CANALIZAR -->
+      <div class="page dark"><div class="page-inner">
+        <p class="eyebrow">02 · El oficio</p>
+        <h2>Canalizar</h2>
+        <p>Canalizar no es manualidad. Es <em>traducir</em>. El material elige, el linaje se manifiesta, el nombre llega.</p>
+        <p>El oficio se aprende escuchando. La materia te enseña si la dejás. Por eso tardamos siete días — y por eso cada guardián es único.</p>
+        <svg class="ornament dark small"><use href="#r-star4"/></svg>
+        <p class="lead">No copiamos modelos. No usamos moldes. No apuramos el proceso.</p>
+        <div class="page-number">10</div>
+      </div></div>
+
+      <!-- 11 FOTO MANOS -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">El proceso</p>
+        <div class="foto-rounded"><img src="https://duendesdeluruguay.com/cdn/shop/files/IMG_2484.png?width=500" alt="Manos canalizando" loading="lazy"></div>
+        <p class="foto-caption">Siete días por guardián</p>
+        <p class="lead">Cada material lo elegimos a mano. Cada cristal lo limpiamos antes. Cada hilo se ata mirando hacia donde va.</p>
+        <div class="page-number">11</div>
+      </div></div>
+
+      <!-- 12 CÓMO RECIBIRLO -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">03 · Cómo recibirlo</p>
+        <h2>Los primeros minutos</h2>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">LUGAR TRANQUILO</span><p class="desc">Sin pantallas, sin gente alrededor. Solo vos y él.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LAVATE LAS MANOS</span><p class="desc">Agua fría. Gesto simple, asienta. Te prepara para el contacto.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">DOS MANOS</span><p class="desc">Tomalo con las dos. Crean un cáliz. Eso le dice al ser que lo recibís bien.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">DECILE SU NOMBRE</span><p class="desc">El tuyo y el de él en voz alta una vez. Es orientación, no teatro.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">UBICALO VISIBLE</span><p class="desc">Las primeras 24 horas: lugar visible, no en zona de tránsito.</p></div>
+        <div class="dia-item"><span class="num">06</span> · <span class="titulo">NO LO SUBAS A REDES</span><p class="desc">Dejá que primero exista para vos. Después podés compartirlo.</p></div>
+        <div class="page-number">12</div>
+      </div></div>
+
+      <!-- 13 FOTO GUARDIÁN -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">Cada uno único</p>
+        <div class="foto-circle"><img src="https://duendesdeluruguay.com/cdn/shop/files/IMG_2501.png?width=300" alt="Guardián" loading="lazy"></div>
+        <p class="foto-caption">No hay dos iguales</p>
+        <p class="lead">Cada cara, cada postura, cada detalle se eligió en el proceso. Si tu guardián tiene algo "raro" — un ojo distinto, una mano levantada — eso es parte de su firma personal.</p>
+        <div class="page-number">13</div>
+      </div></div>
+
+      <!-- 14 QUÉ PODÉS SENTIR · INTRO -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">04 · Qué podés sentir</p>
+        <h2>Lo que se siente</h2>
+        <p>Cuando abrís el paquete y lo tenés por primera vez en las manos, pueden aparecer sensaciones físicas y emocionales. Cada una significa algo. Te las explicamos.</p>
+        <div class="consejo-card">
+          <p class="titulo">Calor en las palmas</p>
+          <p>Es la conexión energética activándose. Significa que el ser ya empezó a reconocerte. Sostenelo más tiempo si te pasa.</p>
+        </div>
+        <div class="consejo-card">
+          <p class="titulo">Piel de gallina</p>
+          <p>El sello energético clásico. Aparece especialmente en la nuca y los antebrazos. Es validación: te eligió bien.</p>
+        </div>
+        <div class="consejo-card">
+          <p class="titulo">Ganas de llorar sin razón</p>
+          <p>No es tristeza, es liberación. El cuerpo descarga lo que venía guardado. Dejala fluir, no la cortes.</p>
+        </div>
+        <div class="page-number">14</div>
+      </div></div>
+
+      <!-- 15 QUÉ PODÉS SENTIR · CONTINÚA -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">04 · Continúa</p>
+        <h2 style="font-size:38px;">Más sensaciones</h2>
+        <div class="consejo-card">
+          <p class="titulo">Sensación de "ya conocerlo"</p>
+          <p>Mirás su cara y te resulta familiar aunque sea la primera vez. Es memoria del alma. La búsqueda fue mutua.</p>
+        </div>
+        <div class="consejo-card">
+          <p class="titulo">Aroma sutil sin fuente</p>
+          <p>De repente percibís un olor a flor, a tierra, a humo de vela — y no hay nada que lo explique. Es presencia. Saludalo en voz baja.</p>
+        </div>
+        <div class="consejo-card">
+          <p class="titulo">Risa sin motivo</p>
+          <p>Pasa con guardianes de linaje pixie o duende travieso. Se "presentan" haciéndote reír. Reíte fuerte: les encanta.</p>
+        </div>
+        <div class="consejo-card">
+          <p class="titulo">Calma profunda</p>
+          <p>Si en lugar de emoción fuerte sentís paz inmensa, es guardián de tierra (gnomo, Bosque Antiguo). Vino para asentarte.</p>
+        </div>
+        <div class="page-number">15</div>
+      </div></div>
+
+      <!-- 16 SI NO SENTÍS NADA -->
+      <div class="page dark"><div class="page-inner">
+        <p class="eyebrow">04 · Importante</p>
+        <h2 style="color:var(--cream);">Si no sentís nada</h2>
+        <p>Tampoco pasa nada. La conexión no siempre es inmediata. Algunos vínculos son más lentos: aparecen al tercer día, a la primera luna llena, o un mes después en un sueño.</p>
+        <p>No te exijas sentir. La presencia se confirma con el tiempo, no con la primera impresión.</p>
+        <p class="lead">El amor que dura no siempre estalla en el primer encuentro.</p>
+        <span class="neuro-tag">✦ Validación emocional</span>
+        <div class="page-number">16</div>
+      </div></div>
+
+      <!-- 17 RITUAL 7 DÍAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">05 · Ritual de bienvenida</p>
+        <h2 style="font-size:38px;">Los siete días</h2>
+        <div class="dia-item"><span class="num">DÍA 1</span> · <span class="titulo">PRESENCIA</span><p class="desc">5 minutos en silencio a su lado.</p></div>
+        <div class="dia-item"><span class="num">DÍA 2</span> · <span class="titulo">MIRADA</span><p class="desc">2 minutos sosteniéndole la mirada.</p></div>
+        <div class="dia-item"><span class="num">DÍA 3</span> · <span class="titulo">PALABRA</span><p class="desc">Una intención esencial dicha en voz baja.</p></div>
+        <div class="dia-item"><span class="num">DÍA 4</span> · <span class="titulo">CUERPO</span><p class="desc">Tocá tu corazón mientras lo mirás.</p></div>
+        <div class="dia-item"><span class="num">DÍA 5</span> · <span class="titulo">SILENCIO</span><p class="desc">Mostrale tu casa visualmente.</p></div>
+        <div class="dia-item"><span class="num">DÍA 6</span> · <span class="titulo">GRATITUD</span><p class="desc">Agradecele algo concreto.</p></div>
+        <div class="dia-item"><span class="num">DÍA 7</span> · <span class="titulo">COMPROMISO</span><p class="desc">"Te recibo, te respeto, te cuido."</p></div>
+        <div class="page-number">17</div>
+      </div></div>
+
+      <!-- 18 CITA -->
+      <div class="page dark"><div class="page-inner center-content">
+        <svg class="ornament dark small"><use href="#r-awen"/></svg>
+        <p class="cita">Lo que se recibe<br>en consciencia,<br>se queda más tiempo.</p>
+        <div class="page-number">18</div>
+      </div></div>
+
+      <!-- 19 DUENDES DE ABUNDANCIA -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">06 · Tipos de seres</p>
+        <h2>Duendes de Abundancia</h2>
+        <div class="ser-card">
+          <p class="ser-nombre">Los que abren camino</p>
+          <p class="ser-energia">Linaje tierra · prosperidad</p>
+          <p class="ser-detalle">Vienen para mover lo que está estancado en lo material. No traen dinero — traen <strong>fluidez</strong>. Después de unas semanas con ellos, las personas notan que aparecen oportunidades laborales, deudas viejas que se cierran, vínculos comerciales nuevos.</p>
+          <div class="ser-meta"><span>Cristal · Citrino</span><span>Cristal · Pirita</span><span>Hierba · Albahaca</span></div>
+        </div>
+        <h3>Cuidado puntual</h3>
+        <p>Ubicalo cerca de la entrada principal o en el escritorio donde manejás el dinero. Una moneda vieja a su lado renueva la conexión. Limpialo cada luna nueva con humo de canela.</p>
+        <span class="neuro-tag">✦ Si tu vida pide movimiento financiero</span>
+        <div class="page-number">19</div>
+      </div></div>
+
+      <!-- 20 DUENDES DEL AMOR -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">06 · Continúa</p>
+        <h2>Duendes del Amor</h2>
+        <div class="ser-card">
+          <p class="ser-nombre">Los que abren el corazón</p>
+          <p class="ser-energia">Linaje agua · vínculo</p>
+          <p class="ser-detalle">No traen pareja: <strong>sanan tu vínculo con vos misma primero</strong>. Después de unas semanas, las relaciones de tu vida cambian — algunas se profundizan, otras se sueltan. Ambas son trabajo de ellos.</p>
+          <div class="ser-meta"><span>Cristal · Cuarzo rosa</span><span>Cristal · Rodonita</span><span>Hierba · Rosa</span></div>
+        </div>
+        <h3>Cuidado puntual</h3>
+        <p>Ubicalo cerca de tu cama, del espejo donde te ves todos los días, o del living donde reciben visitas. Pétalos secos de rosa a su lado renuevan su energía. Limpialo en luna llena con agua de luna.</p>
+        <span class="neuro-tag">✦ Si tu corazón está pidiendo apertura</span>
+        <div class="page-number">20</div>
+      </div></div>
+
+      <!-- 21 HADAS · 4 TIPOS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">06 · Continúa · Hadas</p>
+        <h2 style="font-size:38px;">Hadas · 4 tipos</h2>
+        <div class="elementos-grid">
+          <div class="elemento-cell"><p class="titulo">▽ Ondinas</p><p class="quien">Agua dulce</p><p class="funcion">Procesos emocionales largos.</p></div>
+          <div class="elemento-cell"><p class="titulo">~ Nereidas</p><p class="quien">Mar abierto</p><p class="funcion">Decisiones profundas, transformación.</p></div>
+          <div class="elemento-cell"><p class="titulo">⌒ Melusinas</p><p class="quien">Manantial</p><p class="funcion">Renovación, fertilidad creativa.</p></div>
+          <div class="elemento-cell"><p class="titulo">⌬ Driádas</p><p class="quien">Árbol vivo</p><p class="funcion">Asentamiento, raíces, hogar.</p></div>
+        </div>
+        <p>Las hadas son sensibles, sutiles, lloran fácil. No las apures. Trabajan en silencio mientras dormís.</p>
+        <span class="neuro-tag">✦ Si llorás más de lo normal sin saber por qué</span>
+        <div class="page-number">21</div>
+      </div></div>
+
+      <!-- 22 CUIDADO HADAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">06 · Continúa</p>
+        <h2>Cuidar a una hada</h2>
+        <p>Las hadas necesitan más sutileza que cualquier otro linaje. Si tenés una, esto es lo que pide.</p>
+        <div class="consejo-card"><p class="titulo">Cerca de algo vivo</p><p>Una planta, un florero con agua fresca renovada cada 3 días, o cerca de una ventana con vista al cielo o al jardín.</p></div>
+        <div class="consejo-card"><p class="titulo">Luz lunar mensual</p><p>Una vez por mes, en luna llena, ponela cerca de una ventana 1-2 horas. La luz lunar es su alimento natural.</p></div>
+        <div class="consejo-card"><p class="titulo">Sin gritos cerca</p><p>Las hadas se retraen con violencia o discusiones fuertes. Si en tu casa hay tensión emocional, ubicala en el cuarto más tranquilo.</p></div>
+        <span class="neuro-tag">✦ Sensibilidad protegida</span>
+        <div class="page-number">22</div>
+      </div></div>
+
+      <!-- 23 PIXIES -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">06 · Continúa</p>
+        <h2>Pixies</h2>
+        <div class="ser-card">
+          <p class="ser-nombre">Los traviesos</p>
+          <p class="ser-energia">Linaje aire · alegría</p>
+          <p class="ser-detalle">Pequeños, juguetones, livianos. Vienen para <strong>devolverte la risa que perdiste</strong>. Si tu vida se puso muy seria, un pixie te pide jugar otra vez.</p>
+          <div class="ser-meta"><span>Cristal · Calcedonia</span><span>Cristal · Selenita</span><span>Hierba · Menta</span></div>
+        </div>
+        <h3>Cuidado puntual</h3>
+        <p>Ubicalo cerca de una ventana abierta, en un mantel ancho, o en un estante alto donde la luz cambia durante el día. Cosa chiquita: dejarle un objeto brillante (botón, cuenta, moneda) lo entretiene durante semanas.</p>
+        <span class="neuro-tag">✦ Si necesitás recuperar tu alegría liviana</span>
+        <div class="page-number">23</div>
+      </div></div>
+
+      <!-- 24 ELFOS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">06 · Continúa</p>
+        <h2>Elfos</h2>
+        <div class="ser-card">
+          <p class="ser-nombre">Los sabios antiguos</p>
+          <p class="ser-energia">Linaje vegetal · conocimiento</p>
+          <p class="ser-detalle">Custodios de saber ancestral. Llegan cuando estás en momento de <strong>aprendizaje profundo o decisión grande</strong>. Trabajan despacio, con la mirada larga.</p>
+          <div class="ser-meta"><span>Cristal · Lapislázuli</span><span>Cristal · Aventurina</span><span>Hierba · Romero</span></div>
+        </div>
+        <h3>Cuidado puntual</h3>
+        <p>Ubicalo cerca de tus libros, en el escritorio donde estudiás, o en el rincón donde tomás decisiones importantes. Una vela apagada a su lado lo conecta con su elemento. Limpialo con humo de salvia blanca.</p>
+        <span class="neuro-tag">✦ Si estás en un momento de aprendizaje o decisión sabia</span>
+        <div class="page-number">24</div>
+      </div></div>
+
+      <!-- 25 MAESTROS GIGANTES -->
+      <div class="page dark"><div class="page-inner">
+        <p class="eyebrow">06 · Continúa</p>
+        <h2 style="color:var(--cream);">Maestros Gigantes</h2>
+        <div class="ser-card" style="background:linear-gradient(160deg, #1a1410, #0a0806); border-color: var(--gold);">
+          <p class="ser-nombre" style="color:var(--gold);">Los grandes</p>
+          <p class="ser-energia">50-80cm · únicos · irrepetibles</p>
+          <p class="ser-detalle" style="color:rgba(245,240,225,0.85);">Cuando alguien necesita un <strong style="color:var(--cream);">ancla mayor</strong> — un cambio enorme, un cierre de etapa larga, un comienzo profundo — un Maestro Gigante se manifiesta. No son decoración: son presencia mayor.</p>
+          <div class="ser-meta"><span style="color:var(--gold);border-color:var(--gold);">Cristal · Cuarzo grande</span><span style="color:var(--gold);border-color:var(--gold);">Hierba · Copal</span></div>
+        </div>
+        <h3 style="color:var(--gold);">Cuidado puntual</h3>
+        <p>Ubicación central. Lugar fijo, no movible. Una vez instalado, queda. Es su trono. Limpialo con copal en luna nueva, sin moverlo del sitio.</p>
+        <span class="neuro-tag" style="background:var(--gold); color:var(--black-deep);">✦ Si tu vida pide un cambio enorme</span>
+        <div class="page-number">25</div>
+      </div></div>
+
+      <!-- 26 GIGANTES IRREPETIBLES -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">06 · Por qué son irrepetibles</p>
+        <h2>Una sola vez</h2>
+        <p>Los Maestros Gigantes no se recrean. Cada uno es <strong>único en el mundo</strong>. Cuando uno se adopta, se va. No hacemos una segunda copia.</p>
+        <p>Si te eligió uno, es porque tu vida está pidiendo algo del tamaño de él. Aceptalo con la consciencia de que esa pieza no existe en otro lado.</p>
+        <p class="lead">Lo grande llega cuando lo grande es necesario.</p>
+        <span class="neuro-tag">✦ Escasez real</span>
+        <div class="page-number">26</div>
+      </div></div>
+
+      <!-- 27 CUIDADOS BÁSICOS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">10 · Cuidados básicos</p>
+        <h2 style="font-size:38px;">Cuidarlo</h2>
+        <div class="consejo-card"><p class="titulo">Polvo</p><p>Pincel suave de cerdas naturales o trapo de microfibra. Una vez por semana. Nunca productos químicos, alcohol ni paños húmedos.</p></div>
+        <div class="consejo-card warning"><p class="titulo">Agua</p><p>No lo mojes. La fibra se mancha, los pegamentos se sueltan, los cristales se oxidan. Si se humedece, secalo al aire (no al sol directo).</p></div>
+        <div class="consejo-card"><p class="titulo">Luz solar directa</p><p>Evítala. Decolora pigmentos y reseca las fibras. Luz natural indirecta sí.</p></div>
+        <div class="page-number">27</div>
+      </div></div>
+
+      <!-- 28 DÓNDE -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">10 · Continúa</p>
+        <h2 style="font-size:38px;">Sí · No</h2>
+        <div class="consejo-card"><p class="titulo">Lugares ideales</p><p>Estante a la altura del corazón. Mesa de luz. Repisa del living. Escritorio. Donde lo veas seguido pero sin tránsito constante.</p></div>
+        <div class="consejo-card warning"><p class="titulo">Evitá estos lugares</p><p>Cocina, baño, suelo, vitrina cerrada, cerca del televisor encendido, detrás de aparatos electrónicos.</p></div>
+        <div class="consejo-card"><p class="titulo">Su lugar definitivo</p><p>Lo vas a sentir. Cuando lo ponés en el lugar correcto, te calma mirarlo. Si te sentís incómoda, ese no es. Probá otro.</p></div>
+        <div class="page-number">28</div>
+      </div></div>
+
+      <!-- 29 NIÑOS Y MASCOTAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">10 · Convivencia</p>
+        <h2 style="font-size:38px;">Niños y mascotas</h2>
+        <div class="consejo-card"><p class="titulo">Niños</p><p>Pueden mirarlo y conocerlo. Explicales que es un ser, no un juguete. Si son chicos, ubicalo donde no lleguen.</p></div>
+        <div class="consejo-card"><p class="titulo">Gatos</p><p>Sentirán curiosidad. Si lo tiran, no es ataque: están explorando. Ubicalo donde el gato no llegue las primeras semanas.</p></div>
+        <div class="consejo-card"><p class="titulo">Perros</p><p>Generalmente lo respetan si se lo presentás. Acercá al perro, dejá que lo huela una vez. Después de eso, lo deja en paz.</p></div>
+        <div class="page-number">29</div>
+      </div></div>
+
+      <!-- 30 LIMPIEZA ENERGÉTICA -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">10 · Limpieza energética</p>
+        <h2 style="font-size:38px;">Limpieza</h2>
+        <p>Una vez por mes, o cuando lo sentís cargado (opaco, pesado, distante).</p>
+        <div class="consejo-card"><p class="titulo">Método palo santo</p><p>Encendé un trozo, dejá humear 3 segundos. Pasalo alrededor del guardián (no encima) en círculos lentos. 30 segundos alcanza.</p></div>
+        <div class="consejo-card"><p class="titulo">Método luna</p><p>En noche de luna llena, ponelo cerca de una ventana abierta o balcón. 1-2 horas. Volvé a entrarlo antes del amanecer.</p></div>
+        <div class="consejo-card"><p class="titulo">Método cuarzo</p><p>Dejá un cuarzo cristal pegado a él durante 24 horas. Absorbe lo denso y lo libera al sol del día siguiente.</p></div>
+        <div class="page-number">30</div>
+      </div></div>
+
+      <!-- 31 CRISTALES PROPÓSITO -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · Cristales</p>
+        <h2 style="font-size:38px;">Cristales · qué para qué</h2>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Protección</span><span class="uso">Turmalina negra, obsidiana.</span></div>
+          <div class="compendio-row"><span class="nombre">Calma emocional</span><span class="uso">Cuarzo rosa, amatista.</span></div>
+          <div class="compendio-row"><span class="nombre">Energía</span><span class="uso">Citrino, ojo de tigre.</span></div>
+          <div class="compendio-row"><span class="nombre">Claridad mental</span><span class="uso">Cuarzo cristal, fluorita.</span></div>
+          <div class="compendio-row"><span class="nombre">Voz interior</span><span class="uso">Lapislázuli, sodalita.</span></div>
+          <div class="compendio-row"><span class="nombre">Anclaje</span><span class="uso">Pirita, hematita, jaspe.</span></div>
+          <div class="compendio-row"><span class="nombre">Conexión lunar</span><span class="uso">Selenita, piedra luna.</span></div>
+          <div class="compendio-row"><span class="nombre">Equilibrio</span><span class="uso">Jade, aventurina.</span></div>
+          <div class="compendio-row"><span class="nombre">Universal</span><span class="uso">Cuarzo cristal · cualquier guardián.</span></div>
+        </div>
+        <div class="page-number">31</div>
+      </div></div>
+
+      <!-- 32 CRISTALES POR LINAJE -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · Por linaje</p>
+        <h2 style="font-size:38px;">Cristales · por linaje</h2>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Hadas / Agua</span><span class="uso">Cuarzo blanco, aguamarina, calcita azul.</span></div>
+          <div class="compendio-row"><span class="nombre">Gnomos / Tierra</span><span class="uso">Cuarzo ahumado, ágata, hematita.</span></div>
+          <div class="compendio-row"><span class="nombre">Espíritus árbol</span><span class="uso">Aventurina verde, malaquita, ámbar.</span></div>
+          <div class="compendio-row"><span class="nombre">Sílfides / Aire</span><span class="uso">Selenita, apofilita, calcedonia azul.</span></div>
+          <div class="compendio-row"><span class="nombre">Duendes</span><span class="uso">Cuarzo rosa, citrino, ojo de tigre.</span></div>
+          <div class="compendio-row"><span class="nombre">Pixies</span><span class="uso">Calcedonia, selenita, fluorita.</span></div>
+          <div class="compendio-row"><span class="nombre">Elfos</span><span class="uso">Lapislázuli, aventurina, cuarzo claro.</span></div>
+          <div class="compendio-row"><span class="nombre">Maestros Gigantes</span><span class="uso">Cuarzo grande, amatista catedral.</span></div>
+        </div>
+        <div class="page-number">32</div>
+      </div></div>
+
+      <!-- 33 ACTIVAR CRISTAL -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · Activación</p>
+        <h2>Activar un cristal</h2>
+        <p>Cuando ponés un cristal nuevo cerca, conviene activarlo primero.</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">LIMPIALO</span><p class="desc">Bajo agua fría 30 segundos (excepto selenita y kyanita — se disuelven).</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">SOL O LUNA</span><p class="desc">Cuarzos en sol de mañana 1 hora. Blandos en luna llena.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">PRESENTACIÓN</span><p class="desc">Tomá el cristal y el guardián con las dos manos. Decí: "Acompañate".</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">UBICACIÓN</span><p class="desc">A 5-10 cm del guardián. No encima. Al lado.</p></div>
+        <div class="page-number">33</div>
+      </div></div>
+
+      <!-- 34 HIERBAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">Compendio · Hierbas</p>
+        <h2 style="font-size:38px;">Hierbas básicas</h2>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Romero</span><span class="uso">Limpieza general, claridad mental.</span></div>
+          <div class="compendio-row"><span class="nombre">Ruda</span><span class="uso">Protección fuerte. En la entrada.</span></div>
+          <div class="compendio-row"><span class="nombre">Lavanda</span><span class="uso">Calma emocional, sueño.</span></div>
+          <div class="compendio-row"><span class="nombre">Palo santo</span><span class="uso">Limpieza profunda.</span></div>
+          <div class="compendio-row"><span class="nombre">Salvia blanca</span><span class="uso">Limpieza intermedia, intuición.</span></div>
+          <div class="compendio-row"><span class="nombre">Marcela</span><span class="uso">Específica de Uruguay. Calma profunda.</span></div>
+          <div class="compendio-row"><span class="nombre">Carqueja</span><span class="uso">Limpieza interior. Té amargo.</span></div>
+          <div class="compendio-row"><span class="nombre">Verbena</span><span class="uso">Atrae presencia elemental.</span></div>
+          <div class="compendio-row"><span class="nombre">Mirra</span><span class="uso">Cierres y duelos.</span></div>
+          <div class="compendio-row"><span class="nombre">Copal</span><span class="uso">Espacios sagrados, ancestralidad.</span></div>
+        </div>
+        <div class="page-number">34</div>
+      </div></div>
+
+      <!-- 35 LUNAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">12 · Lunas</p>
+        <h2 style="font-size:38px;">Las dos lunas</h2>
+        <div class="consejo-card"><p class="titulo">Luna nueva · sembrar</p><p>Una vela, tu guardián, una intención escrita en papel, 5 minutos en silencio. Doblás el papel y lo guardás cerca durante el ciclo lunar.</p></div>
+        <div class="consejo-card"><p class="titulo">Luna llena · revisar</p><p>Sacás el papel del ciclo anterior, lo leés en voz baja. Si se cumplió, agradecés y lo quemás. Si no, observás por qué y volvés a guardarlo.</p></div>
+        <svg class="ornament small"><use href="#r-moon"/></svg>
+        <div class="page-number">35</div>
+      </div></div>
+
+      <!-- 36 CITA -->
+      <div class="page dark"><div class="page-inner center-content">
+        <svg class="ornament dark small"><use href="#r-sun"/></svg>
+        <p class="cita">El vínculo<br>se cuida<br>como una amistad larga.</p>
+        <div class="page-number">36</div>
+      </div></div>
+
+      <!-- 37 SE CAYÓ -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">13 · Qué pasa si</p>
+        <h2 style="font-size:38px;">¿Se cayó?</h2>
+        <div class="faq"><p class="pregunta">Si se cae al piso</p><p class="respuesta">Levantalo con calma. Pasale las dos manos suavemente para reasentarlo. Decile "estás bien". No se rompen energéticamente por una caída — solo se desorientan unos segundos.</p></div>
+        <div class="faq"><p class="pregunta">Si se rompe una parte</p><p class="respuesta">Escribinos a info@duendesdeluruguay.com con foto. Si es algo menor, te explicamos cómo arreglarlo. Si es algo grande, evaluamos restauración. Lo que NO se hace: tirarlo. Un guardián roto sigue siendo un guardián.</p></div>
+        <div class="faq"><p class="pregunta">Si pierde un cristal</p><p class="respuesta">No te preocupes — es parte del envejecimiento natural. Si era importante, podemos reponerlo.</p></div>
+        <div class="page-number">37</div>
+      </div></div>
+
+      <!-- 38 LO REGALÁS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">13 · Continúa</p>
+        <h2 style="font-size:38px;">¿Lo regalás?</h2>
+        <div class="faq"><p class="pregunta">¿Puedo regalárselo a otra persona?</p><p class="respuesta">Sí, pero esperá al menos 21 días después de recibirlo. Necesita asentarse en vos primero.</p></div>
+        <div class="faq"><p class="pregunta">¿Cómo se hace la transferencia?</p><p class="respuesta">Sostenelo entre tus dos manos antes de entregarlo y decí: "Me acompañaste un tiempo. Ahora pasás a [nombre]. Gracias".</p></div>
+        <div class="faq"><p class="pregunta">¿Le digo que es canalizado?</p><p class="respuesta">Sí. Es importante. Si no entiende qué es, mandala al blog Mi Magia. La energía se transmite mejor con consciencia.</p></div>
+        <div class="page-number">38</div>
+      </div></div>
+
+      <!-- 39 MUDÁS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">13 · Continúa</p>
+        <h2 style="font-size:38px;">¿Te mudás · viajás?</h2>
+        <div class="faq"><p class="pregunta">Si te mudás de casa</p><p class="respuesta">El guardián viaja con vos en mano (no en caja con muebles). En la casa nueva, presentale los espacios igual que el primer día.</p></div>
+        <div class="faq"><p class="pregunta">Si viajás unos días</p><p class="respuesta">Podés llevarlo o dejarlo. Si lo llevás, va envuelto en tela suave. Si lo dejás, lugar tranquilo, sin vidrios cerca.</p></div>
+        <div class="faq"><p class="pregunta">Si viajás al exterior</p><p class="respuesta">Va siempre en cabina, no en bodega. Cartera o mochila, no valija despachada.</p></div>
+        <div class="page-number">39</div>
+      </div></div>
+
+      <!-- 40 VARIOS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">13 · Continúa</p>
+        <h2 style="font-size:38px;">¿Tenés varios?</h2>
+        <div class="faq"><p class="pregunta">¿Pueden estar juntos?</p><p class="respuesta">Sí, pero dales su espacio. Si tenés tres, no los amontones en un mismo estante. Cada uno necesita su micro-territorio.</p></div>
+        <div class="faq"><p class="pregunta">¿Compiten entre ellos?</p><p class="respuesta">No. Trabajan juntos cada uno desde su linaje. En distintos momentos, uno habla más fuerte. Es normal.</p></div>
+        <div class="faq"><p class="pregunta">¿Le agrego Canalización Álmica a todos?</p><p class="respuesta">Vos elegís. Algunos la agregan a uno, otros a todos. Es por guardián, irrepetible.</p></div>
+        <div class="page-number">40</div>
+      </div></div>
+
+      <!-- 41 LO SENTÍS RARO -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">13 · Continúa</p>
+        <h2 style="font-size:38px;">¿Lo sentís raro?</h2>
+        <div class="faq"><p class="pregunta">Si lo sentís frío o distante</p><p class="respuesta">Hacé limpieza energética (palo santo o luna). Después sentate con él 5 minutos sin pedir nada.</p></div>
+        <div class="faq"><p class="pregunta">Si te da impresión moverlo</p><p class="respuesta">Confiá en el impulso. Cuando aparece la sensación "este no es su lugar", suele ser el ser pidiendo cambio.</p></div>
+        <div class="faq"><p class="pregunta">Si soñás con él fuerte</p><p class="respuesta">Anotá el sueño apenas te despertás. Esos sueños son comunicación directa. Si se repiten, escribinos.</p></div>
+        <div class="faq"><p class="pregunta">Si querés guardarlo en una caja</p><p class="respuesta">No. Los seres elementales no viven encerrados.</p></div>
+        <div class="page-number">41</div>
+      </div></div>
+
+      <!-- 42 NUNCA -->
+      <div class="page dark"><div class="page-inner">
+        <p class="eyebrow">13 · Lo que NO se hace</p>
+        <h2 style="font-size:38px;">Nunca</h2>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No lo limpies con químicos</p><p class="respuesta" style="color:rgba(245,240,225,0.85);">Ningún producto, alcohol, perfume, jabón. Solo trapo seco o pincel suave.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No lo metas en vitrina cerrada</p><p class="respuesta" style="color:rgba(245,240,225,0.85);">Necesita energía abierta de la casa.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No lo prestes</p><p class="respuesta" style="color:rgba(245,240,225,0.85);">Es tuyo. Si querés transferirlo, hacelo con consciencia.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">No lo uses para asustar</p><p class="respuesta" style="color:rgba(245,240,225,0.85);">Estos seres no son objetos de juego. Tratalos con respeto y se devuelve.</p></div>
+        <div class="page-number">42</div>
+      </div></div>
+
+      <!-- 43 SUEÑOS Y SEÑALES -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">14 · Sueños y señales</p>
+        <h2 style="font-size:38px;">Cinco señales clave</h2>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">EL ELEMENTO APARECE EN TODOS LADOS</span><p class="desc">Agua, árboles, fuego — según tu linaje.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LA PALABRA "DUENDE" TE ENCUENTRA</span><p class="desc">Tres veces o más en una semana, sin buscarla.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">SUEÑOS RECURRENTES CON FIGURAS PEQUEÑAS</span><p class="desc">No tienen que ser nítidos. La sensación al despertar cuenta.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">UN ANIMAL QUE SE QUEDA</span><p class="desc">Un pájaro que vuelve, un gato que se posa.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">PIEL DE GALLINA SIN CAUSA</span><p class="desc">Especialmente en la nuca. El sello energético.</p></div>
+        <div class="page-number">43</div>
+      </div></div>
+
+      <!-- 44 ANIVERSARIO -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">Tradición elemental</p>
+        <h2>El aniversario</h2>
+        <p>Cada año, en la fecha que recibiste tu guardián, hacé un pequeño ritual de gratitud. No es obligatorio — es bonito.</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">VELA</span><p class="desc">Encendé una vela y dejala arder mientras lo sostenés.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LISTA</span><p class="desc">Anotá tres cosas que cambiaron en tu vida desde que llegó.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">GRACIAS</span><p class="desc">Decile gracias en voz alta por cada una de las tres.</p></div>
+        <p class="lead" style="margin-top:10px;">Los aniversarios renuevan el vínculo. Lo que se celebra, se queda.</p>
+        <div class="page-number">44</div>
+      </div></div>
+
+      <!-- 45 CTAs -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">15 · Comunidad y accesos</p>
+        <h2>Seguí adentro</h2>
+        <p>Esta guía es la base. La comunidad elemental está viva en estos tres lugares — vos elegís por dónde seguís.</p>
+        <div class="cta-final">
+          <a href="/blogs/mi-magia" class="cta-final-btn">
+            <p class="cta-titulo">El blog de la comunidad</p>
+            <p class="cta-text">Más de 28 artículos · linajes, rituales, historias</p>
+          </a>
+          <a href="/products/canalizacion-almica" class="cta-final-btn">
+            <p class="cta-titulo">Canalización Álmica · USD 30</p>
+            <p class="cta-text">El nombre álmico de tu guardián, su voz, su propósito</p>
+          </a>
+          <a href="/collections/all" class="cta-final-btn">
+            <p class="cta-titulo">La tienda</p>
+            <p class="cta-text">Si querés adoptar otro guardián, o regalar uno</p>
+          </a>
+        </div>
+        <div class="page-number">45</div>
+      </div></div>
+
+      <!-- 46 CIERRE -->
+      <div class="page dark"><div class="page-inner center-content">
+        <svg class="ornament dark med"><use href="#r-triskele"/></svg>
+        <p class="cita" style="font-size:54px;">La alquimia<br>continúa.</p>
+        <div style="position:absolute;bottom:48px;left:0;right:0;text-align:center;">
+          <p style="font-family:'Cinzel',serif;font-weight:400;font-size:10px;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;text-align:center;">Duendes del Uruguay</p>
+          <p style="font-family:'Cinzel',serif;font-weight:400;font-size:9px;letter-spacing:0.4em;color:var(--gold-dark);text-transform:uppercase;margin-top:6px;text-align:center;">2026 · Edición de la Comunidad Elemental</p>
+        </div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <div class="libro-controls">
+    <button id="prev-page">← Atrás</button>
+    <span class="page-indicator" id="page-indicator">01 · 46</span>
+    <button id="next-page">Adelante →</button>
+    <button class="sound-toggle" id="sound-toggle">🔊 Sonido</button>
+  </div>
+
+  <div class="libro-footer">
+    <a href="/blogs/mi-magia">Mi Magia · El Blog</a> ·
+    <a href="/products/canalizacion-almica">Canalización Álmica</a> ·
+    <a href="/collections/all">La Tienda</a>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+<script>
+(function() {
+  let audioCtx = null;
+  let soundEnabled = true;
+  function ensureAudioCtx() {
+    if (!audioCtx) {
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; }
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+  function playPageTurn() {
+    if (!soundEnabled) return;
+    const ctx = ensureAudioCtx(); if (!ctx) return;
+    const duration = 0.42;
+    const bufferSize = ctx.sampleRate * duration;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      const t = i / bufferSize;
+      const env = t < 0.15 ? (t/0.15) : Math.pow(1 - (t - 0.15)/0.85, 1.6);
+      data[i] = (Math.random() * 2 - 1) * env;
+    }
+    const noise = ctx.createBufferSource(); noise.buffer = buffer;
+    const filter = ctx.createBiquadFilter(); filter.type = 'bandpass'; filter.Q.value = 0.8;
+    filter.frequency.setValueAtTime(800, ctx.currentTime);
+    filter.frequency.linearRampToValueAtTime(2400, ctx.currentTime + 0.2);
+    filter.frequency.linearRampToValueAtTime(600, ctx.currentTime + duration);
+    const lowpass = ctx.createBiquadFilter(); lowpass.type = 'lowpass'; lowpass.frequency.value = 4000;
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.18, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + duration);
+    noise.connect(filter); filter.connect(lowpass); lowpass.connect(gain); gain.connect(ctx.destination);
+    noise.start(); noise.stop(ctx.currentTime + duration);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('lang-overlay');
+    const btnES = document.getElementById('lang-es');
+    const btnEN = document.getElementById('lang-en');
+
+    function startBook() {
+      overlay.classList.add('hide');
+      ensureAudioCtx();
+      initFlipbook();
+    }
+
+    const currentPath = window.location.pathname;
+    const alreadyInES = currentPath.startsWith('/es/');
+    const alreadyInEN = !alreadyInES;
+
+    btnES.addEventListener('click', function() {
+      try { localStorage.setItem('libro_lang', 'es'); } catch(e) {}
+      if (!alreadyInES) {
+        window.location.href = '/es/pages/libro-elemental';
+        return;
+      }
+      startBook();
+    });
+    btnEN.addEventListener('click', function() {
+      try { localStorage.setItem('libro_lang', 'en_pending'); } catch(e) {}
+      if (alreadyInES) {
+        window.location.href = '/pages/libro-elemental';
+        return;
+      }
+      alert('The book content is currently in Spanish. English version coming soon. Continuing in Spanish.');
+      startBook();
+    });
+
+    try {
+      const saved = localStorage.getItem('libro_lang');
+      if (saved === 'es' && alreadyInES) { overlay.classList.add('hide'); initFlipbook(); }
+      else if (saved === 'en_pending' && alreadyInEN) { overlay.classList.add('hide'); initFlipbook(); }
+    } catch(e) {}
+  });
+
+  function initFlipbook() {
+    const bookEl = document.getElementById('book');
+    if (!bookEl || typeof St === 'undefined') return;
+
+    const isMobile = window.innerWidth < 768;
+    const pageFlip = new St.PageFlip(bookEl, {
+      width: isMobile ? 320 : 480,
+      height: isMobile ? 460 : 680,
+      size: 'fixed',
+      minWidth: 280, maxWidth: 600,
+      minHeight: 400, maxHeight: 800,
+      drawShadow: true,
+      flippingTime: 950,
+      usePortrait: isMobile,
+      startZIndex: 0,
+      autoSize: false,
+      maxShadowOpacity: 0.5,
+      showCover: true,
+      mobileScrollSupport: true,
+      swipeDistance: 30,
+      clickEventForward: true,
+      useMouseEvents: true,
+      showPageCorners: true,
+      disableFlipByClick: false
+    });
+
+    pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    const indicator = document.getElementById('page-indicator');
+    const soundBtn = document.getElementById('sound-toggle');
+    const total = pageFlip.getPageCount();
+
+    function updateIndicator() {
+      const cur = pageFlip.getCurrentPageIndex() + 1;
+      indicator.textContent = String(cur).padStart(2, '0') + ' · ' + String(total).padStart(2, '0');
+      prevBtn.disabled = cur === 1;
+      nextBtn.disabled = cur === total;
+    }
+
+    prevBtn.addEventListener('click', () => pageFlip.flipPrev());
+    nextBtn.addEventListener('click', () => pageFlip.flipNext());
+    pageFlip.on('flip', () => { playPageTurn(); updateIndicator(); });
+
+    soundBtn.addEventListener('click', function() {
+      soundEnabled = !soundEnabled;
+      soundBtn.textContent = soundEnabled ? '🔊 Sonido' : '🔇 Silencio';
+      soundBtn.classList.toggle('muted', !soundEnabled);
+      if (soundEnabled) ensureAudioCtx();
+    });
+
+    updateIndicator();
+
+    let lastIsMobile = isMobile;
+    window.addEventListener('resize', () => {
+      const newIsMobile = window.innerWidth < 768;
+      if (newIsMobile !== lastIsMobile) location.reload();
+    });
+  }
+})();
+</script>

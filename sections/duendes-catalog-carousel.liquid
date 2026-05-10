@@ -1,0 +1,312 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign theme = section.settings.theme | default: 'light'
+  assign filter_tags = section.settings.filter_tags | split: ','
+  assign show_sold_out = section.settings.show_sold_out
+  assign is_memorial = section.settings.is_memorial
+  assign carousel_id = section.id
+  assign deco_char = section.settings.deco_char | default: ''
+-%}
+
+<style>
+  .dc-carousel { padding: 40px 0 32px; position: relative; overflow: hidden; }
+  .dc-carousel--light { background: #FAFAF8; }
+  .dc-carousel--dark { background: #0D0B08; }
+  .dc-carousel__inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  .dc-carousel__header { text-align: center; margin-bottom: 20px; position: relative; z-index: 2; }
+  .dc-carousel__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 400; font-style: italic; margin: 0 0 4px;
+  }
+  .dc-carousel--light .dc-carousel__title { color: var(--text, #1a1a14); }
+  .dc-carousel--dark .dc-carousel__title { color: #FAFAF8; }
+  .dc-carousel__subtitle {
+    font-family: 'Lato', sans-serif; font-size: 10px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .dc-carousel--light .dc-carousel__subtitle { color: rgba(26,26,20,.3); }
+  .dc-carousel--dark .dc-carousel__subtitle { color: rgba(250,250,248,.2); }
+
+  .dc-carousel__track-wrap { position: relative; z-index: 1; }
+  .dc-carousel__track { display: flex; gap: 14px; width: max-content; will-change: transform; }
+
+  /* ── SQUARE card for thematic carousels ── */
+  .dc-sq {
+    flex-shrink: 0; width: 160px;
+    text-decoration: none; color: inherit;
+    border-radius: 8px; overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+    position: relative;
+  }
+  .dc-carousel--light .dc-sq { background: #fff; }
+  .dc-carousel--dark .dc-sq { background: rgba(255,255,255,.05); }
+  .dc-sq:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+  .dc-sq::after {
+    content:''; position:absolute; inset:0; border-radius:8px;
+    border: 1px solid transparent; transition: border-color .3s; pointer-events:none;
+  }
+  .dc-sq:hover::after { border-color: rgba(201,169,110,.25); }
+  .dc-sq__img { aspect-ratio: 1/1; overflow: hidden; position: relative; }
+  .dc-sq__img img { width:100%; height:100%; object-fit:cover; transition: transform .5s; }
+  .dc-sq:hover .dc-sq__img img { transform: scale(1.04); }
+  .dc-sq__adopted-tag {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 3px; text-align: center;
+    background: rgba(13,11,8,.65); backdrop-filter: blur(4px);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 10px; font-style: italic; color: var(--gold, #C9A96E);
+  }
+  .dc-sq__info { padding: 8px 10px 10px; }
+  .dc-sq__name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 13px; font-weight: 600; line-height: 1.2; margin: 0 0 2px;
+  }
+  .dc-carousel--light .dc-sq__name { color: var(--text, #1a1a14); }
+  .dc-carousel--dark .dc-sq__name { color: #FAFAF8; }
+  .dc-sq__price {
+    font-family: 'Lato', sans-serif; font-size: 11px; font-weight: 700; margin: 0 0 6px;
+  }
+  .dc-carousel--light .dc-sq__price { color: var(--gold-dk, #A38640); }
+  .dc-carousel--dark .dc-sq__price { color: var(--gold, #C9A96E); }
+  .dc-sq__price--struck { text-decoration: line-through; opacity: .4; }
+  .dc-sq__btn {
+    font-family: 'Cinzel', serif; font-size: 7px; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+    display: inline-block; transition: all .3s;
+  }
+  .dc-carousel--light .dc-sq__btn { background: #0D0B08; color: #FAFAF8; }
+  .dc-carousel--dark .dc-sq__btn { background: rgba(255,255,255,.1); color: #FAFAF8; border: 1px solid rgba(255,255,255,.1); }
+  .dc-sq:hover .dc-sq__btn { background: var(--gold, #C9A96E); color: #0D0B08; }
+
+  /* ── ROUND card for memorial only ── */
+  .dc-carousel--memorial { padding: 56px 0 48px; background: linear-gradient(180deg, #0D0B08, #1a1610, #0D0B08); }
+  .dc-carousel--memorial .dc-carousel__title { color: var(--gold-lt, #D6BD7B); font-style: normal; font-weight: 300; font-size: clamp(22px,3vw,32px); }
+  .dc-carousel--memorial .dc-carousel__subtitle { color: rgba(201,169,110,.35); }
+  .dc-carousel--memorial .dc-carousel__track { gap: 28px; }
+  .dc-mem {
+    flex-shrink: 0; width: 160px; text-align: center;
+    text-decoration: none; color: inherit;
+    opacity: .65; transition: opacity .4s, transform .3s;
+  }
+  .dc-mem:hover { opacity: 1; transform: translateY(-3px); }
+  .dc-mem__img {
+    width: 130px; height: 130px; border-radius: 50%; overflow: hidden;
+    margin: 0 auto 10px;
+    border: 1.5px solid rgba(201,169,110,.15);
+    box-shadow: 0 0 30px rgba(201,169,110,.06);
+    position: relative;
+  }
+  .dc-mem__img img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(.6); transition: filter .4s, transform .5s;
+  }
+  .dc-mem:hover .dc-mem__img img { filter: saturate(1); transform: scale(1.06); }
+  .dc-mem__name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 14px; font-style: italic; font-weight: 500;
+    color: var(--gold-lt, #D6BD7B); margin: 0 0 3px;
+  }
+  .dc-mem__status {
+    font-family: 'Lato', sans-serif; font-size: 9px;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: rgba(201,169,110,.35);
+  }
+  /* Glow particles */
+  .dc-carousel--memorial .dc-carousel__track-wrap::before,
+  .dc-carousel--memorial .dc-carousel__track-wrap::after {
+    content:''; position:absolute; top:50%; width:100px; height:100px; border-radius:50%;
+    background: radial-gradient(circle, rgba(201,169,110,.05), transparent);
+    pointer-events:none; z-index:0;
+    animation: dc-mem-glow 8s ease-in-out infinite;
+  }
+  .dc-carousel--memorial .dc-carousel__track-wrap::before { left:5%; }
+  .dc-carousel--memorial .dc-carousel__track-wrap::after { right:10%; animation-delay:4s; }
+  @keyframes dc-mem-glow {
+    0%,100% { transform:translateY(-50%) scale(1); opacity:.2; }
+    50% { transform:translateY(-60%) scale(1.4); opacity:.5; }
+  }
+
+  /* ── Decorative rain behind thematic carousels ── */
+  .dc-carousel__deco {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+  }
+  .dc-carousel__deco span {
+    position: absolute;
+    font-size: 14px;
+    opacity: 0;
+    animation: dc-rain 12s linear infinite;
+    color: currentColor;
+  }
+  .dc-carousel--light .dc-carousel__deco { color: rgba(26,26,20,.04); }
+  .dc-carousel--dark .dc-carousel__deco { color: rgba(250,250,248,.04); }
+  .dc-carousel__deco span:nth-child(1) { left:5%; animation-delay:0s; font-size:12px; }
+  .dc-carousel__deco span:nth-child(2) { left:15%; animation-delay:1.5s; font-size:16px; }
+  .dc-carousel__deco span:nth-child(3) { left:25%; animation-delay:3s; font-size:10px; }
+  .dc-carousel__deco span:nth-child(4) { left:38%; animation-delay:4.5s; font-size:14px; }
+  .dc-carousel__deco span:nth-child(5) { left:50%; animation-delay:6s; font-size:18px; }
+  .dc-carousel__deco span:nth-child(6) { left:62%; animation-delay:7.5s; font-size:11px; }
+  .dc-carousel__deco span:nth-child(7) { left:75%; animation-delay:9s; font-size:15px; }
+  .dc-carousel__deco span:nth-child(8) { left:88%; animation-delay:10.5s; font-size:13px; }
+  @keyframes dc-rain {
+    0% { top: -10%; opacity: 0; transform: rotate(0deg); }
+    10% { opacity: .6; }
+    90% { opacity: .6; }
+    100% { top: 110%; opacity: 0; transform: rotate(20deg); }
+  }
+
+  /* Fade edges */
+  .dc-carousel__fade-l, .dc-carousel__fade-r {
+    position:absolute; top:0; bottom:0; width:40px; pointer-events:none; z-index:2;
+  }
+  .dc-carousel__fade-l { left:0; }
+  .dc-carousel__fade-r { right:0; }
+  .dc-carousel--light .dc-carousel__fade-l { background: linear-gradient(to right, #FAFAF8, transparent); }
+  .dc-carousel--light .dc-carousel__fade-r { background: linear-gradient(to left, #FAFAF8, transparent); }
+  .dc-carousel--dark .dc-carousel__fade-l, .dc-carousel--memorial .dc-carousel__fade-l { background: linear-gradient(to right, #0D0B08, transparent); }
+  .dc-carousel--dark .dc-carousel__fade-r, .dc-carousel--memorial .dc-carousel__fade-r { background: linear-gradient(to left, #0D0B08, transparent); }
+
+  @media (max-width: 640px) {
+    .dc-sq { width: 140px; }
+    .dc-mem { width: 130px; }
+    .dc-mem__img { width: 105px; height: 105px; }
+    .dc-carousel__track { gap: 10px; }
+    .dc-carousel--memorial .dc-carousel__track { gap: 18px; }
+  }
+</style>
+
+<section class="dc-carousel dc-carousel--{{ theme }} {% if is_memorial %}dc-carousel--memorial{% endif %}" id="carousel-{{ carousel_id }}">
+  {%- unless is_memorial -%}
+    {%- if deco_char != blank -%}
+      <div class="dc-carousel__deco">
+        <span>{{ deco_char }}</span><span>{{ deco_char }}</span><span>{{ deco_char }}</span><span>{{ deco_char }}</span>
+        <span>{{ deco_char }}</span><span>{{ deco_char }}</span><span>{{ deco_char }}</span><span>{{ deco_char }}</span>
+      </div>
+    {%- endif -%}
+  {%- endunless -%}
+
+  <div class="dc-carousel__inner">
+    <div class="dc-carousel__header duendes-reveal">
+      <h3 class="dc-carousel__title">{{ section.settings.title }}</h3>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="dc-carousel__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="dc-carousel__track-wrap">
+      <div class="dc-carousel__fade-l"></div>
+      <div class="dc-carousel__fade-r"></div>
+      <div class="dc-carousel__track" data-dc-carousel="{{ carousel_id }}" data-dc-dir="{{ section.settings.direction | default: 'left' }}">
+
+        {%- comment -%} Render products twice for seamless loop {%- endcomment -%}
+        {%- for pass in (1..2) -%}
+          {%- assign found = 0 -%}
+          {%- paginate collections.all.products by 250 -%}
+            {%- for product in collections.all.products -%}
+              {%- if found >= 40 -%}{%- break -%}{%- endif -%}
+
+              {%- assign tag_match = false -%}
+              {%- for ft in filter_tags -%}
+                {%- assign clean_tag = ft | strip -%}
+                {%- if product.tags contains clean_tag -%}{%- assign tag_match = true -%}{%- break -%}{%- endif -%}
+              {%- endfor -%}
+              {%- unless tag_match -%}{%- continue -%}{%- endunless -%}
+
+              {%- assign is_adopted = false -%}
+              {%- unless product.available -%}{%- assign is_adopted = true -%}{%- endunless -%}
+              {%- if is_memorial and is_adopted == false -%}{%- continue -%}{%- endif -%}
+              {%- unless show_sold_out -%}{%- if is_adopted -%}{%- continue -%}{%- endif -%}{%- endunless -%}
+
+              {%- assign found = found | plus: 1 -%}
+
+              {%- if is_memorial -%}
+                {%- comment -%} ROUND memorial card {%- endcomment -%}
+                <a href="{{ product.url }}" class="dc-mem" {% if pass == 2 %}aria-hidden="true" tabindex="-1"{% endif %}>
+                  <div class="dc-mem__img">
+                    {%- if product.featured_image -%}
+                      <img src="{{ product.featured_image | image_url: width: 240 }}" alt="{{ product.title | escape }}" loading="lazy" width="120" height="120">
+                    {%- endif -%}
+                  </div>
+                  <h4 class="dc-mem__name">{{ product.title }}</h4>
+                  <span class="dc-mem__status">Encontr&oacute; su hogar</span>
+                </a>
+              {%- else -%}
+                {%- comment -%} SQUARE thematic card {%- endcomment -%}
+                <a href="{{ product.url }}" class="dc-sq" {% if pass == 2 %}aria-hidden="true" tabindex="-1"{% endif %}>
+                  <div class="dc-sq__img">
+                    {%- if product.featured_image -%}
+                      <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy" width="200" height="200">
+                    {%- endif -%}
+                    {%- if is_adopted -%}
+                      <div class="dc-sq__adopted-tag">Adopted</div>
+                    {%- endif -%}
+                  </div>
+                  <div class="dc-sq__info">
+                    <h4 class="dc-sq__name">{{ product.title }}</h4>
+                    <p class="dc-sq__price {% if is_adopted %}dc-sq__price--struck{% endif %}">{{ product.price | money_without_trailing_zeros }}</p>
+                    {%- unless is_adopted -%}
+                      <span class="dc-sq__btn">Discover</span>
+                    {%- endunless -%}
+                  </div>
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endpaginate -%}
+        {%- endfor -%}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var tracks = document.querySelectorAll('[data-dc-carousel="{{ carousel_id }}"]');
+  tracks.forEach(function(track){
+    var totalW = track.scrollWidth / 2;
+    if(totalW <= 0) return;
+    var dir = track.getAttribute('data-dc-dir') === 'right' ? 1 : -1;
+    var pos = dir === 1 ? -totalW : 0;
+    var speed = 0.3, paused = false;
+
+    function tick(){
+      if(!paused){
+        pos += dir * speed;
+        if(dir === -1 && pos <= -totalW) pos += totalW;
+        if(dir === 1 && pos >= 0) pos -= totalW;
+        track.style.transform = 'translateX(' + pos + 'px)';
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    track.querySelectorAll('.dc-sq, .dc-mem').forEach(function(card){
+      card.addEventListener('mouseenter', function(){ paused = true; });
+      card.addEventListener('mouseleave', function(){ paused = false; });
+    });
+    track.addEventListener('touchstart', function(){ paused = true; }, {passive:true});
+    track.addEventListener('touchend', function(){ setTimeout(function(){ paused = false; }, 2000); }, {passive:true});
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Carrusel Tematico",
+  "tag": "section",
+  "class": "dc-carousel-section",
+  "settings": [
+    { "type": "select", "id": "theme", "label": "Tema", "options": [{"value":"light","label":"Claro"},{"value":"dark","label":"Oscuro"}], "default": "light" },
+    { "type": "text", "id": "title", "label": "Titulo", "default": "Abundancia y Dinero" },
+    { "type": "text", "id": "subtitle", "label": "Subtitulo", "default": "Desliza para explorar" },
+    { "type": "text", "id": "filter_tags", "label": "Tags (separados por coma)", "default": "Abundancia y Dinero" },
+    { "type": "checkbox", "id": "show_sold_out", "label": "Mostrar adoptados", "default": true },
+    { "type": "checkbox", "id": "is_memorial", "label": "Estilo memorial", "default": false },
+    { "type": "select", "id": "direction", "label": "Direccion", "options": [{"value":"left","label":"Izquierda"},{"value":"right","label":"Derecha"}], "default": "left" },
+    { "type": "text", "id": "deco_char", "label": "Caracter decorativo (lluvia)", "info": "Ej: ◆ para dinero, ♥ para amor, ✦ para proteccion" }
+  ],
+  "presets": [{ "name": "Carrusel Tematico" }]
+}
+{% endschema %}
+

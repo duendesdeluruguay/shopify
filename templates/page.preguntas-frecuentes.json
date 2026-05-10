@@ -1,0 +1,591 @@
+{
+  "sections": {
+    "main": {
+      "type": "duendes-faq-page",
+      "blocks": {
+        "cat_1000": {
+          "type": "category_header",
+          "settings": {
+            "title": "What no one else can explain to you"
+          }
+        },
+        "faq_1001": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What exactly are channeled Guardians?",
+            "answer": "<p>They are not decorative figures. They are beings channeled in deep meditation — each one with their own name, history, and purpose. No two are alike because they don't come from a mold: they come from a process even we don't control.</p>"
+          }
+        },
+        "faq_1002": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I know which Guardian is for me?",
+            "answer": "<p>You don't choose them — they choose you. Look at the available Guardians and pay attention to which one stops you. That pause, that extra second looking at a photo: that's the sign.</p>"
+          }
+        },
+        "faq_1003": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the Guardians consecrated?",
+            "answer": "<p>Every Guardian is channeled and consecrated in Piriápolis — an energy point recognized worldwide. They don't leave the studio without going through that process. It's what makes them different from any other piece in existence.</p>"
+          }
+        },
+        "faq_1004": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the Guardians demons or negative energies?",
+            "answer": "<p>Absolutely not. They are ancestral Guardians linked to protection, abundance, and nature. Their energy is luminous. More than 15,000 people in 45 countries confirm it.</p>"
+          }
+        },
+        "faq_1005": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does each Guardian have a specific purpose?",
+            "answer": "<p>Every Guardian has a specific purpose: abundance, protection, love, health, or spiritual connection. The essence of each one is on their profile — and no, we don't choose it.</p>"
+          }
+        },
+        "faq_1006": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is a channeled Guardian for?",
+            "answer": "<p>An energy portal that protects your space, attracts what you need, and connects you with what is unseen but felt. It's not decoration — it's presence.</p>"
+          }
+        },
+        "faq_1007": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it better to have only one or several?",
+            "answer": "<p>They are sociable: in a group they amplify their collective energy. But one alone already fulfills its purpose perfectly. Many adopters start with one and end up with an entire family.</p>"
+          }
+        },
+        "faq_1008": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What happens if my Guardian breaks?",
+            "answer": "<p>They are made of professional cold porcelain, a noble and flexible material. Minor damage can be repaired. If it breaks unexpectedly, many adopters believe it fulfilled a protective mission. Whatever happens, write to us.</p>"
+          }
+        },
+        "faq_1009": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can anyone touch my Guardian?",
+            "answer": "<p>We don't recommend it. The connection between a Guardian and their person is intimate and personal. If someone else needs one, the best thing is for them to adopt their own.</p>"
+          }
+        },
+        "faq_1010": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do they need energetic maintenance?",
+            "answer": "<p>Yes — full moon, direct sun, talk to them, offer them flowers or coins. Everything is explained in our Mi Magia Portal, exclusive access you get with your Guardian.</p>"
+          }
+        },
+        "faq_1011": {
+          "type": "faq_item",
+          "settings": {
+            "question": "I dreamed something about my Guardian / it broke / something strange happened",
+            "answer": "<p>If you dreamed something or something strange happened, the meaning is yours. Sit for a moment, meditate, and ask directly. The answer always comes — but in its own way.</p>"
+          }
+        },
+        "faq_1012": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do I have to give it a name?",
+            "answer": "<p>They all have a name we give them, but their soul name — the true one — may come to you in dreams, meditations, or moments of silence. You'll know when you hear it.</p>"
+          }
+        },
+        "faq_1013": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it true that they must be gifted?",
+            "answer": "<p>It's not necessary. They can be gifted, bought, or adopted in any form. What matters is the connection — and that doesn't depend on how it came to you.</p>"
+          }
+        },
+        "faq_1014": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can ones like yours be found elsewhere?",
+            "answer": "<p>We don't have (nor want) branches, distributors, or replicas. Every Guardian is 100% original and channeled only in our workshop in Piriápolis. This website is the only official source. And don't be confused… SIMILAR IS NOT THE SAME.</p>"
+          }
+        },
+        "cat_1015": {
+          "type": "category_header",
+          "settings": {
+            "title": "Why it isn&apos;t expensive — it is one-of-a-kind"
+          }
+        },
+        "faq_1016": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does it take to create a Guardian?",
+            "answer": "<p>A mid-size Guardian takes between 20 and 60 hours of pure artisanal work. The large and giant ones can take weeks or months. They aren't rushed — and every hour invested shows in the result.</p>"
+          }
+        },
+        "faq_1017": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is every Guardian really one-of-a-kind?",
+            "answer": "<p>The mid-size, large, and giant ones are 100% unrepeatable: you'll never find another one like them in the world. The minis may share a base design, but each one is finished by hand and varies.</p>"
+          }
+        },
+        "faq_1018": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes them different?",
+            "answer": "<p>Hand sculpting without molds, hours of channeling, 100% authentic crystals, consecration in Piriápolis, and a letter written exclusively for you. It's not a product — it's an experience.</p>"
+          }
+        },
+        "faq_1019": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How to protect yourself from fraud?",
+            "answer": "<p>Verify that the company is real, that it issues an official invoice, and that it uses a secure payment gateway. And above all: listen to your intuition. If something doesn't feel right, it probably isn't.</p>"
+          }
+        },
+        "faq_1020": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are there imitations?",
+            "answer": "<p>Unfortunately yes. They copy our texts, photos, and even our history. The only official source is this website and our verified social media. If you see it elsewhere, it's not us.</p>"
+          }
+        },
+        "faq_1021": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What does my investment include?",
+            "answer": "<p>Hours of handcrafted work, premium materials, real crystals, Certificate of Authenticity, Digital Guide, special packaging, channeled letter, access to the My Magic Portal, and over 10 years of experience. All of that is included in every piece.</p>"
+          }
+        },
+        "faq_1022": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you sell wholesale?",
+            "answer": "<p>No. Every Guardian goes directly from our hands to yours. No intermediaries, no third parties, no distribution chain. From Piriápolis to your door.</p>"
+          }
+        },
+        "cat_1023": {
+          "type": "category_header",
+          "settings": {
+            "title": "What you need to know before choosing"
+          }
+        },
+        "faq_1024": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What sizes are there?",
+            "answer": "<p>Mini/Pixies (7-13cm): perfect to start. Mid-Size (16-28cm): the most adopted. Large (30-40cm): real presence in any space. Giants (50-80cm): unrepeatable collector's pieces.</p>"
+          }
+        },
+        "faq_1025": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What materials are used?",
+            "answer": "<p>Professional cold porcelain of the highest quality, combined with 100% natural and authentic crystals. Nothing is synthetic, nothing is a prop.</p>"
+          }
+        },
+        "faq_1026": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it the same as the photo?",
+            "answer": "<p>Yes — what you see is what you adopt. Every photo is of the actual Guardian that will arrive at your home. The only exception are the Minis, which may have minimal variations because they're the only ones that get recreated by hand and we don't want any two to be identical. Don't insist.</p>"
+          }
+        },
+        "faq_1027": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you do custom orders?",
+            "answer": "<p>We don't accept custom orders. A channeling can't be forced or rushed — every Guardian arrives when they need to arrive.</p>"
+          }
+        },
+        "faq_1028": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the crystals real?",
+            "answer": "<p>100% authentic and natural.</p>"
+          }
+        },
+        "faq_1029": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What does my purchase include?",
+            "answer": "<p>Your hand-sculpted Guardian, signed Certificate of Authenticity, channeled letter written exclusively for you, Digital Connection Guide, access to the My Magic Portal, and packaging designed to make opening it an unforgettable moment.</p>"
+          }
+        },
+        "faq_1030": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I take care of my Guardian?",
+            "answer": "<p>Near a window with natural light, surrounded by plants or crystals. Everything is detailed in our Mi Magia Portal, with specific instructions to boost their energy.</p>"
+          }
+        },
+        "faq_1031": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I take it with me?",
+            "answer": "<p>Yes — and it strengthens the bond. Let it know before moving it and give thanks when you place it in its new spot. It sounds simple, but it makes a difference.</p>"
+          }
+        },
+        "cat_1032": {
+          "type": "category_header",
+          "settings": {
+            "title": "El proceso es simple"
+          }
+        },
+        "faq_1033": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the purchase process?",
+            "answer": "<p>Browse the available Guardians, choose the one that calls you, add it to the cart, fill in your details, pay securely, and receive your tracking by email. Simple, secure, and fast.</p>"
+          }
+        },
+        "faq_1034": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Multiple in the cart?",
+            "answer": "<p>Yes, you can adopt multiple Guardians in a single order. They travel together in the same box, so you avoid paying two shipping fees. Many adopters build their Guardian team gradually. No pressure: the right Guardian arrives when it's meant to arrive.</p>"
+          }
+        },
+        "faq_1035": {
+          "type": "faq_item",
+          "settings": {
+            "question": "If it isn&apos;t available?",
+            "answer": "<p>It means it has already found its home — someone else adopted it before. New Guardians are born constantly. We recommend always keeping an eye on the website because most are adopted very quickly. Follow us on socials to know first.</p>"
+          }
+        },
+        "faq_1036": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I cancel?",
+            "answer": "<p>No. Each piece is one-of-a-kind and unrepeatable. Buying is a commitment from both sides. Nobody likes wasting time.</p>"
+          }
+        },
+        "faq_1037": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Factura?",
+            "answer": "<p>Yes, we issue an official Uruguayan invoice with every purchase. Fully legal, fully transparent.</p>"
+          }
+        },
+        "faq_1038": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I know it went through?",
+            "answer": "<p>You receive a confirmation email from our store, the confirmation screen at the end, and a receipt from the payment gateway. Triple backup.</p>"
+          }
+        },
+        "faq_1039": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Minimum amount?",
+            "answer": "<p>We have no minimum purchase amount. If you plan to adopt more than one, it's better to do it in a single purchase to optimize shipping — the cost is per package, not per piece.</p>"
+          }
+        },
+        "cat_1040": {
+          "type": "category_header",
+          "settings": {
+            "title": "Pay however suits you best"
+          }
+        },
+        "faq_1041": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Payment methods?",
+            "answer": "<p>We accept the most complete payment methods on the market:</p><p><strong>International (worldwide):</strong> Shopify Payments shows you Visa, Mastercard, American Express, Discover, plus fast payments like <strong>Shop Pay</strong>, <strong>Apple Pay</strong>, <strong>Google Pay</strong>, and <strong>Meta Pay</strong>. One click if you already shop online in any store.</p><p><strong>Latin America:</strong> Mercado Pago (Uruguay, Argentina, and the rest of the region) with local cards and account balance.</p><p><strong>United States and Europe:</strong> PayPal available in addition to international cards.</p><p>All gateways are PCI DSS certified — your data never passes through our servers, it goes directly from your browser to the bank.</p>"
+          }
+        },
+        "faq_1042": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Which currency?",
+            "answer": "<p>If you're in Uruguay, you'll pay in Uruguayan pesos. For other countries, the conversion is done automatically at checkout, you don't have to do anything.</p>"
+          }
+        },
+        "faq_1043": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it secure?",
+            "answer": "<p>Yes. All payments go through <strong>Shopify Payments</strong> and other PCI DSS certified gateways. Your card details never touch our servers — they travel encrypted directly from your browser to the bank. Active SSL certificate, verified domain.</p>"
+          }
+        },
+        "faq_1044": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cuotas?",
+            "answer": "<p>It depends on your country and card. In Uruguay (via Mercado Pago) you can see installment options with local cards at checkout. In the United States, Shopify Payments offers <strong>Shop Pay Installments</strong> — pay in 4 interest-free installments on purchases from USD 50. In other countries, installments depend on the issuing bank.</p>"
+          }
+        },
+        "faq_1045": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Payment declined?",
+            "answer": "<p>Check that the details are entered correctly, try another card, or contact your bank. If the problem persists, write to us on WhatsApp and we'll help.</p>"
+          }
+        },
+        "faq_1046": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you accept PayPal, Mercado Pago, transfer, crypto?",
+            "answer": "<p><strong>PayPal:</strong> yes, for the United States, Europe, and the rest of the world.</p><p><strong>Mercado Pago:</strong> yes, for Uruguay and Latin America (local cards and account balance).</p><p><strong>Shopify Payments with Shop Pay:</strong> yes, worldwide. It's the fastest option — one click if you already have Shop Pay active in another store.</p><p><strong>Direct bank transfer:</strong> not for now.</p><p><strong>Crypto:</strong> not for now.</p>"
+          }
+        },
+        "faq_1047": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are deposits? Are they for reserving a Guardian?",
+            "answer": "<p>Deposits <strong>are not used to reserve Guardians</strong> — Guardians are purchased in full at the moment of adoption. The deposit is only used for one thing: <strong>scheduling a visit to the workshop in Piriápolis</strong>. Since there's a months-long wait, the deposit secures your spot and gets discounted from any purchase you make after the visit.</p>"
+          }
+        },
+        "faq_1048": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does the studio visit deposit last?",
+            "answer": "<p>The deposit stays associated with your name until the day of the confirmed visit. If after visiting the studio you adopt a Guardian, the amount is automatically deducted from that purchase.</p>"
+          }
+        },
+        "faq_1049": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Partial payments?",
+            "answer": "<p>No. Adoptions are paid at the moment of purchase, in a single transaction. The exception is the <strong>deposit for a workshop visit</strong> — that one is a separate payment and gets discounted from your later purchase.</p>"
+          }
+        },
+        "faq_1050": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I can&apos;t make the scheduled visit?",
+            "answer": "<p>Let us know on WhatsApp as far in advance as possible and we'll reschedule at no cost. If the cancellation is last-minute or you don't notify us, the deposit isn't refunded — but you can use it for an online purchase within the next 6 months.</p>"
+          }
+        },
+        "faq_1051": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I hold a Guardian to pay later?",
+            "answer": "<p>No. Since each Guardian is one-of-a-kind and exists only once in the world, none are held. When one calls you, the only way to secure it is to adopt it in that moment — otherwise, someone else will adopt it before you.</p>"
+          }
+        },
+        "faq_1052": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Refunds?",
+            "answer": "<p>Because they're unique and unrepeatable pieces, we don't offer returns or exchanges. The only exception: if your Guardian arrives with major shipping damage. In that case, send us photos within 24 hours via WhatsApp to start the corresponding claim procedure with the shipping carrier.</p>"
+          }
+        },
+        "cat_1053": {
+          "type": "category_header",
+          "settings": {
+            "title": "From Piriápolis to the world"
+          }
+        },
+        "faq_1054": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Which countries?",
+            "answer": "<p>Worldwide. We ship via DHL Express for international shipments and via DAC within Uruguay. Your Guardian arrives wherever you are.</p>"
+          }
+        },
+        "faq_1055": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does it take?",
+            "answer": "<p>The complete process has three stages:</p><p><strong>1. Channeling (7 days):</strong> begins when you complete the <em>Recognition Encounter</em> in My Magic. Those 7 days are sacred — they're not rushed.</p><p><strong>2. Shipping:</strong> your Guardian leaves on the Friday closest to the end of the channeling. If you finish on a Tuesday, it ships that same Friday; if you finish on a Thursday, also.</p><p><strong>3. Transit:</strong> Uruguay 1-3 business days via DAC. International 5-10 business days via DHL Express with real-time tracking.</p>"
+          }
+        },
+        "faq_1056": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Free shipping?",
+            "answer": "<p>We currently don't offer free shipping.</p>"
+          }
+        },
+        "faq_1057": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How is it packaged?",
+            "answer": "<p>Every Guardian travels individually protected, inside a sturdy box with anti-shock padding designed specifically for handcrafted pieces. They arrive perfect.</p>"
+          }
+        },
+        "faq_1058": {
+          "type": "faq_item",
+          "settings": {
+            "question": "If it arrives damaged?",
+            "answer": "<p>Send us photos of the damage on WhatsApp within 24 hours of receiving it. We resolve it quickly and without complications.</p>"
+          }
+        },
+        "faq_1059": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Aduana?",
+            "answer": "<p>It varies by destination country and is the buyer's responsibility. We recommend checking your country's import regulations before purchasing.</p>"
+          }
+        },
+        "faq_1060": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I don&apos;t pick it up?",
+            "answer": "<p>IMPORTANT: wrong address / not picked up = return with very high costs. You don't want this to happen — pick up or receive on time. Because if you don't, and the package returns to Uruguay, there's a high re-shipping cost. And if you're abroad and your package comes back, you lose it — DHL sends it directly to destruction. Nobody wants that.</p>"
+          }
+        },
+        "cat_1061": {
+          "type": "category_header",
+          "settings": {
+            "title": "The people behind the magic"
+          }
+        },
+        "faq_1062": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Who are they?",
+            "answer": "<p>Gabriel and Thibisay — a couple of 100% self-taught channelers with more than 10 years of experience. Everything you see was born in a workshop in Piriápolis, without investors, without formulas, without molds.</p>"
+          }
+        },
+        "faq_1063": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Why Piriápolis?",
+            "answer": "<p>Piriápolis is known as the Alchemist City — an energy point recognized worldwide. We didn't choose this place by chance. Or rather: it chose us.</p>"
+          }
+        },
+        "faq_1064": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I visit?",
+            "answer": "<p>Yes, but with two real conditions: <strong>by appointment only</strong> (we don't take walk-ins) and <strong>currently there's a months-long wait</strong>. To reserve your spot we ask for a <strong>deposit that gets discounted from any purchase you make after the visit</strong>. If you'd like to book, message us on WhatsApp and we'll tell you the next available spots.</p>"
+          }
+        },
+        "faq_1065": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you teach courses?",
+            "answer": "<p>No. Channeling isn't a technique that can be taught in a course. It's a personal and non-transferable process that flows through us.</p>"
+          }
+        },
+        "faq_1066": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How to contact you?",
+            "answer": "<p>WhatsApp (the fastest), email, the contact form on this website, or by direct message on our verified social media. +59898690629</p>"
+          }
+        },
+        "cat_mimagia_2026": {
+          "type": "category_header",
+          "settings": {
+            "title": "Mi Magia · your Guardian&apos;s portal"
+          }
+        },
+        "q_mimagia_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is Mi Magia?",
+            "answer": "<p>My Magic is the exclusive portal that opens when you adopt a Guardian. It's where everything that isn't the physical piece happens: the personalized channeling, the Oracle, the Elemental Diary, the Encyclopedia of the Realm, The Forest Knows (forest rituals for when questions arise), and The Forest's Crafts (the 12 areas of life your Guardian works on).</p><p>It's not just another app. It's where your Guardian stops being an object and starts to live.</p>"
+          }
+        },
+        "q_mimagia_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I access Mi Magia?",
+            "answer": "<p>You receive an email with the link when your purchase is confirmed. You enter with the same email you used to adopt — no password, we send you a magic link by email each time. Lifetime access.</p>"
+          }
+        },
+        "q_mimagia_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the 7-day channeling work?",
+            "answer": "<p>When you complete the Recognition Encounter (a 3-minute form), the forest begins to read. For 7 days, your channeling takes shape — we write it carefully, without rushing. On day 7 you receive the closing of the ritual: a personalized reading with four blocks (what the forest sees, why your Guardian came, how to care for them in your home, and what comes next). Eternal, one-of-a-kind, unrepeatable.</p>"
+          }
+        },
+        "q_mimagia_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the Oracle? And the Journal?",
+            "answer": "<p><strong>The Oracle</strong> is where you ask your Guardian questions when you need to. One question at a time, channeled answer. It's not a chatbot — it's listening.</p><p><strong>The Elemental Diary</strong> is for recording what's shifting: dreams, synchronicities, what moves inside you after adopting. It's yours, private, with no algorithms behind it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1000",
+        "faq_1001",
+        "faq_1002",
+        "faq_1003",
+        "faq_1004",
+        "faq_1005",
+        "faq_1006",
+        "faq_1007",
+        "faq_1008",
+        "faq_1009",
+        "faq_1010",
+        "faq_1011",
+        "faq_1012",
+        "faq_1013",
+        "faq_1014",
+        "cat_1015",
+        "faq_1016",
+        "faq_1017",
+        "faq_1018",
+        "faq_1019",
+        "faq_1020",
+        "faq_1021",
+        "faq_1022",
+        "cat_1023",
+        "faq_1024",
+        "faq_1025",
+        "faq_1026",
+        "faq_1027",
+        "faq_1028",
+        "faq_1029",
+        "faq_1030",
+        "faq_1031",
+        "cat_1032",
+        "faq_1033",
+        "faq_1034",
+        "faq_1035",
+        "faq_1036",
+        "faq_1037",
+        "faq_1038",
+        "faq_1039",
+        "cat_1040",
+        "faq_1041",
+        "faq_1042",
+        "faq_1043",
+        "faq_1044",
+        "faq_1045",
+        "faq_1046",
+        "faq_1047",
+        "faq_1048",
+        "faq_1049",
+        "faq_1050",
+        "faq_1051",
+        "faq_1052",
+        "cat_1053",
+        "faq_1054",
+        "faq_1055",
+        "faq_1056",
+        "faq_1057",
+        "faq_1058",
+        "faq_1059",
+        "faq_1060",
+        "cat_mimagia_2026",
+        "q_mimagia_1",
+        "q_mimagia_2",
+        "q_mimagia_3",
+        "q_mimagia_4",
+        "cat_1061",
+        "faq_1062",
+        "faq_1063",
+        "faq_1064",
+        "faq_1065",
+        "faq_1066"
+      ],
+      "settings": {
+        "eyebrow": "BEFORE YOU DECIDE, READ THIS",
+        "title": "Everything you need to know before adopting",
+        "subtitle": "If your question isn&apos;t here, write us on WhatsApp. We respond quickly and without runarounds.",
+        "cta_title": "Still have questions?",
+        "cta_text": "Write to us and we'll get back to you.",
+        "cta_button": "Contact us",
+        "cta_url": ""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

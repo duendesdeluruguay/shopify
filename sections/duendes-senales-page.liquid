@@ -1,0 +1,234 @@
+<style>
+  .sen2 *,.sen2 *::before,.sen2 *::after{box-sizing:border-box;margin:0;padding:0}
+  .sen2{font-family:'Cormorant Garamond',serif;-webkit-font-smoothing:antialiased}
+
+  /* --- Hero --- */
+  .sen2-hero{
+    background:#0d0f09;
+    padding:clamp(48px,6vw,80px) 24px;
+    text-align:center;
+    display:flex;align-items:center;justify-content:center;flex-direction:column;
+    min-height:60vh;position:relative;overflow:hidden;
+  }
+  .sen2-hero-img{position:absolute;inset:0}
+  .sen2-hero-img img{width:100%;height:100%;object-fit:cover;opacity:.35}
+  .sen2-hero-inner{position:relative;z-index:2;max-width:720px;margin:0 auto}
+  .sen2-eyebrow{
+    font-family:'Cormorant Garamond',serif;
+    font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:#a8a89a;display:block;margin-bottom:20px;
+  }
+  .sen2-hero-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(32px,5vw,54px);font-weight:300;line-height:1.15;
+    color:#FAFAF7;margin:0 0 24px;
+  }
+  .sen2-hero-intro{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(18px,2.4vw,24px);font-weight:300;font-style:italic;
+    color:#c8c8b8;line-height:1.6;max-width:600px;margin:0 auto;
+  }
+
+  /* --- Categories --- */
+  .sen2-category{
+    padding:clamp(48px,6vw,80px) 24px;
+    background:#FAFAF7;
+  }
+  .sen2-cat-header{text-align:center;margin-bottom:40px}
+  .sen2-cat-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(24px,3.5vw,38px);font-weight:400;line-height:1.2;
+    color:#1a1a14;margin:8px 0 0;
+  }
+  .sen2-cat-subtitle{
+    font-family:'Cormorant Garamond',serif;
+    font-size:16px;font-weight:300;color:#5a5a50;
+    max-width:560px;margin:12px auto 0;line-height:1.6;
+  }
+
+  /* --- Cards grid --- */
+  .sen2-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;max-width:1060px;margin:0 auto;
+  }
+  .sen2-card{
+    background:#fff;
+    border:1px solid #e4e4dc;
+    border-radius:8px;
+    padding:28px;
+    transition:border-color .3s ease;
+  }
+  .sen2-card:hover{border-color:#b0b0a0}
+  .sen2-card-img{
+    border-radius:6px;overflow:hidden;margin-bottom:16px;aspect-ratio:16/9;
+  }
+  .sen2-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .sen2-card-icon{font-size:28px;line-height:1;margin-bottom:10px}
+  .sen2-card-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px;font-weight:600;color:#1a1a14;margin:0 0 10px;line-height:1.3;
+  }
+  .sen2-card-desc{
+    font-family:'Cormorant Garamond',serif;
+    font-size:15px;font-weight:300;line-height:1.7;color:#5a5a50;margin:0;
+  }
+
+  /* --- CTA --- */
+  .sen2-cta{
+    background:#0d0f09;
+    padding:clamp(48px,6vw,80px) 24px;
+    text-align:center;
+  }
+  .sen2-cta-text{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(20px,3vw,28px);font-weight:300;font-style:italic;
+    color:#c8c8b8;line-height:1.6;max-width:600px;margin:0 auto 32px;
+  }
+  .sen2-btn{
+    display:inline-block;
+    font-family:'Cormorant Garamond',serif;
+    font-size:15px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:#0d0f09;background:#FAFAF7;
+    padding:14px 36px;border-radius:4px;text-decoration:none;
+    transition:background .3s ease,color .3s ease;
+  }
+  .sen2-btn:hover{background:#e8e8dc;color:#0d0f09}
+
+  /* --- Reveal --- */
+  .sen2-reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+  .sen2-reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* --- Mobile --- */
+  @media(max-width:768px){
+    .sen2-cards{grid-template-columns:1fr}
+    .sen2-hero{min-height:50vh}
+  }
+</style>
+
+{%- comment -%}=== HERO ==={%- endcomment -%}
+<div class="sen2">
+  <section class="sen2-hero">
+    {%- if section.settings.hero_image -%}
+      <div class="sen2-hero-img">
+        <img src="{{ section.settings.hero_image | image_url: width: 1800 }}" alt="{{ section.settings.title }}" loading="eager">
+      </div>
+    {%- endif -%}
+    <div class="sen2-hero-inner sen2-reveal">
+      <span class="sen2-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1 class="sen2-hero-title">{{ section.settings.title }}</h1>
+      <p class="sen2-hero-intro">{{ section.settings.intro }}</p>
+    </div>
+  </section>
+
+  {%- comment -%}=== SIGNAL CATEGORIES ==={%- endcomment -%}
+  {%- assign cat_open = false -%}
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'category_header' -%}
+      {%- if cat_open -%}
+        </div></section>
+      {%- endif -%}
+      <section class="sen2-category">
+        <div class="sen2-cat-header sen2-reveal">
+          <span class="sen2-eyebrow" style="color:#8a8a7a">{{ block.settings.eyebrow }}</span>
+          <h2 class="sen2-cat-title">{{ block.settings.title }}</h2>
+          {%- if block.settings.subtitle != blank -%}
+            <p class="sen2-cat-subtitle">{{ block.settings.subtitle }}</p>
+          {%- endif -%}
+        </div>
+        <div class="sen2-cards">
+      {%- assign cat_open = true -%}
+
+    {%- elsif block.type == 'signal_card' -%}
+      <div class="sen2-card sen2-reveal" {{ block.shopify_attributes }}>
+        {%- if block.settings.image -%}
+          <div class="sen2-card-img">
+            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title }}" loading="lazy">
+          </div>
+        {%- endif -%}
+        <div class="sen2-card-icon">{{ block.settings.icon }}</div>
+        <h3 class="sen2-card-title">{{ block.settings.title }}</h3>
+        <p class="sen2-card-desc">{{ block.settings.description }}</p>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if cat_open -%}
+    </div></section>
+  {%- endif -%}
+
+  {%- comment -%}=== CTA ==={%- endcomment -%}
+  <section class="sen2-cta">
+    <div class="sen2-reveal">
+      <p class="sen2-cta-text">{{ section.settings.cta_text }}</p>
+      <a href="/collections/todos-los-guardianes" class="sen2-btn">Encontr&aacute; a tu Guardi&aacute;n</a>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.sen2-reveal');
+  if(!els.length)return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
+    });
+  },{threshold:0.1});
+  els.forEach(function(el,i){el.style.transitionDelay=(i%4)*60+'ms';obs.observe(el)});
+})();
+</script>
+
+{%- comment -%} Fix 8 (2026-05-01) — CTA al final de Señales {%- endcomment -%}
+<section class="duendes-senales-cta">
+  <div class="duendes-senales-cta__inner">
+    <p class="duendes-senales-cta__eyebrow">LAS SEÑALES TE TRAJERON HASTA ACÁ</p>
+    <h2 class="duendes-senales-cta__title">
+      El siguiente paso es saber<br>
+      <em>which Guardian is looking for you.</em>
+    </h2>
+    <a href="/pages/test-del-guardian" class="duendes-btn-gold duendes-senales-cta__btn">
+      HACER EL TEST AHORA — ES GRATIS
+    </a>
+    <p class="duendes-senales-cta__foot">
+      2 minutos · Resultado inmediato · Sin registro
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes Señales",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "SINCRONICIDADES"},
+    {"type": "text", "id": "title", "label": "Título", "default": "Las Señales de tu Guardián"},
+    {"type": "textarea", "id": "intro", "label": "Intro", "default": "No estás loca. No es tu imaginación. Lo que sentís es real."},
+    {"type": "image_picker", "id": "hero_image", "label": "Imagen hero"},
+    {"type": "textarea", "id": "cta_text", "label": "Texto CTA", "default": "Si llegaste hasta acá, probablemente no fue casualidad."}
+  ],
+  "blocks": [
+    {
+      "type": "category_header",
+      "name": "Categoría",
+      "settings": [
+        {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "SEÑALES"},
+        {"type": "text", "id": "title", "label": "Título", "default": "Señales Físicas"},
+        {"type": "textarea", "id": "subtitle", "label": "Subtítulo"}
+      ]
+    },
+    {
+      "type": "signal_card",
+      "name": "Señal",
+      "settings": [
+        {"type": "text", "id": "icon", "label": "Emoji", "default": "*"},
+        {"type": "text", "id": "title", "label": "Título", "default": "Números repetidos"},
+        {"type": "textarea", "id": "description", "label": "Descripción", "default": "Ves 11:11, 22:22 en el reloj. No es coincidencia."},
+        {"type": "image_picker", "id": "image", "label": "Imagen (opcional)"}
+      ]
+    }
+  ],
+  "presets": [{"name": "Duendes Señales"}]
+}
+{% endschema %}
+

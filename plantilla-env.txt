@@ -1,0 +1,5 @@
+# Copiá estas líneas a tu archivo .env (raíz del proyecto).
+# Nunca pegues tokens reales en este archivo — solo en .env (que no se sube).
+
+SHOPIFY_ACCESS_TOKEN=
+SHOPIFY_SHOP=tu-tienda.myshopify.com

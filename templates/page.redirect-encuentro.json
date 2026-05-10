@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "rito-redirect",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,138 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .di2 { position: relative; overflow: hidden; background: var(--forest-floor, #EDF0EA); color: var(--text, #1a1a14); }
+  .di2__wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: 700px; }
+  .di2__photo { position: relative; overflow: hidden; }
+  .di2__photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 8s ease; }
+  .di2:hover .di2__photo img { transform: scale(1.04); }
+  .di2__photo-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--forest-floor, #EDF0EA) 100%); }
+  .di2__photo--empty { display: none; }
+  .di2__content { display: flex; flex-direction: column; justify-content: center; padding: clamp(48px, 6vw, 80px) clamp(32px, 4vw, 56px); }
+  .di2__eyebrow { font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: 12px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold, #C6A55A); margin-bottom: 20px; font-style: italic; }
+  .di2__title { font-family: var(--font-heading-family, 'Cinzel', serif); font-size: clamp(26px, 3vw, 40px); font-weight: 400; color: var(--color-foreground, var(--text, #1a1a14)); line-height: 1.2; letter-spacing: 1px; margin-bottom: 12px; }
+  .di2__subtitle { font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: 17px; font-style: italic; color: var(--text-light, rgba(26,26,20,.8)); line-height: 1.65; margin-bottom: 8px; }
+  .di2__diamond { display: flex; align-items: center; gap: 12px; margin: 24px 0 36px; }
+  .di2__diamond::before, .di2__diamond::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold, #C6A55A), transparent); opacity: .3; }
+  .di2__diamond::after { background: linear-gradient(90deg, transparent, var(--gold, #C6A55A)); }
+  .di2__diamond-icon { width: 6px; height: 6px; background: var(--gold, #C6A55A); transform: rotate(45deg); flex-shrink: 0; }
+  .di2__items { display: flex; flex-direction: column; gap: 0; }
+  .di2__item { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(198,165,90,.12); transition: all .4s cubic-bezier(.25,.8,.25,1); opacity: 0; transform: translateX(20px); }
+  .di2__item.di-visible { opacity: 1; transform: translateX(0); }
+  .di2__item:first-child { border-top: 1px solid rgba(198,165,90,.12); }
+  .di2__item:hover { padding-left: 8px; }
+  .di2__item-icon { width: 44px; height: 44px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(198,165,90,.08); border: 1px solid rgba(198,165,90,.15); transition: all .3s; }
+  .di2__item:hover .di2__item-icon { background: rgba(198,165,90,.15); border-color: rgba(198,165,90,.3); box-shadow: 0 0 16px rgba(198,165,90,.12); }
+  .di2__item-icon svg { width: 22px; height: 22px; stroke: var(--gold, #C6A55A); fill: none; stroke-width: 1.5; }
+  .di2__item-title { font-family: var(--font-heading-family, 'Cinzel', serif); font-size: 16px; font-weight: 600; color: var(--color-foreground, var(--text, #1a1a14)); margin-bottom: 4px; letter-spacing: .3px; }
+  .di2__item-desc { font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: 16px; color: var(--text-light, rgba(26,26,20,.8)); line-height: 1.6; font-style: italic; }
+  @media (max-width: 1024px) { .di2__wrap { grid-template-columns: 1fr; } .di2__photo { height: 360px; } .di2__photo-overlay { background: linear-gradient(180deg, transparent 50%, var(--forest-floor, #EDF0EA) 100%); } }
+  @media (max-width: 768px) { .di2__content { padding: 40px 24px; } .di2__photo { height: 280px; } }
+  @media (max-width: 480px) { .di2__photo { height: 220px; } .di2__content { padding: 32px 20px; } }
+  @media (prefers-reduced-motion: reduce) { .di2__item { opacity: 1; transform: none; } }
+</style>
+
+<section class="di2" id="duendes-incluye">
+  <div class="di2__wrap">
+    {% if section.settings.side_image != blank %}
+      <div class="di2__photo">
+        <img src="{{ section.settings.side_image | image_url: width: 1000 }}" alt="Lo que incluye tu guardian" loading="lazy">
+        <div class="di2__photo-overlay"></div>
+      </div>
+    {% else %}
+      <div class="di2__photo di2__photo--empty"></div>
+    {% endif %}
+
+    <div class="di2__content">
+      <div class="duendes-reveal">
+        {% if section.settings.eyebrow != blank %}
+          <p class="di2__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <h2 class="di2__title">{{ section.settings.title }}</h2>
+        {% if section.settings.subtitle != blank %}
+          <p class="di2__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+        <div class="di2__diamond"><span class="di2__diamond-icon"></span></div>
+      </div>
+
+      <div class="di2__items">
+        {% for block in section.blocks %}
+          <div class="di2__item duendes-reveal delay-{{ forloop.index }}" {{ block.shopify_attributes }} style="transition-delay:{{ forloop.index0 | times: 100 }}ms">
+            <div class="di2__item-icon">
+              {% case block.settings.icon %}
+                {% when 'guardian' %}
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/></svg>
+                {% when 'letter' %}
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                {% when 'crystal' %}
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="2"/><polyline points="22 8.5 12 15 2 8.5"/></svg>
+                {% when 'shield' %}
+                  <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                {% when 'heart' %}
+                  <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                {% when 'star' %}
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                {% else %}
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              {% endcase %}
+            </div>
+            <div>
+              <h3 class="di2__item-title">{{ block.settings.title }}</h3>
+              <p class="di2__item-desc">{{ block.settings.description }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var items = document.querySelectorAll('#duendes-incluye .di2__item');
+  if(!items.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('di-visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+  items.forEach(function(i){ obs.observe(i); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes Que Incluye",
+  "settings": [
+    {"type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1"},
+    {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "LA EXPERIENCIA COMPLETA"},
+    {"type": "text", "id": "title", "label": "Titulo", "default": "Que Incluye Tu Guardian"},
+    {"type": "text", "id": "subtitle", "label": "Subtitulo", "default": "Cada guardian viene con mucho mas que una figura. Es una experiencia de conexion espiritual completa."},
+    {"type": "image_picker", "id": "side_image", "label": "Imagen lateral", "info": "Foto de unboxing o contenido del paquete. Se muestra al costado izquierdo en desktop, arriba en mobile."}
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Elemento",
+      "settings": [
+        {"type": "select", "id": "icon", "label": "Icono", "options": [{"value": "guardian", "label": "Guardian"}, {"value": "letter", "label": "Carta"}, {"value": "crystal", "label": "Cristal"}, {"value": "shield", "label": "Proteccion"}, {"value": "heart", "label": "Corazon"}, {"value": "star", "label": "Estrella"}], "default": "guardian"},
+        {"type": "text", "id": "title", "label": "Titulo", "default": "Tu Guardian"},
+        {"type": "textarea", "id": "description", "label": "Descripcion", "default": "Escultura unica hecha a mano en porcelana fria con cristales naturales incrustados."}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes Que Incluye",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "guardian", "title": "Tu Guardian Unico", "description": "Escultura artesanal de porcelana fria, hecha completamente a mano por Gabriel. Cada uno existe una sola vez en el mundo. Con cristales naturales incrustados." } },
+        { "type": "item", "settings": { "icon": "letter", "title": "Carta Canalizada", "description": "Un mensaje personal dictado por tu guardian a traves de Thibisay. Palabras unicas que llegan al alma. Muchos dicen que los hace llorar." } },
+        { "type": "item", "settings": { "icon": "crystal", "title": "Certificado de Esencia", "description": "Documento con el nombre, esencia, elemento, cristales, poderes y la historia de tu guardian. Su carta de presentacion energetica." } },
+        { "type": "item", "settings": { "icon": "shield", "title": "Ritual de Activacion", "description": "Instrucciones paso a paso para activar la conexion con tu guardian cuando llega a tu hogar. Un momento intimo y poderoso." } },
+        { "type": "item", "settings": { "icon": "heart", "title": "Empaque Energetico", "description": "Caja artesanal con musgo, cuarzo y una nota escrita a mano. Cada guardian viaja protegido como merece." } },
+        { "type": "item", "settings": { "icon": "star", "title": "Comunidad Guardiana", "description": "Acceso al grupo privado donde compartimos rituales, lunas, y experiencias con otros guardianes adoptados." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

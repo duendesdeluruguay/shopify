@@ -1,0 +1,193 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .dt2 { position: relative; overflow: hidden; padding: clamp(80px, 10vw, 120px) 0; background: var(--black-deep, #080a06); color: var(--white, #FAFAF7); }
+  .dt2__bg { position: absolute; inset: 0; z-index: 0; }
+  .dt2__bg img { width: 100%; height: 100%; object-fit: cover; opacity: .18; filter: saturate(.4); }
+  .dt2__bg-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,10,6,.88) 0%, rgba(8,10,6,.72) 50%, rgba(8,10,6,.88) 100%); z-index: 1; }
+  .dt2::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(198,165,90,.06), transparent 60%); pointer-events: none; z-index: 2; }
+  .dt2__container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 3; }
+  .dt2__heading { text-align: center; margin-bottom: clamp(48px, 6vw, 64px); }
+  .dt2__eyebrow { font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: 12px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold, #C6A55A); margin-bottom: 20px; font-style: italic; }
+  .dt2__heading h2 { font-family: var(--font-heading-family, 'Cinzel', serif); font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; color: var(--white, #FAFAF7); line-height: 1.2; letter-spacing: 1px; }
+  .dt2__diamond { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; }
+  .dt2__diamond::before, .dt2__diamond::after { content: ''; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold, #C6A55A), transparent); opacity: .4; }
+  .dt2__diamond-icon { width: 8px; height: 8px; background: var(--gold, #C6A55A); transform: rotate(45deg); flex-shrink: 0; }
+  .dt2__slideshow { position: relative; max-width: 760px; margin: 0 auto; overflow: hidden; }
+  .dt2__slide { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transition: opacity .7s ease; pointer-events: none; }
+  .dt2__slide:first-child { position: relative; }
+  .dt2__slide.active { opacity: 1; pointer-events: all; z-index: 2; }
+  .dt2__card { background: rgba(255,255,255,.05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 20px; padding: clamp(40px, 5vw, 56px) clamp(32px, 4vw, 52px); border: 1px solid rgba(198,165,90,.12); box-shadow: 0 12px 48px rgba(0,0,0,.3); text-align: center; position: relative; }
+  .dt2__card::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 2px; background: var(--gold-shimmer, linear-gradient(135deg, #C6A55A, #D6BD7B, #E8D9A0, #D6BD7B, #C6A55A)); background-size: 200% 100%; animation: goldShimmer 3s linear infinite; border-radius: 2px; }
+  .dt2__quote-mark { font-family: var(--font-heading-family, 'Cinzel', serif); font-size: 72px; line-height: 1; color: var(--gold, #C6A55A); opacity: .3; margin-bottom: -20px; display: block; }
+  .dt2__stars { color: var(--gold, #C6A55A); font-size: 20px; margin-bottom: 24px; letter-spacing: 4px; }
+  .dt2__card blockquote { font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: clamp(19px, 2.2vw, 23px); font-style: italic; line-height: 1.75; color: #FAFAF7; margin-bottom: 32px; border: none; padding: 0; }
+  .dt2__author { display: flex; align-items: center; gap: 16px; justify-content: center; }
+  .dt2__avatar { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--gold, #C6A55A), var(--gold-dk, #A38640)); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading-family, 'Cinzel', serif); font-size: 22px; font-weight: 600; box-shadow: 0 4px 16px rgba(198,165,90,.3); }
+  .dt2__author-info { text-align: left; }
+  .dt2__name { font-family: var(--font-heading-family, 'Cinzel', serif); font-size: 15px; font-weight: 600; color: var(--gold, #C6A55A); letter-spacing: .5px; }
+  .dt2__loc { font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: 13px; color: rgba(255,255,255,.75); margin-top: 2px; font-style: italic; }
+  .dt2__dots { display: flex; justify-content: center; gap: 12px; margin-top: 36px; }
+  .dt2__dot { width: 10px; height: 10px; border-radius: 50%; background: transparent; cursor: pointer; transition: all .3s; border: 1.5px solid rgba(198,165,90,.4); padding: 0; }
+  .dt2__dot.active { background: var(--gold, #C6A55A); border-color: var(--gold, #C6A55A); box-shadow: 0 0 12px rgba(198,165,90,.4); transform: scale(1.15); }
+  .dt2__dot:hover { background: rgba(198,165,90,.3); }
+  @media (max-width: 768px) { .dt2__card { padding: 36px 24px; } .dt2__card blockquote { font-size: 18px; } .dt2__quote-mark { font-size: 52px; } }
+  @media (max-width: 480px) { .dt2 { padding: 64px 0; } }
+</style>
+
+<section class="dt2" id="duendes-testimonios">
+  {% if section.settings.background_image != blank %}
+    <div class="dt2__bg">
+      <img src="{{ section.settings.background_image | image_url: width: 1920 }}" alt="" loading="lazy" fetchpriority="low">
+      <div class="dt2__bg-overlay"></div>
+    </div>
+  {% endif %}
+
+  <div class="dt2__container">
+    <div class="dt2__heading duendes-reveal">
+      {% if section.settings.eyebrow != blank %}
+        <p class="dt2__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2>{{ section.settings.heading }}</h2>
+      <div class="dt2__diamond">
+        <span class="dt2__diamond-icon"></span>
+      </div>
+    </div>
+
+    <div class="dt2__slideshow" id="dt2Slideshow">
+      {% for block in section.blocks %}
+        <div class="dt2__slide {% if forloop.first %}active{% endif %}" {{ block.shopify_attributes }}>
+          <div class="dt2__card">
+            <span class="dt2__quote-mark">&ldquo;</span>
+            <div class="dt2__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote>{{ block.settings.quote }}</blockquote>
+            <div class="dt2__author">
+              <div class="dt2__avatar">{{ block.settings.name | slice: 0 }}</div>
+              <div class="dt2__author-info">
+                <div class="dt2__name">{{ block.settings.name }}</div>
+                <div class="dt2__loc">{{ block.settings.location }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="dt2__dots" id="dt2Dots">
+      {% for block in section.blocks %}
+        <button class="dt2__dot {% if forloop.first %}active{% endif %}" data-idx="{{ forloop.index0 }}" aria-label="Testimonio {{ forloop.index }}"></button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="duendes-gold-line"></div>
+<div class="duendes-divider"><span class="duendes-divider-diamond"></span></div>
+
+<script>
+(function() {
+  var idx = 0;
+  var slides = document.querySelectorAll('#dt2Slideshow .dt2__slide');
+  var dots = document.querySelectorAll('#dt2Dots .dt2__dot');
+  var total = slides.length;
+  if (total < 2) return;
+  var timer;
+
+  function setSlide(i) {
+    idx = i;
+    slides.forEach(function(s, n) { s.classList.toggle('active', n === i); });
+    dots.forEach(function(d, n) { d.classList.toggle('active', n === i); });
+  }
+  function next() { setSlide((idx + 1) % total); }
+  function start() { timer = setInterval(next, 5000); }
+  function stop() { clearInterval(timer); }
+
+  dots.forEach(function(d) {
+    d.addEventListener('click', function() {
+      stop();
+      setSlide(+this.dataset.idx);
+      start();
+    });
+  });
+  start();
+})();
+</script>
+
+{%- comment -%}
+  Schema.org Review JSON-LD (2026-05-01) — testimonios estructurados.
+  Sin AggregateRating (no hay app verificable de reviews aún), pero los
+  Review individuales le dicen a Google "este sitio tiene reviews reales"
+  y suman al ranking general. Cuando se instale Judge.me, se agrega
+  AggregateRating y aparecen estrellas en SERP.
+{%- endcomment -%}
+{%- liquid
+  assign review_items = ''
+  for block in section.blocks
+    if block.type == 'testimonial' and block.settings.quote != blank
+      assign rev_quote = block.settings.quote | strip_html | strip | replace: '"', '\"' | replace: '\n', ' '
+      assign rev_author = block.settings.name | default: 'Cliente' | strip | replace: '"', '\"'
+      assign rev_loc = block.settings.location | default: '' | strip | replace: '"', '\"'
+      capture rev
+        echo '{ "@type": "Review", "reviewBody": "'
+        echo rev_quote
+        echo '", "author": { "@type": "Person", "name": "'
+        echo rev_author
+        if rev_loc != ''
+          echo '", "address": { "@type": "PostalAddress", "addressLocality": "'
+          echo rev_loc
+          echo '" }'
+        else
+          echo '"'
+        endif
+        echo ' }, "itemReviewed": { "@type": "Organization", "name": "Duendes del Uruguay" } }'
+      endcapture
+      if review_items != ''
+        assign review_items = review_items | append: ','
+      endif
+      assign review_items = review_items | append: rev
+    endif
+  endfor
+-%}
+{%- if review_items != '' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [{{ review_items }}]
+}
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Duendes Testimonios",
+  "tag": "section",
+  "class": "duendes-testi-section",
+  "settings": [
+    {"type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1"},
+    {"type": "text", "id": "eyebrow", "label": "Etiqueta superior", "default": "VOCES DE GUARDIANES"},
+    {"type": "text", "id": "heading", "label": "Titulo", "default": "Lo Que Dicen Quienes Ya Tienen Su Guardian"},
+    {"type": "image_picker", "id": "background_image", "label": "Imagen de fondo", "info": "Imagen atmosferica detras de los testimonios. Se muestra con overlay oscuro para mantener legibilidad."}
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonio",
+      "settings": [
+        {"type": "textarea", "id": "quote", "label": "Cita", "default": "Cuando lei el mensaje canalizado, llore. Decia exactamente lo que necesitaba escuchar. No se como lo hacen, pero es real."},
+        {"type": "text", "id": "name", "label": "Nombre", "default": "Maria L."},
+        {"type": "text", "id": "location", "label": "Ubicacion", "default": "Buenos Aires, Argentina"}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes Testimonios",
+      "blocks": [
+        { "type": "testimonial", "settings": { "quote": "Cuando lei el mensaje canalizado, llore. Decia exactamente lo que necesitaba escuchar. No se como lo hacen, pero es real.", "name": "Maria L.", "location": "Buenos Aires, Argentina" } },
+        { "type": "testimonial", "settings": { "quote": "Lo compre como regalo y mi amiga me dijo que fue lo mas especial que le regalaron en su vida. La canalizacion le llego al alma.", "name": "Carolina S.", "location": "Montevideo, Uruguay" } },
+        { "type": "testimonial", "settings": { "quote": "Tengo tres. Cada vez que necesito uno nuevo, aparece en la web justo cuando lo necesito. Es como si supieran.", "name": "Luciana R.", "location": "Madrid, Espana" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Magia · Dashboard cinematográfico (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  :root {
+    --bg-deep: #060606;
+    --bg-near: #0d0c0e;
+    --bg-mid: #14110f;
+    --gold: #c9a961;
+    --gold-soft: rgba(201,169,97,0.18);
+    --gold-glow: rgba(201,169,97,0.35);
+    --ivory: #f4ecd8;
+    --warm: #d8d2c4;
+    --mist: #8b8579;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  body {
+    background: #050505;
+    font-family: var(--sans);
+    color: var(--ivory);
+    min-height: 100vh;
+    padding: 20px 16px 60px;
+  }
+  .legend {
+    max-width: 880px;
+    margin: 0 auto 32px;
+    background: rgba(201,169,97,0.06);
+    border: 1px solid var(--gold-soft);
+    padding: 22px 26px;
+    border-radius: 4px;
+  }
+  .legend h1 {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ivory);
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+  }
+  .legend p { color: var(--warm); font-size: 14px; line-height: 1.6; margin-bottom: 6px; }
+  .legend .hint { color: var(--gold); font-size: 12px; margin-top: 8px; letter-spacing: 0.3px; }
+  .switcher {
+    max-width: 880px;
+    margin: 0 auto 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .switcher button {
+    background: transparent;
+    border: 1px solid var(--gold-soft);
+    color: var(--warm);
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: all 200ms ease;
+    border-radius: 2px;
+  }
+  .switcher button:hover { color: var(--gold); border-color: var(--gold); }
+  .switcher button.on { background: var(--gold); color: #0a0a0a; border-color: var(--gold); }
+  .stage {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .phone {
+    width: 390px;
+    height: 844px;
+    background: var(--bg-deep);
+    border: 1px solid #1a1816;
+    border-radius: 38px;
+    box-shadow:
+      0 0 0 8px #0a0a0a,
+      0 0 60px rgba(201,169,97,0.1),
+      0 30px 90px rgba(0,0,0,0.7);
+    overflow: hidden;
+    position: relative;
+    flex: 0 0 auto;
+  }
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 12px; left: 50%;
+    transform: translateX(-50%);
+    width: 110px; height: 28px;
+    background: #000;
+    border-radius: 18px;
+    z-index: 100;
+  }
+  .screen {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(201,169,97,0.12) 0%, transparent 40%),
+      linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-near) 30%, var(--bg-mid) 60%, var(--bg-deep) 100%);
+    -webkit-overflow-scrolling: touch;
+  }
+  .screen::-webkit-scrollbar { width: 0; }
+
+  /* ===== TOP BAR ===== */
+  .topbar {
+    padding: 56px 22px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: linear-gradient(180deg, rgba(6,6,6,0.95) 0%, rgba(6,6,6,0.85) 80%, transparent 100%);
+    backdrop-filter: blur(8px);
+    z-index: 50;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+  .menu-btn {
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1px solid var(--gold-soft);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 180ms ease;
+  }
+  .menu-btn:hover { border-color: var(--gold); }
+  .menu-btn svg { width: 14px; height: 14px; stroke: var(--gold); }
+
+  /* ===== HERO STORYTELLING (capa 1) ===== */
+  .hero {
+    padding: 8px 26px 28px;
+    text-align: center;
+  }
+  .hero .ornament {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 8px;
+    margin-bottom: 18px;
+    opacity: 0.7;
+  }
+  .hero .story {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ivory);
+    font-weight: 300;
+    font-style: italic;
+  }
+  .hero .story span {
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeUp 800ms ease-out forwards;
+  }
+  .hero .story span:nth-child(1) { animation-delay: 200ms; }
+  .hero .story span:nth-child(2) { animation-delay: 600ms; }
+  .hero .story span:nth-child(3) { animation-delay: 1000ms; }
+  .hero .story span:nth-child(4) { animation-delay: 1400ms; }
+  .hero .story span.accent {
+    color: var(--gold);
+    font-style: normal;
+    letter-spacing: 1px;
+    margin-top: 10px;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SALUDO ===== */
+  .greeting {
+    text-align: center;
+    padding: 8px 26px 18px;
+  }
+  .greeting h1 {
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--ivory);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+  .greeting h1 em { color: var(--gold); font-style: normal; }
+  .greeting p {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--warm);
+    font-size: 15px;
+    margin-top: 6px;
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    text-align: center;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 6px;
+    margin: 22px 0;
+    opacity: 0.6;
+  }
+
+  /* ===== CARD GUARDIÁN HERO ===== */
+  .guardian-hero {
+    margin: 0 22px 22px;
+    background: linear-gradient(180deg, rgba(20,17,15,0.9) 0%, rgba(13,12,14,0.95) 100%);
+    border: 1px solid var(--gold-soft);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  .guardian-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,169,97,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .guardian-img {
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(135deg, #2a1f15 0%, #14110f 50%, #0a0a0a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .guardian-img::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 60%;
+    background: linear-gradient(180deg, transparent 0%, var(--bg-near) 100%);
+  }
+  .guardian-placeholder {
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 60px;
+    opacity: 0.4;
+    text-shadow: 0 0 40px rgba(201,169,97,0.3);
+  }
+  .guardian-info {
+    padding: 18px 22px 22px;
+    text-align: center;
+    position: relative;
+  }
+  .guardian-tag {
+    display: inline-block;
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .guardian-name {
+    font-family: var(--serif);
+    font-size: 32px;
+    color: var(--ivory);
+    font-weight: 400;
+    margin-bottom: 4px;
+    letter-spacing: 0.4px;
+  }
+  .soul-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gold);
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+  .guardian-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--warm);
+    line-height: 1.5;
+    border-top: 1px solid var(--gold-soft);
+    padding-top: 12px;
+    margin-top: 10px;
+  }
+  .guardian-cta {
+    display: block;
+    margin: 14px auto 0;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 11px 24px;
+    font-family: var(--serif);
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 220ms ease;
+    text-decoration: none;
+    width: 80%;
+    text-align: center;
+  }
+  .guardian-cta:hover { background: var(--gold); color: #0a0a0a; }
+
+  /* ===== TIMELINE 7 DÍAS ===== */
+  .timeline {
+    padding: 4px 22px 22px;
+  }
+  .timeline-title {
+    font-family: var(--serif);
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+  .timeline-track {
+    position: relative;
+    padding: 0 6px;
+  }
+  .timeline-line {
+    position: absolute;
+    top: 12px; left: 18px; right: 18px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold-soft) 0%, var(--gold) 50%, var(--gold-soft) 100%);
+    z-index: 1;
+  }
+  .timeline-days {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+  .day-dot {
+    flex: 0 0 auto;
+    text-align: center;
+    width: 38px;
+  }
+  .day-dot .circle {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    margin: 0 auto 6px;
+    border: 1px solid var(--gold);
+    background: var(--bg-deep);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 11px;
+    color: var(--mist);
+  }
+  .day-dot.done .circle { background: var(--gold); color: #0a0a0a; border-color: var(--gold); }
+  .day-dot.now .circle {
+    background: rgba(201,169,97,0.2);
+    color: var(--ivory);
+    box-shadow: 0 0 0 4px rgba(201,169,97,0.18), 0 0 20px var(--gold-glow);
+    animation: pulse 2200ms ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(201,169,97,0.12), 0 0 18px rgba(201,169,97,0.25); }
+    50% { box-shadow: 0 0 0 6px rgba(201,169,97,0.22), 0 0 28px rgba(201,169,97,0.5); }
+  }
+  .day-dot.future .circle { opacity: 0.4; }
+  .day-dot .label {
+    font-family: var(--serif);
+    font-size: 10px;
+    color: var(--mist);
+    letter-spacing: 0.5px;
+  }
+  .day-dot.now .label { color: var(--gold); font-weight: 500; }
+  .timeline-status {
+    text-align: center;
+    margin-top: 14px;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--warm);
+    font-size: 13px;
+  }
+
+  /* ===== OTROS GUARDIANES ===== */
+  .others {
+    padding: 8px 0 22px 22px;
+    overflow: hidden;
+  }
+  .others-title {
+    font-family: var(--serif);
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    opacity: 0.8;
+  }
+  .others-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-right: 22px;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .others-scroll::-webkit-scrollbar { height: 0; }
+  .other-card {
+    flex: 0 0 auto;
+    width: 130px;
+    background: var(--bg-mid);
+    border: 1px solid var(--gold-soft);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .other-card .img-mini {
+    height: 90px;
+    background: linear-gradient(135deg, #2a1f15 0%, #0a0a0a 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 28px;
+    opacity: 0.5;
+  }
+  .other-card .info-mini {
+    padding: 10px 12px;
+  }
+  .other-card .name-mini {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--ivory);
+    margin-bottom: 2px;
+  }
+  .other-card .day-mini {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== CTAs ===== */
+  .ctas {
+    padding: 12px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 18px;
+    background: rgba(20,17,15,0.6);
+    border: 1px solid var(--gold-soft);
+    border-radius: 4px;
+    color: var(--ivory);
+    text-decoration: none;
+    transition: all 220ms ease;
+    min-height: 64px;
+    cursor: pointer;
+  }
+  .cta:hover { border-color: var(--gold); background: rgba(20,17,15,0.9); }
+  .cta-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(201,169,97,0.12);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 18px;
+    flex: 0 0 auto;
+  }
+  .cta-text {
+    flex: 1;
+  }
+  .cta-text .cta-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ivory);
+    margin-bottom: 2px;
+  }
+  .cta-text .cta-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--mist);
+  }
+  .cta-arrow {
+    color: var(--gold);
+    font-size: 16px;
+    flex: 0 0 auto;
+  }
+
+  /* ===== FOOTER CIERRE ===== */
+  .closing {
+    padding: 22px 26px 60px;
+    text-align: center;
+    border-top: 1px solid var(--gold-soft);
+    margin: 14px 22px 0;
+  }
+  .closing .ornament-big {
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 8px;
+    margin-bottom: 14px;
+  }
+  .closing p {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--warm);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .closing .signature {
+    font-family: var(--serif);
+    color: var(--gold);
+    margin-top: 14px;
+    letter-spacing: 0.4px;
+    font-size: 14px;
+  }
+  .closing .signature em { font-style: normal; color: var(--ivory); }
+
+  /* ===== ESTADO VACÍO ===== */
+  .empty-state {
+    margin: 22px;
+    padding: 40px 22px;
+    text-align: center;
+    background: rgba(20,17,15,0.5);
+    border: 1px solid var(--gold-soft);
+    border-radius: 6px;
+  }
+  .empty-state .icon {
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 48px;
+    margin-bottom: 14px;
+    opacity: 0.5;
+  }
+  .empty-state h3 {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ivory);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+  .empty-state p {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--warm);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+  .empty-state .empty-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: #0a0a0a;
+    padding: 12px 28px;
+    font-family: var(--serif);
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  /* ===== EN PROCESO ESTADO ===== */
+  .in-progress-card {
+    margin: 0 22px 22px;
+    padding: 32px 22px;
+    background: linear-gradient(180deg, rgba(20,17,15,0.95) 0%, rgba(13,12,14,0.85) 100%);
+    border: 1px solid var(--gold-soft);
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .in-progress-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(201,169,97,0.18) 0%, transparent 60%);
+    animation: breathe 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes breathe {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.06); }
+  }
+  .in-progress-card .glow-circle {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    border: 1px solid var(--gold);
+    background: radial-gradient(circle, rgba(201,169,97,0.3) 0%, transparent 70%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 42px;
+    box-shadow: 0 0 40px var(--gold-glow);
+    position: relative;
+    z-index: 1;
+  }
+  .in-progress-card h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ivory);
+    font-weight: 400;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .in-progress-card .progress-text {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--gold);
+    font-size: 14px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .in-progress-card p {
+    font-family: var(--serif);
+    color: var(--warm);
+    font-size: 14px;
+    line-height: 1.5;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== HIDDEN STATES ===== */
+  .state { display: none; }
+  .state.on { display: block; }
+
+  /* ===== SCREEN-LARGE annotation ===== */
+  .annotations {
+    max-width: 880px;
+    margin: 30px auto 0;
+    padding: 22px 26px;
+    background: rgba(201,169,97,0.04);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+  }
+  .annotations h2 {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ivory);
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .annotations ul { list-style: none; padding: 0; }
+  .annotations li {
+    color: var(--warm);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    padding-left: 16px;
+    position: relative;
+  }
+  .annotations li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 10px;
+  }
+
+  @media (max-width: 920px) {
+    .stage { gap: 16px; }
+    .phone { transform: scale(0.85); transform-origin: top center; margin-bottom: -120px; }
+  }
+  @media (max-width: 480px) {
+    body { padding: 12px 8px 60px; }
+    .phone { transform: scale(0.78); margin-bottom: -180px; }
+    .legend, .switcher, .annotations { padding-left: 16px; padding-right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="legend">
+  <h1>Mi Magia · Dashboard cinematográfico Los Elegidos</h1>
+  <p>Mockup standalone (NO toca Hydrogen LIVE). 4 estados navegables. Mobile-first 390px. Esto es la base visual para que Code lo implemente. Todo lo que ves acá respeta voz Duendes (voseo, firma Thibisay &amp; Gabriel, sin clichés "el bosque te lee").</p>
+  <p class="hint">Tap los botones de abajo para ver cada estado. El frame simula iPhone 14. Scroll dentro del frame.</p>
+</div>
+
+<div class="switcher">
+  <button class="on" data-state="empty">SIN COMPRA · primera visita</button>
+  <button data-state="pending_form">PENDING FORM · compró, no llenó</button>
+  <button data-state="canalizando">CANALIZANDO · 24-48h</button>
+  <button data-state="pending">EN PROCESO · Día 3 de 7</button>
+  <button data-state="published">PUBLISHED · Día 7 reveal</button>
+  <button data-state="multi">MÚLTIPLES guardianes</button>
+</div>
+
+<div class="stage">
+  <div class="phone">
+    <div class="screen">
+
+      <!-- TOP BAR (compartido) -->
+      <div class="topbar">
+        <div class="logo">DUENDES · MI MAGIA</div>
+        <button class="menu-btn" aria-label="Menú">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+            <line x1="4" y1="8" x2="20" y2="8"/>
+            <line x1="4" y1="16" x2="20" y2="16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- HERO STORYTELLING (compartido en todos los estados) -->
+      <div class="hero">
+        <div class="ornament">✦ ✦ ✦</div>
+        <div class="story">
+          <span>Hay personas que vinieron al mundo con una misión.</span>
+          <span>Cuidar la tierra. Despertar a otros.</span>
+          <span>Sostener algo que el resto no ve.</span>
+          <span class="accent">Sos de Los Elegidos ✦</span>
+        </div>
+      </div>
+
+      <!-- SALUDO (compartido) -->
+      <div class="greeting">
+        <h1>Hola, <em>Thibisay</em></h1>
+        <p>Acá empieza tu camino</p>
+      </div>
+
+      <div class="divider">✦ ✦ ✦</div>
+
+      <!-- ESTADO 1: VACÍO -->
+      <div class="state on" data-show="empty">
+        <div class="empty-state">
+          <div class="icon">✦</div>
+          <h3>Todavía ningún guardián cruzó hacia vos</h3>
+          <p>Acá no hay catálogo abierto al público. Lo que tenemos vive en duendesdeluruguay.com. Mirá tranquila — cuando alguno te frene al mirarlo, ese ya te eligió.</p>
+          <a href="#" class="empty-cta">Ver el catálogo abierto</a>
+        </div>
+        <div class="closing">
+          <div class="ornament-big">✦</div>
+          <p>"Los guardianes encuentran a las personas. No al revés."</p>
+          <div class="signature">— <em>Thibisay &amp; Gabriel</em></div>
+        </div>
+      </div>
+
+      <!-- ESTADO PENDING FORM: compró pero no llenó Encuentro -->
+      <div class="state" data-show="pending_form">
+        <div class="in-progress-card" style="border-color: var(--gold); background: linear-gradient(180deg, rgba(20,17,15,0.95) 0%, rgba(35,28,20,0.85) 100%);">
+          <div class="glow-circle" style="background: radial-gradient(circle, rgba(201,169,97,0.5) 0%, transparent 70%); animation: pulse 2200ms ease-in-out infinite;">✎</div>
+          <h2>Cash te está esperando</h2>
+          <div class="progress-text" style="color: var(--ivory);">Falta tu Encuentro</div>
+          <p style="color: var(--warm); margin-bottom: 18px;">Sin tu Encuentro, Cash no puede empezar a cargarse. Son 9 preguntas. Llevan 4 minutos. Todo lo que escribas entra al círculo de cristales.</p>
+          <a href="#" style="display:inline-block; background: var(--gold); color:#0a0a0a; padding: 14px 32px; font-family: var(--serif); font-size: 13px; letter-spacing: 4px; text-transform: uppercase; text-decoration: none; border-radius: 2px; font-weight: 500; position: relative; z-index: 1;">Empezar el Encuentro ✦</a>
+        </div>
+
+        <div class="ctas">
+          <a href="#" class="cta">
+            <div class="cta-icon">?</div>
+            <div class="cta-text">
+              <div class="cta-title">¿Por qué hay que llenar esto?</div>
+              <div class="cta-sub">Cómo funciona la canalización</div>
+            </div>
+            <div class="cta-arrow">→</div>
+          </a>
+        </div>
+
+        <div class="closing">
+          <div class="ornament-big">✦</div>
+          <p>"No es un formulario. Es la primera puerta. Lo que escribas ahí, Cash lo va a oír."</p>
+          <div class="signature">— <em>Thibisay &amp; Gabriel</em></div>
+        </div>
+      </div>
+
+      <!-- ESTADO CANALIZANDO: form_submitted, 24-48h pre-aprobación -->
+      <div class="state" data-show="canalizando">
+        <div class="in-progress-card">
+          <div class="glow-circle">✦</div>
+          <h2>Estamos en el círculo</h2>
+          <div class="progress-text">Cash · canalizando ahora</div>
+          <p>Encendimos el espacio. Tu Encuentro entró completo. Las próximas horas las pasamos meditando, respirando con el barro, dejando que Cash se exprese a través nuestro. No hay apuro — el proceso lleva el tiempo que tiene que llevar.</p>
+          <p style="margin-top: 14px; font-size: 13px; color: var(--gold);">Te avisamos en 24 a 48 horas cuando el círculo cierre.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-title">El camino que viene · 7 días</div>
+          <div class="timeline-track">
+            <div class="timeline-line"></div>
+            <div class="timeline-days">
+              <div class="day-dot future"><div class="circle">1</div><div class="label">Abre</div></div>
+              <div class="day-dot future"><div class="circle">2</div><div class="label">Acomoda</div></div>
+              <div class="day-dot future"><div class="circle">3</div><div class="label">Gesto</div></div>
+              <div class="day-dot future"><div class="circle">4</div><div class="label">Propósito</div></div>
+              <div class="day-dot future"><div class="circle">5</div><div class="label">Diálogo</div></div>
+              <div class="day-dot future"><div class="circle">6</div><div class="label">Umbral</div></div>
+              <div class="day-dot future"><div class="circle">7</div><div class="label">Reveal</div></div>
+            </div>
+          </div>
+          <div class="timeline-status">El Día 1 arranca cuando aprobamos la canalización.</div>
+        </div>
+
+        <div class="ctas">
+          <a href="#" class="cta">
+            <div class="cta-icon">◐</div>
+            <div class="cta-text">
+              <div class="cta-title">Hablale al bosque</div>
+              <div class="cta-sub">Oráculo · ya podés empezar a preguntar</div>
+            </div>
+            <div class="cta-arrow">→</div>
+          </a>
+          <a href="#" class="cta">
+            <div class="cta-icon">✎</div>
+            <div class="cta-text">
+              <div class="cta-title">Tu diario</div>
+              <div class="cta-sub">Empezá a anotar lo que vas notando</div>
+            </div>
+            <div class="cta-arrow">→</div>
+          </a>
+        </div>
+
+        <div class="closing">
+          <div class="ornament-big">✦</div>
+          <p>"Mientras nosotros canalizamos, Cash ya está mirando hacia vos. El proceso no es lineal — empieza antes."</p>
+          <div class="signature">— <em>Thibisay &amp; Gabriel</em></div>
+        </div>
+      </div>
+
+      <!-- ESTADO 2: EN PROCESO (Día 3 de 7) -->
+      <div class="state" data-show="pending">
+        <div class="in-progress-card">
+          <div class="glow-circle">✦</div>
+          <h2>Cash está cargándose</h2>
+          <div class="progress-text">Día 3 de 7</div>
+          <p>"El primer gesto apareció. Hay algo que tu cuerpo está empezando a notar antes que tu cabeza."</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-title">Tu camino · 7 días</div>
+          <div class="timeline-track">
+            <div class="timeline-line"></div>
+            <div class="timeline-days">
+              <div class="day-dot done"><div class="circle">1</div><div class="label">Abre</div></div>
+              <div class="day-dot done"><div class="circle">2</div><div class="label">Acomoda</div></div>
+              <div class="day-dot now"><div class="circle">3</div><div class="label">Hoy</div></div>
+              <div class="day-dot future"><div class="circle">4</div><div class="label">Propósito</div></div>
+              <div class="day-dot future"><div class="circle">5</div><div class="label">Diálogo</div></div>
+              <div class="day-dot future"><div class="circle">6</div><div class="label">Umbral</div></div>
+              <div class="day-dot future"><div class="circle">7</div><div class="label">Reveal</div></div>
+            </div>
+          </div>
+          <div class="timeline-status">El Día 7 cierra el círculo. Lo vas a saber.</div>
+        </div>
+
+        <div class="ctas">
+          <a href="#" class="cta">
+            <div class="cta-icon">◐</div>
+            <div class="cta-text">
+              <div class="cta-title">Hablale al bosque</div>
+              <div class="cta-sub">Oráculo · pregunta lo que sea</div>
+            </div>
+            <div class="cta-arrow">→</div>
+          </a>
+          <a href="#" class="cta">
+            <div class="cta-icon">✎</div>
+            <div class="cta-text">
+              <div class="cta-title">Tu diario</div>
+              <div class="cta-sub">Lo que escribís lo lee solo tu cuenta</div>
+            </div>
+            <div class="cta-arrow">→</div>
+          </a>
+        </div>
+
+        <div class="closing">
+          <div class="ornament-big">✦</div>
+          <p>"Mientras tanto, respirá hondo. Si Cash te eligió, ya está hecho."</p>
+          <div class="signature">— <em>Thibisay &amp; Gabriel</em></div>
+        </div>
+      </div>
+
+      <!-- ESTADO 3: PUBLISHED Día 7 -->
+      <div class="state" data-show="published">
+        <div class="guardian-hero">
+          <div class="guardian-img">
+            <div class="guardian-placeholder">✦</div>
+          </div>
+          <div class="guardian-info">
+            <div class="guardian-tag">Tu guardián · Día 7 ✦</div>
+            <div class="guardian-name">Cash</div>
+            <div class="soul-name">Tael · Custodio del Umbral del Deseo</div>
+            <div class="guardian-quote">"El nudo tiene nombre ahora. Yo lo sostengo mientras vos respirás."</div>
+            <a href="#" class="guardian-cta">Leer la canalización completa</a>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-title">Tu camino · cerrado</div>
+          <div class="timeline-track">
+            <div class="timeline-line"></div>
+            <div class="timeline-days">
+              <div class="day-dot done"><div class="circle">1</div><div class="label">Abre</div></div>
+              <div class="day-dot done"><div class="circle">2</div><div class="label">Acomoda</div></div>
+              <div class="day-dot done"><div class="circle">3</div><div class="label">Gesto</div></div>
+              <div class="day-dot done"><div class="circle">4</div><div class="label">Propósito</div></div>
+              <div class="day-dot done"><div class="circle">5</div><div class="label">Diálogo</div></div>
+              <div class="day-dot done"><div class="circle">6</div><div class="label">Umbral</div></div>
+              <div class="day-dot done"><div class="circle">7</div><div class="label">Reveal ✦</div></div>
+            </div>
+          </div>
+          <div class="timeline-status">Cash viaja hacia vos el viernes próximo · DHL Express</div>
+        </div>
+
+        <div class="ctas">
+          <a href="#" class="cta">
+            <div class="cta-icon">◐</div>
+            <div class="cta-text">
+              <div class="cta-title">Hablale a Cash</div>
+              <div class="cta-sub">Oráculo · pregúntale lo que necesites</div>
+            </div>
+            <div class="cta-arrow">→</div>
+          </a>
+          <a href="#" class="cta">
+            <div class="cta-icon">✎</div>
+            <div class="cta-text">
+              <div class="cta-title">Tu diario</div>
+              <div class="cta-sub">Lo que escribís lo lee solo tu cuenta</div>
+            </div>
+            <div class="cta-arrow">→</div>
+          </a>
+          <a href="#" class="cta">
+            <div class="cta-icon">+</div>
+            <div class="cta-text">
+              <div class="cta-title">Adoptar otro guardián</div>
+              <div class="cta-sub">Ver el catálogo abierto</div>
+            </div>
+            <div class="cta-arrow">→</div>
+          </a>
+        </div>
+
+        <div class="closing">
+          <div class="ornament-big">✦</div>
+          <p>"Yo me corro acá. Ustedes dos hablan directo, sin intermediarios. Mi parte se cumple."</p>
+          <div class="signature">— <em>Thibisay &amp; Gabriel</em></div>
+        </div>
+      </div>
+
+      <!-- ESTADO 4: MÚLTIPLES guardianes -->
+      <div class="state" data-show="multi">
+        <div class="guardian-hero">
+          <div class="guardian-img">
+            <div class="guardian-placeholder">✦</div>
+          </div>
+          <div class="guardian-info">
+            <div class="guardian-tag">Tu guardián más reciente · Día 5</div>
+            <div class="guardian-name">Aurora</div>
+            <div class="soul-name">Verán · La que escucha lo que aún no se dijo</div>
+            <div class="guardian-quote">"Algo se está acomodando. Vos ya lo sabés sin saber por qué."</div>
+            <a href="#" class="guardian-cta">Ver el día 5</a>
+          </div>
+        </div>
+
+        <div class="others">
+          <div class="others-title">Otros guardianes que te eligieron</div>
+          <div class="others-scroll">
+            <div class="other-card">
+              <div class="img-mini">✦</div>
+              <div class="info-mini">
+                <div class="name-mini">Cash</div>
+                <div class="day-mini">Día 7 · cerrado</div>
+              </div>
+            </div>
+            <div class="other-card">
+              <div class="img-mini">✦</div>
+              <div class="info-mini">
+                <div class="name-mini">Diana</div>
+                <div class="day-mini">Día 7 · cerrado</div>
+              </div>
+            </div>
+            <div class="other-card">
+              <div class="img-mini">✦</div>
+              <div class="info-mini">
+                <div class="name-mini">Yrvin</div>
+                <div class="day-mini">Día 2 · cargándose</div>
+              </div>
+            </div>
+            <div class="other-card">
+              <div class="img-mini">✦</div>
+              <div class="info-mini">
+                <div class="name-mini">Leo</div>
+                <div class="day-mini">Esperando Encuentro</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ctas">
+          <a href="#" class="cta">
+            <div class="cta-icon">◐</div>
+            <div class="cta-text">
+              <div class="cta-title">Hablale al bosque</div>
+              <div class="cta-sub">Oráculo abierto a todos tus guardianes</div>
+            </div>
+            <div class="cta-arrow">→</div>
+          </a>
+          <a href="#" class="cta">
+            <div class="cta-icon">✎</div>
+            <div class="cta-text">
+              <div class="cta-title">Tu diario</div>
+              <div class="cta-sub">Tu espacio íntimo</div>
+            </div>
+            <div class="cta-arrow">→</div>
+          </a>
+        </div>
+
+        <div class="closing">
+          <div class="ornament-big">✦</div>
+          <p>"Cuatro te encontraron. Cuatro caminos abiertos. Vos sostenés todos."</p>
+          <div class="signature">— <em>Thibisay &amp; Gabriel</em></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="annotations">
+  <h2>Especificaciones técnicas para Code</h2>
+  <ul>
+    <li><strong>Stack:</strong> Hydrogen (mantener), Tailwind o CSS modules. Fuentes: Cormorant Garamond (serif) + Inter (sans). Importar de Google Fonts en root.</li>
+    <li><strong>Top bar:</strong> sticky con backdrop-filter blur 8px + gradient transparente al scroll. Logo dorado tiny, menú hamburguesa en círculo.</li>
+    <li><strong>Hero storytelling:</strong> 4 líneas en Cormorant Garamond italic, scroll-reveal con animación fadeUp 800ms staggered (200/600/1000/1400ms delay). La línea final ("Sos de Los Elegidos ✦") en dorado sin italic.</li>
+    <li><strong>Saludo:</strong> SOLO el primer nombre del cliente. Si first_name vacío → "Hola, alma elegida".</li>
+    <li><strong>Card guardián hero:</strong> imagen real del producto Shopify (campo featured_image). Si no hay imagen, fallback ornamento dorado. Nombre álmico SOLO si Día 7 está unlocked. Quote del guardián = primera línea del story_text del Día N actual.</li>
+    <li><strong>Timeline 7 días:</strong> dots con estados done/now/future. El "now" pulsa con animación CSS keyframes. Línea de fondo gradient dorado. Labels chicas debajo de cada dot.</li>
+    <li><strong>Otros guardianes:</strong> scroll horizontal -webkit-overflow-scrolling touch. Cards 130px wide, snap si querés. Scroll bar oculto.</li>
+    <li><strong>CTAs:</strong> 64px min-height (target táctil iOS), border 1px gold-soft, hover/active border gold + bg lift. Iconos en círculo dorado tenue.</li>
+    <li><strong>Estados:</strong> render condicional según data del Worker. Estados: empty / pending_form / form_submitted / published_dia_n / published_completo / multi. La página /canalizacion debe RECIBIR este mismo design system.</li>
+    <li><strong>Padding mobile:</strong> top 56px (sticky bar safe), 22px lateral, gaps internos 14-22px. NUNCA dejar más de 28px vertical entre secciones — eliminar el "empieza muy abajo" actual.</li>
+    <li><strong>Performance:</strong> NO lazy loading agresivo en componentes above-the-fold (causaba el bug de "scroll-up todo desaparece"). Animaciones solo CSS, no JS. Hydration optimista.</li>
+    <li><strong>Accesibilidad:</strong> aria-labels en menú, contraste 4.5:1 cumplido en gold sobre bg-deep, prefers-reduced-motion respetado en pulse/breathe/fadeUp.</li>
+    <li><strong>NO romper:</strong> NO tocar Worker. NO tocar /admin/*. NO tocar Klaviyo flows recién creados. SOLO Hydrogen frontend.</li>
+  </ul>
+</div>
+
+<script>
+  document.querySelectorAll('.switcher button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.switcher button').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const target = btn.dataset.state;
+      document.querySelectorAll('.state').forEach(s => {
+        s.classList.toggle('on', s.dataset.show === target);
+      });
+      document.querySelector('.screen').scrollTop = 0;
+    });
+  });
+</script>
+
+</body>
+</html>

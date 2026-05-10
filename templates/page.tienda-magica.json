@@ -1,0 +1,419 @@
+{
+  "sections": {
+    "catalog-hero": {
+      "type": "duendes-catalog-hero",
+      "blocks": {
+        "nav-minis": {
+          "type": "category_nav",
+          "settings": {
+            "label": "Minis",
+            "anchor": "minis-clasicos"
+          }
+        },
+        "nav-especiales": {
+          "type": "category_nav",
+          "settings": {
+            "label": "Especiales",
+            "anchor": "minis-especiales"
+          }
+        },
+        "nav-pixies": {
+          "type": "category_nav",
+          "settings": {
+            "label": "Pixies",
+            "anchor": "pixies"
+          }
+        },
+        "nav-medianos": {
+          "type": "category_nav",
+          "settings": {
+            "label": "Mid-Size",
+            "anchor": "medianos"
+          }
+        },
+        "nav-grandes": {
+          "type": "category_nav",
+          "settings": {
+            "label": "Large",
+            "anchor": "grandes"
+          }
+        },
+        "nav-gigantes": {
+          "type": "category_nav",
+          "settings": {
+            "label": "Giants",
+            "anchor": "gigantes"
+          }
+        }
+      },
+      "block_order": [
+        "nav-minis",
+        "nav-especiales",
+        "nav-pixies",
+        "nav-medianos",
+        "nav-grandes",
+        "nav-gigantes"
+      ],
+      "settings": {
+        "eyebrow": "Bienvenido",
+        "title": "Magical Shop",
+        "subtitle": "Every Guardian chooses its person. Find the one looking for you."
+      }
+    },
+    "minis-clasicos": {
+      "type": "duendes-catalog-category",
+      "settings": {
+        "theme": "light",
+        "anchor": "minis-clasicos",
+        "collection_handle": "minis-clasicos",
+        "tag_filter": "",
+        "price_min": 200000,
+        "price_max": 300000,
+        "name_contains": "",
+        "name_excludes": "",
+        "is_unique": false,
+        "eyebrow": "Puerta de Entrada",
+        "title": "Classic Minis",
+        "meta": "~10cm  ·  $2,500 UYU / $70 USD",
+        "description": "Small but mighty. Ideal to carry in your pocket, car, or by your bedside. Perfect for those who want discreet magic and silent protection.",
+        "badge_text": "Mini",
+        "scarcity_text": "",
+        "cta_text": "See all Minis",
+        "show_hero_card": false,
+        "max_products": 50
+      }
+    },
+    "promo-12": {
+      "type": "duendes-catalog-category",
+      "settings": {
+        "theme": "dark",
+        "anchor": "12-guardianes",
+        "collection_handle": "",
+        "tag_filter": "",
+        "price_min": 1600000,
+        "price_max": 1700000,
+        "name_contains": "12",
+        "name_excludes": "",
+        "is_unique": false,
+        "eyebrow": "Special Promotion",
+        "title": "12 Guardians",
+        "meta": "12 minis  ·  $16,500 UYU / $450 USD",
+        "description": "11 channeled minis + the Pixie the universe chooses for you. You don't choose which. She already knows who you are.",
+        "badge_text": "Promo",
+        "scarcity_text": "",
+        "cta_text": "",
+        "show_hero_card": false,
+        "max_products": 3
+      }
+    },
+    "pixies": {
+      "type": "duendes-catalog-category",
+      "settings": {
+        "theme": "light",
+        "anchor": "pixies",
+        "collection_handle": "pixies",
+        "tag_filter": "",
+        "price_min": 500000,
+        "price_max": 600000,
+        "name_contains": "Pixie",
+        "name_excludes": "",
+        "is_unique": true,
+        "eyebrow": "Souls of the Flowers",
+        "title": "Pixies",
+        "meta": "10-13cm  ·  $5,500 UYU / $150 USD",
+        "description": "Flower souls with the spirit of a child. Each one is born only once. When a Pixie finds a home, it ceases to exist. If you feel one calling you, don't let it pass you by.",
+        "badge_text": "Pixie",
+        "scarcity_text": "Each Pixie is one-of-a-kind, unrepeatable",
+        "cta_text": "Ver Pixies",
+        "show_hero_card": false,
+        "max_products": 50
+      }
+    },
+    "minis-especiales": {
+      "type": "duendes-catalog-category",
+      "settings": {
+        "theme": "dark",
+        "anchor": "minis-especiales",
+        "collection_handle": "minis-especiales",
+        "tag_filter": "",
+        "price_min": 500000,
+        "price_max": 600000,
+        "name_contains": "",
+        "name_excludes": "Pixie",
+        "is_unique": true,
+        "eyebrow": "Seres Historical",
+        "title": "Special Minis",
+        "meta": "~10cm  ·  $5,500 UYU / $150 USD",
+        "description": "Merlin, Leprechaun, and other legendary beings. Channeled with the reverence their story deserves. For those who connect with ancestral magic.",
+        "badge_text": "Especial",
+        "scarcity_text": "",
+        "cta_text": "Ver Special Minis",
+        "show_hero_card": false,
+        "max_products": 20
+      }
+    },
+    "medianos": {
+      "type": "duendes-catalog-category",
+      "settings": {
+        "theme": "light",
+        "anchor": "medianos",
+        "collection_handle": "medianos",
+        "tag_filter": "Mediano",
+        "price_min": 700000,
+        "price_max": 900000,
+        "name_contains": "",
+        "name_excludes": "",
+        "is_unique": true,
+        "eyebrow": "Presencia Mayor",
+        "title": "Mid-Size Guardians",
+        "meta": "16-28cm  ·  $8,000 UYU / $200 USD",
+        "description": "Each one is one-of-a-kind and unrepeatable. More detail, more presence, more connection. They aren't recreated, they aren't repeated. If you see it and feel something, it's because it has already chosen you.",
+        "badge_text": "Mediano",
+        "scarcity_text": "One-of-a-kind pieces — if you see it, there&apos;s a reason",
+        "cta_text": "See all Mid-Size",
+        "show_hero_card": false,
+        "max_products": 80
+      }
+    },
+    "grandes": {
+      "type": "duendes-catalog-category",
+      "settings": {
+        "theme": "dark",
+        "anchor": "grandes",
+        "collection_handle": "grandes",
+        "tag_filter": "grande",
+        "price_min": 1800000,
+        "price_max": 2000000,
+        "name_contains": "",
+        "name_excludes": "",
+        "is_unique": true,
+        "eyebrow": "Presencia Suprema",
+        "title": "Large Guardians",
+        "meta": "28-40cm  ·  $18,500 UYU / $450 USD",
+        "description": "Each one is one-of-a-kind and unrepeatable. Dominant presence, powerful energy. They aren't recreated or repeated. If you feel one is calling you, you've come to the right place.",
+        "badge_text": "Grande",
+        "scarcity_text": "They only exist once — when they leave, they don't return",
+        "cta_text": "See all Large",
+        "show_hero_card": false,
+        "max_products": 80
+      }
+    },
+    "gigantes": {
+      "type": "duendes-catalog-category",
+      "settings": {
+        "theme": "light",
+        "anchor": "gigantes",
+        "collection_handle": "gigantes",
+        "tag_filter": "gigante",
+        "price_min": 3900000,
+        "price_max": 4100000,
+        "name_contains": "",
+        "name_excludes": "",
+        "is_unique": true,
+        "eyebrow": "Guardians of Maximum Power",
+        "title": "Giant Guardians",
+        "meta": "50-80cm  ·  $39,800 UYU / $1,050 USD",
+        "description": "The largest Guardians that exist. Monumental, unrepeatable pieces. For those who seek the maximum elemental presence in their space.",
+        "badge_text": "Gigante",
+        "scarcity_text": "Monumental pieces — only one chance",
+        "cta_text": "See all Giants",
+        "show_hero_card": false,
+        "max_products": 80
+      }
+    },
+    "curiosidades": {
+      "type": "duendes-catalog-curiosidades",
+      "settings": {
+        "theme": "light",
+        "title": "Curiosidades de nuestras creaciones"
+      },
+      "blocks": {
+        "c1": {
+          "type": "curiosidad",
+          "settings": {
+            "label": "Alquimia",
+            "text": "Every Guardian is hand-channeled in Piriápolis during a 7-day ritual. There are no molds. There are no factories. Only hands, silence, and alchemy."
+          }
+        },
+        "c2": {
+          "type": "curiosidad",
+          "settings": {
+            "label": "Elementals",
+            "text": "The Guardians are the ones Mother Earth placed in charge of the earth element. They protect nature, homes, and those they choose to accompany."
+          }
+        },
+        "c3": {
+          "type": "curiosidad",
+          "settings": {
+            "label": "Sincronicidad",
+            "text": "Thousands of adopters write us the same thing: It arrived just when I needed it. It's not coincidence. The Guardians find their person."
+          }
+        },
+        "c4": {
+          "type": "curiosidad",
+          "settings": {
+            "label": "Channeling",
+            "text": "We don't choose what to create. Every Guardian is born with a name, story, and purpose. The channeled letter accompanying the mid-size ones confirms it."
+          }
+        },
+        "c5": {
+          "type": "curiosidad",
+          "settings": {
+            "label": "15.000 hogares",
+            "text": "More than fifteen thousand Guardians have found a home in 45 countries. Everything is still made by hand. Everything still comes out of the same studio in Uruguay."
+          }
+        },
+        "c6": {
+          "type": "curiosidad",
+          "settings": {
+            "label": "Irrepetibles",
+            "text": "Mid-Size, Large, and Giants exist only once. When one is adopted, it disappears forever. It's not repeated, not recreated, not made to order."
+          }
+        },
+        "c7": {
+          "type": "curiosidad",
+          "settings": {
+            "label": "Cristales",
+            "text": "Every Guardian carries a crystal according to their energy: amethyst for protection, citrine for abundance, rose quartz for love."
+          }
+        },
+        "c8": {
+          "type": "curiosidad",
+          "settings": {
+            "label": "El test",
+            "text": "Not sure which Guardian is yours? The Guardian Test connects you with the elemental being that resonates with your moment."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6",
+        "c7",
+        "c8"
+      ]
+    },
+    "divider-temas": {
+      "type": "duendes-catalog-category",
+      "settings": {
+        "theme": "dark",
+        "anchor": "por-intencion",
+        "price_min": 0,
+        "price_max": 1,
+        "eyebrow": "By intention",
+        "title": "Looking for something specific?",
+        "meta": "",
+        "description": "Every Guardian channels a unique energy. Swipe and find the one that resonates with you.",
+        "badge_text": "",
+        "show_hero_card": false,
+        "max_products": 3
+      }
+    },
+    "carousel-abundancia": {
+      "type": "duendes-catalog-carousel",
+      "settings": {
+        "theme": "dark",
+        "title": "Abundancia, Dinero y Negocios",
+        "subtitle": "Swipe to explore",
+        "filter_tags": "Abundancia y Dinero,Suerte,Emprendedores",
+        "show_sold_out": true,
+        "direction": "left",
+        "deco_char": "◆"
+      }
+    },
+    "carousel-amor": {
+      "type": "duendes-catalog-carousel",
+      "settings": {
+        "theme": "light",
+        "title": "Love, Family, and Harmony",
+        "subtitle": "Swipe to explore",
+        "filter_tags": "Love and Heart,Company and Emotional Support,Linaje y Transgeneracional",
+        "show_sold_out": true,
+        "direction": "right",
+        "deco_char": "♥"
+      }
+    },
+    "carousel-proteccion": {
+      "type": "duendes-catalog-carousel",
+      "settings": {
+        "theme": "dark",
+        "title": "Protection and Path-Openers",
+        "subtitle": "Swipe to explore",
+        "filter_tags": "Protection,Path-Opener",
+        "show_sold_out": true,
+        "direction": "left",
+        "deco_char": "✦"
+      }
+    },
+    "carousel-espiritual": {
+      "type": "duendes-catalog-carousel",
+      "settings": {
+        "theme": "light",
+        "title": "Spirituality, Wisdom, and Connection",
+        "subtitle": "Swipe to explore",
+        "filter_tags": "Spirituality,Wisdom,Shadow and Integration",
+        "show_sold_out": true,
+        "direction": "right",
+        "deco_char": "✧"
+      }
+    },
+    "carousel-salud": {
+      "type": "duendes-catalog-carousel",
+      "settings": {
+        "theme": "dark",
+        "title": "Health, Healing, and Wellbeing",
+        "subtitle": "Swipe to explore",
+        "filter_tags": "Health and Healing,Ansiedad y Salud Mental",
+        "show_sold_out": true,
+        "direction": "left",
+        "deco_char": "✤"
+      }
+    },
+    "carousel-autoestima": {
+      "type": "duendes-catalog-carousel",
+      "settings": {
+        "theme": "light",
+        "title": "Self-esteem and New Beginnings",
+        "subtitle": "Swipe to explore",
+        "filter_tags": "Self-esteem and Empowerment,New Beginnings,Study and Concentration",
+        "show_sold_out": true,
+        "direction": "right",
+        "deco_char": "✻"
+      }
+    },
+    "adoptados": {
+      "type": "duendes-catalog-carousel",
+      "settings": {
+        "theme": "dark",
+        "title": "Ya Encontraron su Hogar",
+        "subtitle": "Guardians who chose their person",
+        "filter_tags": "Mediano,Pixie,grande,gigante",
+        "show_sold_out": true,
+        "direction": "right",
+        "is_memorial": true
+      }
+    }
+  },
+  "order": [
+    "catalog-hero",
+    "minis-clasicos",
+    "promo-12",
+    "pixies",
+    "minis-especiales",
+    "medianos",
+    "grandes",
+    "gigantes",
+    "curiosidades",
+    "divider-temas",
+    "carousel-abundancia",
+    "carousel-amor",
+    "carousel-proteccion",
+    "carousel-espiritual",
+    "carousel-salud",
+    "carousel-autoestima",
+    "adoptados"
+  ]
+}

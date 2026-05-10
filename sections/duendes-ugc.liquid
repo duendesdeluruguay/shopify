@@ -1,0 +1,134 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+.dugc{padding:64px 0;background:var(--black-deep, #080a06);position:relative;overflow:hidden}
+.dugc::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(198,165,90,.04),transparent 50%);pointer-events:none}
+.dugc-header{text-align:center;padding:0 24px;margin-bottom:36px;position:relative;z-index:1}
+.dugc-eyebrow{font-family:var(--serif, Georgia);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold, #C6A55A);margin-bottom:12px}
+.dugc-title{font-family:var(--serif, Georgia);font-size:clamp(22px,3vw,32px);font-weight:300;color:#fff;margin:0}
+.dugc-title em{font-style:italic;color:var(--gold-lt, #D6BD7B)}
+.dugc-sub{font-family:var(--serif, Georgia);font-size:14px;font-style:italic;color:rgba(255,255,255,.75);margin-top:8px}
+
+/* Horizontal scrolling gallery */
+.dugc-track{display:flex;gap:16px;overflow-x:auto;padding:0 24px 20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:smooth}
+.dugc-track::-webkit-scrollbar{display:none}
+
+.dugc-card{flex:0 0 280px;scroll-snap-align:start;border-radius:14px;overflow:hidden;position:relative;aspect-ratio:4/5;cursor:pointer;transition:all .4s}
+.dugc-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(198,165,90,.12)}
+.dugc-card::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,10,6,.85) 0%,transparent 50%);transition:opacity .3s}
+.dugc-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;z-index:2;background:linear-gradient(90deg,var(--gold, #C6A55A),#e8d48b,var(--gold, #C6A55A));background-size:200% 100%;animation:dugcShimmer 3s linear infinite;opacity:0;transition:opacity .3s}
+.dugc-card:hover::after{opacity:1}
+@keyframes dugcShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.dugc-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.dugc-card:hover img{transform:scale(1.05)}
+
+.dugc-card-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,rgba(198,165,90,.06),rgba(74,93,58,.04));border:1px dashed rgba(198,165,90,.15)}
+.dugc-card-placeholder span{font-size:32px;opacity:.3}
+.dugc-card-placeholder small{font-family:var(--serif, Georgia);font-size:12px;font-style:italic;color:var(--gold, #C6A55A);opacity:.5;text-align:center;padding:0 16px}
+
+.dugc-card-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px 16px}
+.dugc-card-name{font-family:var(--serif, Georgia);font-size:14px;font-weight:600;color:#fff;margin:0 0 4px}
+.dugc-card-detail{font-family:var(--serif, Georgia);font-size:12px;font-style:italic;color:var(--gold-lt, #D6BD7B)}
+
+/* Auto-scroll arrows */
+.dugc-arrows{display:flex;gap:10px;justify-content:center;margin-top:24px}
+.dugc-arr{width:36px;height:36px;border-radius:50%;border:1px solid rgba(198,165,90,.4);background:rgba(198,165,90,.08);color:#C6A55A;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;font-size:20px;font-weight:bold;padding:0;line-height:1}
+.dugc-arr:hover{background:rgba(198,165,90,.12);border-color:var(--gold, #C6A55A)}
+
+.dugc-cta{text-align:center;margin-top:28px}
+.dugc-cta a{font-family:var(--serif, Georgia);font-size:13px;color:var(--gold, #C6A55A);text-decoration:none;letter-spacing:1px;border-bottom:1px solid rgba(198,165,90,.3);padding-bottom:2px;transition:all .3s}
+.dugc-cta a:hover{color:var(--gold-lt, #D6BD7B);border-color:var(--gold-lt, #D6BD7B)}
+
+@media(max-width:768px){.dugc-card{flex:0 0 240px}}
+</style>
+
+<section class="dugc">
+  <div class="dugc-header">
+    <div class="dugc-eyebrow">{{ section.settings.eyebrow }}</div>
+    <h2 class="dugc-title">{{ section.settings.title }}</h2>
+    <p class="dugc-sub">{{ section.settings.subtitle }}</p>
+  </div>
+
+  <div class="dugc-track" id="dugcTrack">
+    {%- for block in section.blocks -%}
+      <div class="dugc-card" {{ block.shopify_attributes }}>
+        {%- if block.settings.photo -%}
+          <img src="{{ block.settings.photo | image_url: width: 600 }}" alt="{{ block.settings.name }}" loading="lazy">
+        {%- else -%}
+          <div class="dugc-card-placeholder">
+            <span></span>
+            <small>Subí foto de adoptante con su guardián</small>
+          </div>
+        {%- endif -%}
+        <div class="dugc-card-info">
+          <p class="dugc-card-name">{{ block.settings.name }}</p>
+          <span class="dugc-card-detail">{{ block.settings.caption }}</span>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="dugc-arrows">
+    <button class="dugc-arr" id="dugcPrev">&#8249;</button>
+    <button class="dugc-arr" id="dugcNext">&#8250;</button>
+  </div>
+
+  {%- if section.settings.cta_text != blank -%}
+    <div class="dugc-cta">
+      <a href="{{ section.settings.cta_url }}">{{ section.settings.cta_text }} →</a>
+    </div>
+  {%- endif -%}
+</section>
+
+<script>
+(function(){
+  var track=document.getElementById('dugcTrack');
+  if(!track)return;
+  var scrollAmt=300;
+  document.getElementById('dugcPrev').addEventListener('click',function(){track.scrollBy({left:-scrollAmt,behavior:'smooth'})});
+  document.getElementById('dugcNext').addEventListener('click',function(){track.scrollBy({left:scrollAmt,behavior:'smooth'})});
+
+  /* Auto-scroll every 4s */
+  var autoTimer;
+  function autoScroll(){
+    autoTimer=setInterval(function(){
+      if(track.scrollLeft+track.offsetWidth>=track.scrollWidth-10){
+        track.scrollTo({left:0,behavior:'smooth'});
+      }else{
+        track.scrollBy({left:scrollAmt,behavior:'smooth'});
+      }
+    },4000);
+  }
+  autoScroll();
+  track.addEventListener('mouseenter',function(){clearInterval(autoTimer)});
+  track.addEventListener('mouseleave',autoScroll);
+  track.addEventListener('touchstart',function(){clearInterval(autoTimer)},{passive:true});
+  track.addEventListener('touchend',function(){autoScroll()},{passive:true});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes Comunidad",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "COMUNIDAD ELEMENTAL"},
+    {"type": "textarea", "id": "title", "label": "Título", "default": "Así los reciben en <em>todo el mundo</em>"},
+    {"type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Fotos reales de adoptantes con sus guardianes"},
+    {"type": "text", "id": "cta_text", "label": "Texto CTA", "default": "Seguinos en Instagram"},
+    {"type": "url", "id": "cta_url", "label": "Link CTA"}
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Foto",
+      "settings": [
+        {"type": "image_picker", "id": "photo", "label": "Foto"},
+        {"type": "text", "id": "name", "label": "Nombre", "default": "Nombre"},
+        {"type": "text", "id": "caption", "label": "Caption", "default": "Con su guardián"}
+      ]
+    }
+  ],
+  "presets": [{"name": "Duendes Comunidad"}]
+}
+{% endschema %}
+

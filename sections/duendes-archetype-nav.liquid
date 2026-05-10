@@ -1,0 +1,134 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign current_tag = ''
+  if current_tags.size > 0
+    assign current_tag = current_tags | first | downcase
+  endif
+  assign base_url = '/collections/tienda-magica'
+-%}
+
+<style>
+  .dc-arch {
+    background: #0D0B08;
+    padding: 28px 20px 36px;
+    border-top: 1px solid rgba(201,169,110,.08);
+  }
+  .dc-arch__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .dc-arch__eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(201,169,110,.6);
+    margin: 0 0 16px;
+  }
+  .dc-arch__nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .dc-arch__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid rgba(201,169,110,.18);
+    border-radius: 100px;
+    background: rgba(255,255,255,.02);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    color: rgba(250,250,248,.65);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .35s cubic-bezier(.25,.8,.25,1);
+  }
+  .dc-arch__chip:hover {
+    border-color: var(--gold, #C9A96E);
+    background: rgba(201,169,110,.08);
+    color: var(--gold-lt, #D6BD7B);
+    transform: translateY(-1px);
+  }
+  .dc-arch__chip--active {
+    border-color: var(--gold, #C9A96E);
+    background: rgba(201,169,110,.12);
+    color: var(--gold-lt, #D6BD7B);
+    box-shadow: 0 0 16px rgba(201,169,110,.18);
+  }
+  .dc-arch__chip-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--gold, #C9A96E);
+    opacity: .4;
+  }
+  .dc-arch__chip:hover .dc-arch__chip-dot,
+  .dc-arch__chip--active .dc-arch__chip-dot { opacity: 1; }
+  @media (max-width: 768px) {
+    .dc-arch__nav {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .dc-arch__nav::-webkit-scrollbar { display: none; }
+    .dc-arch__chip { flex-shrink: 0; }
+  }
+</style>
+
+<section class="dc-arch" aria-label="Filtrar por arquetipo">
+  <div class="dc-arch__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="dc-arch__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <nav class="dc-arch__nav">
+      <a href="{{ base_url }}"
+         class="dc-arch__chip{% if current_tag == blank %} dc-arch__chip--active{% endif %}">
+        <span class="dc-arch__chip-dot"></span>
+        Todos
+      </a>
+      {%- for block in section.blocks -%}
+        {%- assign tag_handle = block.settings.tag | handleize -%}
+        {%- assign tag_slug = block.settings.tag | downcase -%}
+        {%- capture chip_url -%}{{ base_url }}/{{ tag_handle }}{%- endcapture -%}
+        <a href="{{ chip_url }}"
+           class="dc-arch__chip{% if current_tag == tag_slug %} dc-arch__chip--active{% endif %}"
+           {{ block.shopify_attributes }}>
+          <span class="dc-arch__chip-dot"></span>
+          {{ block.settings.label }}
+        </a>
+      {%- endfor -%}
+    </nav>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Filtro por Arquetipo",
+  "tag": "section",
+  "class": "dc-arch-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Encontrá al guardián que necesitás" }
+  ],
+  "blocks": [
+    {
+      "type": "archetype",
+      "name": "Arquetipo",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Nombre visible", "default": "Amor" },
+        { "type": "text", "id": "tag", "label": "Tag de Shopify", "default": "amor", "info": "Tag tal cual está en los productos. Se aplica como filtro a la URL /collections/tienda-magica/[tag]" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Filtro por Arquetipo" }]
+}
+{% endschema %}

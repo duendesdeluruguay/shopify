@@ -1,0 +1,218 @@
+{% comment %}
+  Mi Magia · Article público (SEO + captación) · v5.0
+  Template asignable a artículos individuales del blog Mi Magia.
+  SIN gating — público para todos. Captación de tráfico desde Google.
+  Extras (banner novedad + badge comunidad + CTA upsell premium) solo se muestran a compradores logueados.
+{% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+  .art-wrap {
+    --black-deep: #0a0a0a;
+    --black-soft: #16110d;
+    --cream: #F5F0E1;
+    --cream-light: #FAF6EE;
+    --gold: #C9A961;
+    --gold-bright: #D8B872;
+    --gold-dark: #8b7137;
+    --brown-deep: #2A2620;
+    --brown-soft: #5A5048;
+    --line-gold: rgba(201,169,97,0.25);
+    background: var(--cream);
+    color: var(--brown-deep);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    line-height: 1.85;
+    font-size: 19px;
+  }
+  .art-wrap * { box-sizing: border-box; }
+
+  /* BANNER NOVEDAD · solo compradores */
+  .art-wrap .mm-novedad { background: var(--black-soft); color: var(--cream); border-bottom: 1px solid var(--gold-dark); padding: 12px 24px; text-align: center; }
+  .art-wrap .mm-novedad a { color: var(--cream); text-decoration: none; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .art-wrap .mm-novedad .badge { background: var(--gold); color: var(--black-deep); padding: 3px 10px; font-size: 9px; letter-spacing: 0.4em; }
+  .art-wrap .mm-novedad .arrow { color: var(--gold); transition: transform 0.3s; }
+  .art-wrap .mm-novedad a:hover .arrow { transform: translateX(4px); }
+
+  /* BADGE COMUNIDAD · solo compradores */
+  .art-wrap .mm-badge-comunidad { background: var(--cream-light); border-bottom: 1px solid var(--line-gold); text-align: center; padding: 10px 24px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; }
+  .art-wrap .mm-badge-comunidad .star { color: var(--gold); margin-right: 8px; }
+
+  /* BREADCRUMB */
+  .art-wrap .breadcrumb { background: var(--black-soft); color: var(--gold); padding: 14px 24px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; text-align: center; }
+  .art-wrap .breadcrumb a { color: var(--gold); text-decoration: none; opacity: 0.8; transition: opacity 0.3s ease; }
+  .art-wrap .breadcrumb a:hover { opacity: 1; }
+  .art-wrap .breadcrumb .sep { margin: 0 12px; opacity: 0.4; }
+
+  /* HERO ARTÍCULO */
+  .art-wrap .article-hero { background: var(--black-deep); color: var(--cream); padding: 60px 24px 70px; text-align: center; position: relative; overflow: hidden; }
+  .art-wrap .article-hero::after { content: '✦'; position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); color: var(--gold); font-size: 18px; opacity: .65; }
+  .art-wrap .article-hero .category { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; margin-bottom: 22px; }
+  .art-wrap .article-hero h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(34px, 5.2vw, 58px); margin: 0 auto 18px; max-width: 880px; line-height: 1.2; color: var(--cream); letter-spacing: 0.2px; }
+  .art-wrap .article-hero .subtitle { font-style: italic; font-size: 19px; color: rgba(245,240,225,0.78); max-width: 620px; margin: 0 auto 26px; line-height: 1.55; }
+  .art-wrap .article-hero .meta { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.4em; color: rgba(201,169,97,0.85); text-transform: uppercase; }
+  .art-wrap .article-hero .meta span { margin: 0 10px; }
+
+  /* CUERPO DEL ARTÍCULO · editorial */
+  .art-wrap .art-body { max-width: 720px; margin: 0 auto; padding: 64px 24px 80px; }
+  .art-wrap .art-body p { margin: 0 0 26px; }
+  .art-wrap .art-body h2 { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; margin: 56px 0 12px; font-weight: 500; }
+  .art-wrap .art-body h2 + p { font-family: 'Great Vibes', cursive; font-size: 44px; color: var(--brown-deep); line-height: 1; margin: 0 0 28px; font-style: normal; font-weight: 400; }
+  .art-wrap .art-body h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; font-size: 26px; color: var(--brown-deep); margin: 44px 0 16px; line-height: 1.3; }
+  .art-wrap .art-body strong { color: var(--brown-deep); font-weight: 600; }
+  .art-wrap .art-body em { font-style: italic; color: var(--gold-dark); }
+  .art-wrap .art-body blockquote { border: none; padding: 32px 0; margin: 44px 0; font-family: 'Great Vibes', cursive; font-size: 32px; line-height: 1.3; color: var(--gold-dark); text-align: center; font-weight: 400; }
+  .art-wrap .art-body blockquote::before, .art-wrap .art-body blockquote::after { content: '✦'; display: block; color: var(--gold); font-size: 12px; letter-spacing: 0.5em; font-family: 'Cinzel', serif; opacity: 0.6; }
+  .art-wrap .art-body blockquote::before { margin-bottom: 14px; }
+  .art-wrap .art-body blockquote::after { margin-top: 14px; }
+  .art-wrap .art-body img { max-width: 100%; height: auto; margin: 28px 0; }
+  .art-wrap .art-body ul, .art-wrap .art-body ol { margin: 0 0 26px; padding-left: 22px; }
+  .art-wrap .art-body li { margin: 8px 0; line-height: 1.7; }
+  .art-wrap .art-body a { color: var(--gold-dark); text-decoration: underline; text-decoration-color: rgba(167,129,64,0.4); }
+  .art-wrap .art-body a:hover { color: var(--brown-deep); text-decoration-color: var(--brown-deep); }
+
+  /* CTA UPSELL · varía según comprador o no */
+  .art-wrap .deep-cta { background: var(--black-deep); color: var(--cream); padding: 48px 32px; margin: 56px 0; text-align: center; border: 1px solid var(--gold); }
+  .art-wrap .deep-cta .label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
+  .art-wrap .deep-cta h4 { font-family: 'Great Vibes', cursive; font-size: 40px; margin: 0 0 14px; color: var(--cream); font-weight: 400; line-height: 1.1; }
+  .art-wrap .deep-cta p { font-style: italic; color: rgba(245,240,225,0.78); max-width: 520px; margin: 0 auto 24px; font-size: 16px; line-height: 1.6; }
+  .art-wrap .deep-cta a { display: inline-block; padding: 13px 30px; background: var(--gold); color: var(--black-deep); font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; text-decoration: none; transition: background 0.3s ease; }
+  .art-wrap .deep-cta a:hover { background: var(--gold-bright); }
+
+  /* CIERRE */
+  .art-wrap .article-end { text-align: center; margin: 56px 0 0; padding-top: 40px; border-top: 1px solid var(--line-gold); }
+  .art-wrap .article-end .symbol { color: var(--gold); letter-spacing: 0.6em; font-size: 14px; }
+  .art-wrap .article-end .author { font-family: 'Great Vibes', cursive; font-size: 30px; color: var(--brown-deep); margin: 18px 0 4px; font-weight: 400; }
+  .art-wrap .article-end .role { font-family: 'Cinzel', serif; font-size: 9.5px; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; }
+
+  /* TAGS + NAVEGACIÓN */
+  .art-wrap .article-tags { max-width: 720px; margin: 32px auto 0; padding: 0 24px; }
+  .art-wrap .article-tags a { display: inline-block; margin: 4px 6px 0 0; padding: 6px 14px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dark); border: 1px solid var(--line-gold); text-decoration: none; transition: all 0.25s ease; }
+  .art-wrap .article-tags a:hover { background: var(--brown-deep); color: var(--cream); border-color: var(--brown-deep); }
+
+  .art-wrap .article-nav { max-width: 720px; margin: 48px auto 0; padding: 0 24px; display: flex; gap: 20px; flex-wrap: wrap; }
+  .art-wrap .article-nav a { flex: 1; min-width: 220px; text-decoration: none; color: var(--brown-deep); padding: 18px 22px; border: 1px solid var(--line-gold); transition: all 0.3s ease; background: var(--cream-light); }
+  .art-wrap .article-nav a:hover { border-color: var(--gold); }
+  .art-wrap .article-nav .label { font-family: 'Cinzel', serif; font-size: 9.5px; letter-spacing: 0.35em; color: var(--gold-dark); display: block; margin-bottom: 6px; text-transform: uppercase; }
+  .art-wrap .article-nav .title { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 18px; line-height: 1.35; color: var(--brown-deep); }
+  .art-wrap .article-nav .next { text-align: right; }
+
+  /* VOLVER AL BLOG */
+  .art-wrap .back-block { background: var(--cream-light); border-top: 1px solid var(--line-gold); border-bottom: 1px solid var(--line-gold); padding: 48px 24px; text-align: center; margin-top: 60px; }
+  .art-wrap .back-block h3 { font-family: 'Great Vibes', cursive; font-size: 40px; color: var(--brown-deep); margin: 0 0 12px; line-height: 1; font-weight: 400; }
+  .art-wrap .back-block p { font-style: italic; color: var(--brown-soft); max-width: 480px; margin: 0 auto 22px; font-size: 16px; }
+  .art-wrap .back-block a { display: inline-block; padding: 13px 30px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em; color: var(--cream); background: var(--black-deep); border: 1px solid var(--gold); text-transform: uppercase; text-decoration: none; transition: background 0.3s ease; }
+  .art-wrap .back-block a:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
+
+  @media (max-width: 640px) {
+    .art-wrap .article-hero { padding: 44px 16px 50px; }
+    .art-wrap .art-body { padding: 44px 16px 60px; font-size: 18px; }
+    .art-wrap .article-nav { flex-direction: column; }
+    .art-wrap .article-nav .next { text-align: left; }
+  }
+</style>
+
+<div class="art-wrap">
+
+{%- comment -%} EXTRAS solo para compradores logueados {%- endcomment -%}
+{%- assign es_comprador = false -%}
+{%- if customer -%}
+  {%- if customer.orders_count > 0 -%}{%- assign es_comprador = true -%}{%- endif -%}
+  {%- if customer.tags contains 'comprador' -%}{%- assign es_comprador = true -%}{%- endif -%}
+{%- endif -%}
+
+{%- if es_comprador -%}
+<div class="mm-novedad">
+  <a href="/products/canalizacion-almica">
+    <span class="badge">✦ Novedad</span>
+    <span>Canalización Álmica · escuchá su voz · USD 30 por guardián</span>
+    <span class="arrow">→</span>
+  </a>
+</div>
+<div class="mm-badge-comunidad">
+  <span class="star">✦</span>Comunidad Elemental · {{ customer.first_name | default: 'Adoptante' }}
+</div>
+{%- endif -%}
+
+<div class="breadcrumb">
+  <a href="/blogs/mi-magia">Mi Magia</a>
+  {%- if article.tags.size > 0 -%}<span class="sep">/</span><span>{{ article.tags.first }}</span>{%- endif -%}
+</div>
+
+<section class="article-hero">
+  {%- if article.tags.size > 0 -%}
+    <p class="category">{{ article.tags.first }}</p>
+  {%- else -%}
+    <p class="category">Mi Magia</p>
+  {%- endif -%}
+  <h1>{{ article.title }}</h1>
+  {%- if article.excerpt != blank -%}
+    <p class="subtitle">{{ article.excerpt | strip_html }}</p>
+  {%- endif -%}
+  <p class="meta">
+    <span>{{ article.published_at | date: "%d %b %Y" }}</span>
+    <span>·</span>
+    <span>{{ article.content | strip_html | number_of_words | divided_by: 200 | plus: 1 }} min de lectura</span>
+  </p>
+</section>
+
+<article class="art-body">
+  {{ article.content }}
+
+  {%- if es_comprador -%}
+  <div class="deep-cta">
+    <p class="label">✦ Profundizar tu vínculo ✦</p>
+    <h4>Conocé el linaje específico de tu guardián</h4>
+    <p>Si querés saber a qué linaje pertenece el tuyo, su nombre álmico y por qué te eligió específicamente — agregá la Canalización Álmica. Trabajo de 7 días, audio + PDF cinematográfico, irrepetible.</p>
+    <a href="/products/canalizacion-almica">Agregar Canalización Álmica</a>
+  </div>
+  {%- else -%}
+  <div class="deep-cta">
+    <p class="label">✦ Encontrá al tuyo ✦</p>
+    <h4>Adoptá un guardián elemental</h4>
+    <p>Lo que leés es la palabra. Lo que vive en tu casa es la presencia. Cada guardián es canalizado en 7 días, hecho a mano, único e irrepetible. Nadie más va a recibir el tuyo.</p>
+    <a href="/collections/all">Conocer los guardianes</a>
+  </div>
+  {%- endif -%}
+
+  <div class="article-end">
+    <p class="symbol">✦ ✦ ✦</p>
+    <p class="author">Thibisay y Gabriel</p>
+    <p class="role">Duendes del Uruguay</p>
+  </div>
+</article>
+
+{%- if article.tags.size > 0 -%}
+<div class="article-tags">
+  {%- for tag in article.tags -%}
+    <a href="/blogs/mi-magia/tagged/{{ tag | handle }}">{{ tag }}</a>
+  {%- endfor -%}
+</div>
+{%- endif -%}
+
+{%- if article.previous or article.next -%}
+<nav class="article-nav">
+  {%- if article.previous -%}
+    <a href="{{ article.previous.url }}">
+      <span class="label">← Anterior</span>
+      <span class="title">{{ article.previous.title }}</span>
+    </a>
+  {%- else -%}<div></div>{%- endif -%}
+  {%- if article.next -%}
+    <a href="{{ article.next.url }}" class="next">
+      <span class="label">Siguiente →</span>
+      <span class="title">{{ article.next.title }}</span>
+    </a>
+  {%- else -%}<div></div>{%- endif -%}
+</nav>
+{%- endif -%}
+
+<div class="back-block">
+  <h3>Seguí explorando</h3>
+  <p>Cada historia te lleva a otra. Volvé al blog y elegí la próxima.</p>
+  <a href="/blogs/mi-magia">Volver al blog</a>
+</div>
+
+</div>

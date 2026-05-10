@@ -1,0 +1,85 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .dfnd2 { position: relative; overflow: hidden; padding: clamp(80px, 10vw, 120px) 0; background: var(--black-deep, #0a0c06); color: var(--white, #FAFAF7); }
+  .dfnd2::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(198,165,90,.06), transparent 60%); pointer-events: none; z-index: 1; }
+  .dfnd2__container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  .dfnd2__header { text-align: center; margin-bottom: clamp(48px, 6vw, 72px); }
+  .dfnd2__eyebrow { font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: 12px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold, #C6A55A); margin-bottom: 20px; font-style: italic; }
+  .dfnd2__header h2 { font-family: var(--font-heading-family, 'Cinzel', serif); font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; color: var(--white, #FAFAF7); line-height: 1.2; letter-spacing: 1px; margin: 0; }
+  .dfnd2__diamond { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; }
+  .dfnd2__diamond::before, .dfnd2__diamond::after { content: ''; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold, #C6A55A), transparent); opacity: .4; }
+  .dfnd2__diamond-icon { width: 8px; height: 8px; background: var(--gold, #C6A55A); transform: rotate(45deg); flex-shrink: 0; }
+  .dfnd2__photos { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: clamp(40px, 5vw, 56px); max-width: 900px; margin-left: auto; margin-right: auto; }
+  .dfnd2__photo { position: relative; border-radius: 16px; overflow: hidden; height: 420px; box-shadow: 0 12px 40px rgba(0,0,0,.4); border: 1px solid rgba(198,165,90,.12); }
+  .dfnd2__photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 8s ease; }
+  .dfnd2__photo:hover img { transform: scale(1.04); }
+  .dfnd2__photo-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(10,12,6,.6) 100%); z-index: 1; }
+  .dfnd2__photo-name { position: absolute; bottom: 20px; left: 24px; z-index: 2; font-family: var(--font-heading-family, 'Cinzel', serif); font-size: 18px; font-weight: 600; color: var(--gold, #C6A55A); letter-spacing: 1px; }
+  .dfnd2__story { background: rgba(255,255,255,.04); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 16px; padding: clamp(36px, 5vw, 56px); border: 1px solid rgba(198,165,90,.12); box-shadow: 0 8px 32px rgba(0,0,0,.3); max-width: 900px; margin: 0 auto; position: relative; }
+  .dfnd2__story::before { content: '\201C'; position: absolute; top: 16px; left: 28px; font-family: var(--font-heading-family, 'Cinzel', serif); font-size: 80px; color: var(--gold, #C6A55A); opacity: .2; line-height: 1; }
+  .dfnd2__story p { font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: 18px; line-height: 1.8; color: #FAFAF7; font-style: italic; margin: 0; }
+  .dfnd2__sign { margin-top: 28px; font-family: var(--font-body-family, 'Cormorant Garamond', serif); font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold, #C6A55A); font-style: normal; }
+  @media (max-width: 1024px) { .dfnd2__photos { gap: 16px; } .dfnd2__photo { height: 360px; } }
+  @media (max-width: 768px) { .dfnd2__photos { grid-template-columns: 1fr; } .dfnd2__photo { height: 300px; } .dfnd2__story { padding: 32px 24px; } }
+  @media (max-width: 480px) { .dfnd2 { padding: 64px 0; } .dfnd2__photo { height: 260px; } }
+</style>
+
+<section class="dfnd2" id="duendes-founders">
+  <div class="dfnd2__container">
+    <div class="dfnd2__header duendes-reveal">
+      <p class="dfnd2__eyebrow">QUIENES SOMOS</p>
+      <h2>{{ section.settings.heading }}</h2>
+      <div class="dfnd2__diamond">
+        <span class="dfnd2__diamond-icon"></span>
+      </div>
+    </div>
+
+    <div class="dfnd2__photos duendes-reveal">
+      {% if section.settings.photo_1 != blank %}
+        <div class="dfnd2__photo">
+          {{ section.settings.photo_1 | image_url: width: 800 | image_tag: loading: 'lazy' }}
+          <div class="dfnd2__photo-overlay"></div>
+          <div class="dfnd2__photo-name">Gabriel</div>
+        </div>
+      {% endif %}
+      {% if section.settings.photo_2 != blank %}
+        <div class="dfnd2__photo">
+          {{ section.settings.photo_2 | image_url: width: 800 | image_tag: loading: 'lazy' }}
+          <div class="dfnd2__photo-overlay"></div>
+          <div class="dfnd2__photo-name">Thibisay</div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="dfnd2__story duendes-reveal">
+      <p>{{ section.settings.story }}</p>
+      <div class="dfnd2__sign">{{ section.settings.signature }}</div>
+    </div>
+  </div>
+</section>
+
+<div class="duendes-gold-line"></div>
+<div class="duendes-divider"><span class="duendes-divider-diamond"></span></div>
+
+{% schema %}
+{
+  "name": "Duendes Fundadores",
+  "tag": "section",
+  "class": "duendes-founders-section",
+  "settings": [
+    {"type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1"},
+    {"type": "text", "id": "heading", "label": "T\u00edtulo", "default": "Gabriel & Thibisay"},
+    {"type": "text", "id": "subheading", "label": "Subt\u00edtulo", "default": "Los creadores detr\u00e1s de cada guardi\u00e1n"},
+    {"type": "image_picker", "id": "photo_1", "label": "Foto 1 (Gabriel)"},
+    {"type": "image_picker", "id": "photo_2", "label": "Foto 2 (Thibisay)"},
+    {"type": "textarea", "id": "story", "label": "Historia", "default": "Somos una familia de 5. Tres hijos \u2014 dos de ellos diagnosticados con autismo. En 2015 empezamos sin nada, en una casa prestada. Las primeras figuras se vendieron en 24 horas. Perdimos 60 paquetes en Navidad de 2020. Nos mudamos a Piri\u00e1polis buscando sanar. Hoy uno de nuestros hijos revirti\u00f3 el diagn\u00f3stico. Nos apasiona la m\u00fasica \u2014 tenemos un hangdrum, un piano, un ukelele... y casi nunca tenemos tiempo libre. Pero cuando lo tenemos, divagamos juntos."},
+    {"type": "text", "id": "signature", "label": "Firma", "default": "Gabriel & Thibisay \u00b7 Desde Piri\u00e1polis, ciudad alquimista"}
+  ],
+  "presets": [
+    {
+      "name": "Duendes Fundadores"
+    }
+  ]
+}
+{% endschema %}

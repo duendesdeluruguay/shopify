@@ -1,0 +1,592 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .ds-signals {
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-signals__split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+  }
+
+  /* -- Photo side -- */
+  .ds-signals__photo {
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+  }
+  .ds-signals__photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 8s ease;
+  }
+  .ds-signals:hover .ds-signals__photo img { transform: scale(1.05); }
+  .ds-signals__photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, transparent 60%, var(--black-deep, #080a06) 100%);
+    pointer-events: none;
+  }
+
+  /* -- Content side -- */
+  .ds-signals__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(32px,4vw,56px) clamp(24px,3.5vw,48px);
+    background: var(--black-deep, #080a06);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-signals__content::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 30%, rgba(198,165,90,.05), transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(74,93,58,.04), transparent 50%);
+    pointer-events: none;
+  }
+
+  /* -- Floating orbs -- */
+  .ds-signals__orbs {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .ds-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: dsOrbFloat 12s ease-in-out infinite alternate;
+  }
+  .ds-orb--1 { width: 120px; height: 120px; background: rgba(198,165,90,.08); top: 10%; left: 5%; animation-delay: 0s; }
+  .ds-orb--2 { width: 80px; height: 80px; background: rgba(74,93,58,.06); top: 60%; right: 10%; animation-delay: -4s; }
+  .ds-orb--3 { width: 60px; height: 60px; background: rgba(198,165,90,.05); bottom: 15%; left: 30%; animation-delay: -8s; }
+  @keyframes dsOrbFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(15px, -20px) scale(1.1); }
+    66% { transform: translate(-10px, 10px) scale(0.95); }
+    100% { transform: translate(5px, -15px) scale(1.05); }
+  }
+
+  /* -- Stars -- */
+  .ds-signals__stars {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .ds-star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--gold, #C6A55A);
+    border-radius: 50%;
+    animation: dsStarTwinkle 3s ease-in-out infinite;
+  }
+  @keyframes dsStarTwinkle {
+    0%, 100% { opacity: .08; transform: scale(1); }
+    50% { opacity: .6; transform: scale(1.8); }
+  }
+
+  /* -- Inner -- */
+  .ds-signals__inner {
+    position: relative;
+    z-index: 2;
+  }
+  .ds-signals__label {
+    font-family: var(--serif, Georgia);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold, #C6A55A);
+    margin-bottom: 12px;
+  }
+  .ds-signals h2 {
+    font-family: var(--serif, Georgia);
+    font-size: clamp(24px,3vw,36px);
+    font-weight: 300;
+    font-style: italic;
+    color: #fff;
+    margin: 0 0 4px;
+    line-height: 1.2;
+  }
+  .ds-signals h2 em { color: var(--gold-lt, #D6BD7B); }
+  .ds-signals__sub {
+    font-family: var(--serif, Georgia);
+    font-size: 15px;
+    color: rgba(255,255,255,.8);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  /* -- Energy meter -- */
+  .ds-energy {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: rgba(198,165,90,.03);
+    border: 1px solid rgba(198,165,90,.08);
+  }
+  .ds-energy__bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,.06);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .ds-energy__fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold, #C6A55A), #e8d48b);
+    border-radius: 4px;
+    transition: width .6s cubic-bezier(.4,0,.2,1);
+    position: relative;
+  }
+  .ds-energy__fill::after {
+    content: '';
+    position: absolute;
+    right: 0; top: -3px; bottom: -3px;
+    width: 8px;
+    background: var(--gold, #C6A55A);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--gold, #C6A55A), 0 0 24px rgba(198,165,90,.3);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .ds-energy__fill.has-progress::after { opacity: 1; }
+  .ds-energy__icon {
+    font-size: 18px;
+    filter: grayscale(1) brightness(.5);
+    transition: all .4s;
+  }
+  .ds-energy.active .ds-energy__icon {
+    filter: grayscale(0) brightness(1);
+    animation: dsEnergyPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes dsEnergyPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  .ds-energy__label {
+    font-family: var(--serif, Georgia);
+    font-size: 12px;
+    color: rgba(255,255,255,.75);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color .3s;
+    white-space: nowrap;
+  }
+  .ds-energy.active .ds-energy__label { color: var(--gold-lt, #D6BD7B); }
+  /* Contador visible */
+  .ds-energy__count {
+    font-family: var(--serif, Georgia);
+    font-size: 13px;
+    color: var(--gold, #C6A55A);
+    font-weight: 600;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    min-width: 36px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .ds-energy.active .ds-energy__count { opacity: 1; }
+
+  /* -- Signal items -- */
+  .ds-signal {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 13px 16px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(198,165,90,.08);
+    border-radius: 10px;
+    background: rgba(255,255,255,.01);
+    cursor: pointer;
+    transition: all .4s;
+    user-select: none;
+  }
+  .ds-signal:hover {
+    border-color: rgba(198,165,90,.18);
+    background: rgba(198,165,90,.03);
+  }
+  .ds-signal.lit {
+    border-color: var(--gold, #C6A55A);
+    background: rgba(198,165,90,.08);
+    box-shadow: 0 0 24px rgba(198,165,90,.08);
+  }
+  .ds-signal__check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(198,165,90,.25);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s;
+  }
+  .ds-signal.lit .ds-signal__check {
+    background: var(--gold, #C6A55A);
+    border-color: var(--gold, #C6A55A);
+    box-shadow: 0 0 10px rgba(198,165,90,.3);
+  }
+  .ds-signal.lit .ds-signal__check svg { opacity: 1; }
+  .ds-signal__check svg {
+    width: 12px; height: 12px;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .ds-signal p {
+    color: rgba(255,255,255,.85);
+    font-family: var(--serif, Georgia);
+    font-size: 14px;
+    line-height: 1.5;
+    font-style: italic;
+    transition: color .3s;
+    margin: 0;
+  }
+  .ds-signal.lit p { color: #FAFAF7; }
+
+  /* -- Reveal message -- */
+  .ds-reveal {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height .5s ease, opacity .4s ease, margin .4s ease;
+    margin: 0;
+  }
+  .ds-reveal.show {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 20px;
+  }
+  .ds-reveal__inner {
+    padding: 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(198,165,90,.06), rgba(74,93,58,.04));
+    border: 1px solid rgba(198,165,90,.12);
+    position: relative;
+  }
+  .ds-reveal__inner::before {
+    content: '';
+    position: absolute;
+    top: -8px; left: 20px;
+    font-size: 14px;
+    color: var(--gold, #C6A55A);
+    background: var(--black-deep, #080a06);
+    padding: 0 8px;
+  }
+  .ds-reveal__msg {
+    font-family: var(--serif, Georgia);
+    font-size: 15px;
+    font-style: italic;
+    color: var(--gold-lt, #D6BD7B);
+    line-height: 1.7;
+    margin: 0 0 12px;
+    transition: opacity .3s;
+  }
+  .ds-reveal__reading {
+    font-family: var(--serif, Georgia);
+    font-size: 13px;
+    color: rgba(255,255,255,.8);
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px solid rgba(198,165,90,.1);
+  }
+
+  /* -- CTA -- */
+  .ds-signals__cta-wrap {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .ds-signals__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 36px;
+    background: var(--black-deep, #080a06);
+    color: #fff;
+    font-family: var(--serif, Georgia);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    border: 1px solid rgba(198,165,90,.25);
+    text-decoration: none;
+    transition: all .5s;
+    opacity: .45;
+    pointer-events: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-signals__cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+    transform: translateX(-100%);
+    transition: none;
+  }
+  .ds-signals__cta.active {
+    opacity: 1;
+    pointer-events: auto;
+    background: var(--gold, #C6A55A);
+    border-color: var(--gold, #C6A55A);
+    box-shadow: 0 4px 24px rgba(198,165,90,.4);
+  }
+  .ds-signals__cta.active::before {
+    animation: dsShine 2s ease-in-out infinite;
+  }
+  @keyframes dsShine {
+    0% { transform: translateX(-100%); }
+    60%, 100% { transform: translateX(100%); }
+  }
+  .ds-signals__cta.active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(198,165,90,.4);
+  }
+  .ds-signals__hint {
+    font-family: var(--serif, Georgia);
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(255,255,255,.65);
+    transition: opacity .3s;
+  }
+
+  @media (max-width: 768px) {
+    .ds-signals__split { grid-template-columns: 1fr; }
+    .ds-signals__photo { min-height: 40vh; }
+    .ds-signals__photo-overlay {
+      background: linear-gradient(to bottom, transparent 50%, var(--black-deep, #080a06) 100%);
+    }
+    .ds-signals__content { padding: 32px 20px 48px; }
+  }
+</style>
+
+<section class="ds-signals" id="duendes-senales">
+  <div class="ds-signals__split">
+    <div class="ds-signals__photo">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+      {% else %}
+        <div style="width:100%;height:100%;background:var(--black-deep, #080a06);display:flex;align-items:center;justify-content:center">
+          <span style="color:var(--gold, #C6A55A);font-family:var(--serif, Georgia);font-style:italic">Subi una imagen</span>
+        </div>
+      {% endif %}
+      <div class="ds-signals__photo-overlay"></div>
+    </div>
+
+    <div class="ds-signals__content">
+      <div class="ds-signals__orbs">
+        <div class="ds-orb ds-orb--1"></div>
+        <div class="ds-orb ds-orb--2"></div>
+        <div class="ds-orb ds-orb--3"></div>
+      </div>
+      <div class="ds-signals__stars" id="dsStars"></div>
+
+      <div class="ds-signals__inner">
+        <span class="ds-signals__label">{{ section.settings.label }}</span>
+        <h2>{{ section.settings.heading_start }} <em>{{ section.settings.heading_italic }}</em></h2>
+        <p class="ds-signals__sub">{{ section.settings.subheading }}</p>
+
+        {%- comment -%} Energy meter con contador {%- endcomment -%}
+        <div class="ds-energy" id="dsEnergy">
+          <span class="ds-energy__icon"></span>
+          <div class="ds-energy__bar">
+            <div class="ds-energy__fill" id="dsEnergyFill"></div>
+          </div>
+          <span class="ds-energy__count" id="dsCount">0/{{ section.blocks.size }}</span>
+          <span class="ds-energy__label" id="dsEnergyLabel">Energia</span>
+        </div>
+
+        {%- comment -%} Signals {%- endcomment -%}
+        {% for block in section.blocks %}
+          <div class="ds-signal" {{ block.shopify_attributes }}>
+            <div class="ds-signal__check">
+              <svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2"><path d="M2 6l3 3 5-5"/></svg>
+            </div>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        {% endfor %}
+
+        {%- comment -%} Reveal area {%- endcomment -%}
+        <div class="ds-reveal" id="dsReveal">
+          <div class="ds-reveal__inner">
+            <p class="ds-reveal__msg" id="dsRevealMsg"></p>
+            <p class="ds-reveal__reading" id="dsRevealReading"></p>
+          </div>
+        </div>
+
+        {%- comment -%} CTA {%- endcomment -%}
+        <div class="ds-signals__cta-wrap">
+          <a href="{{ section.settings.cta_url }}" class="ds-signals__cta" id="dsCta">{{ section.settings.cta_text }}</a>
+          <span class="ds-signals__hint" id="dsHint">Toca al menos 2 senales</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="duendes-gold-line"></div>
+<div class="duendes-divider">&#10022;</div>
+
+<script>
+(function() {
+  /* Stars */
+  var starsC = document.getElementById('dsStars');
+  if (starsC) {
+    for (var i = 0; i < 35; i++) {
+      var s = document.createElement('div');
+      s.className = 'ds-star';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDelay = (Math.random() * 4).toFixed(1) + 's';
+      s.style.animationDuration = (2.5 + Math.random() * 2).toFixed(1) + 's';
+      starsC.appendChild(s);
+    }
+  }
+
+  /* Signals interaction */
+  var signals = document.querySelectorAll('.ds-signal');
+  var energyBar = document.getElementById('dsEnergy');
+  var fill = document.getElementById('dsEnergyFill');
+  var label = document.getElementById('dsEnergyLabel');
+  var countEl = document.getElementById('dsCount');
+  var reveal = document.getElementById('dsReveal');
+  var revMsg = document.getElementById('dsRevealMsg');
+  var revRead = document.getElementById('dsRevealReading');
+  var cta = document.getElementById('dsCta');
+  var hint = document.getElementById('dsHint');
+  var total = signals.length || 6;
+
+  var messages = {
+    0: { msg: '', reading: '' },
+    1: { msg: 'Una senal... podria ser coincidencia.', reading: 'Pero algo dentro tuyo sabe que no lo es.' },
+    2: { msg: 'Dos senales. Ya no es casualidad.', reading: 'Las sincronicidades se acumulan cuando un guardian te busca. Presta atencion a los proximos dias.' },
+    3: { msg: 'Tres senales. El universo insiste.', reading: 'Tu energia resuena con la de un ser elemental. Hay un guardian que fue creado pensando en alguien exactamente como vos.' },
+    4: { msg: 'Cuatro senales. Tu guardian te esta buscando.', reading: 'La conexion es fuerte. No es que vos buscas al guardian — el te encontro primero. Solo falta que des el paso.' },
+    5: { msg: 'Cinco senales. La conexion es innegable.', reading: 'Tu sensibilidad energetica esta por encima de lo comun. Un guardian no solo te acompanaria — te potenciaria.' },
+    6: { msg: 'Todas las senales. No hay dudas.', reading: 'Esto no pasa seguido. Tu campo energetico esta completamente alineado. El guardian que te espera lleva tu nombre en su esencia.' }
+  };
+
+  signals.forEach(function(sig) {
+    sig.addEventListener('click', function() {
+      this.classList.toggle('lit');
+      var count = document.querySelectorAll('.ds-signal.lit').length;
+      var pct = (count / total) * 100;
+
+      /* Energy bar */
+      if (fill) {
+        fill.style.width = pct + '%';
+        fill.classList.toggle('has-progress', count > 0);
+      }
+      if (energyBar) energyBar.classList.toggle('active', count > 0);
+      /* Contador visible */
+      if (countEl) countEl.textContent = count + '/' + total;
+      if (label) {
+        var labels = ['Energia', 'Despertando...', 'Creciendo...', 'Resonando...', 'Vibrando...', 'Pulsando...', 'Maxima!'];
+        label.textContent = labels[Math.min(count, labels.length - 1)];
+      }
+
+      /* Reveal */
+      var data = messages[Math.min(count, 6)] || messages[0];
+      if (count > 0) {
+        reveal.classList.add('show');
+        revMsg.textContent = data.msg;
+        revRead.textContent = data.reading;
+      } else {
+        reveal.classList.remove('show');
+      }
+
+      /* CTA */
+      if (cta) cta.classList.toggle('active', count >= 2);
+      if (hint) hint.style.opacity = count >= 2 ? '0' : '1';
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes Senales",
+  "tag": "section",
+  "class": "duendes-senales-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen lateral"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Etiqueta superior",
+      "default": "Sincronicidades"
+    },
+    {
+      "type": "text",
+      "id": "heading_start",
+      "label": "Titulo (inicio)",
+      "default": "Toca las que"
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Titulo (parte italica dorada)",
+      "default": "te pasan"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subtitulo",
+      "default": "Si te identificas con al menos una, el universo ya te esta hablando."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del boton",
+      "default": "DESCUBRI CUAL TE BUSCA"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Link del boton"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "signal",
+      "name": "Senal",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texto de la senal",
+          "default": "Das todo por los demas y al final no queda nada para vos."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes Senales",
+      "blocks": [
+        { "type": "signal", "settings": { "text": "Das todo por los demas y al final no queda nada para vos." } },
+        { "type": "signal", "settings": { "text": "Cargas emociones que no son tuyas y el cuerpo te lo dice." } },
+        { "type": "signal", "settings": { "text": "Sentis que algo falta — un vacio que vuelve." } },
+        { "type": "signal", "settings": { "text": "Tenes corazonadas que ignoras, y despues se confirman." } },
+        { "type": "signal", "settings": { "text": "Encontras plumas, horas espejo, treboles... sin explicacion." } },
+        { "type": "signal", "settings": { "text": "La gente te cuenta todo sin saber por que confia en vos." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

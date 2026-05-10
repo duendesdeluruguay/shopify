@@ -1,0 +1,342 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .dcol { background: #FAFAF8; padding: 0 0 60px; }
+
+  .dcol__head {
+    max-width: 1100px; margin: 0 auto; padding: 48px 20px 12px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    border-bottom: 1px solid rgba(26,26,20,.06);
+  }
+  .dcol__head-eyebrow {
+    font-family: 'Cinzel', serif; font-size: 8px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold, #C9A96E); margin-bottom: 4px;
+  }
+  .dcol__head-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(26px, 3.5vw, 40px); font-weight: 300;
+    color: var(--text, #1a1a14); margin: 0; line-height: 1.1;
+  }
+  .dcol__head-right {
+    font-family: 'Lato', sans-serif; font-size: 11px;
+    color: rgba(26,26,20,.3); padding-bottom: 6px;
+  }
+  .dcol__head-right strong { color: var(--gold-dk, #A38640); font-weight: 700; }
+
+  .dcol__desc-bar { max-width: 1100px; margin: 0 auto; padding: 16px 20px 0; }
+  .dcol__desc-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px; font-style: italic; line-height: 1.6;
+    color: rgba(26,26,20,.4); max-width: 600px; margin: 0;
+  }
+
+  .dcol__filters {
+    max-width: 1100px; margin: 0 auto; padding: 20px 20px 28px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .dcol__pill {
+    font-family: 'Lato', sans-serif; font-size: 10px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 100px;
+    border: 1px solid rgba(26,26,20,.08); background: transparent;
+    color: rgba(26,26,20,.4); cursor: pointer; transition: all .3s;
+  }
+  .dcol__pill:hover { border-color: var(--gold, #C9A96E); color: var(--gold-dk, #A38640); }
+  .dcol__pill.active { background: var(--gold, #C9A96E); color: #0D0B08; border-color: var(--gold, #C9A96E); }
+
+  .dcol__grid {
+    max-width: 1100px; margin: 0 auto; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+  }
+  @media (max-width: 1024px) { .dcol__grid { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+  @media (max-width: 640px) { .dcol__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+
+  .dcol__card {
+    display: block; text-decoration: none; color: inherit;
+    border-radius: 10px; overflow: hidden; position: relative;
+    background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    transition: transform .4s cubic-bezier(.25,.8,.25,1), box-shadow .4s;
+  }
+  .dcol__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(0,0,0,.1);
+  }
+  .dcol__card::after {
+    content:''; position:absolute; inset:0; border-radius:10px;
+    border: 1.5px solid transparent; transition: border-color .4s;
+    pointer-events:none; z-index:1;
+  }
+  .dcol__card:hover::after { border-color: rgba(201,169,110,.3); }
+
+  .dcol__card--hero { grid-column: span 2; grid-row: span 2; }
+  .dcol__card--hero .dcol__card-img { aspect-ratio: auto; height: 100%; min-height: 400px; }
+  .dcol__card--hero .dcol__card-name { font-size: 22px; }
+  .dcol__card--hero .dcol__card-price { font-size: 16px; }
+  .dcol__card--hero .dcol__badge { font-size: 8px; padding: 3px 10px; }
+  @media (max-width: 640px) {
+    .dcol__card--hero { grid-column: span 2; grid-row: span 1; }
+    .dcol__card--hero .dcol__card-img { min-height: 250px; }
+  }
+
+  .dcol__card-img { position: relative; aspect-ratio: 3/4; overflow: hidden; }
+  .dcol__card-img img {
+    width:100%; height:100%; object-fit:cover;
+    transition: transform .6s cubic-bezier(.25,.8,.25,1);
+  }
+  .dcol__card:hover .dcol__card-img img { transform: scale(1.05); }
+
+  .dcol__card-overlay {
+    position:absolute; bottom:0; left:0; right:0;
+    padding: 36px 14px 12px;
+    background: linear-gradient(to top, rgba(0,0,0,.5), transparent);
+    opacity:0; transition: opacity .4s;
+    display:flex; align-items:flex-end; justify-content:center;
+  }
+  .dcol__card:hover .dcol__card-overlay { opacity: 1; }
+  .dcol__card-cta {
+    font-family:'Cinzel',serif; font-size:8px;
+    letter-spacing:2px; text-transform:uppercase;
+    color:#fff; background:rgba(0,0,0,.45); backdrop-filter:blur(6px);
+    padding:7px 18px; border-radius:100px;
+    border:1px solid rgba(255,255,255,.15);
+  }
+
+  /* ── Multi-badge stack ── */
+  .dcol__badges {
+    position:absolute; top:8px; left:8px; z-index:2;
+    display:flex; flex-wrap:wrap; gap:3px; max-width: calc(100% - 16px);
+    pointer-events:none;
+  }
+  .dcol__badge {
+    font-family:'Lato',sans-serif; font-size:7px; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase;
+    padding:3px 8px; border-radius:100px;
+    white-space: nowrap;
+  }
+  /* Theme colors */
+  .dcol__badge--abundancia    { background:#C9A96E; color:#0D0B08; }
+  .dcol__badge--amor          { background:#D4868A; color:#fff; }
+  .dcol__badge--proteccion    { background:#5B6E8A; color:#fff; }
+  .dcol__badge--espiritualidad{ background:#8B7BB5; color:#fff; }
+  .dcol__badge--salud         { background:#6A9E6B; color:#fff; }
+  .dcol__badge--autoestima    { background:#D4955A; color:#fff; }
+  .dcol__badge--compania      { background:#A0826D; color:#fff; }
+  .dcol__badge--salud-mental  { background:#5A9E9E; color:#fff; }
+  .dcol__badge--sombra        { background:#5C5C6E; color:#fff; }
+  .dcol__badge--abrecaminos   { background:#C4A73A; color:#0D0B08; }
+  .dcol__badge--suerte        { background:#4A8C5C; color:#fff; }
+  .dcol__badge--nuevos        { background:#6AAED6; color:#fff; }
+  .dcol__badge--sabiduria     { background:#6B5B8A; color:#fff; }
+  .dcol__badge--linaje        { background:#8A4A5A; color:#fff; }
+  .dcol__badge--estudio       { background:#4A5A7A; color:#fff; }
+  .dcol__badge--emprendedores { background:#A67C4A; color:#fff; }
+  .dcol__badge--uruguay       { background:#4A7AC4; color:#fff; }
+
+  .dcol__card-info { padding: 12px 14px 16px; }
+  .dcol__card-name {
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:16px; font-weight:600; line-height:1.25; margin:0 0 3px;
+    color: var(--text, #1a1a14);
+  }
+  .dcol__card-meta { display:flex; align-items:center; gap:6px; margin-bottom:6px; flex-wrap:wrap; }
+  .dcol__card-essence {
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:12px; font-style:italic; color:rgba(26,26,20,.35);
+  }
+  .dcol__card-element {
+    font-family:'Lato',sans-serif; font-size:9px;
+    color:rgba(26,26,20,.25); letter-spacing:.3px;
+  }
+  .dcol__card-bottom {
+    display:flex; align-items:center; justify-content:space-between; gap:6px;
+  }
+  .dcol__card-price {
+    font-family:'Lato',sans-serif; font-size:14px; font-weight:700;
+    color: var(--gold-dk, #A38640); margin:0;
+  }
+  .dcol__card-avail {
+    display:flex; align-items:center; gap:4px;
+    font-family:'Lato',sans-serif; font-size:9px; color:rgba(26,26,20,.3);
+  }
+  .dcol__dot {
+    width:5px; height:5px; border-radius:50%;
+    background:#5a9a5a; display:inline-block;
+    animation: dcol-pulse 2s ease-in-out infinite;
+  }
+  @keyframes dcol-pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+  .dcol__empty {
+    text-align:center; padding:80px 20px;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:20px; font-style:italic; color:rgba(26,26,20,.25);
+  }
+  .dcol__bottom {
+    text-align:center; padding:48px 24px 0;
+    max-width:500px; margin:0 auto;
+  }
+  .dcol__bottom-text {
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:16px; font-style:italic; color:rgba(26,26,20,.3);
+    line-height:1.6;
+  }
+</style>
+
+{%- assign theme_tags_list = 'Abundancia y Dinero,Amor y Corazón,Protección,Espiritualidad,Salud y Sanación,Autoestima y Empoderamiento,Compañía y Apoyo Emocional,Ansiedad y Salud Mental,Sombra e Integración,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje y Transgeneracional,Estudio y Concentración,Emprendedores,Identidad Uruguaya' | split: ',' -%}
+{%- assign theme_short_list = 'Abundancia,Amor,Protección,Espiritualidad,Salud,Autoestima,Compañía,Salud Mental,Sombra,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje,Estudio,Emprendedores,Uruguay' | split: ',' -%}
+{%- assign theme_css_list = 'abundancia,amor,proteccion,espiritualidad,salud,autoestima,compania,salud-mental,sombra,abrecaminos,suerte,nuevos,sabiduria,linaje,estudio,emprendedores,uruguay' | split: ',' -%}
+
+{%- assign avail_count = 0 -%}
+{%- paginate collection.products by 250 -%}
+{%- for product in collection.products -%}
+  {%- if product.available -%}
+    {%- assign avail_count = avail_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<section class="dcol">
+  <div class="dcol__head">
+    <div class="dcol__head-left">
+      <p class="dcol__head-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1 class="dcol__head-title">
+        {%- if collection.title != blank -%}{{ collection.title }}{%- else -%}{{ section.settings.title }}{%- endif -%}
+      </h1>
+    </div>
+    <div class="dcol__head-right">
+      <strong id="dcolCount">{{ avail_count }}</strong> disponibles
+    </div>
+  </div>
+
+  {%- if collection.description != blank -%}
+    <div class="dcol__desc-bar">
+      <p class="dcol__desc-text">{{ collection.description }}</p>
+    </div>
+  {%- endif -%}
+
+  <div class="dcol__filters" id="dcolFilters">
+    <button class="dcol__pill active" data-filter="all">Todos</button>
+    {%- assign seen_themes = '' -%}
+    {%- for product in collection.products -%}
+      {%- if product.available -%}
+        {%- for tt in theme_tags_list -%}
+          {%- assign clean_tt = tt | strip -%}
+          {%- if product.tags contains clean_tt -%}
+            {%- assign short = theme_short_list[forloop.index0] -%}
+            {%- unless seen_themes contains short -%}
+              <button class="dcol__pill" data-filter="{{ clean_tt | handleize }}">{{ short }}</button>
+              {%- assign seen_themes = seen_themes | append: short | append: ',' -%}
+            {%- endunless -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="dcol__grid" id="dcolGrid">
+    {%- assign card_idx = 0 -%}
+    {%- for product in collection.products -%}
+      {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+      {%- assign card_idx = card_idx | plus: 1 -%}
+
+      {%- comment -%} Collect ALL matching themes {%- endcomment -%}
+      {%- assign p_themes = '' -%}
+      {%- assign p_handles = '' -%}
+      {%- for tt in theme_tags_list -%}
+        {%- assign clean_tt = tt | strip -%}
+        {%- if product.tags contains clean_tt -%}
+          {%- assign short = theme_short_list[forloop.index0] -%}
+          {%- assign css_class = theme_css_list[forloop.index0] -%}
+          {%- if p_themes == '' -%}
+            {%- assign p_themes = short | append: '|' | append: css_class -%}
+            {%- assign p_handles = clean_tt | handleize -%}
+          {%- else -%}
+            {%- assign p_themes = p_themes | append: ',' | append: short | append: '|' | append: css_class -%}
+            {%- assign p_handles = p_handles | append: ' ' | append: clean_tt | handleize -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <a href="{{ product.url }}"
+         class="dcol__card {% if card_idx == 1 %}dcol__card--hero{% endif %}"
+         data-themes="{{ p_handles }}">
+        <div class="dcol__card-img">
+          {%- if product.featured_image -%}
+            <img src="{{ product.featured_image | image_url: width: 800 }}"
+                 alt="{{ product.title | escape }}" loading="lazy" width="400" height="533">
+          {%- endif -%}
+
+          {%- if p_themes != '' -%}
+            <div class="dcol__badges">
+              {%- assign theme_pairs = p_themes | split: ',' -%}
+              {%- for pair in theme_pairs -%}
+                {%- assign parts = pair | split: '|' -%}
+                <span class="dcol__badge dcol__badge--{{ parts[1] }}">{{ parts[0] }}</span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <div class="dcol__card-overlay">
+            <span class="dcol__card-cta">Meet this Guardian</span>
+          </div>
+        </div>
+        <div class="dcol__card-info">
+          <h3 class="dcol__card-name">{{ product.title | split: ' - ' | first }}</h3>
+          <div class="dcol__card-meta">
+            {%- if product.metafields.custom.elemento != blank -%}
+              <span class="dcol__card-element">{{ product.metafields.custom.elemento }}</span>
+            {%- endif -%}
+          </div>
+          <div class="dcol__card-bottom">
+            <p class="dcol__card-price">{{ product.price | money }}</p>
+            <span class="dcol__card-avail"><span class="dcol__dot"></span>Disponible</span>
+          </div>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- if avail_count == 0 -%}
+    <p class="dcol__empty">All Guardians in this collection have already found a home.</p>
+  {%- endif -%}
+
+  <div class="dcol__bottom">
+    <p class="dcol__bottom-text">Can't find yours? Maybe it hasn't been born yet.<br>Follow us on socials to see the new ones.</p>
+  </div>
+</section>
+{%- endpaginate -%}
+
+<script>
+(function(){
+  var btns = document.querySelectorAll('.dcol__pill');
+  var cards = document.querySelectorAll('.dcol__card');
+  var countEl = document.getElementById('dcolCount');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.filter;
+      var n = 0;
+      cards.forEach(function(c){
+        var themes = (c.dataset.themes || '').split(' ');
+        if(f === 'all' || themes.indexOf(f) !== -1){
+          c.style.display = ''; n++;
+        } else {
+          c.style.display = 'none';
+        }
+      });
+      if(countEl) countEl.textContent = n;
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes Colección Pro",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "GUARDIANES CANALIZADOS" },
+    { "type": "text", "id": "title", "label": "Título fallback", "default": "Todos los Guardianes" }
+  ]
+}
+{% endschema %}

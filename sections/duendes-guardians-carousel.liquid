@@ -1,0 +1,576 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .duendes-guardians {
+    padding: 80px 0 60px;
+    background: var(--misty, #F4F1EC);
+    position: relative;
+    overflow: hidden;
+  }
+  .duendes-guardians__title {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .duendes-guardians__title h2 {
+    font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    color: var(--text, #1a1a14);
+    margin-bottom: 10px;
+  }
+  .duendes-guardians__title p {
+    color: var(--text-light, #7a7a6e);
+    font-family: var(--serif, Georgia);
+    font-size: 15px;
+    font-style: italic;
+  }
+
+  .duendes-guardians__row-wrap {
+    overflow: hidden;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .duendes-guardians__row {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    will-change: transform;
+  }
+
+  /* -- Mobile: native horizontal scroll instead of JS animation -- */
+  @media (max-width: 768px) {
+    .duendes-guardians__row-wrap {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      touch-action: pan-x pan-y;
+      scrollbar-width: none;          /* Firefox */
+      -ms-overflow-style: none;       /* IE/Edge */
+    }
+    .duendes-guardians__row-wrap::-webkit-scrollbar {
+      display: none;                  /* Chrome/Safari */
+    }
+    .duendes-guardians__row {
+      will-change: auto;
+    }
+    .duendes-g-card {
+      scroll-snap-align: center;
+    }
+  }
+
+  .duendes-g-card {
+    width: 280px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    transition: transform .4s, box-shadow .4s, opacity .4s, filter .4s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+  }
+  .duendes-g-card:hover,
+  .duendes-g-card.is-active {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 16px 48px rgba(0,0,0,.15);
+    z-index: 3;
+  }
+  /* Dim siblings when one card is active */
+  .duendes-guardians.has-active-card .duendes-g-card:not(.is-active):not(:hover) {
+    opacity: 1;
+    filter: none;
+  }
+  /* Gold shimmer top on hover */
+  .duendes-g-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    z-index: 2;
+    background: linear-gradient(90deg, var(--gold, #C6A55A), #e8d48b, var(--gold, #C6A55A));
+    background-size: 200% 100%;
+    animation: dgCardShimmer 3s linear infinite;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .duendes-g-card:hover::before,
+  .duendes-g-card.is-active::before { opacity: 0; }
+  @keyframes dgCardShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+  .duendes-g-card__img {
+    height: 340px;
+    overflow: hidden;
+    position: relative;
+  }
+  .duendes-g-card__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .6s;
+  }
+  .duendes-g-card:hover .duendes-g-card__img img,
+  .duendes-g-card.is-active .duendes-g-card__img img { transform: none; }
+
+  /* CTA button in info area */
+  .duendes-g-card__btn {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 11px 0;
+    background: var(--black-deep, #080a06);
+    color: #fff;
+    font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .duendes-g-card__btn:hover {
+    background: #1a1c16;
+    box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  }
+  .duendes-g-card__btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+    transform: translateX(-100%);
+    animation: dgBtnShine 3s ease-in-out infinite;
+  }
+  @keyframes dgBtnShine { 0% { transform: translateX(-100%); } 40%, 100% { transform: translateX(100%); } }
+
+  .duendes-g-card__info {
+    padding: 18px 20px;
+  }
+  .duendes-g-card__info h3 {
+    font-family: var(--serif, Georgia);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text, #1a1a14);
+    margin: 0 0 4px;
+  }
+  .duendes-g-card__essence {
+    font-family: var(--serif, Georgia);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-light, #7a7a6e);
+    margin: 0 0 8px;
+  }
+  .duendes-g-card__price {
+    font-family: var(--sans, 'Lato', Helvetica, sans-serif);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold-dk, #A38640);
+    margin: 0;
+  }
+
+  /* -- Pause indicator -- */
+  .duendes-guardians__pause-hint {
+    text-align: center;
+    margin-top: 10px;
+    font-family: var(--serif, Georgia);
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-light, #7a7a6e);
+    opacity: .6;
+    transition: opacity .3s;
+  }
+  .duendes-guardians.is-paused .duendes-guardians__pause-hint { opacity: 0; }
+
+  /* -- Product type badge (fallback) -- */
+  .duendes-g-card__type-badge {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(0,0,0,0.7);
+    color: #C9A96E;
+    font-family: var(--sans, 'Lato', Helvetica, sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    z-index: 2;
+    line-height: 1.3;
+    pointer-events: none;
+  }
+  /* -- Sold out "Adopted" badge -- */
+  .duendes-g-card__sold-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #C9A96E;
+    color: #1a1a14;
+    font-family: var(--sans, 'Lato', Helvetica, sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    z-index: 2;
+    line-height: 1.3;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  /* -- Colored tag badges (matching catalog cards) -- */
+  .duendes-g-card__img .dc-badges {
+    position: absolute; bottom: 8px; left: 8px; z-index: 2;
+    display: flex; flex-wrap: wrap; gap: 3px; max-width: calc(100% - 16px);
+    pointer-events: none;
+  }
+  .duendes-g-card__img .dc-badge {
+    font-family: var(--sans, 'Lato', Helvetica, sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    pointer-events: none;
+    line-height: 1.3;
+  }
+  .dc-badge--abundancia    { background:#C9A96E; color:#0D0B08; }
+  .dc-badge--amor          { background:#D4868A; color:#fff; }
+  .dc-badge--proteccion    { background:#5B6E8A; color:#fff; }
+  .dc-badge--espiritualidad{ background:#8B7BB5; color:#fff; }
+  .dc-badge--salud         { background:#6A9E6B; color:#fff; }
+  .dc-badge--autoestima    { background:#D4955A; color:#fff; }
+  .dc-badge--compania      { background:#A0826D; color:#fff; }
+  .dc-badge--salud-mental  { background:#5A9E9E; color:#fff; }
+  .dc-badge--sombra        { background:#5C5C6E; color:#fff; }
+  .dc-badge--abrecaminos   { background:#C4A73A; color:#0D0B08; }
+  .dc-badge--suerte        { background:#4A8C5C; color:#fff; }
+  .dc-badge--nuevos        { background:#6AAED6; color:#fff; }
+  .dc-badge--sabiduria     { background:#6B5B8A; color:#fff; }
+  .dc-badge--linaje        { background:#8A4A5A; color:#fff; }
+  .dc-badge--estudio       { background:#4A5A7A; color:#fff; }
+  .dc-badge--emprendedores { background:#A67C4A; color:#fff; }
+  .dc-badge--uruguay       { background:#4A7AC4; color:#fff; }
+  .dc-badge--completo {
+    background: linear-gradient(135deg, #C9A96E, #D6BD7B); color: #0D0B08;
+    font-size: 6px; letter-spacing: .8px;
+  }
+  .dc-badge--more {
+    background: rgba(13,11,8,.6); color: #FAFAF8;
+    backdrop-filter: blur(4px);
+  }
+
+  @media (max-width: 480px) {
+    .duendes-g-card { width: 240px; }
+    .duendes-g-card__img { height: 280px; }
+    .duendes-guardians__pause-hint { display: none; }
+    .duendes-g-card__type-badge { font-size: 10px; padding: 3px 8px; }
+    .duendes-g-card__sold-badge { font-size: 10px; padding: 3px 8px; }
+    .duendes-g-card__img .dc-badge { font-size: 9px; padding: 3px 8px; }
+  }
+</style>
+
+<section class="duendes-guardians" id="duendes-guardianes">
+  <div class="duendes-guardians__title duendes-reveal">
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.subheading }}</p>
+  </div>
+
+  {%- assign collection = section.settings.collection -%}
+  {%- if collection == blank -%}
+    {%- assign collection = collections['all'] -%}
+  {%- endif -%}
+  {%- comment -%} Fix 6 (2026-05-01): productos más caros primero — los premium abren la conversación. {%- endcomment -%}
+  {%- assign products = collection.products | sort: 'price' | reverse -%}
+  {%- assign half = products.size | divided_by: 2 -%}
+  {%- if half < 1 -%}{%- assign half = 1 -%}{%- endif -%}
+
+  <!-- Row 1 -->
+  <div class="duendes-guardians__row-wrap">
+    <div class="duendes-guardians__row duendes-guardians__row--1" data-dg-row="1">
+      {% for i in (1..2) %}
+        {% for product in products limit: half %}
+          {%- liquid
+            assign theme_tags = 'Abundancia y Dinero,Amor y Corazón,Protección,Espiritualidad,Salud y Sanación,Autoestima y Empoderamiento,Compañía y Apoyo Emocional,Ansiedad y Salud Mental,Sombra e Integración,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje y Transgeneracional,Estudio y Concentración,Emprendedores,Identidad Uruguaya' | split: ','
+            assign theme_short = 'Abundancia,Amor,Protección,Espiritualidad,Salud,Autoestima,Compañía,Salud Mental,Sombra,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje,Estudio,Emprendedores,Uruguay' | split: ','
+            assign theme_css = 'abundancia,amor,proteccion,espiritualidad,salud,autoestima,compania,salud-mental,sombra,abrecaminos,suerte,nuevos,sabiduria,linaje,estudio,emprendedores,uruguay' | split: ','
+            assign is_coleccion = false
+            if product.tags contains 'Colección Completa'
+              assign is_coleccion = true
+            endif
+            assign badge_count = 0
+            assign p_badges = ''
+            unless is_coleccion
+              for tt in theme_tags
+                assign clean_tt = tt | strip
+                if product.tags contains clean_tt
+                  assign badge_count = badge_count | plus: 1
+                  assign short = theme_short[forloop.index0]
+                  assign css = theme_css[forloop.index0]
+                  if p_badges == ''
+                    assign p_badges = short | append: '|' | append: css
+                  else
+                    assign p_badges = p_badges | append: ',' | append: short | append: '|' | append: css
+                  endif
+                endif
+              endfor
+            endunless
+          -%}
+          {% if product.available %}<a href="{{ product.url }}" class="duendes-g-card">
+            <div class="duendes-g-card__img">
+              {% if product.featured_image %}
+                {{ product.featured_image | image_url: width: 560 | image_tag: loading: 'lazy' }}
+              {% endif %}
+              {%- if is_coleccion -%}
+                <div class="dc-badges">
+                  <span class="dc-badge dc-badge--completo">Protection · Abundance · Love · Spiritual</span>
+                </div>
+              {%- elsif p_badges != blank -%}
+                <div class="dc-badges">
+                  {%- assign badge_pairs = p_badges | split: ',' -%}
+                  {%- assign shown = 0 -%}
+                  {%- for pair in badge_pairs -%}
+                    {%- assign parts = pair | split: '|' -%}
+                    {%- if shown < 3 -%}
+                      <span class="dc-badge dc-badge--{{ parts[1] }}">{{ parts[0] }}</span>
+                      {%- assign shown = shown | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- assign remaining = badge_count | minus: 3 -%}
+                  {%- if remaining > 0 -%}
+                    <span class="dc-badge dc-badge--more">+{{ remaining }}</span>
+                  {%- endif -%}
+                </div>
+              {%- elsif product.type != blank -%}
+                <span class="duendes-g-card__type-badge">{{ product.type }}</span>
+              {%- endif -%}
+              {% unless product.available %}
+                <span class="duendes-g-card__sold-badge">Adopted</span>
+              {% endunless %}
+            </div>
+            <div class="duendes-g-card__info">
+              <h3>{{ product.title }}</h3>
+              <p class="duendes-g-card__essence">{{ product.metafields.custom.esencia | default: product.type }}</p>
+              <p class="duendes-g-card__price">{{ product.price | money }}</p>
+              <span class="duendes-g-card__btn">Meet this Guardian</span>
+            </div>
+          </a>{% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="duendes-guardians__row-wrap">
+    <div class="duendes-guardians__row duendes-guardians__row--2" data-dg-row="2">
+      {% for i in (1..2) %}
+        {% for product in products offset: half %}
+          {%- liquid
+            assign theme_tags = 'Abundancia y Dinero,Amor y Corazón,Protección,Espiritualidad,Salud y Sanación,Autoestima y Empoderamiento,Compañía y Apoyo Emocional,Ansiedad y Salud Mental,Sombra e Integración,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje y Transgeneracional,Estudio y Concentración,Emprendedores,Identidad Uruguaya' | split: ','
+            assign theme_short = 'Abundancia,Amor,Protección,Espiritualidad,Salud,Autoestima,Compañía,Salud Mental,Sombra,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje,Estudio,Emprendedores,Uruguay' | split: ','
+            assign theme_css = 'abundancia,amor,proteccion,espiritualidad,salud,autoestima,compania,salud-mental,sombra,abrecaminos,suerte,nuevos,sabiduria,linaje,estudio,emprendedores,uruguay' | split: ','
+            assign is_coleccion = false
+            if product.tags contains 'Colección Completa'
+              assign is_coleccion = true
+            endif
+            assign badge_count = 0
+            assign p_badges = ''
+            unless is_coleccion
+              for tt in theme_tags
+                assign clean_tt = tt | strip
+                if product.tags contains clean_tt
+                  assign badge_count = badge_count | plus: 1
+                  assign short = theme_short[forloop.index0]
+                  assign css = theme_css[forloop.index0]
+                  if p_badges == ''
+                    assign p_badges = short | append: '|' | append: css
+                  else
+                    assign p_badges = p_badges | append: ',' | append: short | append: '|' | append: css
+                  endif
+                endif
+              endfor
+            endunless
+          -%}
+          {% if product.available %}<a href="{{ product.url }}" class="duendes-g-card">
+            <div class="duendes-g-card__img">
+              {% if product.featured_image %}
+                {{ product.featured_image | image_url: width: 560 | image_tag: loading: 'lazy' }}
+              {% endif %}
+              {%- if is_coleccion -%}
+                <div class="dc-badges">
+                  <span class="dc-badge dc-badge--completo">Protection · Abundance · Love · Spiritual</span>
+                </div>
+              {%- elsif p_badges != blank -%}
+                <div class="dc-badges">
+                  {%- assign badge_pairs = p_badges | split: ',' -%}
+                  {%- assign shown = 0 -%}
+                  {%- for pair in badge_pairs -%}
+                    {%- assign parts = pair | split: '|' -%}
+                    {%- if shown < 3 -%}
+                      <span class="dc-badge dc-badge--{{ parts[1] }}">{{ parts[0] }}</span>
+                      {%- assign shown = shown | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- assign remaining = badge_count | minus: 3 -%}
+                  {%- if remaining > 0 -%}
+                    <span class="dc-badge dc-badge--more">+{{ remaining }}</span>
+                  {%- endif -%}
+                </div>
+              {%- elsif product.type != blank -%}
+                <span class="duendes-g-card__type-badge">{{ product.type }}</span>
+              {%- endif -%}
+              {% unless product.available %}
+                <span class="duendes-g-card__sold-badge">Adopted</span>
+              {% endunless %}
+            </div>
+            <div class="duendes-g-card__info">
+              <h3>{{ product.title }}</h3>
+              <p class="duendes-g-card__essence">{{ product.metafields.custom.esencia | default: product.type }}</p>
+              <p class="duendes-g-card__price">{{ product.price | money }}</p>
+              <span class="duendes-g-card__btn">Meet this Guardian</span>
+            </div>
+          </a>{% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <p class="duendes-guardians__pause-hint">Hover over a Guardian to stop the carousel</p>
+</section>
+
+<div class="duendes-gold-line"></div>
+<div class="duendes-divider">&#10022;</div>
+
+<script>
+(function(){
+  var section = document.getElementById('duendes-guardianes');
+  if(!section) return;
+
+  var rows = section.querySelectorAll('[data-dg-row]');
+  if(!rows.length) return;
+
+  /* -- Detect mobile (matches the CSS breakpoint) -- */
+  var isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+  /* -- Speed config -- */
+  var NORMAL_SPEED = 0.35;
+  var HOVER_SPEED = 0;
+
+  /* -- State per row -- */
+  var state = [];
+  rows.forEach(function(row, idx){
+    var totalW = row.scrollWidth / 2;
+    state.push({
+      el: row,
+      pos: idx === 1 ? -totalW : 0,
+      totalW: totalW,
+      dir: idx === 0 ? -1 : 1,
+      speed: NORMAL_SPEED
+    });
+  });
+
+  /* -- Active card management -- */
+  var activeCard = null;
+
+  function activateCard(card) {
+    if (activeCard === card) return;
+    clearActive();
+    activeCard = card;
+    card.classList.add('is-active');
+    section.classList.add('has-active-card');
+    section.classList.add('is-paused');
+    state.forEach(function(s){ s.speed = HOVER_SPEED; });
+  }
+
+  function clearActive() {
+    if (activeCard) {
+      activeCard.classList.remove('is-active');
+      activeCard = null;
+    }
+    section.classList.remove('has-active-card');
+    section.classList.remove('is-paused');
+    state.forEach(function(s){ s.speed = NORMAL_SPEED; });
+  }
+
+  /* -- Desktop: hover on individual cards -- */
+  var cards = section.querySelectorAll('.duendes-g-card');
+  cards.forEach(function(card){
+    card.addEventListener('mouseenter', function(){ activateCard(card); });
+    card.addEventListener('mouseleave', function(){ clearActive(); });
+  });
+
+  if (isMobile) {
+    /* -- Mobile: native CSS scroll handles swiping -- */
+    /* Remove translateX transforms so native scroll works */
+    rows.forEach(function(row){
+      row.style.transform = 'none';
+    });
+    /* No JS touch handlers needed - browser handles it */
+  } else {
+    /* -- Desktop: JS auto-scroll animation -- */
+    var lastTime = 0;
+    function tick(timestamp){
+      if(!lastTime) lastTime = timestamp;
+      var delta = timestamp - lastTime;
+      lastTime = timestamp;
+
+      if(delta > 100) delta = 16;
+
+      state.forEach(function(s){
+        if(s.speed <= 0) return;
+
+        s.pos += s.dir * s.speed * (delta / 16);
+
+        if(s.dir === -1 && s.pos <= -s.totalW) {
+          s.pos += s.totalW;
+        }
+        if(s.dir === 1 && s.pos >= 0) {
+          s.pos -= s.totalW;
+        }
+
+        s.el.style.transform = 'translateX(' + s.pos + 'px)';
+      });
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes Carrusel",
+  "tag": "section",
+  "class": "duendes-guardians-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Cada Guardián Tiene un Alma"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Deslizá para conocerlos. Cuando uno te llame, seguí tu intuición."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección de guardianes"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes Carrusel"
+    }
+  ]
+}
+{% endschema %}

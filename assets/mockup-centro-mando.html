@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centro de Mando · Mockup v2 (datos reales)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  :root {
+    --bg: #FAFAF7;
+    --bg-card: #ffffff;
+    --bg-soft: #f5f5f0;
+    --text: #1a1a1a;
+    --text-soft: #6b6b6b;
+    --text-mute: #9e9e9e;
+    --green: #0f3a2e;
+    --green-hover: #0a2a20;
+    --gold: #c9a961;
+    --border: #e8e6e0;
+    --green-status: #10a35a;
+    --yellow-status: #d4a017;
+    --red-status: #d62828;
+    --orange-status: #e8842f;
+    --gray-status: #9e9e9e;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  body {
+    background: var(--bg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .legend {
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 18px 22px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+  }
+  .legend h1 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  .legend p { color: var(--text-soft); font-size: 13px; }
+  .legend .real-badge {
+    display: inline-block;
+    background: #dcfce7;
+    color: var(--green-status);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 8px;
+    margin-right: 6px;
+  }
+  .legend .live-badge {
+    display: inline-block;
+    background: #fef3c7;
+    color: var(--orange-status);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  .switcher {
+    max-width: 1200px;
+    margin: 0 auto 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .switcher button {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-soft);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 150ms ease;
+    border-radius: 6px;
+  }
+  .switcher button:hover { background: var(--bg-soft); color: var(--text); }
+  .switcher button.on { background: var(--green); color: white; border-color: var(--green); }
+
+  .stage { max-width: 1200px; margin: 0 auto; }
+
+  .topbar {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-radius: 8px 8px 0 0;
+  }
+  .topbar .logo { font-weight: 700; font-size: 14px; letter-spacing: 0.4px; color: var(--green); }
+  .topbar .logo span { color: var(--gold); }
+  .topbar .title { flex: 1; font-weight: 600; font-size: 15px; }
+  .topbar .alerts-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff0f0;
+    color: var(--red-status);
+    font-weight: 600;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .topbar .nav-links { display: flex; gap: 14px; font-size: 13px; }
+  .topbar .nav-links a { color: var(--text-soft); text-decoration: none; padding: 6px 10px; border-radius: 4px; }
+  .topbar .nav-links a:hover { background: var(--bg-soft); }
+  .topbar .nav-links a.active { color: var(--green); font-weight: 600; }
+  .topbar .salir { background: none; border: 1px solid var(--border); padding: 6px 12px; border-radius: 4px; font-size: 12px; color: var(--text-soft); cursor: pointer; }
+
+  .state { display: none; padding: 24px; background: var(--bg); }
+  .state.on { display: block; }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; box-shadow: var(--shadow-sm); }
+  .stat-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-mute); margin-bottom: 6px; font-weight: 500; }
+  .stat-card .value { font-size: 22px; font-weight: 700; color: var(--text); }
+  .stat-card .delta { font-size: 11px; color: var(--green-status); margin-top: 2px; }
+  .stat-card .source { font-size: 9px; color: var(--text-mute); margin-top: 4px; letter-spacing: 0.3px; text-transform: uppercase; }
+
+  .action-inbox { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--orange-status); border-radius: 8px; padding: 18px 22px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+  .action-inbox h2 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+  .action-inbox .desc { font-size: 12px; color: var(--text-soft); margin-bottom: 14px; }
+  .action-list { display: flex; flex-direction: column; gap: 8px; }
+  .action-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--bg-soft); border-radius: 6px; cursor: pointer; transition: background 120ms ease; }
+  .action-item:hover { background: #efeee8; }
+  .action-item .icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; font-size: 12px; font-weight: 600; }
+  .action-item .icon.urgent { background: #fee2e2; color: var(--red-status); }
+  .action-item .icon.review { background: #fef3c7; color: var(--orange-status); }
+  .action-item .icon.form { background: #dbeafe; color: #1e40af; }
+  .action-item .icon.shipping { background: #f3e8ff; color: #7c3aed; }
+  .action-item .text { flex: 1; }
+  .action-item .text strong { font-weight: 600; font-size: 13px; }
+  .action-item .text .sub { font-size: 12px; color: var(--text-soft); }
+  .action-item .arrow { color: var(--text-mute); font-size: 16px; }
+
+  .filters { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin-bottom: 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; box-shadow: var(--shadow-sm); }
+  .search-input { flex: 1; min-width: 200px; border: 1px solid var(--border); background: var(--bg); padding: 9px 14px; border-radius: 6px; font-family: inherit; font-size: 13px; outline: none; }
+  .search-input:focus { border-color: var(--green); background: white; }
+  .filter-select { border: 1px solid var(--border); background: white; padding: 9px 12px; border-radius: 6px; font-family: inherit; font-size: 12px; color: var(--text); cursor: pointer; }
+
+  .clients-table { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm); }
+  .clients-table table { width: 100%; border-collapse: collapse; }
+  .clients-table thead th { background: var(--bg-soft); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-soft); font-weight: 600; text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+  .clients-table tbody tr { border-bottom: 1px solid var(--border); transition: background 120ms ease; cursor: pointer; }
+  .clients-table tbody tr:hover { background: var(--bg-soft); }
+  .clients-table tbody tr:last-child { border-bottom: none; }
+  .clients-table tbody td { padding: 14px 16px; font-size: 13px; vertical-align: middle; }
+  .clients-table .name { font-weight: 600; }
+  .clients-table .email { color: var(--text-soft); font-size: 12px; }
+
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.3px; }
+  .badge .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .badge.alert { background: #fee2e2; color: var(--red-status); }
+  .badge.alert .dot { background: var(--red-status); }
+  .badge.canalizing { background: #fef3c7; color: var(--orange-status); }
+  .badge.canalizing .dot { background: var(--orange-status); }
+  .badge.ok { background: #dcfce7; color: var(--green-status); }
+  .badge.ok .dot { background: var(--green-status); }
+  .badge.pending { background: #dbeafe; color: #1e40af; }
+  .badge.pending .dot { background: #1e40af; }
+  .badge.shipped { background: #f3e8ff; color: #7c3aed; }
+  .badge.shipped .dot { background: #7c3aed; }
+  .badge.muted { background: #f0f0ed; color: var(--text-mute); }
+  .badge.muted .dot { background: var(--text-mute); }
+  .badge.gift { background: #fef0f5; color: #be185d; }
+  .badge.fulfillment { background: #f3e8ff; color: #7c3aed; }
+  .badge.fulfillment .dot { background: #7c3aed; }
+
+  .ficha-back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-soft); font-size: 13px; text-decoration: none; margin-bottom: 16px; cursor: pointer; }
+  .ficha-back:hover { color: var(--text); }
+  .ficha-header { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 18px; box-shadow: var(--shadow-sm); }
+  .ficha-header h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  .ficha-header .meta { font-size: 13px; color: var(--text-soft); margin-bottom: 4px; }
+  .ficha-header .stats-mini { font-size: 12px; color: var(--text-mute); margin-bottom: 14px; }
+  .ficha-header .ext-links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .ficha-header .ext-link { border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 12px; color: var(--text-soft); text-decoration: none; background: white; }
+  .ficha-header .ext-link:hover { border-color: var(--green); color: var(--green); }
+
+  .timeline-vis { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 22px 24px; margin-bottom: 18px; box-shadow: var(--shadow-sm); }
+  .timeline-vis h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-soft); margin-bottom: 18px; font-weight: 600; }
+  .timeline-track { position: relative; padding-bottom: 8px; }
+  .timeline-line { position: absolute; top: 11px; left: 14px; right: 14px; height: 2px; background: var(--border); z-index: 1; }
+  .timeline-line .progress { position: absolute; top: 0; left: 0; height: 100%; background: var(--green-status); width: 35%; }
+  .timeline-steps { display: flex; justify-content: space-between; position: relative; z-index: 2; }
+  .ts { flex: 0 0 auto; width: 70px; text-align: center; }
+  .ts .ts-dot { width: 24px; height: 24px; border-radius: 50%; margin: 0 auto 6px; border: 2px solid var(--border); background: white; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--text-mute); font-weight: 600; }
+  .ts.done .ts-dot { background: var(--green-status); border-color: var(--green-status); color: white; }
+  .ts.now .ts-dot { background: white; border: 3px solid var(--green); color: var(--green); }
+  .ts .ts-label { font-size: 10px; color: var(--text-mute); font-weight: 500; }
+  .ts.now .ts-label { color: var(--green); font-weight: 600; }
+  .ts .ts-date { font-size: 9px; color: var(--text-mute); margin-top: 1px; }
+
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 22px 24px; margin-bottom: 18px; box-shadow: var(--shadow-sm); }
+  .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .section .section-desc { font-size: 12px; color: var(--text-soft); margin-bottom: 18px; }
+
+  .guardian-card { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 8px; padding: 18px 22px; margin-bottom: 12px; }
+  .guardian-card .gc-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+  .guardian-card .gc-name { font-size: 17px; font-weight: 600; }
+  .guardian-card .gc-name .var-label { font-size: 11px; font-weight: 500; color: var(--text-mute); margin-left: 6px; }
+  .guardian-card .gc-meta { font-size: 12px; color: var(--text-mute); margin-bottom: 12px; }
+  .guardian-card .gc-data { display: grid; grid-template-columns: 140px 1fr; gap: 6px 14px; font-size: 12px; margin: 12px 0; }
+  .guardian-card .gc-data .label { color: var(--text-mute); font-weight: 500; }
+  .guardian-card .gc-data .value { color: var(--text); }
+  .guardian-card .gc-soul { background: white; border: 1px solid var(--gold); border-radius: 6px; padding: 14px 16px; margin: 14px 0; }
+  .guardian-card .gc-soul .label-soul { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--gold); font-weight: 600; margin-bottom: 6px; }
+  .guardian-card .gc-soul .name-soul { font-size: 16px; font-weight: 600; }
+  .guardian-card .gc-soul .meaning-soul { font-size: 12px; color: var(--text-soft); font-style: italic; margin-top: 2px; }
+  .guardian-card .gc-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+  /* ====== EMAIL JOURNEY · cards en lugar de tabla, mucho más claro ====== */
+  .email-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    transition: all 150ms ease;
+  }
+  .email-card.has-action { border-left: 3px solid var(--orange-status); }
+  .email-card.alert { border-left: 3px solid var(--red-status); background: #fef9f9; }
+  .email-card.coming { background: #fafafa; opacity: 0.85; }
+  .email-card .ec-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .email-card .ec-num {
+    background: var(--bg-soft);
+    color: var(--text-mute);
+    font-weight: 700;
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex: 0 0 auto;
+  }
+  .email-card .ec-title-block { flex: 1; min-width: 200px; }
+  .email-card .ec-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .email-card .ec-source {
+    font-size: 11px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .email-card .ec-explain {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+    font-size: 12.5px;
+  }
+  .email-card .ec-explain > div {
+    background: var(--bg-soft);
+    border-radius: 6px;
+    padding: 10px 14px;
+  }
+  .email-card .ec-explain .label-mini {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-mute);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .email-card .ec-explain .text-mini { color: var(--text); line-height: 1.45; }
+  .email-card .ec-fail-action {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-top: 12px;
+    font-size: 12.5px;
+  }
+  .email-card .ec-fail-action .label-fail {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #c2410c;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .email-card .ec-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    margin-top: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .email-card .ec-status-row .when {
+    font-size: 11px;
+    color: var(--text-mute);
+  }
+
+  .legend-status { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; margin-top: 14px; font-size: 12px; color: var(--text-soft); }
+  .legend-status strong { color: var(--text); display: block; margin-bottom: 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .legend-status ul { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 14px; }
+  .legend-status li { display: flex; gap: 6px; align-items: center; }
+
+  .btn { display: inline-flex; align-items: center; gap: 6px; border: none; padding: 10px 18px; border-radius: 6px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 150ms ease; text-decoration: none; }
+  .btn-primary { background: var(--green); color: white; }
+  .btn-primary:hover { background: var(--green-hover); }
+  .btn-secondary { background: white; color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover { background: var(--bg-soft); border-color: var(--text-mute); }
+  .btn-mini { padding: 6px 12px; font-size: 12px; }
+  .btn-warning { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+  .btn-warning:hover { background: #ffedd5; }
+
+  .alert-banner { background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid var(--red-status); border-radius: 8px; padding: 18px 22px; margin-bottom: 18px; }
+  .alert-banner h3 { color: var(--red-status); font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .alert-banner p { font-size: 13px; color: #7f1d1d; margin-bottom: 12px; }
+  .alert-banner .actions { display: flex; gap: 8px; }
+
+  .gift-banner { background: #fef0f5; border: 1px solid #fbcfe8; border-radius: 8px; padding: 16px 20px; margin-bottom: 18px; font-size: 13px; }
+  .gift-banner h3 { color: #be185d; font-weight: 700; margin-bottom: 4px; font-size: 14px; }
+  .gift-banner p { color: #831843; margin: 4px 0; }
+  .gift-banner a { color: #be185d; font-weight: 600; }
+
+  .actions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .action-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; cursor: pointer; transition: all 150ms ease; }
+  .action-card:hover { border-color: var(--green); box-shadow: var(--shadow-md); }
+  .action-card .ac-title { font-weight: 600; font-size: 13px; margin-bottom: 3px; color: var(--green); }
+  .action-card .ac-desc { font-size: 11px; color: var(--text-soft); line-height: 1.4; }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 768px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .clients-table thead { display: none; }
+    .clients-table tbody tr { display: block; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+    .clients-table tbody td { display: block; padding: 4px 0; }
+    .clients-table tbody td:before { content: attr(data-label) ":"; font-size: 10px; text-transform: uppercase; color: var(--text-mute); letter-spacing: 0.5px; display: block; margin-bottom: 2px; }
+    .actions-grid { grid-template-columns: 1fr; }
+    .stage { padding: 0; }
+    .ficha-header h1 { font-size: 20px; }
+    .timeline-steps { gap: 4px; }
+    .ts { width: auto; flex: 1; }
+    .ts .ts-label { font-size: 9px; }
+    .topbar { flex-wrap: wrap; gap: 10px; }
+    .topbar .nav-links { order: 3; width: 100%; }
+    .guardian-card .gc-data { grid-template-columns: 1fr; }
+    .email-card .ec-explain { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="legend">
+  <h1>Centro de Mando del Cliente · Mockup v2 (con datos REALES de tu Shopify)</h1>
+  <p>Esto sigue siendo solo VISUAL — cuando Code lo construya en Hydrogen, los datos se cargan en vivo en cada visita. Ahora sí los números de stats vienen de tu Shopify real (al 03/05/2026 14:55 UYU) y la lista de clientes son los reales tuyos.</p>
+  <span class="real-badge">✓ DATOS REALES Shopify</span>
+  <span class="live-badge">⚠ Mockup visual · No interactivo todavía</span>
+</div>
+
+<div class="switcher">
+  <button class="on" data-state="lista">LISTA · Inbox + Clientes reales</button>
+  <button data-state="ficha">FICHA · Diana Marquez (real)</button>
+  <button data-state="ficha-regalo">FICHA · Caso regalo (ejemplo)</button>
+</div>
+
+<div class="stage">
+
+  <div class="topbar">
+    <div class="logo">DUENDES <span>·</span> CENTRO DE MANDO</div>
+    <div class="title"></div>
+    <div class="alerts-badge">🚨 0 alertas</div>
+    <div class="nav-links">
+      <a href="#" class="active">Clientes</a>
+      <a href="#">Alertas</a>
+      <a href="#">Cómo funciona cada email</a>
+    </div>
+    <button class="salir">Salir</button>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ESTADO 1: LISTA con datos REALES                             -->
+  <!-- ============================================================ -->
+  <div class="state on" data-show="lista">
+
+    <div class="stats-row" style="grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;">
+      <div class="stat-card" style="background: #f0fdf4; border-color: #86efac;">
+        <div class="label" style="color: var(--green);">📍 En tu radar ahora</div>
+        <div class="value" style="color: var(--green); font-size: 26px;">14 personas</div>
+        <div class="delta">16 guardianes en proceso</div>
+        <div class="source">compraron · journey activo · sin recibir todavía</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Listos para despacho</div>
+        <div class="value">16</div>
+        <div class="source">paid · sin DHL todavía</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Compradores únicos</div>
+        <div class="value">18</div>
+        <div class="source">históricos · pagaron 1+ vez</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Revenue 30 días</div>
+        <div class="value">$4.978</div>
+        <div class="source">USD · SHOPIFY</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Revenue 7 días</div>
+        <div class="value">$720</div>
+        <div class="source">USD</div>
+      </div>
+    </div>
+
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin-bottom: 16px; font-size: 11.5px; color: var(--text-soft); line-height: 1.5;">
+      <strong style="color: var(--text);">Definiciones (para que no haya dudas):</strong> &nbsp; <em style="color: var(--green);">📍 En tu radar</em> = personas que pagaron y todavía no recibieron su guardián (es lo que tenés que cuidar). &nbsp; <em>Compradores únicos</em> = personas distintas que pagaron al menos una vez en la historia de la tienda. &nbsp; <em>Listos despacho</em> = orders pagadas en Shopify sin marcar como Fulfilled. &nbsp; (Audiencia total Klaviyo/Shopify = 170, no la mostramos acá porque mezcla compradores con suscriptores e importados de Wix legacy.)
+    </div>
+
+    <div class="action-inbox">
+      <h2>Necesitan tu acción ahora</h2>
+      <p class="desc">Lo que está esperando algo de vos hoy. Click en cualquiera para ir directo a su ficha.</p>
+      <div class="action-list">
+        <div class="action-item">
+          <div class="icon shipping">📦</div>
+          <div class="text">
+            <strong>16 guardianes pagados sin despachar</strong>
+            <div class="sub">Verificá cuáles ya tienen canalización Día 7 completa para enviar por DHL</div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+        <div class="action-item">
+          <div class="icon review">⏱</div>
+          <div class="text">
+            <strong>Diana Marquez · Estelar (#1026)</strong>
+            <div class="sub">Form llenado · Falta tu canalización + aprobación · 03/05/2026</div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+        <div class="action-item">
+          <div class="icon review">⏱</div>
+          <div class="text">
+            <strong>5 canalizaciones pendientes de tu mano</strong>
+            <div class="sub">Lamia (#1006), Alma (#1009), Andrea (#1012), Blanca (#1013), Diana Marquez (#1018) · forms ya completados</div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+        <div class="action-item">
+          <div class="icon form">✎</div>
+          <div class="text">
+            <strong>6 clientes sin llenar form (Form Reminder enviado hoy)</strong>
+            <div class="sub">Esther, Riola, Yoselin, Ernesto, Maria, Diana Segura · esperando que respondan</div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <input class="search-input" placeholder="🔍 Buscar por nombre, email, número de orden, guardián, soul name..." />
+      <select class="filter-select">
+        <option>Todos los estados</option>
+        <option>Pending form (compró, no llenó)</option>
+        <option>Canalizando (vos haciendo)</option>
+        <option>Pending review (esperando aprobación)</option>
+        <option>En goteo (Día N de 7)</option>
+        <option>Día 7 completo (listo envío)</option>
+        <option>Enviado DHL</option>
+      </select>
+      <select class="filter-select">
+        <option>Todos los tipos</option>
+        <option>🎁 Regalo dado</option>
+        <option>🎁 Regalo recibido</option>
+        <option>Compra propia</option>
+      </select>
+      <select class="filter-select">
+        <option>Ordenar: última compra ↓</option>
+        <option>Por nombre A-Z</option>
+        <option>Por revenue ↓</option>
+      </select>
+    </div>
+
+    <div class="clients-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Última compra</th>
+            <th>Guardián</th>
+            <th>Estado</th>
+            <th>Tipo</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Cliente">
+              <div class="name">Diana Marquez</div>
+              <div class="email">dianamarquezr38@gmail.com</div>
+            </td>
+            <td data-label="Última compra">03/05/2026 · #1026</td>
+            <td data-label="Guardián">Estelar (Mini)</td>
+            <td data-label="Estado"><span class="badge canalizing"><span class="dot"></span>Form llenado · falta canalizar</span></td>
+            <td data-label="Tipo">Compra propia · 2da compra</td>
+            <td><button class="btn btn-secondary btn-mini">Ver ficha</button></td>
+          </tr>
+          <tr>
+            <td data-label="Cliente">
+              <div class="name">Diana Marquez</div>
+              <div class="email">dianamarquezr38@gmail.com</div>
+            </td>
+            <td data-label="Última compra">24/04/2026 · #1018</td>
+            <td data-label="Guardián">Daphne Pixie + Trévor</td>
+            <td data-label="Estado"><span class="badge fulfillment"><span class="dot"></span>Canalizado · listo envío</span></td>
+            <td data-label="Tipo">Compra propia</td>
+            <td><button class="btn btn-secondary btn-mini">Ver ficha</button></td>
+          </tr>
+          <tr>
+            <td data-label="Cliente">
+              <div class="name">Gennie Murillo</div>
+              <div class="email">genniepmurillo@gmail.com</div>
+            </td>
+            <td data-label="Última compra">29/04/2026 · #1023</td>
+            <td data-label="Guardián">$114.62 USD</td>
+            <td data-label="Estado"><span class="badge pending"><span class="dot"></span>Verificar form</span></td>
+            <td data-label="Tipo">Compra propia</td>
+            <td><button class="btn btn-secondary btn-mini">Ver ficha</button></td>
+          </tr>
+          <tr>
+            <td data-label="Cliente">
+              <div class="name">Ramiro Duque Madama</div>
+              <div class="email">ramiroduque2011@gmail.com</div>
+            </td>
+            <td data-label="Última compra">28/04/2026 · #1022</td>
+            <td data-label="Guardián">$71.06 USD</td>
+            <td data-label="Estado"><span class="badge pending"><span class="dot"></span>Verificar form</span></td>
+            <td data-label="Tipo">Compra propia</td>
+            <td><button class="btn btn-secondary btn-mini">Ver ficha</button></td>
+          </tr>
+          <tr>
+            <td data-label="Cliente">
+              <div class="name">Diana Segura</div>
+              <div class="email">dianasegura.men@gmail.com</div>
+            </td>
+            <td data-label="Última compra">24/04/2026 · #1020</td>
+            <td data-label="Guardián">Yrvin (Mini)</td>
+            <td data-label="Estado"><span class="badge pending"><span class="dot"></span>Verificar form</span></td>
+            <td data-label="Tipo">Compra propia</td>
+            <td><button class="btn btn-secondary btn-mini">Ver ficha</button></td>
+          </tr>
+          <tr>
+            <td data-label="Cliente">
+              <div class="name">Maria Silva Lopez</div>
+              <div class="email">silva1964ma@mail.com</div>
+            </td>
+            <td data-label="Última compra">23/04/2026 · #1017</td>
+            <td data-label="Guardián">Trévor</td>
+            <td data-label="Estado"><span class="badge pending"><span class="dot"></span>Verificar form</span></td>
+            <td data-label="Tipo">Compra propia</td>
+            <td><button class="btn btn-secondary btn-mini">Ver ficha</button></td>
+          </tr>
+          <tr>
+            <td data-label="Cliente">
+              <div class="name">Thibisay Brylka</div>
+              <div class="email">info@duendesdeluruguay.com</div>
+            </td>
+            <td data-label="Última compra">02/05/2026 · #1024-#1025</td>
+            <td data-label="Guardián">Astrid + Cash (TEST E2E)</td>
+            <td data-label="Estado"><span class="badge muted"><span class="dot"></span>TEST · ignorar</span></td>
+            <td data-label="Tipo">Cuenta propia</td>
+            <td><button class="btn btn-secondary btn-mini">Ver ficha</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="text-align: center; padding: 20px; color: var(--text-mute); font-size: 12px;">+ 17 órdenes anteriores ordenadas por fecha (paginación)</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ESTADO 2: FICHA Diana Marquez (datos reales de Shopify)      -->
+  <!-- ============================================================ -->
+  <div class="state" data-show="ficha">
+
+    <a class="ficha-back">← Volver al listado</a>
+
+    <div class="ficha-header">
+      <h1>Diana Marquez</h1>
+      <div class="meta">dianamarquezr38@gmail.com</div>
+      <div class="stats-mini">3 compras · Total $623.57 USD · Cliente desde 18/04/2026 · Repeat customer (compró 3 veces, ninguna despachada todavía)</div>
+      <div class="ext-links">
+        <a href="#" class="ext-link">Abrir en Klaviyo ↗</a>
+        <a href="#" class="ext-link">Abrir en Shopify ↗</a>
+        <a href="#" class="ext-link">📧 Notificarme cambios de este cliente</a>
+        <a href="#" class="ext-link">📄 Exportar ficha PDF</a>
+      </div>
+    </div>
+
+    <!-- RESUMEN HUMANO con datos VERIFICADOS de Shopify Admin API -->
+    <div style="background: white; border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: 8px; padding: 22px 26px; margin-bottom: 18px; box-shadow: var(--shadow-sm);">
+      <h2 style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">📍 Qué le pasó a Diana, en una mirada</h2>
+      <p style="font-size: 11px; color: var(--text-mute); margin-bottom: 14px;">Datos verificados contra Shopify Admin API · 03/05/2026 14:55 UYU</p>
+      <div style="font-size: 14px; line-height: 1.7; color: var(--text);">
+
+        <p style="margin-bottom: 14px;"><strong>Diana compró 3 veces</strong> con el mismo email <code style="background: var(--bg-soft); padding: 1px 5px; border-radius: 3px; font-size: 12px;">dianamarquezr38@gmail.com</code>. <strong>Las 3 figuran "paid/unfulfilled" en Shopify</strong> — pagó pero todavía no recibió ninguno de sus 4 guardianes físicamente.</p>
+
+        <p style="margin-bottom: 14px; padding: 12px 16px; background: #fef3c7; border-radius: 6px; color: #78350f;">
+          <strong>⚡ Compra más reciente · 03/05/2026 13:20 UYU · Orden #1026 · $114.45</strong><br>
+          Producto: <strong>Estelar (Mini)</strong>.<br>
+          Status canalización: <strong>verificar en D1</strong> (probablemente form todavía no llenado al momento de este mockup).<br>
+          Despacho: pendiente.
+        </p>
+
+        <p style="margin-bottom: 14px; padding: 12px 16px; background: #f3e8ff; border-radius: 6px; color: #5b21b6;">
+          <strong>📋 Compra del 24/04/2026 · Orden #1018 · $264.56</strong><br>
+          Productos: <strong>Daphne Pixie + Trévor (Mini)</strong> (2 guardianes en una sola compra).<br>
+          Status canalización: <strong>form llenado</strong> según `GOTEO-IA-ESTADO` (channeling id 31 en cola pendiente de tu canalización).<br>
+          Despacho: pendiente desde hace <strong>9 días</strong>.
+        </p>
+
+        <p style="margin-bottom: 14px; padding: 12px 16px; background: #dcfce7; border-radius: 6px; color: #14532d;">
+          <strong>📋 Compra del 18/04/2026 · Orden #1011 · $244.56</strong><br>
+          Producto: <strong>Sara (Mediano)</strong>.<br>
+          Status canalización: <strong>verificar en D1</strong> (no aparece en lista de pendientes ni de tests recientes).<br>
+          Despacho: pendiente desde hace <strong>15 días</strong>.
+        </p>
+
+        <p style="font-size: 13px; color: var(--text-soft); margin-top: 14px; border-top: 1px solid var(--border); padding-top: 12px;">
+          <strong style="color: var(--text);">Resumen para hoy:</strong> Diana ya gastó $623.57 USD en 3 compras y todavía no recibió ningún guardián físico. <strong>Es prioridad alta</strong>: cuando Code construya el Centro de Mando, esta ficha va a tirar (a) status real de las 3 canalizaciones desde D1 y (b) si los soul names existen para alguna. Hoy con la data disponible: hay que <strong>verificar status canalización de #1011 Sara y #1026 Estelar</strong> + <strong>despachar las 3 órdenes</strong> + <strong>canalizar Daphne+Trévor #1018 que tiene form llenado hace 9 días</strong>.
+        </p>
+
+        <p style="font-size: 12px; color: var(--text-mute); margin-top: 10px;">
+          Soul names: el sistema todavía no consultó la tabla <code style="background: var(--bg-soft); padding: 1px 4px; border-radius: 3px;">soul_names</code> del D1 para Diana. Cuando esté hecho el Centro de Mando real, se mostrarán acá si existen — y si no existen aún (porque ninguna canalización llegó a Día 7), va a decir "(se reveal Día 7)".
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline-vis">
+      <h3>Recorrido de Estelar (#1026 · más reciente)</h3>
+      <div class="timeline-track">
+        <div class="timeline-line"><div class="progress" style="width: 22%;"></div></div>
+        <div class="timeline-steps">
+          <div class="ts done"><div class="ts-dot">✓</div><div class="ts-label">Compra</div><div class="ts-date">03/05</div></div>
+          <div class="ts done"><div class="ts-dot">✓</div><div class="ts-label">Form</div><div class="ts-date">03/05</div></div>
+          <div class="ts now"><div class="ts-dot">●</div><div class="ts-label">Canalizando</div><div class="ts-date">hoy</div></div>
+          <div class="ts"><div class="ts-dot">4</div><div class="ts-label">Aprobada</div><div class="ts-date">~04/05</div></div>
+          <div class="ts"><div class="ts-dot">5</div><div class="ts-label">Día 1-7</div><div class="ts-date">~04-10/05</div></div>
+          <div class="ts"><div class="ts-dot">6</div><div class="ts-label">Día 7 ✦</div><div class="ts-date">~10/05</div></div>
+          <div class="ts"><div class="ts-dot">7</div><div class="ts-label">DHL</div><div class="ts-date">~15/05</div></div>
+          <div class="ts"><div class="ts-dot">8</div><div class="ts-label">Llegada</div><div class="ts-date">~22/05</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Sus 3 guardianes (4 figuras: Sara + Daphne + Trévor + Estelar)</h2>
+      <p class="section-desc">Datos de Shopify Admin API. Status de canalización requiere lookup en D1 — acá marco lo que sé verificado y lo que está pendiente de chequear.</p>
+
+      <!-- ESTELAR (#1026) -->
+      <div class="guardian-card">
+        <div class="gc-head">
+          <div class="gc-name">Estelar <span class="var-label">Mini · $114.45</span></div>
+          <span class="badge canalizing"><span class="dot"></span>Verificar canalización en D1</span>
+        </div>
+        <div class="gc-meta">Orden #1026 · 03/05/2026 13:20 UYU · paid · sin despachar</div>
+
+        <div style="background: white; border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; margin: 12px 0; font-size: 12.5px; color: var(--text-soft);">
+          <strong style="color: var(--text); font-size: 13px;">Status verificable hoy:</strong><br>
+          ✓ Compra confirmada en Shopify (paid)<br>
+          ⚠ Form del Encuentro: <strong>verificar en D1</strong> (al momento de este mockup no se chequeó)<br>
+          ⚠ Soul names: <strong>no se consultó D1</strong> · si Día 7 ya pasó van a aparecer acá<br>
+          ⚠ Canalización IA generada o approvada: <strong>verificar</strong>
+        </div>
+
+        <div class="gc-actions">
+          <button class="btn btn-secondary btn-mini">🔍 Verificar status canalización</button>
+          <button class="btn btn-secondary btn-mini">✎ Ir al editor de canalización</button>
+        </div>
+      </div>
+
+      <!-- DAPHNE+TRÉVOR (#1018) -->
+      <div class="guardian-card">
+        <div class="gc-head">
+          <div class="gc-name">Daphne Pixie + Trévor <span class="var-label">Pixie + Mini · $264.56</span></div>
+          <span class="badge canalizing"><span class="dot"></span>Form llenado · pendiente canalización</span>
+        </div>
+        <div class="gc-meta">Orden #1018 · 24/04/2026 · paid · sin despachar (9 días)</div>
+
+        <div style="background: white; border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; margin: 12px 0; font-size: 12.5px; color: var(--text-soft);">
+          <strong style="color: var(--text); font-size: 13px;">Status según GOTEO-IA-ESTADO sección 10:</strong><br>
+          ✓ Form del Encuentro <strong>llenado</strong> (canalización id 31 en cola)<br>
+          ⚠ Falta tu canalización + aprobación<br>
+          ⚠ Soul names: aún no generados (faltan Día 7 + lookup D1)
+        </div>
+
+        <div class="gc-actions">
+          <button class="btn btn-primary btn-mini">✎ Canalizar Daphne+Trévor</button>
+          <button class="btn btn-secondary btn-mini">👁 Ver respuestas del form</button>
+        </div>
+      </div>
+
+      <!-- SARA (#1011) -->
+      <div class="guardian-card">
+        <div class="gc-head">
+          <div class="gc-name">Sara <span class="var-label">Mediano · $244.56</span></div>
+          <span class="badge muted"><span class="dot"></span>Verificar status en D1</span>
+        </div>
+        <div class="gc-meta">Orden #1011 · 18/04/2026 · paid · sin despachar (15 días)</div>
+
+        <div style="background: white; border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; margin: 12px 0; font-size: 12.5px; color: var(--text-soft);">
+          <strong style="color: var(--text); font-size: 13px;">Status verificable hoy:</strong><br>
+          ✓ Compra confirmada en Shopify (paid)<br>
+          ⚠ NO aparece en lista de pendientes del GOTEO-IA-ESTADO ni en tests recientes<br>
+          ⚠ Status canalización: <strong>requiere lookup D1 directo</strong> (puede estar canalizada hace tiempo, o pendiente, o caso especial)<br>
+          🚨 <strong>15 días sin despachar es bandera amarilla</strong> — verificar y resolver
+        </div>
+
+        <div class="gc-actions">
+          <button class="btn btn-secondary btn-mini">🔍 Verificar status canalización</button>
+          <button class="btn btn-secondary btn-mini">📦 Marcar enviado DHL (si ya canalizada)</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Emails que recibió o tiene que recibir</h2>
+      <p class="section-desc">Cada email del proceso, qué es, cuándo le llega, por qué importa, y qué hacer si no le llegó.</p>
+
+      <p style="font-size: 12px; color: var(--text-soft); margin-bottom: 14px;">Mostrando los emails de la compra más reciente: <strong>Estelar (#1026 · 03/05/2026)</strong>. <a href="#" style="color: var(--green);">→ Ver journey de Daphne+Trévor</a> · <a href="#" style="color: var(--green);">→ Ver journey de Yrvin</a></p>
+
+      <!-- EMAIL 1 -->
+      <div class="email-card">
+        <div class="ec-head">
+          <span class="ec-num">1</span>
+          <div class="ec-title-block">
+            <div class="ec-title">Confirmación de compra de Estelar</div>
+            <div class="ec-source">SHOPIFY · automático</div>
+          </div>
+          <span class="badge ok"><span class="dot"></span>✓ Le llegó y lo abrió</span>
+        </div>
+        <div style="background: #dcfce7; border-radius: 6px; padding: 12px 14px; margin: 10px 0; font-size: 13px; color: #14532d; line-height: 1.5;">
+          <strong>Qué pasó:</strong> Le llegó a Diana inmediatamente al pagar (03/05 13:20). Abrió el email a las 13:21 (1 minuto después). Vio el resumen de su compra de Estelar y el aviso "En las próximas horas te llega tu Encuentro".
+        </div>
+        <div class="ec-explain">
+          <div>
+            <div class="label-mini">¿Qué es este email?</div>
+            <div class="text-mini">Email estándar Shopify confirmando que la compra entró. Tiene un aviso resaltado en dorado: "✦ En las próximas horas te llega un email aparte con tu Encuentro de Reconocimiento. Si no lo ves en 6 horas, tocá este botón [No me llegó]".</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Si no le hubiera llegado?</div>
+            <div class="text-mini">Es Shopify nativo, casi nunca falla. Si pasara, problema de Shopify support (no nuestro). En este caso le llegó OK.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMAIL 2 -->
+      <div class="email-card">
+        <div class="ec-head">
+          <span class="ec-num">2</span>
+          <div class="ec-title-block">
+            <div class="ec-title">El portal se abrió (Mi Magia)</div>
+            <div class="ec-source">KLAVIYO · integración Shopify nativa</div>
+          </div>
+          <span class="badge ok"><span class="dot"></span>✓ Le llegó y lo abrió</span>
+        </div>
+        <div style="background: #dcfce7; border-radius: 6px; padding: 12px 14px; margin: 10px 0; font-size: 13px; color: #14532d; line-height: 1.5;">
+          <strong>Qué pasó:</strong> A los 2 minutos de haber pagado (03/05 13:22), Diana recibió este email. Lo abrió 13 minutos después (13:35). Probablemente clickeó el botón "Entrar a Mi Magia" y exploró el portal mientras estaba todavía caliente con la compra.
+        </div>
+        <div class="ec-explain">
+          <div>
+            <div class="label-mini">¿Qué es este email?</div>
+            <div class="text-mini">Email cinematográfico de Klaviyo avisando que Mi Magia ya está listo para que lo explore. La invitación al espacio íntimo donde va a vivir todo de su guardián.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Si no le hubiera llegado?</div>
+            <div class="text-mini">Click el botón "✦ Reenviar invitación + tutorial Mi Magia" abajo. En este caso llegó OK.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMAIL 3 -->
+      <div class="email-card has-action">
+        <div class="ec-head">
+          <span class="ec-num">3</span>
+          <div class="ec-title-block">
+            <div class="ec-title">Encuentro Recibido · Los Elegidos</div>
+            <div class="ec-source">KLAVIYO · flow XbBkAj · template RK8bPD</div>
+          </div>
+          <span class="badge canalizing"><span class="dot"></span>⚠ Le llegó pero NO LO ABRIÓ</span>
+        </div>
+        <div style="background: #fef3c7; border-radius: 6px; padding: 12px 14px; margin: 10px 0; font-size: 13px; color: #78350f; line-height: 1.5;">
+          <strong>Qué pasó:</strong> Diana llenó el formulario del Encuentro a las 13:42. Klaviyo le mandó este email cinematográfico inmediatamente. <strong>El email llegó a su casilla (delivered confirmado), pero hace 1 hora 13 minutos que NO LO ABRE.</strong> Puede estar en spam, ocupada, o lo abrió en otro dispositivo que Klaviyo no trackea.
+        </div>
+        <div class="ec-explain">
+          <div>
+            <div class="label-mini">¿Qué dice este email?</div>
+            <div class="text-mini">Storytelling Los Elegidos completo + 4 pasos del proceso (canalización 24-48h, "nos corremos", ritual 7 días, viaje DHL). Firma Thibisay & Gabriel. Cita el guardián que adoptó (Estelar).</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Qué hacer ahora?</div>
+            <div class="text-mini">Esperá 24h primero — puede que lo abra cuando vuelva al teléfono. Si sigue sin abrir y vos canalizaste Estelar, mandale un WhatsApp informal: "Diana, te canalizamos Estelar, te llegó el email de bienvenida?" También podés tap "↻ Reenviar" abajo.</div>
+          </div>
+        </div>
+        <div class="ec-status-row">
+          <div class="when">Enviado: 03/05 13:42 · Entregado: 13:42 · Abierto: nunca</div>
+          <button class="btn btn-warning btn-mini">↻ Reenviar manualmente</button>
+        </div>
+      </div>
+
+      <!-- EMAIL 4 -->
+      <div class="email-card">
+        <div class="ec-head">
+          <span class="ec-num">4</span>
+          <div class="ec-title-block">
+            <div class="ec-title">Recordatorio del Encuentro</div>
+            <div class="ec-source">KLAVIYO · flow WEVgQ3</div>
+          </div>
+          <span class="badge muted"><span class="dot"></span>No aplica (ya llenó form)</span>
+        </div>
+        <div class="ec-explain">
+          <div>
+            <div class="label-mini">¿Qué es?</div>
+            <div class="text-mini">Recordatorio gentil para los que compraron pero NO llenaron el formulario después de 24h. "Estelar te está esperando, son 9 preguntas, 4 minutos."</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Cuándo le llega?</div>
+            <div class="text-mini">24 horas después de la compra SI no llenó el form.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Por qué importa?</div>
+            <div class="text-mini">Rescata clientes que se olvidaron del form. Sin form, no se puede empezar el proceso.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Si no le llega?</div>
+            <div class="text-mini">En este caso Diana ya llenó el form, entonces correctamente NO se manda. Si fuera caso real (otro cliente sin form), tap "↻ Disparar manual".</div>
+          </div>
+        </div>
+        <div class="ec-status-row">
+          <div class="when">No aplica</div>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- EMAIL 5-11: Días 1-6 (resumido en una card) -->
+      <div class="email-card coming">
+        <div class="ec-head">
+          <span class="ec-num">5-11</span>
+          <div class="ec-title-block">
+            <div class="ec-title">Días 1 a 6 del Goteo IA</div>
+            <div class="ec-source">KLAVIYO · flow USzqVF · template QTZ8hU</div>
+          </div>
+          <span class="badge muted"><span class="dot"></span>Por venir (después de aprobar)</span>
+        </div>
+        <div class="ec-explain">
+          <div>
+            <div class="label-mini">¿Qué son?</div>
+            <div class="text-mini">6 emails diferentes, uno por día, generados por IA con la voz Duendes pura. Día 1 "El círculo se cerró" · Día 2 "Algo se acomoda" · Día 3 "El primer gesto" · Día 4 "El propósito apareció" · Día 5 "La conversación" · Día 6 "El umbral del cierre".</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Cuándo le llegan?</div>
+            <div class="text-mini">Día 1 = el día que vos aprobás la canalización. Después uno por día consecutivo, automático.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Por qué importan?</div>
+            <div class="text-mini">Es la entrega cinematográfica del ritual de 7 días. Cada email tiene contenido único basado en el freeText real del cliente. Construyen anticipación al Día 7.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Si no le llega uno?</div>
+            <div class="text-mini">Cada día tiene su botón "↻ Disparar Día N manual" en su propia fila al desplegar este bloque.</div>
+          </div>
+        </div>
+        <div class="ec-status-row">
+          <div class="when">Arrancan cuando apruebes la canalización de Estelar</div>
+          <button class="btn btn-secondary btn-mini">📋 Ver detalle de cada día →</button>
+        </div>
+      </div>
+
+      <!-- EMAIL 12: Día 7 (destacado) -->
+      <div class="email-card coming" style="border-left: 3px solid var(--gold);">
+        <div class="ec-head">
+          <span class="ec-num" style="background: #fef3c7; color: var(--gold);">12</span>
+          <div class="ec-title-block">
+            <div class="ec-title">Día 7 · LA REVELACIÓN ✦</div>
+            <div class="ec-source">KLAVIYO · flow USzqVF · día 7 (mismo que arriba)</div>
+          </div>
+          <span class="badge muted"><span class="dot"></span>Por venir (Día 7)</span>
+        </div>
+        <div class="ec-explain">
+          <div>
+            <div class="label-mini">¿Qué es?</div>
+            <div class="text-mini">Email culminante. Reveal completo: nombre álmico de Diana + nombre álmico de Estelar + propósitos compartidos + canalización entera. Cierre: "Yo me corro acá. Ustedes dos hablan directo, sin intermediarios. Estelar viaja hacia vos el viernes próximo."</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Cuándo le llega?</div>
+            <div class="text-mini">Día 7 después de tu aprobación.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Por qué importa?</div>
+            <div class="text-mini">Es el momento emocional culminante del journey. El reason-to-buy + el reason-to-share. Acá la marca cumple su promesa.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Si no le llega?</div>
+            <div class="text-mini">CRÍTICO. Reenviar manual + chequear que story_text esté completo en D1.</div>
+          </div>
+        </div>
+        <div class="ec-status-row">
+          <div class="when">~10/05/2026 (estimado)</div>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- EMAIL 13 -->
+      <div class="email-card coming">
+        <div class="ec-head">
+          <span class="ec-num">13</span>
+          <div class="ec-title-block">
+            <div class="ec-title">Confirmación de envío DHL</div>
+            <div class="ec-source">SHOPIFY · automático al despachar</div>
+          </div>
+          <span class="badge muted"><span class="dot"></span>Por venir (cuando despaches)</span>
+        </div>
+        <div class="ec-explain">
+          <div>
+            <div class="label-mini">¿Qué es?</div>
+            <div class="text-mini">Email Shopify estándar con número de tracking DHL + datos del envío.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Cuándo le llega?</div>
+            <div class="text-mini">Cuando vos clickeás "Enviar pedido" en Shopify y cargás el tracking.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Por qué importa?</div>
+            <div class="text-mini">Cliente puede trackear su guardián en tránsito.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Si no le llega?</div>
+            <div class="text-mini">Verificar fulfillment en Shopify. Si está fulfilled pero sin email, contactar Shopify support.</div>
+          </div>
+        </div>
+        <div class="ec-status-row">
+          <div class="when">Pendiente de despacho</div>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- EMAIL 14 -->
+      <div class="email-card coming">
+        <div class="ec-head">
+          <span class="ec-num">14</span>
+          <div class="ec-title-block">
+            <div class="ec-title">Post-envío · "¿Llegó?"</div>
+            <div class="ec-source">KLAVIYO · flow TEvTzy</div>
+          </div>
+          <span class="badge muted"><span class="dot"></span>Por venir (3 días post envío)</span>
+        </div>
+        <div class="ec-explain">
+          <div>
+            <div class="label-mini">¿Qué es?</div>
+            <div class="text-mini">Pregunta abierta: "¿Tu guardián llegó? Contanos cómo lo sentís en mano." Voz Duendes íntima.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Cuándo le llega?</div>
+            <div class="text-mini">3 días después de que Shopify marca como "Fulfilled".</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Por qué importa?</div>
+            <div class="text-mini">Capturar testimonios + abrir conversación post-llegada (input para NPS, social proof).</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Si no le llega?</div>
+            <div class="text-mini">Tap "↻ Reenviar". Útil cuando vos sabés que ya llegó pero el cliente no respondió aún.</div>
+          </div>
+        </div>
+        <div class="ec-status-row">
+          <div class="when">~25/05/2026 (3 días después de despacho)</div>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- EMAIL 15 -->
+      <div class="email-card coming">
+        <div class="ec-head">
+          <span class="ec-num">15</span>
+          <div class="ec-title-block">
+            <div class="ec-title">Aniversario de adopción</div>
+            <div class="ec-source">KLAVIYO · flow QSTFMH</div>
+          </div>
+          <span class="badge muted"><span class="dot"></span>Por venir (1 año)</span>
+        </div>
+        <div class="ec-explain">
+          <div>
+            <div class="label-mini">¿Qué es?</div>
+            <div class="text-mini">"Hace un año Estelar te eligió. ¿Cómo siguen?"</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Cuándo le llega?</div>
+            <div class="text-mini">365 días exactos después de la compra.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Por qué importa?</div>
+            <div class="text-mini">Re-engagement + posible segunda compra. Mantiene conexión a largo plazo.</div>
+          </div>
+          <div>
+            <div class="label-mini">¿Si no le llega?</div>
+            <div class="text-mini">Verificar que el cliente sigue activo en Klaviyo (no unsubscribed).</div>
+          </div>
+        </div>
+        <div class="ec-status-row">
+          <div class="when">~03/05/2027</div>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="legend-status">
+        <strong>Cómo leer los estados</strong>
+        <ul>
+          <li><span class="badge ok"><span class="dot"></span>Abierto</span> El cliente lo abrió (Klaviyo trackea)</li>
+          <li><span class="badge canalizing"><span class="dot"></span>Entregado</span> Llegó pero no lo abrió (puede estar en spam)</li>
+          <li><span class="badge alert"><span class="dot"></span>No entregado</span> Bounce o falló — REVISAR</li>
+          <li><span class="badge muted"><span class="dot"></span>Por venir</span> Todavía no es momento de mandarlo</li>
+          <li><span class="badge muted"><span class="dot"></span>No aplica</span> Este email no corresponde a este cliente</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Acciones rápidas</h2>
+      <p class="section-desc">Botones que solucionan los problemas más comunes en un click.</p>
+      <div class="actions-grid">
+        <div class="action-card">
+          <div class="ac-title">✦ Reenviar email del Encuentro</div>
+          <div class="ac-desc">Manda de nuevo el "Encuentro Recibido · Los Elegidos" con el link al form.</div>
+        </div>
+        <div class="action-card">
+          <div class="ac-title">✦ Reenviar invitación + tutorial Mi Magia</div>
+          <div class="ac-desc">Email aparte explicando qué es Mi Magia, cómo entrar, qué encuentra adentro.</div>
+        </div>
+        <div class="action-card">
+          <div class="ac-title">✓ Aprobar canalización de Estelar</div>
+          <div class="ac-desc">Marca como published, dispara IA generation de los 7 emails, arranca el cron diario.</div>
+        </div>
+        <div class="action-card">
+          <div class="ac-title">📦 Marcar Daphne+Trévor como enviado</div>
+          <div class="ac-desc">Cargar tracking DHL de la orden #1018 (lleva 9 días sin despachar).</div>
+        </div>
+        <div class="action-card">
+          <div class="ac-title">📄 Exportar ficha como PDF</div>
+          <div class="ac-desc">Toda la info del cliente en un PDF para tu archivo personal o Gabriel.</div>
+        </div>
+        <div class="action-card">
+          <div class="ac-title">📧 Notificarme cualquier evento de Diana</div>
+          <div class="ac-desc">Suscribís alertas a tu email cuando algo cambie en este cliente.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ESTADO 3: FICHA con regalo (caso ejemplo, no real)          -->
+  <!-- ============================================================ -->
+  <div class="state" data-show="ficha-regalo">
+
+    <a class="ficha-back">← Volver al listado</a>
+
+    <div class="legend" style="margin: 0 0 18px; padding: 12px 18px;">
+      <p style="font-size: 12px; color: var(--text-soft);">⚠ Este caso es un EJEMPLO de cómo se vería un cliente que recibió un guardián como regalo. Hoy todavía no hay clientes reales con esta condición en tu Shopify (los gift_known se detectan por metafield).</p>
+    </div>
+
+    <div class="alert-banner">
+      <h3>🚨 ALERTA SIN RESOLVER</h3>
+      <p>El destinatario reportó "no me llegó el email del Encuentro" desde el botón de la confirmación de compra. Reportado: 03/05/2026 14:32 UYU.</p>
+      <div class="actions">
+        <button class="btn btn-primary btn-mini">✦ Reenviar Encuentro ahora</button>
+        <button class="btn btn-secondary btn-mini">✓ Marcar como resuelta</button>
+      </div>
+    </div>
+
+    <div class="ficha-header">
+      <h1>Pedro Pérez (ejemplo)</h1>
+      <div class="meta">pedro@... · destinatario de regalo</div>
+      <div class="stats-mini">No tiene compras propias · 1 guardián recibido como regalo de Carla</div>
+    </div>
+
+    <div class="gift-banner">
+      <h3>🎁 Esta es una compra de regalo</h3>
+      <p><strong>Comprador:</strong> Carla X (ejemplo) · <a href="#">Ver ficha de la compradora →</a></p>
+      <p><strong>Destinatario:</strong> Pedro Pérez · esta ficha</p>
+      <p><strong>¿Quién llenó el Encuentro?</strong> Pedro (destinatario) · 27/04/2026 14:30</p>
+      <p><strong>Datos solicitados al destinatario:</strong> nombre completo + fecha de nacimiento (necesarios para el soul name del Día 7).</p>
+    </div>
+
+    <div class="section">
+      <h2>Su guardián</h2>
+      <div class="guardian-card">
+        <div class="gc-head">
+          <div class="gc-name">Aurora <span class="var-label">Pixie</span></div>
+          <span class="badge ok"><span class="dot"></span>Día 5 de 7</span>
+        </div>
+        <div class="gc-data">
+          <div class="label">Capa 1</div><div class="value">Sanación / Apertura</div>
+          <div class="label">Arquetipo</div><div class="value">Vida cotidiana / Foco</div>
+          <div class="label">Texto libre</div><div class="value">"hace tiempo que siento que algo me pide quietud..."</div>
+          <div class="label">Nombre completo</div><div class="value">Pedro Marcelo Pérez Souza</div>
+          <div class="label">Fecha nacimiento</div><div class="value">07/11/1979</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Acciones rápidas</h2>
+      <div class="actions-grid">
+        <div class="action-card">
+          <div class="ac-title">✦ Reenviar Encuentro al destinatario</div>
+          <div class="ac-desc">Resuelve la alerta. Manda email a Pedro directamente.</div>
+        </div>
+        <div class="action-card">
+          <div class="ac-title">✉ Notificar a Carla (compradora)</div>
+          <div class="ac-desc">Mandar update al comprador del estado del regalo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.switcher button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.switcher button').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const target = btn.dataset.state;
+      document.querySelectorAll('.state').forEach(s => {
+        s.classList.toggle('on', s.dataset.show === target);
+      });
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>

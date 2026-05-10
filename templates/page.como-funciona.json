@@ -1,0 +1,129 @@
+{
+  "sections": {
+    "main": {
+      "type": "duendes-como-funciona",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "El Encuentro",
+            "description": "Take the Guardian Test or browse the shop. Browse, look, feel. Something stops you on one — maybe it's its gaze, its name, its essence. That pause is no coincidence.",
+            "image": "shopify://shop_images/1569.jpg"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Your Story",
+            "description": "When you adopt, you share your current situation and your intentions. That information is the foundation for the personalized channeling — it's not a generic form.",
+            "image": "shopify://shop_images/1656.jpg"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "La Channeling",
+            "description": "Thibisay reads your story and connects with your Guardian. She receives specific messages for you and writes a personal letter — not a generic text.",
+            "image": "shopify://shop_images/690.jpg"
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "The Preparation",
+            "description": "Your Guardian is prepared with a smudging ritual, crystals, and the intention to protect every step of the journey. It's packaged with protective materials.",
+            "image": "shopify://shop_images/1653.jpg"
+          }
+        },
+        "s5": {
+          "type": "step",
+          "settings": {
+            "title": "El Viaje",
+            "description": "DHL Express worldwide (5-10 business days) and DAC within Uruguay (5-7 days). You receive tracking to follow every step.",
+            "image": "shopify://shop_images/1329.jpg"
+          }
+        },
+        "s6": {
+          "type": "step",
+          "settings": {
+            "title": "El Verdadero Encuentro",
+            "description": "You open the package, read your channeled letter, and perform the activation ritual to seal the connection. Many say this is the moment when everything changes.",
+            "image": "shopify://shop_images/1373.jpg"
+          }
+        },
+        "i1": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Handcrafted Guardian",
+            "description": "One-of-a-kind in the world."
+          }
+        },
+        "i2": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Channeled letter",
+            "description": "Personal message written exclusively for you after the channeling."
+          }
+        },
+        "i3": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Activation Ritual",
+            "description": "Step-by-step guide to seal the energetic connection."
+          }
+        },
+        "i4": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Portal Mi Magia",
+            "description": "Lifetime access to the digital portal with guides and exclusive content."
+          }
+        },
+        "i5": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Certificado",
+            "description": "Certificado de originalidad y autenticidad firmado."
+          }
+        },
+        "i6": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Packaging protector",
+            "description": "Packaging designed for your Guardian to travel safely."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "s6",
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6"
+      ],
+      "settings": {
+        "eyebrow": "EL PROCESO",
+        "title": "How It Works",
+        "subtitle": "From the first encounter to the real energetic connection. Six steps that change everything.",
+        "hero_image": "shopify://shop_images/2312.jpg",
+        "cta_text": "Ready to find your Guardian?"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

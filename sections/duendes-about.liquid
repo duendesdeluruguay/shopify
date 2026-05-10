@@ -1,0 +1,440 @@
+<style>
+/* Duendes About V2 — Clean, Minimal, Premium */
+*,*::before,*::after{box-sizing:border-box}
+
+.da2{--bg-light:#FAFAF7;--bg-dark:#0d0f09;--text-dark:#1a1a14;--text-light:#FAFAF7;--text-muted-dark:rgba(26,26,20,.45);--text-muted-light:rgba(250,250,247,.5);--serif:'Cormorant Garamond',serif;--pad:clamp(48px,6vw,80px);--max-w:1080px}
+
+/* Reveal animation */
+.da2-reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.da2-reveal.is-visible{opacity:1;transform:translateY(0)}
+
+/* Shared */
+.da2-section{padding:var(--pad) 24px}
+.da2-inner{max-width:var(--max-w);margin:0 auto}
+.da2-eyebrow{font-family:var(--serif);font-size:12px;letter-spacing:2.5px;text-transform:uppercase;opacity:.5}
+.da2-heading{font-family:var(--serif);font-weight:300;font-size:clamp(28px,4vw,48px);margin:12px 0 0;line-height:1.2}
+.da2-separator{display:block;text-align:center;font-size:14px;opacity:.25;padding:0;margin:0;line-height:1}
+
+/* 1. Hero — dark */
+.da2-hero{background:var(--bg-dark);padding:clamp(72px,10vw,140px) 24px;text-align:center}
+.da2-hero .da2-eyebrow{color:var(--text-muted-light)}
+.da2-hero-tagline{font-family:var(--serif);font-size:clamp(30px,5vw,60px);font-weight:300;font-style:italic;color:var(--text-light);margin:20px auto 0;max-width:800px;line-height:1.25}
+.da2-hero-sub{font-family:var(--serif);font-size:clamp(16px,2vw,20px);font-weight:300;color:var(--text-muted-light);margin:24px auto 0;max-width:600px;line-height:1.7}
+
+/* Hero with image */
+.da2-hero-img-wrap{position:relative;width:100%;max-height:60vh;overflow:hidden}
+.da2-hero-img-wrap img{width:100%;height:60vh;object-fit:cover;display:block}
+.da2-hero-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,15,9,.2),rgba(13,15,9,.7));display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+
+/* 2. Timeline — light */
+.da2-timeline{background:var(--bg-light)}
+.da2-timeline-header{text-align:center;margin-bottom:clamp(32px,4vw,56px)}
+.da2-timeline-header .da2-eyebrow{color:var(--text-muted-dark)}
+.da2-timeline-header .da2-heading{color:var(--text-dark)}
+.da2-tl-list{list-style:none;padding:0;margin:0;max-width:680px;margin-left:auto;margin-right:auto}
+.da2-tl-entry{padding:24px 0;border-bottom:1px solid rgba(26,26,20,.08)}
+.da2-tl-entry:last-child{border-bottom:none}
+.da2-tl-year{font-family:var(--serif);font-size:clamp(22px,3vw,32px);font-weight:600;color:var(--text-dark);margin:0 0 6px;line-height:1}
+.da2-tl-text{font-family:var(--serif);font-size:clamp(15px,1.8vw,17px);font-weight:300;color:var(--text-dark);opacity:.65;line-height:1.7;margin:0}
+.da2-tl-img{margin-top:16px;border-radius:6px;overflow:hidden;max-width:480px}
+.da2-tl-img img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.da2-tl-placeholder{font-family:var(--serif);font-size:13px;font-style:italic;color:var(--text-muted-dark);padding:32px;background:rgba(26,26,20,.03);border-radius:6px;text-align:center}
+
+/* 3. Founders — dark */
+.da2-founders{background:var(--bg-dark)}
+.da2-founders-header{text-align:center;margin-bottom:clamp(32px,4vw,48px)}
+.da2-founders-header .da2-eyebrow{color:var(--text-muted-light)}
+.da2-founders-header .da2-heading{color:var(--text-light)}
+.da2-founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);max-width:var(--max-w);margin:0 auto}
+.da2-founder{display:grid;grid-template-columns:1fr;gap:0}
+.da2-founder-photo{aspect-ratio:3/4;overflow:hidden;border-radius:4px}
+.da2-founder-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.da2-founder-photo-placeholder{width:100%;height:100%;min-height:280px;display:flex;align-items:center;justify-content:center;background:rgba(250,250,247,.04);font-family:var(--serif);font-style:italic;font-size:13px;color:var(--text-muted-light);border-radius:4px}
+.da2-founder-info{padding-top:20px}
+.da2-founder-name{font-family:var(--serif);font-size:clamp(20px,2.5vw,28px);font-weight:400;color:var(--text-light);margin:0 0 4px}
+.da2-founder-role{font-family:var(--serif);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted-light);margin:0 0 16px}
+.da2-founder-desc{font-family:var(--serif);font-size:15px;font-weight:300;line-height:1.7;color:var(--text-light);opacity:.7;margin:0 0 16px}
+.da2-founder-quote{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;color:var(--text-light);opacity:.55;line-height:1.6;margin:0;padding:0;border:none}
+
+/* 4. Magic — light */
+.da2-magic{background:var(--bg-light);text-align:center}
+.da2-magic .da2-eyebrow{color:var(--text-muted-dark)}
+.da2-magic .da2-heading{color:var(--text-dark)}
+.da2-magic-story{font-family:var(--serif);font-size:clamp(16px,2vw,20px);font-weight:300;font-style:italic;line-height:1.8;color:var(--text-dark);opacity:.7;max-width:700px;margin:28px auto 0}
+.da2-magic-img{margin:36px auto 0;max-width:800px;border-radius:4px;overflow:hidden}
+.da2-magic-img img{width:100%;display:block}
+
+/* 5. Manifesto — dark */
+.da2-manifesto{background:var(--bg-dark)}
+.da2-manifesto-header{text-align:center;margin-bottom:clamp(24px,3vw,40px)}
+.da2-manifesto-header .da2-eyebrow{color:var(--text-muted-light)}
+.da2-manifesto-header .da2-heading{color:var(--text-light)}
+.da2-manifesto-list{list-style:none;padding:0;margin:0;max-width:640px;margin-left:auto;margin-right:auto}
+.da2-manifesto-item{font-family:var(--serif);font-size:clamp(17px,2.2vw,22px);font-weight:300;font-style:italic;color:var(--text-light);opacity:.75;padding:18px 0;border-bottom:1px solid rgba(250,250,247,.08)}
+.da2-manifesto-item:last-child{border-bottom:none}
+
+/* 6. Stats — light */
+.da2-stats{background:var(--bg-light)}
+.da2-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:var(--max-w);margin:0 auto;text-align:center}
+.da2-stat-num{font-family:var(--serif);font-size:clamp(32px,4.5vw,52px);font-weight:300;color:var(--text-dark);line-height:1}
+.da2-stat-label{font-family:var(--serif);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted-dark);margin-top:8px}
+
+/* 7. CTA — dark */
+.da2-cta{background:var(--bg-dark);text-align:center}
+.da2-cta-text{font-family:var(--serif);font-size:clamp(17px,2.2vw,22px);font-weight:300;font-style:italic;color:var(--text-light);opacity:.7;line-height:1.6;margin:0 0 32px;max-width:600px;margin-left:auto;margin-right:auto}
+.da2-cta-btn{display:inline-block;font-family:var(--serif);font-size:15px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light);border:1px solid rgba(250,250,247,.3);padding:14px 36px;text-decoration:none;transition:background .3s,color .3s}
+.da2-cta-btn:hover{background:var(--text-light);color:var(--bg-dark)}
+
+/* Mobile */
+@media(max-width:768px){
+  .da2-founders-grid{grid-template-columns:1fr}
+  .da2-stats-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+
+<div class="da2">
+
+  {%- comment -%}=== 1. HERO ==={%- endcomment -%}
+  {%- if section.settings.hero_image -%}
+    <div class="da2-hero-img-wrap">
+      <img src="{{ section.settings.hero_image | image_url: width: 1800 }}" alt="{{ section.settings.tagline }}" loading="eager">
+      <div class="da2-hero-img-overlay">
+        <span class="da2-eyebrow" style="color:var(--text-muted-light)">{{ section.settings.eyebrow }}</span>
+        <h1 class="da2-hero-tagline">{{ section.settings.tagline }}</h1>
+      </div>
+    </div>
+  {%- else -%}
+    <section class="da2-hero da2-reveal">
+      <span class="da2-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1 class="da2-hero-tagline">{{ section.settings.tagline }}</h1>
+      <p class="da2-hero-sub">{{ section.settings.hook_question }}</p>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%}=== Hook (if hero image present, show hook below) ==={%- endcomment -%}
+  {%- if section.settings.hero_image -%}
+    <section class="da2-section" style="background:var(--bg-dark);text-align:center">
+      <div class="da2-inner da2-reveal">
+        <p style="font-family:var(--serif);font-size:clamp(18px,2.5vw,24px);font-weight:300;font-style:italic;color:var(--text-light);line-height:1.6;margin:0 0 16px;max-width:700px;margin-left:auto;margin-right:auto">{{ section.settings.hook_question }}</p>
+        <p style="font-family:var(--serif);font-size:clamp(14px,1.6vw,17px);font-weight:300;color:var(--text-muted-light);line-height:1.8;margin:0;max-width:600px;margin-left:auto;margin-right:auto">{{ section.settings.hook_answer }}</p>
+      </div>
+    </section>
+  {%- else -%}
+    <section class="da2-section" style="background:var(--bg-dark);text-align:center;padding-top:0">
+      <div class="da2-inner da2-reveal">
+        <p style="font-family:var(--serif);font-size:clamp(14px,1.6vw,17px);font-weight:300;color:var(--text-muted-light);line-height:1.8;margin:0;max-width:600px;margin-left:auto;margin-right:auto">{{ section.settings.hook_answer }}</p>
+      </div>
+    </section>
+  {%- endif -%}
+
+  <div class="da2-separator" style="background:var(--bg-light);padding:2px 0;color:var(--text-dark)">&#10022;</div>
+
+  {%- comment -%}=== 2. TIMELINE ==={%- endcomment -%}
+  <section class="da2-section da2-timeline">
+    <div class="da2-inner">
+      <div class="da2-timeline-header">
+        <span class="da2-eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 class="da2-heading">Our Journey</h2>
+      </div>
+      <ul class="da2-tl-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'timeline_item' -%}
+            <li class="da2-tl-entry da2-reveal" {{ block.shopify_attributes }}>
+              <div class="da2-tl-year">{{ block.settings.year }}</div>
+              <p class="da2-tl-text">{{ block.settings.text }}</p>
+              {%- if block.settings.image -%}
+                <div class="da2-tl-img">
+                  <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.year }}" loading="lazy">
+                </div>
+              {%- endif -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+
+  <div class="da2-separator" style="background:var(--bg-dark);padding:2px 0;color:var(--text-light)">&#10022;</div>
+
+  {%- comment -%}=== 3. FOUNDERS ==={%- endcomment -%}
+  <section class="da2-section da2-founders">
+    <div class="da2-inner">
+      <div class="da2-founders-header">
+        <span class="da2-eyebrow">WHO WE ARE</span>
+        <h2 class="da2-heading">The Channelers</h2>
+      </div>
+      <div class="da2-founders-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'founder' -%}
+            <div class="da2-founder da2-reveal" {{ block.shopify_attributes }}>
+              <div class="da2-founder-photo">
+                {%- if block.settings.photo -%}
+                  <img src="{{ block.settings.photo | image_url: width: 800 }}" alt="{{ block.settings.name }}" loading="lazy">
+                {%- else -%}
+                  <div class="da2-founder-photo-placeholder">Foto de {{ block.settings.name }}</div>
+                {%- endif -%}
+              </div>
+              <div class="da2-founder-info">
+                <h3 class="da2-founder-name">{{ block.settings.name }}</h3>
+                <p class="da2-founder-role">{{ block.settings.role }}</p>
+                <p class="da2-founder-desc">{{ block.settings.description }}</p>
+                <blockquote class="da2-founder-quote">"{{ block.settings.quote }}"</blockquote>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <div class="da2-separator" style="background:var(--bg-light);padding:2px 0;color:var(--text-dark)">&#10022;</div>
+
+  {%- comment -%}=== 4. MAGIC ==={%- endcomment -%}
+  <section class="da2-section da2-magic">
+    <div class="da2-inner da2-reveal">
+      <span class="da2-eyebrow">{{ section.settings.magic_eyebrow }}</span>
+      <h2 class="da2-heading">{{ section.settings.magic_title }}</h2>
+      <div class="da2-magic-story">{{ section.settings.magic_story }}</div>
+      {%- if section.settings.magic_image -%}
+        <div class="da2-magic-img">
+          <img src="{{ section.settings.magic_image | image_url: width: 1200 }}" alt="{{ section.settings.magic_title }}" loading="lazy">
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  <div class="da2-separator" style="background:var(--bg-dark);padding:2px 0;color:var(--text-light)">&#10022;</div>
+
+  {%- comment -%}=== 5. MANIFESTO ==={%- endcomment -%}
+  <section class="da2-section da2-manifesto">
+    <div class="da2-inner">
+      <div class="da2-manifesto-header">
+        <span class="da2-eyebrow">MANIFIESTO</span>
+        <h2 class="da2-heading">What we believe</h2>
+      </div>
+      <ul class="da2-manifesto-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'manifesto_item' -%}
+            <li class="da2-manifesto-item da2-reveal" {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+
+  <div class="da2-separator" style="background:var(--bg-light);padding:2px 0;color:var(--text-dark)">&#10022;</div>
+
+  {%- comment -%}=== 6. STATS ==={%- endcomment -%}
+  <section class="da2-section da2-stats" style="background:var(--bg-light)">
+    <div class="da2-stats-grid">
+      <div class="da2-reveal">
+        <div class="da2-stat-num">15.000+</div>
+        <div class="da2-stat-label">Guardianes adoptados</div>
+      </div>
+      <div class="da2-reveal">
+        <div class="da2-stat-num">45+</div>
+        <div class="da2-stat-label">Countries</div>
+      </div>
+      <div class="da2-reveal">
+        <div class="da2-stat-num">10+</div>
+        <div class="da2-stat-label">Years channeling</div>
+      </div>
+      <div class="da2-reveal">
+        <div class="da2-stat-num">100%</div>
+        <div class="da2-stat-label">Artesanal</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="da2-separator" style="background:var(--bg-dark);padding:2px 0;color:var(--text-light)">&#10022;</div>
+
+  {%- comment -%}=== 7. CTA ==={%- endcomment -%}
+  <section class="da2-section da2-cta">
+    <div class="da2-inner da2-reveal">
+      <p class="da2-cta-text">{{ section.settings.cta_text }}</p>
+      <a href="/collections/todos-los-guardianes" class="da2-cta-btn">Find your Guardian</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.da2-reveal');
+  if(!els.length)return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('is-visible');obs.unobserve(e.target)}
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el,i){el.style.transitionDelay=(i%5)*60+'ms';obs.observe(el)});
+})();
+</script>
+
+{%- comment -%} Fix 7 (2026-05-01) — CTA al final de Nuestra Historia {%- endcomment -%}
+<section class="duendes-historia-cta">
+  <div class="duendes-historia-cta__inner">
+    <p class="duendes-historia-cta__text">If you've made it this far, there's one waiting for you.</p>
+    <a href="/pages/test-del-guardian" class="duendes-btn-gold duendes-historia-cta__btn">
+      DESCUBRÍ CUÁL TE BUSCA
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes Nosotros",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Etiqueta",
+      "default": "DESDE 2015 CANALIZANDO MAGIA"
+    },
+    {
+      "type": "textarea",
+      "id": "hook_question",
+      "label": "Pregunta inicial",
+      "default": "¿Alguna vez sentiste que la vida te está hablando... pero no sabés en qué idioma?"
+    },
+    {
+      "type": "textarea",
+      "id": "hook_answer",
+      "label": "Respuesta inicial",
+      "default": "Nos pasó. Durante años. Hasta que un día las manos de Gabriel empezaron a moldear algo que ni él entendía. Y Thibisay empezó a recibir mensajes que no podía ignorar."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagen hero principal"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline hero",
+      "default": "No los creamos. Los canalizamos."
+    },
+    {
+      "type": "text",
+      "id": "magic_eyebrow",
+      "label": "Etiqueta sección magia",
+      "default": "LO QUE NOS MUEVE"
+    },
+    {
+      "type": "text",
+      "id": "magic_title",
+      "label": "Título sección magia",
+      "default": "¿Por Qué Creemos en la Magia?"
+    },
+    {
+      "type": "textarea",
+      "id": "magic_story",
+      "label": "Historia de la magia",
+      "default": "Nuestros mellizos fueron diagnosticados dentro del espectro autista. Los médicos nos prepararon para lo peor. Hoy, contra todo pronóstico, están completamente recuperados. No tenemos explicación científica. Solo tenemos gratitud y la certeza de que hay fuerzas que no podemos ver pero sí sentir."
+    },
+    {
+      "type": "image_picker",
+      "id": "magic_image",
+      "label": "Imagen sección magia"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "Texto CTA final",
+      "default": "Recordá: cada pieza es única. Cuando se va, no vuelve."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "timeline_item",
+      "name": "Momento del camino",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Año",
+          "default": "2015"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Descripción",
+          "default": "Todo empezó en una mesa de la cocina, en Piriápolis."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Foto"
+        }
+      ]
+    },
+    {
+      "type": "founder",
+      "name": "Fundador/a",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Foto"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nombre",
+          "default": "Gabriel"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Rol",
+          "default": "Escultor · Canalizador"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Esculpe en estado de meditación profunda. Dice que las manos van solas."
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Cita",
+          "default": "Yo no sé lo que hago. Solo obedezco."
+        }
+      ]
+    },
+    {
+      "type": "manifesto_item",
+      "name": "Frase del manifiesto",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Frase",
+          "default": "Creemos que lo hecho a mano es un acto de revolución."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes Nosotros",
+      "blocks": [
+        {"type": "timeline_item", "settings": {"year": "2015", "text": "Todo empezó en una mesa de la cocina, en Piriápolis. Lejos de todo. Sin plan. Sin moldes. Sin saber lo que estábamos haciendo. 100% autodidactas."}},
+        {"type": "timeline_item", "settings": {"year": "2017", "text": "Nos dimos cuenta de que no estábamos haciendo figuras. Las estábamos canalizando. Cada pieza empezó a tener nombre, historia y propósito propio."}},
+        {"type": "timeline_item", "settings": {"year": "2020", "text": "La prueba de fuego: una pandemia mundial. Mientras todos frenaban, nosotros nos encerramos a crear. Fue el año que todo cambió."}},
+        {"type": "timeline_item", "settings": {"year": "2022", "text": "Los primeros envíos internacionales. DHL. Un duende nuestro llegando a Madrid, a Nueva York, a Tokio. Desde la misma mesa de Piriápolis."}},
+        {"type": "timeline_item", "settings": {"year": "2025", "text": "Más de 15.000 guardianes adoptados. 45+ países. Y la misma mesa de Piriápolis donde todo comenzó."}},
+        {"type": "founder", "settings": {"name": "Gabriel", "role": "Escultor · Canalizador", "description": "Esculpe en estado de meditación profunda. Dice que las manos van solas. Que él solo obedece.", "quote": "Yo no creo lo que hago. Solo obedezco."}},
+        {"type": "founder", "settings": {"name": "Thibisay", "role": "Canalizadora · Consagración · Marca", "description": "Canaliza, consagra y transforma la energía en palabras. Cada carta que escribe llega exactamente donde tiene que llegar.", "quote": "Cada carta que escribo llega exactamente donde tiene que llegar."}},
+        {"type": "manifesto_item", "settings": {"text": "Creemos que lo hecho a mano es un acto de revolución."}},
+        {"type": "manifesto_item", "settings": {"text": "Creemos que Piriápolis es un portal."}},
+        {"type": "manifesto_item", "settings": {"text": "Creemos que cada pieza elige a su persona."}},
+        {"type": "manifesto_item", "settings": {"text": "Creemos que la magia es medicina."}},
+        {"type": "manifesto_item", "settings": {"text": "Creemos en lo que no se puede explicar."}}
+      ]
+    }
+  ]
+}
+{% endschema %}
+

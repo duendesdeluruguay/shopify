@@ -1,0 +1,426 @@
+<style>
+  .cf2-section {
+    padding: clamp(48px, 6vw, 80px) 24px;
+  }
+  .cf2-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* Typography */
+  .cf2-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+  .cf2-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    margin: 12px 0 0;
+    line-height: 1.2;
+  }
+
+  /* Reveal */
+  .cf2-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .cf2-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === HERO === */
+  .cf2-hero {
+    background: #0d0f09;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cf2-hero-img {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .cf2-hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+  .cf2-hero-inner {
+    position: relative;
+    z-index: 1;
+  }
+  .cf2-hero .cf2-eyebrow {
+    color: rgba(250, 250, 247, 0.5);
+  }
+  .cf2-hero .cf2-heading {
+    color: #FAFAF7;
+    font-size: clamp(32px, 5vw, 56px);
+  }
+  .cf2-hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: rgba(250, 250, 247, 0.55);
+    max-width: 560px;
+    margin: 16px auto 0;
+    line-height: 1.7;
+  }
+
+  /* === STEPS === */
+  .cf2-steps {
+    background: #FAFAF7;
+  }
+  .cf2-step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 64px;
+  }
+  .cf2-step:last-child {
+    margin-bottom: 0;
+  }
+  .cf2-step--reverse .cf2-step-visual {
+    order: 2;
+  }
+  .cf2-step--reverse .cf2-step-body {
+    order: 1;
+  }
+  .cf2-step-visual {
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+  .cf2-step-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .cf2-step-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f0efe9;
+    gap: 6px;
+  }
+  .cf2-step-placeholder span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: #1a1a14;
+    opacity: 0.25;
+  }
+  .cf2-step-placeholder small {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #1a1a14;
+    opacity: 0.25;
+  }
+  .cf2-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #1a1a14;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #1a1a14;
+    margin-bottom: 16px;
+  }
+  .cf2-step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 400;
+    color: #1a1a14;
+    margin: 0 0 12px;
+  }
+  .cf2-step-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(26, 26, 20, 0.6);
+    margin: 0;
+  }
+
+  /* === INCLUDES === */
+  .cf2-includes {
+    background: #0d0f09;
+    text-align: center;
+  }
+  .cf2-includes .cf2-eyebrow {
+    color: rgba(250, 250, 247, 0.4);
+  }
+  .cf2-includes .cf2-heading {
+    color: #FAFAF7;
+    font-size: clamp(24px, 3.5vw, 36px);
+  }
+  .cf2-includes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 40px;
+  }
+  .cf2-include-item {
+    text-align: left;
+    padding: 28px 24px;
+    border: 1px solid rgba(250, 250, 247, 0.08);
+    border-radius: 8px;
+  }
+  .cf2-include-icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .cf2-include-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #FAFAF7;
+    margin: 0 0 8px;
+  }
+  .cf2-include-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: rgba(250, 250, 247, 0.45);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* === CTA === */
+  .cf2-cta {
+    background: #FAFAF7;
+    text-align: center;
+  }
+  .cf2-cta-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-style: italic;
+    color: #1a1a14;
+    margin: 0 0 32px;
+    line-height: 1.5;
+  }
+  .cf2-btn {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #FAFAF7;
+    background: #1a1a14;
+    padding: 16px 40px;
+    border-radius: 0;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+  .cf2-btn:hover {
+    opacity: 0.8;
+  }
+
+  /* === MOBILE === */
+  @media (max-width: 768px) {
+    .cf2-step {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .cf2-step--reverse .cf2-step-visual,
+    .cf2-step--reverse .cf2-step-body {
+      order: unset;
+    }
+    .cf2-step-visual {
+      aspect-ratio: 16/9;
+    }
+    .cf2-includes-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .cf2-include-item {
+      text-align: center;
+    }
+  }
+</style>
+
+{%- comment -%}=== HERO ==={%- endcomment -%}
+<section class="cf2-section cf2-hero">
+  {%- if section.settings.hero_image -%}
+    <div class="cf2-hero-img">
+      <img src="{{ section.settings.hero_image | image_url: width: 1800 }}" alt="{{ section.settings.title }}" loading="eager">
+    </div>
+  {%- endif -%}
+  <div class="cf2-hero-inner">
+    <span class="cf2-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h1 class="cf2-heading">{{ section.settings.title }}</h1>
+    <p class="cf2-hero-sub">{{ section.settings.subtitle }}</p>
+  </div>
+</section>
+
+{%- comment -%}=== STEPS ==={%- endcomment -%}
+<section class="cf2-section cf2-steps">
+  <div class="cf2-container">
+    {%- assign step_num = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'step' -%}
+        {%- assign step_num = step_num | plus: 1 -%}
+        {%- assign is_even = step_num | modulo: 2 -%}
+        <div class="cf2-step {% if is_even == 0 %}cf2-step--reverse{% endif %} cf2-reveal" {{ block.shopify_attributes }}>
+          <div class="cf2-step-visual">
+            {%- if block.settings.image -%}
+              <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.title }}" loading="lazy">
+            {%- else -%}
+              <div class="cf2-step-placeholder">
+                <span>{{ step_num }}</span>
+                <small>Agregar foto</small>
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="cf2-step-body">
+            <div class="cf2-step-num">{{ step_num }}</div>
+            <h3 class="cf2-step-title">{{ block.settings.title }}</h3>
+            <p class="cf2-step-desc">{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{%- comment -%}=== QUE INCLUYE ==={%- endcomment -%}
+<section class="cf2-section cf2-includes">
+  <div class="cf2-container">
+    <span class="cf2-eyebrow">TODO ESTO ES TUYO</span>
+    <h2 class="cf2-heading">Lo que recibis con cada guardian</h2>
+    <div class="cf2-includes-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'include_item' -%}
+          {%- assign _is_portal = false -%}
+          {%- assign _t = block.settings.title | downcase -%}
+          {%- if _t contains 'portal' or _t contains 'mi magia' -%}{%- assign _is_portal = true -%}{%- endif -%}
+          <div class="cf2-include-item cf2-reveal{% if _is_portal %} cf2-include-item--portal{% endif %}" {{ block.shopify_attributes }}>
+            <span class="cf2-include-icon">{{ block.settings.icon }}</span>
+            <h4 class="cf2-include-name">{{ block.settings.title }}</h4>
+            <p class="cf2-include-desc">{{ block.settings.description }}</p>
+            {%- comment -%} Fix 10 (2026-05-01) — preview de las 3 secciones reales del Portal {%- endcomment -%}
+            {%- if _is_portal -%}
+              <div class="duendes-portal-preview">
+                <div class="duendes-portal-preview__card">
+                  <span class="duendes-portal-preview__icon">✦</span>
+                  <span class="duendes-portal-preview__label">Tu Canalización</span>
+                  <span class="duendes-portal-preview__desc">palabras que solo tienen sentido para vos</span>
+                </div>
+                <div class="duendes-portal-preview__card">
+                  <span class="duendes-portal-preview__icon">◈</span>
+                  <span class="duendes-portal-preview__label">El Oráculo</span>
+                  <span class="duendes-portal-preview__desc">hablale a tu guardián cuando necesitás</span>
+                </div>
+                <div class="duendes-portal-preview__card">
+                  <span class="duendes-portal-preview__icon">◇</span>
+                  <span class="duendes-portal-preview__label">Diario Elemental</span>
+                  <span class="duendes-portal-preview__desc">registrá lo que va cambiando</span>
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%}=== CTA ==={%- endcomment -%}
+<section class="cf2-section cf2-cta cf2-reveal">
+  <div class="cf2-container">
+    <p class="cf2-cta-text">{{ section.settings.cta_text }}</p>
+    <a href="/collections/todos-los-guardianes" class="cf2-btn">Ver Guardianes Disponibles</a>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.cf2-reveal');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function(el) { obs.observe(el); });
+
+  /* Fix 9 (2026-05-01) — fallback mobile iOS / 3G:
+     si tras 1.2s aún hay elementos sin .visible (IntersectionObserver
+     trabajó tarde o el viewport del usuario no llegó a ellos),
+     forzar la revelación para que nada quede invisible. */
+  setTimeout(function(){
+    document.querySelectorAll('.cf2-reveal:not(.visible)').forEach(function(el){
+      el.classList.add('visible');
+    });
+  }, 1200);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes Cómo Funciona",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "EL PROCESO"},
+    {"type": "text", "id": "title", "label": "Título", "default": "Cómo Funciona"},
+    {"type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Desde el primer encuentro hasta la conexión energética real. Seis pasos que cambian todo."},
+    {"type": "image_picker", "id": "hero_image", "label": "Imagen hero"},
+    {"type": "textarea", "id": "cta_text", "label": "Texto CTA", "default": "¿Listo para encontrar a tu guardián?"}
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Paso del proceso",
+      "settings": [
+        {"type": "text", "id": "title", "label": "Título", "default": "El Encuentro"},
+        {"type": "textarea", "id": "description", "label": "Descripción", "default": "Explorá la tienda dejándote guiar."},
+        {"type": "image_picker", "id": "image", "label": "Imagen del paso"}
+      ]
+    },
+    {
+      "type": "include_item",
+      "name": "Qué incluye",
+      "settings": [
+        {"type": "text", "id": "icon", "label": "Emoji/Icono", "default": "✦"},
+        {"type": "text", "id": "title", "label": "Título", "default": "Guardián artesanal"},
+        {"type": "textarea", "id": "description", "label": "Descripción", "default": "Pieza única de porcelana fría con cristales auténticos."}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes Cómo Funciona",
+      "blocks": [
+        {"type": "step", "settings": {"title": "El Encuentro", "description": "Hacé el Test del Guardián o explorá la tienda. Navegá, mirá, sentí. Algo te detiene en uno — quizás es su mirada, su nombre, su esencia. Esa pausa no es casualidad."}},
+        {"type": "step", "settings": {"title": "Tu Historia", "description": "Al adoptar, compartís tu situación actual y tus intenciones. Esa información es la base para la canalización personalizada."}},
+        {"type": "step", "settings": {"title": "La Canalización", "description": "Thibisay lee tu historia y entra en conexión con tu guardián. Recibe mensajes específicos para vos y escribe una carta personal."}},
+        {"type": "step", "settings": {"title": "La Preparación", "description": "Tu guardián se prepara con un ritual de sahúmo, cristales y la intención de proteger cada paso del camino."}},
+        {"type": "step", "settings": {"title": "El Viaje", "description": "DHL Express internacional (5-10 días) o DAC dentro de Uruguay (5-7 días). Tracking en tiempo real."}},
+        {"type": "step", "settings": {"title": "El Verdadero Encuentro", "description": "Abrís el paquete, leés tu carta canalizada y realizás el ritual de activación. A partir de ahí, tu guardián y vos empiezan un camino juntos."}},
+        {"type": "include_item", "settings": {"icon": "✦", "title": "Guardián artesanal", "description": "Pieza única de porcelana fría, esculpida a mano con cristales auténticos."}},
+        {"type": "include_item", "settings": {"icon": "📜", "title": "Carta canalizada", "description": "Mensaje personal escrito exclusivamente para vos tras la canalización."}},
+        {"type": "include_item", "settings": {"icon": "🔮", "title": "Ritual de activación", "description": "Guía paso a paso para sellar la conexión energética con tu guardián."}},
+        {"type": "include_item", "settings": {"icon": "🌐", "title": "Portal Mi Magia", "description": "Acceso de por vida al portal digital con guías y contenido exclusivo."}},
+        {"type": "include_item", "settings": {"icon": "📋", "title": "Certificado", "description": "Certificado de originalidad y autenticidad firmado."}},
+        {"type": "include_item", "settings": {"icon": "📦", "title": "Packaging protector", "description": "Empaque especial diseñado para que tu guardián viaje seguro."}}
+      ]
+    }
+  ]
+}
+{% endschema %}
+

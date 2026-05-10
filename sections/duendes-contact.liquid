@@ -1,0 +1,185 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+.ct-hero{padding:clamp(60px,10vw,100px) 24px;text-align:center;position:relative;overflow:hidden}
+.ct-hero-img{position:absolute;inset:0}
+.ct-hero-img img{width:100%;height:100%;object-fit:cover;opacity:.25}
+.ct-hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,10,6,.5),rgba(8,10,6,.8))}
+.ct-hero.no-img{background:linear-gradient(135deg,var(--black-deep),#0d0f0a)}
+.ct-hero.no-img::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(198,165,90,.08),transparent 50%);pointer-events:none}
+.ct-hero-inner{position:relative;z-index:2}
+
+.ct-note{max-width:680px;margin:0 auto;padding:48px 24px 0;text-align:center}
+.ct-note p{font-family:var(--serif);font-size:17px;line-height:1.8;color:var(--text-light);font-style:italic}
+
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1100px;margin:48px auto;padding:0 24px 80px}
+.ct-info-cards{display:flex;flex-direction:column;gap:20px}
+.ct-card{display:flex;gap:16px;padding:24px;background:#fff;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.04);transition:transform .3s,box-shadow .3s}
+.ct-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.ct-card-icon{font-size:28px;flex-shrink:0}
+.ct-card h3{font-family:var(--serif);font-size:18px;font-weight:600;margin:0 0 6px}
+.ct-card p{font-family:var(--sans);font-size:14px;color:var(--text-light);margin:0;line-height:1.6}
+.ct-card a{color:var(--gold-dk);text-decoration:none}
+.ct-card a:hover{text-decoration:underline}
+
+.ct-social{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.ct-social a{padding:8px 16px;border:1px solid rgba(198,165,90,.3);border-radius:20px;font-family:var(--sans);font-size:13px;text-decoration:none;color:var(--text);transition:all .3s}
+.ct-social a:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+
+.ct-form{background:#fff;border-radius:16px;padding:40px;box-shadow:0 8px 40px rgba(0,0,0,.06)}
+.ct-form h2{font-family:var(--serif);font-size:24px;font-weight:400;margin:0 0 24px}
+.ct-form label{display:block;font-family:var(--sans);font-size:13px;color:var(--text-light);margin-bottom:6px;letter-spacing:.5px}
+.ct-form input,.ct-form textarea,.ct-form select{width:100%;font-family:var(--sans);font-size:14px;padding:12px 16px;border:1px solid rgba(198,165,90,.25);border-radius:6px;background:var(--white);margin-bottom:18px;color:var(--text);transition:border-color .3s}
+.ct-form input:focus,.ct-form textarea:focus,.ct-form select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(198,165,90,.1)}
+
+.ct-reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.ct-reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){.ct-grid{grid-template-columns:1fr}}
+</style>
+
+{%- comment -%}=== HERO ==={%- endcomment -%}
+<section class="ct-hero {% unless section.settings.hero_image %}no-img{% endunless %}">
+  {%- if section.settings.hero_image -%}
+    <div class="ct-hero-img">
+      <img src="{{ section.settings.hero_image | image_url: width: 1800 }}" alt="{{ section.settings.title }}" loading="eager">
+    </div>
+  {%- endif -%}
+  <div class="ct-hero-inner">
+    <span class="duendes-eyebrow" style="color:var(--gold-lt)">{{ section.settings.eyebrow }}</span>
+    <h1 class="duendes-title" style="color:#fff;margin-top:12px">{{ section.settings.title }}</h1>
+    <p style="font-family:var(--sans);font-size:17px;color:rgba(255,255,255,.6);max-width:500px;margin:12px auto 0">{{ section.settings.subtitle }}</p>
+  </div>
+</section>
+
+{%- comment -%}=== TEAM NOTE ==={%- endcomment -%}
+<div class="ct-note ct-reveal">
+  <p>{{ section.settings.team_note }}</p>
+</div>
+
+{%- comment -%}=== MAIN GRID ==={%- endcomment -%}
+<div class="ct-grid">
+
+  <div class="ct-info-cards">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'contact_card' -%}
+        <div class="ct-card ct-reveal" {{ block.shopify_attributes }}>
+          <div class="ct-card-icon">{{ block.settings.icon }}</div>
+          <div>
+            <h3>{{ block.settings.title }}</h3>
+            {%- if block.settings.link != blank -%}
+              <p><a href="{{ block.settings.link }}" target="_blank">{{ block.settings.link_text }}</a></p>
+            {%- endif -%}
+            <p>{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <div style="margin-top:8px" class="ct-reveal">
+      <h3 style="font-family:var(--serif);font-size:16px;font-weight:500;margin-bottom:12px">Seguinos</h3>
+      <div class="ct-social">
+        <a href="https://instagram.com/duendesdeluruguay" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://tiktok.com/@duendesdeluruguay" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://facebook.com/duendescanalizados" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://threads.net/@duendesdeluruguay" target="_blank" rel="noopener">Threads</a>
+        <a href="https://youtube.com/@duendesdeluruguay" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://pinterest.com/duendesdeluruguay" target="_blank" rel="noopener">Pinterest</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ct-form ct-reveal">
+    <h2>Escribinos</h2>
+    {%- form 'contact' -%}
+      {%- if form.posted_successfully? -%}
+        <div id="ctSuccess" style="padding:24px;background:rgba(198,165,90,.08);border-radius:12px;margin-bottom:24px;border:1px solid rgba(198,165,90,.3);text-align:center">
+          <p style="margin:0;font-family:var(--serif);color:var(--gold);font-size:18px;font-weight:400">Mensaje enviado</p>
+          <p style="margin:8px 0 0;font-family:var(--sans);color:var(--text-light);font-size:14px">Te responderemos pronto. Gracias por escribirnos.</p>
+        </div>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <div style="padding:20px;background:#fdf2f2;border-radius:8px;margin-bottom:20px;border-left:3px solid #c53030">
+          <p style="margin:0;color:#c53030;font-size:14px">{{ form.errors | default_errors }}</p>
+        </div>
+      {%- endif -%}
+      <label for="ContactName">Nombre</label>
+      <input type="text" id="ContactName" name="contact[name]" placeholder="Tu nombre" required>
+      <label for="ContactEmail">Email</label>
+      <input type="email" id="ContactEmail" name="contact[email]" placeholder="tu@email.com" required>
+      <label for="ContactPhone">Teléfono (opcional)</label>
+      <input type="tel" id="ContactPhone" name="contact[phone]" placeholder="+598 99 123 456">
+      <label for="ContactCountry">País</label>
+      <input type="text" id="ContactCountry" name="contact[country]" placeholder="¿Desde dónde nos escribís?">
+      <label for="ContactSubject">Asunto</label>
+      <select id="ContactSubject" name="contact[subject]">
+        <option value="Consulta sobre producto">Consulta sobre producto</option>
+        <option value="Envío">Envío</option>
+        <option value="Estado de pedido">Estado de pedido</option>
+        <option value="Señas">Señas</option>
+        <option value="Prensa / Colaboración">Prensa / Colaboración</option>
+        <option value="Otro">Otro</option>
+      </select>
+      <label for="ContactMessage">Mensaje</label>
+      <textarea id="ContactMessage" name="contact[body]" rows="5" placeholder="Contanos en qué podemos ayudarte..." required></textarea>
+      <button type="submit" class="duendes-btn-gold" style="width:100%">Enviar mensaje</button>
+      <p style="text-align:center;margin-top:16px;font-family:var(--serif);font-size:14px;color:var(--gold);font-style:italic">
+        Sentiste el llamado. Y tu guardián ya lo sabe.
+      </p>
+    {%- endform -%}
+  </div>
+</div>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.ct-reveal');
+  if(!els.length)return;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+  },{threshold:0.1});
+  els.forEach(function(el,i){el.style.transitionDelay=i*80+'ms';obs.observe(el)});
+
+  /* Scroll to success message after form submit */
+  var successMsg = document.getElementById('ctSuccess');
+  if(successMsg){
+    successMsg.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes Contacto",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "CONTACTO"},
+    {"type": "text", "id": "title", "label": "Título", "default": "Hablemos"},
+    {"type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Estamos para ayudarte. Escribinos por WhatsApp para respuesta rápida o completá el formulario."},
+    {"type": "image_picker", "id": "hero_image", "label": "Imagen hero"},
+    {"type": "textarea", "id": "team_note", "label": "Nota del equipo", "default": "Somos un equipo pequeño con una comunidad enorme siguiéndonos en todo el mundo. Nos encantaría atender llamadas, pero crear sería imposible si el teléfono sonara todo el día. Por eso trabajamos por mensaje."}
+  ],
+  "blocks": [
+    {
+      "type": "contact_card",
+      "name": "Tarjeta de contacto",
+      "settings": [
+        {"type": "text", "id": "icon", "label": "Emoji", "default": "💬"},
+        {"type": "text", "id": "title", "label": "Título", "default": "WhatsApp"},
+        {"type": "url", "id": "link", "label": "Link"},
+        {"type": "text", "id": "link_text", "label": "Texto del link", "default": "+598 98 690 629"},
+        {"type": "textarea", "id": "description", "label": "Descripción", "default": "Respuesta rápida para consultas. Solo mensajes de texto."}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes Contacto",
+      "blocks": [
+        {"type": "contact_card", "settings": {"icon": "💬", "title": "WhatsApp", "link": "https://wa.me/59898690629", "link_text": "+598 98 690 629", "description": "Respuesta rápida para consultas. Solo mensajes de texto."}},
+        {"type": "contact_card", "settings": {"icon": "✉", "title": "Email", "link": "mailto:info@duendesdeluruguay.com", "link_text": "info@duendesdeluruguay.com", "description": "Para consultas detalladas, prensa y colaboraciones."}},
+        {"type": "contact_card", "settings": {"icon": "📍", "title": "Taller", "link_text": "", "description": "Barrio Country, Av. Central entre Brighton y Joaquín de Salterain. Piriápolis, Maldonado, Uruguay 🇺🇾. Visitas únicamente con cita previa."}},
+        {"type": "contact_card", "settings": {"icon": "🕐", "title": "Horarios", "link_text": "", "description": "Martes a Domingo: 10:00 — 18:00. Lunes: Cerrado."}}
+      ]
+    }
+  ]
+}
+{% endschema %}

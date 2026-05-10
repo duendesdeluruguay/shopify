@@ -1,0 +1,333 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .duendes-fullsplit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  .duendes-fullsplit__photo {
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+  }
+  .duendes-fullsplit__photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform .6s ease;
+  }
+  .duendes-fullsplit:hover .duendes-fullsplit__photo img { transform: scale(1.03); }
+  .duendes-fullsplit__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(40px,6vw,80px) clamp(32px,5vw,64px);
+  }
+  .duendes-fullsplit__label {
+    font-family: var(--serif);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .duendes-fullsplit__title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .duendes-fullsplit__body {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2vw, 19px);
+    line-height: 1.75;
+    margin-bottom: 28px;
+  }
+  .duendes-fullsplit__quote {
+    padding: 20px 24px;
+    border-left: 3px solid var(--gold);
+    margin-bottom: 28px;
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .duendes-fullsplit__quote cite {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    font-style: normal;
+    letter-spacing: 1px;
+    opacity: 1;
+  }
+  .duendes-fullsplit__counter {
+    font-family: var(--serif);
+    font-size: clamp(24px,3vw,36px);
+    font-style: italic;
+    margin: 24px 0;
+    padding: 20px;
+    border: 1px solid rgba(198,165,90,.3);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .duendes-fullsplit__small {
+    font-size: 15px;
+    opacity: 1;
+    margin-bottom: 24px;
+  }
+
+  /* Dark variant */
+  .duendes-fullsplit--dark .duendes-fullsplit__content {
+    background: linear-gradient(135deg, #0f110d, #141610);
+    color: #fff;
+  }
+  .duendes-fullsplit--dark .duendes-fullsplit__title { color: #fff; }
+  .duendes-fullsplit--dark .duendes-fullsplit__body { color: #FAFAF7; }
+  .duendes-fullsplit--dark .duendes-fullsplit__quote { color: #FAFAF7; }
+  .duendes-fullsplit--dark .duendes-fullsplit__counter {
+    color: var(--gold-lt);
+    border-color: rgba(198,165,90,.25);
+  }
+  .duendes-fullsplit--dark .duendes-fullsplit__small { color: rgba(255,255,255,.75); }
+
+  /* Light variant */
+  .duendes-fullsplit--light .duendes-fullsplit__content {
+    background: var(--parchment);
+    color: var(--text);
+  }
+
+  /* Reverse layout */
+  .duendes-fullsplit--reverse { direction: rtl; }
+  .duendes-fullsplit--reverse > * { direction: ltr; }
+
+  /* Gift options */
+  .duendes-gift-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .duendes-gift-card {
+    padding: 20px;
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    text-align: center;
+    background: rgba(198,165,90,.04);
+  }
+  .duendes-gift-card svg { color: var(--gold); margin: 0 auto 10px; display: block; }
+  .duendes-gift-card h4 {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .duendes-gift-card p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1024px) {
+    .duendes-fullsplit { grid-template-columns: 1fr; min-height: auto; }
+    .duendes-fullsplit__photo { min-height: 50vh; }
+    .duendes-fullsplit--reverse { direction: ltr; }
+  }
+  @media (max-width: 768px) {
+    .duendes-fullsplit__content { padding: 36px 24px; }
+    .duendes-gift-options { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="duendes-fullsplit duendes-reveal
+  {% if section.settings.theme == 'dark' %}duendes-fullsplit--dark{% else %}duendes-fullsplit--light{% endif %}
+  {% if section.settings.photo_position == 'right' %}duendes-fullsplit--reverse{% endif %}
+">
+  {% if section.settings.photo_position == 'left' or section.settings.photo_position == blank %}
+    <div class="duendes-fullsplit__photo">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="duendes-fullsplit__content">
+    {% if section.settings.label != blank %}
+      <span class="duendes-fullsplit__label">{{ section.settings.label }}</span>
+    {% endif %}
+
+    <h2 class="duendes-fullsplit__title">{{ section.settings.title }}</h2>
+
+    {% if section.settings.body != blank %}
+      <p class="duendes-fullsplit__body">{{ section.settings.body }}</p>
+    {% endif %}
+
+    {% if section.settings.counter_text != blank %}
+      <div class="duendes-fullsplit__counter">{{ section.settings.counter_text }}</div>
+    {% endif %}
+
+    {% if section.settings.small_text != blank %}
+      <p class="duendes-fullsplit__small">{{ section.settings.small_text }}</p>
+    {% endif %}
+
+    {% if section.settings.quote != blank %}
+      <blockquote class="duendes-fullsplit__quote">
+        {{ section.settings.quote }}
+        {% if section.settings.quote_author != blank %}
+          <cite>— {{ section.settings.quote_author }}</cite>
+        {% endif %}
+      </blockquote>
+    {% endif %}
+
+    {% if section.settings.show_gift_options %}
+      <div class="duendes-gift-options">
+        {% for block in section.blocks %}
+          {% if block.type == 'gift_option' %}
+            <div class="duendes-gift-card" {{ block.shopify_attributes }}>
+              <svg width="40" height="40" viewBox="0 0 52 52" fill="none"><rect x="8" y="22" width="36" height="24" rx="3" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="16" width="44" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M26 16v30" stroke="currentColor" stroke-width="1.5"/></svg>
+              <h4>{{ block.settings.title }}</h4>
+              <p>{{ block.settings.description }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.cta_text != blank %}
+      <a href="{{ section.settings.cta_url }}"
+         class="{% if section.settings.theme == 'dark' %}duendes-btn-white{% else %}duendes-btn-gold{% endif %}">
+        {{ section.settings.cta_text }}
+      </a>
+    {% endif %}
+  </div>
+
+  {% if section.settings.photo_position == 'right' %}
+    <div class="duendes-fullsplit__photo">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+
+<div class="duendes-gold-line"></div>
+<div class="duendes-divider">&#10022;</div>
+
+{% schema %}
+{
+  "name": "Duendes Sección Split",
+  "tag": "section",
+  "class": "duendes-fullsplit-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "theme",
+      "label": "Estilo",
+      "options": [
+        { "value": "light", "label": "Claro (crema)" },
+        { "value": "dark", "label": "Oscuro (negro)" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "select",
+      "id": "photo_position",
+      "label": "Posición de la foto",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Etiqueta superior",
+      "default": "La Experiencia"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Título",
+      "default": "No es un objeto. Es un antes y un después."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Texto principal"
+    },
+    {
+      "type": "text",
+      "id": "counter_text",
+      "label": "Texto contador (opcional)"
+    },
+    {
+      "type": "text",
+      "id": "small_text",
+      "label": "Texto pequeño (opcional)"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Cita (opcional)"
+    },
+    {
+      "type": "text",
+      "id": "quote_author",
+      "label": "Autor de la cita"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gift_options",
+      "label": "Mostrar opciones de regalo",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Link del botón"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gift_option",
+      "name": "Opción de regalo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Regalo Sorpresa"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Vos completás un formulario sobre la persona. Que no se entere hasta abrirlo."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes Sección Split"
+    }
+  ]
+}
+{% endschema %}
+
