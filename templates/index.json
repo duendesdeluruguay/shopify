@@ -6,37 +6,37 @@
         "msg-1": {
           "type": "message",
           "settings": {
-            "text": "International DHL Express shipping · 5 to 10 days door to door"
+            "text": "Envío internacional DHL Express · 5 a 10 días puerta a puerta"
           }
         },
         "msg-2": {
           "type": "message",
           "settings": {
-            "text": "Uruguay shipping via DAC · 5 to 7 days"
+            "text": "Envíos en Uruguay con DAC · 5 a 7 días"
           }
         },
         "msg-3": {
           "type": "message",
           "settings": {
-            "text": "100% secure checkout · All cards · SSL encrypted"
+            "text": "Pago 100 % seguro · Todas las tarjetas · Cifrado SSL"
           }
         },
         "msg-4": {
           "type": "message",
           "settings": {
-            "text": "Made by hand without molds · Each piece exists only once"
+            "text": "Hecho a mano sin moldes · Cada pieza existe una sola vez"
           }
         },
         "msg-5": {
           "type": "message",
           "settings": {
-            "text": "+15,000 Guardians adopted in 45 countries · 10 years of magic"
+            "text": "+15.000 Guardianes adoptados en 45 países · 10 años de magia"
           }
         },
         "msg-elegidos": {
           "type": "message",
           "settings": {
-            "text": "If a Guardian ever stopped you, you are one of The Chosen · find out what it means"
+            "text": "Si alguna vez un Guardián te frenó en seco, sos de los Elegidos · descubrí qué significa"
           }
         }
       },
@@ -54,24 +54,24 @@
       "type": "duendes-hero",
       "settings": {
         "eyebrow": "Duendes del Uruguay",
-        "title_line1": "You don't choose them.",
-        "title_line2": "They choose you.",
-        "subtitle": "Guardians channeled by hand in Piriápolis. Each one exists only once.",
+        "title_line1": "Vos no los elegís.",
+        "title_line2": "Ellos te eligen a vos.",
+        "subtitle": "Guardianes canalizados a mano en Piriápolis. Cada uno existe una sola vez.",
         "video_url": "",
         "hero_image": "shopify://shop_images/2319.jpg",
-        "cta_text": "Find My Guardian",
+        "cta_text": "Encontrar a mi Guardián",
         "cta_url": "shopify://collections/tienda-magica",
-        "secondary_text": "Not sure where to start? Take the Free Test",
+        "secondary_text": "¿No sabés por dónde empezar? Hacé el test gratuito",
         "secondary_url": "shopify://pages/test-del-guardian"
       }
     },
     "mi-magia-home": {
       "type": "mi-magia-banner",
       "settings": {
-        "eyebrow": "For The Chosen — your exclusive portal",
+        "eyebrow": "Para los Elegidos — tu portal exclusivo",
         "title": "Mi Magia",
-        "subtitle": "Guides, meditations, your channeled letter, and the adopters community — everything after you welcome your Guardian.",
-        "cta_text": "Enter Mi Magia",
+        "subtitle": "Guías, meditaciones, tu carta canalizada y la comunidad de quienes adoptaron: todo lo que sigue después de recibir a tu Guardián.",
+        "cta_text": "Entrar a Mi Magia",
         "cta_icon": "✦",
         "cta_url": "/blogs/mi-magia"
       }
@@ -79,8 +79,8 @@
     "guardians-carousel": {
       "type": "duendes-guardians-carousel",
       "settings": {
-        "heading": "Every Guardian Has a Soul",
-        "subheading": "Walk slowly. When one calls you, don't let it pass.",
+        "heading": "Cada Guardián tiene un alma",
+        "subheading": "Caminá despacio. Cuando uno te llame, no lo dejes pasar.",
         "collection": "todos-los-guardianes"
       }
     },
@@ -92,12 +92,12 @@
           "settings": {
             "bg_image": "shopify://shop_images/1695.jpg",
             "theme": "dark",
-            "eyebrow": "ART THAT TRANSCENDS",
-            "title": "Each piece is <em>unrepeatable</em>",
+            "eyebrow": "ARTE QUE TRASCIENDE",
+            "title": "Cada pieza es <em>irrepetible</em>",
             "stat_number": "0",
-            "stat_label": "identical pieces in the world",
-            "body": "No molds. No mass production. Every Guardian is hand-sculpted in our studio in Piriápolis. When one is gone, it doesn't repeat.",
-            "cta_text": "SEE GUARDIANS",
+            "stat_label": "piezas idénticas en el mundo",
+            "body": "Sin moldes. Sin producción en masa. Cada Guardián se esculpe a mano en nuestro taller de Piriápolis. Cuando uno se va, no se repite.",
+            "cta_text": "VER GUARDIANES",
             "cta_url": "shopify://collections/tienda-magica"
           }
         },
@@ -105,12 +105,12 @@
           "type": "slide",
           "settings": {
             "theme": "gold",
-            "eyebrow": "ENERGETIC CHANNELING",
-            "title": "A message that <em>only you</em> will understand",
+            "eyebrow": "CANALIZACIÓN ENERGÉTICA",
+            "title": "Un mensaje que <em>solo vos</em> vas a entender",
             "stat_number": "",
             "stat_label": "",
-            "body": "Every Guardian comes with a channeled letter: a personal message we don't write — it flows through us. Thousands of Chosen ones in 45 countries confirm it: the words always reach where they need to reach.",
-            "cta_text": "HOW IT WORKS",
+            "body": "Cada Guardián llega con una carta canalizada: un mensaje personal que nosotros no escribimos — fluye a través nuestro. Miles de Elegidos en 45 países lo confirman: las palabras siempre llegan donde tienen que llegar.",
+            "cta_text": "CÓMO FUNCIONA",
             "cta_url": "shopify://pages/como-funciona"
           }
         },
@@ -119,12 +119,12 @@
           "settings": {
             "bg_image": "shopify://shop_images/1773.jpg",
             "theme": "forest",
-            "eyebrow": "A GLOBAL COMMUNITY",
-            "title": "<em>+15,000</em> Guardians have already found a home",
+            "eyebrow": "UNA COMUNIDAD GLOBAL",
+            "title": "<em>+15.000</em> Guardianes ya encontraron hogar",
             "stat_number": "45+",
-            "stat_label": "countries",
-            "body": "From Piriápolis to the world. Each Guardian travels via DHL Express if you're abroad, or DAC if you're in Uruguay, protected like the work of art it is, with real-time tracking.",
-            "cta_text": "TESTIMONIALS",
+            "stat_label": "países",
+            "body": "De Piriápolis al mundo. Cada Guardián viaja por DHL Express si estás en el exterior, o DAC si estás en Uruguay, protegido como la obra de arte que es, con seguimiento en tiempo real.",
+            "cta_text": "TESTIMONIOS",
             "cta_url": "shopify://pages/testimonios"
           }
         },
@@ -133,12 +133,12 @@
           "settings": {
             "bg_image": "shopify://shop_images/IMG_1674.png",
             "theme": "dark",
-            "eyebrow": "GIFT THAT TRANSFORMS",
-            "title": "A gift that <em>no one forgets</em>",
+            "eyebrow": "UN REGALO QUE TRANSFORMA",
+            "title": "Un regalo que <em>nadie olvida</em>",
             "stat_number": "",
             "stat_label": "",
-            "body": "Giving one of our Guardians isn't an ordinary gift. It's a complete experience: personal channeled letter, activation ritual, certificate, and digital portal. The person who receives it will never forget the moment.",
-            "cta_text": "GIFT A GUARDIAN",
+            "body": "Regalar uno de nuestros Guardianes no es un regalo común. Es una experiencia completa: carta canalizada personal, ritual de activación, certificado y portal digital. Quien lo recibe no olvida ese momento.",
+            "cta_text": "REGALAR UN GUARDIÁN",
             "cta_url": "shopify://collections/tienda-magica"
           }
         }
@@ -157,15 +157,15 @@
         "theme": "light",
         "photo_position": "left",
         "image": "shopify://shop_images/2.jpg",
-        "label": "The Experience",
-        "title": "You don't buy an object. You receive a message.",
-        "body": "Our most special Guardians arrive with a channeled letter: words written exclusively for you, that we don't control or choose. Thousands of people write us saying the same thing: \"How did you know exactly what I needed to hear?\". You will have all of this available in our exclusive section for The Chosen, called \"Mi Magia\".",
+        "label": "La experiencia",
+        "title": "No comprás un objeto. Recibís un mensaje.",
+        "body": "Nuestros Guardianes más especiales llegan con una carta canalizada: palabras escritas exclusivamente para vos, que nosotros no controlamos ni elegimos. Miles de personas nos escriben diciendo lo mismo: \"¿Cómo supieron exactamente lo que necesitaba escuchar?\". Todo eso lo vas a tener en nuestra sección exclusiva para los Elegidos: \"Mi Magia\".",
         "counter_text": "",
         "small_text": "",
-        "quote": "\"I opened the package, read the letter, and cried. It said exactly what I needed to hear. I don't know how they do it.\"",
+        "quote": "\"Abrí el paquete, leí la carta y lloré. Decía exactamente lo que necesitaba escuchar. No sé cómo lo hacen.\"",
         "quote_author": "María L. · Buenos Aires, Argentina",
         "show_gift_options": false,
-        "cta_text": "Find My Guardian",
+        "cta_text": "Encontrar a mi Guardián",
         "cta_url": "shopify://collections/tienda-magica"
       }
     },
@@ -176,60 +176,60 @@
           "type": "value_card",
           "settings": {
             "icon": "01",
-            "title": "Hand-Sculpted Sculpture",
-            "description": "Professional cold porcelain, combined with magics that make it flexible, mimicking skin. Natural crystals, painted, modeled, and sewn by hand. Between 20 and 60 hours of work per creation.",
-            "compare_them": "We refuse the industrial mold",
-            "compare_us": "We transform by hand without molds"
+            "title": "Escultura modelada a mano",
+            "description": "Porcelana fría profesional, combinada con magias que la hacen flexible, imitando la piel. Cristales naturales, pintados, modelados y cosidos a mano. Entre 20 y 60 horas de trabajo por creación.",
+            "compare_them": "Rechazamos el molde industrial",
+            "compare_us": "Transformamos a mano, sin moldes"
           }
         },
         "v2": {
           "type": "value_card",
           "settings": {
             "icon": "02",
-            "title": "Channeling",
-            "description": "Our creations move through a 7-day channeling process where you collaborate energetically, no matter where in the world you are. We receive a message from your Guardian during the channeling. Each letter is one-of-a-kind and unrepeatable, like the Guardian who brings it. You don't only receive your Guardian… you receive the message they have for you.",
-            "compare_them": "We refuse to give you something empty, lifeless, without history.",
-            "compare_us": "We do the personal channeling study and share it with you."
+            "title": "Canalización",
+            "description": "Nuestras creaciones atraviesan un proceso de canalización de 7 días en el que vos colaborás energéticamente, estés donde estés. Recibimos un mensaje de tu Guardián durante la canalización. Cada carta es única e irrepetible, como el Guardián que la trae. No solo recibís a tu Guardián… recibís el mensaje que tiene para vos.",
+            "compare_them": "Rechazamos darte algo vacío, sin vida, sin historia.",
+            "compare_us": "Hacemos el estudio de canalización personal y lo compartimos con vos."
           }
         },
         "v3": {
           "type": "value_card",
           "settings": {
             "icon": "03",
-            "title": "Authentic Crystals",
-            "description": "Every Guardian and creation carries natural crystals selected for their essence and energetic purpose. Nothing is synthetic.",
-            "compare_them": "We refuse to give you painted plastic and tell you they are real stones.",
-            "compare_us": "You will always have 100% real crystals"
+            "title": "Cristales auténticos",
+            "description": "Cada Guardián y creación lleva cristales naturales elegidos por su esencia y propósito energético. Nada es sintético.",
+            "compare_them": "Rechazamos pintar plástico y decirte que son piedras reales.",
+            "compare_us": "Siempre vas a tener cristales 100 % reales"
           }
         },
         "v4": {
           "type": "value_card",
           "settings": {
             "icon": "04",
-            "title": "Certificate of authenticity",
-            "description": "Name, essence, element, crystals, powers, and the complete story of your Guardian documented — all of this in our Exclusive Portal.",
-            "compare_them": "We refuse to deliver something generic, without identity.",
-            "compare_us": "Each piece arrives signed and identified with its full history."
+            "title": "Certificado de autenticidad",
+            "description": "Nombre, esencia, elemento, cristales, poderes y la historia completa de tu Guardián documentada — todo en nuestro Portal Exclusivo.",
+            "compare_them": "Rechazamos entregar algo genérico, sin identidad.",
+            "compare_us": "Cada pieza llega firmada e identificada con su historia completa."
           }
         },
         "v5": {
           "type": "value_card",
           "settings": {
             "icon": "05",
-            "title": "Activation Ritual",
-            "description": "Step-by-step guide to seal the energetic connection with your Guardian when it arrives in your hands. The most intimate moment of the process.",
-            "compare_them": "For others, this doesn't exist",
-            "compare_us": "We want to give you a COMPLETE guided spiritual Experience."
+            "title": "Ritual de activación",
+            "description": "Guía paso a paso para sellar la conexión energética con tu Guardián cuando llega a tus manos. El momento más íntimo del proceso.",
+            "compare_them": "Para otros, esto no existe",
+            "compare_us": "Queremos darte una experiencia espiritual guiada y COMPLETA."
           }
         },
         "v6": {
           "type": "value_card",
           "settings": {
             "icon": "06",
-            "title": "Access Our \"My Magic\" Portal",
-            "description": "Lifetime digital access to guides, meditations, and exclusive content to deepen the connection with your Guardian.",
-            "compare_them": "Nobody else is willing to offer you so much once you already have your Guardian",
-            "compare_us": "We believe in our Community, that's why we give you exclusive content."
+            "title": "Acceso al portal \"Mi Magia\"",
+            "description": "Acceso digital de por vida a guías, meditaciones y contenido exclusivo para profundizar la conexión con tu Guardián.",
+            "compare_them": "Nadie más está dispuesto a ofrecerte tanto cuando ya tenés tu Guardián",
+            "compare_us": "Creemos en nuestra Comunidad, por eso te damos contenido exclusivo."
           }
         }
       },
@@ -243,9 +243,9 @@
       ],
       "settings": {
         "color_scheme": "",
-        "eyebrow": "WHY WE'RE DIFFERENT",
-        "title": "Why do our Guardians cost what they cost?",
-        "bottom_text": "<strong> All of this is included. <strong></strong></strong>",
+        "eyebrow": "POR QUÉ SOMOS DIFERENTES",
+        "title": "¿Por qué nuestros Guardianes cuestan lo que cuestan?",
+        "bottom_text": "<strong>Todo esto está incluido.</strong>",
         "background_image": "shopify://shop_images/1310.jpg"
       }
     },
@@ -255,15 +255,15 @@
         "theme": "dark",
         "photo_position": "right",
         "image": "shopify://shop_images/C9C8F91A-1720-40C1-9C82-0CCB5CB69D34.png",
-        "label": "One-of-a-kind pieces",
-        "title": "When they leave, they don't come back. Ever.",
-        "body": "There is no repeated stock. There is no \"I'll see it later.\" Every Guardian you see on this page exists only once in the world. The medium-sized, large, and giant ones are 100% unrepeatable — when someone adopts them, they disappear forever.",
-        "counter_text": "Manifest what you long for, with the guidance of an elemental being",
-        "small_text": "More than 15,000 Guardians have already found their home in 45+ countries.",
+        "label": "Piezas únicas",
+        "title": "Cuando se van, no vuelven. Nunca.",
+        "body": "No hay stock repetido. No existe el \"lo veo después\". Cada Guardián que ves en esta página existe una sola vez en el mundo. Los medianos, grandes y gigantes son 100 % irrepetibles — cuando alguien los adopta, desaparecen para siempre.",
+        "counter_text": "Manifestá lo que anhelás, con la guía de un ser elemental",
+        "small_text": "Más de 15.000 Guardianes ya encontraron hogar en más de 45 países.",
         "quote": "",
         "quote_author": "",
         "show_gift_options": false,
-        "cta_text": "See the Available Guardians",
+        "cta_text": "Ver Guardianes disponibles",
         "cta_url": "shopify://collections/tienda-magica"
       }
     },
@@ -274,7 +274,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/1339.jpg",
-            "alt": "The package arrives via DHL",
+            "alt": "El paquete llega por DHL",
             "icon": "—"
           }
         },
@@ -282,7 +282,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/1660.jpg",
-            "alt": "Opening the sealed box",
+            "alt": "Abriendo la caja sellada",
             "icon": "—"
           }
         },
@@ -290,7 +290,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/1653.jpg",
-            "alt": "The channeled letter inside",
+            "alt": "La carta canalizada adentro",
             "icon": "—"
           }
         },
@@ -298,32 +298,32 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/1310.jpg",
-            "alt": "The Guardian in your hands",
+            "alt": "El Guardián en tus manos",
             "icon": "—"
           }
         },
         "us1": {
           "type": "step",
           "settings": {
-            "text": "<strong>The package arrives sealed</strong> with our seal. No one touched it before you. That moment is yours."
+            "text": "<strong>El paquete llega sellado</strong> con nuestro sello. Nadie lo tocó antes que vos. Ese momento es tuyo."
           }
         },
         "us2": {
           "type": "step",
           "settings": {
-            "text": "<strong>The channeled letter</strong> arrives in a wax-sealed envelope. Read it in silence — the words inside are only for you."
+            "text": "<strong>La carta canalizada</strong> llega en un sobre sellado con lacre. Leela en silencio — las palabras de adentro son solo para vos."
           }
         },
         "us3": {
           "type": "step",
           "settings": {
-            "text": "<strong>Your Guardian is protected</strong> in premium packaging. Take it with both hands — it is your first contact with their energy."
+            "text": "<strong>Tu Guardián va protegido</strong> en un empaque premium. Tomalo con las dos manos — es tu primer contacto con su energía."
           }
         },
         "us4": {
           "type": "step",
           "settings": {
-            "text": "<strong>Follow the Activation Ritual:</strong> choose a special place, light a candle, read aloud. That's how the bond begins."
+            "text": "<strong>Seguí el ritual de activación:</strong> elegí un lugar especial, encendé una vela, leé en voz alta. Así empieza el vínculo."
           }
         }
       },
@@ -338,9 +338,9 @@
         "us4"
       ],
       "settings": {
-        "eyebrow": "OPENING IT IS PART OF THE MAGIC",
-        "title": "The first ritual begins <em>with your hands</em>",
-        "cta_text": "CHOOSE MY GUARDIAN",
+        "eyebrow": "ABRIRLO ES PARTE DE LA MAGIA",
+        "title": "El primer ritual empieza <em>con tus manos</em>",
+        "cta_text": "ELEGIR A MI GUARDIÁN",
         "cta_url": "shopify://collections/tienda-magica"
       }
     },
@@ -350,7 +350,7 @@
         "testi-1": {
           "type": "testimonial",
           "settings": {
-            "quote": "When I read the channeled message, I cried. It said exactly what I needed to hear. I don't know how they do it, but it's real.",
+            "quote": "Cuando leí el mensaje canalizado, lloré. Decía exactamente lo que necesitaba escuchar. No sé cómo lo hacen, pero es real.",
             "name": "María L.",
             "location": "Buenos Aires, Argentina"
           }
@@ -358,7 +358,7 @@
         "testi-2": {
           "type": "testimonial",
           "settings": {
-            "quote": "I bought it as a gift and my friend told me it was the most special thing she had ever been given. The channeling reached her soul.",
+            "quote": "Lo compré de regalo y mi amiga me dijo que era lo más especial que le habían dado. La canalización le llegó al alma.",
             "name": "Carolina S.",
             "location": "Montevideo, Uruguay"
           }
@@ -366,7 +366,7 @@
         "testi-3": {
           "type": "testimonial",
           "settings": {
-            "quote": "I have three. Every time I need a new one, it appears on the website right when I need it. It's like they know.",
+            "quote": "Tengo tres. Cada vez que necesito uno nuevo, aparece en la web justo cuando lo necesito. Es como si supieran.",
             "name": "Luciana R.",
             "location": "Madrid, España"
           }
@@ -374,7 +374,7 @@
         "testi-4": {
           "type": "testimonial",
           "settings": {
-            "quote": "I'm very skeptical, but something about Aidan called me. The letter mentioned things no one knew. Since he's been with me, I make better decisions.",
+            "quote": "Soy muy escéptica, pero algo de Aidan me llamó. La carta mencionaba cosas que nadie sabía. Desde que está conmigo, tomo mejores decisiones.",
             "name": "Ana P.",
             "location": "Santiago, Chile"
           }
@@ -382,7 +382,7 @@
         "testi-5": {
           "type": "testimonial",
           "settings": {
-            "quote": "My 12-year-old autistic son connected with his Guardian in a way he never connects with people. His therapist is fascinated.",
+            "quote": "Mi hijo de 12 años, autista, conectó con su Guardián de un modo en que casi no conecta con la gente. Su terapeuta está fascinada.",
             "name": "Verónica M.",
             "location": "Montevideo, Uruguay"
           }
@@ -390,7 +390,7 @@
         "testi-6": {
           "type": "testimonial",
           "settings": {
-            "quote": "Fourth Guardian I adopt. My family thinks I'm crazy. But each one has its place and its purpose. They are art, energy, and company.",
+            "quote": "Es el cuarto Guardián que adoptó. Mi familia piensa que estoy loca. Pero cada uno tiene su lugar y su propósito. Son arte, energía y compañía.",
             "name": "Lucía F.",
             "location": "La Paz, Bolivia"
           }
@@ -406,8 +406,8 @@
       ],
       "settings": {
         "color_scheme": "",
-        "eyebrow": "REAL VOICES",
-        "heading": "Stories from The Chosen",
+        "eyebrow": "VOCES REALES",
+        "heading": "Historias de los Elegidos",
         "background_image": "shopify://shop_images/1668.jpg"
       }
     },
@@ -419,7 +419,7 @@
           "settings": {
             "photo": "shopify://shop_images/Gemini_Generated_Image_l9shkml9shkml9sh.png",
             "name": "Valentina M.",
-            "caption": "With Cedric — Buenos Aires"
+            "caption": "Con Cedric — Buenos Aires"
           }
         },
         "ug2": {
@@ -435,7 +435,7 @@
           "settings": {
             "photo": "shopify://shop_images/IMG_0243.jpg",
             "name": "Ana P.",
-            "caption": "Her altar with 3 Guardians — Madrid"
+            "caption": "Su altar con 3 Guardianes — Madrid"
           }
         },
         "ug4": {
@@ -443,7 +443,7 @@
           "settings": {
             "photo": "shopify://shop_images/1771.jpg",
             "name": "Roberto L.",
-            "caption": "First day together — Mexico City"
+            "caption": "Primer día juntos — Ciudad de México"
           }
         },
         "ug5": {
@@ -451,7 +451,7 @@
           "settings": {
             "photo": "shopify://shop_images/1-4.jpg",
             "name": "Lucía F.",
-            "caption": "Complete collection — La Paz"
+            "caption": "Colección completa — La Paz"
           }
         },
         "ug6": {
@@ -459,7 +459,7 @@
           "settings": {
             "photo": "shopify://shop_images/1264.jpg",
             "name": "Mariana D.",
-            "caption": "Birthday gift — Bogotá"
+            "caption": "Regalo de cumpleaños — Bogotá"
           }
         },
         "ug7": {
@@ -467,7 +467,7 @@
           "settings": {
             "photo": "shopify://shop_images/1658.jpg",
             "name": "Diego R.",
-            "caption": "On her desk — Lima"
+            "caption": "En su escritorio — Lima"
           }
         },
         "ug8": {
@@ -475,7 +475,7 @@
           "settings": {
             "photo": "shopify://shop_images/Gemini_Generated_Image_avw4exavw4exavw4.png",
             "name": "Sofía T.",
-            "caption": "With her Pixie — Montevideo"
+            "caption": "Con su Pixie — Montevideo"
           }
         }
       },
@@ -490,9 +490,9 @@
         "ug8"
       ],
       "settings": {
-        "eyebrow": "THE ELEMENTAL COMMUNITY",
-        "title": "How they receive them <em>around the world</em>",
-        "subtitle": "The Chosen. Real moments. Guardians that already found their home.",
+        "eyebrow": "LA COMUNIDAD ELEMENTAL",
+        "title": "Cómo los reciben <em>en todo el mundo</em>",
+        "subtitle": "Los Elegidos. Momentos reales. Guardianes que ya encontraron hogar.",
         "cta_text": "Seguinos en Instagram",
         "cta_url": "https://www.instagram.com/duendesdeluruguay/"
       }
@@ -503,37 +503,37 @@
         "s1": {
           "type": "signal",
           "settings": {
-            "text": "You give everything to others and at the end nothing is left for you."
+            "text": "Le das todo a los demás y al final no te queda nada para vos."
           }
         },
         "s2": {
           "type": "signal",
           "settings": {
-            "text": "You carry emotions that aren't yours and your body pays the price."
+            "text": "Cargás emociones que no son tuyas y tu cuerpo lo paga."
           }
         },
         "s3": {
           "type": "signal",
           "settings": {
-            "text": "You feel an emptiness that returns even when everything is \"fine.\""
+            "text": "Sentís un vacío que vuelve aunque todo esté \"bien\"."
           }
         },
         "s4": {
           "type": "signal",
           "settings": {
-            "text": "You have gut feelings that always end up being right."
+            "text": "Tenés presentimientos que siempre terminan acertando."
           }
         },
         "s5": {
           "type": "signal",
           "settings": {
-            "text": "You find feathers, mirror hours, four-leaf clovers… and you don't know why."
+            "text": "Encontrás plumas, horas espejo, tréboles de cuatro hojas… y no sabés por qué."
           }
         },
         "s6": {
           "type": "signal",
           "settings": {
-            "text": "People tell you their things without knowing why they trust you."
+            "text": "La gente te cuenta sus cosas sin saber por qué confía en vos."
           }
         }
       },
@@ -547,11 +547,11 @@
       ],
       "settings": {
         "image": "shopify://shop_images/IMG_1890.png",
-        "label": "Synchronicities",
-        "heading_start": "Mark the ones",
-        "heading_italic": "that happen to you",
-        "subheading": "If you mark more than two, this isn't a coincidence. The universe is talking to you.",
-        "cta_text": "FIND OUT WHICH ONE IS LOOKING FOR YOU",
+        "label": "Sincronicidades",
+        "heading_start": "Marcá las que",
+        "heading_italic": "te pasan a vos",
+        "subheading": "Si marcás más de dos, esto no es casualidad. El universo te está hablando.",
+        "cta_text": "DESCUBRÍ CUÁL TE ESTÁ BUSCANDO",
         "cta_url": "shopify://pages/test-del-guardian"
       }
     },
@@ -559,12 +559,12 @@
       "type": "duendes-founders",
       "settings": {
         "color_scheme": "",
-        "heading": "Who We Are",
-        "subheading": "A family that transformed their life by channeling elemental energy.",
+        "heading": "Quiénes somos",
+        "subheading": "Una familia que transformó su vida canalizando energía elemental.",
         "photo_1": "shopify://shop_images/vintage_plant_garden_portrait_1f0cdf63-af63-6bf0-bcf0-493023560006_0_0.png",
         "photo_2": "shopify://shop_images/tranquil_forest_portrait_1f0cdfbd-310e-62f0-b735-9826e7022bb4_1_1.png",
-        "story": "We are Gabriel and Thibisay. A family of 5 who chose to live in Piriápolis — the alchemist city of Uruguay — and who in 2015 discovered something that wasn't in any plan: the ability to channel elemental beings through the use and transformation of various materials.\n\nWith no formal artistic training, no investors, no formulas. Only intuition, silence, and the certainty that what flowed through our hands was pure magic. Every piece we have created, since day one, was born with a name, a story, and a purpose. And every person who received one told us the same thing: \"How did you know exactly what I needed?\"\n\nToday, more than 15,000 Guardians live in 45+ countries. Everything is still made by hand. Everything still comes out of the same studio. And every channeled letter still reaches exactly where it needs to reach.",
-        "signature": "With love from Piriápolis · Gabriel & Thibisay · Since 2015"
+        "story": "Somos Gabriel y Thibisay. Una familia de 5 que eligió vivir en Piriápolis — la ciudad alquimista de Uruguay — y que en 2015 descubrió algo que no estaba en ningún plan: la capacidad de canalizar seres elementales a través del uso y la transformación de distintos materiales.\n\nSin formación artística formal, sin inversores, sin fórmulas. Solo intuición, silencio y la certeza de que lo que fluía por nuestras manos era magia pura. Cada pieza que creamos, desde el primer día, nació con nombre, historia y propósito. Y cada persona que recibió una nos dijo lo mismo: \"¿Cómo supieron exactamente lo que necesitaba?\"\n\nHoy, más de 15.000 Guardianes viven en más de 45 países. Todo sigue hecho a mano. Todo sigue saliendo del mismo taller. Y cada carta canalizada sigue llegando exactamente donde tiene que llegar.",
+        "signature": "Con amor desde Piriápolis · Gabriel y Thibisay · Desde 2015"
       }
     },
     "regalar": {
@@ -573,15 +573,15 @@
         "g1": {
           "type": "gift_option",
           "settings": {
-            "title": "Special Gift",
-            "description": "We send the channeling form to the person receiving it. Even though they already know they will receive a gift… the message will be 100% personal for that person, and they will be amazed."
+            "title": "Regalo especial",
+            "description": "Le mandamos el formulario de canalización a quien lo va a recibir. Aunque ya sepa que le van a hacer un regalo… el mensaje va a ser 100 % personal para esa persona, y se va a sorprender."
           }
         },
         "g2": {
           "type": "gift_option",
           "settings": {
-            "title": "Surprise Gift",
-            "description": "If you want it to be 100% a surprise… You fill out a special form about the person. We prepare our magics and they only find out when they open the package."
+            "title": "Regalo sorpresa",
+            "description": "Si querés que sea 100 % sorpresa… vos completás un formulario especial sobre la persona. Preparamos nuestras magias y solo se entera cuando abre el paquete."
           }
         }
       },
@@ -593,15 +593,15 @@
         "theme": "light",
         "photo_position": "left",
         "image": "shopify://shop_images/36F7C457-3C5B-45F4-9FDA-5FE507BE3997.png",
-        "label": "Gift Magic… YES, Guardians can be acquired by you, or as a gift from someone else.",
-        "title": "The gift that changes the day. And sometimes, a life.",
-        "body": "Gifting one of our Guardians is not a common gift. It's a complete experience: personal channeled letter, activation ritual, certificate, and digital portal. The person who receives it will never forget the moment they received this very special detail.",
+        "label": "Magia para regalar… SÍ, los Guardianes los podés comprar vos, o recibirlos de regalo de otra persona.",
+        "title": "El regalo que cambia el día. Y a veces, una vida.",
+        "body": "Regalar uno de nuestros Guardianes no es un regalo común. Es una experiencia completa: carta canalizada personal, ritual de activación, certificado y portal digital. Quien lo recibe no olvida el momento en que recibió este detalle tan especial.",
         "counter_text": "",
         "small_text": "",
         "quote": "",
         "quote_author": "",
         "show_gift_options": true,
-        "cta_text": "Gift a Guardian",
+        "cta_text": "Regalar un Guardián",
         "cta_url": "shopify://collections/tienda-magica"
       }
     },
@@ -612,40 +612,40 @@
           "type": "step",
           "settings": {
             "icon": "search",
-            "title": "1. Choose Your Guardian",
-            "description": "Browse the shop or take the Guardian Test. When one (or more) stops you, don't ignore it — that is the sign."
+            "title": "1. Elegí a tu Guardián",
+            "description": "Recorré la tienda o hacé el Test del Guardián. Cuando uno (o más) te frene, no lo ignores — esa es la señal."
           }
         },
         "p2": {
           "type": "step",
           "settings": {
             "icon": "form",
-            "title": "2. Tell us your moment",
-            "description": "After purchase you receive a brief form. Your answer is the foundation of the channeling."
+            "title": "2. Contanos tu momento",
+            "description": "Después de la compra recibís un formulario breve. Tu respuesta es la base de la canalización."
           }
         },
         "p3": {
           "type": "step",
           "settings": {
             "icon": "channel",
-            "title": "3. We channel your message",
-            "description": "We connect with the energy of your Guardian. What flows is a letter that only makes sense to you."
+            "title": "3. Canalizamos tu mensaje",
+            "description": "Nos conectamos con la energía de tu Guardián. Lo que fluye es una carta que solo tiene sentido para vos."
           }
         },
         "p4": {
           "type": "step",
           "settings": {
             "icon": "letter",
-            "title": "4. Your personal letter",
-            "description": "A sealed letter with words we don't choose. Read it in a moment of silence — you will understand why."
+            "title": "4. Tu carta personal",
+            "description": "Una carta sellada con palabras que nosotros no elegimos. Leela en un momento de silencio — vas a entender por qué."
           }
         },
         "p5": {
           "type": "step",
           "settings": {
             "icon": "ship",
-            "title": "5. Arrives at your door",
-            "description": "DHL Express international (5-10 days after the channeling) or DAC in Uruguay (2-3 days after the channeling). With full tracking."
+            "title": "5. Llega a tu puerta",
+            "description": "DHL Express internacional (5-10 días después de la canalización) o DAC en Uruguay (2-3 días después de la canalización). Con seguimiento completo."
           }
         }
       },
@@ -658,8 +658,8 @@
       ],
       "settings": {
         "color_scheme": "",
-        "eyebrow": "FROM THE STUDIO TO YOUR HOME",
-        "heading": "From our studio to your hands",
+        "eyebrow": "DEL TALLER A TU CASA",
+        "heading": "De nuestro taller a tus manos",
         "background_image": "shopify://shop_images/1049.jpg"
       }
     },
@@ -670,48 +670,48 @@
           "type": "item",
           "settings": {
             "icon": "guardian",
-            "title": "Your One-of-a-Kind Guardian",
-            "description": "Hand-crafted sculpture made entirely by hand. Each one exists only once in the world. With authentic natural crystals."
+            "title": "Tu Guardián irrepetible",
+            "description": "Escultura hecha enteramente a mano. Cada uno existe una sola vez en el mundo. Con cristales naturales auténticos."
           }
         },
         "inc2": {
           "type": "item",
           "settings": {
             "icon": "letter",
-            "title": "Personal Channeled Letter",
-            "description": "A message we don't write — it flows through us for you. The words always reach where they need to reach."
+            "title": "Carta canalizada personal",
+            "description": "Un mensaje que nosotros no escribimos — fluye a través nuestro para vos. Las palabras siempre llegan donde tienen que llegar."
           }
         },
         "inc3": {
           "type": "item",
           "settings": {
             "icon": "crystal",
-            "title": "Certificate of Authenticity",
-            "description": "Name, essence, element, crystals, powers, and the complete story of your Guardian. Signed and documented."
+            "title": "Certificado de autenticidad",
+            "description": "Nombre, esencia, elemento, cristales, poderes e historia completa de tu Guardián. Firmado y documentado."
           }
         },
         "inc4": {
           "type": "item",
           "settings": {
             "icon": "shield",
-            "title": "Activation Ritual",
-            "description": "Step-by-step guide to seal the connection with your Guardian. The most intimate and powerful moment of the entire experience."
+            "title": "Ritual de activación",
+            "description": "Guía paso a paso para sellar la conexión con tu Guardián. El momento más íntimo y poderoso de toda la experiencia."
           }
         },
         "inc5": {
           "type": "item",
           "settings": {
             "icon": "heart",
-            "title": "Premium Packaging",
-            "description": "Handcrafted box. Your Guardian travels like the work of art it is. The unboxing is part of the ritual."
+            "title": "Empaque premium",
+            "description": "Caja artesanal. Tu Guardián viaja como la obra de arte que es. El unboxing es parte del ritual."
           }
         },
         "inc6": {
           "type": "item",
           "settings": {
             "icon": "star",
-            "title": "Mi Magia Portal",
-            "description": "Lifetime access to guides, rituals, meditations, and exclusive content for adopters. Your connection doesn't end — it deepens."
+            "title": "Portal Mi Magia",
+            "description": "Acceso de por vida a guías, rituales, meditaciones y contenido exclusivo para quienes adoptaron. La conexión no termina — se profundiza."
           }
         }
       },
@@ -725,9 +725,9 @@
       ],
       "settings": {
         "color_scheme": "",
-        "eyebrow": "ALL OF THIS IS YOURS",
-        "title": "What you receive with your Guardian",
-        "subtitle": "You don't receive \"a decorative figure\" — you receive a complete experience of connection that includes everything you need.",
+        "eyebrow": "TODO ESTO ES TUYO",
+        "title": "Qué recibís con tu Guardián",
+        "subtitle": "No recibís \"una figura decorativa\" — recibís una experiencia completa de conexión que incluye todo lo que necesitás.",
         "side_image": "shopify://shop_images/1412.jpg"
       }
     },
@@ -735,8 +735,8 @@
       "type": "duendes-guarantee",
       "settings": {
         "color_scheme": "",
-        "title": "Your Guardian arrives in perfect condition anywhere in the world.",
-        "subtitle": "Each piece travels with packaging designed to protect it. If something goes wrong along the way (although honestly… it has never happened to us), we resolve it.",
+        "title": "Tu Guardián llega en perfecto estado a cualquier parte del mundo.",
+        "subtitle": "Cada pieza viaja con un empaque pensado para protegerla. Si algo sale mal en el camino (aunque honestamente… nunca nos pasó), lo resolvemos.",
         "background_image": "shopify://shop_images/1329.jpg"
       }
     },
@@ -746,36 +746,36 @@
         "q1": {
           "type": "question",
           "settings": {
-            "question": "What is a channeled Guardian?",
-            "answer": "An elemental being hand-sculpted, that moves through processes of alchemy and transformation, arriving with a personal channeled letter — a message that flows through us and only makes sense to you… it stops being a simple decorative figure, becoming an ally with the energy of Mother Earth that sought to connect with you to walk together through part of your evolution and theirs, since it is a mutual collaboration."
+            "question": "¿Qué es un Guardián canalizado?",
+            "answer": "Un ser elemental esculpido a mano, que atraviesa procesos de alquimia y transformación, y llega con una carta canalizada personal — un mensaje que fluye a través nuestro y solo tiene sentido para vos… deja de ser una figura decorativa simple y se convierte en un aliado con la energía de la Madre Tierra que buscó conectar con vos para caminar juntos una parte de tu evolución y la suya, porque es una colaboración mutua."
           }
         },
         "q2": {
           "type": "question",
           "settings": {
-            "question": "Do you ship worldwide?",
-            "answer": "Yes. We ship worldwide. Your Guardian travels with premium protection."
+            "question": "¿Hacen envíos a todo el mundo?",
+            "answer": "Sí. Enviamos a todo el mundo. Tu Guardián viaja con protección premium."
           }
         },
         "q3": {
           "type": "question",
           "settings": {
-            "question": "Can I choose what the letter says?",
-            "answer": "No. The letter is channeled — we don't choose the words. What arrives is exactly what you need to hear, even if you don't yet know it."
+            "question": "¿Puedo elegir lo que dice la carta?",
+            "answer": "No. La carta está canalizada — nosotros no elegimos las palabras. Lo que llega es exactamente lo que necesitás escuchar, aunque todavía no lo sepas."
           }
         },
         "q4": {
           "type": "question",
           "settings": {
-            "question": "Can I gift it?",
-            "answer": "Yes, and it's the most transformative gift that exists. It comes with a personalized channeled letter for whoever receives it. You can choose surprise gift or open gift."
+            "question": "¿Puedo regalarlo?",
+            "answer": "Sí, y es el regalo más transformador que existe. Viene con una carta canalizada personalizada para quien lo recibe. Podés elegir regalo sorpresa o regalo abierto."
           }
         },
         "q5": {
           "type": "question",
           "settings": {
-            "question": "Why is each Guardian one-of-a-kind?",
-            "answer": "Because they are sculpted by hand without molds, between 20 and 60 hours each. Our intention is to give you something authentic, one-of-a-kind, and exceptional."
+            "question": "¿Por qué cada Guardián es único?",
+            "answer": "Porque se esculpen a mano sin moldes, entre 20 y 60 horas cada uno. Nuestra intención es darte algo auténtico, irrepetible y excepcional."
           }
         }
       },
@@ -788,8 +788,8 @@
       ],
       "settings": {
         "color_scheme": "",
-        "eyebrow": "ANSWERS",
-        "heading": "What people ask us most"
+        "eyebrow": "RESPUESTAS",
+        "heading": "Lo que más nos preguntan"
       }
     },
     "cta-final": {
@@ -799,7 +799,7 @@
           "type": "badge",
           "settings": {
             "icon": "shield",
-            "text": "SECURE SSL CHECKOUT"
+            "text": "PAGO SEGURO SSL"
           }
         },
         "b2": {
@@ -813,7 +813,7 @@
           "type": "badge",
           "settings": {
             "icon": "check",
-            "text": "+15,000 GUARDIANS ADOPTED"
+            "text": "+15.000 GUARDIANES ADOPTADOS"
           }
         }
       },
@@ -824,14 +824,14 @@
       ],
       "settings": {
         "color_scheme": "",
-        "eyebrow": "NO REFILL",
-        "title_line1": "Are you going to let",
-        "title_line2": "someone else take them?",
-        "subtitle": "If you reached this far, something brought you. There are Guardians who disappear the same day they are born — and others who wait months for the right person. Yours is there. But it won't wait forever — remember they also seek to evolve and can't let opportunities pass, just as you shouldn't either.",
-        "shipping_text": "DHL Express worldwide · DAC in Uruguay · Full tracking",
-        "primary_text": "Find My Guardian",
+        "eyebrow": "SIN REPOSICIÓN",
+        "title_line1": "¿Vas a dejar que",
+        "title_line2": "otro se los lleve?",
+        "subtitle": "Si llegaste hasta acá, algo te trajo. Hay Guardianes que desaparecen el mismo día en que nacen — y otros que esperan meses a la persona indicada. El tuyo está ahí. Pero no va a esperar para siempre — acordate que ellos también buscan evolucionar y no pueden dejar pasar oportunidades, como vos tampoco deberías.",
+        "shipping_text": "DHL Express a todo el mundo · DAC en Uruguay · Seguimiento completo",
+        "primary_text": "Encontrar a mi Guardián",
         "primary_url": "shopify://collections/tienda-magica",
-        "secondary_text": "Take the Free Test",
+        "secondary_text": "Hacer el test gratuito",
         "secondary_url": "shopify://pages/test-del-guardian",
         "background_image": "shopify://shop_images/2.jpg"
       }
@@ -840,8 +840,8 @@
       "type": "duendes-whatsapp",
       "settings": {
         "phone": "59898690629",
-        "text": "Questions? Write to us",
-        "subtext": "We respond promptly. There may be delays due to high message volume."
+        "text": "¿Dudas? Escribinos",
+        "subtext": "Respondemos a la brevedad. Puede haber demoras si hay mucho volumen de mensajes."
       }
     },
     "social-proof": {
@@ -853,21 +853,21 @@
     "sticky-cta": {
       "type": "duendes-sticky-cta",
       "settings": {
-        "highlight": "12 guardians",
+        "highlight": "12 guardianes",
         "text": "disponibles ahora",
-        "cta_text": "SEE GUARDIANS",
+        "cta_text": "VER GUARDIANES",
         "cta_url": "shopify://collections/tienda-magica"
       }
     },
     "ddu-nuevos-guardianes": {
       "type": "duendes-nuevos-guardianes",
       "settings": {
-        "badge": "Just arrived · May 2026",
-        "title": "They just came down to the Forest.",
-        "subtitle": "Forty-six newly channeled. Each one one-of-a-kind, handmade only once. The one for you is already here, waiting.",
-        "cta_text": "See who arrived",
+        "badge": "Recién llegados · mayo 2026",
+        "title": "Recién bajaron al Bosque.",
+        "subtitle": "Cuarenta y seis recién canalizados. Cada uno irrepetible, hecho a mano una sola vez. El tuyo ya está acá, esperando.",
+        "cta_text": "Ver quiénes llegaron",
         "cta_url": "/collections/nuevos-guardianes",
-        "see_all_text": "See all 46",
+        "see_all_text": "Ver los 46",
         "collection": "nuevos-guardianes",
         "rotate_seconds": 5
       }
@@ -875,20 +875,20 @@
     "ddu-te-eligen": {
       "type": "duendes-te-eligen",
       "settings": {
-        "badge": "Takes you 2 minutes",
-        "title": "You don't choose. They choose you.",
-        "subtitle": "The one that arrives at your home isn't the one you liked most on the screen. It's the one that recognized your energy. Take the Guardian Test and see which ones already know your name.",
-        "cta_text": "Take the Test",
+        "badge": "Te lleva 2 minutos",
+        "title": "Vos no elegís. Ellos te eligen a vos.",
+        "subtitle": "El que llega a tu casa no es el que más te gustó en la pantalla. Es el que reconoció tu energía. Hacé el Test del Guardián y mirá cuáles ya saben tu nombre.",
+        "cta_text": "Hacer el test",
         "cta_url": "/pages/test-del-guardian"
       }
     },
     "ddu-llegaron-hadas": {
       "type": "duendes-llegaron-hadas",
       "settings": {
-        "badge": "New category in the Forest",
-        "title": "For the first time: the Fairies.",
-        "subtitle": "Twelve medium fairies. An energy finer than a Guardian's, lighter than a Pixie's. They asked for their turn months ago. They are here.",
-        "cta_text": "Meet the Fairies",
+        "badge": "Nueva categoría en el Bosque",
+        "title": "Por primera vez: las Hadas.",
+        "subtitle": "Doce hadas medianas. Una energía más fina que la de un Guardián, más liviana que la de un Pixie. Hace meses que pedían su turno. Ya están acá.",
+        "cta_text": "Conocer a las Hadas",
         "cta_url": "/collections/hadas-medianas",
         "collection": "hadas-medianas"
       }
