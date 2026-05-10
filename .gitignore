@@ -5,3 +5,6 @@
 
 # macOS
 .DS_Store
+
+# Export Claude (supera límite 100 MB de GitHub)
+brand e info/conversations.json
