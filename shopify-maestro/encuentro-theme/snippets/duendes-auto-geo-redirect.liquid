@@ -1,0 +1,270 @@
+{%- comment -%}
+  --- Para el dueño de la tienda (no hace falta tocar este archivo) ---
+  Encender o apagar: Tema → Ajustes del tema → grupo "Duendes" →
+  casilla "Redirección geo al español". Ahí el tema explica qué hace.
+
+  ============================================================
+  DDU AUTO-GEO REDIRECT 2026-05-08 (deep links 2026-05-10)
+  Redirige al subfolder español del mercado según país (IP).
+  El idioma primario del tema suele ser inglés en la raíz (/),
+  pero si el visitante corresponde a un mercado hispano y sigue
+  en esa raíz (colección, producto, página…), se envía a la misma
+  ruta bajo /es-uy/, /es-mx/, etc., para que no vea mezcla EN+ES.
+
+  2026-05-11 — Tráfico: NO redirige si la URL trae parámetros utm_*
+  (campañas) ni fbclid/gclid/msclkid/ttclid. Solo aplica redirect
+  profundo cuando el referrer es vacío (directo), mismo sitio, u
+  origen tipo buscador (orgánico). Referrer social u otros: sin redirect.
+
+  Solo activo si hay Markets/idiomas configurados en Admin (evita
+  URLs /es-*/ inexistentes). En el editor del tema no corre.
+  ============================================================
+
+  Estrategia híbrida (lo más rápido y robusto):
+  1. SERVER-SIDE primero: usa localization.country.iso_code que
+     Shopify ya tiene resuelto antes de renderizar la página
+     → cero flash, redirect inmediato.
+  2. CLIENT-SIDE fallback: si el server no detectó (caché,
+     CDN edge, etc.), reutiliza el cache `duendes_geo_v2` que
+     ya setea duendes-currency-converter.liquid.
+  3. ÚLTIMA OPCIÓN: llama a geojs.io con timeout 2.5s.
+
+  Reglas:
+  - Misma ruta en el mercado español (ej. /collections/x → /es-uy/collections/x).
+  - Solo si la página actual usa la URL del idioma primario del tema
+    (típico inglés sin prefijo); si ya está en /es-mx/ u otro, no se fuerza.
+  - Sin utm_* ni ids de clic de anuncios; solo directo / orgánico / mismo host.
+  - Respeta elección manual (?lang=en, ?keep_lang=1).
+  - Si eligió inglés (localStorage o sessionStorage dduPreferEn), no redirigir
+    hasta que vuelva a español en el selector. ?keep_lang=1 guarda esa preferencia.
+  - Países sin mapeo quedan en la raíz del idioma primario.
+
+  Mapa de países hispanohablantes → subfolder de su mercado:
+    UY → /es-uy/    MX → /es-mx/    AR → /es-ar/    CL → /es-cl/
+    CO → /es-co/    BR → /es-br/    ES → /es-es/
+    LATAM (BO, CR, EC, SV, GT, HN, NI, PA, PY, PE, DO, VE) → /es-lat/
+{%- endcomment -%}
+
+{%- liquid
+  assign ddu_geo_enabled = settings.duendes_enable_geo_redirect
+  if ddu_geo_enabled == nil
+    assign ddu_geo_enabled = true
+  endif
+  assign ddu_geo_markets_ready = false
+  if localization.available_countries.size > 1 or localization.available_languages.size > 1
+    assign ddu_geo_markets_ready = true
+  endif
+-%}
+
+{%- unless ddu_geo_enabled -%}
+  {%- comment -%} Desactivado en Personalizar tema. {%- endcomment -%}
+{%- elsif ddu_geo_markets_ready == false -%}
+  {%- comment -%} Un solo país e idioma: sin redirección hasta que configures Mercados. {%- endcomment -%}
+{%- elsif request.design_mode -%}
+  {%- comment -%} Editor de tema: no redirigir. {%- endcomment -%}
+{%- else -%}
+
+{%- liquid
+  assign ddu_geo_target = blank
+  assign country_iso = localization.country.iso_code
+
+  case country_iso
+    when 'UY'
+      assign ddu_geo_target = '/es-uy/'
+    when 'MX'
+      assign ddu_geo_target = '/es-mx/'
+    when 'AR'
+      assign ddu_geo_target = '/es-ar/'
+    when 'CL'
+      assign ddu_geo_target = '/es-cl/'
+    when 'CO'
+      assign ddu_geo_target = '/es-co/'
+    when 'BR'
+      assign ddu_geo_target = '/es-br/'
+    when 'ES'
+      assign ddu_geo_target = '/es-es/'
+    when 'BO','CR','EC','SV','GT','HN','NI','PA','PY','PE','DO','VE'
+      assign ddu_geo_target = '/es-lat/'
+  endcase
+
+  assign ddu_primary_root = '/'
+  for language in localization.available_languages
+    if language.primary
+      assign ddu_primary_root = language.root_url | default: '/'
+      break
+    endif
+  endfor
+-%}
+
+<script>
+  // DDU Auto-Geo Redirect (server country: {{ country_iso | default: 'unknown' }})
+  (function() {
+    try {
+      var primaryRoot = {{ ddu_primary_root | default: '/' | json }};
+      var currentRoot = {{ routes.root_url | default: '/' | json }};
+      var serverTarget = {{ ddu_geo_target | json }};
+
+      function normRoot(r) {
+        var s = (r == null || r === '') ? '/' : String(r).trim();
+        if (s === '') return '/';
+        return s.replace(/\/+$/, '') || '/';
+      }
+
+      function buildUrl(marketRoot) {
+        var base = normRoot(marketRoot);
+        var path = window.location.pathname || '/';
+        var tail = base === '/' ? path : (base + path);
+        return tail + window.location.search + window.location.hash;
+      }
+
+      function preferEnIsSet() {
+        try {
+          if (localStorage.getItem('dduPreferEn') === '1') return true;
+          if (sessionStorage.getItem('dduPreferEn') === '1') return true;
+        } catch (e) {}
+        return false;
+      }
+      function setPreferEn() {
+        try {
+          localStorage.setItem('dduPreferEn', '1');
+          sessionStorage.setItem('dduPreferEn', '1');
+        } catch (e) {}
+      }
+
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('locale') === 'en' || params.get('lang') === 'en' || params.get('keep_lang') === '1') {
+        setPreferEn();
+        return;
+      }
+
+      if (preferEnIsSet()) return;
+
+      if (/^\/(cart|checkout|orders|account\/challenge)(\/?|$)/i.test(window.location.pathname)) return;
+
+      /**
+       * Redirección geo profunda solo para tráfico directo u orgánico (buscador).
+       * Pausa con utm_* y con ids típicos de anuncios (sin depender solo de utm).
+       */
+      function dduGeoTrafficAllowsDeepRedirect() {
+        var blockedParam = false;
+        params.forEach(function (_v, key) {
+          var k = String(key || '').toLowerCase();
+          if (k.indexOf('utm_') === 0) blockedParam = true;
+        });
+        if (blockedParam) return false;
+        if (params.get('fbclid') || params.get('gclid') || params.get('msclkid') || params.get('ttclid')) {
+          return false;
+        }
+
+        var ref = document.referrer || '';
+        if (!ref) return true;
+
+        try {
+          var ru = new URL(ref);
+          var host = ru.hostname.replace(/^www\./i, '').toLowerCase();
+          var here = (window.location.hostname || '').replace(/^www\./i, '').toLowerCase();
+          if (host === here) return true;
+
+          if (host.indexOf('mail.google') !== -1) return false;
+          if (/doubleclick|googleadservices|googlesyndication|gclid|googleads\./.test(host)) return false;
+
+          if (host === 'google.com' || host.indexOf('google.') !== -1) return true;
+          if (host === 'bing.com' || host.endsWith('.bing.com')) return true;
+          if (host.indexOf('duckduckgo') !== -1) return true;
+          if (host.indexOf('yahoo.com') !== -1 && host.indexOf('mail.yahoo') === -1) return true;
+          if (host.indexOf('yandex.') !== -1 || host.indexOf('baidu.com') !== -1) return true;
+          if (host.indexOf('ecosia') !== -1 || host.indexOf('startpage') !== -1) return true;
+          if (host.indexOf('search.brave') !== -1) return true;
+
+          if (
+            /facebook|fbcdn|instagram|igcdn|tiktok|pinterest|t\.co|twitt|(^|\.)x\.com|reddit|snapchat|linkedin|youtube|youtu\.be|discord|t\.me|telegram|whatsapp|threads\.|medium\.com/.test(
+              host
+            )
+          ) {
+            return false;
+          }
+
+          return false;
+        } catch (e2) {
+          return false;
+        }
+      }
+
+      if (!dduGeoTrafficAllowsDeepRedirect()) return;
+
+      var ESP_REDIRECTS = {
+        UY: '/es-uy/', MX: '/es-mx/', AR: '/es-ar/', CL: '/es-cl/',
+        CO: '/es-co/', BR: '/es-br/', ES: '/es-es/',
+        BO: '/es-lat/', CR: '/es-lat/', EC: '/es-lat/', SV: '/es-lat/',
+        GT: '/es-lat/', HN: '/es-lat/', NI: '/es-lat/', PA: '/es-lat/',
+        PY: '/es-lat/', PE: '/es-lat/', DO: '/es-lat/', VE: '/es-lat/'
+      };
+
+      function shouldGeoRedirect(targetMarketRoot) {
+        if (!targetMarketRoot) return false;
+        if (normRoot(currentRoot) === normRoot(targetMarketRoot)) return false;
+        if (normRoot(currentRoot) !== normRoot(primaryRoot)) return false;
+        return true;
+      }
+
+      function doRedirect(targetMarketRoot) {
+        if (!shouldGeoRedirect(targetMarketRoot)) return;
+        window.location.replace(buildUrl(targetMarketRoot));
+      }
+
+      if (serverTarget && serverTarget !== '') {
+        doRedirect(serverTarget);
+        return;
+      }
+
+      var cachedCountry = sessionStorage.getItem('duendes_geo_v2');
+      if (cachedCountry && ESP_REDIRECTS[cachedCountry]) {
+        doRedirect(ESP_REDIRECTS[cachedCountry]);
+        return;
+      }
+
+      var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+      var tid = setTimeout(function() { if (ctrl) ctrl.abort(); }, 2500);
+
+      fetch('https://get.geojs.io/v1/ip/country.json', ctrl ? { signal: ctrl.signal } : {})
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(data) {
+          clearTimeout(tid);
+          var code = (data && data.country) ? data.country : null;
+          if (code) {
+            sessionStorage.setItem('duendes_geo_v2', code);
+            if (ESP_REDIRECTS[code]) doRedirect(ESP_REDIRECTS[code]);
+          }
+        })
+        .catch(function() { clearTimeout(tid); });
+    } catch (e) {}
+  })();
+</script>
+<script>
+  (function () {
+    try {
+      document.addEventListener(
+        'change',
+        function (e) {
+          var t = e.target;
+          if (!t || t.name !== 'language_code') return;
+          var v = (t.value || '').toLowerCase();
+          if (v.indexOf('en') === 0) {
+            try {
+              localStorage.setItem('dduPreferEn', '1');
+              sessionStorage.setItem('dduPreferEn', '1');
+            } catch (e) {}
+          } else {
+            try {
+              localStorage.removeItem('dduPreferEn');
+              sessionStorage.removeItem('dduPreferEn');
+            } catch (e) {}
+          }
+        },
+        true
+      );
+    } catch (e) {}
+  })();
+</script>
+
+{%- endunless -%}
