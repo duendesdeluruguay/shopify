@@ -79,8 +79,8 @@
 </script>
 <script>
 (function() {
-  // Triggers (2026-05-11): scroll ≥50% del documento, O exit-intent solo desktop (pointer fino),
-  // O fallback 45s. Sin mouseleave en táctil (evitaba popup a los 1–2s en mobile).
+  // Triggers (2026-05-12): scroll ≥75% del documento, O exit-intent solo desktop (pointer fino),
+  // O fallback 60–90s aleatorio. Sin mouseleave en táctil (evitaba popup a los 1–2s en mobile).
   if (sessionStorage.getItem('dduPopupShown')) return;
   
   var backdrop = document.getElementById('dduPopupBackdrop');
@@ -136,10 +136,11 @@
   }
 
   var scrollOpts = { passive: true };
+  var fallbackMs = 60000 + Math.floor(Math.random() * 30001);
   var fallbackTimer = setTimeout(function() {
     if (!armed) return;
     show();
-  }, 45000);
+  }, fallbackMs);
 
   window.addEventListener('scroll', onScroll, scrollOpts);
   document.addEventListener('mouseleave', onMouseLeave);
