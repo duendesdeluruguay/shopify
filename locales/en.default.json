@@ -345,6 +345,7 @@
     "nav_magic_shop": "Magic Shop",
     "card_no_image": "Image coming soon",
     "global": {
+      "announcement_bar": "International shipping with tracking · 5 to 10 business days",
       "footer_newsletter_h2_html": "<h2>Forest letters</h2>",
       "footer_newsletter_p_html": "<p>Stories, arrivals, and ritual notes — no spam, ever.</p>",
       "newsletter_button": "Subscribe"

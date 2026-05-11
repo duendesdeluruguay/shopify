@@ -351,6 +351,7 @@
     "nav_magic_shop": "Tienda Mágica",
     "card_no_image": "Imagen próximamente",
     "global": {
+      "announcement_bar": "Envío internacional con tracking · 5 a 10 días hábiles",
       "footer_newsletter_h2_html": "<h2>Cartas del Bosque</h2>",
       "footer_newsletter_p_html": "<p>Novedades, llegadas y notas del ritual — sin spam.</p>",
       "newsletter_button": "Suscribirme"
