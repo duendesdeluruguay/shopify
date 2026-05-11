@@ -311,13 +311,9 @@
   position: relative;
   z-index: 1;
 }
-@media (max-width: 1024px) {
-  .duendes-hero { flex-direction: column; }
-  .duendes-hero-media,
-  .duendes-hero-content { width: 100%; }
-  .duendes-hero-media { height: 50vh; }
-  .duendes-hero-content { padding: 48px 28px; }
-}
+/* Nota 2026-05-11: el hero real usa .duendes-hero__video-wrap / __content (sections/duendes-hero.liquid).
+   Un @media ≤1024px con flex-direction:column aquí rompía el layout (50% + 50% en columna = mitad vacía).
+   Estilos responsive del hero viven en la sección; clases -media/-content quedan por si se reutilizan. */
 
 /* ===== GUARDIANS CAROUSEL ===== */
 .duendes-guardians {
@@ -1346,26 +1342,6 @@
     40%, 100% { transform: translateX(100%); }
   }
 }
-
-/* ═══════════════════════════════════════
-   FIX 5 (2026-05-01) — Botón Test del Guardián en Hero home
-   ═══════════════════════════════════════ */
-.duendes-hero__test-cta-wrap { margin-top: 14px; display: flex; justify-content: center; }
-.duendes-hero__btn-test {
-  display: block; width: 100%; max-width: 320px;
-  padding: 14px 32px;
-  border: 1.5px solid rgba(201,168,76,0.6); border-radius: 6px;
-  color: var(--gold-lt, #dfc472);
-  font-family: var(--serif, 'Cormorant Garamond', serif);
-  font-size: 13px; letter-spacing: 1.5px;
-  text-align: center; text-decoration: none;
-  background: transparent; transition: all 0.4s;
-}
-.duendes-hero__btn-test:hover {
-  background: rgba(201,168,76,0.08);
-  border-color: var(--gold, #c9a84c); color: #fff;
-}
-@media (max-width: 768px) { .duendes-hero__btn-test { max-width: 100%; } }
 
 /* ═══════════════════════════════════════
    FIX 7 (2026-05-01) — CTA final de Nuestra Historia
