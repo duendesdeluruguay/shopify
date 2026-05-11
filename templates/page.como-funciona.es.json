@@ -1,0 +1,129 @@
+{
+  "sections": {
+    "main": {
+      "type": "duendes-como-funciona",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "El encuentro",
+            "description": "Hacé el Test del Guardián o recorré la tienda. Mirá, sentí, dejate llevar. Algo te frena en uno: puede ser la mirada, el nombre, la esencia. Esa pausa no es casualidad.",
+            "image": "shopify://shop_images/1569.jpg"
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Tu historia",
+            "description": "Cuando adoptás, contás quién recibe la pieza y los datos logísticos que necesitamos. Eso cierra el Encuentro — información real, no un formulario genérico, para despachar y abrir Mi Magia bien.",
+            "image": "shopify://shop_images/1656.jpg"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "El taller",
+            "description": "Gabriel y Thibisay cierran el trabajo de estudio sobre el Guardián que elegiste. Puede haber nota escrita a mano que viaja con la adopción, pero ya no mandamos canalización escrita personalizada día por día por email.",
+            "image": "shopify://shop_images/690.jpg"
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "La preparación",
+            "description": "Tu Guardián se prepara con ritual de sahumerio, cristales y la intención de proteger cada paso del camino. Viaja embalado con materiales que lo cuidan.",
+            "image": "shopify://shop_images/1653.jpg"
+          }
+        },
+        "s5": {
+          "type": "step",
+          "settings": {
+            "title": "El viaje",
+            "description": "Envío internacional con tracking (5 a 10 días hábiles) y DAC en Uruguay (5 a 7 días). Recibís seguimiento para ver cada etapa.",
+            "image": "shopify://shop_images/1329.jpg"
+          }
+        },
+        "s6": {
+          "type": "step",
+          "settings": {
+            "title": "El verdadero encuentro",
+            "description": "Abrís el paquete, leés lo que mandó el estudio, hacés el ritual de activación y usás Mi Magia para las guías compartidas. Muchas dicen que ahí es cuando todo cambia.",
+            "image": "shopify://shop_images/1373.jpg"
+          }
+        },
+        "i1": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Guardián hecho a mano",
+            "description": "Irrepetible en el mundo."
+          }
+        },
+        "i2": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Carta del estudio",
+            "description": "Materiales escritos a mano que viajan con esta adopción — la misma entrega de taller para cada adoptante."
+          }
+        },
+        "i3": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Ritual de activación",
+            "description": "Guía paso a paso para sellar la conexión energética."
+          }
+        },
+        "i4": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Portal Mi Magia",
+            "description": "Acceso de por vida al portal digital con guías y contenido exclusivo."
+          }
+        },
+        "i5": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Certificado",
+            "description": "Certificado de originalidad y autenticidad firmado."
+          }
+        },
+        "i6": {
+          "type": "include_item",
+          "settings": {
+            "icon": "",
+            "title": "Empaque protector",
+            "description": "Embalaje pensado para que tu Guardián viaje seguro."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "s6",
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6"
+      ],
+      "settings": {
+        "eyebrow": "EL PROCESO",
+        "title": "Cómo funciona",
+        "subtitle": "Del primer encuentro al vínculo real. Seis pasos que lo cambian todo.",
+        "hero_image": "shopify://shop_images/2312.jpg",
+        "cta_text": "¿Lista para encontrar a tu Guardián?"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

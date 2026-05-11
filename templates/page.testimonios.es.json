@@ -1,0 +1,390 @@
+{
+  "sections": {
+    "main": {
+      "type": "duendes-testimonios-page",
+      "blocks": {
+        "feat_1": {
+          "type": "featured",
+          "settings": {
+            "quote": "Cuando abrí el paquete y leí mi carta, lloré. Era exactamente lo que necesitaba escuchar en ese momento. Mi Guardián Cedric está en mi altar y le hablo todas las mañanas. No puedo explicar la paz que siento desde que llegó.",
+            "name": "Mariana",
+            "location": "Buenos Aires, Argentina",
+            "guardian": "Cedric — Guardián de la intuición",
+            "photo": "shopify://shop_images/Gemini_Generated_Image_l9shkml9shkml9sh.png"
+          }
+        },
+        "t01": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Pedí a Abraham para mi mamá, que pasaba un momento difícil. Cuando leyó la carta canalizada, se desarmó. Dijo que por fin alguien la entendía. Desde entonces está en su mesa de luz.",
+            "name": "Valentina",
+            "location": "Montevideo, Uruguay",
+            "guardian": "Abraham — Guardián de la fuerza",
+            "category": "sanacion"
+          }
+        },
+        "t02": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Soy muy escéptica con estas cosas, pero algo en Aidan me llamó. Cuando llegó la carta, mencionaba cosas que nadie sabía. Casualidad o no, desde que está conmigo tomo mejores decisiones.",
+            "name": "Carolina",
+            "location": "Santiago, Chile",
+            "guardian": "Aidan — Guardián del fuego interior",
+            "category": "transformacion"
+          }
+        },
+        "t03": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Mi hija de 8 años eligió a Luna sin que yo dijera nada. Dice que la cuida cuando duerme. La forma en que conecta con algo mágico me conmueve.",
+            "name": "Sofía",
+            "location": "Lima, Perú",
+            "guardian": "Luna — Guardián de los sueños",
+            "category": "conexion"
+          }
+        },
+        "t04": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Ya tengo tres Guardianes y cada uno llegó en el momento justo. No los busco: ellos me encuentran. La canalización de Thibisay es un regalo.",
+            "name": "Diego",
+            "location": "Bogotá, Colombia",
+            "guardian": "Colección de 3 Guardianes",
+            "category": "magia"
+          }
+        },
+        "t05": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lo compré de decoración. No soy espiritual. Pero hay algo en estos duendes que te hace frenar y pensar. Mi oficina se siente distinta desde que está Rowan.",
+            "name": "Martín",
+            "location": "Mexico City, Mexico",
+            "guardian": "Rowan — Guardián de la sabiduría",
+            "category": "magia"
+          }
+        },
+        "t06": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "El tracking decía jueves y llegó miércoles. El envío, impecable. El paquete divino, todo protegido. Abrirlo es parte de la magia.",
+            "name": "Fernanda",
+            "location": "São Paulo, Brasil",
+            "guardian": "Ivy — Guardián del crecimiento",
+            "category": "magia"
+          }
+        },
+        "t07": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Regalé un Guardián a mi mejor amiga cuando perdió a su papá. La carta hablaba de él sin que nadie se lo dijera. Las dos quedamos en shock. No tiene explicación.",
+            "name": "Ana",
+            "location": "Madrid, Spain",
+            "guardian": "Sage — Guardián del consuelo",
+            "category": "sanacion"
+          }
+        },
+        "t08": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Hice el Test del Guardián y me tocó Briar. Leí su historia y lloré. Era exactamente mi situación. Cuando llegó, mi casa se sintió más segura. No hay otra forma de decirlo.",
+            "name": "Camila",
+            "location": "Quito, Ecuador",
+            "guardian": "Briar — Guardián de la protección",
+            "category": "proteccion"
+          }
+        },
+        "t09": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Llevo 15 años con cristales y reiki. Puedo decir que la energía de estos Guardianes es real. No es merchandising espiritual: hay algo genuino en cada pieza.",
+            "name": "Isabel",
+            "location": "Medellín, Colombia",
+            "guardian": "Thorne — Guardián de los límites",
+            "category": "conexion"
+          }
+        },
+        "t10": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Mi marido me regaló a Willow por nuestro aniversario. La carta decía cosas de nuestra relación que nadie podía saber. Ahora él también quiere el suyo.",
+            "name": "Laura",
+            "location": "Asunción, Paraguay",
+            "guardian": "Willow — Guardián del amor",
+            "category": "conexion"
+          }
+        },
+        "t11": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Tenía miedo de que se rompiera en el envío. Llegó perfecto. El empaque es una locura y el ritual de activación fue un momento que compartí con mi hija. Experiencia completa.",
+            "name": "Patricia",
+            "location": "San José, Costa Rica",
+            "guardian": "Fern — Guardián de la renovación",
+            "category": "magia"
+          }
+        },
+        "t12": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Adopté a Hazel cuando empecé terapia. Mi terapeuta dice que tener un objeto de vínculo ayuda. No sé si es el duende o la terapia, pero estoy mejor que nunca.",
+            "name": "Daniela",
+            "location": "Caracas, Venezuela",
+            "guardian": "Hazel — Guardián de la claridad",
+            "category": "sanacion"
+          }
+        },
+        "t13": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Soy artista y entiendo el trabajo detrás de cada pieza. Porcelana fría así, con cristales de verdad incrustados… esto no es un producto, es una obra.",
+            "name": "Gabriel M.",
+            "location": "Punta del Este, Uruguay",
+            "guardian": "Moss — Guardián de la creatividad",
+            "category": "magia"
+          }
+        },
+        "t14": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Compré desde Estados Unidos con envío internacional con tracking. En 6 días estaba en mi puerta. El proceso clarísimo y el soporte por WhatsApp excelente.",
+            "name": "Jennifer",
+            "location": "Miami, FL, USA",
+            "guardian": "Elm — Guardián de la estabilidad",
+            "category": "magia"
+          }
+        },
+        "t15": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Mi Guardián llegó la semana en que dejé el trabajo para emprender. La carta hablaba de soltar el miedo y confiar. Fue la confirmación que necesitaba. Hoy mi negocio crece.",
+            "name": "Roberto",
+            "location": "Panama City, Panama",
+            "guardian": "Phoenix — Guardián del renacer",
+            "category": "transformacion"
+          }
+        },
+        "t16": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Mi abuela de 82 años tiene a Oakley en su cuarto. Dice que desde que llega duerme mejor y siente que alguien la acompaña. Eso no tiene precio.",
+            "name": "Miguel",
+            "location": "Guadalajara, Mexico",
+            "guardian": "Oakley — Guardián del descanso",
+            "category": "proteccion",
+            "photo": "shopify://shop_images/1264.jpg"
+          }
+        },
+        "t17": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Estaba entre dos Guardianes y no decidía. Escribí por WhatsApp y Thibisay me ayudó a elegir. Su recomendación fue perfecta. Esa atención personal marca la diferencia.",
+            "name": "Andrea",
+            "location": "Córdoba, Argentina",
+            "guardian": "Clover — Guardián de la suerte",
+            "category": "conexion",
+            "photo": "shopify://shop_images/Gemini_Generated_Image_avw4exavw4exavw4.png"
+          }
+        },
+        "t18": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "A mi grupo de meditación le fascinó cuando llevé a Ember. Ahora tres tienen el suyo. Los Guardianes crean comunidad sin proponérselo.",
+            "name": "Alejandra",
+            "location": "Monterrey, Mexico",
+            "guardian": "Ember — Guardián del coraje",
+            "category": "conexion",
+            "photo": "shopify://shop_images/1613.jpg"
+          }
+        },
+        "t19": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Le regalé un Guardián a mi terapeuta. Ella, que ayuda a tantos, también necesita a alguien que la cuide. Me dijo que fue el regalo más significativo en años.",
+            "name": "Paula",
+            "location": "Rosario, Argentina",
+            "guardian": "Birch — Guardián del equilibrio",
+            "category": "sanacion"
+          }
+        },
+        "t20": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Vivo sola hace 5 años. Suena raro, pero desde que tengo a Grove siento que el depto tiene otra energía. Vuelvo del trabajo y me siento recibida.",
+            "name": "Tomás",
+            "location": "Valparaíso, Chile",
+            "guardian": "Grove — Guardián del hogar",
+            "category": "proteccion"
+          }
+        },
+        "t21": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Perdí a mi perra de 14 años y una amiga me mandó con Willow. La carta hablaba de soltar con amor. Lloré toda la noche pero por primera vez sentí que podía seguir.",
+            "name": "María José",
+            "location": "Santo Domingo, Rep. Dominicana",
+            "guardian": "Willow — Guardián del amor",
+            "category": "sanacion"
+          }
+        },
+        "t22": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Es el cuarto Guardián que adoptó. Mi familia piensa que estoy loca. Pero cada uno tiene su lugar y su propósito en mi casa. Son arte, energía y compañía. No pienso parar.",
+            "name": "Lucía",
+            "location": "La Paz, Bolivia",
+            "guardian": "Colección de 4 Guardianes",
+            "category": "magia"
+          }
+        },
+        "t23": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Compré a Flint cuando me diagnosticaron ansiedad. No sé si es placebo o qué, pero tocarlo en una crisis me calma. Mi psiquiatra dice que los objetos ancla funcionan.",
+            "name": "Andrés",
+            "location": "Guayaquil, Ecuador",
+            "guardian": "Flint — Guardián de la calma",
+            "category": "sanacion"
+          }
+        },
+        "t24": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Mi mamá colecciona figuras y cuando vio la calidad del Guardián dijo que nunca había visto nada igual. Los cristales, el detalle, la pintura… otro nivel.",
+            "name": "Santiago",
+            "location": "Mendoza, Argentina",
+            "guardian": "Reed — Guardián de la adaptación",
+            "category": "magia"
+          }
+        },
+        "t25": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Trabajo en un hospital y los días son duros. Mi Guardián está en mi locker y antes de cada turno lo toco. Es mi ritual. Me ayuda a recordar por qué hago lo que hago.",
+            "name": "Natalia",
+            "location": "Bogotá, Colombia",
+            "guardian": "Ash — Guardián de la resiliencia",
+            "category": "proteccion"
+          }
+        },
+        "t26": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "El ritual de activación fue un momento hermoso con mi pareja. Prendimos la vela, leímos la carta juntos. Fue como un mini matrimonio con magia.",
+            "name": "Claudia",
+            "location": "Curitiba, Brasil",
+            "guardian": "Glen — Guardián de la armonía",
+            "category": "conexion"
+          }
+        },
+        "t27": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Nunca escribo reseñas pero esto lo merece. La carta canalizada describió mi situación con una precisión que me asustó. Lo que hace Thibisay es real.",
+            "name": "Fernando",
+            "location": "Tegucigalpa, Honduras",
+            "guardian": "Sterling — Guardián de la verdad",
+            "category": "transformacion"
+          }
+        },
+        "t28": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Mi hijo de 12 años con autismo conectó con Moss de una forma que no conecta con la gente. Lo lleva a todos lados. Su terapeuta está fascinada con el vínculo.",
+            "name": "Verónica",
+            "location": "Montevideo, Uruguay",
+            "guardian": "Moss — Guardián de la creatividad",
+            "category": "conexion"
+          }
+        },
+        "t29": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "El Portal Mi Magia es un detalle que no esperaba. Las guías, las meditaciones, el contenido exclusivo… comprás un Guardián y recibís un universo entero.",
+            "name": "Renata",
+            "location": "Mexico City, Mexico",
+            "guardian": "Ivy — Guardián del crecimiento",
+            "category": "magia"
+          }
+        },
+        "t30": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Me mudé sola a otro país y mi Guardián fue lo primero que puse en el depto nuevo. Es mi pedacito de hogar. Cuando lo miro, sé que no estoy del todo sola.",
+            "name": "Valeria",
+            "location": "Barcelona, Spain",
+            "guardian": "Linden — Guardián de los nuevos comienzos",
+            "category": "transformacion"
+          }
+        },
+        "t31": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Mi novio no creía en nada de esto. Le regalé a Flint. Ahora él me cuenta que le habla antes de dormir. La magia no pide permiso.",
+            "name": "Romina",
+            "location": "Santa Cruz, Bolivia",
+            "guardian": "Flint — Guardián de la calma",
+            "category": "transformacion"
+          }
+        },
+        "t32": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Colecciono art toys y figuras. Esto está en otra liga. La artesanía, los cristales, la historia detrás… mis amigos no pueden creer que venga de Uruguay.",
+            "name": "Matías",
+            "location": "Buenos Aires, Argentina",
+            "guardian": "Alder — Guardián de la visión",
+            "category": "magia"
+          }
+        }
+      },
+      "block_order": [
+        "feat_1",
+        "t01",
+        "t02",
+        "t03",
+        "t04",
+        "t05",
+        "t06",
+        "t07",
+        "t08",
+        "t09",
+        "t10",
+        "t11",
+        "t12",
+        "t13",
+        "t14",
+        "t15",
+        "t16",
+        "t17",
+        "t18",
+        "t19",
+        "t20",
+        "t21",
+        "t22",
+        "t23",
+        "t24",
+        "t25",
+        "t26",
+        "t27",
+        "t28",
+        "t29",
+        "t30",
+        "t31",
+        "t32"
+      ],
+      "settings": {
+        "eyebrow": "HISTORIAS QUE NO SE INVENTAN",
+        "title": "No te lo contamos nosotros. Te lo cuentan ellos.",
+        "subtitle": "Miles de familias en 45 países ya sienten lo que vos estás por descubrir.",
+        "hero_image": "shopify://shop_images/1310.jpg",
+        "stat_adoptions": "15000+",
+        "stat_countries": "45+",
+        "stat_stars": "5.0",
+        "cta_text": "Si llegaste hasta acá leyendo, tu Guardián ya te está buscando."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

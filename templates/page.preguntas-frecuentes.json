@@ -379,14 +379,14 @@
           "type": "faq_item",
           "settings": {
             "question": "Which countries?",
-            "answer": "<p>Worldwide. We ship via DHL Express for international shipments and via DAC within Uruguay. Your Guardian arrives wherever you are.</p>"
+            "answer": "<p>Worldwide. We ship internationally with tracking and via DAC within Uruguay. Your Guardian arrives wherever you are.</p>"
           }
         },
         "faq_1055": {
           "type": "faq_item",
           "settings": {
             "question": "How long does it take?",
-            "answer": "<p>The complete process has three stages:</p><p><strong>1. Channeling (7 days):</strong> begins when you complete the <em>Recognition Encounter</em> in My Magic. Those 7 days are sacred — they're not rushed.</p><p><strong>2. Shipping:</strong> your Guardian leaves on the Friday closest to the end of the channeling. If you finish on a Tuesday, it ships that same Friday; if you finish on a Thursday, also.</p><p><strong>3. Transit:</strong> Uruguay 1-3 business days via DAC. International 5-10 business days via DHL Express with real-time tracking.</p>"
+            "answer": "<p>The complete process has three stages:</p><p><strong>1. Channeling (7 days):</strong> begins when you complete the <em>Recognition Encounter</em> in My Magic. Those 7 days are sacred — they're not rushed.</p><p><strong>2. Shipping:</strong> your Guardian leaves on the Friday closest to the end of the channeling. If you finish on a Tuesday, it ships that same Friday; if you finish on a Thursday, also.</p><p><strong>3. Transit:</strong> Uruguay 1-3 business days via DAC. International 5-10 business days with tracked shipping and real-time updates.</p>"
           }
         },
         "faq_1056": {
@@ -421,7 +421,7 @@
           "type": "faq_item",
           "settings": {
             "question": "What if I don&apos;t pick it up?",
-            "answer": "<p>IMPORTANT: wrong address / not picked up = return with very high costs. You don't want this to happen — pick up or receive on time. Because if you don't, and the package returns to Uruguay, there's a high re-shipping cost. And if you're abroad and your package comes back, you lose it — DHL sends it directly to destruction. Nobody wants that.</p>"
+            "answer": "<p>IMPORTANT: wrong address / not picked up = return with very high costs. You don't want this to happen — pick up or receive on time. Because if you don't, and the package returns to Uruguay, there's a high re-shipping cost. And if you're abroad and your package comes back, you may lose it — some carriers discard unclaimed international returns. Nobody wants that.</p>"
           }
         },
         "cat_1061": {

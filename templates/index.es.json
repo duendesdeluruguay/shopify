@@ -6,7 +6,7 @@
         "msg-1": {
           "type": "message",
           "settings": {
-            "text": "Envío internacional DHL Express · 5 a 10 días puerta a puerta"
+            "text": "Envío internacional con tracking · 5 a 10 días hábiles"
           }
         },
         "msg-2": {
@@ -123,7 +123,7 @@
             "title": "<em>+15.000</em> Guardianes ya encontraron hogar",
             "stat_number": "45+",
             "stat_label": "países",
-            "body": "De Piriápolis al mundo. Cada Guardián viaja por DHL Express si estás en el exterior, o DAC si estás en Uruguay, protegido como la obra de arte que es, con seguimiento en tiempo real.",
+            "body": "De Piriápolis al mundo. Cada Guardián viaja con envío internacional con tracking si estás en el exterior, o DAC si estás en Uruguay, protegido como la obra de arte que es, con seguimiento en tiempo real.",
             "cta_text": "TESTIMONIOS",
             "cta_url": "shopify://pages/testimonios"
           }
@@ -274,7 +274,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/1339.jpg",
-            "alt": "El paquete llega por DHL",
+            "alt": "El paquete llega a tu puerta",
             "icon": "—"
           }
         },
@@ -645,7 +645,7 @@
           "settings": {
             "icon": "ship",
             "title": "5. Llega a tu puerta",
-            "description": "DHL Express internacional (5-10 días después de la canalización) o DAC en Uruguay (2-3 días después de la canalización). Con seguimiento completo."
+            "description": "Envío internacional con tracking (5–10 días hábiles) o DAC en Uruguay (2–3 días después de la canalización). Con seguimiento completo."
           }
         }
       },
@@ -828,7 +828,7 @@
         "title_line1": "¿Vas a dejar que",
         "title_line2": "otro se los lleve?",
         "subtitle": "Si llegaste hasta acá, algo te trajo. Hay Guardianes que desaparecen el mismo día en que nacen — y otros que esperan meses a la persona indicada. El tuyo está ahí. Pero no va a esperar para siempre — acordate que ellos también buscan evolucionar y no pueden dejar pasar oportunidades, como vos tampoco deberías.",
-        "shipping_text": "DHL Express a todo el mundo · DAC en Uruguay · Seguimiento completo",
+        "shipping_text": "Envío mundial con tracking · DAC en Uruguay",
         "primary_text": "Encontrar a mi Guardián",
         "primary_url": "shopify://collections/tienda-magica",
         "secondary_text": "Hacer el test gratuito",

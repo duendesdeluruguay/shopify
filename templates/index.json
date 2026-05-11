@@ -6,7 +6,7 @@
         "msg-1": {
           "type": "message",
           "settings": {
-            "text": "International DHL Express shipping · 5 to 10 days door to door"
+            "text": "International shipping with tracking · 5 to 10 business days"
           }
         },
         "msg-2": {
@@ -123,7 +123,7 @@
             "title": "<em>+15,000</em> Guardians have already found a home",
             "stat_number": "45+",
             "stat_label": "countries",
-            "body": "From Piriápolis to the world. Each Guardian travels via DHL Express if you're abroad, or DAC if you're in Uruguay, protected like the work of art it is, with real-time tracking.",
+            "body": "From Piriápolis to the world. Each Guardian travels with international tracked shipping if you're abroad, or DAC if you're in Uruguay, protected like the work of art it is, with real-time tracking.",
             "cta_text": "TESTIMONIALS",
             "cta_url": "shopify://pages/testimonios"
           }
@@ -274,7 +274,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/1339.jpg",
-            "alt": "The package arrives via DHL",
+            "alt": "The package arrives at your door",
             "icon": "—"
           }
         },
@@ -645,7 +645,7 @@
           "settings": {
             "icon": "ship",
             "title": "5. Arrives at your door",
-            "description": "DHL Express international (5-10 days after the channeling) or DAC in Uruguay (2-3 days after the channeling). With full tracking."
+            "description": "International tracked shipping or DAC in Uruguay, with full tracking — timing follows the Encounter + portal window."
           }
         }
       },
@@ -828,7 +828,7 @@
         "title_line1": "Are you going to let",
         "title_line2": "someone else take them?",
         "subtitle": "If you reached this far, something brought you. There are Guardians who disappear the same day they are born — and others who wait months for the right person. Yours is there. But it won't wait forever — remember they also seek to evolve and can't let opportunities pass, just as you shouldn't either.",
-        "shipping_text": "DHL Express worldwide · DAC in Uruguay · Full tracking",
+        "shipping_text": "Worldwide shipping with tracking · DAC in Uruguay",
         "primary_text": "Find My Guardian",
         "primary_url": "shopify://collections/tienda-magica",
         "secondary_text": "Take the Free Test",

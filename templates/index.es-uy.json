@@ -187,7 +187,7 @@
           "settings": {
             "icon": "02",
             "title": "Canalización",
-            "description": "Nuestras creaciones atraviesan un proceso de canalización de 7 días en el que vos colaborás energéticamente, estés donde estés. Recibimos un mensaje de tu Guardián durante la canalización. Cada carta es única e irrepetible, como el Guardián que la trae. No solo recibís a tu Guardián… recibís el mensaje que tiene para vos.",
+            "description": "Nuestras piezas nacen en el taller de Piriápolis: esculpidas a mano, una sola vez en el mundo. Cuando adoptás, completás el Encuentro para que podamos despachar y abrir Mi Magia. El portal comparte las mismas guías, cuidados y herramientas para toda la comunidad adoptante. Te llevás al Guardián — y un camino para convivir con él.",
             "compare_them": "Rechazamos darte algo vacío, sin vida, sin historia.",
             "compare_us": "Hacemos el estudio de canalización personal y lo compartimos con vos."
           }
@@ -620,24 +620,24 @@
           "type": "step",
           "settings": {
             "icon": "form",
-            "title": "2. Contanos tu momento",
-            "description": "Después de la compra recibís un formulario breve. Tu respuesta es la base de la canalización."
+            "title": "2. Completá el Encuentro",
+            "description": "Después de la compra recibís un formulario breve. Lo usamos para envío, Mi Magia y acompañamiento — no para mandarte canalización escrita día por día por mail."
           }
         },
         "p3": {
           "type": "step",
           "settings": {
             "icon": "channel",
-            "title": "3. Canalizamos tu mensaje",
-            "description": "Nos conectamos con la energía de tu Guardián. Lo que fluye es una carta que solo tiene sentido para vos."
+            "title": "3. Cierre en el taller",
+            "description": "Tu Guardián es la pieza que elegiste. Gabriel y Thibisay cierran el trabajo; puede haber nota escrita a mano con el envío."
           }
         },
         "p4": {
           "type": "step",
           "settings": {
             "icon": "letter",
-            "title": "4. Tu carta personal",
-            "description": "Una carta sellada con palabras que nosotros no elegimos. Leela en un momento de silencio — vas a entender por qué."
+            "title": "4. Paquete del estudio + Mi Magia",
+            "description": "Viaja la pieza y los materiales del taller. Mi Magia se abre con tu correo: guías compartidas, cuidados, diario y utilidades para adoptantes."
           }
         },
         "p5": {
@@ -645,7 +645,7 @@
           "settings": {
             "icon": "ship",
             "title": "5. Llega a tu puerta",
-            "description": "Envío internacional con tracking (5–10 días hábiles) o DAC en Uruguay (2–3 días después de la canalización). Con seguimiento completo."
+            "description": "Envío internacional con tracking o DAC en Uruguay, con seguimiento — los plazos siguen el Encuentro + la ventana del portal."
           }
         }
       },
@@ -768,7 +768,7 @@
           "type": "question",
           "settings": {
             "question": "¿Puedo regalarlo?",
-            "answer": "Sí, y es el regalo más transformador que existe. Viene con una carta canalizada personalizada para quien lo recibe. Podés elegir regalo sorpresa o regalo abierto."
+            "answer": "Sí, y es un regalo muy potente. Incluye al Guardián adoptado con materiales del estudio (certificado, guía de activación) y acceso de por vida a Mi Magia. Podés elegir regalo sorpresa o regalo abierto."
           }
         },
         "q5": {

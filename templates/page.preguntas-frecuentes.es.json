@@ -1,0 +1,591 @@
+{
+  "sections": {
+    "main": {
+      "type": "duendes-faq-page",
+      "blocks": {
+        "cat_1000": {
+          "type": "category_header",
+          "settings": {
+            "title": "Lo que nadie más te puede explicar"
+          }
+        },
+        "faq_1001": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué son exactamente los Guardianes canalizados?",
+            "answer": "<p>No son figuras decorativas. Son seres canalizados en meditación profunda: cada uno con nombre, historia y propósito propio. No hay dos iguales porque no salen de un molde: vienen de un proceso que ni nosotros controlamos.</p>"
+          }
+        },
+        "faq_1002": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo sé cuál Guardián es para mí?",
+            "answer": "<p>Vos no los elegís: ellos te eligen a vos. Mirá los Guardianes disponibles y fijate cuál te detiene. Esa pausa, ese segundo de más mirando una foto: esa es la señal.</p>"
+          }
+        },
+        "faq_1003": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Los Guardianes están consagrados?",
+            "answer": "<p>Cada Guardián se canaliza y consagra en Piriápolis, un punto energético reconocido en el mundo. No sale del taller sin pasar por ese proceso. Por eso son distintos de cualquier otra pieza.</p>"
+          }
+        },
+        "faq_1004": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Son demonios o energías negativas?",
+            "answer": "<p>No. Son guardianes ancestrales ligados a protección, abundancia y naturaleza. Su energía es luminosa. Más de 15.000 personas en 45 países lo confirman.</p>"
+          }
+        },
+        "faq_1005": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cada Guardián tiene un propósito específico?",
+            "answer": "<p>Sí: abundancia, protección, amor, salud o conexión espiritual. La esencia de cada uno está en su ficha — y no, nosotros no la elegimos.</p>"
+          }
+        },
+        "faq_1006": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Para qué sirve un Guardián canalizado?",
+            "answer": "<p>Es un portal energético que protege tu espacio, atrae lo que necesitás y te conecta con lo invisible pero sentido. No es decoración: es presencia.</p>"
+          }
+        },
+        "faq_1007": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Es mejor tener uno solo o varios?",
+            "answer": "<p>Conviven: en grupo amplifican la energía colectiva. Con uno solo ya cumplen su propósito. Muchas personas empiezan con uno y terminan con una familia entera.</p>"
+          }
+        },
+        "faq_1008": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué pasa si se rompe mi Guardián?",
+            "answer": "<p>Están hechos en porcelana fría profesional, noble y flexible. Los golpes menores se pueden reparar. Si se rompe de forma inesperada, muchas adoptantes sienten que cumplió una misión protectora. Lo que pase, escribinos.</p>"
+          }
+        },
+        "faq_1009": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Puede cualquiera tocar mi Guardián?",
+            "answer": "<p>No lo recomendamos. La conexión entre un Guardián y su persona es íntima. Si otra persona necesita uno, lo mejor es que adopte el suyo.</p>"
+          }
+        },
+        "faq_1010": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Necesitan mantenimiento energético?",
+            "answer": "<p>Sí: luna llena, sol directo, hablarle, ofrendas de flores o monedas. Todo está en nuestro Portal Mi Magia, acceso exclusivo que viene con tu Guardián.</p>"
+          }
+        },
+        "faq_1011": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Soñé algo con mi Guardián / se rompió / pasó algo raro",
+            "answer": "<p>Si soñaste algo o pasó algo extraño, el sentido es tuyo. Sentate un momento, meditá y preguntá directo. La respuesta llega, pero a su manera.</p>"
+          }
+        },
+        "faq_1012": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Tengo que ponerle nombre?",
+            "answer": "<p>Cada pieza sale del taller con el nombre que usamos en la tienda. En casa, mucha gente siente otro nombre para convivir con el guardián — eso es entre vos y la pieza; no es algo que escribamos para vos día por día. Si llega un nombre, usalo con respeto; si no, la presencia igual funciona.</p>"
+          }
+        },
+        "faq_1013": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Tienen que ser siempre un regalo?",
+            "answer": "<p>No es necesario. Pueden ser regalo, compra o adopción: lo que importa es la conexión, no cómo llegó a vos.</p>"
+          }
+        },
+        "faq_1014": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Se consiguen otros iguales en otro lado?",
+            "answer": "<p>No tenemos (ni queremos) sucursales, distribuidores ni réplicas. Cada Guardián es 100 % original y se canaliza solo en nuestro taller en Piriápolis. Este sitio web es la única fuente oficial. Y que no te confunda… PARECIDO NO ES LO MISMO.</p>"
+          }
+        },
+        "cat_1015": {
+          "type": "category_header",
+          "settings": {
+            "title": "Por qué no es caro: es irrepetible"
+          }
+        },
+        "faq_1016": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cuánto tiempo lleva crear un Guardián?",
+            "answer": "<p>Un Guardián mediano lleva entre 20 y 60 horas de trabajo artesanal puro. Los grandes y gigantes pueden llevar semanas o meses. No se apuran —y cada hora se nota.</p>"
+          }
+        },
+        "faq_1017": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cada Guardián es realmente irrepetible?",
+            "answer": "<p>Los medianos, grandes y gigantes son 100 % irrepetibles: no hay otro igual en el mundo. Los mini pueden compartir una base, pero cada uno termina a mano y varía.</p>"
+          }
+        },
+        "faq_1018": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué los hace diferentes?",
+            "answer": "<p>Modelado a mano sin moldes, horas de canalización, cristales auténticos, consagración en Piriápolis y una carta escrita solo para vos. No es un producto: es una experiencia.</p>"
+          }
+        },
+        "faq_1019": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo protegerme de estafas?",
+            "answer": "<p>Verificá que la empresa sea real, que facture en formal y que use pasarela segura. Y sobre todo: escuchá tu intuición. Si algo no cierra, probablemente no cierre.</p>"
+          }
+        },
+        "faq_1020": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Hay imitaciones?",
+            "answer": "<p>Lamentablemente sí. Copian textos, fotos e incluso nuestra historia. La única fuente oficial es este sitio y nuestras redes verificadas. Si lo ves en otro lado, no somos nosotros.</p>"
+          }
+        },
+        "faq_1021": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué incluye mi inversión?",
+            "answer": "<p>Horas de trabajo artesanal, materiales premium, cristales reales, certificado de autenticidad, guía digital, empaque especial, carta canalizada, acceso al Portal Mi Magia y más de 10 años de trayectoria. Todo eso va en cada pieza.</p>"
+          }
+        },
+        "faq_1022": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Venden al por mayor?",
+            "answer": "<p>No. Cada Guardián va de nuestras manos a las tuyas. Sin intermediarios ni cadena de distribución. De Piriápolis a tu puerta.</p>"
+          }
+        },
+        "cat_1023": {
+          "type": "category_header",
+          "settings": {
+            "title": "Lo que conviene saber antes de elegir"
+          }
+        },
+        "faq_1024": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué talles hay?",
+            "answer": "<p>Mini/Pixies (7–13 cm): ideal para empezar. Medianos (16–28 cm): los más adoptados. Grandes (30–40 cm): presencia real. Gigantes (50–80 cm): piezas de colección irrepetibles.</p>"
+          }
+        },
+        "faq_1025": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué materiales se usan?",
+            "answer": "<p>Porcelana fría profesional de máxima calidad y cristales 100 % naturales y auténticos. Nada sintético, nada “de utilería”.</p>"
+          }
+        },
+        "faq_1026": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Es igual que en la foto?",
+            "answer": "<p>Sí: lo que ves es lo que adoptás. Cada foto es del Guardián real que llega a tu casa. La única excepción son los mini: pueden tener variaciones mínimas porque son los únicos que se recrean a mano y no queremos dos iguales. No insistas.</p>"
+          }
+        },
+        "faq_1027": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Hacen pedidos personalizados?",
+            "answer": "<p>No aceptamos pedidos a medida. Una canalización no se fuerza ni se apura: cada Guardián llega cuando tiene que llegar.</p>"
+          }
+        },
+        "faq_1028": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Los cristales son reales?",
+            "answer": "<p>100 % auténticos y naturales.</p>"
+          }
+        },
+        "faq_1029": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué incluye mi compra?",
+            "answer": "<p>Tu Guardián modelado a mano, certificado de autenticidad firmado, carta canalizada exclusiva para vos, guía digital de conexión, acceso al Portal Mi Magia y un empaque pensado para que abrirlo sea un momento inolvidable.</p>"
+          }
+        },
+        "faq_1030": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo cuido a mi Guardián?",
+            "answer": "<p>Cerca de una ventana con luz natural, rodeado de plantas o cristales. Todo está detallado en Mi Magia Portal, con indicaciones para potenciar su energía.</p>"
+          }
+        },
+        "faq_1031": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Puedo llevarlo conmigo?",
+            "answer": "<p>Sí —y refuerza el vínculo. Avisale antes de moverlo y agradecé cuando lo ubiques en el nuevo lugar. Suena simple, y marca diferencia.</p>"
+          }
+        },
+        "cat_1032": {
+          "type": "category_header",
+          "settings": {
+            "title": "El proceso es simple"
+          }
+        },
+        "faq_1033": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo es el proceso de compra?",
+            "answer": "<p>Recorrés los Guardianes disponibles, elegís al que te llama, lo agregás al carrito, completás tus datos, pagás de forma segura y recibís el seguimiento por correo. Simple, seguro y rápido.</p>"
+          }
+        },
+        "faq_1034": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Varios en el mismo carrito?",
+            "answer": "<p>Sí: podés adoptar varios Guardianes en un solo pedido. Viajan juntos en la misma caja y evitás pagar dos envíos. Muchas van armando su equipo con tiempo. Sin apuro: el Guardián correcto llega cuando tiene que llegar.</p>"
+          }
+        },
+        "faq_1035": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Y si no está disponible?",
+            "answer": "<p>Significa que ya encontró hogar: alguien lo adoptó antes. Nacen Guardianes nuevos todo el tiempo. Te recomendamos mirar el sitio seguido porque la mayoría se adopta muy rápido. Seguinos en redes para enterarte primero.</p>"
+          }
+        },
+        "faq_1036": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Puedo cancelar?",
+            "answer": "<p>No. Cada pieza es única e irrepetible. Comprar es un compromiso de ambas partes. A nadie le gusta perder el tiempo.</p>"
+          }
+        },
+        "faq_1037": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Factura?",
+            "answer": "<p>Sí: emitimos factura oficial uruguaya con cada compra. Legal y transparente.</p>"
+          }
+        },
+        "faq_1038": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo sé que la compra entró?",
+            "answer": "<p>Recibís correo de confirmación de la tienda, pantalla de confirmación al final y comprobante de la pasarela de pago. Triple respaldo.</p>"
+          }
+        },
+        "faq_1039": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Hay monto mínimo?",
+            "answer": "<p>No tenemos monto mínimo. Si vas a adoptar más de uno, conviene hacerlo en una sola compra para optimizar el envío: el costo es por paquete, no por pieza.</p>"
+          }
+        },
+        "cat_1040": {
+          "type": "category_header",
+          "settings": {
+            "title": "Pagá como te quede mejor"
+          }
+        },
+        "faq_1041": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué medios de pago tienen?",
+            "answer": "<p>Aceptamos los medios más completos del mercado:</p><p><strong>Internacional (todo el mundo):</strong> Shopify Payments muestra Visa, Mastercard, American Express, Discover y pagos rápidos como <strong>Shop Pay</strong>, <strong>Apple Pay</strong>, <strong>Google Pay</strong> y <strong>Meta Pay</strong>. Un clic si ya comprás online en cualquier tienda.</p><p><strong>Latinoamérica:</strong> Mercado Pago (Uruguay, Argentina y región) con tarjetas locales y saldo en cuenta.</p><p><strong>Estados Unidos y Europa:</strong> PayPal además de tarjetas internacionales.</p><p>Todas las pasarelas son certificadas PCI DSS: tus datos no pasan por nuestros servidores, van directo del navegador al banco.</p>"
+          }
+        },
+        "faq_1042": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿En qué moneda pago?",
+            "answer": "<p>Si estás en Uruguay, pagás en pesos uruguayos. En otros países la conversión se hace sola al finalizar la compra: no tenés que hacer nada.</p>"
+          }
+        },
+        "faq_1043": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Es seguro?",
+            "answer": "<p>Sí. Los pagos pasan por <strong>Shopify Payments</strong> y otras pasarelas certificadas PCI DSS. Los datos de la tarjeta no tocan nuestros servidores: van cifrados del navegador al banco. SSL activo, dominio verificado.</p>"
+          }
+        },
+        "faq_1044": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cuotas?",
+            "answer": "<p>Depende de tu país y tarjeta. En Uruguay (Mercado Pago) podés ver cuotas con tarjetas locales al pagar. En Estados Unidos, Shopify Payments ofrece <strong>Shop Pay Installments</strong>: 4 cuotas sin interés desde USD 50. En otros países, las cuotas dependen del banco emisor.</p>"
+          }
+        },
+        "faq_1045": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿El pago fue rechazado?",
+            "answer": "<p>Revisá que los datos estén bien, probá otra tarjeta o contactá a tu banco. Si sigue fallando, escribinos por WhatsApp y te ayudamos.</p>"
+          }
+        },
+        "faq_1046": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Aceptan PayPal, Mercado Pago, transferencia, cripto?",
+            "answer": "<p><strong>PayPal:</strong> sí, EE. UU., Europa y resto del mundo.</p><p><strong>Mercado Pago:</strong> sí, Uruguay y Latinoamérica (tarjetas locales y saldo).</p><p><strong>Shopify Payments con Shop Pay:</strong> sí, en todo el mundo. Es la opción más rápida si ya tenés Shop Pay en otra tienda.</p><p><strong>Transferencia bancaria directa:</strong> por ahora no.</p><p><strong>Cripto:</strong> por ahora no.</p>"
+          }
+        },
+        "faq_1047": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué son las señas? ¿Sirven para reservar un Guardián?",
+            "answer": "<p>Las señas <strong>no sirven para reservar Guardianes</strong>: la adopción se paga completa en el momento. La seña solo se usa para una cosa: <strong>agendar una visita al taller en Piriápolis</strong>. Como la lista de espera es de meses, la seña asegura tu lugar y se descuenta de cualquier compra que hagas después de la visita.</p>"
+          }
+        },
+        "faq_1048": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cuánto dura la seña de visita al taller?",
+            "answer": "<p>La seña queda a tu nombre hasta el día de la visita confirmada. Si después de visitar adoptás un Guardián, el monto se descuenta automáticamente de esa compra.</p>"
+          }
+        },
+        "faq_1049": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Pagos parciales?",
+            "answer": "<p>No. Las adopciones se pagan en el momento, en una sola transacción. La excepción es la <strong>seña por visita al taller</strong>: ese pago es aparte y se descuenta después.</p>"
+          }
+        },
+        "faq_1050": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué pasa si no puedo ir al día acordado?",
+            "answer": "<p>Avisanos por WhatsApp con la mayor anticipación posible y reagendamos sin costo. Si cancelás a último momento o sin avisar, la seña no se reembolsa —pero podés usarla en una compra online dentro de los próximos 6 meses.</p>"
+          }
+        },
+        "faq_1051": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Pueden guardarme un Guardián para pagar después?",
+            "answer": "<p>No. Como cada uno es único y existe una sola vez en el mundo, no guardamos piezas. Cuando uno te llama, la forma de asegurarlo es adoptarlo en ese momento; si no, alguien más lo adopta antes.</p>"
+          }
+        },
+        "faq_1052": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Devoluciones?",
+            "answer": "<p>Por ser piezas únicas e irrepetibles, no hacemos cambios ni devoluciones. La única excepción: si tu Guardián llega con daño grave de envío. En ese caso mandanos fotos en las primeras 24 h por WhatsApp para iniciar el reclamo con el carrier.</p>"
+          }
+        },
+        "cat_1053": {
+          "type": "category_header",
+          "settings": {
+            "title": "De Piriápolis al mundo"
+          }
+        },
+        "faq_1054": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿A qué países envían?",
+            "answer": "<p>A todo el mundo. Internacional con tracking y en Uruguay con DAC. Tu Guardián llega donde estés.</p>"
+          }
+        },
+        "faq_1055": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cuánto tarda?",
+            "answer": "<p>El flujo completo tiene tres partes:</p><p><strong>1. Encuentro + semana de portal:</strong> completás el Encuentro de Reconocimiento; después usás Mi Magia con el mismo correo — pasos de bienvenida compartidos para toda la comunidad (sin mails diarios de canalización escrita personalizada).</p><p><strong>2. Envío:</strong> el Guardián suele salir el viernes siguiente, cuando cerramos logística.</p><p><strong>3. Tránsito:</strong> Uruguay 1–3 días hábiles por DAC. Internacional 5–10 días hábiles con envío internacional y seguimiento.</p>"
+          }
+        },
+        "faq_1056": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Envío gratis?",
+            "answer": "<p>Por ahora no ofrecemos envío gratis.</p>"
+          }
+        },
+        "faq_1057": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo lo embalan?",
+            "answer": "<p>Cada Guardián viaja protegido, dentro de una caja firme con relleno anti golpes pensado para piezas hechas a mano. Llegan perfectos.</p>"
+          }
+        },
+        "faq_1058": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Si llega dañado?",
+            "answer": "<p>Mandanos fotos del daño por WhatsApp dentro de las 24 h de recibirlo. Lo resolvemos rápido y sin vueltas.</p>"
+          }
+        },
+        "faq_1059": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Aduana?",
+            "answer": "<p>Depende del país de destino y es responsabilidad de quien compra. Te recomendamos revisar la normativa de importación antes de comprar.</p>"
+          }
+        },
+        "faq_1060": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué pasa si no retiro el paquete?",
+            "answer": "<p>IMPORTANTE: dirección mal cargada / no retirar = devolución con costos altísimos. Mejor recibir a tiempo. Si el paquete vuelve a Uruguay, el reenvío sale carísimo. Si estás en el exterior y vuelve, podés perderlo: la paquetería internacional puede descartar devoluciones no reclamadas. Nadie quiere eso.</p>"
+          }
+        },
+        "cat_1061": {
+          "type": "category_header",
+          "settings": {
+            "title": "Las personas detrás de la magia"
+          }
+        },
+        "faq_1062": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Quiénes son?",
+            "answer": "<p>Gabriel y Thibisay: una pareja de canalizadores 100 % autodidactas con más de 10 años de trayectoria. Todo lo que ves nació en un taller en Piriápolis, sin inversores, sin fórmulas, sin moldes.</p>"
+          }
+        },
+        "faq_1063": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Por qué Piriápolis?",
+            "answer": "<p>Piriápolis es conocida como la ciudad alquímica: un punto energético reconocido en el mundo. No elegimos este lugar al azar. O mejor: nos eligió a nosotros.</p>"
+          }
+        },
+        "faq_1064": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Puedo visitarlos?",
+            "answer": "<p>Sí, con dos condiciones reales: <strong>solo con cita previa</strong> (no atendemos sin aviso) y <strong>hay lista de espera de meses</strong>. Para reservar pedimos una <strong>seña que se descuenta de cualquier compra después de la visita</strong>. Si querés agenda, escribinos por WhatsApp y te pasamos los próximos turnos.</p>"
+          }
+        },
+        "faq_1065": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Dan cursos?",
+            "answer": "<p>No. La canalización no es una técnica que se enseñe en un curso: es un proceso personal que nos atraviesa.</p>"
+          }
+        },
+        "faq_1066": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo los contacto?",
+            "answer": "<p>WhatsApp (lo más rápido), correo, el formulario de este sitio o mensaje directo en nuestras redes verificadas. +59898690629</p>"
+          }
+        },
+        "cat_mimagia_2026": {
+          "type": "category_header",
+          "settings": {
+            "title": "Mi Magia · el portal de tu Guardián"
+          }
+        },
+        "q_mimagia_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué es Mi Magia?",
+            "answer": "<p>Mi Magia es el portal exclusivo que se abre cuando adoptás un Guardián. Ahí está lo que no es la pieza física: guías y cuidados compartidos, Enciclopedia, El Bosque Sabe, Las Artes del Bosque (las 12 áreas en las que trabaja tu Guardián), meditaciones y frecuencias para toda la comunidad, Oráculo comunitario y Diario elemental (privado, para anotar lo que vivís).</p><p>No es “una app más”: es la casa digital de quien ya tiene un ser del estudio.</p>"
+          }
+        },
+        "q_mimagia_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo entro a Mi Magia?",
+            "answer": "<p>Recibís un correo con el enlace cuando se confirma tu compra. Entrás con el mismo mail que usaste para adoptar: sin contraseña, te mandamos un enlace mágico cada vez. Acceso de por vida.</p>"
+          }
+        },
+        "q_mimagia_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué pasa después de adoptar? ¿Siguen los mails de canalización?",
+            "answer": "<p>Completás el Encuentro / Rito de Reconocimiento para dejarnos tu huella de adoptante: quién recibe la pieza, datos del pedido y contexto del hogar. Con el mismo correo entrás a Mi Magia: las utilidades (guías, cuidados, frecuencias, Enciclopedia, etc.) son las mismas para toda la comunidad.</p><p><strong>Ya no enviamos secuencias diarias de canalización escrita personalizada por email.</strong> El vínculo principal es la pieza que elegiste y lo que el portal ofrece para convivir con ella. Si tu pedido anterior todavía muestra textos o PDFs en el portal, es material legado hasta que lo limpiemos.</p>"
+          }
+        },
+        "q_mimagia_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Qué es el Oráculo? ¿Y el diario?",
+            "answer": "<p><strong>El Oráculo</strong> es un espacio comunitario: resonan preguntas del reino elemental y aparecen respuestas pensadas para todas — no es un chat privado con tu pieza.</p><p><strong>El Diario elemental</strong> es para registrar lo que se mueve: sueños, sincronicidades, lo que cambia adentro después de adoptar. Es tuyo, privado, sin algoritmos detrás.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1000",
+        "faq_1001",
+        "faq_1002",
+        "faq_1003",
+        "faq_1004",
+        "faq_1005",
+        "faq_1006",
+        "faq_1007",
+        "faq_1008",
+        "faq_1009",
+        "faq_1010",
+        "faq_1011",
+        "faq_1012",
+        "faq_1013",
+        "faq_1014",
+        "cat_1015",
+        "faq_1016",
+        "faq_1017",
+        "faq_1018",
+        "faq_1019",
+        "faq_1020",
+        "faq_1021",
+        "faq_1022",
+        "cat_1023",
+        "faq_1024",
+        "faq_1025",
+        "faq_1026",
+        "faq_1027",
+        "faq_1028",
+        "faq_1029",
+        "faq_1030",
+        "faq_1031",
+        "cat_1032",
+        "faq_1033",
+        "faq_1034",
+        "faq_1035",
+        "faq_1036",
+        "faq_1037",
+        "faq_1038",
+        "faq_1039",
+        "cat_1040",
+        "faq_1041",
+        "faq_1042",
+        "faq_1043",
+        "faq_1044",
+        "faq_1045",
+        "faq_1046",
+        "faq_1047",
+        "faq_1048",
+        "faq_1049",
+        "faq_1050",
+        "faq_1051",
+        "faq_1052",
+        "cat_1053",
+        "faq_1054",
+        "faq_1055",
+        "faq_1056",
+        "faq_1057",
+        "faq_1058",
+        "faq_1059",
+        "faq_1060",
+        "cat_mimagia_2026",
+        "q_mimagia_1",
+        "q_mimagia_2",
+        "q_mimagia_3",
+        "q_mimagia_4",
+        "cat_1061",
+        "faq_1062",
+        "faq_1063",
+        "faq_1064",
+        "faq_1065",
+        "faq_1066"
+      ],
+      "settings": {
+        "eyebrow": "ANTES DE DECIDIR, LEÉ ESTO",
+        "title": "Todo lo que necesitás saber antes de adoptar",
+        "subtitle": "Si tu duda no está acá, escribinos por WhatsApp. Respondemos rápido y sin vueltas.",
+        "cta_title": "¿Seguís con dudas?",
+        "cta_text": "Escribinos y te respondemos.",
+        "cta_button": "Contacto",
+        "cta_url": ""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
