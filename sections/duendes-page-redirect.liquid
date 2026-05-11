@@ -1,0 +1,56 @@
+{%- comment -%}
+  Redirección inmediata (meta + JS) para URLs legacy /pages/… que deben apuntar a blogs u otras rutas.
+  Requiere una página en Admin con el mismo handle que el nombre del template (ej. comunidad-elemental).
+{%- endcomment -%}
+{%- liquid
+  assign target = section.settings.redirect_path | default: '/blogs/comunidad-elemental' | strip
+  if target == blank
+    assign target = '/blogs/comunidad-elemental'
+  endif
+  unless target contains '://'
+    assign target_full = request.origin | append: target
+  else
+    assign target_full = target
+  endunless
+-%}
+<meta http-equiv="refresh" content="0; url={{ target | escape }}">
+<link rel="canonical" href="{{ target_full | escape }}">
+<div class="section" style="min-height:40vh;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;font-family:var(--font-body--family,serif);">
+  <p style="max-width:420px;line-height:1.6;color:rgb(var(--color-foreground-rgb));">
+    {{ section.settings.message | default: 'Redirigiendo…' | escape }}
+    <a href="{{ target | escape }}" style="display:block;margin-top:16px;color:rgb(var(--color-primary-rgb));">{{ section.settings.link_label | default: 'Continuar' | escape }}</a>
+  </p>
+</div>
+<script>
+  try { window.location.replace({{ target | json }}); } catch (e) {}
+</script>
+
+{% schema %}
+{
+  "name": "Duendes — redirección de página",
+  "tag": "section",
+  "class": "duendes-page-redirect-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "redirect_path",
+      "label": "Ruta destino",
+      "default": "/blogs/comunidad-elemental",
+      "info": "Ej. /blogs/comunidad-elemental (relativa a la tienda)"
+    },
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Mensaje mientras redirige",
+      "default": "Te llevamos al Compendio Elemental…"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Texto del enlace manual",
+      "default": "Ir ahora"
+    }
+  ],
+  "presets": [{ "name": "Duendes — redirección" }]
+}
+{% endschema %}

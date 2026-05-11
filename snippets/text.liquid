@@ -9,7 +9,29 @@
 
 {% liquid
   assign block_settings = block.settings
-  assign plain_text = block_settings.text | strip_newlines | strip
+  assign raw_block_text = block_settings.text | strip_newlines | strip
+  assign effective_block_text = raw_block_text
+  if raw_block_text contains '[ddu:footer_newsletter_h2]'
+    assign effective_block_text = 'duendes.global.footer_newsletter_h2_html' | t
+  elsif raw_block_text contains '[ddu:footer_newsletter_p]'
+    assign effective_block_text = 'duendes.global.footer_newsletter_p_html' | t
+  elsif raw_block_text contains '[ddu:collection_heading_h1]'
+    if collection != blank
+      assign _col_title_down = collection.title | downcase | strip
+      assign _use_magic_shop_title = false
+      if collection.handle == 'all'
+        assign _use_magic_shop_title = true
+      elsif _col_title_down == 'productos' or _col_title_down == 'products' or _col_title_down == 'all products' or _col_title_down == 'todos los productos'
+        assign _use_magic_shop_title = true
+      endif
+      if _use_magic_shop_title
+        assign effective_block_text = '<h1>' | append: ('duendes.collection_all_title' | t) | append: '</h1>'
+      else
+        assign effective_block_text = '<h1>' | append: collection.title | escape | append: '</h1>'
+      endif
+    endif
+  endif
+  assign plain_text = effective_block_text | strip_newlines | strip
   assign visible_text = plain_text | strip_html
   assign text_width = width | default: block_settings.width
 
@@ -89,7 +111,7 @@
   </div>
 {% elsif plain_text != blank %}
   <{{ element }} {{ attributes | strip_newlines | strip }}>
-    {{ block.settings.text }}
+    {{ effective_block_text }}
   </{{ element }}>
 {% endif %}
 

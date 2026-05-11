@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "duendes-page-redirect",
+      "settings": {
+        "redirect_path": "/blogs/comunidad-elemental",
+        "message": "Te llevamos a la Comunidad Elemental…",
+        "link_label": "Ir al blog"
+      }
+    }
+  },
+  "order": ["main"]
+}

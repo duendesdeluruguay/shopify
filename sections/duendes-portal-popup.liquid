@@ -123,7 +123,7 @@
     var vh = window.innerHeight || 0;
     if (h <= vh * 1.15) return;
     var y = window.scrollY || window.pageYOffset || 0;
-    if (y + vh >= h * 0.5) show();
+    if (y + vh >= h * 0.75) show();
   }
 
   function onMouseLeave(e) {

@@ -1,6 +1,26 @@
 {% comment %}
   MI MAGIA BANNER REUSABLE - lineas doradas en movimiento arriba y abajo
 {% endcomment %}
+{%- liquid
+  assign mm_lang = request.locale.iso_code | default: '' | slice: 0, 2 | downcase
+  assign mm_loc = localization.language.iso_code | default: '' | slice: 0, 2 | downcase
+  assign mm_en = false
+  if mm_lang == 'en' or mm_loc == 'en'
+    assign mm_en = true
+  endif
+  assign mm_title = section.settings.title
+  assign mm_cta = section.settings.cta_text
+  if mm_en
+    assign _t = section.settings.title | strip | downcase
+    if _t == 'mi magia' or _t contains 'mi magia'
+      assign mm_title = 'MY MAGIC'
+    endif
+    assign _c = section.settings.cta_text | strip | downcase
+    if _c contains 'mi magia' or _c contains 'entrar a mi magia' or _c contains 'enter mi magia'
+      assign mm_cta = 'ENTER MY MAGIC'
+    endif
+  endif
+-%}
 
 <style>
 .mm-strip-{{ section.id }}{ width:100%; background:#fff; padding:42px 32px; display:flex; align-items:center; justify-content:center; gap:48px; text-decoration:none; color:inherit; position:relative; transition:background 0.5s ease; margin:24px 0; }
@@ -25,12 +45,12 @@
 <a href="{{ section.settings.cta_url | default: '/blogs/mi-magia' }}" class="mm-strip-{{ section.id }}">
   <div class="mm-strip-text">
     <div class="mm-strip-eyebrow">{{ section.settings.eyebrow }}</div>
-    <div class="mm-strip-title">{{ section.settings.title }}</div>
+    <div class="mm-strip-title">{{ mm_title }}</div>
     <div class="mm-strip-sub">{{ section.settings.subtitle }}</div>
   </div>
   <div class="mm-strip-divider"></div>
   <div class="mm-strip-cta">
-    {{ section.settings.cta_text }}
+    {{ mm_cta }}
     <span class="mm-strip-cta-arrow">{{ section.settings.cta_icon }}</span>
   </div>
 </a>

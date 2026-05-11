@@ -341,6 +341,20 @@
     }
   },
   "duendes": {
+    "collection_all_title": "Magic Shop",
+    "nav_magic_shop": "Magic Shop",
+    "card_no_image": "Image coming soon",
+    "global": {
+      "footer_newsletter_h2_html": "<h2>Forest letters</h2>",
+      "footer_newsletter_p_html": "<p>Stories, arrivals, and ritual notes — no spam, ever.</p>",
+      "newsletter_button": "Subscribe"
+    },
+    "market_hint_aria": "Suggested market for your country",
+    "market_hint_close": "Close",
+    "market_hint_msg_en": "Looks like you're visiting from {country}. You can see prices in your local currency.",
+    "market_hint_cta_en": "See prices for {country}",
+    "market_hint_msg_es": "Parece que estás visitando desde {country}. Podés ver precios en tu moneda.",
+    "market_hint_cta_es": "Ver precios para {country}",
     "meet_this_guardian": "Meet this Guardian",
     "card_adopted": "Adopted",
     "carousel_pause_hint": "Hover over a Guardian to stop the carousel",
@@ -357,7 +371,7 @@
       "short_inc_1": "<strong>One-of-a-kind, unrepeatable piece</strong> · channeled only for you",
       "short_inc_2": "<strong>Personal channeled letter</strong> · handwritten for this adoption",
       "short_inc_3": "<strong>Certificate of authenticity</strong> · name, essence, crystals",
-      "short_inc_4": "<strong>Lifetime access to Mi Magia</strong> · 7-day channeling, Oracle, Journal, the rituals of the forest",
+      "short_inc_4": "<strong>Lifetime access to My Magic</strong> · 7-day channeling, Oracle, Journal, the rituals of the forest",
       "short_inc_5": "<strong>Cinematic packaging</strong> · international shipping with tracking",
       "gift_toggle": "Is it a gift? Personalize the recipient",
       "gift_who_for": "Who is {{ title }} for?",
@@ -372,7 +386,7 @@
       "channeling_note": "✦ Includes channeling study",
       "trust_shipping": "International Shipping",
       "trust_unique": "Unrepeatable Piece",
-      "trust_portal": "Mi Magia Portal",
+      "trust_portal": "My Magic portal",
       "story_title": "The Story of {{ title }}",
       "profile_heading": "{{ title }} — Profile",
       "label_purpose": "Purpose",
@@ -385,7 +399,7 @@
       "inc_1_desc": "Hand-sculpted polymer clay with natural crystals. Each piece exists only once in the world.",
       "inc_2_title": "Channeling Letter",
       "inc_2_desc": "Personal handwritten message after the 7-day ritual. It only makes sense to you.",
-      "inc_3_title": "Mi Magia Portal",
+      "inc_3_title": "My Magic portal",
       "inc_3_desc": "Lifetime access to the digital portal with guides, rituals, and exclusive content.",
       "inc_4_title": "Certificate of Origin",
       "inc_4_desc": "Document that certifies the authenticity and origin of your Guardian from Piriápolis.",
@@ -415,6 +429,10 @@
       "wait_arrived": "· just arrived at the studio",
       "wait_days": "· waiting for you for {{ count }} days",
       "wait_weeks": "· waiting for you for {{ count }} weeks"
+    },
+    "test": {
+      "intro_music_yes": "BEGIN READING WITH MUSIC",
+      "intro_music_no": "BEGIN IN SILENCE"
     }
   }
 }

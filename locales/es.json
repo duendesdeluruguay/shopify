@@ -347,6 +347,20 @@
     }
   },
   "duendes": {
+    "collection_all_title": "Tienda Mágica",
+    "nav_magic_shop": "Tienda Mágica",
+    "card_no_image": "Imagen próximamente",
+    "global": {
+      "footer_newsletter_h2_html": "<h2>Cartas del Bosque</h2>",
+      "footer_newsletter_p_html": "<p>Novedades, llegadas y notas del ritual — sin spam.</p>",
+      "newsletter_button": "Suscribirme"
+    },
+    "market_hint_aria": "Mercado sugerido según tu país",
+    "market_hint_close": "Cerrar",
+    "market_hint_msg_en": "Looks like you're visiting from {country}. You can see prices in your local currency.",
+    "market_hint_cta_en": "See prices for {country}",
+    "market_hint_msg_es": "Parece que estás visitando desde {country}. Podés ver precios en tu moneda.",
+    "market_hint_cta_es": "Ver precios para {country}",
     "meet_this_guardian": "Conocer a este Guardián",
     "product": {
       "hero_eyebrow": "Vos no los elegís. Ellos te eligen a vos.",
@@ -418,6 +432,10 @@
       "wait_days": "· esperándote hace {{ count }} días",
       "wait_weeks": "· esperándote hace {{ count }} semanas",
       "sticky_btn": "ADOPTAR"
+    },
+    "test": {
+      "intro_music_yes": "INICIAR LECTURA CON MÚSICA",
+      "intro_music_no": "INICIAR EN SILENCIO"
     },
     "card_adopted": "Adoptado",
     "carousel_pause_hint": "Pasá el cursor sobre un Guardián para frenar el carrusel",

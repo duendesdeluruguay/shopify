@@ -98,7 +98,8 @@
         2) shop.description (campo legacy)
         3) brand_tagline hardcoded como último fallback para que NUNCA quede vacío
       endcomment
-      assign brand_tagline = 'Guardianes elementales canalizados a mano en Piriápolis, Uruguay. +15.000 guardianes en 45 países. Pieza única e irrepetible.'
+      assign ddu_pub_lang = localization.language.iso_code | default: request.locale.iso_code | replace: '_', '-'
+      assign brand_tagline = 'duendes.seo.default_description' | t
       assign default_desc = shop.brand.short_description | default: shop.description | default: brand_tagline
 
       comment
@@ -151,9 +152,9 @@
       {%- endif -%}
     {%- endunless -%}
 
-    {%- comment -%} Hreflang — el sitio es es-UY pero acepta visitantes globales {%- endcomment -%}
-    <link rel="alternate" hreflang="es" href="{{ canonical_url | default: shop.url }}">
-    <link rel="alternate" hreflang="x-default" href="{{ canonical_url | default: shop.url }}">
+    {%- comment -%} Hreflang: idioma de esta URL + x-default a la raíz del dominio {%- endcomment -%}
+    <link rel="alternate" hreflang="{{ ddu_pub_lang | escape }}" href="{{ canonical_url | default: shop.url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ shop.url }}">
 
     {%- comment -%} Schema.org Organization — knowledge panel + branding en Google {%- endcomment -%}
     <script type="application/ld+json">
@@ -196,7 +197,7 @@
       "@type": "WebSite",
       "name": "Duendes del Uruguay",
       "url": "https://duendesdeluruguay.com",
-      "inLanguage": "es-UY",
+      "inLanguage": {{ ddu_pub_lang | json }},
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
@@ -235,8 +236,8 @@
       </script>
 
       {%- comment -%} Override del title + description en producto para SEO ultra específico {%- endcomment -%}
-      {%- assign seo_title_p = product.title | append: ' — Guardián ' | append: product.type | append: ' · Duendes del Uruguay' -%}
-      {%- assign seo_desc_p = 'Guardián canalizado ' | append: product.title | append: ' — ' | append: product.type | append: '. Hecho a mano en Piriápolis, Uruguay. Pieza única e irrepetible. Carta canalizada personal incluida. +15.000 guardianes en 45 países.' -%}
+      {%- assign seo_title_p = 'duendes.seo.product_meta_title' | t: title: product.title, type: product.type -%}
+      {%- assign seo_desc_p = 'duendes.seo.product_meta_description' | t: title: product.title, type: product.type -%}
       <meta name="description" content="{{ seo_desc_p | escape | truncate: 160 }}">
       <meta property="og:title" content="{{ seo_title_p | escape | truncate: 70 }}">
       <meta property="og:description" content="{{ product.description | strip_html | truncate: 200 | escape }}">
@@ -253,8 +254,8 @@
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "{{ shop.url }}" },
-          { "@type": "ListItem", "position": 2, "name": "Tienda Mágica", "item": "{{ shop.url }}/collections/tienda-magica" },
+          { "@type": "ListItem", "position": 1, "name": {{ 'duendes.seo.breadcrumb_home' | t | json }}, "item": "{{ shop.url }}" },
+          { "@type": "ListItem", "position": 2, "name": {{ 'duendes.seo.breadcrumb_magic_shop' | t | json }}, "item": "{{ shop.url }}/collections/tienda-magica" },
           { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": "{{ shop.url }}{{ product.url }}" }
         ]
       }
@@ -265,7 +266,7 @@
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "{{ shop.url }}" },
+          { "@type": "ListItem", "position": 1, "name": {{ 'duendes.seo.breadcrumb_home' | t | json }}, "item": "{{ shop.url }}" },
           { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": "{{ shop.url }}{{ collection.url }}" }
         ]
       }
@@ -299,7 +300,6 @@
 <script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=XFasYy"></script>
 <script>var _learnq = _learnq || [];</script>
 
-
 <!-- DDU Performance 2026-05-01 — instant.page: prefetch on hover/touch, navegación instantánea entre páginas. ~1 KB, zero risk. -->
 <link rel="dns-prefetch" href="https://instant.page">
 <script src="//instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
@@ -331,11 +331,12 @@
     {%- render 'duendes-auto-geo-redirect' -%}
   </head>
 
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }} template-{{ template.name | handleize }}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
     <div id="header-group">
       {% sections 'header-group' %}
     </div>
+    {%- render 'duendes-market-hint-banner' -%}
 
     <script>
       // Inline header height and menu style calculations to prevent layout shift

@@ -1,0 +1,51 @@
+{%- doc -%}
+  Menú principal: si el visitante está en inglés (idioma de contenido o locale de URL),
+  reemplaza títulos típicos en español por equivalentes EN (Shopify Payments / LLC).
+  @param link {object} link, childlink o grandchildlink
+{%- enddoc -%}
+{%- liquid
+  unless link
+    echo ''
+  else
+    assign raw = link.title | strip
+    assign lang_loc = localization.language.iso_code | default: '' | slice: 0, 2 | downcase
+    assign lang_req = request.locale.iso_code | default: '' | slice: 0, 2 | downcase
+    assign is_en = false
+    if lang_loc == 'en' or lang_req == 'en'
+      assign is_en = true
+    endif
+
+    if is_en == false
+      echo raw
+    else
+      assign u = raw | upcase | replace: 'Á', 'A' | replace: 'É', 'E' | replace: 'Í', 'I' | replace: 'Ó', 'O' | replace: 'Ú', 'U' | replace: 'Ñ', 'N' | replace: 'Ü', 'U' | replace: 'À', 'A' | replace: 'È', 'E' | replace: 'Ì', 'I' | replace: 'Ò', 'O' | replace: 'Ù', 'U'
+      assign u = u | replace: '✦', '' | replace: '·', ' ' | replace: '•', ' ' | replace: '|', ' '
+      assign u = u | strip | replace: '  ', ' '
+      assign u_compact = u | replace: ' ', ''
+
+      if u == 'INICIO' or u_compact == 'INICIO'
+        echo 'HOME'
+      elsif u contains 'TIENDA' and u contains 'MAGICA'
+        echo 'MAGIC SHOP'
+      elsif u contains 'TEST' and u contains 'GUARDIAN'
+        echo 'GUARDIAN TEST'
+      elsif u contains 'COMO' and u contains 'FUNCIONA'
+        echo 'HOW IT WORKS'
+      elsif u contains 'COMUNIDAD' and u contains 'ELEMENTAL'
+        echo 'ELEMENTAL COMMUNITY'
+      elsif u contains 'MI' and u contains 'MAGIA'
+        echo 'MY MAGIC'
+      elsif u contains 'NUESTRA' and u contains 'HISTORIA'
+        echo 'OUR STORY'
+      elsif u == 'TESTIMONIOS' or u_compact == 'TESTIMONIOS'
+        echo 'TESTIMONIALS'
+      elsif u == 'CONTACTO'
+        echo 'CONTACT'
+      elsif u contains 'PREGUNTAS' and u contains 'FRECUENTES'
+        echo 'FAQ'
+      else
+        echo raw
+      endif
+    endif
+  endunless
+-%}
