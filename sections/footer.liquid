@@ -48,8 +48,7 @@
 
 {% stylesheet %}
   .footer-content {
-    contain: content;
-    content-visibility: auto;
+    /* Sin content-visibility:auto: en algunos Chromium colapsaba altura y el footer “desaparecía” en prod */
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--footer-gap);
