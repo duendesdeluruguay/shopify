@@ -1,0 +1,1386 @@
+{% comment %}
+  Duendes del Uruguay - Product Section Template v3
+  Premium channeled guardian figurines
+{% endcomment %}
+
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<script>
+  window.__DPP_I18N = {
+    connecting: {{ 'duendes.product.js_connecting' | t | json }},
+    toBeRevealed: {{ 'duendes.product.to_be_revealed' | t | json }}
+  };
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&display=swap');
+
+  /* ── Reset & Base ── */
+  .dpp-section { --gold: #C9A96E; --bg: #FAFAF8; --dark: #0d0f09; --text: #1a1a14; --text-light: #6a6a60; --btn-bg: #050505; --btn-text: #ffffff; --dpp-gift-close: {{ 'duendes.product.gift_close_suffix' | t | json }}; font-family: 'Cormorant Garamond', serif; }
+  .dpp-section *, .dpp-section *::before, .dpp-section *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .dpp-cinzel { font-family: 'Cinzel', serif; }
+  .dpp-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── Scroll Reveal ── */
+  .duendes-reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+  .duendes-reveal.dpp-visible { opacity: 1; transform: translateY(0); }
+
+  /* ══════════════════════════════════════
+     1. HERO BANNER — light, ethereal, warm
+  ══════════════════════════════════════ */
+  /* Hero poético: tope de altura para que galería+precio+CTA entren antes en mobile/social */
+  .dpp-hero {
+    position: relative; width: 100%; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: #0a0c07; padding: 32px 20px;
+    max-height: 60vh;
+    box-sizing: border-box;
+  }
+
+  /* Subtle radial glow behind text */
+  .dpp-hero__forest { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 50%); }
+
+  /* Floating golden motes */
+  .dpp-hero__fireflies { position: absolute; inset: 0; overflow: hidden; }
+  .dpp-hero__firefly {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,212,139,0.8) 0%, rgba(201,169,110,0.3) 50%, transparent 70%);
+    animation: dppMote var(--dur) ease-in-out infinite var(--delay);
+  }
+  @keyframes dppMote {
+    0%, 100% { opacity: 0; transform: translate(0, 0) scale(0.3); }
+    15% { opacity: 0.7; }
+    40% { transform: translate(var(--dx1), var(--dy1)) scale(1); opacity: 0.5; }
+    60% { opacity: 0.15; }
+    80% { transform: translate(var(--dx2), var(--dy2)) scale(0.6); opacity: 0.6; }
+  }
+
+  /* Side filigree decorations */
+  .dpp-hero__filigree {
+    position: absolute; top: 50%; width: 120px; height: 80%;
+    transform: translateY(-50%); z-index: 1; opacity: 0.12;
+  }
+  .dpp-hero__filigree--left { left: 24px; }
+  .dpp-hero__filigree--right { right: 24px; transform: translateY(-50%) scaleX(-1); }
+  .dpp-hero__filigree svg { width: 100%; height: 100%; }
+
+  @media (max-width: 768px) {
+    .dpp-hero__filigree { width: 50px; }
+    .dpp-hero__filigree--left { left: 8px; }
+    .dpp-hero__filigree--right { right: 8px; }
+  }
+
+  /* Content */
+  .dpp-hero__content { position: relative; z-index: 3; text-align: center; padding: 10px 20px; max-width: 700px; }
+  .dpp-hero__type { display: inline-block; font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,169,110,0.25); padding: 5px 20px; margin-bottom: 8px; animation: dppFadeUp 1s 0.1s both; }
+  .dpp-hero__eyebrow { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 10px; animation: dppFadeUp 1s 0.2s both; }
+  .dpp-hero__title {
+    font-family: 'Great Vibes', cursive; font-size: clamp(32px, 6vw, 58px);
+    color: var(--gold); letter-spacing: 0; line-height: 1.1; margin-bottom: 10px; font-weight: 400;
+    text-transform: none; word-break: break-word;
+    animation: dppFadeUp 1s 0.5s both;
+    text-shadow: 0 0 25px rgba(201,169,110,0.5), 0 0 60px rgba(201,169,110,0.25), 0 0 100px rgba(201,169,110,0.12);
+  }
+  .dpp-hero__phrase { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; letter-spacing: 0.5px; color: rgba(255,255,255,0.85); max-width: 480px; margin: 0 auto; line-height: 1.6; animation: dppFadeUp 1s 0.8s both; }
+  .dpp-hero__line { width: 40px; height: 1px; background: var(--gold); margin: 10px auto 0; opacity: 0.35; animation: dppFadeUp 1s 1s both; }
+  .dpp-hero__scarcity { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12px; letter-spacing: 1px; color: var(--gold); margin-top: 8px; animation: dppFadeUp 1s 1.2s both; }
+
+  @media (min-width: 768px) {
+    .dpp-hero { padding: 36px 24px; }
+  }
+
+  @keyframes dppFadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 767px) {
+    .dpp-hero { padding: 14px 12px; max-height: 52vh; }
+    .dpp-hero__type { font-size: 10px; }
+    .dpp-hero__eyebrow { font-size: 10px; letter-spacing: 1.5px; margin-bottom: 6px; }
+    .dpp-hero__title { font-size: clamp(22px, 8vw, 40px); margin-bottom: 6px; }
+    .dpp-hero__phrase { font-size: 12px; line-height: 1.45; max-width: 100%; }
+    .dpp-hero__line { margin-top: 6px; }
+    .dpp-hero__scarcity { font-size: 10px; margin-top: 4px; }
+    .dpp-product { padding-top: 28px; }
+  }
+
+  /* ══════════════════════════════════════
+     2. PRODUCT GRID
+  ══════════════════════════════════════ */
+  .dpp-product { background: var(--bg); padding: 48px 0 64px; }
+  .dpp-product__grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+
+  @media (min-width: 768px) {
+    .dpp-product__grid { grid-template-columns: 1fr 1fr; gap: 56px; }
+  }
+
+  /* Gallery */
+  .dpp-gallery {}
+  .dpp-gallery__main { position: relative; width: 100%; max-width: 100%; aspect-ratio: 4/5; border-radius: 4px; overflow: hidden; background: #f0efe9; cursor: zoom-in; }
+  .dpp-gallery__main img { width: 100%; height: 100%; object-fit: cover; max-width: 100%; transition: opacity 0.4s ease, transform 0.35s ease; }
+  .dpp-gallery__main:hover img { transform: scale(1.06); }
+  .dpp-gallery__thumbs { display: flex; gap: 10px; margin-top: 14px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+  .dpp-gallery__thumbs::-webkit-scrollbar { height: 4px; }
+  .dpp-gallery__thumbs::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+  .dpp-gallery__thumb { flex: 0 0 72px; width: 72px; height: 90px; border-radius: 3px; overflow: hidden; border: 1.5px solid transparent; cursor: pointer; transition: border-color 0.3s; }
+  .dpp-gallery__thumb.dpp-active, .dpp-gallery__thumb:hover { border-color: var(--gold); }
+  .dpp-gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Info */
+  .dpp-info { display: flex; flex-direction: column; justify-content: center; }
+  .dpp-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .dpp-badge { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border: 1px solid rgba(26,26,20,0.15); border-radius: 2px; color: var(--text-light); }
+  .dpp-info__title { font-family: 'Cinzel', serif; font-size: clamp(26px, 3.5vw, 40px); color: var(--text); line-height: 1.2; margin-bottom: 14px; font-weight: 500; }
+  .dpp-info__price { font-family: 'Cinzel', serif; font-size: 28px; color: var(--text); margin-bottom: 6px; }
+  .dpp-info__price s { font-size: 20px; color: var(--text-light); margin-right: 10px; font-weight: 400; }
+  .dpp-separator { width: 40px; height: 1px; background: var(--gold); margin: 20px 0; }
+  .dpp-atc-form {}
+  .dpp-atc-btn {
+    font-family: 'Cinzel', serif; font-size: 15px; letter-spacing: 2.5px; text-transform: uppercase;
+    background: #050505; color: #ffffff; border: 2px solid #050505; width: 100%; padding: 18px 24px;
+    cursor: pointer; border-radius: 2px; transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.15s;
+  }
+  .dpp-atc-btn:hover { background: #111111; color: #ffffff; border-color: #111111; }
+  .dpp-atc-btn:active { transform: scale(0.985); }
+  .dpp-atc-btn:disabled { background: #8a8a80; cursor: not-allowed; }
+  .dpp-canalizacion-note { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: var(--gold); text-align: center; margin-top: 12px; letter-spacing: 0.5px; font-style: italic; }
+  /* Gift toggle (split multi-guardián #75) */
+  .dpp-gift-toggle { margin-bottom: 14px; border: 1px solid rgba(201,169,110,0.25); border-radius: 4px; background: rgba(255,255,255,0.4); }
+  .dpp-gift-toggle[open] { background: rgba(255,250,240,0.9); border-color: rgba(201,169,110,0.5); }
+  .dpp-gift-toggle__summary { padding: 12px 16px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 14px; color: #2a2a22; letter-spacing: 0.4px; display: flex; align-items: center; gap: 10px; list-style: none; }
+  .dpp-gift-toggle__summary::-webkit-details-marker { display: none; }
+  .dpp-gift-toggle__icon { color: var(--gold); font-size: 12px; }
+  .dpp-gift-toggle__label { font-style: italic; }
+  .dpp-gift-toggle[open] .dpp-gift-toggle__label::after { content: var(--dpp-gift-close); opacity: 0.6; font-size: 12px; }
+  .dpp-gift-panel { padding: 4px 16px 16px; border-top: 1px dashed rgba(201,169,110,0.25); margin-top: 4px; }
+  .dpp-gift-radio { border: none; padding: 0; margin: 12px 0; }
+  .dpp-gift-radio__legend { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; padding: 0; }
+  .dpp-gift-radio__opt { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 15px; color: #1a1a14; }
+  .dpp-gift-radio__opt input[type='radio'] { margin-top: 4px; accent-color: #2a2a22; }
+  .dpp-gift-recipient { display: grid; gap: 12px; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(201,169,110,0.2); }
+  .dpp-gift-recipient[hidden] { display: none !important; }
+  .dpp-atc-btn--shake { animation: dppShake 0.6s; }
+  @keyframes dppShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
+  .dpp-gift-field { display: flex; flex-direction: column; gap: 4px; }
+  .dpp-gift-field__label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #6a6a60; }
+  .dpp-gift-field input { font-family: 'Cormorant Garamond', serif; font-size: 16px; padding: 10px 12px; border: 1px solid rgba(201,169,110,0.4); border-radius: 3px; background: #fff; color: #1a1a14; }
+  .dpp-gift-field input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 2px rgba(201,169,110,0.15); }
+  .dpp-gift-help { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: #6a6a60; font-style: italic; margin: 4px 0 0; }
+
+  /* Trust */
+  .dpp-trust { display: flex; gap: 24px; margin-top: 28px; flex-wrap: wrap; }
+  .dpp-trust__item { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--text-light); letter-spacing: 0.3px; }
+  .dpp-trust__icon { width: 20px; height: 20px; flex-shrink: 0; }
+  .dpp-trust__icon svg { width: 100%; height: 100%; stroke: var(--text-light); fill: none; stroke-width: 1.2; }
+
+  /* ══════════════════════════════════════
+     3. LA CANALIZACION
+  ══════════════════════════════════════ */
+  .dpp-canal { background: var(--dark); padding: 80px 0 72px; overflow: hidden; }
+  .dpp-canal__inner { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  .dpp-canal__quote-mark { font-family: 'Cinzel', serif; font-size: 120px; color: rgba(201,169,110,0.15); line-height: 1; user-select: none; display: none; }
+  .dpp-canal__title { font-family: 'Cinzel', serif; font-size: clamp(22px, 3vw, 32px); color: #fff; margin-bottom: 8px; font-weight: 500; }
+  .dpp-canal__line { width: 40px; height: 1px; background: var(--gold); margin-bottom: 28px; }
+  .dpp-canal__text { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: rgba(250,250,247,0.8); line-height: 1.8; margin-bottom: 22px; }
+  .dpp-canal__steps { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
+  .dpp-canal__step { border: 1px solid rgba(201,169,110,0.15); padding: 28px; border-radius: 2px; }
+  .dpp-canal__step-day { font-family: 'Cinzel', serif; font-size: 14px; color: var(--gold); letter-spacing: 1px; margin-bottom: 6px; }
+  .dpp-canal__step-title { font-family: 'Cinzel', serif; font-size: 16px; color: #fff; margin-bottom: 8px; font-weight: 500; }
+  .dpp-canal__step-desc { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: rgba(250,250,247,0.6); line-height: 1.6; }
+  .dpp-canal__final { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--gold); text-align: center; margin-top: 48px; letter-spacing: 0.5px; }
+
+  @media (min-width: 768px) {
+    .dpp-canal__inner { grid-template-columns: auto 1fr; gap: 40px; align-items: start; }
+    .dpp-canal__quote-mark { display: block; padding-top: 8px; }
+    .dpp-canal__steps { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ══════════════════════════════════════
+     4. LA HISTORIA
+  ══════════════════════════════════════ */
+  .dpp-story { background: var(--bg); padding: 72px 0 64px; }
+  .dpp-story__title { font-family: 'Cinzel', serif; font-size: clamp(22px, 3vw, 32px); color: var(--text); text-align: center; margin-bottom: 8px; font-weight: 500; }
+  .dpp-story__line { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 36px; }
+  .dpp-story__body { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: #3a3a34; max-width: 720px; margin: 0 auto; line-height: 1.8; text-align: center; }
+  .dpp-story__body p { margin-bottom: 18px; }
+  .dpp-story__body em { font-style: italic; }
+
+  /* ══════════════════════════════════════
+     5. FICHA DEL GUARDIAN
+  ══════════════════════════════════════ */
+  .dpp-ficha {
+    background: #0a0c07; padding: 72px 0; position: relative; overflow: hidden;
+  }
+  .dpp-ficha__glow { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 50%); }
+  .dpp-ficha__fireflies { position: absolute; inset: 0; overflow: hidden; }
+  /* Orbes dorados flotantes */
+  .dpp-ficha__orb {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.35) 0%, rgba(201,169,110,0.12) 40%, transparent 70%);
+    animation: dppOrbFloat var(--dur) ease-in-out infinite var(--delay);
+    filter: blur(2px);
+  }
+  @keyframes dppOrbFloat {
+    0%, 100% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+    20% { opacity: 0.7; }
+    50% { transform: translate(var(--dx), var(--dy)) scale(1); opacity: 0.4; }
+    80% { opacity: 0.6; }
+  }
+  .dpp-ficha__filigree {
+    position: absolute; top: 50%; width: 120px; height: 80%;
+    transform: translateY(-50%); z-index: 1; opacity: 0.12;
+  }
+  .dpp-ficha__filigree--left { left: 24px; }
+  .dpp-ficha__filigree--right { right: 24px; transform: translateY(-50%) scaleX(-1); }
+  .dpp-ficha__filigree svg { width: 100%; height: 100%; }
+  .dpp-ficha__title {
+    font-family: 'Cinzel', serif; font-size: clamp(22px, 3vw, 32px); color: #fff;
+    text-align: center; margin-bottom: 8px; font-weight: 600; position: relative; z-index: 2;
+  }
+  .dpp-ficha__line { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 40px; position: relative; z-index: 2; }
+  .dpp-ficha__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 640px; margin: 0 auto; position: relative; z-index: 2; }
+  .dpp-ficha__card {
+    border: 1px solid rgba(201,169,110,0.3); border-radius: 4px; padding: 24px 20px;
+    text-align: center; background: #FAFAF8;
+    box-shadow: 0 0 15px rgba(201,169,110,0.1), 0 4px 20px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .dpp-ficha__card:hover {
+    box-shadow: 0 0 25px rgba(201,169,110,0.25), 0 6px 24px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+  }
+  .dpp-ficha__card-icon { color: var(--gold); font-size: 16px; margin-bottom: 10px; letter-spacing: 2px; }
+  .dpp-ficha__card-label {
+    font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(26,26,20,0.45); margin-bottom: 8px;
+  }
+  .dpp-ficha__card-value {
+    font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #1a1a14;
+    text-transform: capitalize; position: relative;
+  }
+  /* Shimmer on card values */
+  @keyframes dppShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .dpp-ficha__card-value {
+    background: linear-gradient(90deg, #1a1a14 35%, #C9A96E 50%, #1a1a14 65%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: dppShimmer 5s linear infinite;
+  }
+
+  @media (min-width: 768px) {
+    .dpp-ficha__grid { grid-template-columns: repeat(4, 1fr); max-width: 880px; }
+    .dpp-ficha__filigree { width: 120px; }
+  }
+  @media (max-width: 768px) {
+    .dpp-ficha__filigree { width: 40px; }
+    .dpp-ficha__filigree--left { left: 6px; }
+    .dpp-ficha__filigree--right { right: 6px; }
+  }
+
+  /* ══════════════════════════════════════
+     6. QUE INCLUYE
+  ══════════════════════════════════════ */
+  .dpp-includes { background: var(--bg); padding: 72px 0 64px; }
+  .dpp-includes__title { font-family: 'Cinzel', serif; font-size: clamp(22px, 3vw, 32px); color: var(--text); text-align: center; margin-bottom: 8px; font-weight: 500; }
+  .dpp-includes__line { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 44px; }
+  .dpp-includes__list { max-width: 640px; margin: 0 auto; list-style: none; padding: 0; }
+  .dpp-includes__item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px 0; border-bottom: 1px solid rgba(201,169,110,0.15);
+    opacity: 0; transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .dpp-includes__item.dpp-check-visible {
+    opacity: 1; transform: translateX(0);
+  }
+  .dpp-includes__item:last-child { border-bottom: none; }
+  .dpp-includes__check {
+    flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+    border: 2px solid rgba(201,169,110,0.3); display: flex; align-items: center; justify-content: center;
+    transition: all 0.4s ease; position: relative;
+  }
+  .dpp-check-visible .dpp-includes__check {
+    border-color: var(--gold); background: var(--gold);
+  }
+  .dpp-includes__check-svg {
+    width: 14px; height: 14px; stroke: #fff; stroke-width: 3; fill: none;
+    stroke-dasharray: 20; stroke-dashoffset: 20;
+    transition: stroke-dashoffset 0.4s 0.2s ease;
+  }
+  .dpp-check-visible .dpp-includes__check-svg {
+    stroke-dashoffset: 0;
+  }
+  .dpp-includes__text { flex: 1; }
+  .dpp-includes__item-title {
+    font-family: 'Cinzel', serif; font-size: 15px; letter-spacing: 1px;
+    color: #1a1a14; margin-bottom: 4px; font-weight: 600;
+  }
+  .dpp-includes__item-desc {
+    font-family: 'Cormorant Garamond', serif; font-size: 16px;
+    color: var(--text-light); line-height: 1.5;
+  }
+
+  /* ══════════════════════════════════════
+     7. SELLO DE CANALIZACION (bottom seal)
+  ══════════════════════════════════════ */
+  .dpp-seal { background: #0a0c07; padding: 72px 0 56px; position: relative; overflow: hidden; }
+  .dpp-seal__glow { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 50%); }
+  .dpp-seal__fireflies { position: absolute; inset: 0; overflow: hidden; }
+  .dpp-seal__card {
+    max-width: 680px; margin: 0 auto; border: 1px solid rgba(201,169,110,0.25);
+    padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
+    text-align: center; position: relative; z-index: 2;
+    background: rgba(201,169,110,0.02);
+  }
+  .dpp-seal__card::before { content: '◇'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #0a0c07; padding: 0 16px; font-size: 14px; color: var(--gold); }
+  .dpp-seal__eyebrow { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .dpp-seal__title { font-family: 'Cinzel', serif; font-size: clamp(20px, 3vw, 28px); font-weight: 400; color: #fff; margin-bottom: 16px; line-height: 1.3; }
+  .dpp-seal__line { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 24px; }
+  .dpp-seal__text { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: rgba(255,255,255,0.75); line-height: 1.8; max-width: 540px; margin: 0 auto 24px; }
+  .dpp-seal__steps { display: flex; gap: 1px; margin: 28px 0; }
+  .dpp-seal__step { flex: 1; padding: 16px 12px; background: rgba(201,169,110,0.05); text-align: center; border: 1px solid rgba(201,169,110,0.1); }
+  .dpp-seal__step-day { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .dpp-seal__step-name { font-family: 'Cinzel', serif; font-size: 17px; color: #fff; margin-bottom: 4px; }
+  .dpp-seal__step-desc { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: rgba(255,255,255,0.55); font-style: italic; }
+  .dpp-seal__final { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--gold); margin-bottom: 28px; }
+
+  /* Signature with writing animation */
+  .dpp-seal__signature-wrap { position: relative; display: inline-block; margin-bottom: 8px; }
+  .dpp-seal__signature {
+    font-family: 'Great Vibes', cursive; font-size: clamp(32px, 5vw, 48px); color: var(--gold);
+    letter-spacing: 1px; opacity: 0;
+    text-shadow: 0 0 20px rgba(201,169,110,0.4), 0 0 50px rgba(201,169,110,0.2);
+  }
+  .dpp-seal__signature.dpp-sig-visible {
+    animation: dppSignatureWrite 2s ease-out forwards;
+  }
+  .dpp-seal__sig-line {
+    position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .dpp-seal__sig-line.dpp-sig-visible {
+    animation: dppSigLine 1.5s 1.8s ease-out forwards;
+  }
+  .dpp-seal__sig-glow {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 0; height: 0; border-radius: 50%; opacity: 0;
+    background: radial-gradient(circle, rgba(201,169,110,0.3) 0%, transparent 70%);
+  }
+  .dpp-seal__sig-glow.dpp-sig-visible {
+    animation: dppSigGlow 2.5s 0.5s ease-out forwards;
+  }
+  @keyframes dppSignatureWrite {
+    0% { opacity: 0; letter-spacing: 8px; filter: blur(4px); }
+    40% { opacity: 0.7; letter-spacing: 3px; filter: blur(1px); }
+    100% { opacity: 1; letter-spacing: 1px; filter: blur(0); }
+  }
+  @keyframes dppSigLine {
+    0% { width: 0; opacity: 0; }
+    100% { width: 100%; opacity: 0.5; }
+  }
+  @keyframes dppSigGlow {
+    0% { width: 0; height: 0; opacity: 0; }
+    50% { width: 200px; height: 100px; opacity: 0.6; }
+    100% { width: 300px; height: 150px; opacity: 0; }
+  }
+
+  .dpp-seal__signature-role { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 8px; }
+
+  /* Filigree sides */
+  .dpp-seal__filigree {
+    position: absolute; top: 50%; width: 100px; height: 70%;
+    transform: translateY(-50%); z-index: 1; opacity: 0.1;
+  }
+  .dpp-seal__filigree--left { left: 20px; }
+  .dpp-seal__filigree--right { right: 20px; transform: translateY(-50%) scaleX(-1); }
+  .dpp-seal__filigree svg { width: 100%; height: 100%; }
+
+  @media (max-width: 600px) {
+    .dpp-seal__steps { flex-direction: column; gap: 8px; }
+    .dpp-seal__filigree { width: 35px; }
+    .dpp-seal__filigree--left { left: 6px; }
+    .dpp-seal__filigree--right { right: 6px; }
+  }
+
+  /* ══════════════════════════════════════
+     8. RECOMMENDATIONS
+  ══════════════════════════════════════ */
+  .dpp-recs { background: var(--bg); padding: 48px 0 80px; }
+  .dpp-recs__title { font-family: 'Cinzel', serif; font-size: clamp(22px, 3vw, 32px); color: var(--text); text-align: center; margin-bottom: 8px; font-weight: 500; }
+  .dpp-recs__line { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 40px; }
+  .dpp-recs__scroll { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 12px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; scroll-snap-type: x mandatory; }
+  .dpp-recs__scroll::-webkit-scrollbar { height: 4px; }
+  .dpp-recs__scroll::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+  .dpp-recs__card { flex: 0 0 260px; scroll-snap-align: start; text-decoration: none; }
+  .dpp-recs__card-img { width: 100%; aspect-ratio: 4/5; border-radius: 3px; overflow: hidden; background: #f0efe9; margin-bottom: 12px; }
+  .dpp-recs__card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .dpp-recs__card:hover .dpp-recs__card-img img { transform: scale(1.04); }
+  .dpp-recs__card-name { font-family: 'Cinzel', serif; font-size: 16px; color: var(--text); letter-spacing: 0.5px; margin-bottom: 4px; }
+  .dpp-recs__card-price { font-family: 'Cinzel', serif; font-size: 15px; color: var(--text); }
+
+  /* ══════════════════════════════════════
+     GLOBAL MOBILE FIXES
+  ══════════════════════════════════════ */
+  @media (max-width: 767px) {
+    .dpp-section img,
+    .dpp-gallery img,
+    .dpp-product img,
+    .dpp-recs img { max-width: 100%; height: auto; }
+
+    .dpp-gallery { max-width: 100%; overflow: hidden; }
+    .dpp-gallery__main { max-width: 100%; overflow: hidden; }
+
+    .dpp-product { padding: 24px 0 32px; }
+
+    .dpp-ficha,
+    .dpp-seal,
+    .dpp-includes,
+    .dpp-recs { padding: 40px 0; }
+
+    .dpp-container { padding: 0 16px; }
+
+    .dpp-seal__signature { font-size: 32px !important; }
+  }
+</style>
+
+{%- comment -%} Extract channeled phrase from first <em> in description {%- endcomment -%}
+{%- assign desc_split = product.description | split: '<em>' -%}
+{%- if desc_split.size > 1 -%}
+  {%- assign phrase_raw = desc_split[1] | split: '</em>' | first -%}
+  {%- assign channeled_phrase = phrase_raw | strip_html -%}
+{%- else -%}
+  {%- assign channeled_phrase = '' -%}
+{%- endif -%}
+
+{%- comment -%} Detect size tag + exact height from metafield {%- endcomment -%}
+{%- assign guardian_size = '' -%}
+{%- assign guardian_height_cm = product.metafields.duende.altura_cm.value -%}
+{%- for tag in product.tags -%}
+  {%- assign tag_lower = tag | downcase -%}
+  {%- if tag_lower == 'mini' or tag_lower == 'mediano' or tag_lower == 'grande' or tag_lower == 'gigante' or tag_lower == 'pixie' -%}
+    {%- assign guardian_size = tag -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%} Determine uniqueness label {%- endcomment -%}
+{%- assign is_unique = true -%}
+{%- for tag in product.tags -%}
+  {%- assign tag_lower = tag | downcase -%}
+  {%- if tag_lower == 'se recrea' or tag_lower == 'se-recrea' -%}
+    {%- assign is_unique = false -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+{%- liquid
+  assign dpp_display_title = product.title
+  assign dpp_lang = localization.language.iso_code | default: request.locale.iso_code | slice: 0, 2 | downcase
+  if dpp_lang == 'es'
+    assign dpp_display_title = dpp_display_title | replace: 'MID-SIZE', 'MEDIANO' | replace: 'Mid-Size', 'Mediano' | replace: 'mid-size', 'mediano'
+    assign dpp_display_title = dpp_display_title | replace: 'LARGE', 'GRANDE' | replace: 'Large', 'Grande' | replace: 'large', 'grande'
+    assign dpp_display_title = dpp_display_title | replace: 'GIANT', 'GIGANTE' | replace: 'Giant', 'Gigante' | replace: 'giant', 'gigante'
+  endif
+-%}
+
+<!-- ═══════════════════════════════════════
+     1. HERO BANNER
+═══════════════════════════════════════ -->
+<div class="dpp-hero" id="dpp-hero">
+  <div class="dpp-hero__forest"></div>
+  <div class="dpp-hero__fireflies" id="dpp-fireflies"></div>
+  <div class="dpp-hero__filigree dpp-hero__filigree--left">
+    <svg viewBox="0 0 100 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 0 V300" stroke="#C9A96E" stroke-width="0.5"/>
+      <path d="M50 40 Q80 60 50 80 Q20 100 50 120 Q80 140 50 160 Q20 180 50 200 Q80 220 50 240 Q20 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <path d="M50 40 Q20 60 50 80 Q80 100 50 120 Q20 140 50 160 Q80 180 50 200 Q20 220 50 240 Q80 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <circle cx="50" cy="20" r="4" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="150" r="8" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="150" r="3" fill="#C9A96E" opacity="0.3"/>
+      <path d="M42 150 L50 142 L58 150 L50 158 Z" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="290" r="4" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="dpp-hero__filigree dpp-hero__filigree--right">
+    <svg viewBox="0 0 100 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 0 V300" stroke="#C9A96E" stroke-width="0.5"/>
+      <path d="M50 40 Q80 60 50 80 Q20 100 50 120 Q80 140 50 160 Q20 180 50 200 Q80 220 50 240 Q20 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <path d="M50 40 Q20 60 50 80 Q80 100 50 120 Q20 140 50 160 Q80 180 50 200 Q20 220 50 240 Q80 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <circle cx="50" cy="20" r="4" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="150" r="8" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="150" r="3" fill="#C9A96E" opacity="0.3"/>
+      <path d="M42 150 L50 142 L58 150 L50 158 Z" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="290" r="4" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="dpp-hero__content">
+    {%- if product.type != blank -%}<div class="dpp-hero__type">{{ product.type }}</div>{%- endif -%}
+    {%- assign size_tag_lower = guardian_size | downcase -%}
+    {%- unless size_tag_lower == 'mini' or size_tag_lower == 'pixie' -%}
+      <p class="dpp-hero__eyebrow">{{ 'duendes.product.hero_eyebrow' | t }}</p>
+    {%- endunless -%}
+    <h1 class="dpp-hero__title">{{ dpp_display_title }}</h1>
+    {%- if channeled_phrase != '' -%}
+      <p class="dpp-hero__phrase">&ldquo;{{ channeled_phrase }}&rdquo;</p>
+    {%- endif -%}
+    <div class="dpp-hero__line"></div>
+    {%- if size_tag_lower == 'mini' or size_tag_lower == 'pixie' -%}
+      <p class="dpp-hero__scarcity" style="font-size:14px;color:#fff;">{{ 'duendes.product.hero_scarcity_1' | t }}</p>
+    {%- else -%}
+      <p class="dpp-hero__scarcity">{{ 'duendes.product.hero_scarcity_2' | t }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     2. PRODUCT GRID
+═══════════════════════════════════════ -->
+<div class="dpp-product">
+  <div class="dpp-container">
+    <div class="dpp-product__grid">
+
+      <!-- Gallery -->
+      <div class="dpp-gallery duendes-reveal">
+        <div class="dpp-gallery__main" id="dpp-main-image">
+          <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | escape }}" id="dpp-main-img" loading="eager">
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="dpp-gallery__thumbs" id="dpp-thumbs">
+            {%- for image in product.images -%}
+              <button class="dpp-gallery__thumb{% if forloop.first %} dpp-active{% endif %}" data-src="{{ image | image_url: width: 900 }}" data-alt="{{ image.alt | escape }}" aria-label="{{ 'duendes.product.gallery_view' | t: index: forloop.index | escape }}">
+                <img src="{{ image | image_url: width: 160 }}" alt="{{ image.alt | escape }}" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Info -->
+      <div class="dpp-info duendes-reveal">
+        <div class="dpp-badges">
+          {%- if product.type != blank -%}
+            <span class="dpp-badge">{{ product.type }}</span>
+          {%- endif -%}
+          {%- if guardian_size != '' -%}
+            <span class="dpp-badge">{{ guardian_size }}</span>
+          {%- endif -%}
+          {%- if is_unique -%}
+            <span class="dpp-badge">{{ 'duendes.product.badge_unique' | t }}</span>
+          {%- else -%}
+            <span class="dpp-badge">{{ 'duendes.product.badge_recreated' | t }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%}
+          Badge dorado "1 de 1" + fecha canalización (2026-05-01) — neuromarketing:
+          transforma "única" abstracta en "única esperándote desde hace X". Activa
+          loss aversion + obligación moral. Solo si product es 'is_unique'.
+        {%- endcomment -%}
+        {%- if is_unique -%}
+          <div class="duendes-unique-badge" aria-label="{{ 'duendes.product.unique_badge_aria' | t | escape }}">
+            <span class="duendes-unique-badge__mark" aria-hidden="true">✦</span>
+            <span class="duendes-unique-badge__text">{{ 'duendes.product.unique_badge_text' | t }}</span>
+          </div>
+          {%- assign canalizado_date = product.metafields.custom.canalizado_el | default: product.published_at | default: product.created_at -%}
+          {%- if canalizado_date != blank -%}
+            {%- assign now_s = 'now' | date: '%s' | times: 1 -%}
+            {%- assign cdate_s = canalizado_date | date: '%s' | times: 1 -%}
+            {%- assign elapsed_days = now_s | minus: cdate_s | divided_by: 86400 -%}
+            {%- if elapsed_days >= 0 and elapsed_days < 730 -%}
+              {%- assign cd_date_fmt = canalizado_date | date: '%-d/%m/%Y' -%}
+              <p class="duendes-unique-date">
+                {{ 'duendes.product.channeled_on_short' | t: date: cd_date_fmt }}
+                {%- if elapsed_days < 7 -%}
+                  <em>{{ 'duendes.product.wait_arrived' | t }}</em>
+                {%- elsif elapsed_days < 30 -%}
+                  <em>{{ 'duendes.product.wait_days' | t: count: elapsed_days }}</em>
+                {%- else -%}
+                  {%- assign elapsed_weeks = elapsed_days | divided_by: 7 -%}
+                  <em>{{ 'duendes.product.wait_weeks' | t: count: elapsed_weeks }}</em>
+                {%- endif -%}
+              </p>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        <h2 class="dpp-info__title">{{ dpp_display_title }}</h2>
+
+        <div class="dpp-info__price">
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <s>{{ current_variant.compare_at_price | money }}</s>
+          {%- endif -%}
+          {{ current_variant.price | money }}
+        </div>
+
+        <div class="dpp-separator"></div>
+
+        {%- comment -%}
+          Bloque "Lo que recibís" (2026-05-01) — anchoring del precio.
+          Va ANTES del botón ADOPTAR para que el cerebro vea el valor
+          completo antes de procesar el ticket.
+        {%- endcomment -%}
+        {%- if current_variant.available -%}
+          <ul class="duendes-includes" aria-label="{{ 'duendes.product.includes_ul_aria' | t | escape }}">
+            {%- assign _s1 = 'duendes.product.short_inc_1' | t | strip_html | replace: '<strong>', '' | replace: '</strong>', '' | split: ' · ' -%}
+            {%- assign _s2 = 'duendes.product.short_inc_2' | t | strip_html | replace: '<strong>', '' | replace: '</strong>', '' | split: ' · ' -%}
+            {%- assign _s3 = 'duendes.product.short_inc_3' | t | strip_html | replace: '<strong>', '' | replace: '</strong>', '' | split: ' · ' -%}
+            {%- assign _s4 = 'duendes.product.short_inc_4' | t | strip_html | replace: '<strong>', '' | replace: '</strong>', '' | split: ' · ' -%}
+            {%- assign _s5 = 'duendes.product.short_inc_5' | t | strip_html | replace: '<strong>', '' | replace: '</strong>', '' | split: ' · ' -%}
+            <li class="duendes-includes__item">
+              <span class="duendes-includes__glyph" aria-hidden="true">✦</span>
+              <span class="duendes-includes__text"><strong>{{ _s1[0] }}</strong>{%- if _s1.size > 1 -%} · {% for _p in _s1 offset: 1 %}{{ _p }}{% unless forloop.last %} · {% endunless %}{% endfor %}{%- endif -%}</span>
+            </li>
+            <li class="duendes-includes__item">
+              <span class="duendes-includes__glyph" aria-hidden="true">✉</span>
+              <span class="duendes-includes__text"><strong>{{ _s2[0] }}</strong>{%- if _s2.size > 1 -%} · {% for _p in _s2 offset: 1 %}{{ _p }}{% unless forloop.last %} · {% endunless %}{% endfor %}{%- endif -%}</span>
+            </li>
+            <li class="duendes-includes__item">
+              <span class="duendes-includes__glyph" aria-hidden="true">◈</span>
+              <span class="duendes-includes__text"><strong>{{ _s3[0] }}</strong>{%- if _s3.size > 1 -%} · {% for _p in _s3 offset: 1 %}{{ _p }}{% unless forloop.last %} · {% endunless %}{% endfor %}{%- endif -%}</span>
+            </li>
+            <li class="duendes-includes__item">
+              <span class="duendes-includes__glyph" aria-hidden="true">☾</span>
+              <span class="duendes-includes__text"><strong>{{ _s4[0] }}</strong>{%- if _s4.size > 1 -%} · {% for _p in _s4 offset: 1 %}{{ _p }}{% unless forloop.last %} · {% endunless %}{% endfor %}{%- endif -%}</span>
+            </li>
+            <li class="duendes-includes__item">
+              <span class="duendes-includes__glyph" aria-hidden="true">◇</span>
+              <span class="duendes-includes__text"><strong>{{ _s5[0] }}</strong>{%- if _s5.size > 1 -%} · {% for _p in _s5 offset: 1 %}{{ _p }}{% unless forloop.last %} · {% endunless %}{% endfor %}{%- endif -%}</span>
+            </li>
+          </ul>
+        {%- endif -%}
+
+        <form class="dpp-atc-form" id="dpp-atc-form" method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+
+          {%- comment -%} DDU 2026-05-01 — split multi-guardián #75:
+            Cart line item properties para destinatario.
+            Default oculto: adoption_type = self (compatibilidad con flujo simple).
+            Si el comprador toggle "es regalo": expone radio gift_known/gift_surprise + inputs.
+          {%- endcomment -%}
+          {%- comment -%} Prefix `_` hace que Shopify oculte estas properties del rendering automático del carrito.
+            En su lugar, el snippet `_cart-products.liquid` las lee y muestra un mensaje bonito tipo "✦ Regalo para X". {%- endcomment -%}
+          <input type="hidden" name="properties[_adoption_type]" id="dpp-prop-adoption-type" value="self">
+
+          {%- if current_variant.available -%}
+            <details class="dpp-gift-toggle" id="dpp-gift-toggle">
+              <summary class="dpp-gift-toggle__summary">
+                <span class="dpp-gift-toggle__icon">✦</span>
+                <span class="dpp-gift-toggle__label">{{ 'duendes.product.gift_toggle' | t }}</span>
+              </summary>
+              <div class="dpp-gift-panel">
+                <fieldset class="dpp-gift-radio">
+                  <legend class="dpp-gift-radio__legend">{{ 'duendes.product.gift_who_for' | t: title: dpp_display_title }}</legend>
+                  <label class="dpp-gift-radio__opt">
+                    <input type="radio" name="dpp_adoption_choice" value="self" checked>
+                    <span>{{ 'duendes.product.gift_me' | t }}</span>
+                  </label>
+                  <label class="dpp-gift-radio__opt">
+                    <input type="radio" name="dpp_adoption_choice" value="gift_known">
+                    <span>{{ 'duendes.product.gift_known' | t }}</span>
+                  </label>
+                  <label class="dpp-gift-radio__opt">
+                    <input type="radio" name="dpp_adoption_choice" value="gift_surprise">
+                    <span>{{ 'duendes.product.gift_surprise' | t }}</span>
+                  </label>
+                </fieldset>
+
+                <div class="dpp-gift-recipient" id="dpp-gift-recipient" hidden>
+                  <label class="dpp-gift-field">
+                    <span class="dpp-gift-field__label">{{ 'duendes.product.recipient_name' | t }}</span>
+                    <input type="text" name="properties[_gift_recipient_name]" id="dpp-prop-recipient-name" autocomplete="off" placeholder="e.g. Maria">
+                  </label>
+                  <label class="dpp-gift-field">
+                    <span class="dpp-gift-field__label">{{ 'duendes.product.recipient_email' | t }}</span>
+                    <input type="email" name="properties[_gift_recipient_email]" id="dpp-prop-recipient-email" autocomplete="off" placeholder="email@example.com">
+                  </label>
+                  <p class="dpp-gift-help">{{ 'duendes.product.gift_help' | t }}</p>
+                </div>
+              </div>
+            </details>
+            <button type="button" class="dpp-atc-btn" id="dpp-atc-btn">{{ 'duendes.product.btn_adopt' | t }}</button>
+          {%- else -%}
+            <button type="button" class="dpp-atc-btn" disabled>{{ 'duendes.product.btn_adopted' | t }}</button>
+          {%- endif -%}
+        </form>
+
+        {%- assign size_tag_lower = guardian_size | downcase -%}
+        {%- if size_tag_lower == 'mediano' or size_tag_lower == 'grande' or size_tag_lower == 'gigante' or size_tag_lower == 'pixie' -%}
+          <p class="dpp-canalizacion-note">{{ 'duendes.product.channeling_note' | t }}</p>
+        {%- endif -%}
+
+        <div class="dpp-trust">
+          <div class="dpp-trust__item">
+            <span class="dpp-trust__icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+            </span>
+            {{ 'duendes.product.trust_shipping' | t }}
+          </div>
+          <div class="dpp-trust__item">
+            <span class="dpp-trust__icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 9.5l10 7.5 10-7.5L12 2zm0 3l6.5 4.5L12 14 5.5 9.5 12 5z"/><path d="M12 17l-6.5-4.5L2 14.5 12 22l10-7.5-3.5-2L12 17z"/></svg>
+            </span>
+            {{ 'duendes.product.trust_unique' | t }}
+          </div>
+          <div class="dpp-trust__item">
+            <span class="dpp-trust__icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+            </span>
+            {{ 'duendes.product.trust_portal' | t }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{%- comment -%} Canalizacion section moved to bottom as seal {%- endcomment -%}
+
+<!-- ═══════════════════════════════════════
+     4. LA HISTORIA
+═══════════════════════════════════════ -->
+<div class="dpp-story">
+  <div class="dpp-container duendes-reveal">
+    <h2 class="dpp-story__title dpp-cinzel">{{ 'duendes.product.story_title' | t: title: dpp_display_title }}</h2>
+    <div class="dpp-story__line"></div>
+    <div class="dpp-story__body" id="dpp-story-body">
+      {{ product.description }}
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     5. FICHA DEL GUARDIAN
+═══════════════════════════════════════ -->
+<div class="dpp-ficha">
+  <div class="dpp-ficha__glow"></div>
+  <div class="dpp-ficha__fireflies" id="dpp-ficha-orbs"></div>
+  <div class="dpp-ficha__filigree dpp-ficha__filigree--left">
+    <svg viewBox="0 0 100 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 0 V300" stroke="#C9A96E" stroke-width="0.5"/>
+      <path d="M50 40 Q80 60 50 80 Q20 100 50 120 Q80 140 50 160 Q20 180 50 200 Q80 220 50 240 Q20 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <path d="M50 40 Q20 60 50 80 Q80 100 50 120 Q20 140 50 160 Q80 180 50 200 Q20 220 50 240 Q80 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <circle cx="50" cy="20" r="4" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="150" r="8" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="150" r="3" fill="#C9A96E" opacity="0.3"/>
+      <path d="M42 150 L50 142 L58 150 L50 158 Z" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="290" r="4" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="dpp-ficha__filigree dpp-ficha__filigree--right">
+    <svg viewBox="0 0 100 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 0 V300" stroke="#C9A96E" stroke-width="0.5"/>
+      <path d="M50 40 Q80 60 50 80 Q20 100 50 120 Q80 140 50 160 Q20 180 50 200 Q80 220 50 240 Q20 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <path d="M50 40 Q20 60 50 80 Q80 100 50 120 Q20 140 50 160 Q80 180 50 200 Q20 220 50 240 Q80 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <circle cx="50" cy="20" r="4" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="150" r="8" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="150" r="3" fill="#C9A96E" opacity="0.3"/>
+      <path d="M42 150 L50 142 L58 150 L50 158 Z" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <circle cx="50" cy="290" r="4" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="dpp-container duendes-reveal">
+    <h2 class="dpp-ficha__title dpp-cinzel">{{ 'duendes.product.profile_heading' | t: title: dpp_display_title }}</h2>
+    <div class="dpp-ficha__line"></div>
+    <div class="dpp-ficha__grid">
+      <div class="dpp-ficha__card">
+        <div class="dpp-ficha__card-icon">&#9671;</div>
+        <div class="dpp-ficha__card-label">{{ 'duendes.product.label_purpose' | t }}</div>
+        <div class="dpp-ficha__card-value">{{ product.type | default: 'Guardian' }}</div>
+      </div>
+      <div class="dpp-ficha__card">
+        <div class="dpp-ficha__card-icon">&#9671;</div>
+        <div class="dpp-ficha__card-label">{{ 'duendes.product.label_size' | t }}</div>
+        <div class="dpp-ficha__card-value" id="dpp-ficha-size">{%- if guardian_size != '' -%}{{ guardian_size }}{%- assign size_lower = guardian_size | downcase -%}{%- if size_lower == 'mini' or size_lower == 'pixie' -%}{{ 'duendes.product.ficha_size_mini_hint' | t }}{%- elsif guardian_height_cm -%}: {{ guardian_height_cm }} cm{%- endif -%}{%- else -%}{{ 'duendes.product.ficha_size_unknown' | t }}{%- endif -%}</div>
+      </div>
+      <div class="dpp-ficha__card">
+        <div class="dpp-ficha__card-icon">&#9671;</div>
+        <div class="dpp-ficha__card-label">{{ 'duendes.product.label_stone' | t }}</div>
+        <div class="dpp-ficha__card-value" id="dpp-ficha-crystal">{{ 'duendes.product.to_be_revealed' | t }}</div>
+      </div>
+      <div class="dpp-ficha__card">
+        <div class="dpp-ficha__card-icon">&#9671;</div>
+        <div class="dpp-ficha__card-label">{{ 'duendes.product.label_mission' | t }}</div>
+        <div class="dpp-ficha__card-value" id="dpp-ficha-mission" style="font-style:italic;font-size:15px;">{{ 'duendes.product.to_be_revealed' | t }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     6. QUE INCLUYE TU ADOPCION
+═══════════════════════════════════════ -->
+<div class="dpp-includes">
+  <div class="dpp-container">
+    <h2 class="dpp-includes__title dpp-cinzel">{{ 'duendes.product.includes_title' | t }}</h2>
+    <div class="dpp-includes__line"></div>
+    <ul class="dpp-includes__list" id="dpp-checklist">
+      <li class="dpp-includes__item">
+        <div class="dpp-includes__check"><svg class="dpp-includes__check-svg" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+        <div class="dpp-includes__text">
+          <div class="dpp-includes__item-title">{{ 'duendes.product.inc_1_title' | t }}</div>
+          <p class="dpp-includes__item-desc">{{ 'duendes.product.inc_1_desc' | t }}</p>
+        </div>
+      </li>
+      <li class="dpp-includes__item">
+        <div class="dpp-includes__check"><svg class="dpp-includes__check-svg" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+        <div class="dpp-includes__text">
+          <div class="dpp-includes__item-title">{{ 'duendes.product.inc_2_title' | t }}</div>
+          <p class="dpp-includes__item-desc">{{ 'duendes.product.inc_2_desc' | t }}</p>
+        </div>
+      </li>
+      <li class="dpp-includes__item">
+        <div class="dpp-includes__check"><svg class="dpp-includes__check-svg" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+        <div class="dpp-includes__text">
+          <div class="dpp-includes__item-title">{{ 'duendes.product.inc_3_title' | t }}</div>
+          <p class="dpp-includes__item-desc">{{ 'duendes.product.inc_3_desc' | t }}</p>
+        </div>
+      </li>
+      <li class="dpp-includes__item">
+        <div class="dpp-includes__check"><svg class="dpp-includes__check-svg" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+        <div class="dpp-includes__text">
+          <div class="dpp-includes__item-title">{{ 'duendes.product.inc_4_title' | t }}</div>
+          <p class="dpp-includes__item-desc">{{ 'duendes.product.inc_4_desc' | t }}</p>
+        </div>
+      </li>
+      <li class="dpp-includes__item">
+        <div class="dpp-includes__check"><svg class="dpp-includes__check-svg" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+        <div class="dpp-includes__text">
+          <div class="dpp-includes__item-title">{{ 'duendes.product.inc_5_title' | t }}</div>
+          <p class="dpp-includes__item-desc">{{ 'duendes.product.inc_5_desc' | t }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     7. SELLO DE CANALIZACION
+═══════════════════════════════════════ -->
+<div class="dpp-seal">
+  <div class="dpp-seal__glow"></div>
+  <div class="dpp-seal__fireflies" id="dpp-seal-fireflies"></div>
+  <div class="dpp-seal__filigree dpp-seal__filigree--left">
+    <svg viewBox="0 0 100 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 0 V300" stroke="#C9A96E" stroke-width="0.5"/>
+      <path d="M50 40 Q80 60 50 80 Q20 100 50 120 Q80 140 50 160 Q20 180 50 200 Q80 220 50 240 Q20 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <path d="M50 40 Q20 60 50 80 Q80 100 50 120 Q20 140 50 160 Q80 180 50 200 Q20 220 50 240 Q80 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <circle cx="50" cy="150" r="8" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <path d="M42 150 L50 142 L58 150 L50 158 Z" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="dpp-seal__filigree dpp-seal__filigree--right">
+    <svg viewBox="0 0 100 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 0 V300" stroke="#C9A96E" stroke-width="0.5"/>
+      <path d="M50 40 Q80 60 50 80 Q20 100 50 120 Q80 140 50 160 Q20 180 50 200 Q80 220 50 240 Q20 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <path d="M50 40 Q20 60 50 80 Q80 100 50 120 Q20 140 50 160 Q80 180 50 200 Q20 220 50 240 Q80 260 50 280" stroke="#C9A96E" stroke-width="0.6" fill="none"/>
+      <circle cx="50" cy="150" r="8" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+      <path d="M42 150 L50 142 L58 150 L50 158 Z" stroke="#C9A96E" stroke-width="0.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="dpp-container">
+    <div class="dpp-seal__card duendes-reveal">
+      <p class="dpp-seal__eyebrow">{{ 'duendes.product.seal_eyebrow' | t }}</p>
+      <h2 class="dpp-seal__title">{{ 'duendes.product.seal_title' | t }}</h2>
+      <div class="dpp-seal__line"></div>
+      <p class="dpp-seal__text">{{ 'duendes.product.seal_p1' | t }}</p>
+      <p class="dpp-seal__text">{{ 'duendes.product.seal_p2' | t }}</p>
+
+      <div class="dpp-seal__steps">
+        <div class="dpp-seal__step">
+          <div class="dpp-seal__step-day">{{ 'duendes.product.seal_d1' | t }}</div>
+          <div class="dpp-seal__step-name">{{ 'duendes.product.seal_s1' | t }}</div>
+          <p class="dpp-seal__step-desc">{{ 'duendes.product.seal_s1d' | t }}</p>
+        </div>
+        <div class="dpp-seal__step">
+          <div class="dpp-seal__step-day">{{ 'duendes.product.seal_d2' | t }}</div>
+          <div class="dpp-seal__step-name">{{ 'duendes.product.seal_s2' | t }}</div>
+          <p class="dpp-seal__step-desc">{{ 'duendes.product.seal_s2d' | t }}</p>
+        </div>
+        <div class="dpp-seal__step">
+          <div class="dpp-seal__step-day">{{ 'duendes.product.seal_d3' | t }}</div>
+          <div class="dpp-seal__step-name">{{ 'duendes.product.seal_s3' | t }}</div>
+          <p class="dpp-seal__step-desc">{{ 'duendes.product.seal_s3d' | t }}</p>
+        </div>
+      </div>
+
+      <p class="dpp-seal__final">{{ 'duendes.product.seal_final' | t }}</p>
+      <div class="dpp-seal__signature-wrap" id="dpp-sig-wrap">
+        <div class="dpp-seal__sig-glow"></div>
+        <div class="dpp-seal__signature">Thibisay &amp; Gabriel</div>
+        <div class="dpp-seal__sig-line"></div>
+      </div>
+      <div class="dpp-seal__signature-role">{{ 'duendes.product.seal_role' | t }}</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     8. RECOMMENDATIONS
+═══════════════════════════════════════ -->
+<div class="dpp-recs">
+  <div class="dpp-container duendes-reveal">
+    <h2 class="dpp-recs__title dpp-cinzel">{{ 'duendes.product.recs_title' | t }}</h2>
+    <div class="dpp-recs__line"></div>
+    <div class="dpp-recs__scroll" id="dpp-recs-scroll">
+      <!-- Populated by JS from recommendations API -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ── Parallax Hero ── */
+  var heroBg = document.getElementById('dpp-hero-bg');
+  if (heroBg) {
+    var heroEl = document.getElementById('dpp-hero');
+    var heroH = heroEl ? heroEl.offsetHeight : 500;
+    window.addEventListener('scroll', function() {
+      var st = window.pageYOffset;
+      if (st < heroH) {
+        heroBg.style.transform = 'translateY(' + (st * 0.35) + 'px) scale(1.08)';
+      }
+    }, { passive: true });
+  }
+
+  /* ── Scroll Reveal ── */
+  var reveals = document.querySelectorAll('.duendes-reveal');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('dpp-visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(function(el) { obs.observe(el); });
+  } else {
+    reveals.forEach(function(el) { el.classList.add('dpp-visible'); });
+  }
+
+  /* ── Gallery ── */
+  var mainImg = document.getElementById('dpp-main-img');
+  var thumbs = document.querySelectorAll('.dpp-gallery__thumb');
+  thumbs.forEach(function(th) {
+    th.addEventListener('click', function() {
+      if (!mainImg) return;
+      mainImg.style.opacity = '0';
+      setTimeout(function() {
+        mainImg.src = th.getAttribute('data-src');
+        mainImg.alt = th.getAttribute('data-alt') || '';
+        mainImg.style.opacity = '1';
+      }, 300);
+      thumbs.forEach(function(t) { t.classList.remove('dpp-active'); });
+      th.classList.add('dpp-active');
+    });
+  });
+
+  /* ── Adopt Sound (Crystal Singing Bowl) ── */
+  function playAdoptSound() {
+    try {
+      var ac = new (window.AudioContext || window.webkitAudioContext)();
+      var t = ac.currentTime;
+      [523.25, 659.25, 783.99, 1046.5].forEach(function(f, i) {
+        var o = ac.createOscillator();
+        var g = ac.createGain();
+        o.type = 'sine';
+        o.frequency.value = f;
+        g.gain.setValueAtTime(0, t);
+        g.gain.linearRampToValueAtTime(0.06 - i * 0.012, t + 0.15);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 2.5);
+        o.connect(g);
+        g.connect(ac.destination);
+        o.start(t + i * 0.1);
+        o.stop(t + 2.5);
+      });
+    } catch(e) {}
+  }
+
+  /* ── Golden Spores Explosion ── */
+  function spawnGoldenSpores(btn) {
+    var rect = btn.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+
+    // Golden glow overlay
+    var glow = document.createElement('div');
+    glow.style.cssText = 'position:fixed;inset:0;background:radial-gradient(circle at ' + cx + 'px ' + cy + 'px, rgba(201,169,110,0.25) 0%, transparent 60%);z-index:9998;pointer-events:none;opacity:0;transition:opacity 0.3s;';
+    document.body.appendChild(glow);
+    requestAnimationFrame(function() { glow.style.opacity = '1'; });
+    setTimeout(function() { glow.style.opacity = '0'; setTimeout(function() { glow.remove(); }, 500); }, 1200);
+
+    // Spores
+    for (var i = 0; i < 40; i++) {
+      var spore = document.createElement('div');
+      var angle = Math.random() * Math.PI * 2;
+      var dist = 60 + Math.random() * 180;
+      var dx = Math.cos(angle) * dist;
+      var dy = Math.sin(angle) * dist - Math.random() * 100;
+      var size = 3 + Math.random() * 5;
+      var dur = 800 + Math.random() * 1000;
+      spore.style.cssText = 'position:fixed;left:' + cx + 'px;top:' + cy + 'px;width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:radial-gradient(circle,#e8d48b,#C9A96E);z-index:9999;pointer-events:none;opacity:1;box-shadow:0 0 ' + (size*2) + 'px rgba(201,169,110,0.6);transition:all ' + dur + 'ms cubic-bezier(0.25,0.8,0.25,1);';
+      document.body.appendChild(spore);
+      requestAnimationFrame(function() {
+        spore.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(0)';
+        spore.style.opacity = '0';
+      });
+      setTimeout(function() { spore.remove(); }, dur + 100);
+    }
+
+    // Button glow
+    btn.style.background = '#C9A96E';
+    btn.style.boxShadow = '0 0 40px rgba(201,169,110,0.6), 0 0 80px rgba(201,169,110,0.3)';
+    btn.style.color = '#0d0f09';
+  }
+
+  var atcBtn = document.getElementById('dpp-atc-btn');
+  var atcForm = document.getElementById('dpp-atc-form');
+
+  // Gift toggle (split multi-guardián #75): mostrar/ocultar inputs destinatario
+  var giftRecipientPanel = document.getElementById('dpp-gift-recipient');
+  var adoptionTypeHidden = document.getElementById('dpp-prop-adoption-type');
+  var recipientNameInput = document.getElementById('dpp-prop-recipient-name');
+  var recipientEmailInput = document.getElementById('dpp-prop-recipient-email');
+  var giftRadios = document.querySelectorAll('input[name="dpp_adoption_choice"]');
+
+  function syncGiftUI() {
+    var selected = 'self';
+    for (var ri = 0; ri < giftRadios.length; ri++) {
+      if (giftRadios[ri].checked) { selected = giftRadios[ri].value; break; }
+    }
+    if (adoptionTypeHidden) adoptionTypeHidden.value = selected;
+    if (giftRecipientPanel) {
+      if (selected === 'gift_known') {
+        giftRecipientPanel.removeAttribute('hidden');
+        if (recipientNameInput) recipientNameInput.required = true;
+        if (recipientEmailInput) recipientEmailInput.required = true;
+      } else {
+        giftRecipientPanel.setAttribute('hidden', '');
+        // Limpiar values y required cuando no es gift_known así no se envían
+        // properties vacías al carrito.
+        if (recipientNameInput) { recipientNameInput.required = false; recipientNameInput.value = ''; }
+        if (recipientEmailInput) { recipientEmailInput.required = false; recipientEmailInput.value = ''; }
+      }
+    }
+  }
+  for (var rj = 0; rj < giftRadios.length; rj++) {
+    giftRadios[rj].addEventListener('change', syncGiftUI);
+  }
+  syncGiftUI();
+
+  if (atcBtn && atcForm) {
+    atcBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Si es gift_known, validar nombre y email antes de continuar
+      var isGiftKnown = adoptionTypeHidden && adoptionTypeHidden.value === 'gift_known';
+      if (isGiftKnown) {
+        if (!recipientNameInput || !recipientNameInput.value.trim() || !recipientEmailInput || !recipientEmailInput.value.trim()) {
+          var giftToggle = document.getElementById('dpp-gift-toggle');
+          if (giftToggle) giftToggle.open = true;
+          if (recipientNameInput) recipientNameInput.focus();
+          atcBtn.classList.add('dpp-atc-btn--shake');
+          setTimeout(function(){ atcBtn.classList.remove('dpp-atc-btn--shake'); }, 600);
+          return;
+        }
+      }
+      atcBtn.disabled = true;
+      atcBtn.textContent = (window.__DPP_I18N && window.__DPP_I18N.connecting) || 'Connecting...';
+      playAdoptSound();
+      spawnGoldenSpores(atcBtn);
+      setTimeout(function() {
+        atcForm.submit();
+      }, 1200);
+    });
+  }
+
+  /* ── Fireflies ── */
+  var firefliesContainer = document.getElementById('dpp-fireflies');
+  if (firefliesContainer) {
+    for (var fi = 0; fi < 18; fi++) {
+      var ff = document.createElement('div');
+      ff.className = 'dpp-hero__firefly';
+      var size = 4 + Math.random() * 8;
+      ff.style.width = size + 'px';
+      ff.style.height = size + 'px';
+      ff.style.left = (5 + Math.random() * 90) + '%';
+      ff.style.top = (10 + Math.random() * 80) + '%';
+      ff.style.setProperty('--dur', (6 + Math.random() * 8).toFixed(1) + 's');
+      ff.style.setProperty('--delay', (Math.random() * 8).toFixed(1) + 's');
+      ff.style.setProperty('--dx1', (Math.random() * 60 - 30) + 'px');
+      ff.style.setProperty('--dy1', (Math.random() * 40 - 30) + 'px');
+      ff.style.setProperty('--dx2', (Math.random() * 80 - 40) + 'px');
+      ff.style.setProperty('--dy2', (Math.random() * 60 - 40) + 'px');
+      ff.style.setProperty('--dx3', (Math.random() * 50 - 25) + 'px');
+      ff.style.setProperty('--dy3', (Math.random() * 30 - 20) + 'px');
+      firefliesContainer.appendChild(ff);
+    }
+  }
+
+  /* ── Ficha golden orbs ── */
+  var fichaOrbs = document.getElementById('dpp-ficha-orbs');
+  if (fichaOrbs) {
+    for (var ffi = 0; ffi < 10; ffi++) {
+      var orb = document.createElement('div');
+      orb.className = 'dpp-ficha__orb';
+      var osize = 20 + Math.random() * 50;
+      orb.style.width = osize + 'px';
+      orb.style.height = osize + 'px';
+      orb.style.left = (5 + Math.random() * 90) + '%';
+      orb.style.top = (5 + Math.random() * 90) + '%';
+      orb.style.setProperty('--dur', (8 + Math.random() * 12).toFixed(1) + 's');
+      orb.style.setProperty('--delay', (Math.random() * 10).toFixed(1) + 's');
+      orb.style.setProperty('--dx', (Math.random() * 60 - 30) + 'px');
+      orb.style.setProperty('--dy', (Math.random() * 40 - 20) + 'px');
+      fichaOrbs.appendChild(orb);
+    }
+  }
+
+  /* ── Checklist animation ── */
+  var checklist = document.getElementById('dpp-checklist');
+  if (checklist) {
+    var checkItems = checklist.querySelectorAll('.dpp-includes__item');
+    var checkObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          for (var ci = 0; ci < checkItems.length; ci++) {
+            (function(idx) {
+              setTimeout(function() {
+                checkItems[idx].classList.add('dpp-check-visible');
+              }, idx * 300);
+            })(ci);
+          }
+          checkObserver.unobserve(checklist);
+        }
+      });
+    }, { threshold: 0.2 });
+    checkObserver.observe(checklist);
+  }
+
+  /* ── Seal fireflies ── */
+  var sealFireflies = document.getElementById('dpp-seal-fireflies');
+  if (sealFireflies) {
+    for (var sfi = 0; sfi < 12; sfi++) {
+      var sff = document.createElement('div');
+      sff.className = 'dpp-hero__firefly';
+      var sfsize = 3 + Math.random() * 7;
+      sff.style.width = sfsize + 'px';
+      sff.style.height = sfsize + 'px';
+      sff.style.left = (5 + Math.random() * 90) + '%';
+      sff.style.top = (10 + Math.random() * 80) + '%';
+      sff.style.setProperty('--dur', (8 + Math.random() * 10).toFixed(1) + 's');
+      sff.style.setProperty('--delay', (Math.random() * 10).toFixed(1) + 's');
+      sff.style.setProperty('--dx1', (Math.random() * 50 - 25) + 'px');
+      sff.style.setProperty('--dy1', (Math.random() * 30 - 15) + 'px');
+      sff.style.setProperty('--dx2', (Math.random() * 60 - 30) + 'px');
+      sff.style.setProperty('--dy2', (Math.random() * 40 - 20) + 'px');
+      sff.style.setProperty('--dx3', (Math.random() * 40 - 20) + 'px');
+      sff.style.setProperty('--dy3', (Math.random() * 20 - 10) + 'px');
+      sealFireflies.appendChild(sff);
+    }
+  }
+
+  /* ── Signature writing animation on scroll ── */
+  var sigWrap = document.getElementById('dpp-sig-wrap');
+  if (sigWrap) {
+    var sigObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var els = sigWrap.querySelectorAll('.dpp-seal__signature, .dpp-seal__sig-line, .dpp-seal__sig-glow');
+          for (var si = 0; si < els.length; si++) {
+            els[si].classList.add('dpp-sig-visible');
+          }
+          sigObserver.unobserve(sigWrap);
+        }
+      });
+    }, { threshold: 0.5 });
+    sigObserver.observe(sigWrap);
+  }
+
+  /* ── Ficha: Parse Description for Metadata ── */
+  var storyBody = document.getElementById('dpp-story-body');
+  if (storyBody) {
+    var descText = storyBody.textContent || '';
+    var descLower = descText.toLowerCase();
+
+    /* Height */
+    var heightMatch = descText.match(/(\d+)\s*(?:cent[ií]metros|centimetros|cm)/i);
+    var fichaSize = document.getElementById('dpp-ficha-size');
+    if (heightMatch && fichaSize) {
+      var currentSize = fichaSize.textContent.trim();
+      var tbr = (window.__DPP_I18N && window.__DPP_I18N.toBeRevealed) || 'To be revealed';
+      if (currentSize && currentSize !== tbr && currentSize !== 'To be revealed' && currentSize !== 'Por revelar') {
+        fichaSize.textContent = currentSize + ' · ' + heightMatch[1] + ' cm';
+      } else {
+        fichaSize.textContent = heightMatch[1] + ' cm';
+      }
+    }
+
+    /* Crystal */
+    var crystals = ['sodalita','citrino','cuarzo rosa','cuarzo','amatista','turmalina negra','turmalina','jade','obsidiana','ojo de tigre','lapislazuli','lapis lazuli','\u00e1gata','agata','aventurina','selenita','pirita','fluorita','labradorita','amazonita','rodonita','malaquita','howlita','onix','\u00f3nix','coral','granate','hematita'];
+    var foundCrystal = '';
+    crystals.forEach(function(c) {
+      if (descLower.indexOf(c) > -1 && !foundCrystal) foundCrystal = c;
+    });
+    if (foundCrystal) {
+      var fichaC = document.getElementById('dpp-ficha-crystal');
+      if (fichaC) fichaC.textContent = foundCrystal.charAt(0).toUpperCase() + foundCrystal.slice(1);
+    }
+
+    /* Mission - extract a short compelling sentence about what the guardian does */
+    var missionEl = document.getElementById('dpp-ficha-mission');
+    if (missionEl) {
+      var sentences = descText.replace(/\n/g, ' ').split(/(?<=[.!?])\s+/);
+      var mission = '';
+      var missionKeywords = ['proteg','ayud','acompa\u00f1','trabaj','lleg\u00f3 hasta','lleg\u00f3 porque','mi trabajo','mi misi\u00f3n','me especializo','experto en','nac\u00ed para','vine para','vine desde','mi prop\u00f3sito'];
+      for (var si = 0; si < sentences.length; si++) {
+        var sl = sentences[si].toLowerCase();
+        for (var ki = 0; ki < missionKeywords.length; ki++) {
+          if (sl.indexOf(missionKeywords[ki]) > -1 && sentences[si].length > 20 && sentences[si].length < 150) {
+            mission = sentences[si].trim();
+            break;
+          }
+        }
+        if (mission) break;
+      }
+      if (mission) {
+        missionEl.textContent = mission;
+      }
+    }
+  }
+
+  /* ── Recommendations ── */
+  function dppEscapeHtml(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+  }
+  function dppTitleForLocale(title) {
+    var lang = (document.documentElement.lang || '').toLowerCase();
+    if (lang.indexOf('es') !== 0) return title || '';
+    var t = String(title || '');
+    return t
+      .replace(/\s*-\s*MID-SIZE/gi, ' - MEDIANO')
+      .replace(/\s*-\s*Mid-Size/gi, ' - Mediano')
+      .replace(/\s*-\s*LARGE\b/gi, ' - GRANDE')
+      .replace(/\s*-\s*Large\b/gi, ' - Grande')
+      .replace(/\s*-\s*GIANT\b/gi, ' - GIGANTE')
+      .replace(/\s*-\s*Giant\b/gi, ' - Gigante');
+  }
+  var recsContainer = document.getElementById('dpp-recs-scroll');
+  if (recsContainer) {
+    var productUrl = '/recommendations/products.json?product_id={{ product.id }}&limit=8';
+    fetch(productUrl)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.products || !data.products.length) return;
+        var html = '';
+        data.products.forEach(function(p) {
+          var img = p.featured_image || '';
+          var disp = dppTitleForLocale(p.title);
+          var price = (p.price / 100).toLocaleString('es-UY', { style: 'currency', currency: p.currency || 'USD' });
+          html += '<a href="' + dppEscapeHtml(p.url) + '" class="dpp-recs__card">';
+          html += '<div class="dpp-recs__card-img"><img src="' + dppEscapeHtml(img) + '" alt="' + dppEscapeHtml(disp) + '" loading="lazy"></div>';
+          html += '<div class="dpp-recs__card-name dpp-cinzel">' + dppEscapeHtml(disp) + '</div>';
+          html += '<div class="dpp-recs__card-price dpp-cinzel">' + dppEscapeHtml(price) + '</div>';
+          html += '</a>';
+        });
+        recsContainer.innerHTML = html;
+      })
+      .catch(function() {});
+  }
+
+})();
+</script>
+
+{%- comment -%}
+  Sticky CTA producto mobile (2026-05-01) — aparece SOLO en mobile cuando
+  el botón principal sale del viewport. Reduce abandono mobile dramáticamente.
+{%- endcomment -%}
+{%- if product != blank and current_variant.available -%}
+  <div
+    class="duendes-product-sticky"
+    id="dppStickyBar"
+    aria-hidden="true"
+  >
+    <div class="duendes-product-sticky__inner">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 96 }}"
+          alt="{{ dpp_display_title | escape }}"
+          class="duendes-product-sticky__img"
+          loading="lazy"
+          width="48"
+          height="48"
+        >
+      {%- endif -%}
+      <div class="duendes-product-sticky__info">
+        <p class="duendes-product-sticky__name">{{ dpp_display_title }}</p>
+        <p class="duendes-product-sticky__price">
+          <span>{{ current_variant.price | money }}</span>
+        </p>
+      </div>
+      <button
+        type="button"
+        class="duendes-product-sticky__btn"
+        id="dppStickySubmit"
+        aria-label="{{ 'duendes.product.sticky_aria' | t: title: dpp_display_title | escape }}"
+      >
+        {{ 'duendes.product.sticky_btn' | t }}
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      var bar = document.getElementById('dppStickyBar');
+      var mainBtn = document.getElementById('dpp-atc-btn');
+      if (!bar || !mainBtn) return;
+
+      // Mostrar el sticky cuando el botón principal sale del viewport
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) {
+            bar.classList.remove('show');
+            bar.setAttribute('aria-hidden', 'true');
+          } else {
+            bar.classList.add('show');
+            bar.setAttribute('aria-hidden', 'false');
+          }
+        });
+      }, { rootMargin: '0px 0px 80px 0px', threshold: 0 });
+      io.observe(mainBtn);
+
+      // Click en sticky → click en el botón principal (mantiene flow original)
+      var stickyBtn = document.getElementById('dppStickySubmit');
+      if (stickyBtn) {
+        stickyBtn.addEventListener('click', function(){
+          if (mainBtn && !mainBtn.disabled) {
+            mainBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(function(){ mainBtn.click(); }, 250);
+          }
+        });
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Duendes Producto Premium",
+  "tag": "section",
+  "class": "dpp-section",
+  "settings": [],
+  "presets": [{ "name": "Duendes Producto Premium" }],
+  "templates": ["product"]
+}
+{% endschema %}
