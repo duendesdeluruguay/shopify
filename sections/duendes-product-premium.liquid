@@ -15,7 +15,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&display=swap');
 
   /* ── Reset & Base ── */
-  .dpp-section { --gold: #C9A96E; --bg: #FAFAF8; --dark: #0d0f09; --text: #1a1a14; --text-light: #6a6a60; --btn-bg: #1a1a14; --btn-text: #FAFAF7; --dpp-gift-close: {{ 'duendes.product.gift_close_suffix' | t | json }}; font-family: 'Cormorant Garamond', serif; }
+  .dpp-section { --gold: #C9A96E; --bg: #FAFAF8; --dark: #0d0f09; --text: #1a1a14; --text-light: #6a6a60; --btn-bg: #050505; --btn-text: #ffffff; --dpp-gift-close: {{ 'duendes.product.gift_close_suffix' | t | json }}; font-family: 'Cormorant Garamond', serif; }
   .dpp-section *, .dpp-section *::before, .dpp-section *::after { box-sizing: border-box; margin: 0; padding: 0; }
   .dpp-cinzel { font-family: 'Cinzel', serif; }
   .dpp-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -135,8 +135,12 @@
   .dpp-info__price s { font-size: 20px; color: var(--text-light); margin-right: 10px; font-weight: 400; }
   .dpp-separator { width: 40px; height: 1px; background: var(--gold); margin: 20px 0; }
   .dpp-atc-form {}
-  .dpp-atc-btn { font-family: 'Cinzel', serif; font-size: 15px; letter-spacing: 2.5px; text-transform: uppercase; background: var(--btn-bg); color: var(--btn-text); border: none; width: 100%; padding: 18px 24px; cursor: pointer; border-radius: 2px; transition: background 0.3s, transform 0.15s; }
-  .dpp-atc-btn:hover { background: #2a2a22; }
+  .dpp-atc-btn {
+    font-family: 'Cinzel', serif; font-size: 15px; letter-spacing: 2.5px; text-transform: uppercase;
+    background: #050505; color: #ffffff; border: 2px solid #050505; width: 100%; padding: 18px 24px;
+    cursor: pointer; border-radius: 2px; transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.15s;
+  }
+  .dpp-atc-btn:hover { background: #111111; color: #ffffff; border-color: #111111; }
   .dpp-atc-btn:active { transform: scale(0.985); }
   .dpp-atc-btn:disabled { background: #8a8a80; cursor: not-allowed; }
   .dpp-canalizacion-note { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: var(--gold); text-align: center; margin-top: 12px; letter-spacing: 0.5px; font-style: italic; }
