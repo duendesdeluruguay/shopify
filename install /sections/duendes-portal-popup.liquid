@@ -1,0 +1,178 @@
+{% comment %}
+============================================================
+  DUENDES DEL URUGUAY · POPUP BIENVENIDA 10%
+  Captura email → Shopify (contact[tags] newsletter + popup) + marketing.
+  Cupón BIENVENIDA10: gestionar desde Shopify Email / automatizaciones si aplica.
+
+  GUARD COWORK 2026-04-27: deshabilitado en /pages/mi-magia, /pages/rito-reconocimiento, /account
+============================================================
+{% endcomment %}
+
+{%- assign _h = page.handle | default: '' -%}
+{%- comment -%}
+  GUARD 2026-05-01: deshabilitado en páginas con flow propio o de discovery
+  donde el popup interrumpe el ritmo emocional. Cowork + Code + Thibisay.
+{%- endcomment -%}
+{%- if _h == 'mi-magia'
+   or _h == 'rito-reconocimiento'
+   or _h == 'test-del-guardian'
+   or _h == 'como-funciona'
+   or _h == 'senales'
+   or template contains 'customers' -%}
+  {%- comment -%} Popup deshabilitado en esta página {%- endcomment -%}
+{%- else -%}
+
+<style>
+  /* DDU popup — rebranding 2026-05-01: paleta marca, más compacto, cinematográfico */
+  .ddu-popup-backdrop{position:fixed;inset:0;background:rgba(8,10,6,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:99999;display:none;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .35s ease}
+  .ddu-popup-backdrop.active{display:flex;opacity:1}
+  .ddu-popup-card{position:relative;width:100%;max-width:360px;background:linear-gradient(180deg,#0d0f09 0%,#0a0c06 100%);border:1px solid rgba(201,168,76,.28);border-radius:10px;padding:28px 24px 22px;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 60px rgba(201,168,76,.06);transform:translateY(16px) scale(.97);transition:transform .45s cubic-bezier(0.19,1,0.22,1) .1s,opacity .35s ease;opacity:0}
+  .ddu-popup-backdrop.active .ddu-popup-card{transform:translateY(0) scale(1);opacity:1}
+  .ddu-popup-close{position:absolute;top:10px;right:10px;background:transparent;border:0;width:28px;height:28px;cursor:pointer;color:rgba(245,245,220,.4);font-size:20px;line-height:1;transition:color .2s ease}
+  .ddu-popup-close:hover{color:#dfc472}
+  .ddu-popup-glyph{font-family:'Cinzel',serif;text-align:center;color:#dfc472;font-size:18px;letter-spacing:.4em;margin:0 0 14px;opacity:.85}
+  .ddu-popup-eyebrow{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(223,196,114,.7);text-align:center;margin:0 0 10px;font-weight:500}
+  .ddu-popup-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:22px;line-height:1.2;color:#F5F5DC;text-align:center;margin:0 0 8px;letter-spacing:.01em}
+  .ddu-popup-title strong{font-weight:500;color:#dfc472;font-style:italic}
+  .ddu-popup-text{font-family:'Cormorant Garamond',serif;font-size:13px;line-height:1.55;color:rgba(245,245,220,.65);font-style:italic;text-align:center;margin:0 0 18px}
+  .ddu-popup-form{display:flex;flex-direction:column;gap:10px}
+  .ddu-popup-input{width:100%;padding:12px 14px;background:rgba(245,245,220,.04);border:1px solid rgba(201,168,76,.25);border-radius:6px;font-family:'Cormorant Garamond',serif;font-size:14px;color:#F5F5DC;outline:none;transition:border-color .2s ease}
+  .ddu-popup-input::placeholder{color:rgba(245,245,220,.35);font-style:italic}
+  .ddu-popup-input:focus{border-color:#c9a84c;background:rgba(201,168,76,.06)}
+  .ddu-popup-button{width:100%;padding:13px 24px;background:#c9a84c;color:#0a0c06;border:0;border-radius:6px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .25s ease;font-weight:600;box-shadow:0 4px 18px rgba(201,168,76,.32)}
+  .ddu-popup-button:hover{background:#dfc472;transform:translateY(-1px);box-shadow:0 6px 24px rgba(201,168,76,.45)}
+  .ddu-popup-button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .ddu-popup-disclaimer{font-family:'Cormorant Garamond',serif;font-size:10px;color:rgba(245,245,220,.35);font-style:italic;text-align:center;margin:12px 0 0;line-height:1.4}
+  .ddu-popup-success{display:none;text-align:center;padding:14px 0}
+  .ddu-popup-success.active{display:block}
+  .ddu-popup-success h4{font-family:'Cormorant Garamond',serif;font-size:20px;color:#dfc472;margin:0 0 10px;font-style:italic;font-weight:400}
+  .ddu-popup-success p{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(245,245,220,.7);line-height:1.5;margin:0}
+  @media (max-width:480px){.ddu-popup-card{padding:24px 20px 18px;max-width:340px}.ddu-popup-title{font-size:20px}}
+</style>
+
+<div class="ddu-popup-backdrop" id="dduPopupBackdrop" role="dialog" aria-modal="true" aria-labelledby="dduPopupTitle">
+  <div class="ddu-popup-card">
+    <button type="button" class="ddu-popup-close" id="dduPopupClose" aria-label="{{ 'duendes.popup.close_aria' | t }}">&times;</button>
+    <div class="ddu-popup-glyph" aria-hidden="true">✦</div>
+    <p class="ddu-popup-eyebrow">{{ 'duendes.popup.eyebrow' | t }}</p>
+    <h3 id="dduPopupTitle" class="ddu-popup-title">{{ 'duendes.popup.title_line1' | t }}<br><strong>{{ 'duendes.popup.title_strong' | t }}</strong></h3>
+    <p class="ddu-popup-text">{{ 'duendes.popup.body' | t }}</p>
+    {%- form 'customer', class: 'ddu-popup-form', id: 'dduPopupForm', return_to: request.path -%}
+      <input type="hidden" name="contact[tags]" value="newsletter, ddu-popup-comunidad">
+      <input type="hidden" name="contact[accepts_marketing]" value="true">
+      <input type="email" class="ddu-popup-input" id="dduPopupEmail" name="contact[email]" placeholder="{{ 'duendes.popup.placeholder_email' | t }}" value="{{ form.email }}" required autocomplete="email" {% if form.errors %}aria-invalid="true"{% endif %}>
+      <button type="submit" class="ddu-popup-button" id="dduPopupSubmit">{{ 'duendes.popup.submit' | t }}</button>
+    {%- endform -%}
+    <p class="ddu-popup-disclaimer">{{ 'duendes.popup.disclaimer' | t }}</p>
+    <div class="ddu-popup-success" id="dduPopupSuccess">
+      <h4>{{ 'duendes.popup.success_title' | t }}</h4>
+      <p>{{ 'duendes.popup.success_body' | t }}</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.__DDU_POPUP_I18N = {
+    sending: {{ 'duendes.popup.sending' | t | json }},
+    submit: {{ 'duendes.popup.submit' | t | json }}
+  };
+</script>
+<script>
+(function() {
+  // Triggers (2026-05-11): scroll ≥50% del documento, O exit-intent solo desktop (pointer fino),
+  // O fallback 45s. Sin mouseleave en táctil (evitaba popup a los 1–2s en mobile).
+  if (sessionStorage.getItem('dduPopupShown')) return;
+  
+  var backdrop = document.getElementById('dduPopupBackdrop');
+  var closeBtn = document.getElementById('dduPopupClose');
+  var form = document.getElementById('dduPopupForm');
+  var emailInput = document.getElementById('dduPopupEmail');
+  var btn = document.getElementById('dduPopupSubmit');
+  var successDiv = document.getElementById('dduPopupSuccess');
+  
+  if (!backdrop) return;
+  
+  var armed = true;
+  function unarm() {
+    if (!armed) return;
+    armed = false;
+    try {
+      clearTimeout(fallbackTimer);
+      window.removeEventListener('scroll', onScroll, scrollOpts);
+      document.removeEventListener('mouseleave', onMouseLeave);
+    } catch (e) {}
+  }
+
+  function show() {
+    if (sessionStorage.getItem('dduPopupShown')) return;
+    backdrop.classList.add('active');
+    sessionStorage.setItem('dduPopupShown', '1');
+    unarm();
+  }
+  function hide() { backdrop.classList.remove('active'); }
+
+  function docHeight() {
+    var de = document.documentElement;
+    var b = document.body;
+    return Math.max(de ? de.scrollHeight : 0, b ? b.scrollHeight : 0, de ? de.offsetHeight : 0);
+  }
+
+  function onScroll() {
+    if (!armed) return;
+    var h = docHeight();
+    var vh = window.innerHeight || 0;
+    if (h <= vh * 1.15) return;
+    var y = window.scrollY || window.pageYOffset || 0;
+    if (y + vh >= h * 0.5) show();
+  }
+
+  function onMouseLeave(e) {
+    if (!armed || e.clientY >= 0) return;
+    try {
+      if (!window.matchMedia('(min-width: 768px)').matches) return;
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+    } catch (e2) { return; }
+    show();
+  }
+
+  var scrollOpts = { passive: true };
+  var fallbackTimer = setTimeout(function() {
+    if (!armed) return;
+    show();
+  }, 45000);
+
+  window.addEventListener('scroll', onScroll, scrollOpts);
+  document.addEventListener('mouseleave', onMouseLeave);
+  setTimeout(onScroll, 0);
+  
+  closeBtn.addEventListener('click', hide);
+  backdrop.addEventListener('click', function(e) { if (e.target === backdrop) hide(); });
+  
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = emailInput.value.trim();
+    if (!email) return;
+    btn.disabled = true;
+    btn.textContent = (window.__DDU_POPUP_I18N && window.__DDU_POPUP_I18N.sending) || '…';
+    var action = form.getAttribute('action') || '/contact';
+    var fd = new FormData(form);
+    fetch(action, {
+      method: 'POST',
+      body: fd,
+      credentials: 'same-origin',
+      redirect: 'follow',
+      headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'text/html' }
+    }).then(function(r) {
+      if (!r.ok && r.status !== 302) throw new Error('bad status');
+      form.style.display = 'none';
+      successDiv.classList.add('active');
+      setTimeout(hide, 4000);
+    }).catch(function() {
+      btn.disabled = false;
+      btn.textContent = (window.__DDU_POPUP_I18N && window.__DDU_POPUP_I18N.submit) || '';
+    });
+  });
+})();
+</script>
+
+{%- endif -%}
