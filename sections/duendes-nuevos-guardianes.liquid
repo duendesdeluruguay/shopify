@@ -49,17 +49,21 @@
 
   {%- if coll.products.size > 0 -%}
     <div class="ddu-nuevos__carousel-wrap">
-      <button class="ddu-nuevos__nav ddu-nuevos__nav--prev" aria-label="Anterior" data-dir="prev">‹</button>
-      <button class="ddu-nuevos__nav ddu-nuevos__nav--next" aria-label="Siguiente" data-dir="next">›</button>
-      <div class="ddu-nuevos__carousel" tabindex="0" aria-label="Carrusel de nuevos guardianes">
+      <button class="ddu-nuevos__nav ddu-nuevos__nav--prev" aria-label="{{ 'content.pagination.previous' | t | escape }}" data-dir="prev">‹</button>
+      <button class="ddu-nuevos__nav ddu-nuevos__nav--next" aria-label="{{ 'content.pagination.next' | t | escape }}" data-dir="next">›</button>
+      <div class="ddu-nuevos__carousel" tabindex="0" aria-label="{{ 'duendes.nuevos_carousel_aria' | t | escape }}">
         {%- for p in coll.products limit: 20 -%}
+          {%- assign p_var = p.selected_or_first_available_variant -%}
           <a class="ddu-nuevos__card" href="{{ p.url }}">
             <div class="ddu-nuevos__card-img">
               <img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ p.title | escape }}" loading="lazy">
             </div>
             <div class="ddu-nuevos__card-info">
               <span class="ddu-nuevos__card-title">{{ p.title }}</span>
-              <span class="ddu-nuevos__card-cta">Conocelo →</span>
+              {%- if p_var -%}
+                <span class="ddu-nuevos__card-price">{{ p_var.price | money }}</span>
+              {%- endif -%}
+              <span class="ddu-nuevos__card-cta">{{ 'duendes.nuevos_card_cta' | t }}</span>
             </div>
           </a>
         {%- endfor -%}
@@ -100,6 +104,7 @@
   .ddu-nuevos__card:hover .ddu-nuevos__card-img img { transform: scale(1.04); }
   .ddu-nuevos__card-info { padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
   .ddu-nuevos__card-title { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: #f4ecd8; }
+  .ddu-nuevos__card-price { font-family: 'Cinzel', serif; font-size: 15px; letter-spacing: .04em; color: #f4ecd8; font-weight: 500; }
   .ddu-nuevos__card-cta { font-family: 'Playfair Display', serif; font-size: 13px; font-style: italic; color: #d6b366; }
   .ddu-nuevos__card--more .ddu-nuevos__card-img { display: none; }
   .ddu-nuevos__card--more .ddu-nuevos__card-info--more { aspect-ratio: 4 / 5; align-items: center; justify-content: center; text-align: center; gap: 14px; padding: 32px 24px; background: linear-gradient(135deg, #1a1310 0%, #2a1f18 100%); }
