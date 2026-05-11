@@ -1,9 +1,8 @@
 {% comment %}
 ============================================================
   DUENDES DEL URUGUAY · POPUP BIENVENIDA 10%
-  Captura email → Klaviyo Lista "Comunidad Maestra" (XvtVMG)
-  Dispara flow Bienvenida (QNJbCL) automáticamente
-  El primer email del flow incluye código BIENVENIDA10 (10% off)
+  Captura email → Shopify (contact[tags] newsletter + popup) + marketing.
+  Cupón BIENVENIDA10: gestionar desde Shopify Email / automatizaciones si aplica.
 
   GUARD COWORK 2026-04-27: deshabilitado en /pages/mi-magia, /pages/rito-reconocimiento, /account
 ============================================================
@@ -53,26 +52,35 @@
 
 <div class="ddu-popup-backdrop" id="dduPopupBackdrop" role="dialog" aria-modal="true" aria-labelledby="dduPopupTitle">
   <div class="ddu-popup-card">
-    <button type="button" class="ddu-popup-close" id="dduPopupClose" aria-label="Cerrar">&times;</button>
+    <button type="button" class="ddu-popup-close" id="dduPopupClose" aria-label="{{ 'duendes.popup.close_aria' | t }}">&times;</button>
     <div class="ddu-popup-glyph" aria-hidden="true">✦</div>
-    <p class="ddu-popup-eyebrow">Bienvenida elemental</p>
-    <h3 id="dduPopupTitle" class="ddu-popup-title">10% en tu<br><strong>first adoption</strong></h3>
-    <p class="ddu-popup-text">Leave us your email and we'll send you the code. First Guardian only.</p>
-    <form class="ddu-popup-form" id="dduPopupForm" novalidate>
-      <input type="email" class="ddu-popup-input" id="dduPopupEmail" placeholder="tu@email.com" required autocomplete="email">
-      <button type="submit" class="ddu-popup-button" id="dduPopupSubmit">I want my code</button>
-    </form>
-    <p class="ddu-popup-disclaimer">Sin spam. Te escribimos solo cuando hay magia nueva.</p>
+    <p class="ddu-popup-eyebrow">{{ 'duendes.popup.eyebrow' | t }}</p>
+    <h3 id="dduPopupTitle" class="ddu-popup-title">{{ 'duendes.popup.title_line1' | t }}<br><strong>{{ 'duendes.popup.title_strong' | t }}</strong></h3>
+    <p class="ddu-popup-text">{{ 'duendes.popup.body' | t }}</p>
+    {%- form 'customer', class: 'ddu-popup-form', id: 'dduPopupForm', return_to: request.path -%}
+      <input type="hidden" name="contact[tags]" value="newsletter, ddu-popup-comunidad">
+      <input type="hidden" name="contact[accepts_marketing]" value="true">
+      <input type="email" class="ddu-popup-input" id="dduPopupEmail" name="contact[email]" placeholder="{{ 'duendes.popup.placeholder_email' | t }}" value="{{ form.email }}" required autocomplete="email" {% if form.errors %}aria-invalid="true"{% endif %}>
+      <button type="submit" class="ddu-popup-button" id="dduPopupSubmit">{{ 'duendes.popup.submit' | t }}</button>
+    {%- endform -%}
+    <p class="ddu-popup-disclaimer">{{ 'duendes.popup.disclaimer' | t }}</p>
     <div class="ddu-popup-success" id="dduPopupSuccess">
-      <h4>✦ Listo</h4>
-      <p>Check your email in the next few minutes. Your welcome code is on its way.</p>
+      <h4>{{ 'duendes.popup.success_title' | t }}</h4>
+      <p>{{ 'duendes.popup.success_body' | t }}</p>
     </div>
   </div>
 </div>
 
 <script>
+  window.__DDU_POPUP_I18N = {
+    sending: {{ 'duendes.popup.sending' | t | json }},
+    submit: {{ 'duendes.popup.submit' | t | json }}
+  };
+</script>
+<script>
 (function() {
-  // Trigger: 30s o exit-intent, una vez por sesión
+  // Triggers (2026-05-11): scroll ≥50% del documento, O exit-intent solo desktop (pointer fino),
+  // O fallback 45s. Sin mouseleave en táctil (evitaba popup a los 1–2s en mobile).
   if (sessionStorage.getItem('dduPopupShown')) return;
   
   var backdrop = document.getElementById('dduPopupBackdrop');
@@ -84,17 +92,58 @@
   
   if (!backdrop) return;
   
+  var armed = true;
+  function unarm() {
+    if (!armed) return;
+    armed = false;
+    try {
+      clearTimeout(fallbackTimer);
+      window.removeEventListener('scroll', onScroll, scrollOpts);
+      document.removeEventListener('mouseleave', onMouseLeave);
+    } catch (e) {}
+  }
+
   function show() {
     if (sessionStorage.getItem('dduPopupShown')) return;
     backdrop.classList.add('active');
     sessionStorage.setItem('dduPopupShown', '1');
+    unarm();
   }
   function hide() { backdrop.classList.remove('active'); }
-  
-  setTimeout(show, 30000);
-  document.addEventListener('mouseleave', function(e) {
-    if (e.clientY < 0) show();
-  });
+
+  function docHeight() {
+    var de = document.documentElement;
+    var b = document.body;
+    return Math.max(de ? de.scrollHeight : 0, b ? b.scrollHeight : 0, de ? de.offsetHeight : 0);
+  }
+
+  function onScroll() {
+    if (!armed) return;
+    var h = docHeight();
+    var vh = window.innerHeight || 0;
+    if (h <= vh * 1.15) return;
+    var y = window.scrollY || window.pageYOffset || 0;
+    if (y + vh >= h * 0.5) show();
+  }
+
+  function onMouseLeave(e) {
+    if (!armed || e.clientY >= 0) return;
+    try {
+      if (!window.matchMedia('(min-width: 768px)').matches) return;
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+    } catch (e2) { return; }
+    show();
+  }
+
+  var scrollOpts = { passive: true };
+  var fallbackTimer = setTimeout(function() {
+    if (!armed) return;
+    show();
+  }, 45000);
+
+  window.addEventListener('scroll', onScroll, scrollOpts);
+  document.addEventListener('mouseleave', onMouseLeave);
+  setTimeout(onScroll, 0);
   
   closeBtn.addEventListener('click', hide);
   backdrop.addEventListener('click', function(e) { if (e.target === backdrop) hide(); });
@@ -104,27 +153,23 @@
     var email = emailInput.value.trim();
     if (!email) return;
     btn.disabled = true;
-    btn.textContent = 'Enviando...';
-    
-    fetch('https://a.klaviyo.com/client/subscriptions/?company_id=XvtVMG', {
+    btn.textContent = (window.__DDU_POPUP_I18N && window.__DDU_POPUP_I18N.sending) || '…';
+    var action = form.getAttribute('action') || '/contact';
+    var fd = new FormData(form);
+    fetch(action, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'revision': '2024-10-15' },
-      body: JSON.stringify({
-        data: {
-          type: 'subscription',
-          attributes: {
-            profile: { data: { type: 'profile', attributes: { email: email } } }
-          },
-          relationships: { list: { data: { type: 'list', id: 'XvtVMG' } } }
-        }
-      })
+      body: fd,
+      credentials: 'same-origin',
+      redirect: 'follow',
+      headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'text/html' }
     }).then(function(r) {
+      if (!r.ok && r.status !== 302) throw new Error('bad status');
       form.style.display = 'none';
       successDiv.classList.add('active');
       setTimeout(hide, 4000);
     }).catch(function() {
       btn.disabled = false;
-      btn.textContent = 'I want my code';
+      btn.textContent = (window.__DDU_POPUP_I18N && window.__DDU_POPUP_I18N.submit) || '';
     });
   });
 })();
