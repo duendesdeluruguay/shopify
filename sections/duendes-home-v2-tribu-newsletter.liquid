@@ -1,0 +1,164 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+  .dh2-tribu {
+    background: #faf9f6;
+    padding: 56px 20px 72px;
+    color: #15110d;
+    border-top: 1px solid rgba(21, 17, 13, 0.06);
+  }
+  .dh2-tribu__panel {
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 24px 28px;
+    border: 1px solid rgba(21, 17, 13, 0.08);
+    box-shadow: 0 8px 36px rgba(0, 0, 0, 0.06);
+  }
+  .dh2-tribu__title {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: clamp(22px, 2.6vw, 28px);
+    margin: 0 0 10px;
+  }
+  .dh2-tribu__sub {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(21, 17, 13, 0.72);
+    margin: 0 0 22px;
+  }
+  .dh2-tribu__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .dh2-tribu__input {
+    flex: 1 1 200px;
+    min-width: 0;
+    border: 1px solid rgba(21, 17, 13, 0.15);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+  }
+  .dh2-tribu__btn {
+    border: none;
+    border-radius: 6px;
+    background: #15110d;
+    color: #faf9f6;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    cursor: pointer;
+  }
+  .dh2-tribu__btn:hover {
+    background: #2a241c;
+  }
+  .dh2-tribu__micro {
+    font-size: 12px;
+    color: rgba(21, 17, 13, 0.5);
+    font-style: italic;
+    margin: 0;
+  }
+  .dh2-tribu__errors {
+    color: #8b2e2e;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+</style>
+
+<section class="dh2-tribu section">
+  <div class="dh2-tribu__panel">
+    <h2 class="dh2-tribu__title">{{ section.settings.title }}</h2>
+    <p class="dh2-tribu__sub">{{ section.settings.subtitle }}</p>
+    {% form 'customer', class: 'dh2-tribu__formwrap', return_to: request.path %}
+      {% if form.errors %}
+        <p class="dh2-tribu__errors">{{ section.settings.error_copy }}</p>
+      {% endif %}
+      <div class="dh2-tribu__form">
+        <input type="hidden" name="contact[tags]" value="{{ section.settings.customer_tag }}">
+        <input type="hidden" name="contact[accepts_marketing]" value="true">
+        <input
+          type="email"
+          name="contact[email]"
+          class="dh2-tribu__input"
+          value="{{ form.email }}"
+          placeholder="{{ section.settings.placeholder }}"
+          required
+          autocomplete="email"
+          aria-label="{{ section.settings.placeholder }}"
+        >
+        <button type="submit" class="dh2-tribu__btn">{{ section.settings.submit_label }}</button>
+      </div>
+      {% if form.posted_successfully? %}
+        <p class="dh2-tribu__micro" role="status">{{ section.settings.success }}</p>
+      {% else %}
+        <p class="dh2-tribu__micro">{{ section.settings.micro }}</p>
+      {% endif %}
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · Tribu newsletter",
+  "tag": "section",
+  "class": "duendes-home-v2-tribu-newsletter-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Tribu Elemental"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Linajes, rituales, sueños, lo que el bosque cuenta esta semana."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Placeholder email",
+      "default": "tu@email.com"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Botón",
+      "default": "Sumarme"
+    },
+    {
+      "type": "text",
+      "id": "micro",
+      "label": "Microtexto bajo el form",
+      "default": "Sin spam. Te escribimos solo cuando hay magia nueva."
+    },
+    {
+      "type": "text",
+      "id": "success",
+      "label": "Mensaje tras envío",
+      "default": "Listo. Revisá tu correo para confirmar."
+    },
+    {
+      "type": "text",
+      "id": "customer_tag",
+      "label": "Tag en cliente (comma-separated)",
+      "default": "newsletter, home-v2-tribu"
+    },
+    {
+      "type": "text",
+      "id": "error_copy",
+      "label": "Mensaje si falla el email",
+      "default": "Revisá el correo e intentá de nuevo."
+    }
+  ],
+  "presets": [{ "name": "Duendes — Home v2 · Tribu newsletter" }]
+}
+{% endschema %}
