@@ -1,0 +1,230 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign col = section.settings.collection
+  assign limit = section.settings.limit | default: 12
+-%}
+<style>
+  .dh2-new {
+    background: #faf9f6;
+    padding: 56px 0 72px;
+    color: #15110d;
+    border-top: 1px solid rgba(21, 17, 13, 0.06);
+  }
+  .dh2-new__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .dh2-new__tag {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(21, 17, 13, 0.45);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .dh2-new__title {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 36px);
+    text-align: center;
+    margin: 0 0 28px;
+  }
+  .dh2-new__track {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+  }
+  .dh2-new__track::-webkit-scrollbar {
+    height: 6px;
+  }
+  .dh2-new__track::-webkit-scrollbar-thumb {
+    background: rgba(21, 17, 13, 0.2);
+    border-radius: 4px;
+  }
+  .dh2-new__card {
+    flex: 0 0 calc(25% - 14px);
+    min-width: 220px;
+    scroll-snap-align: start;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(21, 17, 13, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+  }
+  .dh2-new__badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: #15110d;
+    color: #c9a961;
+    padding: 4px 8px;
+    border-radius: 2px;
+  }
+  .dh2-new__img {
+    aspect-ratio: 1;
+    background: #e8e4dc;
+  }
+  .dh2-new__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dh2-new__body {
+    padding: 14px 14px 16px;
+  }
+  .dh2-new__name {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 15px;
+    margin: 0 0 4px;
+    line-height: 1.25;
+  }
+  .dh2-new__essence {
+    font-size: 13px;
+    color: rgba(21, 17, 13, 0.55);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .dh2-new__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .dh2-new__price {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 14px;
+    color: #15110d;
+  }
+  .dh2-new__cta {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #a88b42;
+    white-space: nowrap;
+  }
+  @media (max-width: 749px) {
+    .dh2-new__card {
+      flex: 0 0 calc(50% - 9px);
+      min-width: 160px;
+    }
+  }
+</style>
+
+<section class="dh2-new section">
+  <div class="dh2-new__inner">
+    <p class="dh2-new__tag">{{ section.settings.tag }}</p>
+    <h2 class="dh2-new__title">{{ section.settings.title }}</h2>
+    {% if col != blank %}
+      <div class="dh2-new__track">
+        {% for product in col.products limit: limit %}
+          {% unless product.available == false and section.settings.hide_sold_out %}
+            <a class="dh2-new__card" href="{{ product.url }}">
+              <span class="dh2-new__badge">{{ section.settings.badge }}</span>
+              <div class="dh2-new__img">
+                {% if product.featured_media %}
+                  {{ product.featured_media | image_url: width: 700 | image_tag: loading: 'lazy', sizes: '280px', widths: '350,500,700' }}
+                {% endif %}
+              </div>
+              <div class="dh2-new__body">
+                <h3 class="dh2-new__name">{{ product.title }}</h3>
+                {% if product.metafields.custom.esencia != blank %}
+                  <p class="dh2-new__essence">{{ product.metafields.custom.esencia.value | default: product.metafields.custom.esencia | escape }}</p>
+                {% elsif section.settings.essence_fallback != blank %}
+                  <p class="dh2-new__essence">{{ section.settings.essence_fallback }}</p>
+                {% endif %}
+                <div class="dh2-new__row">
+                  <span class="dh2-new__price">{{ product.price | money }}</span>
+                  <span class="dh2-new__cta">{{ section.settings.cta_label }}</span>
+                </div>
+              </div>
+            </a>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="text-align:center;color:rgba(21,17,13,.5)">{{ section.settings.empty_state }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · Recién llegados",
+  "tag": "section",
+  "class": "duendes-home-v2-recien-llegados-section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección (ej. nuevos o todos)"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "label": "Cantidad máxima",
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_sold_out",
+      "label": "Ocultar adoptados / no disponibles",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Etiqueta",
+      "default": "RECIÉN LLEGADOS · este mes"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Acaban de bajar al bosque"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "1 DE 1"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA en card",
+      "default": "Conocelo →"
+    },
+    {
+      "type": "text",
+      "id": "essence_fallback",
+      "label": "Esencia por defecto (si no hay metafield)",
+      "default": "Canalizado · único"
+    },
+    {
+      "type": "text",
+      "id": "empty_state",
+      "label": "Texto si no hay colección",
+      "default": "Elegí una colección en el editor de tema."
+    }
+  ],
+  "presets": [{ "name": "Duendes — Home v2 · Recién llegados" }]
+}
+{% endschema %}
