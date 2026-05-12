@@ -1,0 +1,222 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+  .dh2-hero {
+    --dh2-bg: #15110d;
+    --dh2-gold: #c9a961;
+    --dh2-gold-deep: #a88b42;
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    align-items: stretch;
+    background: var(--dh2-bg);
+    color: #f8f6f0;
+    overflow: hidden;
+  }
+  .dh2-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .dh2-hero__media video,
+  .dh2-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .dh2-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(10, 8, 6, 0.35);
+    pointer-events: none;
+  }
+  .dh2-hero__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(72px, 12vh, 120px) 20px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+  .dh2-hero__badges {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(248, 246, 240, 0.72);
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  .dh2-hero__badges span { color: var(--dh2-gold); }
+  .dh2-hero__title {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-weight: 400;
+    font-size: clamp(28px, 4.2vw, 52px);
+    line-height: 1.12;
+    max-width: 18ch;
+    margin: 0 0 18px;
+    color: #fff;
+  }
+  .dh2-hero__sub {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.55;
+    max-width: 36ch;
+    margin: 0 0 32px;
+    color: rgba(248, 246, 240, 0.88);
+  }
+  .dh2-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+  }
+  .dh2-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 26px;
+    border-radius: 2px;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .dh2-hero__btn--primary {
+    background: var(--dh2-gold);
+    color: var(--dh2-bg);
+    border-color: var(--dh2-gold);
+  }
+  .dh2-hero__btn--primary:hover {
+    background: #dcc07a;
+    border-color: #dcc07a;
+    color: #0a0806;
+  }
+  .dh2-hero__btn--ghost {
+    background: transparent;
+    color: var(--dh2-gold);
+    border-color: rgba(201, 169, 97, 0.65);
+  }
+  .dh2-hero__btn--ghost:hover {
+    border-color: var(--dh2-gold);
+    color: #fff;
+  }
+  @media (max-width: 749px) {
+    .dh2-hero { min-height: 100svh; }
+    .dh2-hero__inner { padding-top: 96px; }
+    .dh2-hero__ctas { flex-direction: column; width: 100%; }
+    .dh2-hero__btn { width: 100%; max-width: 340px; }
+  }
+</style>
+
+<section class="dh2-hero section" id="dh2-hero-{{ section.id }}">
+  <div class="dh2-hero__media" aria-hidden="true">
+    {% if section.settings.video_url != blank %}
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        poster="{% if section.settings.poster != blank %}{{ section.settings.poster | image_url: width: 2000 }}{% endif %}"
+      >
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+      </video>
+    {% elsif section.settings.poster != blank %}
+      {{ section.settings.poster | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750,1100,1500,2000,2400' }}
+    {% endif %}
+  </div>
+  <div class="dh2-hero__overlay"></div>
+  <div class="dh2-hero__inner">
+    <p class="dh2-hero__badges">{{ section.settings.badges_line }}</p>
+    <h1 class="dh2-hero__title">{{ section.settings.title }}</h1>
+    <p class="dh2-hero__sub">{{ section.settings.subtitle }}</p>
+    <div class="dh2-hero__ctas">
+      <a class="dh2-hero__btn dh2-hero__btn--primary" href="{{ section.settings.cta_primary_url }}">{{ section.settings.cta_primary_label }}</a>
+      <a class="dh2-hero__btn dh2-hero__btn--ghost" href="{{ section.settings.cta_secondary_url }}">{{ section.settings.cta_secondary_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · Hero",
+  "tag": "section",
+  "class": "duendes-home-v2-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video / imagen"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "URL del video MP4 (loop, sin audio)",
+      "info": "Subí el MP4 a Archivos y pegá el enlace. Dejalo vacío para usar solo la imagen poster."
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Imagen poster / fondo si no hay video"
+    },
+    {
+      "type": "header",
+      "content": "Textos"
+    },
+    {
+      "type": "text",
+      "id": "badges_line",
+      "label": "Microbadges (una línea)",
+      "default": "✦ HECHOS A MANO · ✦ 1 DE 1 · ✦ DESDE 2015"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "No los elegís vos. Ellos te eligen a vos."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Canalizados en Piriápolis · Llegan a todo el mundo con tracking"
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_label",
+      "label": "CTA primario (texto)",
+      "default": "Encontrar mi Guardián"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "CTA primario (enlace)",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "CTA secundario (texto)",
+      "default": "Que me lean (2 min)"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "CTA secundario (enlace)",
+      "default": "/pages/test-del-guardian"
+    }
+  ],
+  "presets": [{ "name": "Duendes — Home v2 · Hero" }]
+}
+{% endschema %}
