@@ -50,48 +50,27 @@
       ],
       "settings": {}
     },
-    "home-v2-hero": {
-      "type": "duendes-home-v2-hero",
-      "settings": {
-        "video_url": "",
-        "poster": "shopify://shop_images/2319.jpg",
-        "badges_line": "",
-        "title": "",
-        "subtitle": "",
-        "cta_primary_label": "",
-        "cta_primary_url": "shopify://collections/tienda-magica",
-        "cta_secondary_label": "",
-        "cta_secondary_url": "shopify://pages/test-del-guardian"
-      }
-    },
-    "home-v2-buscador-elemental": {
-      "type": "duendes-home-v2-buscador-elemental",
-      "settings": {
-        "collection": "all",
-        "grace_collection_handle": "all"
-      }
-    },
-    "home-v2-cartas-bosque": {
+    "duendes-home-v2-cartas-bosque": {
       "type": "duendes-home-v2-cartas-bosque",
       "blocks": {
         "cb1": {
           "type": "carta",
           "settings": {
-            "roman": "VI",
+            "roman": "I",
             "essence": "Quiet wisdom"
           }
         },
         "cb2": {
           "type": "carta",
           "settings": {
-            "roman": "XII",
+            "roman": "II",
             "essence": "Quiet wisdom"
           }
         },
         "cb3": {
           "type": "carta",
           "settings": {
-            "roman": "XX",
+            "roman": "III",
             "essence": "Quiet wisdom"
           }
         }
@@ -107,7 +86,21 @@
         "modal_cta": ""
       }
     },
-    "home-v2-recien-llegados": {
+    "duendes-home-v2-hero": {
+      "type": "duendes-home-v2-hero",
+      "settings": {
+        "video_url": "",
+        "poster": "shopify://shop_images/2319.jpg",
+        "badges_line": "",
+        "title": "",
+        "subtitle": "",
+        "cta_primary_label": "",
+        "cta_primary_url": "shopify://collections/tienda-magica",
+        "cta_secondary_label": "",
+        "cta_secondary_url": "shopify://pages/test-del-guardian"
+      }
+    },
+    "duendes-home-v2-recien-llegados": {
       "type": "duendes-home-v2-recien-llegados",
       "settings": {
         "collection": "nuevos-guardianes",
@@ -121,7 +114,7 @@
         "empty_state": ""
       }
     },
-    "home-v2-linajes": {
+    "duendes-home-v2-linajes": {
       "type": "duendes-home-v2-linajes",
       "blocks": {
         "lin1": {
@@ -221,7 +214,14 @@
         "title": ""
       }
     },
-    "home-v2-social-proof": {
+    "duendes-home-v2-buscador-elemental": {
+      "type": "duendes-home-v2-buscador-elemental",
+      "settings": {
+        "collection": "all",
+        "grace_collection_handle": "all"
+      }
+    },
+    "duendes-home-v2-social-proof": {
       "type": "duendes-home-v2-social-proof",
       "blocks": {
         "sp1": {
@@ -255,7 +255,7 @@
         "title": ""
       }
     },
-    "home-v2-editorial": {
+    "duendes-home-v2-editorial": {
       "type": "duendes-home-v2-editorial",
       "settings": {
         "quote": "",
@@ -264,7 +264,7 @@
         "link_url": "shopify://blogs/comunidad-elemental"
       }
     },
-    "home-v2-rito-pasos": {
+    "duendes-home-v2-rito-pasos": {
       "type": "duendes-home-v2-rito-pasos",
       "blocks": {
         "rp1": {
@@ -298,7 +298,7 @@
         "title": ""
       }
     },
-    "home-v2-lectura-test": {
+    "duendes-home-v2-lectura-test": {
       "type": "duendes-home-v2-lectura-test",
       "settings": {
         "glyph": "",
@@ -308,7 +308,7 @@
         "cta_url": "shopify://pages/test-del-guardian"
       }
     },
-    "home-v2-tribu-newsletter": {
+    "duendes-home-v2-tribu-newsletter": {
       "type": "duendes-home-v2-tribu-newsletter",
       "settings": {
         "title": "",
@@ -317,22 +317,22 @@
         "submit_label": "",
         "micro": "",
         "success": "",
-        "customer_tag": "newsletter, home-v2-tribu",
+        "customer_tag": "newsletter, duendes-home-v2-tribu",
         "error_copy": ""
       }
     }
   },
   "order": [
     "announcement-bar",
-    "home-v2-hero",
-    "home-v2-buscador-elemental",
-    "home-v2-cartas-bosque",
-    "home-v2-recien-llegados",
-    "home-v2-linajes",
-    "home-v2-social-proof",
-    "home-v2-editorial",
-    "home-v2-rito-pasos",
-    "home-v2-lectura-test",
-    "home-v2-tribu-newsletter"
+    "duendes-home-v2-cartas-bosque",
+    "duendes-home-v2-hero",
+    "duendes-home-v2-recien-llegados",
+    "duendes-home-v2-linajes",
+    "duendes-home-v2-buscador-elemental",
+    "duendes-home-v2-social-proof",
+    "duendes-home-v2-editorial",
+    "duendes-home-v2-rito-pasos",
+    "duendes-home-v2-lectura-test",
+    "duendes-home-v2-tribu-newsletter"
   ]
 }
