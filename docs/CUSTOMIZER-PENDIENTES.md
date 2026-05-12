@@ -12,3 +12,7 @@ Si en **producción** sigue apareciendo «DHL Express…»:
 ## Orden «header» y «footer» en la home
 
 En **Horizon**, el **header** se renderiza desde **`sections/header-group.json`** (`{% sections 'header-group' %}` en `layout/theme.liquid`), no como entrada en `templates/index.json`. El bloque **`duendes-footer-rich`** está en **`sections/footer-group.json`**. No duplicamos esas piezas en `index.json` para evitar doble header/footer.
+
+## Push del theme en vivo (CLI)
+
+Si `shopify theme push` al theme **activo** pide confirmación en terminal, hace falta `--allow-live` (solo confirma la sobrescritura del theme pasado en `--theme`; no es lo mismo que `--publish`).

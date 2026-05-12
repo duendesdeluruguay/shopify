@@ -372,13 +372,24 @@
       "sending": "Sending…"
     },
     "home_v2": {
+      "cartas": {
+        "eyebrow": "MAY HIGHLIGHTS",
+        "title": "Three Guardians chosen for this week.",
+        "sub": "Tap a card to meet the Guardian. If it feels right, you adopt them.",
+        "foot": "Each card is a unique Guardian. Tap to see photos, story, and energy.",
+        "cta": "SEE ALL THREE →",
+        "badge": "MOST CHOSEN"
+      },
       "elemental_search": {
-        "title": "What do you need today?",
-        "subtitle": "One word.",
-        "placeholder": "Write one word...",
+        "eyebrow": "THE FINDER",
+        "title": "Tell us what you need. We'll bring you three.",
+        "sub": "Write a word. Protection, calm, abundance, whatever.",
+        "subtitle": "Write a word. Protection, calm, abundance, whatever.",
+        "placeholder": "write a word...",
         "input_label": "Word or essence to search",
         "submit_aria": "Search",
-        "micro": "Three Guardians who resonate with that.",
+        "foot": "Three Guardians that resonate with that word.",
+        "micro": "Three Guardians that resonate with that word.",
         "more": "See more",
         "results_before": "These three Guardians resonate with",
         "results_after": ".",
@@ -419,11 +430,15 @@
         "empty_state": "Choose a collection in the theme editor."
       },
       "linajes": {
+        "eyebrow": "BY LINEAGE",
         "tag": "BY LINEAGE",
-        "title": "Find your Guardian by lineage"
+        "title": "Every Guardian comes from a lineage.",
+        "sub": "Tap a lineage to see all the Guardians in that family."
       },
       "social_proof": {
         "tag": "WHAT THOSE WHO ARRIVED BEFORE SAY",
+        "number": "+15,000",
+        "subtitle": "Guardians adopted in 45 countries since 2015.",
         "title": "Adopted by 15,000+ people worldwide",
         "quote_1": "When I opened the box, I felt someone had truly chosen me.",
         "quote_2": "The letter said things no one else could have known.",
@@ -436,23 +451,37 @@
         "link_label": "Read in Elemental Tribe"
       },
       "rito": {
-        "tag": "THE RITE",
-        "title": "Three steps from when they choose you to your door",
-        "step1_label": "STEP 1",
-        "step1_heading": "You connect",
-        "step1_text": "Choose in the shop or let the test read you. The bond starts when one calls you.",
-        "step2_label": "STEP 2",
-        "step2_heading": "We channel",
-        "step2_text": "7–10 days in Piriápolis: ritual, letter, packaging with the care of a work of art.",
-        "step3_label": "STEP 3",
-        "step3_heading": "It reaches your home",
-        "step3_text": "Worldwide, with tracking. Open the parcel when the forest says it is time."
+        "eyebrow": "AFTER YOU CHOOSE",
+        "tag": "AFTER YOU CHOOSE",
+        "title": "Here's what happens next.",
+        "step1_label": "WE PREPARE THEM",
+        "step1_heading": "",
+        "step1_text": "It takes 7–10 days in the workshop in Piriápolis.",
+        "step2_label": "WE SHIP",
+        "step2_heading": "",
+        "step2_text": "It reaches your home in 5–10 days with tracking.",
+        "step3_label": "YOU ENTER THE PORTAL",
+        "step3_heading": "",
+        "step3_text": "There you'll find the guides to care for them, connect, and tend the magic."
+      },
+      "lectura": {
+        "eyebrow": "THE READING",
+        "title": "Not sure which Guardian to choose?",
+        "sub": "We read you in 2 minutes and tell you which Guardian matches what you're living right now.",
+        "cta": "DO THE READING · 2 MIN"
       },
       "lectura_test": {
         "glyph": "✦",
         "title": "Not sure which one is yours?",
         "subtitle": "We do not give you a generic quiz. We read you.",
         "cta_label": "Have them read me · 2 min"
+      },
+      "tribu": {
+        "eyebrow": "ELEMENTAL TRIBE",
+        "title": "Letters only our people receive.",
+        "sub": "Once a week: new Guardians, a story, a simple ritual for your home.",
+        "placeholder": "your@email.com",
+        "cta": "COUNT ME IN"
       },
       "tribu_newsletter": {
         "title": "Elemental Tribe",

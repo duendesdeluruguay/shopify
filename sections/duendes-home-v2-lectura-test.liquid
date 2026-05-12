@@ -1,20 +1,33 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
 {%- liquid
+  assign dh2_rd_eyebrow = 'duendes.home_v2.lectura.eyebrow' | t
+  if dh2_rd_eyebrow contains 'translation missing'
+    assign dh2_rd_eyebrow = ''
+  endif
   assign dh2_rd_glyph = section.settings.glyph | strip
   if dh2_rd_glyph == blank
     assign dh2_rd_glyph = 'duendes.home_v2.lectura_test.glyph' | t
   endif
   assign dh2_rd_title = section.settings.title | strip
   if dh2_rd_title == blank
-    assign dh2_rd_title = 'duendes.home_v2.lectura_test.title' | t
+    assign dh2_rd_title = 'duendes.home_v2.lectura.title' | t
+    if dh2_rd_title contains 'translation missing'
+      assign dh2_rd_title = 'duendes.home_v2.lectura_test.title' | t
+    endif
   endif
   assign dh2_rd_sub = section.settings.subtitle | strip
   if dh2_rd_sub == blank
-    assign dh2_rd_sub = 'duendes.home_v2.lectura_test.subtitle' | t
+    assign dh2_rd_sub = 'duendes.home_v2.lectura.sub' | t
+    if dh2_rd_sub contains 'translation missing'
+      assign dh2_rd_sub = 'duendes.home_v2.lectura_test.subtitle' | t
+    endif
   endif
   assign dh2_rd_cta = section.settings.cta_label | strip
   if dh2_rd_cta == blank
-    assign dh2_rd_cta = 'duendes.home_v2.lectura_test.cta_label' | t
+    assign dh2_rd_cta = 'duendes.home_v2.lectura.cta' | t
+    if dh2_rd_cta contains 'translation missing'
+      assign dh2_rd_cta = 'duendes.home_v2.lectura_test.cta_label' | t
+    endif
   endif
 -%}
 <style>
@@ -43,6 +56,14 @@
     flex: 1 1 240px;
     max-width: 520px;
     text-align: left;
+  }
+  .dh2-read__eyebrow {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(201, 169, 97, 0.85);
+    margin: 0 0 10px;
   }
   .dh2-read__title {
     font-family: var(--font-heading--family, 'Cinzel', serif);
@@ -112,6 +133,9 @@
   <div class="dh2-read__inner">
     <div class="dh2-read__glyph" aria-hidden="true">{{ dh2_rd_glyph }}</div>
     <div class="dh2-read__text">
+      {% if dh2_rd_eyebrow != blank %}
+        <p class="dh2-read__eyebrow">{{ dh2_rd_eyebrow }}</p>
+      {% endif %}
       <h2 class="dh2-read__title">{{ dh2_rd_title }}</h2>
       <p class="dh2-read__sub">{{ dh2_rd_sub }}</p>
       <a class="dh2-read__cta" href="{{ section.settings.cta_url }}">{{ dh2_rd_cta }}</a>

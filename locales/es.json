@@ -378,13 +378,24 @@
       "sending": "Enviando…"
     },
     "home_v2": {
+      "cartas": {
+        "eyebrow": "LOS DESTACADOS DE MAYO",
+        "title": "Tres Guardianes elegidos para esta semana.",
+        "sub": "Tocá una carta y conocé al guardián. Si te gusta, lo adoptás.",
+        "foot": "Cada carta es un guardián único. Tocala para ver fotos, historia y energía.",
+        "cta": "VER LOS TRES →",
+        "badge": "MÁS ELEGIDO"
+      },
       "elemental_search": {
-        "title": "¿Qué necesitás hoy?",
-        "subtitle": "Una palabra.",
-        "placeholder": "Escribí una palabra...",
+        "eyebrow": "EL BUSCADOR",
+        "title": "Decinos qué buscás, te traemos tres.",
+        "sub": "Escribí una palabra. Protección, calma, abundancia, la que sea.",
+        "subtitle": "Escribí una palabra. Protección, calma, abundancia, la que sea.",
+        "placeholder": "escribí una palabra...",
         "input_label": "Palabra o esencia a buscar",
         "submit_aria": "Buscar",
-        "micro": "Tres Guardianes que vibran con eso.",
+        "foot": "Te traemos tres Guardianes que vibran con esa palabra.",
+        "micro": "Te traemos tres Guardianes que vibran con esa palabra.",
         "more": "Ver más",
         "results_before": "Estos tres Guardianes vibran con",
         "results_after": ".",
@@ -425,11 +436,15 @@
         "empty_state": "Elegí una colección en el editor de tema."
       },
       "linajes": {
+        "eyebrow": "POR LINAJE",
         "tag": "POR LINAJE",
-        "title": "Encontrá tu Guardián por su linaje"
+        "title": "Cada Guardián viene de un linaje.",
+        "sub": "Tocá un linaje para ver todos los guardianes de esa familia."
       },
       "social_proof": {
         "tag": "LO QUE CUENTAN LOS QUE LLEGARON ANTES",
+        "number": "+15.000",
+        "subtitle": "Guardianes adoptados en 45 países desde 2015.",
         "title": "Adoptado por +15.000 personas en todo el mundo",
         "quote_1": "Cuando lo abrí, sentí que alguien me había elegido de verdad.",
         "quote_2": "La carta decía cosas que nadie más podía saber.",
@@ -442,23 +457,37 @@
         "link_label": "Leer en Tribu Elemental"
       },
       "rito": {
-        "tag": "EL RITO",
-        "title": "Tres pasos desde que te elige hasta tu puerta",
-        "step1_label": "PASO 1",
-        "step1_heading": "Te conectás",
-        "step1_text": "Elegís en la tienda o te leemos en el test. El vínculo empieza cuando uno te llama.",
-        "step2_label": "PASO 2",
-        "step2_heading": "Lo canalizamos",
-        "step2_text": "7 a 10 días en Piriápolis: ritual, carta, embalaje con cuidado de obra de arte.",
-        "step3_label": "PASO 3",
-        "step3_heading": "Llega a tu casa",
-        "step3_text": "A todo el mundo, con seguimiento. Abrís el paquete cuando el bosque te diga que es hora."
+        "eyebrow": "DESPUÉS DE ELEGIR",
+        "tag": "DESPUÉS DE ELEGIR",
+        "title": "Esto es lo que pasa después.",
+        "step1_label": "LO PREPARAMOS",
+        "step1_heading": "",
+        "step1_text": "Tarda 7-10 días en el taller en Piriápolis.",
+        "step2_label": "LO ENVIAMOS",
+        "step2_heading": "",
+        "step2_text": "Llega a tu casa en 5-10 días con seguimiento.",
+        "step3_label": "ENTRÁS AL PORTAL",
+        "step3_heading": "",
+        "step3_text": "Ahí están las guías para cuidarlo, conectar y cuidar la magia."
+      },
+      "lectura": {
+        "eyebrow": "LA LECTURA",
+        "title": "¿No sabés cuál Guardián elegir?",
+        "sub": "Te leemos en 2 minutos. Te decimos qué Guardián combina con vos según lo que estás viviendo ahora.",
+        "cta": "HACER LA LECTURA · 2 MIN"
       },
       "lectura_test": {
         "glyph": "✦",
         "title": "¿No sabés cuál es tuyo?",
         "subtitle": "No te hacemos un test genérico. Te leemos.",
         "cta_label": "Que me lean · 2 min"
+      },
+      "tribu": {
+        "eyebrow": "TRIBU ELEMENTAL",
+        "title": "Cartas que solo reciben los nuestros.",
+        "sub": "Una vez por semana: los nuevos Guardianes, una historia, un ritual simple para tu casa.",
+        "placeholder": "tu@email.com",
+        "cta": "SUMARME"
       },
       "tribu_newsletter": {
         "title": "Tribu Elemental",

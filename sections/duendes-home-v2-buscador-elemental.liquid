@@ -12,6 +12,18 @@
   if grace_coll == blank
     assign grace_coll = collections.all
   endif
+  assign dh2_be_eyebrow = 'duendes.home_v2.elemental_search.eyebrow' | t
+  if dh2_be_eyebrow contains 'translation missing'
+    assign dh2_be_eyebrow = ''
+  endif
+  assign dh2_be_sub = 'duendes.home_v2.elemental_search.sub' | t
+  if dh2_be_sub contains 'translation missing'
+    assign dh2_be_sub = 'duendes.home_v2.elemental_search.subtitle' | t
+  endif
+  assign dh2_be_foot = 'duendes.home_v2.elemental_search.foot' | t
+  if dh2_be_foot contains 'translation missing'
+    assign dh2_be_foot = 'duendes.home_v2.elemental_search.micro' | t
+  endif
 -%}
 <style>
   .dh2-be {
@@ -42,6 +54,15 @@
     margin: 0 auto;
     padding: 120px 20px;
     box-sizing: border-box;
+  }
+  .dh2-be__eyebrow {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgba(201, 169, 97, 0.75);
+    margin: 0 0 14px;
   }
   .dh2-be__title {
     font-family: var(--font-heading--family, 'Cinzel', serif);
@@ -381,8 +402,11 @@
 >
   <div class="dh2-be__inner">
     <div class="dh2-be__panel" data-dh2-be-panel="search">
+      {% if dh2_be_eyebrow != blank %}
+        <p class="dh2-be__eyebrow">{{ dh2_be_eyebrow }}</p>
+      {% endif %}
       <h2 class="dh2-be__title">{{ 'duendes.home_v2.elemental_search.title' | t }}</h2>
-      <p class="dh2-be__sub">{{ 'duendes.home_v2.elemental_search.subtitle' | t }}</p>
+      <p class="dh2-be__sub">{{ dh2_be_sub }}</p>
 
       <form class="dh2-be__form" data-dh2-be-form autocomplete="off">
         <div class="dh2-be__input-wrap">
@@ -455,7 +479,7 @@
         </div>
       </div>
 
-      <p class="dh2-be__foot">{{ 'duendes.home_v2.elemental_search.micro' | t }}</p>
+      <p class="dh2-be__foot">{{ dh2_be_foot }}</p>
     </div>
   </div>
 

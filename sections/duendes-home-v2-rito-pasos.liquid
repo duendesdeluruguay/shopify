@@ -2,7 +2,10 @@
 {%- liquid
   assign dh2_rito_tag = section.settings.tag | strip
   if dh2_rito_tag == blank
-    assign dh2_rito_tag = 'duendes.home_v2.rito.tag' | t
+    assign dh2_rito_tag = 'duendes.home_v2.rito.eyebrow' | t
+    if dh2_rito_tag contains 'translation missing'
+      assign dh2_rito_tag = 'duendes.home_v2.rito.tag' | t
+    endif
   endif
   assign dh2_rito_title = section.settings.title | strip
   if dh2_rito_title == blank
@@ -172,7 +175,9 @@
             </div>
             <div class="dh2-rito__body">
               <p class="dh2-rito__step">{{ dh2_rs }}</p>
-              <h3 class="dh2-rito__h">{{ dh2_rh }}</h3>
+              {% if dh2_rh != blank %}
+                <h3 class="dh2-rito__h">{{ dh2_rh }}</h3>
+              {% endif %}
               <p class="dh2-rito__p">{{ dh2_rt }}</p>
             </div>
           </article>
@@ -189,12 +194,12 @@
   "class": "duendes-home-v2-rito-pasos-section",
   "max_blocks": 3,
   "settings": [
-    { "type": "text", "id": "tag", "label": "Etiqueta", "default": "EL RITO" },
+    { "type": "text", "id": "tag", "label": "Etiqueta", "default": "DESPUÉS DE ELEGIR" },
     {
       "type": "text",
       "id": "title",
       "label": "Título",
-      "default": "Tres pasos desde que te elige hasta tu puerta"
+      "default": "Esto es lo que pasa después."
     }
   ],
   "blocks": [
@@ -221,25 +226,25 @@
         {
           "type": "paso",
           "settings": {
-            "step_label": "PASO 1",
-            "heading": "Te conectás",
-            "text": "Elegís en la tienda o te leemos en el test. El vínculo empieza cuando uno te llama."
+            "step_label": "LO PREPARAMOS",
+            "heading": "",
+            "text": "Tarda 7-10 días en el taller en Piriápolis."
           }
         },
         {
           "type": "paso",
           "settings": {
-            "step_label": "PASO 2",
-            "heading": "Lo canalizamos",
-            "text": "7 a 10 días en Piriápolis: ritual, carta, embalaje con cuidado de obra de arte."
+            "step_label": "LO ENVIAMOS",
+            "heading": "",
+            "text": "Llega a tu casa en 5-10 días con seguimiento."
           }
         },
         {
           "type": "paso",
           "settings": {
-            "step_label": "PASO 3",
-            "heading": "Llega a tu casa",
-            "text": "A todo el mundo, con tracking. Abrís el paquete cuando el bosque te diga que es hora."
+            "step_label": "ENTRÁS AL PORTAL",
+            "heading": "",
+            "text": "Ahí están las guías para cuidarlo, conectar y cuidar la magia."
           }
         }
       ]

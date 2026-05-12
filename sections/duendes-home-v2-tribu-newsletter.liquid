@@ -1,20 +1,36 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
 {%- liquid
+  assign dh2_tr_eyebrow = 'duendes.home_v2.tribu.eyebrow' | t
+  if dh2_tr_eyebrow contains 'translation missing'
+    assign dh2_tr_eyebrow = ''
+  endif
   assign dh2_tr_title = section.settings.title | strip
   if dh2_tr_title == blank
-    assign dh2_tr_title = 'duendes.home_v2.tribu_newsletter.title' | t
+    assign dh2_tr_title = 'duendes.home_v2.tribu.title' | t
+    if dh2_tr_title contains 'translation missing'
+      assign dh2_tr_title = 'duendes.home_v2.tribu_newsletter.title' | t
+    endif
   endif
   assign dh2_tr_sub = section.settings.subtitle | strip
   if dh2_tr_sub == blank
-    assign dh2_tr_sub = 'duendes.home_v2.tribu_newsletter.subtitle' | t
+    assign dh2_tr_sub = 'duendes.home_v2.tribu.sub' | t
+    if dh2_tr_sub contains 'translation missing'
+      assign dh2_tr_sub = 'duendes.home_v2.tribu_newsletter.subtitle' | t
+    endif
   endif
   assign dh2_tr_ph = section.settings.placeholder | strip
   if dh2_tr_ph == blank
-    assign dh2_tr_ph = 'duendes.home_v2.tribu_newsletter.placeholder' | t
+    assign dh2_tr_ph = 'duendes.home_v2.tribu.placeholder' | t
+    if dh2_tr_ph contains 'translation missing'
+      assign dh2_tr_ph = 'duendes.home_v2.tribu_newsletter.placeholder' | t
+    endif
   endif
   assign dh2_tr_submit = section.settings.submit_label | strip
   if dh2_tr_submit == blank
-    assign dh2_tr_submit = 'duendes.home_v2.tribu_newsletter.submit_label' | t
+    assign dh2_tr_submit = 'duendes.home_v2.tribu.cta' | t
+    if dh2_tr_submit contains 'translation missing'
+      assign dh2_tr_submit = 'duendes.home_v2.tribu_newsletter.submit_label' | t
+    endif
   endif
   assign dh2_tr_micro = section.settings.micro | strip
   if dh2_tr_micro == blank
@@ -45,6 +61,14 @@
     padding: 32px 24px 28px;
     border: 1px solid rgba(21, 17, 13, 0.08);
     box-shadow: 0 8px 36px rgba(0, 0, 0, 0.06);
+  }
+  .dh2-tribu__eyebrow {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(21, 17, 13, 0.45);
+    margin: 0 0 12px;
   }
   .dh2-tribu__title {
     font-family: var(--font-heading--family, 'Cinzel', serif);
@@ -130,6 +154,9 @@
 
 <section class="dh2-tribu section">
   <div class="dh2-tribu__panel">
+    {% if dh2_tr_eyebrow != blank %}
+      <p class="dh2-tribu__eyebrow">{{ dh2_tr_eyebrow }}</p>
+    {% endif %}
     <h2 class="dh2-tribu__title">{{ dh2_tr_title }}</h2>
     <p class="dh2-tribu__sub">{{ dh2_tr_sub }}</p>
     {% form 'customer', class: 'dh2-tribu__formwrap', return_to: request.path %}
@@ -206,7 +233,7 @@
       "type": "text",
       "id": "customer_tag",
       "label": "Tag en cliente (comma-separated)",
-      "default": "newsletter, home-v2-tribu"
+      "default": "newsletter, duendes-home-v2-tribu"
     },
     {
       "type": "text",

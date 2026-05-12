@@ -4,6 +4,14 @@
   if dh2_sp_tag == blank
     assign dh2_sp_tag = 'duendes.home_v2.social_proof.tag' | t
   endif
+  assign dh2_sp_num = section.settings.number | strip
+  if dh2_sp_num == blank
+    assign dh2_sp_num = 'duendes.home_v2.social_proof.number' | t
+  endif
+  assign dh2_sp_subtitle = section.settings.subtitle | strip
+  if dh2_sp_subtitle == blank
+    assign dh2_sp_subtitle = 'duendes.home_v2.social_proof.subtitle' | t
+  endif
   assign dh2_sp_title = section.settings.title | strip
   if dh2_sp_title == blank
     assign dh2_sp_title = 'duendes.home_v2.social_proof.title' | t
@@ -29,7 +37,28 @@
     text-align: center;
     margin-bottom: 14px;
   }
-  .dh2-sp__title {
+  .dh2-sp__headline {
+    text-align: center;
+    margin: 0 0 40px;
+  }
+  .dh2-sp__number {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.1;
+    margin: 0 0 10px;
+    color: #15110d;
+  }
+  .dh2-sp__subtitle {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(16px, 2vw, 19px);
+    line-height: 1.45;
+    margin: 0 auto;
+    max-width: 560px;
+    color: rgba(21, 17, 13, 0.68);
+    font-style: italic;
+  }
+  .dh2-sp__title-fallback {
     font-family: var(--font-heading--family, 'Cinzel', serif);
     font-weight: 400;
     font-size: clamp(24px, 3vw, 38px);
@@ -83,11 +112,17 @@
       padding-left: max(20px, env(safe-area-inset-left, 0px));
       padding-right: max(24px, env(safe-area-inset-right, 0px));
     }
-    h2.dh2-sp__title,
-    .dh2-sp__title {
+    h2.dh2-sp__title-fallback,
+    .dh2-sp__title-fallback {
       font-size: 26px !important;
       line-height: 1.15 !important;
       max-width: 100% !important;
+    }
+    .dh2-sp__number {
+      font-size: 32px !important;
+    }
+    .dh2-sp__subtitle {
+      font-size: 16px !important;
     }
     .dh2-sp__quote {
       font-size: 16px !important;
@@ -102,7 +137,18 @@
 <section class="dh2-sp section">
   <div class="dh2-sp__inner">
     <p class="dh2-sp__tag">{{ dh2_sp_tag }}</p>
-    <h2 class="dh2-sp__title">{{ dh2_sp_title }}</h2>
+    {% if dh2_sp_num != blank or dh2_sp_subtitle != blank %}
+      <div class="dh2-sp__headline">
+        {% if dh2_sp_num != blank %}
+          <p class="dh2-sp__number">{{ dh2_sp_num }}</p>
+        {% endif %}
+        {% if dh2_sp_subtitle != blank %}
+          <p class="dh2-sp__subtitle">{{ dh2_sp_subtitle }}</p>
+        {% endif %}
+      </div>
+    {% elsif dh2_sp_title != blank %}
+      <h2 class="dh2-sp__title-fallback">{{ dh2_sp_title }}</h2>
+    {% endif %}
     <div class="dh2-sp__grid">
       {% for block in section.blocks %}
         {% if block.type == 'testimonial' %}
@@ -151,8 +197,20 @@
     {
       "type": "text",
       "id": "title",
-      "label": "Título",
+      "label": "Título (fallback si no hay número/subtítulo)",
       "default": "Adoptado por +15.000 personas en todo el mundo"
+    },
+    {
+      "type": "text",
+      "id": "number",
+      "label": "Cifra destacada",
+      "default": "+15.000"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo bajo la cifra",
+      "default": "Guardianes adoptados en 45 países desde 2015."
     }
   ],
   "blocks": [

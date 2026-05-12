@@ -253,7 +253,9 @@
       "block_order": ["sp1", "sp2", "sp3", "sp4"],
       "settings": {
         "tag": "",
-        "title": ""
+        "title": "",
+        "number": "",
+        "subtitle": ""
       }
     },
     "duendes-home-v2-editorial": {
