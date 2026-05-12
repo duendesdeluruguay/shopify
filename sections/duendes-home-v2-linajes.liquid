@@ -2,11 +2,18 @@
 {%- liquid
   assign dh2_lin_tag = section.settings.tag | strip
   if dh2_lin_tag == blank
-    assign dh2_lin_tag = 'duendes.home_v2.linajes.tag' | t
+    assign dh2_lin_tag = 'duendes.home_v2.linajes.eyebrow' | t
+    if dh2_lin_tag contains 'translation missing'
+      assign dh2_lin_tag = 'duendes.home_v2.linajes.tag' | t
+    endif
   endif
   assign dh2_lin_title = section.settings.title | strip
   if dh2_lin_title == blank
     assign dh2_lin_title = 'duendes.home_v2.linajes.title' | t
+  endif
+  assign dh2_lin_sub = 'duendes.home_v2.linajes.sub' | t
+  if dh2_lin_sub contains 'translation missing'
+    assign dh2_lin_sub = ''
   endif
 -%}
 <style>
@@ -34,67 +41,99 @@
     font-weight: 400;
     font-size: clamp(24px, 3vw, 36px);
     text-align: center;
-    margin: 0 0 36px;
+    margin: 0 0 10px;
   }
-  .dh2-lin__grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
+  .dh2-lin__sub {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(15px, 1.9vw, 18px);
+    text-align: center;
+    margin: 0 auto 28px;
+    max-width: 520px;
+    line-height: 1.45;
+    color: rgba(21, 17, 13, 0.58);
+    font-style: italic;
+  }
+  .dh2-lin__rail {
+    display: flex;
+    gap: clamp(10px, 1.8vw, 14px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 4px 12px;
+    margin: 0 -8px;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .dh2-lin__rail::-webkit-scrollbar {
+    height: 6px;
+  }
+  .dh2-lin__rail::-webkit-scrollbar-thumb {
+    background: rgba(21, 17, 13, 0.18);
+    border-radius: 99px;
   }
   .dh2-lin__card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    text-decoration: none;
-    color: inherit;
-    background: #fff;
+    position: relative;
+    flex: 0 0 clamp(130px, 11vw, 160px);
+    width: clamp(130px, 11vw, 160px);
+    aspect-ratio: 2 / 3;
     border-radius: 12px;
-    padding: 18px 12px 16px;
-    border: 1px solid rgba(21, 17, 13, 0.08);
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    overflow: hidden;
+    text-decoration: none;
+    color: #f4f1ec;
+    scroll-snap-align: start;
+    border: 1px solid rgba(201, 169, 97, 0.45);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .dh2-lin__card:hover {
-    border-color: rgba(201, 169, 97, 0.45);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
     transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
   }
-  .dh2-lin__icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: linear-gradient(145deg, rgba(201, 169, 97, 0.2), rgba(201, 169, 97, 0.05));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    overflow: hidden;
+  .dh2-lin__bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #3a2e1a, #15110d);
   }
-  .dh2-lin__icon img {
+  .dh2-lin__bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0.92;
   }
-  .dh2-lin__glyph {
-    font-size: 22px;
-    line-height: 1;
+  .dh2-lin__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 20%, rgba(5, 4, 2, 0.88));
+    z-index: 1;
+  }
+  .dh2-lin__body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: 12px 10px 14px;
+    text-align: center;
   }
   .dh2-lin__name {
     font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 13px;
-    letter-spacing: 0.08em;
+    font-size: 12px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 0 0 6px;
+    line-height: 1.25;
+    color: #fff;
   }
   .dh2-lin__count {
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
-    font-size: 13px;
-    color: rgba(21, 17, 13, 0.55);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: rgba(244, 241, 236, 0.82);
   }
-  @media (max-width: 989px) {
-    .dh2-lin__grid {
-      grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 749px) {
+    .dh2-lin__card {
+      flex: 0 0 clamp(110px, 30vw, 130px);
+      width: clamp(110px, 30vw, 130px);
     }
   }
   @media (max-width: 768px) {
@@ -114,9 +153,6 @@
     .dh2-lin__tag {
       font-size: 9px !important;
     }
-    .dh2-lin__name {
-      font-size: 13px !important;
-    }
   }
 </style>
 
@@ -124,19 +160,25 @@
   <div class="dh2-lin__inner">
     <p class="dh2-lin__tag">{{ dh2_lin_tag }}</p>
     <h2 class="dh2-lin__title">{{ dh2_lin_title }}</h2>
-    <div class="dh2-lin__grid">
+    {% if dh2_lin_sub != blank %}
+      <p class="dh2-lin__sub">{{ dh2_lin_sub }}</p>
+    {% endif %}
+    <div class="dh2-lin__rail" role="list">
       {% for block in section.blocks %}
         {% if block.type == 'linaje' %}
-          <a class="dh2-lin__card" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
-            <div class="dh2-lin__icon">
+          <a class="dh2-lin__card" href="{{ block.settings.url }}" role="listitem" {{ block.shopify_attributes }}>
+            <div class="dh2-lin__bg" aria-hidden="true">
               {% if block.settings.image != blank %}
-                {{ block.settings.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: block.settings.title }}
+                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: '', widths: '200,400,600' }}
               {% else %}
-                <span class="dh2-lin__glyph" aria-hidden="true">{{ block.settings.glyph | default: '✦' }}</span>
+                <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:32px;color:rgba(201,169,97,0.55);">{{ block.settings.glyph | default: '✦' }}</span>
               {% endif %}
             </div>
-            <h3 class="dh2-lin__name">{{ block.settings.title }}</h3>
-            <span class="dh2-lin__count">{{ block.settings.count_label }}</span>
+            <div class="dh2-lin__shade" aria-hidden="true"></div>
+            <div class="dh2-lin__body">
+              <h3 class="dh2-lin__name">{{ block.settings.title }}</h3>
+              <span class="dh2-lin__count">{{ block.settings.count_label }}</span>
+            </div>
           </a>
         {% endif %}
       {% endfor %}
@@ -149,7 +191,7 @@
   "name": "DDU v2 · Linajes",
   "tag": "section",
   "class": "duendes-home-v2-linajes-section",
-  "max_blocks": 12,
+  "max_blocks": 10,
   "settings": [
     {
       "type": "text",
@@ -161,7 +203,7 @@
       "type": "text",
       "id": "title",
       "label": "Título",
-      "default": "Encontrá tu Guardián por su linaje"
+      "default": "Cada Guardián viene de un linaje."
     }
   ],
   "blocks": [
@@ -170,10 +212,10 @@
       "name": "Linaje",
       "settings": [
         { "type": "text", "id": "title", "label": "Nombre", "default": "Hadas" },
+        { "type": "image_picker", "id": "image", "label": "Foto del linaje" },
+        { "type": "text", "id": "count_label", "label": "Guardianes / contador (texto)", "default": "Ver colección" },
         { "type": "url", "id": "url", "label": "Enlace a colección" },
-        { "type": "text", "id": "count_label", "label": "Disponibles (texto)", "default": "Ver colección" },
-        { "type": "image_picker", "id": "image", "label": "Imagen (opcional)" },
-        { "type": "text", "id": "glyph", "label": "Ícono texto si no hay imagen", "default": "✦" }
+        { "type": "text", "id": "glyph", "label": "Marcador si no hay foto", "default": "✦", "info": "Solo se muestra si no cargás imagen." }
       ]
     }
   ],
