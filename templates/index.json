@@ -111,21 +111,6 @@
         "modal_cta": "Ver ficha completa"
       }
     },
-    "hero": {
-      "type": "duendes-hero",
-      "settings": {
-        "eyebrow": "Duendes del Uruguay",
-        "title_line1": "You don't choose them.",
-        "title_line2": "They choose you.",
-        "subtitle": "Guardians channeled by hand in Piriápolis. Each one exists only once.",
-        "video_url": "",
-        "hero_image": "shopify://shop_images/2319.jpg",
-        "cta_text": "Find My Guardian",
-        "cta_url": "shopify://collections/tienda-magica",
-        "secondary_text": "Not sure where to start? Take the Free Test",
-        "secondary_url": "shopify://pages/test-del-guardian"
-      }
-    },
     "mi-magia-home": {
       "type": "mi-magia-banner",
       "settings": {
@@ -310,24 +295,6 @@
         "background_image": "shopify://shop_images/1310.jpg"
       }
     },
-    "escasez": {
-      "type": "duendes-fullsplit",
-      "settings": {
-        "theme": "dark",
-        "photo_position": "right",
-        "image": "shopify://shop_images/C9C8F91A-1720-40C1-9C82-0CCB5CB69D34.png",
-        "label": "One-of-a-kind pieces",
-        "title": "When they leave, they don't come back. Ever.",
-        "body": "There is no repeated stock. There is no \"I'll see it later.\" Every Guardian you see on this page exists only once in the world. The medium-sized, large, and giant ones are 100% unrepeatable — when someone adopts them, they disappear forever.",
-        "counter_text": "Manifest what you long for, with the guidance of an elemental being",
-        "small_text": "More than 15,000 Guardians have already found their home in 45+ countries.",
-        "quote": "",
-        "quote_author": "",
-        "show_gift_options": false,
-        "cta_text": "See the Available Guardians",
-        "cta_url": "shopify://collections/tienda-magica"
-      }
-    },
     "unboxing": {
       "type": "duendes-unboxing",
       "blocks": {
@@ -472,92 +439,6 @@
         "background_image": "shopify://shop_images/1668.jpg"
       }
     },
-    "comunidad": {
-      "type": "duendes-ugc",
-      "blocks": {
-        "ug1": {
-          "type": "photo",
-          "settings": {
-            "photo": "shopify://shop_images/Gemini_Generated_Image_l9shkml9shkml9sh.png",
-            "name": "Valentina M.",
-            "caption": "With Cedric — Buenos Aires"
-          }
-        },
-        "ug2": {
-          "type": "photo",
-          "settings": {
-            "photo": "shopify://shop_images/416.jpg",
-            "name": "Carolina S.",
-            "caption": "Unboxing — Santiago"
-          }
-        },
-        "ug3": {
-          "type": "photo",
-          "settings": {
-            "photo": "shopify://shop_images/IMG_0243.jpg",
-            "name": "Ana P.",
-            "caption": "Her altar with 3 Guardians — Madrid"
-          }
-        },
-        "ug4": {
-          "type": "photo",
-          "settings": {
-            "photo": "shopify://shop_images/1771.jpg",
-            "name": "Roberto L.",
-            "caption": "First day together — Mexico City"
-          }
-        },
-        "ug5": {
-          "type": "photo",
-          "settings": {
-            "photo": "shopify://shop_images/1-4.jpg",
-            "name": "Lucía F.",
-            "caption": "Complete collection — La Paz"
-          }
-        },
-        "ug6": {
-          "type": "photo",
-          "settings": {
-            "photo": "shopify://shop_images/1264.jpg",
-            "name": "Mariana D.",
-            "caption": "Birthday gift — Bogotá"
-          }
-        },
-        "ug7": {
-          "type": "photo",
-          "settings": {
-            "photo": "shopify://shop_images/1658.jpg",
-            "name": "Diego R.",
-            "caption": "On her desk — Lima"
-          }
-        },
-        "ug8": {
-          "type": "photo",
-          "settings": {
-            "photo": "shopify://shop_images/Gemini_Generated_Image_avw4exavw4exavw4.png",
-            "name": "Sofía T.",
-            "caption": "With her Pixie — Montevideo"
-          }
-        }
-      },
-      "block_order": [
-        "ug1",
-        "ug2",
-        "ug3",
-        "ug4",
-        "ug5",
-        "ug6",
-        "ug7",
-        "ug8"
-      ],
-      "settings": {
-        "eyebrow": "THE ELEMENTAL COMMUNITY",
-        "title": "How they receive them <em>around the world</em>",
-        "subtitle": "The Chosen. Real moments. Guardians that already found their home.",
-        "cta_text": "Seguinos en Instagram",
-        "cta_url": "https://www.instagram.com/duendesdeluruguay/"
-      }
-    },
     "senales": {
       "type": "duendes-signals",
       "blocks": {
@@ -626,44 +507,6 @@
         "photo_2": "shopify://shop_images/tranquil_forest_portrait_1f0cdfbd-310e-62f0-b735-9826e7022bb4_1_1.png",
         "story": "We are Gabriel and Thibisay. A family of 5 who chose to live in Piriápolis — the alchemist city of Uruguay — and who in 2015 discovered something that wasn't in any plan: the ability to channel elemental beings through the use and transformation of various materials.\n\nWith no formal artistic training, no investors, no formulas. Only intuition, silence, and the certainty that what flowed through our hands was pure magic. Every piece we have created, since day one, was born with a name, a story, and a purpose. And every person who received one told us the same thing: \"How did you know exactly what I needed?\"\n\nToday, more than 15,000 Guardians live in 45+ countries. Everything is still made by hand. Everything still comes out of the same studio. And every channeled letter still reaches exactly where it needs to reach.",
         "signature": "With love from Piriápolis · Gabriel & Thibisay · Since 2015"
-      }
-    },
-    "regalar": {
-      "type": "duendes-fullsplit",
-      "blocks": {
-        "g1": {
-          "type": "gift_option",
-          "settings": {
-            "title": "Special Gift",
-            "description": "We send the channeling form to the person receiving it. Even though they already know they will receive a gift… the message will be 100% personal for that person, and they will be amazed."
-          }
-        },
-        "g2": {
-          "type": "gift_option",
-          "settings": {
-            "title": "Surprise Gift",
-            "description": "If you want it to be 100% a surprise… You fill out a special form about the person. We prepare our magics and they only find out when they open the package."
-          }
-        }
-      },
-      "block_order": [
-        "g1",
-        "g2"
-      ],
-      "settings": {
-        "theme": "light",
-        "photo_position": "left",
-        "image": "shopify://shop_images/36F7C457-3C5B-45F4-9FDA-5FE507BE3997.png",
-        "label": "Gift Magic… YES, Guardians can be acquired by you, or as a gift from someone else.",
-        "title": "The gift that changes the day. And sometimes, a life.",
-        "body": "Gifting one of our Guardians is not a common gift. It's a complete experience: personal channeled letter, activation ritual, certificate, and digital portal. The person who receives it will never forget the moment they received this very special detail.",
-        "counter_text": "",
-        "small_text": "",
-        "quote": "",
-        "quote_author": "",
-        "show_gift_options": true,
-        "cta_text": "Gift a Guardian",
-        "cta_url": "shopify://collections/tienda-magica"
       }
     },
     "proceso": {
@@ -960,7 +803,6 @@
     "home-v2-hero",
     "home-v2-buscador-elemental",
     "home-v2-cartas-bosque",
-    "hero",
     "mi-magia-home",
     "ddu-nuevos-guardianes",
     "ddu-te-eligen",
@@ -969,13 +811,10 @@
     "ddu-llegaron-hadas",
     "experiencia",
     "valor",
-    "escasez",
     "unboxing",
     "testimonios",
-    "comunidad",
     "senales",
     "founders",
-    "regalar",
     "proceso",
     "incluye",
     "garantia",
