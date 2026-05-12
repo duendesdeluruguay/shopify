@@ -1,0 +1,335 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+  .dh2-ft {
+    --g: #c9a961;
+    background: #15110d;
+    color: rgba(248, 246, 240, 0.88);
+    padding: 44px 0 20px;
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+  }
+  .dh2-ft__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .dh2-ft__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.15);
+  }
+  .dh2-ft__col h3 {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(248, 246, 240, 0.45);
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+  .dh2-ft__col a,
+  .dh2-ft__col p {
+    display: block;
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(248, 246, 240, 0.82);
+    text-decoration: none;
+    margin: 0 0 8px;
+  }
+  .dh2-ft__col a:hover {
+    color: var(--g);
+  }
+  .dh2-ft__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+  .dh2-ft__social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 169, 97, 0.28);
+    margin: 0;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: rgba(248, 246, 240, 0.75);
+  }
+  .dh2-ft__social a:hover {
+    border-color: var(--g);
+    color: var(--g);
+  }
+  .dh2-ft__pay {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(248, 246, 240, 0.38);
+  }
+  .dh2-ft__pay span {
+    margin: 0 4px;
+  }
+  .dh2-ft__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 0 8px;
+    font-size: 12px;
+    color: rgba(248, 246, 240, 0.55);
+  }
+  .dh2-ft__bottom a {
+    color: rgba(248, 246, 240, 0.65);
+    text-decoration: none;
+  }
+  .dh2-ft__bottom a:hover {
+    color: var(--g);
+  }
+  .dh2-ft__sep {
+    opacity: 0.35;
+  }
+  .dh2-ft__disclaimer {
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.55;
+    color: rgba(248, 246, 240, 0.42);
+    max-width: 720px;
+    margin: 0 auto;
+    padding-bottom: 16px;
+  }
+  .dh2-ft details.dh2-ft__acc {
+    border-bottom: 1px solid rgba(201, 169, 97, 0.12);
+    padding: 12px 0;
+  }
+  .dh2-ft details.dh2-ft__acc summary {
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(248, 246, 240, 0.55);
+  }
+  .dh2-ft details.dh2-ft__acc summary::-webkit-details-marker {
+    display: none;
+  }
+  .dh2-ft__acc-body {
+    padding-top: 12px;
+  }
+  @media (max-width: 899px) {
+    .dh2-ft__grid {
+      display: block;
+    }
+    .dh2-ft__desk {
+      display: none;
+    }
+  }
+  @media (min-width: 900px) {
+    .dh2-ft__mob {
+      display: none;
+    }
+  }
+</style>
+
+<footer class="dh2-ft section">
+  <div class="dh2-ft__inner">
+    <div class="dh2-ft__grid dh2-ft__desk">
+      <div class="dh2-ft__col">
+        <h3>{{ section.settings.h_bosque }}</h3>
+        <a href="{{ section.settings.url_linajes }}">{{ section.settings.l_linajes }}</a>
+        <a href="{{ section.settings.url_cartas }}">{{ section.settings.l_cartas }}</a>
+        <a href="{{ section.settings.url_nuevos }}">{{ section.settings.l_nuevos }}</a>
+        <a href="{{ section.settings.url_test }}">{{ section.settings.l_test }}</a>
+      </div>
+      <div class="dh2-ft__col">
+        <h3>{{ section.settings.h_rito }}</h3>
+        <a href="{{ section.settings.url_canaliza }}">{{ section.settings.l_canaliza }}</a>
+        <a href="{{ section.settings.url_envios }}">{{ section.settings.l_envios }}</a>
+        <a href="{{ section.settings.url_devol }}">{{ section.settings.l_devol }}</a>
+        <a href="{{ section.settings.url_tracking }}">{{ section.settings.l_tracking }}</a>
+      </div>
+      <div class="dh2-ft__col">
+        <h3>{{ section.settings.h_contacto }}</h3>
+        <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+        {% if section.settings.whatsapp_url != blank %}
+          <a href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener">{{ section.settings.l_whatsapp }}</a>
+        {% endif %}
+        <p>{{ section.settings.line_taller }}</p>
+        <p>{{ section.settings.line_llc }}</p>
+      </div>
+      <div class="dh2-ft__col">
+        <h3>{{ section.settings.h_social }}</h3>
+        <div class="dh2-ft__social">
+          {% if section.settings.instagram_url != blank %}
+            <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          {% endif %}
+          {% if section.settings.tiktok_url != blank %}
+            <a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+          {% endif %}
+          {% if section.settings.facebook_url != blank %}
+            <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+          {% endif %}
+          {% if section.settings.pinterest_url != blank %}
+            <a href="{{ section.settings.pinterest_url }}" target="_blank" rel="noopener" aria-label="Pinterest">Pin</a>
+          {% endif %}
+          {% if section.settings.youtube_url != blank %}
+            <a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="dh2-ft__mob">
+      <details class="dh2-ft__acc">
+        <summary>{{ section.settings.h_bosque }}</summary>
+        <div class="dh2-ft__acc-body">
+          <a href="{{ section.settings.url_linajes }}">{{ section.settings.l_linajes }}</a>
+          <a href="{{ section.settings.url_cartas }}">{{ section.settings.l_cartas }}</a>
+          <a href="{{ section.settings.url_nuevos }}">{{ section.settings.l_nuevos }}</a>
+          <a href="{{ section.settings.url_test }}">{{ section.settings.l_test }}</a>
+        </div>
+      </details>
+      <details class="dh2-ft__acc">
+        <summary>{{ section.settings.h_rito }}</summary>
+        <div class="dh2-ft__acc-body">
+          <a href="{{ section.settings.url_canaliza }}">{{ section.settings.l_canaliza }}</a>
+          <a href="{{ section.settings.url_envios }}">{{ section.settings.l_envios }}</a>
+          <a href="{{ section.settings.url_devol }}">{{ section.settings.l_devol }}</a>
+          <a href="{{ section.settings.url_tracking }}">{{ section.settings.l_tracking }}</a>
+        </div>
+      </details>
+      <details class="dh2-ft__acc">
+        <summary>{{ section.settings.h_contacto }}</summary>
+        <div class="dh2-ft__acc-body">
+          <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+          {% if section.settings.whatsapp_url != blank %}
+            <a href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener">{{ section.settings.l_whatsapp }}</a>
+          {% endif %}
+          <p>{{ section.settings.line_taller }}</p>
+          <p>{{ section.settings.line_llc }}</p>
+        </div>
+      </details>
+      <details class="dh2-ft__acc">
+        <summary>{{ section.settings.h_social }}</summary>
+        <div class="dh2-ft__acc-body dh2-ft__social">
+          {% if section.settings.instagram_url != blank %}
+            <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          {% endif %}
+          {% if section.settings.tiktok_url != blank %}
+            <a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+          {% endif %}
+          {% if section.settings.facebook_url != blank %}
+            <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+          {% endif %}
+          {% if section.settings.pinterest_url != blank %}
+            <a href="{{ section.settings.pinterest_url }}" target="_blank" rel="noopener" aria-label="Pinterest">Pin</a>
+          {% endif %}
+          {% if section.settings.youtube_url != blank %}
+            <a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+          {% endif %}
+        </div>
+      </details>
+    </div>
+
+    <div class="dh2-ft__pay" aria-label="{{ section.settings.payments_aria }}">
+      <span>Visa</span><span>·</span><span>Mastercard</span><span>·</span><span>Amex</span><span>·</span><span>Mercado Pago</span><span>·</span><span>Stripe</span><span>·</span><span>PayPal</span>
+    </div>
+
+    <div class="dh2-ft__bottom">
+      <span>© {{ 'now' | date: '%Y' }} {{ section.settings.brand }}</span>
+      <span class="dh2-ft__sep">·</span>
+      <a href="{{ section.settings.url_terms }}">{{ section.settings.l_terms }}</a>
+      <span class="dh2-ft__sep">·</span>
+      <a href="{{ section.settings.url_privacy }}">{{ section.settings.l_privacy }}</a>
+      <span class="dh2-ft__sep">·</span>
+      <a href="{{ section.settings.url_official }}">{{ section.settings.l_official }}</a>
+    </div>
+    <p class="dh2-ft__disclaimer">{{ section.settings.disclaimer }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · Pie oscuro",
+  "tag": "section",
+  "class": "duendes-home-v2-footer-section",
+  "settings": [
+    { "type": "header", "content": "Columna · El Bosque" },
+    { "type": "text", "id": "h_bosque", "label": "Título columna", "default": "El Bosque" },
+    { "type": "text", "id": "l_linajes", "label": "Linajes", "default": "Linajes" },
+    { "type": "url", "id": "url_linajes", "label": "URL linajes", "default": "/collections/all" },
+    { "type": "text", "id": "l_cartas", "label": "Cartas del Bosque", "default": "Cartas del Bosque" },
+    { "type": "url", "id": "url_cartas", "label": "URL cartas", "default": "/collections/all" },
+    { "type": "text", "id": "l_nuevos", "label": "Recién llegados", "default": "Recién llegados" },
+    { "type": "url", "id": "url_nuevos", "label": "URL recién llegados", "default": "/collections/all" },
+    { "type": "text", "id": "l_test", "label": "Mi lectura", "default": "Mi lectura" },
+    { "type": "url", "id": "url_test", "label": "URL test", "default": "/pages/test-del-guardian" },
+    { "type": "header", "content": "Columna · El Rito" },
+    { "type": "text", "id": "h_rito", "label": "Título columna", "default": "El Rito" },
+    { "type": "text", "id": "l_canaliza", "label": "Cómo se canaliza", "default": "Cómo se canaliza" },
+    { "type": "url", "id": "url_canaliza", "default": "/pages/como-funciona" },
+    { "type": "text", "id": "l_envios", "label": "Envíos", "default": "Envíos" },
+    { "type": "url", "id": "url_envios", "default": "/policies/shipping-policy" },
+    { "type": "text", "id": "l_devol", "label": "Devoluciones", "default": "Devoluciones" },
+    { "type": "url", "id": "url_devol", "default": "/policies/refund-policy" },
+    { "type": "text", "id": "l_tracking", "label": "Tracking", "default": "Tracking" },
+    { "type": "url", "id": "url_tracking", "default": "/pages/preguntas-frecuentes" },
+    { "type": "header", "content": "Contacto" },
+    { "type": "text", "id": "h_contacto", "label": "Título columna", "default": "Contacto" },
+    { "type": "text", "id": "email", "label": "Email", "default": "info@duendesdeluruguay.com" },
+    { "type": "text", "id": "l_whatsapp", "label": "Texto WhatsApp", "default": "WhatsApp" },
+    { "type": "url", "id": "whatsapp_url", "label": "WhatsApp URL", "default": "https://wa.me/59898690629" },
+    { "type": "textarea", "id": "line_taller", "label": "Línea taller", "default": "Piriápolis, UY · Taller mágico" },
+    { "type": "textarea", "id": "line_llc", "label": "Línea legal", "default": "LLC Wyoming, USA · Operación legal" },
+    { "type": "header", "content": "Redes" },
+    { "type": "text", "id": "h_social", "label": "Título columna", "default": "Seguinos" },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram",
+      "default": "https://www.instagram.com/duendesdeluruguay"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook",
+      "default": "https://www.facebook.com/duendescanalizados"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok",
+      "default": "https://www.tiktok.com/@duendesdeluruguay"
+    },
+    {
+      "type": "url",
+      "id": "pinterest_url",
+      "label": "Pinterest",
+      "default": "https://www.pinterest.com/duendesdeluruguay"
+    },
+    { "type": "url", "id": "youtube_url", "label": "YouTube (opcional)" },
+    { "type": "header", "content": "Pie" },
+    { "type": "text", "id": "brand", "label": "Marca ©", "default": "Duendes del Uruguay" },
+    { "type": "text", "id": "l_terms", "label": "Términos", "default": "Términos" },
+    { "type": "url", "id": "url_terms", "default": "/policies/terms-of-service" },
+    { "type": "text", "id": "l_privacy", "label": "Privacidad", "default": "Privacidad" },
+    { "type": "url", "id": "url_privacy", "default": "/policies/privacy-policy" },
+    { "type": "text", "id": "l_official", "label": "Canales oficiales", "default": "Canales oficiales" },
+    { "type": "url", "id": "url_official", "default": "/pages/canales-oficiales-cuidado-con-estafas" },
+    { "type": "text", "id": "payments_aria", "label": "ARIA medios de pago", "default": "Medios de pago aceptados" },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "Nuestros Guardianes son arte espiritual y simbólico, no sustituyen atención médica, psicológica, legal ni financiera."
+    }
+  ],
+  "presets": [{ "name": "Duendes — Home v2 · Pie oscuro" }]
+}
+{% endschema %}
