@@ -15,6 +15,8 @@
     assign effective_block_text = 'duendes.global.footer_newsletter_h2_html' | t
   elsif raw_block_text contains '[ddu:footer_newsletter_p]'
     assign effective_block_text = 'duendes.global.footer_newsletter_p_html' | t
+  elsif raw_block_text contains "('duendes.collection_all_title' | t)" or raw_block_text contains "' | append: ('duendes.collection_all_title'"
+    assign effective_block_text = ''
   elsif raw_block_text contains '[ddu:collection_heading_h1]'
     if collection != blank
       assign _col_title_down = collection.title | downcase | strip
@@ -25,9 +27,9 @@
         assign _use_magic_shop_title = true
       endif
       if _use_magic_shop_title
-        assign effective_block_text = '<h1>' | append: ('duendes.collection_all_title' | t) | append: '</h1>'
+        assign effective_block_text = '<h2>' | append: ('duendes.collection_all_title' | t) | append: '</h2>'
       else
-        assign effective_block_text = '<h1>' | append: collection.title | escape | append: '</h1>'
+        assign effective_block_text = '<h2>' | append: collection.title | escape | append: '</h2>'
       endif
     endif
   endif
