@@ -83,7 +83,8 @@
         "hint": "",
         "modal_aria": "",
         "close_aria": "",
-        "modal_cta": ""
+        "modal_cta": "",
+        "cta_url": ""
       }
     },
     "duendes-home-v2-hero": {

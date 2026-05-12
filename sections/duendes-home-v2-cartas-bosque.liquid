@@ -7,20 +7,41 @@
   endfor
   assign dh2_cb_tag = section.settings.tag | strip
   if dh2_cb_tag == blank
-    assign dh2_cb_tag = 'duendes.home_v2.cartas_bosque.tag' | t
+    assign dh2_cb_tag = 'duendes.home_v2.cartas.eyebrow' | t
+    if dh2_cb_tag contains 'translation missing'
+      assign dh2_cb_tag = 'duendes.home_v2.cartas_bosque.tag' | t
+    endif
   endif
   assign dh2_cb_title = section.settings.title | strip
   if dh2_cb_title == blank
-    assign dh2_cb_title = 'duendes.home_v2.cartas_bosque.title' | t
+    assign dh2_cb_title = 'duendes.home_v2.cartas.title' | t
+    if dh2_cb_title contains 'translation missing'
+      assign dh2_cb_title = 'duendes.home_v2.cartas_bosque.title' | t
+    endif
+  endif
+  assign dh2_cb_sub = 'duendes.home_v2.cartas.sub' | t
+  if dh2_cb_sub contains 'translation missing'
+    assign dh2_cb_sub = ''
   endif
   assign dh2_cb_badge = section.settings.badge_destacado | strip
   if dh2_cb_badge == blank
-    assign dh2_cb_badge = 'duendes.home_v2.cartas_bosque.badge_destacado' | t
+    assign dh2_cb_badge = 'duendes.home_v2.cartas.badge' | t
+    if dh2_cb_badge contains 'translation missing'
+      assign dh2_cb_badge = 'duendes.home_v2.cartas_bosque.badge_destacado' | t
+    endif
   endif
-  assign dh2_cb_hint = section.settings.hint | strip
-  if dh2_cb_hint == blank
-    assign dh2_cb_hint = 'duendes.home_v2.cartas_bosque.hint' | t
+  assign dh2_cb_foot = section.settings.hint | strip
+  if dh2_cb_foot == blank
+    assign dh2_cb_foot = 'duendes.home_v2.cartas.foot' | t
+    if dh2_cb_foot contains 'translation missing'
+      assign dh2_cb_foot = 'duendes.home_v2.cartas_bosque.hint' | t
+    endif
   endif
+  assign dh2_cb_cta = 'duendes.home_v2.cartas.cta' | t
+  if dh2_cb_cta contains 'translation missing'
+    assign dh2_cb_cta = ''
+  endif
+  assign dh2_cb_cta_url = section.settings.cta_url | default: routes.all_products_collection_url
   assign dh2_cb_modal_aria = section.settings.modal_aria | strip
   if dh2_cb_modal_aria == blank
     assign dh2_cb_modal_aria = 'duendes.home_v2.cartas_bosque.modal_aria' | t
@@ -39,8 +60,9 @@
 <style>
   .dh2-cb {
     --dh2-gold: #c9a961;
-    background: #15110d;
-    color: #f4f1ec;
+    --dh2-ink: #15110d;
+    background: #faf9f7 !important;
+    color: var(--dh2-ink);
     padding: 72px 0 80px;
     position: relative;
     overflow: hidden;
@@ -55,7 +77,7 @@
     font-size: 10px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
-    color: rgba(244, 241, 236, 0.45);
+    color: rgba(21, 17, 13, 0.5);
     text-align: center;
     margin-bottom: 12px;
   }
@@ -64,8 +86,18 @@
     font-weight: 400;
     font-size: clamp(22px, 2.8vw, 34px);
     text-align: center;
-    margin: 0 0 8px;
-    color: #fff;
+    margin: 0 0 10px;
+    color: var(--dh2-ink);
+  }
+  .dh2-cb__sub {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(15px, 1.9vw, 18px);
+    text-align: center;
+    margin: 0 auto 8px;
+    max-width: 520px;
+    line-height: 1.45;
+    color: rgba(21, 17, 13, 0.62);
+    font-style: italic;
   }
   .dh2-cb__deck {
     display: flex;
@@ -80,46 +112,61 @@
     aspect-ratio: 2 / 3;
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid rgba(201, 169, 97, 0.35);
-    background: #0d0b09;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+    border: 1px solid #c9a961;
+    background: linear-gradient(180deg, #3a2e1a 0%, #050402 100%);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
     cursor: pointer;
     text-decoration: none;
     color: inherit;
     display: block;
-    transform: rotate(-2.5deg) scale(0.94);
+    transform: rotate(-3deg) scale(0.94);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
   }
   .dh2-cb__card--center {
-    flex-basis: clamp(180px, 26vw, 260px);
-    transform: rotate(0deg) scale(1);
-    border-color: rgba(201, 169, 97, 0.65);
+    flex-basis: clamp(188px, 28vw, 280px);
+    transform: rotate(0deg) scale(1.05);
+    border-color: #c9a961;
     z-index: 2;
   }
   .dh2-cb__card--right {
-    transform: rotate(2.5deg) scale(0.94);
+    transform: rotate(3deg) scale(0.94);
   }
   .dh2-cb__card:hover {
     transform: rotate(0deg) scale(1.06);
-    box-shadow: 0 22px 60px rgba(201, 169, 97, 0.18);
+    box-shadow: 0 22px 60px rgba(201, 169, 97, 0.22);
   }
   .dh2-cb__card--center:hover {
-    transform: scale(1.08);
+    transform: scale(1.1);
+  }
+  .dh2-cb__roman {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    text-align: center;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 16px;
+    letter-spacing: 0.3em;
+    color: #c9a961;
+    margin: 0;
+    pointer-events: none;
   }
   .dh2-cb__badge {
     position: absolute;
-    top: 10px;
+    top: 38px;
     left: 50%;
     transform: translateX(-50%);
     font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 8px;
+    font-size: 9px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    background: rgba(201, 169, 97, 0.92);
-    color: #15110d;
-    padding: 4px 10px;
+    background: #15110d;
+    color: #c9a961;
+    padding: 5px 12px;
     border-radius: 2px;
-    z-index: 2;
+    z-index: 5;
+    white-space: nowrap;
   }
   .dh2-cb__card:not(.dh2-cb__card--center) .dh2-cb__badge {
     display: none;
@@ -132,12 +179,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.92;
+    opacity: 0.88;
   }
   .dh2-cb__shade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 35%, rgba(10, 8, 6, 0.92));
+    background: linear-gradient(180deg, transparent 22%, rgba(5, 4, 2, 0.88));
     z-index: 1;
   }
   .dh2-cb__meta {
@@ -145,41 +192,60 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 14px 12px 16px;
+    padding: 18px 12px 16px;
     z-index: 2;
     text-align: center;
   }
-  .dh2-cb__roman {
-    font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    color: var(--dh2-gold);
-    margin-bottom: 4px;
-  }
   .dh2-cb__name {
     font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 15px;
-    font-style: italic;
-    margin: 0 0 4px;
-    line-height: 1.25;
+    font-size: clamp(17px, 2.1vw, 19px);
+    font-weight: 400;
+    font-style: normal;
+    margin: 0 0 6px;
+    line-height: 1.2;
+    color: #fff;
   }
   .dh2-cb__essence {
-    font-size: 12px;
-    color: rgba(244, 241, 236, 0.65);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a961;
     margin-bottom: 8px;
   }
   .dh2-cb__price {
     font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    color: var(--dh2-gold);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: #c9a961;
+  }
+  .dh2-cb__cta-wrap {
+    text-align: center;
+    margin-top: 22px;
+  }
+  .dh2-cb__cta {
+    display: inline-block;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a88b42;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(168, 139, 66, 0.45);
+    padding-bottom: 2px;
+  }
+  .dh2-cb__cta:hover {
+    color: #15110d;
+    border-color: rgba(21, 17, 13, 0.35);
   }
   .dh2-cb__hint {
     text-align: center;
-    margin-top: 28px;
-    font-size: 12px;
+    margin-top: 20px;
+    font-size: 13px;
     font-style: italic;
-    color: rgba(244, 241, 236, 0.42);
+    color: rgba(21, 17, 13, 0.48);
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .dh2-cb__modal[hidden] {
     display: none !important;
@@ -267,20 +333,20 @@
       order: -1;
     }
   }
-  /* Theme wrapper overrides (OS 2.0): forzar ritual oscuro */
+  /* Theme wrapper overrides (OS 2.0): fondo crema */
   section.dh2-cb.section {
-    background-color: #15110d !important;
+    background-color: #faf9f7 !important;
     background-image: none !important;
-    color: #f4f1ec !important;
+    color: #15110d !important;
   }
   .dh2-cb__title {
-    color: #f4f1ec !important;
+    color: #15110d !important;
   }
   .dh2-cb__tag {
-    color: rgba(201, 169, 97, 0.75) !important;
+    color: rgba(21, 17, 13, 0.55) !important;
   }
   .dh2-cb__hint {
-    color: rgba(244, 241, 236, 0.72) !important;
+    color: rgba(21, 17, 13, 0.55) !important;
   }
   @media (max-width: 768px) {
     section.dh2-cb.section {
@@ -301,7 +367,7 @@
       letter-spacing: 0.2em !important;
     }
     .dh2-cb__hint {
-      font-size: 16px !important;
+      font-size: 15px !important;
       line-height: 1.45 !important;
     }
   }
@@ -310,18 +376,34 @@
 <section
   class="dh2-cb section"
   id="dh2-cb-{{ section.id }}"
-  style="background-color:#15110d;color:#f4f1ec;"
+  style="background-color:#faf9f7!important;color:#15110d;"
   {{ section.shopify_attributes }}
 >
   <div class="dh2-cb__inner">
     <p class="dh2-cb__tag">{{ dh2_cb_tag }}</p>
     <h2 class="dh2-cb__title">{{ dh2_cb_title }}</h2>
+    {% if dh2_cb_sub != blank %}
+      <p class="dh2-cb__sub">{{ dh2_cb_sub }}</p>
+    {% endif %}
     <div class="dh2-cb__deck">
+      {%- assign dh2_cb_slot = 0 -%}
       {% for block in section.blocks %}
         {% if block.type == 'carta' and block.settings.product != blank %}
+          {%- assign dh2_cb_slot = dh2_cb_slot | plus: 1 -%}
+          {%- assign dh2_cb_pos = dh2_cb_slot | minus: 1 -%}
           {% assign product = block.settings.product %}
-          {% assign pos = forloop.index0 %}
-          {% capture card_class %}dh2-cb__card{% if pos == 1 %} dh2-cb__card--center{% elsif pos == 2 %} dh2-cb__card--right{% endif %}{% endcapture %}
+          {% assign dh2_cb_roman = block.settings.roman | strip %}
+          {% if dh2_cb_roman == blank %}
+            {% case dh2_cb_slot %}
+              {% when 1 %}
+                {% assign dh2_cb_roman = 'I' %}
+              {% when 2 %}
+                {% assign dh2_cb_roman = 'II' %}
+              {% else %}
+                {% assign dh2_cb_roman = 'III' %}
+            {% endcase %}
+          {% endif %}
+          {% capture card_class %}dh2-cb__card{% if dh2_cb_pos == 1 %} dh2-cb__card--center{% elsif dh2_cb_pos == 2 %} dh2-cb__card--right{% else %} dh2-cb__card--left{% endif %}{% endcapture %}
           <a
             href="{{ product.url }}"
             class="{{ card_class | strip }}"
@@ -330,7 +412,8 @@
             data-dh2-url="{{ product.url }}"
             {{ block.shopify_attributes }}
           >
-            {% if pos == 1 %}
+            <p class="dh2-cb__roman" aria-hidden="true">{{ dh2_cb_roman }}</p>
+            {% if dh2_cb_pos == 1 %}
               <span class="dh2-cb__badge">{{ dh2_cb_badge }}</span>
             {% endif %}
             <div class="dh2-cb__media">
@@ -340,7 +423,6 @@
             </div>
             <div class="dh2-cb__shade"></div>
             <div class="dh2-cb__meta">
-              <div class="dh2-cb__roman">{{ block.settings.roman }}</div>
               <p class="dh2-cb__name">{{ block.settings.display_title | default: product.title }}</p>
               <div class="dh2-cb__essence">{{ block.settings.essence }}</div>
               <div class="dh2-cb__price">{{ product.price | money }}</div>
@@ -352,7 +434,12 @@
         {% endif %}
       {% endfor %}
     </div>
-    <p class="dh2-cb__hint">{{ dh2_cb_hint }}</p>
+    {% if dh2_cb_cta != blank and dh2_cb_cta_url != blank %}
+      <div class="dh2-cb__cta-wrap">
+        <a class="dh2-cb__cta" href="{{ dh2_cb_cta_url }}">{{ dh2_cb_cta }}</a>
+      </div>
+    {% endif %}
+    <p class="dh2-cb__hint">{{ dh2_cb_foot }}</p>
   </div>
 
   <div class="dh2-cb__modal" id="dh2-cb-modal-{{ section.id }}" hidden role="dialog" aria-modal="true" aria-label="{{ dh2_cb_modal_aria | escape }}">
@@ -444,7 +531,7 @@
 <section
   class="dh2-cb section"
   id="dh2-cb-{{ section.id }}"
-  style="background-color:#15110d!important;padding:48px 24px;text-align:center;color:#c9a961;border-top:1px solid rgba(201,169,97,0.35);font-family:var(--font-body--family,system-ui,sans-serif);font-size:15px;line-height:1.55;"
+  style="background-color:#faf9f7!important;padding:48px 24px;text-align:center;color:#15110d;border-top:1px solid rgba(201,169,97,0.25);font-family:var(--font-body--family,system-ui,sans-serif);font-size:15px;line-height:1.55;"
   {{ section.shopify_attributes }}
 >
   <p style="margin:0;max-width:520px;margin-inline:auto;">
@@ -476,7 +563,7 @@
       "type": "text",
       "id": "badge_destacado",
       "label": "Badge carta central",
-      "default": "DESTACADO"
+      "default": "MÁS ELEGIDO"
     },
     {
       "type": "text",
@@ -501,6 +588,11 @@
       "id": "modal_cta",
       "label": "CTA en modal",
       "default": "Ver ficha completa"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Enlace CTA inferior (vacío = catálogo completo)"
     }
   ],
   "blocks": [
@@ -509,7 +601,7 @@
       "name": "Carta",
       "settings": [
         { "type": "product", "id": "product", "label": "Guardián / producto" },
-        { "type": "text", "id": "roman", "label": "Número romano", "default": "XII" },
+        { "type": "text", "id": "roman", "label": "Número romano (opcional)", "info": "Vacío: I, II o III según posición de la carta." },
         {
           "type": "text",
           "id": "display_title",
@@ -524,9 +616,9 @@
     {
       "name": "DDU v2 · Cartas",
       "blocks": [
-        { "type": "carta", "settings": { "roman": "VI" } },
-        { "type": "carta", "settings": { "roman": "XII" } },
-        { "type": "carta", "settings": { "roman": "XX" } }
+        { "type": "carta", "settings": { "roman": "" } },
+        { "type": "carta", "settings": { "roman": "" } },
+        { "type": "carta", "settings": { "roman": "" } }
       ]
     }
   ]
