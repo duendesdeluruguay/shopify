@@ -1,0 +1,40 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+  .dh2-ubar {
+    background: #faf9f6;
+    border-bottom: 1px solid rgba(21, 17, 13, 0.08);
+    padding: 8px 0;
+    text-align: center;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(21, 17, 13, 0.55);
+  }
+  .dh2-ubar__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+</style>
+
+<div class="dh2-ubar section" role="note">
+  <div class="dh2-ubar__inner">{{ section.settings.line }}</div>
+</div>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · Franja confianza",
+  "tag": "section",
+  "class": "duendes-home-v2-utility-bar-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "line",
+      "label": "Texto (una línea)",
+      "default": "Piriápolis · Uruguay · LLC Wyoming · Envío internacional con tracking"
+    }
+  ],
+  "presets": [{ "name": "Duendes — Home v2 · Franja confianza" }]
+}
+{% endschema %}
