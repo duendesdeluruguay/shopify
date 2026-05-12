@@ -1,0 +1,133 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+  .dh2-sp {
+    background: #faf9f6;
+    padding: 64px 0 72px;
+    color: #15110d;
+  }
+  .dh2-sp__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .dh2-sp__tag {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(21, 17, 13, 0.45);
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .dh2-sp__title {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 38px);
+    text-align: center;
+    margin: 0 0 40px;
+    line-height: 1.2;
+  }
+  .dh2-sp__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .dh2-sp__card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+  }
+  .dh2-sp__photo {
+    aspect-ratio: 1;
+    background: linear-gradient(145deg, #e8e4dc, #d4cfc4);
+    overflow: hidden;
+  }
+  .dh2-sp__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dh2-sp__quote {
+    padding: 16px 16px 20px;
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 15px;
+    line-height: 1.45;
+    font-style: italic;
+    color: rgba(21, 17, 13, 0.82);
+    flex: 1;
+  }
+  @media (max-width: 989px) {
+    .dh2-sp__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 549px) {
+    .dh2-sp__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="dh2-sp section">
+  <div class="dh2-sp__inner">
+    <p class="dh2-sp__tag">{{ section.settings.tag }}</p>
+    <h2 class="dh2-sp__title">{{ section.settings.title }}</h2>
+    <div class="dh2-sp__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'testimonial' %}
+          <article class="dh2-sp__card" {{ block.shopify_attributes }}>
+            <div class="dh2-sp__photo">
+              {% if block.settings.photo != blank %}
+                {{ block.settings.photo | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(min-width:990px) 25vw, (min-width:550px) 50vw, 100vw', widths: '200,400,600' }}
+              {% endif %}
+            </div>
+            <p class="dh2-sp__quote">{{ block.settings.quote }}</p>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · Prueba social",
+  "tag": "section",
+  "class": "duendes-home-v2-social-proof-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Etiqueta superior",
+      "default": "LO QUE CUENTAN LOS QUE LLEGARON ANTES"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Adoptado por +15.000 personas en todo el mundo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonio",
+      "settings": [
+        { "type": "image_picker", "id": "photo", "label": "Foto" },
+        { "type": "textarea", "id": "quote", "label": "Frase", "default": "Cuando lo abrí, sentí que alguien me había elegido de verdad." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes — Home v2 · Prueba social",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}
