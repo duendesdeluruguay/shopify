@@ -1,0 +1,171 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+  .dh2-rito {
+    background: #faf9f6;
+    padding: 64px 0 72px;
+    color: #15110d;
+    border-top: 1px solid rgba(21, 17, 13, 0.06);
+  }
+  .dh2-rito__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .dh2-rito__tag {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(21, 17, 13, 0.45);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .dh2-rito__title {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 34px);
+    text-align: center;
+    margin: 0 0 36px;
+  }
+  .dh2-rito__row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .dh2-rito__card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(21, 17, 13, 0.08);
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.05);
+  }
+  .dh2-rito__photo {
+    aspect-ratio: 4 / 3;
+    background: #e8e4dc;
+  }
+  .dh2-rito__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dh2-rito__body {
+    padding: 18px 16px 20px;
+    text-align: center;
+  }
+  .dh2-rito__step {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #a88b42;
+    margin-bottom: 8px;
+  }
+  .dh2-rito__h {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 17px;
+    margin: 0 0 8px;
+  }
+  .dh2-rito__p {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(21, 17, 13, 0.72);
+    margin: 0;
+  }
+  @media (max-width: 749px) {
+    .dh2-rito__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section class="dh2-rito section">
+  <div class="dh2-rito__inner">
+    <p class="dh2-rito__tag">{{ section.settings.tag }}</p>
+    <h2 class="dh2-rito__title">{{ section.settings.title }}</h2>
+    <div class="dh2-rito__row">
+      {% for block in section.blocks %}
+        {% if block.type == 'paso' %}
+          <article class="dh2-rito__card" {{ block.shopify_attributes }}>
+            <div class="dh2-rito__photo">
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width:750px) 33vw, 100vw', widths: '400,600,900' }}
+              {% endif %}
+            </div>
+            <div class="dh2-rito__body">
+              <p class="dh2-rito__step">{{ block.settings.step_label }}</p>
+              <h3 class="dh2-rito__h">{{ block.settings.heading }}</h3>
+              <p class="dh2-rito__p">{{ block.settings.text }}</p>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · El rito (3 pasos)",
+  "tag": "section",
+  "class": "duendes-home-v2-rito-pasos-section",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Etiqueta", "default": "EL RITO" },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Tres pasos desde que te elige hasta tu puerta"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "paso",
+      "name": "Paso",
+      "settings": [
+        { "type": "text", "id": "step_label", "label": "Etiqueta paso", "default": "PASO 1" },
+        { "type": "text", "id": "heading", "label": "Título", "default": "Te conectás" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texto",
+          "default": "Elegís en la tienda o te leemos en el test. El vínculo empieza cuando uno te llama."
+        },
+        { "type": "image_picker", "id": "image", "label": "Foto real" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes — Home v2 · El rito (3 pasos)",
+      "blocks": [
+        {
+          "type": "paso",
+          "settings": {
+            "step_label": "PASO 1",
+            "heading": "Te conectás",
+            "text": "Elegís en la tienda o te leemos en el test. El vínculo empieza cuando uno te llama."
+          }
+        },
+        {
+          "type": "paso",
+          "settings": {
+            "step_label": "PASO 2",
+            "heading": "Lo canalizamos",
+            "text": "7 a 10 días en Piriápolis: ritual, carta, embalaje con cuidado de obra de arte."
+          }
+        },
+        {
+          "type": "paso",
+          "settings": {
+            "step_label": "PASO 3",
+            "heading": "Llega a tu casa",
+            "text": "A todo el mundo, con tracking. Abrís el paquete cuando el bosque te diga que es hora."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
