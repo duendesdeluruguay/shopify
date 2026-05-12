@@ -185,7 +185,9 @@
 
 {%- assign theme_tags_list = 'Abundancia y Dinero,Amor y Corazón,Protección,Espiritualidad,Salud y Sanación,Autoestima y Empoderamiento,Compañía y Apoyo Emocional,Ansiedad y Salud Mental,Sombra e Integración,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje y Transgeneracional,Estudio y Concentración,Emprendedores,Identidad Uruguaya' | split: ',' -%}
 {%- assign theme_short_list = 'Abundancia,Amor,Protección,Espiritualidad,Salud,Autoestima,Compañía,Salud Mental,Sombra,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje,Estudio,Emprendedores,Uruguay' | split: ',' -%}
+{%- assign theme_short_en_list = 'Abundance,Love,Protection,Spiritual,Health,Self-esteem,Company,Mental health,Shadow,Road opener,Luck,New beginnings,Wisdom,Lineage,Study,Entrepreneurs,Uruguay' | split: ',' -%}
 {%- assign theme_css_list = 'abundancia,amor,proteccion,espiritualidad,salud,autoestima,compania,salud-mental,sombra,abrecaminos,suerte,nuevos,sabiduria,linaje,estudio,emprendedores,uruguay' | split: ',' -%}
+{%- assign dcol_lang = localization.language.iso_code | default: request.locale.iso_code | slice: 0, 2 | downcase -%}
 
 {%- assign avail_count = 0 -%}
 {%- paginate collection.products by 250 -%}
@@ -200,11 +202,21 @@
     <div class="dcol__head-left">
       <p class="dcol__head-eyebrow">{{ section.settings.eyebrow }}</p>
       <h1 class="dcol__head-title">
-        {%- if collection.title != blank -%}{{ collection.title }}{%- else -%}{{ section.settings.title }}{%- endif -%}
+        {%- liquid
+          assign dcol_h1 = section.settings.title
+          if collection.title != blank
+            assign dcol_h1 = collection.title
+            assign dcol_title_down = collection.title | downcase | strip
+            if collection.handle == 'all' or dcol_title_down == 'productos' or dcol_title_down == 'products' or dcol_title_down == 'all products' or dcol_title_down == 'todos los productos'
+              assign dcol_h1 = 'duendes.collection_all_title' | t
+            endif
+          endif
+        -%}
+        {{ dcol_h1 }}
       </h1>
     </div>
     <div class="dcol__head-right">
-      <strong id="dcolCount">{{ avail_count }}</strong> disponibles
+      <strong id="dcolCount">{{ avail_count }}</strong> {{ 'duendes.collection_available_suffix' | t }}
     </div>
   </div>
 
@@ -215,14 +227,18 @@
   {%- endif -%}
 
   <div class="dcol__filters" id="dcolFilters">
-    <button class="dcol__pill active" data-filter="all">Todos</button>
+    <button class="dcol__pill active" data-filter="all">{{ 'duendes.filter_all_guardians' | t }}</button>
     {%- assign seen_themes = '' -%}
     {%- for product in collection.products -%}
       {%- if product.available -%}
         {%- for tt in theme_tags_list -%}
           {%- assign clean_tt = tt | strip -%}
           {%- if product.tags contains clean_tt -%}
-            {%- assign short = theme_short_list[forloop.index0] -%}
+            {%- if dcol_lang == 'es' -%}
+              {%- assign short = theme_short_list[forloop.index0] -%}
+            {%- else -%}
+              {%- assign short = theme_short_en_list[forloop.index0] -%}
+            {%- endif -%}
             {%- unless seen_themes contains short -%}
               <button class="dcol__pill" data-filter="{{ clean_tt | handleize }}">{{ short }}</button>
               {%- assign seen_themes = seen_themes | append: short | append: ',' -%}
@@ -245,7 +261,11 @@
       {%- for tt in theme_tags_list -%}
         {%- assign clean_tt = tt | strip -%}
         {%- if product.tags contains clean_tt -%}
-          {%- assign short = theme_short_list[forloop.index0] -%}
+          {%- if dcol_lang == 'es' -%}
+            {%- assign short = theme_short_list[forloop.index0] -%}
+          {%- else -%}
+            {%- assign short = theme_short_en_list[forloop.index0] -%}
+          {%- endif -%}
           {%- assign css_class = theme_css_list[forloop.index0] -%}
           {%- if p_themes == '' -%}
             {%- assign p_themes = short | append: '|' | append: css_class -%}
@@ -289,7 +309,7 @@
           </div>
           <div class="dcol__card-bottom">
             <p class="dcol__card-price">{{ product.price | money }}</p>
-            <span class="dcol__card-avail"><span class="dcol__dot"></span>Disponible</span>
+            <span class="dcol__card-avail"><span class="dcol__dot"></span>{{ 'duendes.collection_available' | t }}</span>
           </div>
         </div>
       </a>
@@ -297,11 +317,11 @@
   </div>
 
   {%- if avail_count == 0 -%}
-    <p class="dcol__empty">All Guardians in this collection have already found a home.</p>
+    <p class="dcol__empty">{{ 'duendes.collection_empty_all_adopted' | t }}</p>
   {%- endif -%}
 
   <div class="dcol__bottom">
-    <p class="dcol__bottom-text">Can't find yours? Maybe it hasn't been born yet.<br>Follow us on socials to see the new ones.</p>
+    <p class="dcol__bottom-text">{{ 'duendes.collection_footer_line1' | t }}<br>{{ 'duendes.collection_footer_line2' | t }}</p>
   </div>
 </section>
 {%- endpaginate -%}

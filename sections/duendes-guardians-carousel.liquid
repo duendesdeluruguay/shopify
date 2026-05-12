@@ -1,4 +1,7 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign dg_lang = localization.language.iso_code | default: request.locale.iso_code | slice: 0, 2 | downcase
+-%}
 
 <style>
   .duendes-guardians {
@@ -284,8 +287,8 @@
   {%- if collection == blank -%}
     {%- assign collection = collections['all'] -%}
   {%- endif -%}
-  {%- comment -%} Fix 6 (2026-05-01): productos más caros primero — los premium abren la conversación. {%- endcomment -%}
-  {%- assign products = collection.products | sort: 'price' | reverse -%}
+  {%- comment -%} Solo disponibles, ordenados por precio desc (premium primero). {%- endcomment -%}
+  {%- assign products = collection.products | where: 'available', true | sort: 'price' | reverse -%}
   {%- assign half = products.size | divided_by: 2 -%}
   {%- if half < 1 -%}{%- assign half = 1 -%}{%- endif -%}
 
@@ -297,6 +300,7 @@
           {%- liquid
             assign theme_tags = 'Abundancia y Dinero,Amor y Corazón,Protección,Espiritualidad,Salud y Sanación,Autoestima y Empoderamiento,Compañía y Apoyo Emocional,Ansiedad y Salud Mental,Sombra e Integración,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje y Transgeneracional,Estudio y Concentración,Emprendedores,Identidad Uruguaya' | split: ','
             assign theme_short = 'Abundancia,Amor,Protección,Espiritualidad,Salud,Autoestima,Compañía,Salud Mental,Sombra,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje,Estudio,Emprendedores,Uruguay' | split: ','
+            assign theme_short_en = 'Abundance,Love,Protection,Spiritual,Health,Self-esteem,Company,Mental health,Shadow,Road opener,Luck,New beginnings,Wisdom,Lineage,Study,Entrepreneurs,Uruguay' | split: ','
             assign theme_css = 'abundancia,amor,proteccion,espiritualidad,salud,autoestima,compania,salud-mental,sombra,abrecaminos,suerte,nuevos,sabiduria,linaje,estudio,emprendedores,uruguay' | split: ','
             assign is_coleccion = false
             if product.tags contains 'Colección Completa'
@@ -309,7 +313,11 @@
                 assign clean_tt = tt | strip
                 if product.tags contains clean_tt
                   assign badge_count = badge_count | plus: 1
-                  assign short = theme_short[forloop.index0]
+                  if dg_lang == 'es'
+                    assign short = theme_short[forloop.index0]
+                  else
+                    assign short = theme_short_en[forloop.index0]
+                  endif
                   assign css = theme_css[forloop.index0]
                   if p_badges == ''
                     assign p_badges = short | append: '|' | append: css
@@ -372,6 +380,7 @@
           {%- liquid
             assign theme_tags = 'Abundancia y Dinero,Amor y Corazón,Protección,Espiritualidad,Salud y Sanación,Autoestima y Empoderamiento,Compañía y Apoyo Emocional,Ansiedad y Salud Mental,Sombra e Integración,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje y Transgeneracional,Estudio y Concentración,Emprendedores,Identidad Uruguaya' | split: ','
             assign theme_short = 'Abundancia,Amor,Protección,Espiritualidad,Salud,Autoestima,Compañía,Salud Mental,Sombra,Abrecaminos,Suerte,Nuevos Comienzos,Sabiduría,Linaje,Estudio,Emprendedores,Uruguay' | split: ','
+            assign theme_short_en = 'Abundance,Love,Protection,Spiritual,Health,Self-esteem,Company,Mental health,Shadow,Road opener,Luck,New beginnings,Wisdom,Lineage,Study,Entrepreneurs,Uruguay' | split: ','
             assign theme_css = 'abundancia,amor,proteccion,espiritualidad,salud,autoestima,compania,salud-mental,sombra,abrecaminos,suerte,nuevos,sabiduria,linaje,estudio,emprendedores,uruguay' | split: ','
             assign is_coleccion = false
             if product.tags contains 'Colección Completa'
@@ -384,7 +393,11 @@
                 assign clean_tt = tt | strip
                 if product.tags contains clean_tt
                   assign badge_count = badge_count | plus: 1
-                  assign short = theme_short[forloop.index0]
+                  if dg_lang == 'es'
+                    assign short = theme_short[forloop.index0]
+                  else
+                    assign short = theme_short_en[forloop.index0]
+                  endif
                   assign css = theme_css[forloop.index0]
                   if p_badges == ''
                     assign p_badges = short | append: '|' | append: css
