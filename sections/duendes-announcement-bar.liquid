@@ -37,7 +37,14 @@
   <div class="duendes-announce__track">
     {% for i in (1..2) %}
       {% for block in section.blocks %}
-        <span>{{ block.settings.text }}</span>
+        <span>
+          {%- assign _du_an = block.settings.text | strip -%}
+          {%- if _du_an contains '[ddu:announcement_intl]' -%}
+            {{- 'duendes.global.announcement_bar' | t -}}
+          {%- else -%}
+            {{- block.settings.text -}}
+          {%- endif -%}
+        </span>
         <span class="duendes-announce__diamond">&#10022;</span>
       {% endfor %}
     {% endfor %}
@@ -68,7 +75,7 @@
     {
       "name": "Duendes Barra Anuncio",
       "blocks": [
-        { "type": "message", "settings": { "text": "Envío internacional con tracking · 5 a 10 días hábiles" } },
+        { "type": "message", "settings": { "text": "[ddu:announcement_intl]" } },
         { "type": "message", "settings": { "text": "Envíos a Uruguay por DAC · 5 a 7 días" } },
         { "type": "message", "settings": { "text": "Pago 100% seguro · Certificado SSL" } },
         { "type": "message", "settings": { "text": "Cada guardián es único · Hecho a mano sin moldes" } },

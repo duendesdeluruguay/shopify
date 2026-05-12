@@ -6,7 +6,7 @@
         "msg-1": {
           "type": "message",
           "settings": {
-            "text": "International shipping with tracking · 5 to 10 business days"
+            "text": "[ddu:announcement_intl]"
           }
         },
         "msg-2": {

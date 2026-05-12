@@ -75,7 +75,7 @@
   @media (max-width: 549px) {
     .dh2-sp__grid { grid-template-columns: 1fr; }
   }
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     .dh2-sp.section {
       overflow-x: hidden;
     }
@@ -83,11 +83,18 @@
       padding-left: max(20px, env(safe-area-inset-left, 0px));
       padding-right: max(24px, env(safe-area-inset-right, 0px));
     }
+    h2.dh2-sp__title,
     .dh2-sp__title {
-      font-size: clamp(22px, 5.5vw, 36px);
+      font-size: 26px !important;
+      line-height: 1.15 !important;
+      max-width: 100% !important;
     }
     .dh2-sp__quote {
-      font-size: max(14px, min(16px, 3.8vw));
+      font-size: 16px !important;
+      line-height: 1.45 !important;
+    }
+    .dh2-sp__tag {
+      font-size: 9px !important;
     }
   }
 </style>

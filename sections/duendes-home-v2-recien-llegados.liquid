@@ -147,7 +147,7 @@
       min-width: 160px;
     }
   }
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     .dh2-new.section {
       overflow-x: hidden;
     }
@@ -155,16 +155,19 @@
       padding-left: max(20px, env(safe-area-inset-left, 0px));
       padding-right: max(24px, env(safe-area-inset-right, 0px));
     }
+    h2.dh2-new__title,
     .dh2-new__title {
-      font-size: clamp(20px, 5.5vw, 34px);
+      font-size: 26px !important;
+      line-height: 1.15 !important;
+      max-width: 100% !important;
     }
     .dh2-new__tag {
-      font-size: 9px;
-      letter-spacing: 0.22em;
+      font-size: 9px !important;
+      letter-spacing: 0.2em !important;
     }
     .dh2-new__essence,
     .dh2-new__name {
-      font-size: max(14px, min(16px, 3.6vw));
+      font-size: 16px !important;
     }
   }
 </style>
