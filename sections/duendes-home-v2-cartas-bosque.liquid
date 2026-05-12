@@ -5,6 +5,34 @@
       assign dh2_cb_card_count = dh2_cb_card_count | plus: 1
     endif
   endfor
+  assign dh2_cb_tag = section.settings.tag | strip
+  if dh2_cb_tag == blank
+    assign dh2_cb_tag = 'duendes.home_v2.cartas_bosque.tag' | t
+  endif
+  assign dh2_cb_title = section.settings.title | strip
+  if dh2_cb_title == blank
+    assign dh2_cb_title = 'duendes.home_v2.cartas_bosque.title' | t
+  endif
+  assign dh2_cb_badge = section.settings.badge_destacado | strip
+  if dh2_cb_badge == blank
+    assign dh2_cb_badge = 'duendes.home_v2.cartas_bosque.badge_destacado' | t
+  endif
+  assign dh2_cb_hint = section.settings.hint | strip
+  if dh2_cb_hint == blank
+    assign dh2_cb_hint = 'duendes.home_v2.cartas_bosque.hint' | t
+  endif
+  assign dh2_cb_modal_aria = section.settings.modal_aria | strip
+  if dh2_cb_modal_aria == blank
+    assign dh2_cb_modal_aria = 'duendes.home_v2.cartas_bosque.modal_aria' | t
+  endif
+  assign dh2_cb_close_aria = section.settings.close_aria | strip
+  if dh2_cb_close_aria == blank
+    assign dh2_cb_close_aria = 'duendes.home_v2.cartas_bosque.close_aria' | t
+  endif
+  assign dh2_cb_modal_cta = section.settings.modal_cta | strip
+  if dh2_cb_modal_cta == blank
+    assign dh2_cb_modal_cta = 'duendes.home_v2.cartas_bosque.modal_cta' | t
+  endif
 -%}
 {% if dh2_cb_card_count > 0 %}
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
@@ -263,8 +291,8 @@
   {{ section.shopify_attributes }}
 >
   <div class="dh2-cb__inner">
-    <p class="dh2-cb__tag">{{ section.settings.tag }}</p>
-    <h2 class="dh2-cb__title">{{ section.settings.title }}</h2>
+    <p class="dh2-cb__tag">{{ dh2_cb_tag }}</p>
+    <h2 class="dh2-cb__title">{{ dh2_cb_title }}</h2>
     <div class="dh2-cb__deck">
       {% for block in section.blocks %}
         {% if block.type == 'carta' and block.settings.product != blank %}
@@ -280,7 +308,7 @@
             {{ block.shopify_attributes }}
           >
             {% if pos == 1 %}
-              <span class="dh2-cb__badge">{{ section.settings.badge_destacado }}</span>
+              <span class="dh2-cb__badge">{{ dh2_cb_badge }}</span>
             {% endif %}
             <div class="dh2-cb__media">
               {% if product.featured_media %}
@@ -301,16 +329,16 @@
         {% endif %}
       {% endfor %}
     </div>
-    <p class="dh2-cb__hint">{{ section.settings.hint }}</p>
+    <p class="dh2-cb__hint">{{ dh2_cb_hint }}</p>
   </div>
 
-  <div class="dh2-cb__modal" id="dh2-cb-modal-{{ section.id }}" hidden role="dialog" aria-modal="true" aria-label="{{ section.settings.modal_aria | escape }}">
+  <div class="dh2-cb__modal" id="dh2-cb-modal-{{ section.id }}" hidden role="dialog" aria-modal="true" aria-label="{{ dh2_cb_modal_aria | escape }}">
     <div class="dh2-cb__modal-panel">
-      <button type="button" class="dh2-cb__modal-close" data-dh2-cb-close aria-label="{{ section.settings.close_aria | escape }}">&times;</button>
+      <button type="button" class="dh2-cb__modal-close" data-dh2-cb-close aria-label="{{ dh2_cb_close_aria | escape }}">&times;</button>
       <h3 class="dh2-cb__name" style="margin-top: 0" data-dh2-cb-modal-title></h3>
       <div class="dh2-cb__modal-main" data-dh2-cb-modal-main></div>
       <div class="dh2-cb__modal-thumbs" data-dh2-cb-modal-thumbs></div>
-      <a class="dh2-cb__modal-link" data-dh2-cb-modal-link href="#">{{ section.settings.modal_cta }}</a>
+      <a class="dh2-cb__modal-link" data-dh2-cb-modal-link href="#">{{ dh2_cb_modal_cta }}</a>
     </div>
   </div>
 </section>

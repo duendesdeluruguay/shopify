@@ -1,4 +1,14 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign dh2_sp_tag = section.settings.tag | strip
+  if dh2_sp_tag == blank
+    assign dh2_sp_tag = 'duendes.home_v2.social_proof.tag' | t
+  endif
+  assign dh2_sp_title = section.settings.title | strip
+  if dh2_sp_title == blank
+    assign dh2_sp_title = 'duendes.home_v2.social_proof.title' | t
+  endif
+-%}
 <style>
   .dh2-sp {
     background: #faf9f6;
@@ -69,18 +79,33 @@
 
 <section class="dh2-sp section">
   <div class="dh2-sp__inner">
-    <p class="dh2-sp__tag">{{ section.settings.tag }}</p>
-    <h2 class="dh2-sp__title">{{ section.settings.title }}</h2>
+    <p class="dh2-sp__tag">{{ dh2_sp_tag }}</p>
+    <h2 class="dh2-sp__title">{{ dh2_sp_title }}</h2>
     <div class="dh2-sp__grid">
       {% for block in section.blocks %}
         {% if block.type == 'testimonial' %}
+          {% liquid
+            assign dh2_sp_quote = block.settings.quote | strip
+            if dh2_sp_quote == blank
+              case forloop.index
+                when 1
+                  assign dh2_sp_quote = 'duendes.home_v2.social_proof.quote_1' | t
+                when 2
+                  assign dh2_sp_quote = 'duendes.home_v2.social_proof.quote_2' | t
+                when 3
+                  assign dh2_sp_quote = 'duendes.home_v2.social_proof.quote_3' | t
+                else
+                  assign dh2_sp_quote = 'duendes.home_v2.social_proof.quote_4' | t
+              endcase
+            endif
+          %}
           <article class="dh2-sp__card" {{ block.shopify_attributes }}>
             <div class="dh2-sp__photo">
               {% if block.settings.photo != blank %}
                 {{ block.settings.photo | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(min-width:990px) 25vw, (min-width:550px) 50vw, 100vw', widths: '200,400,600' }}
               {% endif %}
             </div>
-            <p class="dh2-sp__quote">{{ block.settings.quote }}</p>
+            <p class="dh2-sp__quote">{{ dh2_sp_quote }}</p>
           </article>
         {% endif %}
       {% endfor %}

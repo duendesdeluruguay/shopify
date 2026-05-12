@@ -1,4 +1,14 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign dh2_rito_tag = section.settings.tag | strip
+  if dh2_rito_tag == blank
+    assign dh2_rito_tag = 'duendes.home_v2.rito.tag' | t
+  endif
+  assign dh2_rito_title = section.settings.title | strip
+  if dh2_rito_title == blank
+    assign dh2_rito_title = 'duendes.home_v2.rito.title' | t
+  endif
+-%}
 <style>
   .dh2-rito {
     background: #faf9f6;
@@ -81,11 +91,50 @@
 
 <section class="dh2-rito section">
   <div class="dh2-rito__inner">
-    <p class="dh2-rito__tag">{{ section.settings.tag }}</p>
-    <h2 class="dh2-rito__title">{{ section.settings.title }}</h2>
+    <p class="dh2-rito__tag">{{ dh2_rito_tag }}</p>
+    <h2 class="dh2-rito__title">{{ dh2_rito_title }}</h2>
     <div class="dh2-rito__row">
       {% for block in section.blocks %}
         {% if block.type == 'paso' %}
+          {% liquid
+            assign dh2_rs = block.settings.step_label | strip
+            assign dh2_rh = block.settings.heading | strip
+            assign dh2_rt = block.settings.text | strip
+            if dh2_rs == blank or dh2_rh == blank or dh2_rt == blank
+              case forloop.index
+                when 1
+                  if dh2_rs == blank
+                    assign dh2_rs = 'duendes.home_v2.rito.step1_label' | t
+                  endif
+                  if dh2_rh == blank
+                    assign dh2_rh = 'duendes.home_v2.rito.step1_heading' | t
+                  endif
+                  if dh2_rt == blank
+                    assign dh2_rt = 'duendes.home_v2.rito.step1_text' | t
+                  endif
+                when 2
+                  if dh2_rs == blank
+                    assign dh2_rs = 'duendes.home_v2.rito.step2_label' | t
+                  endif
+                  if dh2_rh == blank
+                    assign dh2_rh = 'duendes.home_v2.rito.step2_heading' | t
+                  endif
+                  if dh2_rt == blank
+                    assign dh2_rt = 'duendes.home_v2.rito.step2_text' | t
+                  endif
+                else
+                  if dh2_rs == blank
+                    assign dh2_rs = 'duendes.home_v2.rito.step3_label' | t
+                  endif
+                  if dh2_rh == blank
+                    assign dh2_rh = 'duendes.home_v2.rito.step3_heading' | t
+                  endif
+                  if dh2_rt == blank
+                    assign dh2_rt = 'duendes.home_v2.rito.step3_text' | t
+                  endif
+              endcase
+            endif
+          %}
           <article class="dh2-rito__card" {{ block.shopify_attributes }}>
             <div class="dh2-rito__photo">
               {% if block.settings.image != blank %}
@@ -93,9 +142,9 @@
               {% endif %}
             </div>
             <div class="dh2-rito__body">
-              <p class="dh2-rito__step">{{ block.settings.step_label }}</p>
-              <h3 class="dh2-rito__h">{{ block.settings.heading }}</h3>
-              <p class="dh2-rito__p">{{ block.settings.text }}</p>
+              <p class="dh2-rito__step">{{ dh2_rs }}</p>
+              <h3 class="dh2-rito__h">{{ dh2_rh }}</h3>
+              <p class="dh2-rito__p">{{ dh2_rt }}</p>
             </div>
           </article>
         {% endif %}

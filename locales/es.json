@@ -399,7 +399,79 @@
         "chip_sabiduria": "Sabiduría",
         "chip_hogar": "Hogar",
         "chip_transformacion": "Transformación"
+      },
+      "hero": {
+        "badges_line": "✦ HECHOS A MANO  ·  ✦ ÚNICOS  ·  ✦ DESDE 2015",
+        "title": "No los elegís vos. Ellos te eligen a vos.",
+        "subtitle": "Cada uno es único en el mundo.",
+        "cta_primary": "Encontrar mi Guardián",
+        "cta_secondary": "Que me lean (2 min)"
+      },
+      "cartas_bosque": {
+        "tag": "EL PORTAL TE MUESTRA",
+        "title": "Cartas del Bosque · destacados",
+        "badge_destacado": "DESTACADO",
+        "hint": "Pasá el dedo · Las cartas se giran cuando una te llama",
+        "modal_aria": "Galería del guardián",
+        "close_aria": "Cerrar",
+        "modal_cta": "Ver ficha completa"
+      },
+      "recien_llegados": {
+        "tag": "RECIÉN LLEGADOS · este mes",
+        "title": "Acaban de bajar al bosque",
+        "badge": "ÚNICO EN EL MUNDO",
+        "cta_label": "Conocelo →",
+        "essence_fallback": "Canalizado · único",
+        "empty_state": "Elegí una colección en el editor de tema."
+      },
+      "linajes": {
+        "tag": "POR LINAJE",
+        "title": "Encontrá tu Guardián por su linaje"
+      },
+      "social_proof": {
+        "tag": "LO QUE CUENTAN LOS QUE LLEGARON ANTES",
+        "title": "Adoptado por +15.000 personas en todo el mundo",
+        "quote_1": "Cuando lo abrí, sentí que alguien me había elegido de verdad.",
+        "quote_2": "La carta decía cosas que nadie más podía saber.",
+        "quote_3": "Es arte, energía y compañía — no una figura más.",
+        "quote_4": "El envío fue cuidadoso como una pieza de museo. Vale cada instante de espera."
+      },
+      "editorial": {
+        "quote": "Los celtas los ponían en sus casas para proteger a la familia. En Escandinavia, si no le dejabas ofrenda al duende del hogar, la suerte se iba con él. No los inventamos nosotros — los canalizamos.",
+        "signature": "— DEL COMPENDIO ELEMENTAL",
+        "link_label": "Leer en Tribu Elemental"
+      },
+      "rito": {
+        "tag": "EL RITO",
+        "title": "Tres pasos desde que te elige hasta tu puerta",
+        "step1_label": "PASO 1",
+        "step1_heading": "Te conectás",
+        "step1_text": "Elegís en la tienda o te leemos en el test. El vínculo empieza cuando uno te llama.",
+        "step2_label": "PASO 2",
+        "step2_heading": "Lo canalizamos",
+        "step2_text": "7 a 10 días en Piriápolis: ritual, carta, embalaje con cuidado de obra de arte.",
+        "step3_label": "PASO 3",
+        "step3_heading": "Llega a tu casa",
+        "step3_text": "A todo el mundo, con tracking. Abrís el paquete cuando el bosque te diga que es hora."
+      },
+      "lectura_test": {
+        "glyph": "✦",
+        "title": "¿No sabés cuál es tuyo?",
+        "subtitle": "No te hacemos un test genérico. Te leemos.",
+        "cta_label": "Que me lean · 2 min"
+      },
+      "tribu_newsletter": {
+        "title": "Tribu Elemental",
+        "subtitle": "Linajes, rituales, sueños, lo que el bosque cuenta esta semana.",
+        "placeholder": "tu@email.com",
+        "submit_label": "Sumarme",
+        "micro": "Sin spam. Te escribimos solo cuando hay magia nueva.",
+        "success": "Listo. Revisá tu correo para confirmar.",
+        "error_copy": "Revisá el correo e intentá de nuevo."
       }
+    },
+    "nav": {
+      "el_portal": "EL PORTAL ✦"
     },
     "product": {
       "hero_eyebrow": "Vos no los elegís. Ellos te eligen a vos.",

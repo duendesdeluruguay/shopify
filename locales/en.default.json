@@ -393,7 +393,79 @@
         "chip_sabiduria": "Wisdom",
         "chip_hogar": "Home",
         "chip_transformacion": "Transformation"
+      },
+      "hero": {
+        "badges_line": "✦ HANDMADE  ·  ✦ ONE OF A KIND  ·  ✦ SINCE 2015",
+        "title": "You don't choose them. They choose you.",
+        "subtitle": "Each one is unique in the world.",
+        "cta_primary": "Find my Guardian",
+        "cta_secondary": "Have them read me (2 min)"
+      },
+      "cartas_bosque": {
+        "tag": "THE PORTAL SHOWS YOU",
+        "title": "Forest cards · highlights",
+        "badge_destacado": "FEATURED",
+        "hint": "Swipe · The cards turn when one calls you",
+        "modal_aria": "Guardian gallery",
+        "close_aria": "Close",
+        "modal_cta": "View full profile"
+      },
+      "recien_llegados": {
+        "tag": "JUST IN · THIS MONTH",
+        "title": "They just came down to the forest",
+        "badge": "ONE OF A KIND",
+        "cta_label": "Meet them →",
+        "essence_fallback": "Channeled · unique",
+        "empty_state": "Choose a collection in the theme editor."
+      },
+      "linajes": {
+        "tag": "BY LINEAGE",
+        "title": "Find your Guardian by lineage"
+      },
+      "social_proof": {
+        "tag": "WHAT THOSE WHO ARRIVED BEFORE SAY",
+        "title": "Adopted by 15,000+ people worldwide",
+        "quote_1": "When I opened the box, I felt someone had truly chosen me.",
+        "quote_2": "The letter said things no one else could have known.",
+        "quote_3": "It is art, energy, and company — not a simple figure.",
+        "quote_4": "Shipping was careful like a museum piece. Worth every moment of the wait."
+      },
+      "editorial": {
+        "quote": "The Celts placed them in their homes to protect the family. In Scandinavia, if you did not leave an offering for the house spirit, luck went with it. We did not invent them — we channel them.",
+        "signature": "— FROM THE ELEMENTAL COMPENDIUM",
+        "link_label": "Read in Elemental Tribe"
+      },
+      "rito": {
+        "tag": "THE RITE",
+        "title": "Three steps from when they choose you to your door",
+        "step1_label": "STEP 1",
+        "step1_heading": "You connect",
+        "step1_text": "Choose in the shop or let the test read you. The bond starts when one calls you.",
+        "step2_label": "STEP 2",
+        "step2_heading": "We channel",
+        "step2_text": "7–10 days in Piriápolis: ritual, letter, packaging with the care of a work of art.",
+        "step3_label": "STEP 3",
+        "step3_heading": "It reaches your home",
+        "step3_text": "Worldwide, with tracking. Open the parcel when the forest says it is time."
+      },
+      "lectura_test": {
+        "glyph": "✦",
+        "title": "Not sure which one is yours?",
+        "subtitle": "We do not give you a generic quiz. We read you.",
+        "cta_label": "Have them read me · 2 min"
+      },
+      "tribu_newsletter": {
+        "title": "Elemental Tribe",
+        "subtitle": "Lineages, rituals, dreams — what the forest is sharing this week.",
+        "placeholder": "your@email.com",
+        "submit_label": "Count me in",
+        "micro": "No spam. We only write when there is new magic.",
+        "success": "Done. Check your inbox to confirm.",
+        "error_copy": "Check the address and try again."
       }
+    },
+    "nav": {
+      "el_portal": "THE PORTAL ✦"
     },
     "card_adopted": "Adopted",
     "carousel_pause_hint": "Hover over a Guardian to stop the carousel",

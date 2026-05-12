@@ -1,4 +1,34 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign dh2_tr_title = section.settings.title | strip
+  if dh2_tr_title == blank
+    assign dh2_tr_title = 'duendes.home_v2.tribu_newsletter.title' | t
+  endif
+  assign dh2_tr_sub = section.settings.subtitle | strip
+  if dh2_tr_sub == blank
+    assign dh2_tr_sub = 'duendes.home_v2.tribu_newsletter.subtitle' | t
+  endif
+  assign dh2_tr_ph = section.settings.placeholder | strip
+  if dh2_tr_ph == blank
+    assign dh2_tr_ph = 'duendes.home_v2.tribu_newsletter.placeholder' | t
+  endif
+  assign dh2_tr_submit = section.settings.submit_label | strip
+  if dh2_tr_submit == blank
+    assign dh2_tr_submit = 'duendes.home_v2.tribu_newsletter.submit_label' | t
+  endif
+  assign dh2_tr_micro = section.settings.micro | strip
+  if dh2_tr_micro == blank
+    assign dh2_tr_micro = 'duendes.home_v2.tribu_newsletter.micro' | t
+  endif
+  assign dh2_tr_success = section.settings.success | strip
+  if dh2_tr_success == blank
+    assign dh2_tr_success = 'duendes.home_v2.tribu_newsletter.success' | t
+  endif
+  assign dh2_tr_err = section.settings.error_copy | strip
+  if dh2_tr_err == blank
+    assign dh2_tr_err = 'duendes.home_v2.tribu_newsletter.error_copy' | t
+  endif
+-%}
 <style>
   .dh2-tribu {
     background: #faf9f6;
@@ -74,11 +104,11 @@
 
 <section class="dh2-tribu section">
   <div class="dh2-tribu__panel">
-    <h2 class="dh2-tribu__title">{{ section.settings.title }}</h2>
-    <p class="dh2-tribu__sub">{{ section.settings.subtitle }}</p>
+    <h2 class="dh2-tribu__title">{{ dh2_tr_title }}</h2>
+    <p class="dh2-tribu__sub">{{ dh2_tr_sub }}</p>
     {% form 'customer', class: 'dh2-tribu__formwrap', return_to: request.path %}
       {% if form.errors %}
-        <p class="dh2-tribu__errors">{{ section.settings.error_copy }}</p>
+        <p class="dh2-tribu__errors">{{ dh2_tr_err }}</p>
       {% endif %}
       <div class="dh2-tribu__form">
         <input type="hidden" name="contact[tags]" value="{{ section.settings.customer_tag }}">
@@ -88,17 +118,17 @@
           name="contact[email]"
           class="dh2-tribu__input"
           value="{{ form.email }}"
-          placeholder="{{ section.settings.placeholder }}"
+          placeholder="{{ dh2_tr_ph | escape }}"
           required
           autocomplete="email"
-          aria-label="{{ section.settings.placeholder }}"
+          aria-label="{{ dh2_tr_ph | escape }}"
         >
-        <button type="submit" class="dh2-tribu__btn">{{ section.settings.submit_label }}</button>
+        <button type="submit" class="dh2-tribu__btn">{{ dh2_tr_submit }}</button>
       </div>
       {% if form.posted_successfully? %}
-        <p class="dh2-tribu__micro" role="status">{{ section.settings.success }}</p>
+        <p class="dh2-tribu__micro" role="status">{{ dh2_tr_success }}</p>
       {% else %}
-        <p class="dh2-tribu__micro">{{ section.settings.micro }}</p>
+        <p class="dh2-tribu__micro">{{ dh2_tr_micro }}</p>
       {% endif %}
     {% endform %}
   </div>

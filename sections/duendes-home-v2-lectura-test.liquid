@@ -1,4 +1,22 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign dh2_rd_glyph = section.settings.glyph | strip
+  if dh2_rd_glyph == blank
+    assign dh2_rd_glyph = 'duendes.home_v2.lectura_test.glyph' | t
+  endif
+  assign dh2_rd_title = section.settings.title | strip
+  if dh2_rd_title == blank
+    assign dh2_rd_title = 'duendes.home_v2.lectura_test.title' | t
+  endif
+  assign dh2_rd_sub = section.settings.subtitle | strip
+  if dh2_rd_sub == blank
+    assign dh2_rd_sub = 'duendes.home_v2.lectura_test.subtitle' | t
+  endif
+  assign dh2_rd_cta = section.settings.cta_label | strip
+  if dh2_rd_cta == blank
+    assign dh2_rd_cta = 'duendes.home_v2.lectura_test.cta_label' | t
+  endif
+-%}
 <style>
   .dh2-read {
     background: #15110d;
@@ -71,11 +89,11 @@
 
 <section class="dh2-read section">
   <div class="dh2-read__inner">
-    <div class="dh2-read__glyph" aria-hidden="true">{{ section.settings.glyph }}</div>
+    <div class="dh2-read__glyph" aria-hidden="true">{{ dh2_rd_glyph }}</div>
     <div class="dh2-read__text">
-      <h2 class="dh2-read__title">{{ section.settings.title }}</h2>
-      <p class="dh2-read__sub">{{ section.settings.subtitle }}</p>
-      <a class="dh2-read__cta" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+      <h2 class="dh2-read__title">{{ dh2_rd_title }}</h2>
+      <p class="dh2-read__sub">{{ dh2_rd_sub }}</p>
+      <a class="dh2-read__cta" href="{{ section.settings.cta_url }}">{{ dh2_rd_cta }}</a>
     </div>
   </div>
 </section>

@@ -1,4 +1,26 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign dh2_hero_badges = section.settings.badges_line | strip
+  if dh2_hero_badges == blank
+    assign dh2_hero_badges = 'duendes.home_v2.hero.badges_line' | t
+  endif
+  assign dh2_hero_title = section.settings.title | strip
+  if dh2_hero_title == blank
+    assign dh2_hero_title = 'duendes.home_v2.hero.title' | t
+  endif
+  assign dh2_hero_sub = section.settings.subtitle | strip
+  if dh2_hero_sub == blank
+    assign dh2_hero_sub = 'duendes.home_v2.hero.subtitle' | t
+  endif
+  assign dh2_hero_cta1 = section.settings.cta_primary_label | strip
+  if dh2_hero_cta1 == blank
+    assign dh2_hero_cta1 = 'duendes.home_v2.hero.cta_primary' | t
+  endif
+  assign dh2_hero_cta2 = section.settings.cta_secondary_label | strip
+  if dh2_hero_cta2 == blank
+    assign dh2_hero_cta2 = 'duendes.home_v2.hero.cta_secondary' | t
+  endif
+-%}
 <style>
   .dh2-hero {
     --dh2-bg: #15110d;
@@ -139,12 +161,12 @@
   </div>
   <div class="dh2-hero__overlay"></div>
   <div class="dh2-hero__inner">
-    <p class="dh2-hero__badges">{{ section.settings.badges_line }}</p>
-    <h1 class="dh2-hero__title">{{ section.settings.title }}</h1>
-    <p class="dh2-hero__sub">{{ section.settings.subtitle }}</p>
+    <p class="dh2-hero__badges">{{ dh2_hero_badges }}</p>
+    <h1 class="dh2-hero__title">{{ dh2_hero_title }}</h1>
+    <p class="dh2-hero__sub">{{ dh2_hero_sub }}</p>
     <div class="dh2-hero__ctas">
-      <a class="dh2-hero__btn dh2-hero__btn--primary" href="{{ section.settings.cta_primary_url }}">{{ section.settings.cta_primary_label }}</a>
-      <a class="dh2-hero__btn dh2-hero__btn--ghost" href="{{ section.settings.cta_secondary_url }}">{{ section.settings.cta_secondary_label }}</a>
+      <a class="dh2-hero__btn dh2-hero__btn--primary" href="{{ section.settings.cta_primary_url }}">{{ dh2_hero_cta1 }}</a>
+      <a class="dh2-hero__btn dh2-hero__btn--ghost" href="{{ section.settings.cta_secondary_url }}">{{ dh2_hero_cta2 }}</a>
     </div>
   </div>
 </section>

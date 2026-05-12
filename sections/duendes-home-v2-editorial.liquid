@@ -1,4 +1,18 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign dh2_ed_quote = section.settings.quote | strip
+  if dh2_ed_quote == blank
+    assign dh2_ed_quote = 'duendes.home_v2.editorial.quote' | t
+  endif
+  assign dh2_ed_sig = section.settings.signature | strip
+  if dh2_ed_sig == blank
+    assign dh2_ed_sig = 'duendes.home_v2.editorial.signature' | t
+  endif
+  assign dh2_ed_link = section.settings.link_label | strip
+  if dh2_ed_link == blank
+    assign dh2_ed_link = 'duendes.home_v2.editorial.link_label' | t
+  endif
+-%}
 <style>
   .dh2-ed {
     background: #faf9f6;
@@ -41,10 +55,10 @@
 
 <section class="dh2-ed section">
   <div class="dh2-ed__inner">
-    <blockquote class="dh2-ed__quote">{{ section.settings.quote }}</blockquote>
-    <p class="dh2-ed__sig">{{ section.settings.signature }}</p>
+    <blockquote class="dh2-ed__quote">{{ dh2_ed_quote }}</blockquote>
+    <p class="dh2-ed__sig">{{ dh2_ed_sig }}</p>
     {% if section.settings.link_url != blank %}
-      <a class="dh2-ed__link" href="{{ section.settings.link_url }}">{{ section.settings.link_label }}</a>
+      <a class="dh2-ed__link" href="{{ section.settings.link_url }}">{{ dh2_ed_link }}</a>
     {% endif %}
   </div>
 </section>

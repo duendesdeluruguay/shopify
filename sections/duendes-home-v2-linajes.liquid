@@ -1,4 +1,14 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign dh2_lin_tag = section.settings.tag | strip
+  if dh2_lin_tag == blank
+    assign dh2_lin_tag = 'duendes.home_v2.linajes.tag' | t
+  endif
+  assign dh2_lin_title = section.settings.title | strip
+  if dh2_lin_title == blank
+    assign dh2_lin_title = 'duendes.home_v2.linajes.title' | t
+  endif
+-%}
 <style>
   .dh2-lin {
     background: #faf9f6;
@@ -91,8 +101,8 @@
 
 <section class="dh2-lin section">
   <div class="dh2-lin__inner">
-    <p class="dh2-lin__tag">{{ section.settings.tag }}</p>
-    <h2 class="dh2-lin__title">{{ section.settings.title }}</h2>
+    <p class="dh2-lin__tag">{{ dh2_lin_tag }}</p>
+    <h2 class="dh2-lin__title">{{ dh2_lin_title }}</h2>
     <div class="dh2-lin__grid">
       {% for block in section.blocks %}
         {% if block.type == 'linaje' %}

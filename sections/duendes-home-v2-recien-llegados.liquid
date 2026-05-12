@@ -2,6 +2,30 @@
 {%- liquid
   assign col = section.settings.collection
   assign limit = section.settings.limit | default: 12
+  assign dh2_new_tag = section.settings.tag | strip
+  if dh2_new_tag == blank
+    assign dh2_new_tag = 'duendes.home_v2.recien_llegados.tag' | t
+  endif
+  assign dh2_new_title = section.settings.title | strip
+  if dh2_new_title == blank
+    assign dh2_new_title = 'duendes.home_v2.recien_llegados.title' | t
+  endif
+  assign dh2_new_badge = section.settings.badge | strip
+  if dh2_new_badge == blank
+    assign dh2_new_badge = 'duendes.home_v2.recien_llegados.badge' | t
+  endif
+  assign dh2_new_cta = section.settings.cta_label | strip
+  if dh2_new_cta == blank
+    assign dh2_new_cta = 'duendes.home_v2.recien_llegados.cta_label' | t
+  endif
+  assign dh2_new_essence_fb = section.settings.essence_fallback | strip
+  if dh2_new_essence_fb == blank
+    assign dh2_new_essence_fb = 'duendes.home_v2.recien_llegados.essence_fallback' | t
+  endif
+  assign dh2_new_empty = section.settings.empty_state | strip
+  if dh2_new_empty == blank
+    assign dh2_new_empty = 'duendes.home_v2.recien_llegados.empty_state' | t
+  endif
 -%}
 <style>
   .dh2-new {
@@ -127,14 +151,14 @@
 
 <section class="dh2-new section">
   <div class="dh2-new__inner">
-    <p class="dh2-new__tag">{{ section.settings.tag }}</p>
-    <h2 class="dh2-new__title">{{ section.settings.title }}</h2>
+    <p class="dh2-new__tag">{{ dh2_new_tag }}</p>
+    <h2 class="dh2-new__title">{{ dh2_new_title }}</h2>
     {% if col != blank %}
       <div class="dh2-new__track">
         {% for product in col.products limit: limit %}
           {% unless product.available == false and section.settings.hide_sold_out %}
             <a class="dh2-new__card" href="{{ product.url }}">
-              <span class="dh2-new__badge">{{ section.settings.badge }}</span>
+              <span class="dh2-new__badge">{{ dh2_new_badge }}</span>
               <div class="dh2-new__img">
                 {% if product.featured_media %}
                   {{ product.featured_media | image_url: width: 700 | image_tag: loading: 'lazy', sizes: '280px', widths: '350,500,700' }}
@@ -145,11 +169,11 @@
                 {% if product.metafields.custom.esencia != blank %}
                   <p class="dh2-new__essence">{{ product.metafields.custom.esencia.value | default: product.metafields.custom.esencia | escape }}</p>
                 {% elsif section.settings.essence_fallback != blank %}
-                  <p class="dh2-new__essence">{{ section.settings.essence_fallback }}</p>
+                  <p class="dh2-new__essence">{{ dh2_new_essence_fb }}</p>
                 {% endif %}
                 <div class="dh2-new__row">
                   <span class="dh2-new__price">{{ product.price | money }}</span>
-                  <span class="dh2-new__cta">{{ section.settings.cta_label }}</span>
+                  <span class="dh2-new__cta">{{ dh2_new_cta }}</span>
                 </div>
               </div>
             </a>
@@ -157,7 +181,7 @@
         {% endfor %}
       </div>
     {% else %}
-      <p style="text-align:center;color:rgba(21,17,13,.5)">{{ section.settings.empty_state }}</p>
+      <p style="text-align:center;color:rgba(21,17,13,.5)">{{ dh2_new_empty }}</p>
     {% endif %}
   </div>
 </section>

@@ -55,12 +55,12 @@
       "settings": {
         "video_url": "",
         "poster": "shopify://shop_images/2319.jpg",
-        "badges_line": "✦ HANDMADE  ·  ✦ ONE OF A KIND  ·  ✦ SINCE 2015",
-        "title": "You don't choose them. They choose you.",
-        "subtitle": "Each one is unique in the world.",
-        "cta_primary_label": "Find my Guardian",
+        "badges_line": "",
+        "title": "",
+        "subtitle": "",
+        "cta_primary_label": "",
         "cta_primary_url": "shopify://collections/tienda-magica",
-        "cta_secondary_label": "Have them read me (2 min)",
+        "cta_secondary_label": "",
         "cta_secondary_url": "shopify://pages/test-del-guardian"
       }
     },
@@ -98,13 +98,13 @@
       },
       "block_order": ["cb1", "cb2", "cb3"],
       "settings": {
-        "tag": "THE PORTAL SHOWS YOU",
-        "title": "Forest cards · highlights",
-        "badge_destacado": "FEATURED",
-        "hint": "Swipe · The cards turn when one calls you",
-        "modal_aria": "Guardian gallery",
-        "close_aria": "Close",
-        "modal_cta": "View full profile"
+        "tag": "",
+        "title": "",
+        "badge_destacado": "",
+        "hint": "",
+        "modal_aria": "",
+        "close_aria": "",
+        "modal_cta": ""
       }
     },
     "home-v2-recien-llegados": {
@@ -113,12 +113,12 @@
         "collection": "nuevos-guardianes",
         "limit": 12,
         "hide_sold_out": true,
-        "tag": "JUST IN · THIS MONTH",
-        "title": "They just came down to the forest",
-        "badge": "ONE OF A KIND",
-        "cta_label": "Meet them →",
-        "essence_fallback": "Channeled · unique",
-        "empty_state": "Choose a collection in the theme editor."
+        "tag": "",
+        "title": "",
+        "badge": "",
+        "cta_label": "",
+        "essence_fallback": "",
+        "empty_state": ""
       }
     },
     "home-v2-linajes": {
@@ -217,8 +217,8 @@
       },
       "block_order": ["lin1", "lin2", "lin3", "lin4", "lin5", "lin6", "lin7", "lin8", "lin9", "lin10"],
       "settings": {
-        "tag": "BY LINEAGE",
-        "title": "Find your Guardian by lineage"
+        "tag": "",
+        "title": ""
       }
     },
     "home-v2-social-proof": {
@@ -227,40 +227,40 @@
         "sp1": {
           "type": "testimonial",
           "settings": {
-            "quote": "When I opened the box, I felt someone had truly chosen me."
+            "quote": ""
           }
         },
         "sp2": {
           "type": "testimonial",
           "settings": {
-            "quote": "The letter said things no one else could have known."
+            "quote": ""
           }
         },
         "sp3": {
           "type": "testimonial",
           "settings": {
-            "quote": "It is art, energy, and company — not a simple figure."
+            "quote": ""
           }
         },
         "sp4": {
           "type": "testimonial",
           "settings": {
-            "quote": "Shipping was careful like a museum piece. Worth every moment of the wait."
+            "quote": ""
           }
         }
       },
       "block_order": ["sp1", "sp2", "sp3", "sp4"],
       "settings": {
-        "tag": "WHAT THOSE WHO ARRIVED BEFORE SAY",
-        "title": "Adopted by 15,000+ people worldwide"
+        "tag": "",
+        "title": ""
       }
     },
     "home-v2-editorial": {
       "type": "duendes-home-v2-editorial",
       "settings": {
-        "quote": "The Celts placed them in their homes to protect the family. In Scandinavia, if you did not leave an offering for the house spirit, luck went with it. We did not invent them — we channel them.",
-        "signature": "— FROM THE ELEMENTAL COMPENDIUM",
-        "link_label": "Read in Elemental Tribe",
+        "quote": "",
+        "signature": "",
+        "link_label": "",
         "link_url": "shopify://blogs/comunidad-elemental"
       }
     },
@@ -270,55 +270,55 @@
         "rp1": {
           "type": "paso",
           "settings": {
-            "step_label": "STEP 1",
-            "heading": "You connect",
-            "text": "Choose in the shop or let the test read you. The bond starts when one calls you."
+            "step_label": "",
+            "heading": "",
+            "text": ""
           }
         },
         "rp2": {
           "type": "paso",
           "settings": {
-            "step_label": "STEP 2",
-            "heading": "We channel",
-            "text": "7–10 days in Piriápolis: ritual, letter, packaging with the care of a work of art."
+            "step_label": "",
+            "heading": "",
+            "text": ""
           }
         },
         "rp3": {
           "type": "paso",
           "settings": {
-            "step_label": "STEP 3",
-            "heading": "It reaches your home",
-            "text": "Worldwide, with tracking. Open the parcel when the forest says it is time."
+            "step_label": "",
+            "heading": "",
+            "text": ""
           }
         }
       },
       "block_order": ["rp1", "rp2", "rp3"],
       "settings": {
-        "tag": "THE RITE",
-        "title": "Three steps from when they choose you to your door"
+        "tag": "",
+        "title": ""
       }
     },
     "home-v2-lectura-test": {
       "type": "duendes-home-v2-lectura-test",
       "settings": {
-        "glyph": "✦",
-        "title": "Not sure which one is yours?",
-        "subtitle": "We do not give you a generic quiz. We read you.",
-        "cta_label": "Have them read me · 2 min",
+        "glyph": "",
+        "title": "",
+        "subtitle": "",
+        "cta_label": "",
         "cta_url": "shopify://pages/test-del-guardian"
       }
     },
     "home-v2-tribu-newsletter": {
       "type": "duendes-home-v2-tribu-newsletter",
       "settings": {
-        "title": "Elemental Tribe",
-        "subtitle": "Lineages, rituals, dreams — what the forest is sharing this week.",
-        "placeholder": "your@email.com",
-        "submit_label": "Count me in",
-        "micro": "No spam. We only write when there is new magic.",
-        "success": "Done. Check your inbox to confirm.",
+        "title": "",
+        "subtitle": "",
+        "placeholder": "",
+        "submit_label": "",
+        "micro": "",
+        "success": "",
         "customer_tag": "newsletter, home-v2-tribu",
-        "error_copy": "Check the address and try again."
+        "error_copy": ""
       }
     }
   },
