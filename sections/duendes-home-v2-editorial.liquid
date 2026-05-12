@@ -1,0 +1,85 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+  .dh2-ed {
+    background: #faf9f6;
+    padding: 56px 20px 64px;
+    color: #15110d;
+  }
+  .dh2-ed__inner {
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .dh2-ed__quote {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(18px, 2.4vw, 22px);
+    line-height: 1.65;
+    font-style: italic;
+    margin: 0 0 22px;
+    color: rgba(21, 17, 13, 0.88);
+  }
+  .dh2-ed__sig {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(21, 17, 13, 0.45);
+    margin-bottom: 18px;
+  }
+  .dh2-ed__link {
+    font-size: 13px;
+    color: #a88b42;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(168, 139, 66, 0.35);
+    padding-bottom: 2px;
+  }
+  .dh2-ed__link:hover {
+    color: #15110d;
+    border-color: #15110d;
+  }
+</style>
+
+<section class="dh2-ed section">
+  <div class="dh2-ed__inner">
+    <blockquote class="dh2-ed__quote">{{ section.settings.quote }}</blockquote>
+    <p class="dh2-ed__sig">{{ section.settings.signature }}</p>
+    {% if section.settings.link_url != blank %}
+      <a class="dh2-ed__link" href="{{ section.settings.link_url }}">{{ section.settings.link_label }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · Editorial",
+  "tag": "section",
+  "class": "duendes-home-v2-editorial-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Cita",
+      "default": "Los celtas los ponían en sus casas para proteger a la familia. En Escandinavia, si no le dejabas ofrenda al duende del hogar, la suerte se iba con él. No los inventamos nosotros — los canalizamos."
+    },
+    {
+      "type": "text",
+      "id": "signature",
+      "label": "Firma",
+      "default": "— DEL COMPENDIO ELEMENTAL"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Texto del enlace",
+      "default": "Leer en Tribu Elemental"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Enlace",
+      "default": "/blogs/comunidad-elemental"
+    }
+  ],
+  "presets": [{ "name": "Duendes — Home v2 · Editorial" }]
+}
+{% endschema %}
