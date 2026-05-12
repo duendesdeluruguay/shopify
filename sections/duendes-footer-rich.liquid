@@ -1,0 +1,176 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+  .dfr {
+    --dfr-gold: #c9a84c;
+    background: linear-gradient(180deg, rgba(10, 12, 8, 0.03) 0%, transparent 100%);
+    border-top: 1px solid rgba(201, 168, 76, 0.18);
+    padding: 28px 0 8px;
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+  }
+  .dfr__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .dfr__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px 32px;
+    margin-bottom: 24px;
+  }
+  .dfr__col h3 {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground-rgb) / 0.55);
+    margin: 0 0 12px;
+    font-weight: 500;
+  }
+  .dfr__col a,
+  .dfr__col p,
+  .dfr__col span {
+    display: block;
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgb(var(--color-foreground-rgb) / 0.85);
+    text-decoration: none;
+    margin: 0 0 8px;
+  }
+  .dfr__col a:hover {
+    color: var(--dfr-gold);
+  }
+  .dfr__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+  .dfr__social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    margin: 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: rgb(var(--color-foreground-rgb) / 0.75);
+  }
+  .dfr__social a:hover {
+    border-color: var(--dfr-gold);
+    color: var(--dfr-gold);
+  }
+  .dfr__pay {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-family: var(--font-body--family, Lato, sans-serif);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground-rgb) / 0.45);
+  }
+  .dfr__pay span {
+    display: inline;
+    margin: 0;
+  }
+  .dfr__legal {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(201, 168, 76, 0.12);
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1.6;
+    color: rgb(var(--color-foreground-rgb) / 0.5);
+    text-align: center;
+  }
+  @media (max-width: 600px) {
+    .dfr__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="dfr section section--{{ section.settings.section_width }}">
+  <div class="dfr__inner">
+    <div class="dfr__grid">
+      <div class="dfr__col">
+        <h3>{{ 'duendes.footer_rich.col_contact' | t }}</h3>
+        <a href="mailto:{{ section.settings.email | escape }}">{{ section.settings.email | escape }}</a>
+        <a href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener">{{ 'duendes.footer_rich.whatsapp_cta' | t }}</a>
+      </div>
+      <div class="dfr__col">
+        <h3>{{ 'duendes.footer_rich.col_explore' | t }}</h3>
+        <a href="{{ section.settings.url_shop }}">{{ 'duendes.footer_rich.link_shop' | t }}</a>
+        <a href="{{ section.settings.url_how }}">{{ 'duendes.footer_rich.link_how' | t }}</a>
+        <a href="{{ section.settings.url_magia }}">{{ 'duendes.footer_rich.link_magia' | t }}</a>
+        <a href="{{ section.settings.url_tribu }}">{{ 'duendes.footer_rich.link_tribu' | t }}</a>
+        <a href="{{ section.settings.url_story }}">{{ 'duendes.footer_rich.link_story' | t }}</a>
+        <a href="{{ section.settings.url_faq }}">{{ 'duendes.footer_rich.link_faq' | t }}</a>
+      </div>
+      <div class="dfr__col">
+        <h3>{{ 'duendes.footer_rich.col_policies' | t }}</h3>
+        <a href="{{ section.settings.url_shipping }}">{{ 'duendes.footer_rich.link_shipping' | t }}</a>
+        <a href="{{ section.settings.url_refund }}">{{ 'duendes.footer_rich.link_refund' | t }}</a>
+        <a href="{{ section.settings.url_privacy }}">{{ 'duendes.footer_rich.link_privacy' | t }}</a>
+      </div>
+      <div class="dfr__col">
+        <h3>{{ 'duendes.footer_rich.col_social' | t }}</h3>
+        <div class="dfr__social">
+          {% if section.settings.instagram_url != blank %}
+            <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          {% endif %}
+          {% if section.settings.tiktok_url != blank %}
+            <a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+          {% endif %}
+          {% if section.settings.facebook_url != blank %}
+            <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+          {% endif %}
+          {% if section.settings.youtube_url != blank %}
+            <a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="dfr__col">
+        <h3>{{ 'duendes.footer_rich.col_payments' | t }}</h3>
+        <div class="dfr__pay" aria-label="{{ 'duendes.footer_rich.payments_aria' | t }}">
+          <span>Visa</span><span> · </span><span>Mastercard</span><span> · </span><span>Amex</span><span> · </span><span>Mercado Pago</span><span> · </span><span>PayPal</span><span> · </span><span>Shopify Payments</span>
+        </div>
+      </div>
+    </div>
+    <p class="dfr__legal">{{ 'duendes.footer_rich.legal_line' | t }}</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Duendes — pie enriquecido",
+  "tag": "section",
+  "class": "duendes-footer-rich-section",
+  "settings": [
+    { "type": "select", "id": "section_width", "label": "Ancho", "default": "page-width", "options": [
+      { "value": "page-width", "label": "Página" },
+      { "value": "full-width", "label": "Completo" }
+    ]},
+    { "type": "text", "id": "email", "label": "Email contacto", "default": "info@duendesdeluruguay.com" },
+    { "type": "url", "id": "whatsapp_url", "label": "WhatsApp (link wa.me)", "default": "https://wa.me/59898690629" },
+    { "type": "url", "id": "url_shop", "label": "Tienda mágica", "default": "/collections/all" },
+    { "type": "url", "id": "url_how", "label": "Cómo funciona", "default": "/pages/como-funciona" },
+    { "type": "url", "id": "url_magia", "label": "Mi Magia", "default": "/blogs/mi-magia" },
+    { "type": "url", "id": "url_tribu", "label": "Tribu / Comunidad", "default": "/blogs/comunidad-elemental" },
+    { "type": "url", "id": "url_story", "label": "Nuestra historia", "default": "/pages/nuestra-historia" },
+    { "type": "url", "id": "url_faq", "label": "FAQ", "default": "/pages/preguntas-frecuentes" },
+    { "type": "url", "id": "url_shipping", "label": "Política envíos", "default": "/policies/shipping-policy" },
+    { "type": "url", "id": "url_refund", "label": "Devoluciones", "default": "/policies/refund-policy" },
+    { "type": "url", "id": "url_privacy", "label": "Privacidad", "default": "/policies/privacy-policy" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram" },
+    { "type": "url", "id": "tiktok_url", "label": "TikTok" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook" },
+    { "type": "url", "id": "youtube_url", "label": "YouTube" }
+  ],
+  "presets": [{ "name": "Duendes — pie enriquecido" }]
+}
+{% endschema %}

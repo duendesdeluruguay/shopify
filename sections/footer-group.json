@@ -2,6 +2,27 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "duendes_footer_rich": {
+      "type": "duendes-footer-rich",
+      "settings": {
+        "section_width": "page-width",
+        "email": "info@duendesdeluruguay.com",
+        "whatsapp_url": "https://wa.me/59898690629",
+        "url_shop": "/collections/all",
+        "url_how": "/pages/como-funciona",
+        "url_magia": "/blogs/mi-magia",
+        "url_tribu": "/blogs/comunidad-elemental",
+        "url_story": "/pages/nuestra-historia",
+        "url_faq": "/pages/preguntas-frecuentes",
+        "url_shipping": "/policies/shipping-policy",
+        "url_refund": "/policies/refund-policy",
+        "url_privacy": "/policies/privacy-policy",
+        "instagram_url": "",
+        "tiktok_url": "",
+        "facebook_url": "",
+        "youtube_url": ""
+      }
+    },
     "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
@@ -47,7 +68,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<h2>Comunidad elemental · Elemental community<\/h2>",
+                "text": "<h2>[ddu:footer_newsletter_h2]<\/h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -72,7 +93,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>Novedades, lanzamientos y mensajes del mundo elemental · News, launches & messages from the elemental world.<\/p>",
+                "text": "<p>[ddu:footer_newsletter_p]<\/p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -115,7 +136,7 @@
             "input_type_preset": "paragraph",
             "style_class": "button-unstyled",
             "display_type": "arrow",
-            "label": "Suscribirme · Subscribe",
+            "label": "[ddu:newsletter_button]",
             "integrated_button": true,
             "button_type_preset": "paragraph",
             "padding-block-start": 0,
@@ -196,6 +217,7 @@
     }
   },
   "order": [
+    "duendes_footer_rich",
     "footer_m9NzUG",
     "footer_utilities_jLGE8U"
   ]
