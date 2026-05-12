@@ -307,12 +307,45 @@
       align-items: flex-end;
     }
   }
+  /* Theme wrapper overrides (OS 2.0): forzar ritual oscuro */
+  section.dh2-be.section {
+    background-color: #15110d !important;
+    background-image: none !important;
+    color: #f4f1ec !important;
+  }
+  .dh2-be__results {
+    background-color: #15110d !important;
+  }
+  .dh2-be__title {
+    color: #c9a961 !important;
+  }
+  .dh2-be__sub,
+  .dh2-be__foot {
+    color: rgba(244, 241, 236, 0.78) !important;
+  }
+  .dh2-be__chips {
+    color: rgba(244, 241, 236, 0.88) !important;
+  }
+  .dh2-be__input {
+    color: #f4f1ec !important;
+  }
+  .dh2-be__chip,
+  .dh2-be__chips-row {
+    color: rgba(244, 241, 236, 0.88) !important;
+  }
+  .dh2-be__chip--muted {
+    color: rgba(201, 169, 97, 0.92) !important;
+  }
+  .dh2-be__results-lead {
+    color: rgba(244, 241, 236, 0.78) !important;
+  }
 </style>
 
 <section
   class="dh2-be section"
   id="dh2-be-{{ section.id }}"
   data-section-id="{{ section.id }}"
+  style="background-color:#15110d;color:#f4f1ec;"
   {{ section.shopify_attributes }}
 >
   <div class="dh2-be__inner">

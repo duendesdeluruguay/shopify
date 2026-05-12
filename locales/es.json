@@ -363,6 +363,20 @@
     "market_hint_msg_es": "Parece que estás visitando desde {country}. Podés ver precios en tu moneda.",
     "market_hint_cta_es": "Ver precios para {country}",
     "meet_this_guardian": "Conocer a este Guardián",
+    "popup": {
+      "close_aria": "Cerrar ventana",
+      "eyebrow": "Solo por entrar al bosque",
+      "title_line1": "Te regalamos",
+      "title_strong": "10% en tu primera adopción",
+      "body": "Dejá tu email y te enviamos el código. Sin spam: solo novedades que importan.",
+      "placeholder_email": "Tu email",
+      "email_placeholder": "Tu email",
+      "submit": "Quiero mi 10%",
+      "disclaimer": "Al suscribirte aceptás recibir novedades de Duendes del Uruguay. Podés darte de baja cuando quieras.",
+      "success_title": "Listo",
+      "success_body": "Revisá tu bandeja de entrada (y spam) en unos minutos.",
+      "sending": "Enviando…"
+    },
     "home_v2": {
       "elemental_search": {
         "title": "¿Qué necesitás hoy?",

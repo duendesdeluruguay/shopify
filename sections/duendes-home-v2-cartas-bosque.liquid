@@ -1,3 +1,12 @@
+{%- liquid
+  assign dh2_cb_card_count = 0
+  for block in section.blocks
+    if block.type == 'carta' and block.settings.product != blank
+      assign dh2_cb_card_count = dh2_cb_card_count | plus: 1
+    endif
+  endfor
+-%}
+{% if dh2_cb_card_count > 0 %}
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
 <style>
   .dh2-cb {
@@ -230,9 +239,29 @@
       order: -1;
     }
   }
+  /* Theme wrapper overrides (OS 2.0): forzar ritual oscuro */
+  section.dh2-cb.section {
+    background-color: #15110d !important;
+    background-image: none !important;
+    color: #f4f1ec !important;
+  }
+  .dh2-cb__title {
+    color: #f4f1ec !important;
+  }
+  .dh2-cb__tag {
+    color: rgba(201, 169, 97, 0.75) !important;
+  }
+  .dh2-cb__hint {
+    color: rgba(244, 241, 236, 0.72) !important;
+  }
 </style>
 
-<section class="dh2-cb section" id="dh2-cb-{{ section.id }}">
+<section
+  class="dh2-cb section"
+  id="dh2-cb-{{ section.id }}"
+  style="background-color:#15110d;color:#f4f1ec;"
+  {{ section.shopify_attributes }}
+>
   <div class="dh2-cb__inner">
     <p class="dh2-cb__tag">{{ section.settings.tag }}</p>
     <h2 class="dh2-cb__title">{{ section.settings.title }}</h2>
@@ -360,6 +389,18 @@
     closeBtn.addEventListener('click', closeModal);
   })();
 </script>
+{% elsif request.design_mode %}
+<section
+  class="dh2-cb section"
+  id="dh2-cb-{{ section.id }}"
+  style="background-color:#15110d!important;padding:48px 24px;text-align:center;color:#c9a961;border-top:1px solid rgba(201,169,97,0.35);font-family:var(--font-body--family,system-ui,sans-serif);font-size:15px;line-height:1.55;"
+  {{ section.shopify_attributes }}
+>
+  <p style="margin:0;max-width:520px;margin-inline:auto;">
+    <strong>Cartas del Bosque</strong> — Asigná un producto a cada bloque «carta» para que esta sección se muestre en la tienda.
+  </p>
+</section>
+{% endif %}
 
 {% schema %}
 {
