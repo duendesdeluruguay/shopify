@@ -9,7 +9,7 @@
 
   Flujo: Intro → Form datos → Pregunta abierta → Loading → Resultado
   Backend: Worker action 'guardian-deep-analysis'
-  Captura Klaviyo: evento "Guardian Test V3 Completed" con email + tel
+  Resultado vía Worker; sin _learnq en el tema (Klaviyo solo si el Worker lo envía).
   ═══════════════════════════════════════════════════════════
 {% endcomment %}
 
@@ -208,21 +208,29 @@
 
 <div class="dt-share-toast" id="dtShareToast" translate="no" data-no-translate></div>
 
+{%- liquid
+  assign dt_lang_check = localization.language.iso_code | default: request.locale.iso_code | downcase
+  assign dt_locale_js = 'en'
+  if dt_lang_check contains 'es'
+    assign dt_locale_js = 'es'
+  endif
+-%}
+
 <div class="dt-wrap" id="dtWrap" translate="no" data-no-translate>
 
   <section class="dt-intro" id="dtIntro">
     <div class="dt-intro-sigil"></div>
-    <p class="dt-intro-line" data-delay="200" data-i18n="intro_line_1">Hay personas que sienten más de lo que la lógica puede explicar.</p>
-    <p class="dt-intro-line" data-delay="1300" data-i18n="intro_line_2">Que encuentran plumas, ven números repetidos, sienten presencias.</p>
-    <p class="dt-intro-line" data-delay="2400" data-i18n="intro_line_3">Que saben cosas sin saber cómo las saben.</p>
+    <p class="dt-intro-line" data-delay="200">{{ 'duendes.test.intro_line_1' | t }}</p>
+    <p class="dt-intro-line" data-delay="1300">{{ 'duendes.test.intro_line_2' | t }}</p>
+    <p class="dt-intro-line" data-delay="2400">{{ 'duendes.test.intro_line_3' | t }}</p>
     <div class="dt-magic-line" data-delay="3300"></div>
-    <h1 class="dt-intro-title" data-delay="3700" data-i18n="intro_title">LOS ELEGIDOS</h1>
-    <p class="dt-intro-sub" data-delay="4500" data-i18n="intro_sub_1">Si llegaste hasta acá, probablemente ya sepas que sos una de ellas.</p>
-    <p class="dt-intro-sub" data-delay="5300" data-i18n="intro_sub_2">No te vamos a hacer un test genérico. Te vamos a leer.</p>
+    <h1 class="dt-intro-title" data-delay="3700">{{ 'duendes.test.intro_title' | t }}</h1>
+    <p class="dt-intro-sub" data-delay="4500">{{ 'duendes.test.intro_sub_1' | t }}</p>
+    <p class="dt-intro-sub" data-delay="5300">{{ 'duendes.test.intro_sub_2' | t }}</p>
 
     <div class="dt-music-choice" data-delay="6100">
-      <button class="dt-music-btn" data-action="start-with-music" data-i18n="intro_music_yes">Sí, con música</button>
-      <button class="dt-music-btn" data-action="start-no-music" data-i18n="intro_music_no">Prefiero silencio</button>
+      <button class="dt-music-btn" data-action="start-with-music">{{ 'duendes.test.intro_music_yes' | t }}</button>
+      <button class="dt-music-btn" data-action="start-no-music">{{ 'duendes.test.intro_music_no' | t }}</button>
     </div>
   </section>
 
@@ -230,101 +238,101 @@
   <audio id="dtAudio" loop preload="none">
     <source src="{{ 'Raices-y-Agua-Interior.mp3' | asset_url }}" type="audio/mpeg">
   </audio>
-  <button class="dt-music-toggle" id="dtMusicToggle" aria-label="Música" type="button">
+  <button class="dt-music-toggle" id="dtMusicToggle" aria-label="{{ 'duendes.test.music_aria' | t | escape }}" type="button">
     <svg viewBox="0 0 24 24" id="dtMusicIcon"><path d="M9 18V6l12-3v12"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="15" r="3"/></svg>
   </button>
 
   <section class="dt-phase" id="dtPhaseForm">
-    <div class="dt-progress" aria-label="Progreso del test">
+    <div class="dt-progress" aria-label="{{ 'duendes.test.progress_aria' | t | escape }}">
       <span class="dt-progress-dot active"></span>
       <span class="dt-progress-line"></span>
       <span class="dt-progress-dot"></span>
       <span class="dt-progress-line"></span>
       <span class="dt-progress-dot"></span>
     </div>
-    <h2 class="dt-phase-title" data-i18n="form_title">¿Quién sos?</h2>
-    <p class="dt-phase-sub" data-i18n="form_sub">Necesitamos saber a quién le estamos canalizando. Tu información queda solo entre nosotros y tu guardián.</p>
+    <h2 class="dt-phase-title">{{ 'duendes.test.form_title' | t }}</h2>
+    <p class="dt-phase-sub">{{ 'duendes.test.form_sub' | t }}</p>
 
     <form class="dt-form" id="dtForm" novalidate>
       <div class="dt-field">
-        <label for="dtName"><span data-i18n="form_name_label">Nombre completo</span><span class="req">*</span></label>
-        <input type="text" id="dtName" name="name" autocomplete="name" data-i18n-placeholder="form_name_placeholder" placeholder="Tu nombre completo" required>
-        <div class="dt-field-error" data-i18n="form_name_error">Necesitamos tu nombre completo.</div>
+        <label for="dtName"><span>{{ 'duendes.test.form_name_label' | t }}</span><span class="req">*</span></label>
+        <input type="text" id="dtName" name="name" autocomplete="name" placeholder="{{ 'duendes.test.form_name_placeholder' | t | escape }}" required>
+        <div class="dt-field-error">{{ 'duendes.test.form_name_error' | t }}</div>
       </div>
       <div class="dt-field">
-        <label for="dtEmail"><span data-i18n="form_email_label">Email</span><span class="req">*</span></label>
-        <input type="email" id="dtEmail" name="email" autocomplete="email" inputmode="email" data-i18n-placeholder="form_email_placeholder" placeholder="tunombre@email.com" required>
-        <div class="dt-field-error" data-i18n="form_email_error">Necesitamos un email válido.</div>
+        <label for="dtEmail"><span>{{ 'duendes.test.form_email_label' | t }}</span><span class="req">*</span></label>
+        <input type="email" id="dtEmail" name="email" autocomplete="email" inputmode="email" placeholder="{{ 'duendes.test.form_email_placeholder' | t | escape }}" required>
+        <div class="dt-field-error">{{ 'duendes.test.form_email_error' | t }}</div>
       </div>
       <div class="dt-field">
-        <label><span data-i18n="form_phone_label">Teléfono</span><span class="req">*</span></label>
+        <label><span>{{ 'duendes.test.form_phone_label' | t }}</span><span class="req">*</span></label>
         <div class="dt-field-row">
-          <select id="dtPhoneCountry" name="phoneCountry" aria-label="Código de país"></select>
-          <input type="tel" id="dtPhoneNumber" name="phoneNumber" autocomplete="tel-national" inputmode="tel" data-i18n-placeholder="form_phone_placeholder" placeholder="número sin código de país" required>
+          <select id="dtPhoneCountry" name="phoneCountry" aria-label="{{ 'duendes.test.phone_country_aria' | t | escape }}"></select>
+          <input type="tel" id="dtPhoneNumber" name="phoneNumber" autocomplete="tel-national" inputmode="tel" placeholder="{{ 'duendes.test.form_phone_placeholder' | t | escape }}" required>
         </div>
-        <div class="dt-field-error" data-i18n="form_phone_error">Necesitamos un teléfono válido.</div>
-        <div class="dt-field-hint" data-i18n="form_phone_hint">Lo usamos solo para enviarte el resultado por WhatsApp si lo pedís.</div>
+        <div class="dt-field-error">{{ 'duendes.test.form_phone_error' | t }}</div>
+        <div class="dt-field-hint">{{ 'duendes.test.form_phone_hint' | t }}</div>
       </div>
       <div class="dt-field">
-        <label for="dtDob"><span data-i18n="form_dob_label">Fecha de nacimiento</span><span class="req">*</span></label>
-        <input type="date" id="dtDob" name="dob" autocomplete="bday" required>
-        <div class="dt-field-error" data-i18n="form_dob_error">Necesitamos tu fecha de nacimiento.</div>
-        <div class="dt-field-hint" data-i18n="form_dob_hint">Algunas canalizaciones leen esta señal.</div>
+        <label for="dtDob"><span>{{ 'duendes.test.form_dob_label' | t }}</span></label>
+        <input type="date" id="dtDob" name="dob" autocomplete="bday">
+        <div class="dt-field-error">{{ 'duendes.test.form_dob_error' | t }}</div>
+        <div class="dt-field-hint">{{ 'duendes.test.form_dob_hint' | t }}</div>
       </div>
       <div class="dt-field">
-        <label for="dtCountry"><span data-i18n="form_country_label">País donde vivís</span><span class="req">*</span></label>
+        <label for="dtCountry"><span>{{ 'duendes.test.form_country_label' | t }}</span><span class="req">*</span></label>
         <select id="dtCountry" name="country" autocomplete="country" required></select>
-        <div class="dt-field-error" data-i18n="form_country_error">Elegí tu país.</div>
+        <div class="dt-field-error">{{ 'duendes.test.form_country_error' | t }}</div>
       </div>
       <div class="dt-consent">
-        <p data-i18n="form_consent">Tu información queda en nuestra base privada. La usamos solo para enviarte tu canalización por email y, si nos lo pedís, por WhatsApp. Nunca la compartimos.</p>
+        <p>{{ 'duendes.test.form_consent' | t }}</p>
       </div>
       <div class="dt-actions">
-        <button type="button" class="dt-btn-back" data-action="back-to-intro" data-i18n="form_back">Volver</button>
-        <button type="submit" class="dt-btn-next" data-i18n="form_next">Continuar</button>
+        <button type="button" class="dt-btn-back" data-action="back-to-intro">{{ 'duendes.test.form_back' | t }}</button>
+        <button type="submit" class="dt-btn-next">{{ 'duendes.test.form_next' | t }}</button>
       </div>
     </form>
   </section>
 
   <section class="dt-phase" id="dtPhaseQuestion">
-    <div class="dt-progress">
+    <div class="dt-progress" aria-label="{{ 'duendes.test.progress_aria' | t | escape }}">
       <span class="dt-progress-dot done"></span>
       <span class="dt-progress-line done"></span>
       <span class="dt-progress-dot active"></span>
       <span class="dt-progress-line"></span>
       <span class="dt-progress-dot"></span>
     </div>
-    <h2 class="dt-phase-title" data-i18n="q_title">Vaciate.</h2>
-    <p class="dt-phase-sub" data-i18n="q_sub">El bosque te lee desde tus palabras. Contanos en tu propia voz qué sentís hoy, qué buscás, qué te molesta, qué te paraliza, qué necesitás cambiar. No hay respuesta correcta. Cuanto más honesta seas, más preciso es lo que te toca.</p>
+    <h2 class="dt-phase-title">{{ 'duendes.test.q_title' | t }}</h2>
+    <p class="dt-phase-sub">{{ 'duendes.test.q_sub' | t }}</p>
 
     <form class="dt-form" id="dtQuestionForm" novalidate>
       <div class="dt-field">
         <div class="dt-textarea-wrap">
-          <textarea class="dt-textarea" id="dtOpenQuestion" name="openQuestion" data-i18n-placeholder="q_placeholder" placeholder="Empezá por donde quieras. Lo que te aprieta, lo que te emociona, lo que te tira para adelante, lo que te frena. Escribí como si nadie te leyera. (Mínimo unas 10 oraciones — alrededor de 200 palabras —, máximo 3000 caracteres.)" required minlength="200" maxlength="3000" spellcheck="true"></textarea>
-          <span class="dt-textarea-counter" id="dtTextCounter">0 / 200 mínimo</span>
+          <textarea class="dt-textarea" id="dtOpenQuestion" name="openQuestion" placeholder="{{ 'duendes.test.q_placeholder' | t | escape }}" required minlength="200" maxlength="3000" spellcheck="true"></textarea>
+          <span class="dt-textarea-counter" id="dtTextCounter">{{ 'duendes.test.counter_initial' | t }}</span>
         </div>
-        <div class="dt-field-error" data-i18n="q_error">Escribí al menos 200 caracteres (~10 oraciones) para que la canalización pueda leerte bien.</div>
+        <div class="dt-field-error">{{ 'duendes.test.q_error' | t }}</div>
       </div>
       <div class="dt-actions">
-        <button type="button" class="dt-btn-back" data-action="back-to-form" data-i18n="q_back">Volver</button>
-        <button type="submit" class="dt-btn-next" id="dtQuestionSubmit" disabled data-i18n="q_next">Canalizar</button>
+        <button type="button" class="dt-btn-back" data-action="back-to-form">{{ 'duendes.test.q_back' | t }}</button>
+        <button type="submit" class="dt-btn-next" id="dtQuestionSubmit" disabled>{{ 'duendes.test.q_next' | t }}</button>
       </div>
     </form>
   </section>
 
   <section class="dt-phase dt-loading" id="dtPhaseLoading">
     <div class="dt-loading-orb"></div>
-    <h2 class="dt-loading-text" data-i18n="loading_title">Canalizando</h2>
-    <p class="dt-loading-stages" id="dtLoadingStage" data-i18n="loading_stage_1">Leemos lo que escribiste.</p>
+    <h2 class="dt-loading-text">{{ 'duendes.test.loading_title' | t }}</h2>
+    <p class="dt-loading-stages" id="dtLoadingStage">{{ 'duendes.test.loading_stage_1' | t }}</p>
   </section>
 
   <section class="dt-phase dt-result" id="dtPhaseResult"></section>
 
   <section class="dt-phase" id="dtPhaseError">
     <div class="dt-error">
-      <h3 data-i18n="error_title">El bosque se quedó callado.</h3>
-      <p data-i18n="error_text">No pudimos completar la canalización. Probá de nuevo en un minuto. Si vuelve a pasar, escribinos a info@duendesdeluruguay.com.</p>
-      <button type="button" data-action="retry" data-i18n="error_retry">Volver a intentar</button>
+      <h3>{{ 'duendes.test.error_title' | t }}</h3>
+      <p>{{ 'duendes.test.error_text' | t }}</p>
+      <button type="button" data-action="retry">{{ 'duendes.test.error_retry' | t }}</button>
     </div>
   </section>
 
@@ -338,116 +346,37 @@
 
   var API_BASE = {% render 'duendes-api-worker-url', format: 'json' %};
 
-  function detectLocale(){
-    var html = document.documentElement.lang || '';
-    if (html.toLowerCase().indexOf('en') === 0) return 'en';
-    return 'es';
-  }
-  var LOCALE = detectLocale();
-
+  var LOCALE = {{ dt_locale_js | json }};
   var I18N = {
-    es: {
-      intro_line_1: "Hay personas que sienten más de lo que la lógica puede explicar.",
-      intro_line_2: "Que encuentran plumas, ven números repetidos, sienten presencias.",
-      intro_line_3: "Que saben cosas sin saber cómo las saben.",
-      intro_title: "LOS ELEGIDOS",
-      intro_sub_1: "Si llegaste hasta acá, probablemente ya sepas que sos una de ellas.",
-      intro_sub_2: "No te vamos a hacer un test genérico. Te vamos a leer.",
-      intro_cta: "Iniciar la canalización",
-      intro_music_yes: "Sí, con música", intro_music_no: "Prefiero silencio",
-      form_title: "¿Quién sos?",
-      form_sub: "Necesitamos saber a quién le estamos canalizando. Tu información queda solo entre nosotros y tu guardián.",
-      form_name_label: "Nombre completo", form_name_placeholder: "Tu nombre completo", form_name_error: "Necesitamos tu nombre completo.",
-      form_email_label: "Email", form_email_placeholder: "tunombre@email.com", form_email_error: "Necesitamos un email válido.",
-      form_phone_label: "Teléfono", form_phone_placeholder: "número sin código de país", form_phone_error: "Necesitamos un teléfono válido.", form_phone_hint: "Lo usamos solo para enviarte el resultado por WhatsApp si lo pedís.",
-      form_dob_label: "Fecha de nacimiento", form_dob_error: "Necesitamos tu fecha de nacimiento.", form_dob_hint: "Algunas canalizaciones leen esta señal.",
-      form_country_label: "País donde vivís", form_country_error: "Elegí tu país.",
-      form_consent: "Tu información queda en nuestra base privada. La usamos solo para enviarte tu canalización por email y, si nos lo pedís, por WhatsApp. Nunca la compartimos.",
-      form_back: "Volver", form_next: "Continuar",
-      q_title: "Vaciate.",
-      q_sub: "El bosque te lee desde tus palabras. Contanos en tu propia voz qué sentís hoy, qué buscás, qué te molesta, qué te paraliza, qué necesitás cambiar. No hay respuesta correcta. Cuanto más honesta seas, más preciso es lo que te toca.",
-      q_placeholder: "Empezá por donde quieras. Lo que te aprieta, lo que te emociona, lo que te tira para adelante, lo que te frena. Escribí como si nadie te leyera. (Mínimo unas 10 oraciones — alrededor de 200 palabras —, máximo 3000 caracteres.)",
-      q_error: "Escribí al menos 200 caracteres (~10 oraciones) para que la canalización pueda leerte bien.",
-      q_back: "Volver", q_next: "Canalizar",
-      loading_title: "Canalizando",
-      loading_stage_1: "Leemos lo que escribiste.",
-      loading_stage_2: "Detectamos las señales que cargás hoy.",
-      loading_stage_3: "Buscamos al guardián que fue tejido para vos.",
-      loading_stage_4: "Recibí.",
-      result_greeting: "tu guardián fue canalizado.",
-      result_reveal: "Reconocelo",
-      result_personal_label: "Mensaje personal",
-      result_why_label: "Por qué te tocó",
-      result_compat_title: "Otros que vibran cerca tuyo",
-      result_compat_sub: "No son tu guardián central, pero te entienden.",
-      result_cta: "Adoptarlo",
-      receive_title: "Recibí tu canalización completa",
-      receive_sub: "Te llega con el guardián, el mensaje y los compatibles.",
-      receive_email: "Por email", receive_share_wa: "Compartir con alguien", receive_copy: "Copiar enlace",
-      receive_email_sent: "Listo. Revisá tu bandeja de entrada (puede tardar 1-2 minutos).",
-      receive_email_sending: "Mandando...",
-      receive_email_failed: "No pudimos mandar el email. Probá de nuevo o revisá tu casilla de spam.",
-      share_copied: "Enlace copiado.",
-      share_wa_message: "Acabo de hacer el Test del Guardián de Duendes del Uruguay y mi guardián fue {guardian}. Lo sentí muy real. Hacé el tuyo y descubrí cuál te toca a vos: ",
-      error_title: "El bosque se quedó callado.",
-      error_text: "No pudimos completar la canalización. Probá de nuevo en un minuto. Si vuelve a pasar, escribinos a info@duendesdeluruguay.com.",
-      error_retry: "Volver a intentar"
-    },
-    en: {
-      intro_line_1: "Some people feel more than logic can explain.",
-      intro_line_2: "They find feathers, see repeating numbers, sense presences.",
-      intro_line_3: "They know things without knowing how they know.",
-      intro_title: "THE CHOSEN",
-      intro_sub_1: "If you made it here, you probably already know you are one of them.",
-      intro_sub_2: "This is not a generic quiz. We are going to read you.",
-      intro_cta: "Begin the channeling",
-      intro_music_yes: "Yes, with music", intro_music_no: "I prefer silence",
-      form_title: "Who are you?",
-      form_sub: "We need to know who we are channeling for. Your information stays between us and your guardian.",
-      form_name_label: "Full name", form_name_placeholder: "Your full name", form_name_error: "We need your full name.",
-      form_email_label: "Email", form_email_placeholder: "you@email.com", form_email_error: "We need a valid email.",
-      form_phone_label: "Phone", form_phone_placeholder: "number without country code", form_phone_error: "We need a valid phone.", form_phone_hint: "We only use it to send your reading by WhatsApp if you want.",
-      form_dob_label: "Date of birth", form_dob_error: "We need your date of birth.", form_dob_hint: "Some channelings read this signal.",
-      form_country_label: "Country", form_country_error: "Choose your country.",
-      form_consent: "Your information is kept private. We only use it to send you your channeling by email and, if you ask, by WhatsApp. We never share it.",
-      form_back: "Back", form_next: "Continue",
-      q_title: "Pour it out.",
-      q_sub: "The forest reads you through your own words. Tell us in your own voice what you feel today, what you seek, what bothers you, what paralyzes you, what you need to change. There are no right answers. The more honest you are, the more precise the reading.",
-      q_placeholder: "Start wherever you want. What weighs on you, what excites you, what pulls you forward, what holds you back. Write as if no one was reading. (At least about 10 sentences — around 200 words —, maximum 3000 characters.)",
-      q_error: "Write at least 200 characters (~10 sentences) so the channeling can read you well.",
-      q_back: "Back", q_next: "Channel",
-      loading_title: "Channeling",
-      loading_stage_1: "Reading what you wrote.",
-      loading_stage_2: "Detecting the signals you carry today.",
-      loading_stage_3: "Searching for the guardian woven for you.",
-      loading_stage_4: "Receive.",
-      result_greeting: "your guardian was channeled.",
-      result_reveal: "Meet them",
-      result_personal_label: "Personal message",
-      result_why_label: "Why this guardian",
-      result_compat_title: "Others who vibrate close to you",
-      result_compat_sub: "Not your central guardian, but they understand you.",
-      result_cta: "Adopt them",
-      receive_title: "Get your full channeling",
-      receive_sub: "Your guardian, the message, and the compatible ones.",
-      receive_email: "By email", receive_share_wa: "Share with someone", receive_copy: "Copy link",
-      receive_email_sent: "Done. Check your inbox (may take 1-2 minutes).",
-      receive_email_sending: "Sending...",
-      receive_email_failed: "We couldn't send the email. Try again or check your spam folder.",
-      share_copied: "Link copied.",
-      share_wa_message: "I just took the Guardian Test from Duendes del Uruguay and my guardian is {guardian}. It felt very real. Take yours and find out which one is for you: ",
-      error_title: "The forest went silent.",
-      error_text: "We could not complete the channeling. Try again in a minute. If it persists, email info@duendesdeluruguay.com.",
-      error_retry: "Try again"
-    }
+    loading_stage_1: {{ 'duendes.test.loading_stage_1' | t | json }},
+    loading_stage_2: {{ 'duendes.test.loading_stage_2' | t | json }},
+    loading_stage_3: {{ 'duendes.test.loading_stage_3' | t | json }},
+    loading_stage_4: {{ 'duendes.test.loading_stage_4' | t | json }},
+    result_greeting: {{ 'duendes.test.result_greeting' | t | json }},
+    result_reveal: {{ 'duendes.test.result_reveal' | t | json }},
+    result_personal_label: {{ 'duendes.test.result_personal_label' | t | json }},
+    result_why_label: {{ 'duendes.test.result_why_label' | t | json }},
+    result_compat_title: {{ 'duendes.test.result_compat_title' | t | json }},
+    result_compat_sub: {{ 'duendes.test.result_compat_sub' | t | json }},
+    result_cta: {{ 'duendes.test.result_cta' | t | json }},
+    receive_title: {{ 'duendes.test.receive_title' | t | json }},
+    receive_sub: {{ 'duendes.test.receive_sub' | t | json }},
+    receive_email: {{ 'duendes.test.receive_email' | t | json }},
+    receive_share_wa: {{ 'duendes.test.receive_share_wa' | t | json }},
+    receive_copy: {{ 'duendes.test.receive_copy' | t | json }},
+    receive_email_sent: {{ 'duendes.test.receive_email_sent' | t | json }},
+    receive_email_sending: {{ 'duendes.test.receive_email_sending' | t | json }},
+    receive_email_failed: {{ 'duendes.test.receive_email_failed' | t | json }},
+    share_copied: {{ 'duendes.test.share_copied' | t | json }},
+    share_wa_message: {{ 'duendes.test.share_wa_message' | t | json }},
+    counter_suffix: {{ 'duendes.test.counter_suffix' | t | json }},
+    counter_too_long: {{ 'duendes.test.counter_too_long' | t | json }}
   };
   function tr(key, vars){
-    var s = (I18N[LOCALE] && I18N[LOCALE][key]) || I18N.es[key] || key;
+    var s = I18N[key] || '';
     if (vars) { Object.keys(vars).forEach(function(k){ s = s.split('{'+k+'}').join(vars[k]); }); }
     return s;
   }
-  document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = tr(el.getAttribute('data-i18n')); });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){ el.setAttribute('placeholder', tr(el.getAttribute('data-i18n-placeholder'))); });
 
   var introEl = document.getElementById('dtIntro');
   var phaseForm = document.getElementById('dtPhaseForm');
@@ -555,18 +484,41 @@
     countrySel.appendChild(optC);
   });
 
-  var navLang = (navigator.language || 'es-AR').split('-');
-  var guessCC = (navLang[1] || 'AR').toUpperCase();
-  if (Array.from(countrySel.options).some(function(o){ return o.value === guessCC; })) {
-    countrySel.value = guessCC;
-  } else {
-    countrySel.value = (LOCALE === 'en') ? 'US' : 'UY';
-  }
-  function syncPhoneCountry(){
+  function syncPhoneCountry() {
     var cc = countrySel.value;
-    var match = COUNTRIES.find(function(c){ return c[0] === cc; });
+    var match = COUNTRIES.find(function (c) { return c[0] === cc; });
     if (match) phoneCountrySel.value = match[1];
   }
+
+  function setCountryIfValid(cc) {
+    if (!cc) return false;
+    cc = String(cc).toUpperCase();
+    if (Array.from(countrySel.options).some(function (o) { return o.value === cc; })) {
+      countrySel.value = cc;
+      syncPhoneCountry();
+      return true;
+    }
+    return false;
+  }
+
+  var dtShopCC = {{ localization.country.iso_code | default: '' | json }};
+  if (dtShopCC) setCountryIfValid(dtShopCC);
+
+  var navLang = (navigator.language || 'es-AR').split('-');
+  var guessCC = (navLang[1] || '').toUpperCase();
+  if (guessCC && guessCC.length === 2) setCountryIfValid(guessCC);
+  if (!countrySel.value) {
+    setCountryIfValid(LOCALE === 'en' ? 'US' : 'UY');
+  }
+
+  fetch('https://ipwho.is/', { mode: 'cors', credentials: 'omit' })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (!d || d.success === false || !d.country_code) return;
+      setCountryIfValid(d.country_code);
+    })
+    .catch(function () {});
+
   countrySel.addEventListener('change', syncPhoneCountry);
   syncPhoneCountry();
 
@@ -615,7 +567,7 @@
     var len = v.length;
     var min = 200, max = 3000;
     if (len < min) {
-      counterEl.textContent = len + ' / ' + min + ' ' + (LOCALE === 'en' ? 'minimum' : 'mínimo');
+      counterEl.textContent = len + ' / ' + min + ' ' + tr('counter_suffix');
       counterEl.classList.remove('ok','warn');
       qSubmitBtn.disabled = true;
     } else if (len > max - 200 && len <= max) {
@@ -624,7 +576,7 @@
       counterEl.classList.remove('ok');
       qSubmitBtn.disabled = false;
     } else if (len > max) {
-      counterEl.textContent = len + ' / ' + max + ' (' + (LOCALE === 'en' ? 'too long' : 'muy largo') + ')';
+      counterEl.textContent = len + ' / ' + max + ' (' + tr('counter_too_long') + ')';
       counterEl.classList.add('warn');
       counterEl.classList.remove('ok');
       qSubmitBtn.disabled = true;
@@ -658,7 +610,13 @@
     if (!name.value.trim() || name.value.trim().length < 2) { validateField(name, false); ok = false; } else { validateField(name, true); }
     if (!validEmail(email.value.trim())) { validateField(email, false); ok = false; } else { validateField(email, true); }
     if (!validPhone(phone.value.trim())) { validateField(phone, false); ok = false; } else { validateField(phone, true); }
-    if (!dob.value) { validateField(dob, false); ok = false; } else { validateField(dob, true); }
+    if (dob.value && dob.value.length > 0) {
+      var d = new Date(dob.value);
+      if (isNaN(d.getTime())) { validateField(dob, false); ok = false; }
+      else { validateField(dob, true); }
+    } else {
+      validateField(dob, true);
+    }
     if (!country.value) { validateField(country, false); ok = false; } else { validateField(country, true); }
     return ok;
   }
