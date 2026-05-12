@@ -2,10 +2,11 @@
 
 {%- comment -%} Duendes: Default header settings when section.settings are empty (Horizon theme blocks arch) {%- endcomment -%}
 {% liquid
-  assign order = 'logo,menu,localization,search,drawer_search,actions'
+  # Duendes 2026-05-12: localization (país/moneda) justo antes de actions (cuenta+carrito).
+  assign order = 'logo,menu,search,drawer_search,localization,actions'
 
   if shop.customer_accounts_enabled
-    assign order = 'drawer_search,logo,menu,localization,search,actions'
+    assign order = 'drawer_search,logo,menu,search,localization,actions'
   endif
 
   assign rows = 'top,bottom' | split: ','
@@ -105,15 +106,15 @@
   if section.settings.localization_position == 'left'
     if section.settings.search_position == 'left'
       if shop.customer_accounts_enabled
-        assign order = 'drawer_search,logo,search,localization,menu,actions'
+        assign order = 'drawer_search,logo,search,menu,localization,actions'
       else
-        assign order = 'logo,search,localization,menu,drawer_search,actions'
+        assign order = 'logo,search,menu,localization,drawer_search,actions'
       endif
     else
       if shop.customer_accounts_enabled
-        assign order = 'drawer_search,logo,localization,menu,search,actions'
+        assign order = 'drawer_search,logo,menu,search,localization,actions'
       else
-        assign order = 'logo,localization,menu,search,drawer_search,actions'
+        assign order = 'logo,menu,search,localization,drawer_search,actions'
       endif
     endif
   else
@@ -226,7 +227,7 @@
     assign form_style = localization_font | append: localization_font_size | append: color_shadow
   %}
   {% if show_language and show_country == false %}
-    <div class="dropdown-localization mobile:hidden">
+    <div class="dropdown-localization">
       {% render 'localization-form',
         show_country: show_country,
         show_language: show_language,
@@ -237,7 +238,7 @@
     </div>
   {% elsif show_country %}
     <dropdown-localization-component
-      class="dropdown-localization mobile:hidden"
+      class="dropdown-localization"
     >
       <button
         type="button"
@@ -268,10 +269,10 @@
             ></span>
           {% endif %}
           <span
-            class="currency-code"
-            data-testid="localization-currency-code"
+            class="currency-code localization-country-code"
+            data-testid="localization-country-code"
           >
-            {{- localization.country.currency.iso_code -}}
+            {{- localization.country.iso_code | upcase -}}
           </span>
         {% endif %}
         <span
@@ -569,14 +570,20 @@
     }
   }
 
-  #header-component :is(.header-menu, .dropdown-localization) {
+  /* Menú desktop: oculto en móvil / modo drawer. El selector de país se muestra siempre (Mercados / IG). */
+  #header-component :is(.header-menu) {
     display: none;
   }
 
   @media screen and (min-width: 750px) {
-    #header-component[data-menu-style='menu'] :is(.header-menu, .dropdown-localization) {
+    #header-component[data-menu-style='menu'] :is(.header-menu) {
       display: flex;
     }
+  }
+
+  #header-component .dropdown-localization {
+    display: flex;
+    align-items: center;
   }
 
   #header-component[data-menu-style='drawer'] .header__column {
@@ -1330,6 +1337,10 @@
   @media screen and (max-width: 749px) {
     .search-action {
       order: 90 !important;
+    }
+    .header__columns > dropdown-localization-component {
+      order: 96 !important;
+      justify-self: end;
     }
     .header-actions {
       order: 99 !important;
