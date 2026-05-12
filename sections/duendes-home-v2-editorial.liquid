@@ -51,6 +51,16 @@
     color: #15110d;
     border-color: #15110d;
   }
+  @media (max-width: 767px) {
+    .dh2-ed.section {
+      overflow-x: hidden;
+      padding-left: max(20px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+    }
+    .dh2-ed__quote {
+      font-size: clamp(16px, 4.2vw, 18px);
+    }
+  }
 </style>
 
 <section class="dh2-ed section">

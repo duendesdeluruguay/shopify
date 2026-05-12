@@ -85,6 +85,22 @@
       text-align: center;
     }
   }
+  @media (max-width: 767px) {
+    .dh2-read.section {
+      overflow-x: hidden;
+      padding-left: max(20px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+    }
+    .dh2-read__title {
+      font-size: clamp(20px, 5vw, 30px);
+    }
+    .dh2-read__sub {
+      font-size: max(15px, min(16px, 3.8vw));
+    }
+    .dh2-read__cta {
+      padding-inline: max(24px, 6vw);
+    }
+  }
 </style>
 
 <section class="dh2-read section">

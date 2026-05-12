@@ -339,6 +339,27 @@
   .dh2-be__results-lead {
     color: rgba(244, 241, 236, 0.78) !important;
   }
+  @media (max-width: 767px) {
+    section.dh2-be.section {
+      overflow-x: hidden;
+    }
+    .dh2-be__inner {
+      padding-left: max(20px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+    }
+    .dh2-be__title {
+      font-size: clamp(11px, 2.9vw, 13px) !important;
+      letter-spacing: 0.16em !important;
+    }
+    .dh2-be__sub {
+      font-size: clamp(15px, 3.8vw, 18px) !important;
+    }
+    .dh2-be__chips-row {
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 8px;
+    }
+  }
 </style>
 
 <section

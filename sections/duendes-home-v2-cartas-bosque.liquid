@@ -282,6 +282,25 @@
   .dh2-cb__hint {
     color: rgba(244, 241, 236, 0.72) !important;
   }
+  @media (max-width: 767px) {
+    section.dh2-cb.section {
+      overflow-x: hidden;
+    }
+    .dh2-cb__inner {
+      padding-left: max(20px, env(safe-area-inset-left, 0px));
+      padding-right: max(20px, env(safe-area-inset-right, 0px));
+    }
+    .dh2-cb__title {
+      font-size: clamp(20px, 5.5vw, 34px) !important;
+    }
+    .dh2-cb__tag {
+      font-size: 9px !important;
+      letter-spacing: 0.2em !important;
+    }
+    .dh2-cb__hint {
+      font-size: max(14px, min(16px, 3.8vw)) !important;
+    }
+  }
 </style>
 
 <section

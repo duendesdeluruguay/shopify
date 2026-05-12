@@ -87,6 +87,21 @@
       grid-template-columns: 1fr;
     }
   }
+  @media (max-width: 767px) {
+    .dh2-rito.section {
+      overflow-x: hidden;
+    }
+    .dh2-rito__inner {
+      padding-left: max(20px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+    }
+    .dh2-rito__title {
+      font-size: clamp(20px, 5.2vw, 32px);
+    }
+    .dh2-rito__p {
+      font-size: max(14px, min(16px, 3.8vw));
+    }
+  }
 </style>
 
 <section class="dh2-rito section">

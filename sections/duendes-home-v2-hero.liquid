@@ -134,11 +134,40 @@
     border-color: var(--dh2-gold);
     color: #fff;
   }
-  @media (max-width: 749px) {
-    .dh2-hero { min-height: 100svh; }
-    .dh2-hero__inner { padding-top: 96px; }
-    .dh2-hero__ctas { flex-direction: column; width: 100%; }
-    .dh2-hero__btn { width: 100%; max-width: 340px; }
+  @media (max-width: 767px) {
+    .dh2-hero {
+      min-height: min(70vh, 620px);
+      max-height: min(88vh, 780px);
+      overflow-x: hidden;
+    }
+    .dh2-hero__inner {
+      padding: 88px max(20px, env(safe-area-inset-left, 0px)) 40px max(20px, env(safe-area-inset-right, 0px));
+    }
+    .dh2-hero__title {
+      font-size: clamp(22px, 6.5vw, 36px);
+      max-width: 100%;
+    }
+    .dh2-hero__sub {
+      font-size: clamp(15px, 4vw, 18px);
+      max-width: 100%;
+    }
+    .dh2-hero__badges {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      max-width: 100%;
+      padding-inline: 4px;
+    }
+    .dh2-hero__ctas {
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      padding: 0 4px;
+    }
+    .dh2-hero__btn {
+      width: 100%;
+      max-width: min(340px, 100%);
+      padding-inline: 24px;
+    }
   }
 </style>
 

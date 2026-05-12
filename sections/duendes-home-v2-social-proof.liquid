@@ -75,6 +75,21 @@
   @media (max-width: 549px) {
     .dh2-sp__grid { grid-template-columns: 1fr; }
   }
+  @media (max-width: 767px) {
+    .dh2-sp.section {
+      overflow-x: hidden;
+    }
+    .dh2-sp__inner {
+      padding-left: max(20px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+    }
+    .dh2-sp__title {
+      font-size: clamp(22px, 5.5vw, 36px);
+    }
+    .dh2-sp__quote {
+      font-size: max(14px, min(16px, 3.8vw));
+    }
+  }
 </style>
 
 <section class="dh2-sp section">
