@@ -521,8 +521,10 @@
       "link_shipping": "Política de envíos",
       "link_refund": "Devoluciones",
       "link_privacy": "Privacidad",
+      "link_official": "Canales oficiales · Cuidado con estafas",
       "payments_aria": "Medios de pago aceptados",
-      "legal_line": "Taller en Piriápolis, Uruguay · Operación legal: Duendes del Uruguay LLC (Wyoming, USA)"
+      "legal_line": "Taller en Piriápolis, Uruguay · Operación legal: Duendes del Uruguay LLC (Wyoming, USA)",
+      "disclaimer_spiritual": "Nuestros Guardianes son arte espiritual y simbólico, no sustituyen atención médica, psicológica, legal ni financiera."
     }
   }
 }
