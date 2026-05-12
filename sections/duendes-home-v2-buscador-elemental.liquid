@@ -1,0 +1,778 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign search_collection = section.settings.collection
+  if search_collection == blank
+    assign search_collection = collections.all
+  endif
+-%}
+<style>
+  .dh2-be {
+    --dh2-be-bg: #15110d;
+    --dh2-be-gold: #c9a961;
+    --dh2-be-cream: #f4f1ec;
+    background: var(--dh2-be-bg);
+    color: var(--dh2-be-cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .dh2-be--has-results .dh2-be__inner {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .dh2-be--has-results .dh2-be__results {
+    padding-top: 80px;
+  }
+  .dh2-be__inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 120px 20px;
+    box-sizing: border-box;
+  }
+  .dh2-be__title {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-weight: 400;
+    font-size: clamp(13px, 2.4vw, 15px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--dh2-be-gold);
+    margin: 0 0 28px;
+    line-height: 1.45;
+  }
+  .dh2-be__sub {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(17px, 2.2vw, 20px);
+    font-style: italic;
+    text-align: center;
+    color: rgba(244, 241, 236, 0.55);
+    margin: 0 0 40px;
+    line-height: 1.4;
+  }
+  .dh2-be__form {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .dh2-be__input-wrap {
+    flex: 1;
+    min-width: 0;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.45);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+  .dh2-be__input-wrap:focus-within {
+    border-color: rgba(201, 169, 97, 0.85);
+  }
+  .dh2-be__input {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(18px, 2.6vw, 22px);
+    padding: 10px 0 8px;
+    outline: none;
+    line-height: 1.3;
+  }
+  .dh2-be__input::placeholder {
+    color: rgba(244, 241, 236, 0.32);
+  }
+  .dh2-be__submit {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--dh2-be-gold);
+    color: var(--dh2-be-bg);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    margin-bottom: 4px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+  }
+  .dh2-be__submit:hover {
+    opacity: 0.92;
+    transform: scale(1.04);
+  }
+  .dh2-be__chips {
+    text-align: center;
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 15px;
+    line-height: 1.85;
+    color: rgba(244, 241, 236, 0.78);
+    margin-bottom: 48px;
+  }
+  .dh2-be__chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0 6px;
+    row-gap: 6px;
+  }
+  .dh2-be__chips-extra {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
+    margin-top: 0;
+  }
+  .dh2-be__chips-extra.is-open {
+    max-height: 4rem;
+    opacity: 1;
+    margin-top: 10px;
+  }
+  .dh2-be__sep {
+    color: rgba(201, 169, 97, 0.45);
+    user-select: none;
+    padding: 0 2px;
+  }
+  .dh2-be__chip {
+    background: none;
+    border: none;
+    padding: 2px 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease;
+  }
+  .dh2-be__chip:hover {
+    text-decoration: underline;
+    color: rgba(244, 241, 236, 0.95);
+  }
+  .dh2-be__chip--muted {
+    color: rgba(201, 169, 97, 0.75);
+  }
+  .dh2-be__chip--muted:hover {
+    color: var(--dh2-be-gold);
+  }
+  .dh2-be__foot {
+    text-align: center;
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 12px;
+    color: rgba(244, 241, 236, 0.38);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .dh2-be__panel {
+    transition: opacity 0.3s ease;
+  }
+  .dh2-be__results {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+  }
+  .dh2-be__results.is-visible {
+    opacity: 1;
+  }
+  .dh2-be__results-lead {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(16px, 2vw, 18px);
+    font-style: italic;
+    text-align: center;
+    color: rgba(244, 241, 236, 0.62);
+    margin: 0 0 32px;
+    line-height: 1.45;
+  }
+  .dh2-be__deck {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: clamp(10px, 2.2vw, 24px);
+    flex-wrap: wrap;
+  }
+  /* Mismo lenguaje visual que Cartas del Bosque (sin rotación ni modal) */
+  .dh2-be__card {
+    position: relative;
+    flex: 0 0 clamp(150px, 26vw, 220px);
+    aspect-ratio: 2 / 3;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 169, 97, 0.35);
+    background: #0d0b09;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .dh2-be__card:hover {
+    border-color: rgba(201, 169, 97, 0.55);
+    box-shadow: 0 22px 56px rgba(201, 169, 97, 0.12);
+  }
+  .dh2-be__media {
+    position: absolute;
+    inset: 0;
+  }
+  .dh2-be__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.92;
+  }
+  .dh2-be__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 35%, rgba(10, 8, 6, 0.92));
+    z-index: 1;
+  }
+  .dh2-be__meta {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 14px 12px 16px;
+    z-index: 2;
+    text-align: center;
+  }
+  .dh2-be__roman {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--dh2-be-gold);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .dh2-be__name {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 14px;
+    font-style: italic;
+    margin: 0 0 4px;
+    line-height: 1.25;
+  }
+  .dh2-be__essence {
+    font-size: 11px;
+    color: rgba(244, 241, 236, 0.62);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .dh2-be__price {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--dh2-be-gold);
+  }
+  .dh2-be__again {
+    display: block;
+    width: fit-content;
+    margin: 36px auto 0;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 15px;
+    font-style: italic;
+    color: rgba(201, 169, 97, 0.75);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-color: rgba(201, 169, 97, 0.35);
+  }
+  .dh2-be__again:hover {
+    color: var(--dh2-be-gold);
+    text-decoration-color: rgba(201, 169, 97, 0.6);
+  }
+  @media (max-width: 749px) {
+    .dh2-be__inner {
+      padding: 80px 20px;
+    }
+    .dh2-be__form {
+      align-items: flex-end;
+    }
+  }
+</style>
+
+<section
+  class="dh2-be section"
+  id="dh2-be-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="dh2-be__inner">
+    <div class="dh2-be__panel" data-dh2-be-panel="search">
+      <h2 class="dh2-be__title">{{ 'duendes.home_v2.elemental_search.title' | t }}</h2>
+      <p class="dh2-be__sub">{{ 'duendes.home_v2.elemental_search.subtitle' | t }}</p>
+
+      <form class="dh2-be__form" data-dh2-be-form autocomplete="off">
+        <div class="dh2-be__input-wrap">
+          <label class="visually-hidden" for="dh2-be-input-{{ section.id }}">
+            {{- 'duendes.home_v2.elemental_search.input_label' | t -}}
+          </label>
+          <input
+            id="dh2-be-input-{{ section.id }}"
+            class="dh2-be__input"
+            type="text"
+            name="q"
+            maxlength="48"
+            placeholder="{{ 'duendes.home_v2.elemental_search.placeholder' | t | escape }}"
+            data-dh2-be-input
+          >
+        </div>
+        <button type="submit" class="dh2-be__submit" data-dh2-be-submit aria-label="{{ 'duendes.home_v2.elemental_search.submit_aria' | t | escape }}">
+          <span aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <div class="dh2-be__chips" data-dh2-be-chips>
+        <div class="dh2-be__chips-row">
+          <button type="button" class="dh2-be__chip" data-dh2-be-chip data-slug="proteccion" data-label="{{ 'duendes.home_v2.elemental_search.chip_proteccion' | t | escape }}">
+            {{- 'duendes.home_v2.elemental_search.chip_proteccion' | t -}}
+          </button>
+          <span class="dh2-be__sep" aria-hidden="true">·</span>
+          <button type="button" class="dh2-be__chip" data-dh2-be-chip data-slug="calma" data-label="{{ 'duendes.home_v2.elemental_search.chip_calma' | t | escape }}">
+            {{- 'duendes.home_v2.elemental_search.chip_calma' | t -}}
+          </button>
+          <span class="dh2-be__sep" aria-hidden="true">·</span>
+          <button type="button" class="dh2-be__chip" data-dh2-be-chip data-slug="amor" data-label="{{ 'duendes.home_v2.elemental_search.chip_amor' | t | escape }}">
+            {{- 'duendes.home_v2.elemental_search.chip_amor' | t -}}
+          </button>
+          <span class="dh2-be__sep" aria-hidden="true">·</span>
+          <button type="button" class="dh2-be__chip dh2-be__chip--muted" data-dh2-be-more>
+            {{- 'duendes.home_v2.elemental_search.more' | t -}}
+          </button>
+        </div>
+        <div class="dh2-be__chips-extra" data-dh2-be-extra>
+          <div class="dh2-be__chips-row">
+            <button type="button" class="dh2-be__chip" data-dh2-be-chip data-slug="fuerza" data-label="{{ 'duendes.home_v2.elemental_search.chip_fuerza' | t | escape }}">
+              {{- 'duendes.home_v2.elemental_search.chip_fuerza' | t -}}
+            </button>
+            <span class="dh2-be__sep" aria-hidden="true">·</span>
+            <button type="button" class="dh2-be__chip" data-dh2-be-chip data-slug="abundancia" data-label="{{ 'duendes.home_v2.elemental_search.chip_abundancia' | t | escape }}">
+              {{- 'duendes.home_v2.elemental_search.chip_abundancia' | t -}}
+            </button>
+            <span class="dh2-be__sep" aria-hidden="true">·</span>
+            <button type="button" class="dh2-be__chip" data-dh2-be-chip data-slug="sanacion" data-label="{{ 'duendes.home_v2.elemental_search.chip_sanacion' | t | escape }}">
+              {{- 'duendes.home_v2.elemental_search.chip_sanacion' | t -}}
+            </button>
+            <span class="dh2-be__sep" aria-hidden="true">·</span>
+            <button type="button" class="dh2-be__chip" data-dh2-be-chip data-slug="paz" data-label="{{ 'duendes.home_v2.elemental_search.chip_paz' | t | escape }}">
+              {{- 'duendes.home_v2.elemental_search.chip_paz' | t -}}
+            </button>
+            <span class="dh2-be__sep" aria-hidden="true">·</span>
+            <button type="button" class="dh2-be__chip" data-dh2-be-chip data-slug="sabiduria" data-label="{{ 'duendes.home_v2.elemental_search.chip_sabiduria' | t | escape }}">
+              {{- 'duendes.home_v2.elemental_search.chip_sabiduria' | t -}}
+            </button>
+            <span class="dh2-be__sep" aria-hidden="true">·</span>
+            <button type="button" class="dh2-be__chip" data-dh2-be-chip data-slug="hogar" data-label="{{ 'duendes.home_v2.elemental_search.chip_hogar' | t | escape }}">
+              {{- 'duendes.home_v2.elemental_search.chip_hogar' | t -}}
+            </button>
+            <span class="dh2-be__sep" aria-hidden="true">·</span>
+            <button type="button" class="dh2-be__chip" data-dh2-be-chip data-slug="transformacion" data-label="{{ 'duendes.home_v2.elemental_search.chip_transformacion' | t | escape }}">
+              {{- 'duendes.home_v2.elemental_search.chip_transformacion' | t -}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p class="dh2-be__foot">{{ 'duendes.home_v2.elemental_search.micro' | t }}</p>
+    </div>
+  </div>
+
+  <div class="dh2-be__results" data-dh2-be-results hidden>
+    <p class="dh2-be__results-lead" data-dh2-be-lead></p>
+    <div class="dh2-be__deck" data-dh2-be-deck></div>
+    <button type="button" class="dh2-be__again" data-dh2-be-reset>{{ 'duendes.home_v2.elemental_search.search_again' | t }}</button>
+  </div>
+
+  <script type="application/json" data-dh2-be-data>
+    {
+      "products": [
+        {%- assign first_json = true -%}
+        {%- for product in search_collection.products limit: 50 -%}
+          {%- if product.available -%}
+            {%- unless first_json -%},{%- endunless -%}
+            {%- assign first_json = false -%}
+            {%- assign ess = product.metafields.custom.esencia.value | default: product.metafields.custom.esencia | default: '' -%}
+            {%- assign tags_norm = product.tags | join: '|' | downcase -%}
+            {
+              "handle": {{ product.handle | json }},
+              "title": {{ product.title | json }},
+              "url": {{ product.url | json }},
+              "price": {{ product.price | money | json }},
+              "image": {% if product.featured_media %}{{ product.featured_media | image_url: width: 800 | json }}{% else %}""{% endif %},
+              "essence": {{ ess | strip | json }},
+              "tagsNorm": {{ tags_norm | json }}
+            }
+          {%- endif -%}
+        {%- endfor -%}
+      ],
+      "fallback": [
+        {%- assign fb_need_comma = false -%}
+        {%- if section.settings.fallback_1 != blank and section.settings.fallback_1.available -%}
+          {%- assign fp = section.settings.fallback_1 -%}
+          {%- assign essf = fp.metafields.custom.esencia.value | default: fp.metafields.custom.esencia | default: '' -%}
+          {%- assign tags_f = fp.tags | join: '|' | downcase -%}
+          {
+            "handle": {{ fp.handle | json }},
+            "title": {{ fp.title | json }},
+            "url": {{ fp.url | json }},
+            "price": {{ fp.price | money | json }},
+            "image": {% if fp.featured_media %}{{ fp.featured_media | image_url: width: 800 | json }}{% else %}""{% endif %},
+            "essence": {{ essf | strip | json }},
+            "tagsNorm": {{ tags_f | json }}
+          }
+          {%- assign fb_need_comma = true -%}
+        {%- endif -%}
+        {%- if section.settings.fallback_2 != blank and section.settings.fallback_2.available -%}
+          {%- if fb_need_comma -%},{%- endif -%}
+          {%- assign fp = section.settings.fallback_2 -%}
+          {%- assign essf = fp.metafields.custom.esencia.value | default: fp.metafields.custom.esencia | default: '' -%}
+          {%- assign tags_f = fp.tags | join: '|' | downcase -%}
+          {
+            "handle": {{ fp.handle | json }},
+            "title": {{ fp.title | json }},
+            "url": {{ fp.url | json }},
+            "price": {{ fp.price | money | json }},
+            "image": {% if fp.featured_media %}{{ fp.featured_media | image_url: width: 800 | json }}{% else %}""{% endif %},
+            "essence": {{ essf | strip | json }},
+            "tagsNorm": {{ tags_f | json }}
+          }
+          {%- assign fb_need_comma = true -%}
+        {%- endif -%}
+        {%- if section.settings.fallback_3 != blank and section.settings.fallback_3.available -%}
+          {%- if fb_need_comma -%},{%- endif -%}
+          {%- assign fp = section.settings.fallback_3 -%}
+          {%- assign essf = fp.metafields.custom.esencia.value | default: fp.metafields.custom.esencia | default: '' -%}
+          {%- assign tags_f = fp.tags | join: '|' | downcase -%}
+          {
+            "handle": {{ fp.handle | json }},
+            "title": {{ fp.title | json }},
+            "url": {{ fp.url | json }},
+            "price": {{ fp.price | money | json }},
+            "image": {% if fp.featured_media %}{{ fp.featured_media | image_url: width: 800 | json }}{% else %}""{% endif %},
+            "essence": {{ essf | strip | json }},
+            "tagsNorm": {{ tags_f | json }}
+          }
+        {%- endif -%}
+      ]
+    }
+  </script>
+
+  <script>
+  (function () {
+    var root = document.getElementById('dh2-be-{{ section.id }}');
+    if (!root) return;
+
+    var SINONIMOS = {
+      miedo: ['proteccion'],
+      ansiedad: ['calma'],
+      tristeza: ['sanacion'],
+      duelo: ['sanacion', 'transformacion'],
+      dinero: ['abundancia'],
+      pareja: ['amor'],
+      casa: ['hogar'],
+      hijos: ['proteccion', 'hogar'],
+      trabajo: ['fuerza', 'abundancia'],
+      salud: ['sanacion'],
+      energia: ['fuerza'],
+      suenos: ['magia'],
+    };
+
+    var I18N = {
+      resultsBefore: {{ 'duendes.home_v2.elemental_search.results_before' | t | json }},
+      resultsAfter: {{ 'duendes.home_v2.elemental_search.results_after' | t | json }},
+    };
+
+    function stripAccents(s) {
+      try {
+        return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      } catch (e) {
+        return s;
+      }
+    }
+
+    function normalizeToken(s) {
+      return stripAccents(String(s || '').trim().toLowerCase()).replace(/\s+/g, ' ');
+    }
+
+    function tagFromSlug(slug) {
+      return 'esencia-' + slug;
+    }
+
+    function resolveTagsFromInput(token) {
+      if (!token) return [];
+      var base = token.split(/\s+/)[0];
+      if (SINONIMOS.hasOwnProperty(base)) {
+        return SINONIMOS[base].map(tagFromSlug);
+      }
+      return [tagFromSlug(base)];
+    }
+
+    function readData() {
+      var el = root.querySelector('[data-dh2-be-data]');
+      if (!el) return { products: [], fallback: [] };
+      try {
+        var data = JSON.parse(el.textContent.trim());
+        return {
+          products: Array.isArray(data.products) ? data.products : [],
+          fallback: Array.isArray(data.fallback) ? data.fallback : [],
+        };
+      } catch (e) {
+        return { products: [], fallback: [] };
+      }
+    }
+
+    var DATA = readData();
+    var PRODUCTS = DATA.products;
+    var FALLBACK = DATA.fallback.filter(function (p) {
+      return p && p.handle;
+    });
+
+    function productTagSet(p) {
+      var raw = p.tagsNorm || '';
+      if (!raw) return [];
+      return raw.split('|').map(function (x) {
+        return String(x).trim().toLowerCase();
+      }).filter(Boolean);
+    }
+
+    function productHasAnyTag(p, tags) {
+      if (!tags.length) return false;
+      var set = productTagSet(p);
+      for (var i = 0; i < tags.length; i++) {
+        var want = tags[i].toLowerCase();
+        if (set.indexOf(want) !== -1) return true;
+      }
+      return false;
+    }
+
+    function shuffle(arr) {
+      var a = arr.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+      }
+      return a;
+    }
+
+    function pickThree(matches) {
+      var pool = shuffle(matches);
+      return pool.slice(0, 3);
+    }
+
+    function defaultTriple() {
+      if (FALLBACK.length >= 3) return FALLBACK.slice(0, 3);
+      if (FALLBACK.length > 0) {
+        var out = FALLBACK.slice();
+        while (out.length < 3 && PRODUCTS.length) {
+          out.push(PRODUCTS[out.length % PRODUCTS.length]);
+        }
+        return out.slice(0, 3);
+      }
+      return PRODUCTS.slice(0, 3);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function renderCard(p) {
+      var img = p.image
+        ? '<div class="dh2-be__media"><img src="' +
+          escapeHtml(p.image) +
+          '" alt="' +
+          escapeHtml(p.title) +
+          '" loading="lazy" width="440" height="660"></div>'
+        : '<div class="dh2-be__media"></div>';
+      var ess = p.essence ? '<div class="dh2-be__essence">' + escapeHtml(p.essence) + '</div>' : '';
+      return (
+        '<a class="dh2-be__card" href="' +
+        escapeHtml(p.url) +
+        '">' +
+        img +
+        '<div class="dh2-be__shade"></div>' +
+        '<div class="dh2-be__meta">' +
+        '<div class="dh2-be__roman">✦</div>' +
+        '<p class="dh2-be__name">' +
+        escapeHtml(p.title) +
+        '</p>' +
+        ess +
+        '<div class="dh2-be__price">' +
+        escapeHtml(p.price) +
+        '</div>' +
+        '</div></a>'
+      );
+    }
+
+    var panel = root.querySelector('[data-dh2-be-panel]');
+    var form = root.querySelector('[data-dh2-be-form]');
+    var input = root.querySelector('[data-dh2-be-input]');
+    var results = root.querySelector('[data-dh2-be-results]');
+    var lead = root.querySelector('[data-dh2-be-lead]');
+    var deck = root.querySelector('[data-dh2-be-deck]');
+    var resetBtn = root.querySelector('[data-dh2-be-reset]');
+    var moreBtn = root.querySelector('[data-dh2-be-more]');
+    var extra = root.querySelector('[data-dh2-be-extra]');
+
+    if (moreBtn && extra) {
+      moreBtn.addEventListener('click', function () {
+        extra.classList.toggle('is-open');
+      });
+    }
+
+    root.querySelectorAll('[data-dh2-be-chip]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var slug = btn.getAttribute('data-slug') || '';
+        var label = btn.getAttribute('data-label') || btn.textContent.trim();
+        runSearch(slug, label);
+      });
+    });
+
+    function runSearch(slugOrRaw, displayLabel) {
+      var token = normalizeToken(slugOrRaw);
+      if (!token) return;
+      var tags = resolveTagsFromInput(token);
+      var matches = PRODUCTS.filter(function (p) {
+        return productHasAnyTag(p, tags);
+      });
+      var triple = matches.length >= 3 ? pickThree(matches) : matches.length > 0 ? pickThree(matches) : [];
+      if (triple.length < 3) {
+        var def = defaultTriple();
+        var seen = {};
+        triple.forEach(function (p) {
+          seen[p.handle] = true;
+        });
+        def.forEach(function (p) {
+          if (triple.length >= 3) return;
+          if (!seen[p.handle]) {
+            triple.push(p);
+            seen[p.handle] = true;
+          }
+        });
+        triple = triple.slice(0, 3);
+      } else {
+        triple = triple.slice(0, 3);
+      }
+
+      var label =
+        displayLabel ||
+        (slugOrRaw && slugOrRaw.trim ? slugOrRaw.trim() : String(slugOrRaw || ''));
+
+      if (panel) {
+        panel.style.transition = 'opacity 0.3s ease';
+        panel.style.opacity = '0';
+      }
+
+      window.setTimeout(function () {
+        root.classList.add('dh2-be--has-results');
+        if (lead) {
+          lead.textContent =
+            (I18N.resultsBefore || '').trim() +
+            ' ' +
+            label +
+            (I18N.resultsAfter || '').trim();
+        }
+        if (deck) {
+          deck.innerHTML = triple.map(renderCard).join('');
+        }
+        if (results) {
+          results.hidden = false;
+          results.style.opacity = '0';
+          window.requestAnimationFrame(function () {
+            results.classList.add('is-visible');
+            results.style.opacity = '1';
+          });
+        }
+      }, 300);
+    }
+
+    function showSearchAgain() {
+      if (results) {
+        results.classList.remove('is-visible');
+        results.style.opacity = '0';
+        window.setTimeout(function () {
+          results.hidden = true;
+          if (deck) deck.innerHTML = '';
+        }, 340);
+      }
+      if (panel) {
+        panel.classList.remove('is-hidden');
+        window.requestAnimationFrame(function () {
+          panel.style.opacity = '1';
+        });
+      }
+      if (input) input.value = '';
+      if (extra) extra.classList.remove('is-open');
+    }
+
+    if (form && input) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var raw = input.value;
+        var token = normalizeToken(raw);
+        if (!token) return;
+        runSearch(token, raw.trim());
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', showSearchAgain);
+    }
+  })();
+</script>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · Buscador elemental",
+  "tag": "section",
+  "class": "duendes-home-v2-buscador-elemental-section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección a buscar",
+      "info": "Solo se indexan los primeros 50 productos disponibles de la colección. Elegí una colección acotada (ej. Guardianes disponibles)."
+    },
+    {
+      "type": "header",
+      "content": "Respaldo (sin coincidencias por tags)"
+    },
+    {
+      "type": "product",
+      "id": "fallback_1",
+      "label": "Guardián respaldo 1"
+    },
+    {
+      "type": "product",
+      "id": "fallback_2",
+      "label": "Guardián respaldo 2"
+    },
+    {
+      "type": "product",
+      "id": "fallback_3",
+      "label": "Guardián respaldo 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes — Home v2 · Buscador elemental"
+    }
+  ]
+}
+{% endschema %}

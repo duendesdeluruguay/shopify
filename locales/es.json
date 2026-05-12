@@ -363,6 +363,30 @@
     "market_hint_msg_es": "Parece que estás visitando desde {country}. Podés ver precios en tu moneda.",
     "market_hint_cta_es": "Ver precios para {country}",
     "meet_this_guardian": "Conocer a este Guardián",
+    "home_v2": {
+      "elemental_search": {
+        "title": "¿QUÉ NECESITÁS HOY?",
+        "subtitle": "Una palabra.",
+        "placeholder": "Escribí una palabra...",
+        "input_label": "Palabra o esencia a buscar",
+        "submit_aria": "Buscar",
+        "micro": "Tres Guardianes que vibran con eso.",
+        "more": "Ver más",
+        "results_before": "Estos tres Guardianes vibran con",
+        "results_after": ".",
+        "search_again": "Buscar otra",
+        "chip_proteccion": "Protección",
+        "chip_calma": "Calma",
+        "chip_amor": "Amor",
+        "chip_fuerza": "Fuerza",
+        "chip_abundancia": "Abundancia",
+        "chip_sanacion": "Sanación",
+        "chip_paz": "Paz",
+        "chip_sabiduria": "Sabiduría",
+        "chip_hogar": "Hogar",
+        "chip_transformacion": "Transformación"
+      }
+    },
     "product": {
       "hero_eyebrow": "Vos no los elegís. Ellos te eligen a vos.",
       "hero_scarcity_1": "Creado especialmente para vos. No hay dos iguales.",
