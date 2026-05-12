@@ -32,7 +32,8 @@
     position: relative; width: 100%; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     background: #0a0c07; padding: 32px 20px;
-    max-height: 60vh;
+    min-height: clamp(320px, 42vh, 480px);
+    max-height: clamp(420px, 70vh, 720px);
     box-sizing: border-box;
   }
 
@@ -94,7 +95,11 @@
   }
 
   @media (max-width: 767px) {
-    .dpp-hero { padding: 14px 12px; max-height: 52vh; }
+    .dpp-hero {
+      padding: 20px 16px;
+      max-height: min(70vh, 560px);
+      min-height: clamp(260px, 38vh, 420px);
+    }
     .dpp-hero__type { font-size: 10px; }
     .dpp-hero__eyebrow { font-size: 10px; letter-spacing: 1.5px; margin-bottom: 6px; }
     .dpp-hero__title { font-size: clamp(22px, 8vw, 40px); margin-bottom: 6px; }
