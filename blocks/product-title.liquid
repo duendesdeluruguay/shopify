@@ -6,15 +6,15 @@
   {% render 'text', fallback_text: product_title, block: block %}
 {% else %}
   {%- comment -%}
-    Badge "1 de 1" + fecha canalización (2026-05-01) — neuromarketing premium:
+    Badge pieza única + fecha canalización — neuromarketing premium:
     transforma "única" en "única esperándote desde hace X". Activa loss aversion
     + obligación moral. Solo en página de producto principal.
   {%- endcomment -%}
   {%- if request.page_type == 'product' -%}
     {%- assign canalizado_date = closest.product.metafields.custom.canalizado_el | default: closest.product.published_at | default: closest.product.created_at -%}
-    <div class="duendes-unique-badge" aria-label="Pieza única e irrepetible">
+    <div class="duendes-unique-badge" aria-label="{{ 'duendes.product.unique_badge_aria' | t | escape }}">
       <span class="duendes-unique-badge__mark" aria-hidden="true">✦</span>
-      <span class="duendes-unique-badge__text">1 de 1 · existencia única</span>
+      <span class="duendes-unique-badge__text">{{ 'duendes.product.unique_badge_text' | t }}</span>
     </div>
     {%- if canalizado_date != blank -%}
       {%- assign now_s = 'now' | date: '%s' | times: 1 -%}
