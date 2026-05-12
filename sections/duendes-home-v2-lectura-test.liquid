@@ -1,0 +1,117 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+  .dh2-read {
+    background: #15110d;
+    color: #f4f1ec;
+    padding: 56px 20px 64px;
+    border-top: 1px solid rgba(201, 169, 97, 0.2);
+  }
+  .dh2-read__inner {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 28px;
+    justify-content: center;
+  }
+  .dh2-read__glyph {
+    font-size: 42px;
+    line-height: 1;
+    color: #c9a961;
+    opacity: 0.85;
+  }
+  .dh2-read__text {
+    flex: 1 1 240px;
+    max-width: 520px;
+    text-align: left;
+  }
+  .dh2-read__title {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: clamp(22px, 2.6vw, 30px);
+    margin: 0 0 10px;
+    color: #fff;
+  }
+  .dh2-read__sub {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 0 0 18px;
+    color: rgba(244, 241, 236, 0.78);
+  }
+  .dh2-read__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 22px;
+    border: 1px solid rgba(201, 169, 97, 0.65);
+    color: #c9a961;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .dh2-read__cta:hover {
+    background: rgba(201, 169, 97, 0.12);
+    color: #fff;
+  }
+  @media (max-width: 600px) {
+    .dh2-read__inner {
+      text-align: center;
+    }
+    .dh2-read__text {
+      text-align: center;
+    }
+  }
+</style>
+
+<section class="dh2-read section">
+  <div class="dh2-read__inner">
+    <div class="dh2-read__glyph" aria-hidden="true">{{ section.settings.glyph }}</div>
+    <div class="dh2-read__text">
+      <h2 class="dh2-read__title">{{ section.settings.title }}</h2>
+      <p class="dh2-read__sub">{{ section.settings.subtitle }}</p>
+      <a class="dh2-read__cta" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · Lectura / Test",
+  "tag": "section",
+  "class": "duendes-home-v2-lectura-test-section",
+  "settings": [
+    { "type": "text", "id": "glyph", "label": "Ícono / glifo", "default": "✦" },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "¿No sabés cuál es tuyo?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "No te hacemos un test genérico. Te leemos."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA",
+      "default": "Que me lean · 2 min"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del test",
+      "default": "/pages/test-del-guardian"
+    }
+  ],
+  "presets": [{ "name": "Duendes — Home v2 · Lectura / Test" }]
+}
+{% endschema %}
