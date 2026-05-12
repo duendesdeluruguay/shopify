@@ -1,0 +1,442 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+<style>
+  .dh2-cb {
+    --dh2-gold: #c9a961;
+    background: #15110d;
+    color: #f4f1ec;
+    padding: 72px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dh2-cb__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .dh2-cb__tag {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(244, 241, 236, 0.45);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .dh2-cb__title {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-weight: 400;
+    font-size: clamp(22px, 2.8vw, 34px);
+    text-align: center;
+    margin: 0 0 8px;
+    color: #fff;
+  }
+  .dh2-cb__deck {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: clamp(8px, 2vw, 28px);
+    margin-top: 36px;
+  }
+  .dh2-cb__card {
+    position: relative;
+    flex: 0 0 clamp(150px, 22vw, 220px);
+    aspect-ratio: 2 / 3;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 169, 97, 0.35);
+    background: #0d0b09;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transform: rotate(-2.5deg) scale(0.94);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .dh2-cb__card--center {
+    flex-basis: clamp(180px, 26vw, 260px);
+    transform: rotate(0deg) scale(1);
+    border-color: rgba(201, 169, 97, 0.65);
+    z-index: 2;
+  }
+  .dh2-cb__card--right {
+    transform: rotate(2.5deg) scale(0.94);
+  }
+  .dh2-cb__card:hover {
+    transform: rotate(0deg) scale(1.06);
+    box-shadow: 0 22px 60px rgba(201, 169, 97, 0.18);
+  }
+  .dh2-cb__card--center:hover {
+    transform: scale(1.08);
+  }
+  .dh2-cb__badge {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: rgba(201, 169, 97, 0.92);
+    color: #15110d;
+    padding: 4px 10px;
+    border-radius: 2px;
+    z-index: 2;
+  }
+  .dh2-cb__card:not(.dh2-cb__card--center) .dh2-cb__badge {
+    display: none;
+  }
+  .dh2-cb__media {
+    position: absolute;
+    inset: 0;
+  }
+  .dh2-cb__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.92;
+  }
+  .dh2-cb__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 35%, rgba(10, 8, 6, 0.92));
+    z-index: 1;
+  }
+  .dh2-cb__meta {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 14px 12px 16px;
+    z-index: 2;
+    text-align: center;
+  }
+  .dh2-cb__roman {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--dh2-gold);
+    margin-bottom: 4px;
+  }
+  .dh2-cb__name {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 15px;
+    font-style: italic;
+    margin: 0 0 4px;
+    line-height: 1.25;
+  }
+  .dh2-cb__essence {
+    font-size: 12px;
+    color: rgba(244, 241, 236, 0.65);
+    margin-bottom: 8px;
+  }
+  .dh2-cb__price {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--dh2-gold);
+  }
+  .dh2-cb__hint {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(244, 241, 236, 0.42);
+  }
+  .dh2-cb__modal[hidden] {
+    display: none !important;
+  }
+  .dh2-cb__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(8, 6, 4, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .dh2-cb__modal-panel {
+    background: #15110d;
+    border: 1px solid rgba(201, 169, 97, 0.35);
+    border-radius: 14px;
+    max-width: 420px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+    padding: 16px;
+    color: #f4f1ec;
+  }
+  .dh2-cb__modal-close {
+    float: right;
+    border: none;
+    background: transparent;
+    color: var(--dh2-gold);
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .dh2-cb__modal-main img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+  }
+  .dh2-cb__modal-thumbs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .dh2-cb__modal-thumbs button {
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    padding: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #0d0b09;
+    width: 56px;
+    height: 56px;
+  }
+  .dh2-cb__modal-thumbs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dh2-cb__modal-link {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dh2-gold);
+  }
+  @media (max-width: 749px) {
+    .dh2-cb__deck {
+      flex-wrap: wrap;
+    }
+    .dh2-cb__card,
+    .dh2-cb__card--center,
+    .dh2-cb__card--right {
+      flex: 1 1 calc(50% - 12px);
+      max-width: calc(50% - 12px);
+      transform: none;
+    }
+    .dh2-cb__card--center {
+      flex: 1 1 100%;
+      max-width: 280px;
+      margin: 0 auto;
+      order: -1;
+    }
+  }
+</style>
+
+<section class="dh2-cb section" id="dh2-cb-{{ section.id }}">
+  <div class="dh2-cb__inner">
+    <p class="dh2-cb__tag">{{ section.settings.tag }}</p>
+    <h2 class="dh2-cb__title">{{ section.settings.title }}</h2>
+    <div class="dh2-cb__deck">
+      {% for block in section.blocks %}
+        {% if block.type == 'carta' and block.settings.product != blank %}
+          {% assign product = block.settings.product %}
+          {% assign pos = forloop.index0 %}
+          {% capture card_class %}dh2-cb__card{% if pos == 1 %} dh2-cb__card--center{% elsif pos == 2 %} dh2-cb__card--right{% endif %}{% endcapture %}
+          <a
+            href="{{ product.url }}"
+            class="{{ card_class | strip }}"
+            data-dh2-gallery-id="{{ block.id }}"
+            data-dh2-title="{{ block.settings.display_title | default: product.title | escape }}"
+            data-dh2-url="{{ product.url }}"
+            {{ block.shopify_attributes }}
+          >
+            {% if pos == 1 %}
+              <span class="dh2-cb__badge">{{ section.settings.badge_destacado }}</span>
+            {% endif %}
+            <div class="dh2-cb__media">
+              {% if product.featured_media %}
+                {{ product.featured_media | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '30vw', widths: '400,600,800' }}
+              {% endif %}
+            </div>
+            <div class="dh2-cb__shade"></div>
+            <div class="dh2-cb__meta">
+              <div class="dh2-cb__roman">{{ block.settings.roman }}</div>
+              <p class="dh2-cb__name">{{ block.settings.display_title | default: product.title }}</p>
+              <div class="dh2-cb__essence">{{ block.settings.essence }}</div>
+              <div class="dh2-cb__price">{{ product.price | money }}</div>
+            </div>
+          </a>
+          <script type="application/json" data-dh2-cb-gallery="{{ block.id }}">
+            [{% for image in product.images limit: 8 %}{{ image | image_url: width: 1000 | json }}{% unless forloop.last %},{% endunless %}{% endfor %}]
+          </script>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <p class="dh2-cb__hint">{{ section.settings.hint }}</p>
+  </div>
+
+  <div class="dh2-cb__modal" id="dh2-cb-modal-{{ section.id }}" hidden role="dialog" aria-modal="true" aria-label="{{ section.settings.modal_aria | escape }}">
+    <div class="dh2-cb__modal-panel">
+      <button type="button" class="dh2-cb__modal-close" data-dh2-cb-close aria-label="{{ section.settings.close_aria | escape }}">&times;</button>
+      <h3 class="dh2-cb__name" style="margin-top: 0" data-dh2-cb-modal-title></h3>
+      <div class="dh2-cb__modal-main" data-dh2-cb-modal-main></div>
+      <div class="dh2-cb__modal-thumbs" data-dh2-cb-modal-thumbs></div>
+      <a class="dh2-cb__modal-link" data-dh2-cb-modal-link href="#">{{ section.settings.modal_cta }}</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('dh2-cb-{{ section.id }}');
+    if (!root) return;
+    var modal = document.getElementById('dh2-cb-modal-{{ section.id }}');
+    var main = modal && modal.querySelector('[data-dh2-cb-modal-main]');
+    var thumbs = modal && modal.querySelector('[data-dh2-cb-modal-thumbs]');
+    var titleEl = modal && modal.querySelector('[data-dh2-cb-modal-title]');
+    var linkEl = modal && modal.querySelector('[data-dh2-cb-modal-link]');
+    var closeBtn = modal && modal.querySelector('[data-dh2-cb-close]');
+    if (!modal || !main || !thumbs || !titleEl || !linkEl || !closeBtn) return;
+
+    function parseGallery(scriptEl) {
+      try {
+        return JSON.parse(scriptEl.textContent.trim());
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function openModal(gallery, title, url) {
+      titleEl.textContent = title || '';
+      linkEl.href = url || '#';
+      main.innerHTML = '';
+      thumbs.innerHTML = '';
+      var first = gallery[0];
+      if (first) {
+        var img = document.createElement('img');
+        img.src = first;
+        img.alt = title || '';
+        main.appendChild(img);
+      }
+      gallery.forEach(function (src) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        var im = document.createElement('img');
+        im.src = src;
+        im.alt = '';
+        b.appendChild(im);
+        b.addEventListener('click', function () {
+          main.innerHTML = '';
+          var big = document.createElement('img');
+          big.src = src;
+          big.alt = title || '';
+          main.appendChild(big);
+        });
+        thumbs.appendChild(b);
+      });
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    }
+
+    root.querySelectorAll('[data-dh2-gallery-id]').forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (window.matchMedia('(min-width: 990px)').matches) return;
+        e.preventDefault();
+        var gid = card.getAttribute('data-dh2-gallery-id');
+        var script = gid ? root.querySelector('script[data-dh2-cb-gallery="' + gid + '"]') : null;
+        var gallery = script ? parseGallery(script) : [];
+        openModal(gallery, card.getAttribute('data-dh2-title'), card.getAttribute('data-dh2-url'));
+      });
+    });
+
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();
+    });
+    closeBtn.addEventListener('click', closeModal);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Duendes — Home v2 · Cartas del Bosque",
+  "tag": "section",
+  "class": "duendes-home-v2-cartas-bosque-section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Etiqueta",
+      "default": "EL PORTAL TE MUESTRA"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Cartas del Bosque · destacados"
+    },
+    {
+      "type": "text",
+      "id": "badge_destacado",
+      "label": "Badge carta central",
+      "default": "DESTACADO"
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "Microcopy inferior",
+      "default": "Pasá el dedo · Las cartas se giran cuando una te llama"
+    },
+    {
+      "type": "text",
+      "id": "modal_aria",
+      "label": "ARIA modal",
+      "default": "Galería del guardián"
+    },
+    {
+      "type": "text",
+      "id": "close_aria",
+      "label": "ARIA cerrar",
+      "default": "Cerrar"
+    },
+    {
+      "type": "text",
+      "id": "modal_cta",
+      "label": "CTA en modal",
+      "default": "Ver ficha completa"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "carta",
+      "name": "Carta",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Guardián / producto" },
+        { "type": "text", "id": "roman", "label": "Número romano", "default": "XII" },
+        {
+          "type": "text",
+          "id": "display_title",
+          "label": "Nombre mostrado (opcional)",
+          "info": "Si está vacío, usa el título del producto."
+        },
+        { "type": "text", "id": "essence", "label": "Esencia", "default": "Sabiduría silenciosa" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Duendes — Home v2 · Cartas del Bosque",
+      "blocks": [
+        { "type": "carta", "settings": { "roman": "VI" } },
+        { "type": "carta", "settings": { "roman": "XII" } },
+        { "type": "carta", "settings": { "roman": "XX" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
