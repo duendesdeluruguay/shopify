@@ -146,6 +146,9 @@
           {% if section.settings.youtube_url != blank %}
             <a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
           {% endif %}
+          {% if section.settings.pinterest_url != blank %}
+            <a href="{{ section.settings.pinterest_url }}" target="_blank" rel="noopener" aria-label="Pinterest">Pin</a>
+          {% endif %}
         </div>
       </div>
       <div class="dfr__col">
@@ -185,7 +188,8 @@
     { "type": "url", "id": "instagram_url", "label": "Instagram" },
     { "type": "url", "id": "tiktok_url", "label": "TikTok" },
     { "type": "url", "id": "facebook_url", "label": "Facebook" },
-    { "type": "url", "id": "youtube_url", "label": "YouTube" }
+    { "type": "url", "id": "youtube_url", "label": "YouTube" },
+    { "type": "url", "id": "pinterest_url", "label": "Pinterest" }
   ],
   "presets": [{ "name": "Duendes — pie enriquecido" }]
 }
