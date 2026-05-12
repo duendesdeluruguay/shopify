@@ -359,7 +359,7 @@
     "meet_this_guardian": "Meet this Guardian",
     "home_v2": {
       "elemental_search": {
-        "title": "WHAT DO YOU NEED TODAY?",
+        "title": "What do you need today?",
         "subtitle": "One word.",
         "placeholder": "Write one word...",
         "input_label": "Word or essence to search",

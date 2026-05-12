@@ -4,6 +4,14 @@
   if search_collection == blank
     assign search_collection = collections.all
   endif
+  assign grace_handle = section.settings.grace_collection_handle | default: 'all' | strip | downcase
+  if grace_handle == blank
+    assign grace_handle = 'all'
+  endif
+  assign grace_coll = collections[grace_handle]
+  if grace_coll == blank
+    assign grace_coll = collections.all
+  endif
 -%}
 <style>
   .dh2-be {
@@ -415,6 +423,26 @@
           {%- endif -%}
         {%- endfor -%}
       ],
+      "gracePool": [
+        {%- assign g_first = true -%}
+        {%- for product in grace_coll.products limit: 50 -%}
+          {%- if product.available -%}
+            {%- unless g_first -%},{%- endunless -%}
+            {%- assign g_first = false -%}
+            {%- assign essg = product.metafields.custom.esencia.value | default: product.metafields.custom.esencia | default: '' -%}
+            {%- assign tags_g = product.tags | join: '|' | downcase -%}
+            {
+              "handle": {{ product.handle | json }},
+              "title": {{ product.title | json }},
+              "url": {{ product.url | json }},
+              "price": {{ product.price | money | json }},
+              "image": {% if product.featured_media %}{{ product.featured_media | image_url: width: 800 | json }}{% else %}""{% endif %},
+              "essence": {{ essg | strip | json }},
+              "tagsNorm": {{ tags_g | json }}
+            }
+          {%- endif -%}
+        {%- endfor -%}
+      ],
       "fallback": [
         {%- assign fb_need_comma = false -%}
         {%- if section.settings.fallback_1 != blank and section.settings.fallback_1.available -%}
@@ -519,23 +547,57 @@
 
     function readData() {
       var el = root.querySelector('[data-dh2-be-data]');
-      if (!el) return { products: [], fallback: [] };
+      if (!el) return { products: [], gracePool: [], fallback: [] };
       try {
         var data = JSON.parse(el.textContent.trim());
         return {
           products: Array.isArray(data.products) ? data.products : [],
+          gracePool: Array.isArray(data.gracePool) ? data.gracePool : [],
           fallback: Array.isArray(data.fallback) ? data.fallback : [],
         };
       } catch (e) {
-        return { products: [], fallback: [] };
+        return { products: [], gracePool: [], fallback: [] };
       }
     }
 
     var DATA = readData();
     var PRODUCTS = DATA.products;
+    var GRACE = (DATA.gracePool || []).filter(function (p) {
+      return p && p.handle;
+    });
     var FALLBACK = DATA.fallback.filter(function (p) {
       return p && p.handle;
     });
+
+    function mergeUniqueToThree(target, pool) {
+      var seen = {};
+      target.forEach(function (p) {
+        if (p && p.handle) seen[p.handle] = true;
+      });
+      for (var i = 0; i < pool.length && target.length < 3; i++) {
+        var p = pool[i];
+        if (p && p.handle && !seen[p.handle]) {
+          target.push(p);
+          seen[p.handle] = true;
+        }
+      }
+    }
+
+    function defaultTriple() {
+      if (FALLBACK.length >= 3) return FALLBACK.slice(0, 3);
+      if (FALLBACK.length > 0) {
+        var out = FALLBACK.slice();
+        mergeUniqueToThree(out, PRODUCTS);
+        mergeUniqueToThree(out, GRACE);
+        return out.slice(0, 3);
+      }
+      if (GRACE.length > 0) {
+        var g = GRACE.slice(0, 3);
+        mergeUniqueToThree(g, PRODUCTS);
+        return g.slice(0, 3);
+      }
+      return PRODUCTS.slice(0, 3);
+    }
 
     function productTagSet(p) {
       var raw = p.tagsNorm || '';
@@ -564,23 +626,6 @@
         a[j] = t;
       }
       return a;
-    }
-
-    function pickThree(matches) {
-      var pool = shuffle(matches);
-      return pool.slice(0, 3);
-    }
-
-    function defaultTriple() {
-      if (FALLBACK.length >= 3) return FALLBACK.slice(0, 3);
-      if (FALLBACK.length > 0) {
-        var out = FALLBACK.slice();
-        while (out.length < 3 && PRODUCTS.length) {
-          out.push(PRODUCTS[out.length % PRODUCTS.length]);
-        }
-        return out.slice(0, 3);
-      }
-      return PRODUCTS.slice(0, 3);
     }
 
     function escapeHtml(str) {
@@ -708,13 +753,12 @@
         window.setTimeout(function () {
           results.hidden = true;
           if (deck) deck.innerHTML = '';
+          root.classList.remove('dh2-be--has-results');
+          if (panel) panel.style.opacity = '1';
         }, 340);
-      }
-      if (panel) {
-        panel.classList.remove('is-hidden');
-        window.requestAnimationFrame(function () {
-          panel.style.opacity = '1';
-        });
+      } else {
+        root.classList.remove('dh2-be--has-results');
+        if (panel) panel.style.opacity = '1';
       }
       if (input) input.value = '';
       if (extra) extra.classList.remove('is-open');
@@ -748,6 +792,13 @@
       "id": "collection",
       "label": "Colección a buscar",
       "info": "Solo se indexan los primeros 50 productos disponibles de la colección. Elegí una colección acotada (ej. Guardianes disponibles)."
+    },
+    {
+      "type": "text",
+      "id": "grace_collection_handle",
+      "label": "Colección respaldo (handle)",
+      "default": "all",
+      "info": "Si no hay coincidencias por tags y no configuraste Guardianes de respaldo abajo, se muestran 3 productos de esta colección (por defecto «all» = todo el catálogo)."
     },
     {
       "type": "header",

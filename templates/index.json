@@ -50,6 +50,67 @@
       ],
       "settings": {}
     },
+    "home-v2-hero": {
+      "type": "duendes-home-v2-hero",
+      "settings": {
+        "video_url": "",
+        "poster": "shopify://shop_images/2319.jpg",
+        "badges_line": "✦ HECHOS A MANO  ·  ✦ ÚNICOS  ·  ✦ DESDE 2015",
+        "title": "No los elegís vos. Ellos te eligen a vos.",
+        "subtitle": "Cada uno es único en el mundo.",
+        "cta_primary_label": "Encontrar mi Guardián",
+        "cta_primary_url": "shopify://collections/tienda-magica",
+        "cta_secondary_label": "Que me lean (2 min)",
+        "cta_secondary_url": "shopify://pages/test-del-guardian"
+      }
+    },
+    "home-v2-buscador-elemental": {
+      "type": "duendes-home-v2-buscador-elemental",
+      "settings": {
+        "collection": "all",
+        "grace_collection_handle": "all"
+      }
+    },
+    "home-v2-cartas-bosque": {
+      "type": "duendes-home-v2-cartas-bosque",
+      "blocks": {
+        "cb1": {
+          "type": "carta",
+          "settings": {
+            "roman": "VI",
+            "essence": "Sabiduría silenciosa"
+          }
+        },
+        "cb2": {
+          "type": "carta",
+          "settings": {
+            "roman": "XII",
+            "essence": "Sabiduría silenciosa"
+          }
+        },
+        "cb3": {
+          "type": "carta",
+          "settings": {
+            "roman": "XX",
+            "essence": "Sabiduría silenciosa"
+          }
+        }
+      },
+      "block_order": [
+        "cb1",
+        "cb2",
+        "cb3"
+      ],
+      "settings": {
+        "tag": "EL PORTAL TE MUESTRA",
+        "title": "Cartas del Bosque · destacados",
+        "badge_destacado": "DESTACADO",
+        "hint": "Pasá el dedo · Las cartas se giran cuando una te llama",
+        "modal_aria": "Galería del guardián",
+        "close_aria": "Cerrar",
+        "modal_cta": "Ver ficha completa"
+      }
+    },
     "hero": {
       "type": "duendes-hero",
       "settings": {
@@ -896,6 +957,9 @@
   },
   "order": [
     "announcement-bar",
+    "home-v2-hero",
+    "home-v2-buscador-elemental",
+    "home-v2-cartas-bosque",
     "hero",
     "mi-magia-home",
     "ddu-nuevos-guardianes",
