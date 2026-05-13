@@ -35,6 +35,70 @@
     position: relative;
     overflow: hidden;
   }
+  .dh2-be__atmos {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .dh2-be__atmos-radial {
+    position: absolute;
+    inset: -20% -10% -10% -10%;
+    background: radial-gradient(ellipse at center, rgba(201, 169, 97, 0.08) 0%, transparent 60%);
+  }
+  .dh2-be__atmos-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+  .dh2-be__dust {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(201, 169, 97, 0.45);
+    box-shadow: 0 0 8px rgba(201, 169, 97, 0.35);
+    animation: dh2-be-dust 5.5s ease-in-out infinite;
+  }
+  .dh2-be__dust--1 {
+    left: 12%;
+    top: 22%;
+    animation-delay: 0s;
+  }
+  .dh2-be__dust--2 {
+    left: 78%;
+    top: 18%;
+    animation-delay: 1.1s;
+  }
+  .dh2-be__dust--3 {
+    left: 52%;
+    top: 38%;
+    animation-delay: 2.3s;
+  }
+  .dh2-be__dust--4 {
+    left: 28%;
+    top: 62%;
+    animation-delay: 0.7s;
+  }
+  .dh2-be__dust--5 {
+    left: 88%;
+    top: 55%;
+    animation-delay: 3.2s;
+  }
+  @keyframes dh2-be-dust {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.25;
+    }
+    50% {
+      transform: translateY(-10px);
+      opacity: 0.65;
+    }
+  }
   .dh2-be--has-results .dh2-be__inner {
     position: absolute;
     width: 1px;
@@ -50,6 +114,8 @@
     padding-top: 80px;
   }
   .dh2-be__inner {
+    position: relative;
+    z-index: 1;
     max-width: 640px;
     margin: 0 auto;
     padding: 120px 20px;
@@ -57,23 +123,24 @@
   }
   .dh2-be__eyebrow {
     font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 10px;
-    letter-spacing: 0.28em;
+    font-size: 13px;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
     text-align: center;
-    color: rgba(201, 169, 97, 0.75);
-    margin: 0 0 14px;
+    color: rgba(201, 169, 97, 0.82);
+    margin: 0 0 16px;
   }
   .dh2-be__title {
-    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
     font-weight: 400;
-    font-size: clamp(13px, 2.4vw, 15px);
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    font-style: italic;
+    font-size: clamp(24px, 4.2vw, 32px);
+    letter-spacing: 0.02em;
+    text-transform: none;
     text-align: center;
-    color: var(--dh2-be-gold);
+    color: rgba(244, 241, 236, 0.94);
     margin: 0 0 28px;
-    line-height: 1.45;
+    line-height: 1.28;
   }
   .dh2-be__sub {
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
@@ -93,12 +160,17 @@
   .dh2-be__input-wrap {
     flex: 1;
     min-width: 0;
-    border-bottom: 1px solid rgba(201, 169, 97, 0.45);
-    padding-bottom: 2px;
-    transition: border-color 0.2s ease;
+    border-bottom: 2px solid rgba(201, 169, 97, 0.55);
+    padding-bottom: 3px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 6px 22px rgba(201, 169, 97, 0.06);
+    border-radius: 0;
   }
   .dh2-be__input-wrap:focus-within {
-    border-color: rgba(201, 169, 97, 0.85);
+    border-color: rgba(201, 169, 97, 0.95);
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.12),
+      0 4px 28px rgba(201, 169, 97, 0.18);
   }
   .dh2-be__input {
     width: 100%;
@@ -204,6 +276,8 @@
     transition: opacity 0.3s ease;
   }
   .dh2-be__results {
+    position: relative;
+    z-index: 2;
     opacity: 0;
     transition: opacity 0.35s ease;
     max-width: 1180px;
@@ -338,7 +412,7 @@
     background-color: #15110d !important;
   }
   .dh2-be__title {
-    color: #c9a961 !important;
+    color: rgba(244, 241, 236, 0.96) !important;
   }
   .dh2-be__sub,
   .dh2-be__foot {
@@ -370,9 +444,14 @@
     }
     h2.dh2-be__title,
     .dh2-be__title {
-      font-size: 13px !important;
-      letter-spacing: 0.14em !important;
+      font-size: 24px !important;
+      line-height: 1.25 !important;
+      letter-spacing: 0.02em !important;
       max-width: 100% !important;
+    }
+    .dh2-be__eyebrow {
+      font-size: 11px !important;
+      letter-spacing: 0.32em !important;
     }
     .dh2-be__sub {
       font-size: 18px !important;
@@ -397,9 +476,17 @@
   class="dh2-be section"
   id="dh2-be-{{ section.id }}"
   data-section-id="{{ section.id }}"
-  style="background-color:#15110d;color:#f4f1ec;"
   {{ section.shopify_attributes }}
 >
+  <div class="dh2-be__atmos" aria-hidden="true">
+    <span class="dh2-be__atmos-radial"></span>
+    <span class="dh2-be__atmos-noise"></span>
+    <span class="dh2-be__dust dh2-be__dust--1"></span>
+    <span class="dh2-be__dust dh2-be__dust--2"></span>
+    <span class="dh2-be__dust dh2-be__dust--3"></span>
+    <span class="dh2-be__dust dh2-be__dust--4"></span>
+    <span class="dh2-be__dust dh2-be__dust--5"></span>
+  </div>
   <div class="dh2-be__inner">
     <div class="dh2-be__panel" data-dh2-be-panel="search">
       {% if dh2_be_eyebrow != blank %}

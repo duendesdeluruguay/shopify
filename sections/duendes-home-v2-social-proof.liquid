@@ -150,8 +150,9 @@
       <h2 class="dh2-sp__title-fallback">{{ dh2_sp_title }}</h2>
     {% endif %}
     <div class="dh2-sp__grid">
-      {% for block in section.blocks %}
+    {% for block in section.blocks %}
         {% if block.type == 'testimonial' %}
+          {% unless block.settings.photo == blank %}
           {% liquid
             assign dh2_sp_quote = block.settings.quote | strip
             if dh2_sp_quote == blank
@@ -169,12 +170,11 @@
           %}
           <article class="dh2-sp__card" {{ block.shopify_attributes }}>
             <div class="dh2-sp__photo">
-              {% if block.settings.photo != blank %}
-                {{ block.settings.photo | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(min-width:990px) 25vw, (min-width:550px) 50vw, 100vw', widths: '200,400,600' }}
-              {% endif %}
+              {{ block.settings.photo | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(min-width:990px) 25vw, (min-width:550px) 50vw, 100vw', widths: '200,400,600' }}
             </div>
             <p class="dh2-sp__quote">{{ dh2_sp_quote }}</p>
           </article>
+          {% endunless %}
         {% endif %}
       {% endfor %}
     </div>
@@ -218,7 +218,7 @@
       "type": "testimonial",
       "name": "Testimonio",
       "settings": [
-        { "type": "image_picker", "id": "photo", "label": "Foto" },
+        { "type": "image_picker", "id": "photo", "label": "Foto", "info": "Cargá foto real del cliente con su Guardián. Si está vacío, el testimonio no aparece." },
         { "type": "textarea", "id": "quote", "label": "Frase", "default": "Cuando lo abrí, sentí que alguien me había elegido de verdad." }
       ]
     }
