@@ -2,6 +2,13 @@
 
 Hacé estos pasos en **Shopify Admin** cuando puedas; el theme ya apunta al blog correcto en el footer rico.
 
+## 0. Redirecciones URL — `/pages/mi-magia` y El Portal
+
+- **Admin → Tienda online → Navegación → Redirecciones de URL** (URL Redirects).
+- Si existe una regla que mande **`/pages/mi-magia`** → **`/blogs/comunidad-elemental`** (o al blog antiguo **`/blogs/mi-magia`**), **eliminála**. Esa regla en Admin tiene prioridad y puede anular la página del theme o generar un 302 inesperado.
+- Opcional: creá una redirección **`/pages/mi-magia`** → **`/pages/el-portal`** solo si querés un **301** limpio además del HTML/JS de la plantilla `page.mi-magia.liquid`.
+- Creá la página **`el-portal`** con plantilla **`page.el-portal`** si todavía no existe: ver **`docs/EL-PORTAL-PENDIENTE.md`**.
+
 ## 1. Menú principal — link Comunidad Elemental (404)
 
 - **Admin → Tienda online → Navegación → Menú principal** (o el menú que use el header).

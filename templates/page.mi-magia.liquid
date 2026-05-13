@@ -1,15 +1,11 @@
 {% comment %}
-  Mi Magia · Page → Redirect a /blogs/mi-magia
-  Esta página queda como compatibilidad. Mi Magia ahora ES el blog (en /blogs/mi-magia).
-  Si querés eliminar la page completamente, hacelo desde Shopify Admin → Online Store → Pages → Mi Magia → Delete.
-  Mejor opción: crear un URL Redirect en Shopify (Online Store → Navigation → URL redirects):
-    From:  /pages/mi-magia
-    To:    /blogs/mi-magia
-  Esto da redirect 301 limpio para SEO.
+  Compatibilidad: /pages/mi-magia → El Portal exclusivo (post-adopción).
+  Creá la página con handle el-portal y plantilla page.el-portal (ver docs/EL-PORTAL-PENDIENTE.md).
+  Si en Admin existe una redirección URL de /pages/mi-magia hacia el blog u otra ruta, eliminála para que gane esta página o el redirect nuevo hacia /pages/el-portal.
 {% endcomment %}
 
-<meta http-equiv="refresh" content="0; url=/blogs/mi-magia">
-<link rel="canonical" href="/blogs/mi-magia">
+<meta http-equiv="refresh" content="0; url=/pages/el-portal">
+<link rel="canonical" href="/pages/el-portal">
 
 <style>
   body { background: #0a0a0a; color: #F5F0E1; font-family: Georgia, serif; margin: 0; }
@@ -25,12 +21,12 @@
 <div class="redir-wrap">
   <div class="redir-inner">
     <div class="redir-symbol">✦</div>
-    <h1 class="redir-title">Mi Magia se mudó</h1>
-    <p class="redir-text">Mi Magia ahora vive como blog completo. Te llevamos en un instante. Si no carga sola, tocá el botón.</p>
-    <a href="/blogs/mi-magia" class="redir-cta">Entrar a Mi Magia</a>
+    <h1 class="redir-title">Te llevamos al Portal</h1>
+    <p class="redir-text">El espacio exclusivo para adoptantes ahora vive en <strong>El Portal</strong>. Si no redirige solo, tocá el botón.</p>
+    <a href="/pages/el-portal" class="redir-cta">Entrar al Portal</a>
   </div>
 </div>
 
 <script>
-  setTimeout(function(){ window.location.replace('/blogs/mi-magia'); }, 800);
+  setTimeout(function(){ window.location.replace('/pages/el-portal'); }, 800);
 </script>
