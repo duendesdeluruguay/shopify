@@ -9,6 +9,13 @@ Hacé estos pasos en **Shopify Admin** cuando puedas; el theme ya apunta al blog
 - Opcional: creá una redirección **`/pages/mi-magia`** → **`/pages/el-portal`** solo si querés un **301** limpio además del HTML/JS de la plantilla `page.mi-magia.liquid`.
 - Creá la página **`el-portal`** con plantilla **`page.el-portal`** si todavía no existe: ver **`docs/EL-PORTAL-PENDIENTE.md`**.
 
+## Blog público — artículo «Canalización Álmica»
+
+- **Admin → Contenido → Entradas de blog** (Blog posts).
+- Abrí el artículo **Canalización Álmica** que esté en el blog **Comunidad elemental** (o el blog que uses como público).
+- Cambiá la visibilidad a **Oculto** (Hidden) o archiválo / eliminálo si ya no debe indexarse.
+- El theme también **oculta** en listados la entrada cuyo handle sea `canalizacion-almica` o cuyo título coincida con «Canalización Álmica»; aun así conviene ocultarlo en Admin para SEO y para que no quede accesible por URL directa si no querés que se lea.
+
 ## 1. Menú principal — link Comunidad Elemental (404)
 
 - **Admin → Tienda online → Navegación → Menú principal** (o el menú que use el header).

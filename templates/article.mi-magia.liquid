@@ -124,20 +124,13 @@
 {%- endif -%}
 
 {%- if es_comprador -%}
-<div class="mm-novedad">
-  <a href="/products/canalizacion-almica">
-    <span class="badge">✦ Novedad</span>
-    <span>Canalización Álmica · escuchá su voz · USD 30 por guardián</span>
-    <span class="arrow">→</span>
-  </a>
-</div>
 <div class="mm-badge-comunidad">
   <span class="star">✦</span>Comunidad Elemental · {{ customer.first_name | default: 'Adoptante' }}
 </div>
 {%- endif -%}
 
 <div class="breadcrumb">
-  <a href="/blogs/mi-magia">Mi Magia</a>
+  <a href="{{ blog.url }}">{{ blog.title }}</a>
   {%- if article.tags.size > 0 -%}<span class="sep">/</span><span>{{ article.tags.first }}</span>{%- endif -%}
 </div>
 
@@ -145,7 +138,7 @@
   {%- if article.tags.size > 0 -%}
     <p class="category">{{ article.tags.first }}</p>
   {%- else -%}
-    <p class="category">Mi Magia</p>
+    <p class="category">{{ blog.title }}</p>
   {%- endif -%}
   <h1>{{ article.title }}</h1>
   {%- if article.excerpt != blank -%}
@@ -163,10 +156,10 @@
 
   {%- if es_comprador -%}
   <div class="deep-cta">
-    <p class="label">✦ Profundizar tu vínculo ✦</p>
-    <h4>Conocé el linaje específico de tu guardián</h4>
-    <p>Si querés saber a qué linaje pertenece el tuyo, su nombre álmico y por qué te eligió específicamente — agregá la Canalización Álmica. Trabajo de 7 días, audio + PDF cinematográfico, irrepetible.</p>
-    <a href="/products/canalizacion-almica">Agregar Canalización Álmica</a>
+    <p class="label">✦ Tu espacio en El Portal ✦</p>
+    <h4>Guías, meditaciones y comunidad adoptante</h4>
+    <p>El contenido exclusivo para quienes ya conviven con un Guardián vive en El Portal: pasos de bienvenida, materiales del estudio y el hilo con la tribu.</p>
+    <a href="/pages/el-portal">Ir a El Portal</a>
   </div>
   {%- else -%}
   <div class="deep-cta">
@@ -187,7 +180,7 @@
 {%- if article.tags.size > 0 -%}
 <div class="article-tags">
   {%- for tag in article.tags -%}
-    <a href="/blogs/mi-magia/tagged/{{ tag | handle }}">{{ tag }}</a>
+    <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
   {%- endfor -%}
 </div>
 {%- endif -%}
@@ -212,7 +205,7 @@
 <div class="back-block">
   <h3>Seguí explorando</h3>
   <p>Cada historia te lleva a otra. Volvé al blog y elegí la próxima.</p>
-  <a href="/blogs/mi-magia">Volver al blog</a>
+  <a href="{{ blog.url }}">Volver al blog</a>
 </div>
 
 </div>

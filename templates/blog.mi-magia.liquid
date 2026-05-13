@@ -147,13 +147,6 @@
 {%- endif -%}
 
 {%- if es_comprador -%}
-<div class="mm-novedad">
-  <a href="/products/canalizacion-almica">
-    <span class="badge">✦ Novedad</span>
-    <span>Canalización Álmica · escuchá su voz · USD 30 por guardián</span>
-    <span class="arrow">→</span>
-  </a>
-</div>
 <div class="mm-badge-comunidad">
   <span class="star">✦</span>Comunidad Elemental · {{ customer.first_name | default: 'Adoptante' }}
 </div>
@@ -161,9 +154,15 @@
 
 <section class="blog-hero">
   <div class="blog-hero-inner">
-    <p class="eyebrow">Comunidad Elemental Esotérica</p>
-    <h1>Mi Magia</h1>
-    <p class="sub">El Blog del Oficio</p>
+    {% if blog.handle == 'comunidad-elemental' %}
+      <p class="eyebrow">EL BLOG · COMUNIDAD ELEMENTAL</p>
+      <h1>Comunidad Elemental</h1>
+      <p class="sub">EL BLOG DEL OFICIO</p>
+    {% else %}
+      <p class="eyebrow">Comunidad Elemental Esotérica</p>
+      <h1>{{ blog.title | escape }}</h1>
+      <p class="sub">El Blog del Oficio</p>
+    {% endif %}
     <p class="lead">Acá vive la palabra: artículos sobre los seres elementales, los linajes, los rituales, los sueños y la canalización. Volvé cuando quieras.</p>
   </div>
 </section>
@@ -171,13 +170,13 @@
 <section class="categorias-modulo">
   <h2>Por categoría</h2>
   <div class="cat-grid">
-    <a href="/blogs/mi-magia/tagged/quienes-son">Quiénes son</a>
-    <a href="/blogs/mi-magia/tagged/como-se-canaliza">Cómo se canaliza</a>
-    <a href="/blogs/mi-magia/tagged/linajes">Linajes</a>
-    <a href="/blogs/mi-magia/tagged/rituales">Rituales</a>
-    <a href="/blogs/mi-magia/tagged/cuando-te-elige">Cuándo te elige</a>
-    <a href="/blogs/mi-magia/tagged/oficio">El oficio</a>
-    <a href="/blogs/mi-magia/tagged/compendio">Compendio</a>
+    <a href="{{ blog.url }}/tagged/quienes-son">Quiénes son</a>
+    <a href="{{ blog.url }}/tagged/como-se-canaliza">Cómo se canaliza</a>
+    <a href="{{ blog.url }}/tagged/linajes">Linajes</a>
+    <a href="{{ blog.url }}/tagged/rituales">Rituales</a>
+    <a href="{{ blog.url }}/tagged/cuando-te-elige">Cuándo te elige</a>
+    <a href="{{ blog.url }}/tagged/oficio">El oficio</a>
+    <a href="{{ blog.url }}/tagged/compendio">Compendio</a>
   </div>
 </section>
 
@@ -190,13 +189,22 @@
 {%- comment -%} POST DESTACADO {%- endcomment -%}
 {%- assign destacado = nil -%}
 {%- for article in blog.articles -%}
+  {%- if article.handle == 'canalizacion-almica' -%}{%- continue -%}{%- endif -%}
+  {%- assign ddu_bt = article.title | strip | downcase -%}
+  {%- if ddu_bt contains 'canalización álmica' or ddu_bt contains 'canalizacion almica' -%}{%- continue -%}{%- endif -%}
   {%- if article.tags contains 'destacado' or article.tags contains 'Destacado' -%}
     {%- assign destacado = article -%}
     {%- break -%}
   {%- endif -%}
 {%- endfor -%}
 {%- if destacado == nil and blog.articles.size > 0 -%}
-  {%- assign destacado = blog.articles.first -%}
+  {%- for article in blog.articles -%}
+    {%- if article.handle == 'canalizacion-almica' -%}{%- continue -%}{%- endif -%}
+    {%- assign ddu_bt = article.title | strip | downcase -%}
+    {%- if ddu_bt contains 'canalización álmica' or ddu_bt contains 'canalizacion almica' -%}{%- continue -%}{%- endif -%}
+    {%- assign destacado = article -%}
+    {%- break -%}
+  {%- endfor -%}
 {%- endif -%}
 
 {%- if destacado -%}
@@ -241,6 +249,9 @@
   {%- paginate blog.articles by 12 -%}
     {%- if blog.articles.size > 0 -%}
       {%- for article in blog.articles -%}
+        {%- if article.handle == 'canalizacion-almica' -%}{%- continue -%}{%- endif -%}
+        {%- assign ddu_bt = article.title | strip | downcase -%}
+        {%- if ddu_bt contains 'canalización álmica' or ddu_bt contains 'canalizacion almica' -%}{%- continue -%}{%- endif -%}
         {%- if destacado and article.id == destacado.id and current_tags == blank -%}{%- continue -%}{%- endif -%}
         <a href="{{ article.url }}" class="article-card">
           <div class="img-wrap">
@@ -260,7 +271,7 @@
                 {%- endunless -%}
               {%- endfor -%}
             {%- else -%}
-              <p class="cat">Mi Magia</p>
+              <p class="cat">{{ blog.title }}</p>
             {%- endif -%}
             <p class="meta-row">
               <span>{{ article.published_at | date: "%d %b %Y" }}</span>

@@ -26,10 +26,31 @@
       class="blog-posts-container"
     >
       {% liquid
-        assign items_on_page = blog.articles.size
+        assign ddu_visible_total = 0
+        for article in blog.articles
+          if article.handle == 'canalizacion-almica'
+            continue
+          endif
+          assign ddu_at = article.title | strip | downcase
+          if ddu_at contains 'canalización álmica' or ddu_at contains 'canalizacion almica'
+            continue
+          endif
+          assign ddu_visible_total = ddu_visible_total | plus: 1
+        endfor
+        assign items_on_page = ddu_visible_total
+        assign ddu_vis_i = 0
       %}
       {% for article in blog.articles %}
         {% liquid
+          if article.handle == 'canalizacion-almica'
+            continue
+          endif
+          assign ddu_at = article.title | strip | downcase
+          if ddu_at contains 'canalización álmica' or ddu_at contains 'canalizacion almica'
+            continue
+          endif
+          assign ddu_vis_i = ddu_vis_i | plus: 1
+          assign vi = ddu_vis_i
           # Defaults for compact layout
           assign col_span = 2
           assign scale = 0.6
@@ -47,7 +68,7 @@
               assign scale = 0.8
             when 3
               # Three posts: hero + 2 standard
-              if forloop.index == 1
+              if vi == 1
                 assign col_span = 6
                 assign scale = 1
                 assign is_horizontal = true
@@ -61,7 +82,7 @@
               assign scale = 0.8
             when 5
               # Five posts: hero + 4 standard
-              if forloop.index == 1
+              if vi == 1
                 assign col_span = 6
                 assign scale = 1
                 assign is_horizontal = true
@@ -71,11 +92,11 @@
               endif
             else
               # 6+ posts: hero, 2 standard, rest compact
-              if forloop.index == 1
+              if vi == 1
                 assign col_span = 6
                 assign scale = 1
                 assign is_horizontal = true
-              elsif forloop.index <= 3
+              elsif vi <= 3
                 assign col_span = 3
                 assign scale = 0.8
               else
@@ -85,13 +106,13 @@
           endcase
         %}
         {% style %}
-          [data-blog-index="{{ section.id }}-{{ forloop.index }}"] {
+          [data-blog-index="{{ section.id }}-{{ vi }}"] {
             --col-span: {{ col_span }};
             --blog-post-card-scale: {{ scale }};
           }
 
           @media screen and (max-width: 749px) {
-            [data-blog-index="{{ section.id }}-{{ forloop.index }}"] {
+            [data-blog-index="{{ section.id }}-{{ vi }}"] {
               --col-span: 6;
               --blog-post-card-scale: 0.5;
             }
@@ -100,7 +121,7 @@
         <div
           class="blog-post-item{% if is_horizontal %} blog-post-item--horizontal{% endif %}"
           data-testid="blog-post-item"
-          data-blog-index="{{ section.id }}-{{ forloop.index }}"
+          data-blog-index="{{ section.id }}-{{ vi }}"
         >
           {% content_for 'block', id: 'static-blog-post-card', type: '_blog-post-card', article: article %}
         </div>
@@ -149,6 +170,24 @@
   .blog-post-item:has(.blog-post-card__image-container) {
     border: none;
     padding: 0;
+  }
+
+  .dh2-ce-blog-eyebrow {
+    font-family: var(--font-subheading--family, var(--font-body--family));
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.78;
+    margin: 0 0 0.75rem;
+  }
+
+  .dh2-ce-blog-sub {
+    font-family: var(--font-subheading--family, var(--font-body--family));
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.72;
+    margin: 0.65rem 0 0;
   }
 {% endstylesheet %}
 
