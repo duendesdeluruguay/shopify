@@ -16,6 +16,12 @@ Hacé estos pasos en **Shopify Admin** cuando puedas; el theme ya apunta al blog
 - Cambiá la visibilidad a **Oculto** (Hidden) o archiválo / eliminálo si ya no debe indexarse.
 - El theme también **oculta** en listados la entrada cuyo handle sea `canalizacion-almica` o cuyo título coincida con «Canalización Álmica»; aun así conviene ocultarlo en Admin para SEO y para que no quede accesible por URL directa si no querés que se lea.
 
+## Blog Comunidad Elemental — plantilla con H1 fijo
+
+- En el **editor de tema**, navegá al blog **Comunidad elemental** (`/blogs/comunidad-elemental`).
+- **Cambiar plantilla de tema** (o el selector de plantilla en la barra superior) y elegí **`blog.comunidad-elemental`**.
+- Eso carga `templates/blog.comunidad-elemental.json`, con el encabezado **Comunidad Elemental** y la línea **EL BLOG · COMUNIDAD ELEMENTAL** sin depender del nombre del blog en Admin. Si no asignás esta plantilla, seguirá aplicándose la plantilla por defecto `blog.json` (H1 = título del blog en Admin).
+
 ## 1. Menú principal — link Comunidad Elemental (404)
 
 - **Admin → Tienda online → Navegación → Menú principal** (o el menú que use el header).

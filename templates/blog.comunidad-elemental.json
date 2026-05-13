@@ -7,7 +7,7 @@
           "type": "text",
           "name": "Title",
           "settings": {
-            "text": "<h1>{{ closest.blog.title }}</h1>",
+            "text": "<div class=\"dh2-ce-blog-eyebrow\">EL BLOG · COMUNIDAD ELEMENTAL</div><h1>Comunidad Elemental</h1><div class=\"dh2-ce-blog-sub\">EL BLOG DEL OFICIO</div>",
             "width": "fit-content",
             "max_width": "narrow",
             "alignment": "left",
