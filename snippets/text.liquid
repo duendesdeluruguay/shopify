@@ -14,7 +14,9 @@
   else
     assign raw_block_text = block_settings.text | strip_newlines | strip
   endif
-  if raw_block_text contains '{{' and raw_block_text contains '}}'
+  assign _ddu_open_b = '{' | append: '{'
+  assign _ddu_close_b = '}' | append: '}'
+  if raw_block_text contains _ddu_open_b and raw_block_text contains _ddu_close_b
     assign raw_block_text = ''
   endif
   assign effective_block_text = raw_block_text
