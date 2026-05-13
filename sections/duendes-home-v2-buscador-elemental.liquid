@@ -39,9 +39,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 85% 60% at 50% 32%, rgba(201, 169, 97, 0.26) 0%, transparent 62%),
-      radial-gradient(ellipse 45% 35% at 85% 75%, rgba(201, 169, 97, 0.12) 0%, transparent 55%),
-      radial-gradient(ellipse 40% 30% at 12% 70%, rgba(201, 169, 97, 0.1) 0%, transparent 50%);
+      radial-gradient(85% 60% at 50% 32%, rgba(201, 169, 97, 0.55) 0%, rgba(0, 0, 0, 0) 62%),
+      radial-gradient(60% 40% at 50% 70%, rgba(201, 169, 97, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
     pointer-events: none;
     z-index: 0;
     animation: dh2-be-glow-pulse 10s ease-in-out infinite;
@@ -60,7 +59,7 @@
   .dh2-be__noise {
     position: absolute;
     inset: 0;
-    opacity: 0.14;
+    opacity: 0.28 !important;
     pointer-events: none;
     z-index: 1;
     mix-blend-mode: overlay;
@@ -83,34 +82,37 @@
   }
   .dh2-be__dot {
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 4px !important;
+    height: 4px !important;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #fff6d4, #c9a961 45%, #6a5428 100%);
-    opacity: 0;
+    opacity: 0 !important;
+    background: radial-gradient(circle at 30% 30%, #fff6d4, #c9a961 45%, #6a5428 100%) !important;
     box-shadow:
-      0 0 14px rgba(201, 169, 97, 0.9),
-      0 0 28px rgba(201, 169, 97, 0.35);
+      0 0 12px rgba(201, 169, 97, 0.9),
+      0 0 24px rgba(201, 169, 97, 0.45) !important;
+    filter: blur(0.3px);
     animation: dh2-be-float 6.5s ease-in-out infinite;
   }
   .dh2-be__dot--sm {
-    width: 2.5px;
-    height: 2.5px;
-    box-shadow: 0 0 8px rgba(201, 169, 97, 0.75);
+    width: 3px !important;
+    height: 3px !important;
+    box-shadow:
+      0 0 10px rgba(201, 169, 97, 0.85),
+      0 0 20px rgba(201, 169, 97, 0.4) !important;
   }
   @keyframes dh2-be-float {
     0%,
     100% {
-      opacity: 0.15;
-      transform: translateY(0) scale(1);
+      opacity: 0;
+      transform: translateY(0);
     }
-    25%,
-    75% {
+    15%,
+    85% {
       opacity: 0.85;
     }
     50% {
       opacity: 1;
-      transform: translateY(-28px) scale(1.15);
+      transform: translateY(-22px);
     }
   }
   .dh2-be__content {
