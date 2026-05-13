@@ -67,7 +67,7 @@
     --dh2-ink: #15110d;
     background: #faf9f7 !important;
     color: var(--dh2-ink);
-    padding: 72px 0 80px;
+    padding: 56px 0 64px;
     position: relative;
     overflow-x: visible;
     overflow-y: visible;
@@ -238,8 +238,10 @@
     border: 1px solid rgba(201, 169, 97, 0.35);
     white-space: nowrap;
   }
-  .dh2-cb__card:not(.dh2-cb__card--center) .dh2-cb__badge {
-    display: none;
+  @media (min-width: 768px) {
+    .dh2-cb__card:not(.dh2-cb__card--center) .dh2-cb__badge {
+      display: none;
+    }
   }
   .dh2-cb__meta {
     position: absolute;
@@ -377,12 +379,23 @@
     .dh2-cb__swipe-hint {
       display: block;
     }
+    .dh2-cb__badge {
+      display: none;
+    }
+    .dh2-cb__card--focal .dh2-cb__badge {
+      display: block;
+    }
+    .dh2-cb {
+      padding-top: 48px !important;
+      padding-bottom: 52px !important;
+    }
     .dh2-cb__deck {
       flex-wrap: nowrap;
       justify-content: flex-start;
-      align-items: stretch;
+      align-items: center;
       gap: 16px;
-      padding: 0 32px;
+      margin-top: 24px;
+      padding: 12px 32px 16px;
       margin-left: -20px;
       margin-right: -20px;
       width: calc(100% + 40px);
@@ -394,6 +407,7 @@
       -webkit-overflow-scrolling: touch;
       scroll-padding-inline: 32px;
       scrollbar-width: none;
+      touch-action: pan-x;
     }
     .dh2-cb__deck::-webkit-scrollbar {
       display: none;
@@ -405,11 +419,25 @@
       flex: 0 0 calc(85vw - 64px);
       max-width: none;
       scroll-snap-align: center;
-      transform: none !important;
       order: 0;
+      transform: scale(0.88);
+      transform-origin: center center;
+      opacity: 0.88;
+      filter: brightness(0.96);
+      transition: transform 0.28s ease, opacity 0.28s ease, filter 0.28s ease, box-shadow 0.28s ease;
     }
-    .dh2-cb__card:active {
-      transform: scale(0.97) !important;
+    .dh2-cb__card--focal {
+      transform: scale(1.07);
+      opacity: 1;
+      filter: none;
+      z-index: 3;
+      box-shadow: 0 22px 56px rgba(0, 0, 0, 0.4);
+    }
+    .dh2-cb__card--focal:active {
+      transform: scale(0.98) !important;
+    }
+    .dh2-cb__card:not(.dh2-cb__card--focal):active {
+      transform: scale(0.82) !important;
     }
   }
   /* Theme wrapper overrides (OS 2.0): fondo crema */
@@ -503,9 +531,7 @@
             <div class="dh2-cb__shade" aria-hidden="true"></div>
             <div class="dh2-cb__top">
               <p class="dh2-cb__roman" aria-hidden="true">{{ dh2_cb_roman }}</p>
-              {% if dh2_cb_pos == 1 %}
-                <span class="dh2-cb__badge">{{ dh2_cb_badge }}</span>
-              {% endif %}
+              <span class="dh2-cb__badge">{{ dh2_cb_badge }}</span>
             </div>
             <div class="dh2-cb__meta">
               <p class="dh2-cb__name">{{ block.settings.display_title | default: product.title }}</p>
@@ -595,12 +621,56 @@
       document.body.style.overflow = '';
     }
 
+    var deck = root.querySelector('.dh2-cb__deck');
+    var focalRaf = 0;
+    function updateCardFocal() {
+      if (!deck) return;
+      var isMobile = window.matchMedia('(max-width: 767px)').matches;
+      var cards = root.querySelectorAll('[data-dh2-gallery-id]');
+      if (!isMobile) {
+        cards.forEach(function (c) {
+          c.classList.remove('dh2-cb__card--focal');
+        });
+        return;
+      }
+      if (!cards.length) return;
+      var deckRect = deck.getBoundingClientRect();
+      var mid = deckRect.left + deckRect.width * 0.5;
+      var best = null;
+      var bestDist = Infinity;
+      cards.forEach(function (card) {
+        var r = card.getBoundingClientRect();
+        var cx = r.left + r.width * 0.5;
+        var d = Math.abs(cx - mid);
+        if (d < bestDist) {
+          bestDist = d;
+          best = card;
+        }
+      });
+      cards.forEach(function (card) {
+        card.classList.toggle('dh2-cb__card--focal', card === best);
+      });
+    }
+    function scheduleFocal() {
+      if (focalRaf) cancelAnimationFrame(focalRaf);
+      focalRaf = requestAnimationFrame(function () {
+        focalRaf = 0;
+        updateCardFocal();
+      });
+    }
+    if (deck) {
+      deck.addEventListener('scroll', scheduleFocal, { passive: true });
+    }
+    window.addEventListener('resize', scheduleFocal);
+    scheduleFocal();
+    requestAnimationFrame(scheduleFocal);
+
     root.querySelectorAll('[data-dh2-gallery-id]').forEach(function (card) {
       card.addEventListener('click', function (e) {
-        var openModal =
+        var useModal =
           window.matchMedia('(hover: none) and (pointer: coarse)').matches ||
           window.matchMedia('(max-width: 767px)').matches;
-        if (!openModal) return;
+        if (!useModal) return;
         e.preventDefault();
         var gid = card.getAttribute('data-dh2-gallery-id');
         var script = gid ? root.querySelector('script[data-dh2-cb-gallery="' + gid + '"]') : null;

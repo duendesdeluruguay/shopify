@@ -19,7 +19,7 @@
 <style>
   .dh2-lin {
     background: #faf9f6;
-    padding: 64px 0 72px;
+    padding: 48px 0 56px;
     color: #15110d;
   }
   .dh2-lin__inner {
@@ -47,7 +47,7 @@
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
     font-size: clamp(15px, 1.9vw, 18px);
     text-align: center;
-    margin: 0 auto 28px;
+    margin: 0 auto 20px;
     max-width: 520px;
     line-height: 1.45;
     color: rgba(21, 17, 13, 0.58);
@@ -117,7 +117,7 @@
   }
   .dh2-lin__name {
     font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 0 0 6px;
@@ -126,27 +126,14 @@
   }
   .dh2-lin__count {
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 0.04em;
     color: rgba(244, 241, 236, 0.82);
   }
   @media (max-width: 768px) {
-    .dh2-lin__rail {
-      gap: 10px;
+    .dh2-lin {
+      padding: 28px 0 36px;
     }
-    .dh2-lin__card {
-      flex: 0 0 clamp(120px, 38vw, 160px);
-      width: clamp(120px, 38vw, 160px);
-    }
-    .dh2-lin__name {
-      font-size: 14px !important;
-    }
-    .dh2-lin__count {
-      font-size: 9px !important;
-      letter-spacing: 0.15em !important;
-    }
-  }
-  @media (max-width: 768px) {
     .dh2-lin.section {
       overflow-x: hidden;
     }
@@ -154,14 +141,38 @@
       padding-left: max(20px, env(safe-area-inset-left, 0px));
       padding-right: max(24px, env(safe-area-inset-right, 0px));
     }
+    .dh2-lin__sub {
+      margin-bottom: 14px !important;
+    }
+    .dh2-lin__rail {
+      gap: 12px;
+      padding-top: 2px;
+    }
+    .dh2-lin__card {
+      flex: 0 0 clamp(148px, 44vw, 190px);
+      width: clamp(148px, 44vw, 190px);
+    }
+    .dh2-lin__body {
+      padding: 14px 10px 16px;
+    }
+    .dh2-lin__name {
+      font-size: 15px !important;
+      letter-spacing: 0.08em !important;
+    }
+    .dh2-lin__count {
+      font-size: 12px !important;
+      letter-spacing: 0.06em !important;
+    }
     h2.dh2-lin__title,
     .dh2-lin__title {
       font-size: 26px !important;
       line-height: 1.15 !important;
       max-width: 100% !important;
+      margin-bottom: 8px !important;
     }
     .dh2-lin__tag {
       font-size: 9px !important;
+      margin-bottom: 8px !important;
     }
   }
 </style>
