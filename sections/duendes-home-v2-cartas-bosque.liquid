@@ -23,6 +23,10 @@
   if dh2_cb_sub contains 'translation missing'
     assign dh2_cb_sub = ''
   endif
+  assign dh2_cb_swipe_hint = 'duendes.home_v2.cartas.hint' | t
+  if dh2_cb_swipe_hint contains 'translation missing'
+    assign dh2_cb_swipe_hint = ''
+  endif
   assign dh2_cb_badge = section.settings.badge_destacado | strip
   if dh2_cb_badge == blank
     assign dh2_cb_badge = 'duendes.home_v2.cartas.badge' | t
@@ -65,7 +69,8 @@
     color: var(--dh2-ink);
     padding: 72px 0 80px;
     position: relative;
-    overflow: hidden;
+    overflow-x: visible;
+    overflow-y: visible;
   }
   .dh2-cb__inner {
     max-width: 1180px;
@@ -99,6 +104,16 @@
     color: rgba(21, 17, 13, 0.62);
     font-style: italic;
   }
+  .dh2-cb__swipe-hint {
+    display: none;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: rgba(201, 169, 97, 0.6);
+    text-align: center;
+    margin: 16px 0 0;
+    text-transform: uppercase;
+  }
   .dh2-cb__deck {
     display: flex;
     align-items: flex-end;
@@ -119,25 +134,39 @@
     color: inherit;
     display: block;
     overflow: hidden;
-    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.25s ease;
+    transition: transform 0.2s ease, box-shadow 0.35s ease, border-color 0.25s ease;
     -webkit-tap-highlight-color: transparent;
     background: #0a0805;
   }
-  .dh2-cb__card--left,
-  .dh2-cb__card--right {
-    transform: scale(1);
+  @media (min-width: 768px) {
+    .dh2-cb__deck {
+      flex-wrap: nowrap;
+      overflow: visible;
+    }
+    .dh2-cb__card--left {
+      transform: perspective(900px) rotateY(-9deg) scale(1);
+      transform-origin: center bottom;
+    }
+    .dh2-cb__card--right {
+      transform: perspective(900px) rotateY(9deg) scale(1);
+      transform-origin: center bottom;
+    }
+    .dh2-cb__card--center {
+      flex: 0 0 clamp(188px, 28vw, 280px);
+      transform: scale(1.05);
+      z-index: 2;
+    }
   }
-  .dh2-cb__card--center {
-    flex-basis: clamp(188px, 28vw, 280px);
-    transform: scale(1.05);
-    z-index: 2;
-  }
-  @media (hover: hover) and (pointer: fine) {
+  @media (hover: hover) and (pointer: fine) and (min-width: 768px) {
     .dh2-cb__card--left:hover,
+    .dh2-cb__card--left:focus-visible {
+      transform: perspective(900px) rotateY(-9deg) scale(1.06);
+      box-shadow: 0 22px 60px rgba(201, 169, 97, 0.28);
+      border-color: #d4b87a;
+    }
     .dh2-cb__card--right:hover,
-    .dh2-cb__card--left:focus-visible,
     .dh2-cb__card--right:focus-visible {
-      transform: scale(1.06);
+      transform: perspective(900px) rotateY(9deg) scale(1.06);
       box-shadow: 0 22px 60px rgba(201, 169, 97, 0.28);
       border-color: #d4b87a;
     }
@@ -146,6 +175,17 @@
       transform: scale(1.1);
       box-shadow: 0 22px 60px rgba(201, 169, 97, 0.28);
       border-color: #d4b87a;
+    }
+  }
+  @media (min-width: 768px) {
+    .dh2-cb__card--left:active {
+      transform: perspective(900px) rotateY(-9deg) scale(0.97);
+    }
+    .dh2-cb__card--right:active {
+      transform: perspective(900px) rotateY(9deg) scale(0.97);
+    }
+    .dh2-cb__card--center:active {
+      transform: scale(0.97);
     }
   }
   .dh2-cb__media {
@@ -161,7 +201,7 @@
   .dh2-cb__shade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(5, 4, 2, 0.22) 0%, rgba(5, 4, 2, 0.52) 100%);
+    background: linear-gradient(180deg, rgba(5, 4, 2, 0.38) 0%, rgba(5, 4, 2, 0.48) 100%);
     pointer-events: none;
     z-index: 1;
   }
@@ -330,21 +370,46 @@
     text-transform: uppercase;
     color: var(--dh2-gold);
   }
-  @media (max-width: 749px) {
+  @media (max-width: 767px) {
+    .dh2-cb__inner {
+      overflow-x: visible;
+    }
+    .dh2-cb__swipe-hint {
+      display: block;
+    }
     .dh2-cb__deck {
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: 16px;
+      padding: 0 32px;
+      margin-left: -20px;
+      margin-right: -20px;
+      width: calc(100% + 40px);
+      max-width: none;
+      box-sizing: border-box;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-padding-inline: 32px;
+      scrollbar-width: none;
+    }
+    .dh2-cb__deck::-webkit-scrollbar {
+      display: none;
     }
     .dh2-cb__card,
     .dh2-cb__card--center,
+    .dh2-cb__card--left,
     .dh2-cb__card--right {
-      flex: 1 1 calc(50% - 12px);
-      max-width: calc(50% - 12px);
+      flex: 0 0 calc(85vw - 64px);
+      max-width: none;
+      scroll-snap-align: center;
+      transform: none !important;
+      order: 0;
     }
-    .dh2-cb__card--center {
-      flex: 1 1 100%;
-      max-width: 280px;
-      margin: 0 auto;
-      order: -1;
+    .dh2-cb__card:active {
+      transform: scale(0.97) !important;
     }
   }
   /* Theme wrapper overrides (OS 2.0): fondo crema */
@@ -364,7 +429,7 @@
   }
   @media (max-width: 768px) {
     section.dh2-cb.section {
-      overflow-x: hidden;
+      overflow-x: visible;
     }
     .dh2-cb__inner {
       padding-left: max(20px, env(safe-area-inset-left, 0px));
@@ -398,6 +463,9 @@
     <h2 class="dh2-cb__title">{{ dh2_cb_title }}</h2>
     {% if dh2_cb_sub != blank %}
       <p class="dh2-cb__sub">{{ dh2_cb_sub }}</p>
+    {% endif %}
+    {% if dh2_cb_swipe_hint != blank %}
+      <p class="dh2-cb__swipe-hint">{{ dh2_cb_swipe_hint }}</p>
     {% endif %}
     <div class="dh2-cb__deck">
       {%- assign dh2_cb_slot = 0 -%}
@@ -531,7 +599,7 @@
       card.addEventListener('click', function (e) {
         var openModal =
           window.matchMedia('(hover: none) and (pointer: coarse)').matches ||
-          window.matchMedia('(max-width: 749px)').matches;
+          window.matchMedia('(max-width: 767px)').matches;
         if (!openModal) return;
         e.preventDefault();
         var gid = card.getAttribute('data-dh2-gallery-id');

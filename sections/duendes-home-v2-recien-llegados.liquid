@@ -141,12 +141,6 @@
     color: #a88b42;
     white-space: nowrap;
   }
-  @media (max-width: 749px) {
-    .dh2-new__card {
-      flex: 0 0 calc(50% - 9px);
-      min-width: 160px;
-    }
-  }
   @media (max-width: 768px) {
     .dh2-new.section {
       overflow-x: hidden;
@@ -154,6 +148,17 @@
     .dh2-new__inner {
       padding-left: max(20px, env(safe-area-inset-left, 0px));
       padding-right: max(24px, env(safe-area-inset-right, 0px));
+    }
+    .dh2-new__track {
+      gap: 10px;
+    }
+    .dh2-new__card {
+      flex: 0 0 clamp(140px, 42vw, 180px);
+      width: clamp(140px, 42vw, 180px);
+      min-width: 0;
+    }
+    .dh2-new__img {
+      aspect-ratio: 3 / 4;
     }
     h2.dh2-new__title,
     .dh2-new__title {
