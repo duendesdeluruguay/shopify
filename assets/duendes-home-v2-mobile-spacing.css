@@ -1,30 +1,49 @@
-/* Home v2 — reduce vertical rhythm on small screens (one connected scroll) */
-@media (max-width: 768px) {
-  section.dh2-cb.section,
-  section.dh2-new.section,
-  section.dh2-lin.section,
-  section.dh2-sp.section,
-  section.dh2-ed.section,
-  section.dh2-rito.section,
-  section.dh2-read.section,
-  section.dh2-tribu.section {
+/**
+ * Home v2 — mobile vertical rhythm (loads in head after base.css).
+ * Targets Shopify wrapper + inner section so theme .section grid no anula el padding.
+ */
+@media screen and (max-width: 768px) {
+  .shopify-section.duendes-home-v2-cartas-bosque-section,
+  .shopify-section.duendes-home-v2-hero-section,
+  .shopify-section.duendes-home-v2-recien-llegados-section,
+  .shopify-section.duendes-home-v2-linajes-section,
+  .shopify-section.duendes-home-v2-buscador-elemental-section,
+  .shopify-section.duendes-home-v2-social-proof-section,
+  .shopify-section.duendes-home-v2-editorial-section,
+  .shopify-section.duendes-home-v2-rito-pasos-section,
+  .shopify-section.duendes-home-v2-lectura-test-section,
+  .shopify-section.duendes-home-v2-tribu-newsletter-section {
+    margin-block: 0 !important;
+    padding-block: 0 !important;
+  }
+
+  .shopify-section.duendes-home-v2-cartas-bosque-section > section.dh2-cb.section,
+  .shopify-section.duendes-home-v2-recien-llegados-section > section.dh2-new.section,
+  .shopify-section.duendes-home-v2-linajes-section > section.dh2-lin.section,
+  .shopify-section.duendes-home-v2-social-proof-section > section.dh2-sp.section,
+  .shopify-section.duendes-home-v2-editorial-section > section.dh2-ed.section,
+  .shopify-section.duendes-home-v2-rito-pasos-section > section.dh2-rito.section,
+  .shopify-section.duendes-home-v2-lectura-test-section > section.dh2-read.section,
+  .shopify-section.duendes-home-v2-tribu-newsletter-section > section.dh2-tribu.section {
     padding-block: 40px !important;
   }
 
-  section.dh2-hero.section .dh2-hero__inner {
+  .shopify-section.duendes-home-v2-hero-section > section.dh2-hero.section .dh2-hero__inner {
     padding-block: 40px !important;
   }
 
-  section.dh2-be.section .dh2-be__inner {
+  .shopify-section.duendes-home-v2-buscador-elemental-section section.dh2-be.section .dh2-be__inner {
     padding-top: 40px !important;
     padding-bottom: 40px !important;
   }
 
-  section.dh2-be.section .dh2-be__results {
+  .shopify-section.duendes-home-v2-buscador-elemental-section section.dh2-be.section .dh2-be__results {
     padding-bottom: 40px !important;
   }
 
-  section.dh2-be.section.dh2-be--has-results .dh2-be__results {
+  .shopify-section.duendes-home-v2-buscador-elemental-section
+    section.dh2-be.section.dh2-be--has-results
+    .dh2-be__results {
     padding-top: 40px !important;
   }
 }

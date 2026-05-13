@@ -38,54 +38,84 @@
   .dh2-be__glow {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(201, 169, 97, 0.14) 0%, transparent 72%);
+    background:
+      radial-gradient(ellipse 85% 60% at 50% 32%, rgba(201, 169, 97, 0.26) 0%, transparent 62%),
+      radial-gradient(ellipse 45% 35% at 85% 75%, rgba(201, 169, 97, 0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 30% at 12% 70%, rgba(201, 169, 97, 0.1) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
+    animation: dh2-be-glow-pulse 10s ease-in-out infinite;
+  }
+  @keyframes dh2-be-glow-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 0.92;
+      filter: brightness(1.12);
+    }
   }
   .dh2-be__noise {
     position: absolute;
     inset: 0;
-    opacity: 0.09;
+    opacity: 0.14;
     pointer-events: none;
     z-index: 1;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+  .dh2-be__vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(ellipse 75% 65% at 50% 45%, transparent 25%, rgba(5, 4, 2, 0.55) 100%);
   }
   .dh2-be__particles {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    z-index: 2;
+    z-index: 3;
     overflow: hidden;
   }
   .dh2-be__dot {
     position: absolute;
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    background: #c9a961;
+    background: radial-gradient(circle at 30% 30%, #fff6d4, #c9a961 45%, #6a5428 100%);
     opacity: 0;
-    box-shadow: 0 0 10px rgba(201, 169, 97, 0.65);
-    animation: dh2-be-float 8s ease-in-out infinite;
+    box-shadow:
+      0 0 14px rgba(201, 169, 97, 0.9),
+      0 0 28px rgba(201, 169, 97, 0.35);
+    animation: dh2-be-float 6.5s ease-in-out infinite;
+  }
+  .dh2-be__dot--sm {
+    width: 2.5px;
+    height: 2.5px;
+    box-shadow: 0 0 8px rgba(201, 169, 97, 0.75);
   }
   @keyframes dh2-be-float {
     0%,
     100% {
-      opacity: 0;
-      transform: translateY(0);
+      opacity: 0.15;
+      transform: translateY(0) scale(1);
     }
-    20%,
-    80% {
-      opacity: 0.75;
+    25%,
+    75% {
+      opacity: 0.85;
     }
     50% {
       opacity: 1;
-      transform: translateY(-22px);
+      transform: translateY(-28px) scale(1.15);
     }
   }
   .dh2-be__content {
     position: relative;
-    z-index: 5;
+    z-index: 10;
   }
   .dh2-be--has-results .dh2-be__inner {
     position: absolute;
@@ -458,7 +488,6 @@
     }
   }
 </style>
-{{ 'duendes-home-v2-mobile-spacing.css' | asset_url | stylesheet_tag }}
 
 <section
   class="dh2-be section"
@@ -469,12 +498,18 @@
 >
   <div class="dh2-be__glow" aria-hidden="true"></div>
   <div class="dh2-be__noise" aria-hidden="true"></div>
+  <div class="dh2-be__vignette" aria-hidden="true"></div>
   <div class="dh2-be__particles" aria-hidden="true">
     <span class="dh2-be__dot" style="left:15%; top:30%; animation-delay:0s"></span>
+    <span class="dh2-be__dot dh2-be__dot--sm" style="left:22%; top:48%; animation-delay:0.8s"></span>
     <span class="dh2-be__dot" style="left:78%; top:25%; animation-delay:1.5s"></span>
+    <span class="dh2-be__dot dh2-be__dot--sm" style="left:68%; top:42%; animation-delay:2.2s"></span>
     <span class="dh2-be__dot" style="left:32%; top:65%; animation-delay:3s"></span>
+    <span class="dh2-be__dot dh2-be__dot--sm" style="left:44%; top:18%; animation-delay:3.8s"></span>
     <span class="dh2-be__dot" style="left:85%; top:75%; animation-delay:4.5s"></span>
+    <span class="dh2-be__dot dh2-be__dot--sm" style="left:8%; top:62%; animation-delay:5.2s"></span>
     <span class="dh2-be__dot" style="left:50%; top:88%; animation-delay:6s"></span>
+    <span class="dh2-be__dot dh2-be__dot--sm" style="left:92%; top:52%; animation-delay:6.8s"></span>
   </div>
   <div class="dh2-be__content">
   <div class="dh2-be__inner">
