@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "duendes-el-portal",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "premium_threshold_cents": 200000,
+        "premium_override_tag": "portal-servicios-premium",
+        "padding-block-start": 24,
+        "padding-block-end": 48
+      }
+    }
+  },
+  "order": ["main"]
+}

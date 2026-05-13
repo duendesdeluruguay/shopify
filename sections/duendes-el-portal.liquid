@@ -1,0 +1,319 @@
+{%- liquid
+  assign threshold = section.settings.premium_threshold_cents | default: 200000 | plus: 0
+  assign override_tag = section.settings.premium_override_tag | strip
+  assign show_premium = false
+  if customer
+    if customer.total_spent >= threshold
+      assign show_premium = true
+    endif
+    if override_tag != blank and customer.tags contains override_tag
+      assign show_premium = true
+    endif
+  endif
+-%}
+
+<div class="du-el-portal color-{{ section.settings.color_scheme }}">
+  <div class="du-el-portal__bg"></div>
+  <div class="page-width du-el-portal__inner section section--page-width spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+    {% if customer == blank %}
+      <header class="du-el-portal__hero">
+        <p class="du-el-portal__glyph">✦</p>
+        <h1 class="du-el-portal__title">{{ section.settings.gate_title | escape }}</h1>
+        <p class="du-el-portal__lead">{{ section.settings.gate_lead | escape }}</p>
+        <div class="du-el-portal__actions">
+          <a class="button" href="{{ routes.account_login_url }}">{{ section.settings.gate_cta_login | escape }}</a>
+          <a class="button button--secondary" href="{{ routes.account_register_url }}">{{ section.settings.gate_cta_register | escape }}</a>
+        </div>
+      </header>
+    {% else %}
+      <header class="du-el-portal__hero du-el-portal__hero--authed">
+        <p class="du-el-portal__glyph">✦</p>
+        <p class="du-el-portal__eyebrow">{{ section.settings.welcome_eyebrow | escape }}</p>
+        {% assign _portal_nm = customer.first_name | default: 'Elegida' %}
+        {% assign _portal_wt = section.settings.welcome_title | replace: '[name]', _portal_nm %}
+        <h1 class="du-el-portal__title">{{ _portal_wt | escape }}</h1>
+        <p class="du-el-portal__lead">{{ section.settings.welcome_lead | escape }}</p>
+      </header>
+
+      <div class="du-el-portal__grid">
+        <section class="du-el-portal__card">
+          <h2>{{ section.settings.block_guides_title | escape }}</h2>
+          <div class="rte">{{ section.settings.block_guides_body }}</div>
+        </section>
+        <section class="du-el-portal__card">
+          <h2>{{ section.settings.block_meditaciones_title | escape }}</h2>
+          <div class="rte">{{ section.settings.block_meditaciones_body }}</div>
+        </section>
+      </div>
+
+      {% if show_premium %}
+        <section class="du-el-portal__premium">
+          <p class="du-el-portal__premium-label">{{ section.settings.premium_eyebrow | escape }}</p>
+          <h2>{{ section.settings.premium_title | escape }}</h2>
+          <div class="rte">{{ section.settings.premium_body }}</div>
+        </section>
+      {% else %}
+        <p class="du-el-portal__premium-hint">{{ section.settings.premium_locked_note | escape }}</p>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .du-el-portal {
+    position: relative;
+    overflow: hidden;
+    background: rgb(var(--color-background-rgb));
+  }
+  .du-el-portal__bg {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201, 169, 97, 0.12), transparent 55%);
+    opacity: 1;
+  }
+  .du-el-portal__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: 48px 72px;
+  }
+  .du-el-portal__hero {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+  .du-el-portal__glyph {
+    font-family: var(--font-heading--family);
+    letter-spacing: 0.45em;
+    color: rgba(var(--color-foreground-rgb), 0.45);
+    font-size: 1rem;
+    margin: 0 0 12px;
+  }
+  .du-el-portal__eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0 0 10px;
+  }
+  .du-el-portal__title {
+    font-family: var(--font-heading--family);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    margin: 0 0 16px;
+  }
+  .du-el-portal__lead {
+    font-style: italic;
+    line-height: 1.65;
+    opacity: 0.88;
+    margin: 0 0 28px;
+  }
+  .du-el-portal__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .du-el-portal__grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    margin-top: 8px;
+  }
+  .du-el-portal__card {
+    border: 1px solid rgba(var(--color-foreground-rgb), 0.12);
+    border-radius: 8px;
+    padding: 28px 24px;
+    background: rgba(var(--color-foreground-rgb), 0.03);
+  }
+  .du-el-portal__card h2 {
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    margin: 0 0 14px;
+  }
+  .du-el-portal__premium {
+    margin-top: 36px;
+    padding: 32px 28px;
+    border-radius: 8px;
+    border: 1px solid rgba(201, 169, 97, 0.35);
+    background: rgba(201, 169, 97, 0.06);
+    text-align: center;
+  }
+  .du-el-portal__premium-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin: 0 0 10px;
+  }
+  .du-el-portal__premium h2 {
+    margin: 0 0 12px;
+    font-size: 1.35rem;
+  }
+  .du-el-portal__premium-hint {
+    text-align: center;
+    font-style: italic;
+    opacity: 0.72;
+    margin: 32px auto 0;
+    max-width: 520px;
+    font-size: 0.95rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "El Portal (exclusivo)",
+  "tag": "section",
+  "class": "du-el-portal-section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Visitante (sin sesión)"
+    },
+    {
+      "type": "text",
+      "id": "gate_title",
+      "label": "Título",
+      "default": "El Portal ✦"
+    },
+    {
+      "type": "textarea",
+      "id": "gate_lead",
+      "label": "Texto",
+      "default": "Este espacio es para quienes ya caminan con un Guardián. Iniciá sesión con el mismo correo que usaste al adoptar."
+    },
+    {
+      "type": "text",
+      "id": "gate_cta_login",
+      "label": "Botón iniciar sesión",
+      "default": "Iniciar sesión"
+    },
+    {
+      "type": "text",
+      "id": "gate_cta_register",
+      "label": "Botón crear cuenta",
+      "default": "Crear cuenta"
+    },
+    {
+      "type": "header",
+      "content": "Cliente autenticado"
+    },
+    {
+      "type": "text",
+      "id": "welcome_eyebrow",
+      "label": "Antetítulo",
+      "default": "Portal exclusivo"
+    },
+    {
+      "type": "text",
+      "id": "welcome_title",
+      "label": "Título (usá [name] para el nombre)",
+      "default": "Bienvenida, [name]"
+    },
+    {
+      "type": "textarea",
+      "id": "welcome_lead",
+      "label": "Bajada",
+      "default": "Acá reunimos guías para convivir con tu Guardián, cuidados sencillos y acceso a meditaciones y cartas canalizadas del estudio."
+    },
+    {
+      "type": "text",
+      "id": "block_guides_title",
+      "label": "Bloque guías — título",
+      "default": "Guías para tu Guardián"
+    },
+    {
+      "type": "richtext",
+      "id": "block_guides_body",
+      "label": "Bloque guías — texto",
+      "default": "<p>Cuando llega: dejalo respirar en su empaque unas horas, elegí un lugar con luz natural y poca circulación ruidosa. Primeros días: una vela corta o una flor fresca bastan como ofrenda simbólica. Ritual simple: tres respiraciones conscientes frente a él, nombralo en voz baja y decile por qué lo elegiste.</p>"
+    },
+    {
+      "type": "text",
+      "id": "block_meditaciones_title",
+      "label": "Bloque meditaciones — título",
+      "default": "Meditaciones y cartas"
+    },
+    {
+      "type": "richtext",
+      "id": "block_meditaciones_body",
+      "label": "Bloque meditaciones — texto",
+      "default": "<p>El estudio publica frecuencias y lecturas canalizadas para la comunidad adoptante. Revisá tu correo y esta página: sumamos material cuando hay una tanda nueva.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Servicios premium (gasto histórico)"
+    },
+    {
+      "type": "number",
+      "id": "premium_threshold_cents",
+      "label": "Umbral en subunidad de moneda (ej. centavos USD)",
+      "default": 200000,
+      "info": "200000 = 2000.00 en monedas con centavos. En JPY/KRW el valor interno puede diferir: ajustá según tu moneda o usá etiqueta de cliente."
+    },
+    {
+      "type": "text",
+      "id": "premium_override_tag",
+      "label": "Etiqueta de cliente que desbloquea (opcional)",
+      "default": "portal-servicios-premium",
+      "info": "Si el cliente tiene esta etiqueta, ve la sección premium aunque no supere el umbral."
+    },
+    {
+      "type": "text",
+      "id": "premium_eyebrow",
+      "label": "Premium — antetítulo",
+      "default": "Servicios premium"
+    },
+    {
+      "type": "text",
+      "id": "premium_title",
+      "label": "Premium — título",
+      "default": "Canalización Álmica"
+    },
+    {
+      "type": "richtext",
+      "id": "premium_body",
+      "label": "Premium — descripción",
+      "default": "<p>Reservá tu lugar para una lectura profunda del vínculo con tu Guardián: audio y material escrito del estudio. Coordinamos por el canal que ya usás con Duendes.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "premium_locked_note",
+      "label": "Texto si aún no califica",
+      "default": "Los servicios premium de Canalización Álmica se muestran automáticamente cuando el historial de compras en esta tienda supera el umbral configurado arriba (o si el equipo te asignó la etiqueta de acceso)."
+    },
+    {
+      "type": "header",
+      "content": "Espaciado"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Arriba",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Abajo",
+      "default": 0
+    }
+  ],
+  "presets": [{ "name": "El Portal (exclusivo)" }]
+}
+{% endschema %}
