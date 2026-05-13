@@ -7,7 +7,7 @@
           "type": "text",
           "name": "Title",
           "settings": {
-            "text": "[ddu:collection_heading_h1]",
+            "text": "<p>[ddu:collection_heading_h1]</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
