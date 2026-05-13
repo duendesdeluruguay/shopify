@@ -54,8 +54,6 @@
   @media (max-width: 768px) {
     .dh2-ed.section {
       overflow-x: hidden;
-      padding-left: max(20px, env(safe-area-inset-left, 0px));
-      padding-right: max(24px, env(safe-area-inset-right, 0px));
     }
     .dh2-ed__quote {
       font-size: 16px !important;
@@ -67,10 +65,11 @@
     .dh2-ed__link {
       font-size: 14px !important;
     }
-  }
-  @media (max-width: 768px) {
-    .dh2-cb, .dh2-hero, .dh2-new, .dh2-lin, .dh2-be, .dh2-sp, .dh2-ed, .dh2-rito, .dh2-lt, .dh2-tribu {
-      padding-block: 12px !important;
+    .dh2-ed {
+      padding: 6px max(20px, env(safe-area-inset-left, 0px)) 6px max(24px, env(safe-area-inset-right, 0px)) !important;
+    }
+    .dh2-cb, .dh2-hero, .dh2-new, .dh2-lin, .dh2-be, .dh2-sp, .dh2-rito, .dh2-lt, .dh2-tribu {
+      padding: 6px 0 6px !important;
     }
   }
 </style>
