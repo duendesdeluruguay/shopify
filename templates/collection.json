@@ -7,7 +7,7 @@
           "type": "text",
           "name": "Title",
           "settings": {
-            "text": "<h2>{{ collection.title }}</h2>",
+            "text": "[ddu:collection_heading_h1]",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -33,7 +33,7 @@
           "type": "text",
           "name": "Description",
           "settings": {
-            "text": "{{ closest.collection.description }}",
+            "text": "",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",

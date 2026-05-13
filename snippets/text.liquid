@@ -28,7 +28,8 @@
         assign _ddu_shop_title = 'duendes.collection_all_title' | t
         assign effective_block_text = '<h2>' | append: _ddu_shop_title | append: '</h2>'
       else
-        assign effective_block_text = '<h2>' | append: collection.title | escape | append: '</h2>'
+        assign _ddu_col_h2 = collection.title | escape
+        assign effective_block_text = '<h2>' | append: _ddu_col_h2 | append: '</h2>'
       endif
     endif
   elsif raw_block_text contains 'duendes.collection_all_title' and raw_block_text contains 'append:'
@@ -44,7 +45,8 @@
         assign _ddu_shop_title = 'duendes.collection_all_title' | t
         assign effective_block_text = '<h2>' | append: _ddu_shop_title | append: '</h2>'
       else
-        assign effective_block_text = '<h2>' | append: collection.title | escape | append: '</h2>'
+        assign _ddu_col_h2 = collection.title | escape
+        assign effective_block_text = '<h2>' | append: _ddu_col_h2 | append: '</h2>'
       endif
     endif
   endif
