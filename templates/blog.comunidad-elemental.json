@@ -7,7 +7,7 @@
           "type": "text",
           "name": "Title",
           "settings": {
-            "text": "<p class=\"dh2-ce-blog-eyebrow\">EL BLOG · COMUNIDAD ELEMENTAL</p><h1>Comunidad Elemental</h1><p class=\"dh2-ce-blog-sub\">EL BLOG DEL OFICIO</p>",
+            "text": "<p>EL BLOG · COMUNIDAD ELEMENTAL</p><h1>Comunidad Elemental</h1><p>EL BLOG DEL OFICIO</p>",
             "width": "fit-content",
             "max_width": "narrow",
             "alignment": "left",
