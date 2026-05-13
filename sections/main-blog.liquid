@@ -28,7 +28,11 @@
       {% liquid
         assign ddu_visible_total = 0
         for article in blog.articles
-          if article.handle == 'canalizacion-almica'
+          assign _dduh = article.handle | downcase
+          if _dduh == 'canalizacion-almica' or _dduh contains 'canalizacion-almica'
+            continue
+          endif
+          if _dduh contains 'almica' and _dduh contains 'canaliz'
             continue
           endif
           assign ddu_at = article.title | strip | downcase
@@ -42,7 +46,11 @@
       %}
       {% for article in blog.articles %}
         {% liquid
-          if article.handle == 'canalizacion-almica'
+          assign _dduh = article.handle | downcase
+          if _dduh == 'canalizacion-almica' or _dduh contains 'canalizacion-almica'
+            continue
+          endif
+          if _dduh contains 'almica' and _dduh contains 'canaliz'
             continue
           endif
           assign ddu_at = article.title | strip | downcase

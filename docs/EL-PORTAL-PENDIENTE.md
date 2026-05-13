@@ -1,6 +1,6 @@
 # El Portal (`/pages/el-portal`) — pasos en Shopify Admin
 
-El theme incluye la plantilla **`page.el-portal`** y la sección **`duendes-el-portal`**. Hasta que exista la página en Admin, la URL devuelve **404**.
+El theme incluye la plantilla **`templates/page.el-portal.json`** (sección **`duendes-el-portal`**). Hasta que exista la **página** en Admin, la URL devuelve **404**.
 
 ## Crear la página
 
@@ -10,6 +10,24 @@ El theme incluye la plantilla **`page.el-portal`** y la sección **`duendes-el-p
 4. **Manejo de URL (handle):** `el-portal` — debe quedar exactamente `el-portal` para que la ruta sea `https://TU-DOMINIO/pages/el-portal`.
 5. En la barra lateral derecha, **Plantilla de tema:** elegí **`page.el-portal`** (a veces aparece como *el-portal* o *page.el-portal* según la versión del editor).
 6. **Guardar** y abrir en incógnito: `/pages/el-portal` debe cargar el portal (vista de invitado si no hay sesión).
+
+## Opción CLI — GraphQL Admin (mutación `pageCreate`)
+
+Requiere autenticación de app contra la tienda (una vez):
+
+```bash
+shopify store auth --store duendes-del-uruguay-2.myshopify.com --scopes read_content,write_content
+```
+
+Luego creá la página (ajustá el título si querés ASCII plano en la terminal):
+
+```bash
+shopify store execute --store duendes-del-uruguay-2.myshopify.com --allow-mutations --json -q 'mutation { pageCreate(page: {title: "El Portal", handle: "el-portal", templateSuffix: "el-portal", isPublished: true}) { page { id title handle } userErrors { field message } } }'
+```
+
+Si `userErrors` viene vacío y `page.handle` es `el-portal`, probá `GET /pages/el-portal` → **200**.
+
+**Nota:** En este entorno de Cursor no hay `SHOPIFY_ACCESS_TOKEN` en `.env` ni `shopify store auth` previo, por eso la página no se puede crear desde acá sin que ejecutes vos uno de los dos flujos de arriba.
 
 ## SEO y menús
 

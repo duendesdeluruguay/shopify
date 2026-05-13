@@ -25,25 +25,25 @@
   .shopify-section.duendes-home-v2-rito-pasos-section > section.dh2-rito.section,
   .shopify-section.duendes-home-v2-lectura-test-section > section.dh2-read.section,
   .shopify-section.duendes-home-v2-tribu-newsletter-section > section.dh2-tribu.section {
-    padding-block: 40px !important;
+    padding-block: 6px !important;
   }
 
   .shopify-section.duendes-home-v2-hero-section > section.dh2-hero.section .dh2-hero__inner {
-    padding-block: 40px !important;
+    padding-block: 6px !important;
   }
 
   .shopify-section.duendes-home-v2-buscador-elemental-section section.dh2-be.section .dh2-be__inner {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
   }
 
   .shopify-section.duendes-home-v2-buscador-elemental-section section.dh2-be.section .dh2-be__results {
-    padding-bottom: 40px !important;
+    padding-bottom: 6px !important;
   }
 
   .shopify-section.duendes-home-v2-buscador-elemental-section
     section.dh2-be.section.dh2-be--has-results
     .dh2-be__results {
-    padding-top: 40px !important;
+    padding-top: 6px !important;
   }
 }
