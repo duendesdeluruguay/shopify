@@ -1,49 +1,66 @@
-/**
- * Home v2 — mobile vertical rhythm (loads in head after base.css).
- * Targets Shopify wrapper + inner section so theme .section grid no anula el padding.
- */
-@media screen and (max-width: 768px) {
-  .shopify-section.duendes-home-v2-cartas-bosque-section,
-  .shopify-section.duendes-home-v2-hero-section,
-  .shopify-section.duendes-home-v2-recien-llegados-section,
-  .shopify-section.duendes-home-v2-linajes-section,
-  .shopify-section.duendes-home-v2-buscador-elemental-section,
-  .shopify-section.duendes-home-v2-social-proof-section,
-  .shopify-section.duendes-home-v2-editorial-section,
-  .shopify-section.duendes-home-v2-rito-pasos-section,
-  .shopify-section.duendes-home-v2-lectura-test-section,
-  .shopify-section.duendes-home-v2-tribu-newsletter-section {
-    margin-block: 0 !important;
-    padding-block: 0 !important;
-  }
+/* ════════════════════════════════════════════════════════
+   FIX SPACING HOME V2 — Compactar entre secciones
+   Cargado desde layout/theme.liquid antes de </head>
+   ════════════════════════════════════════════════════════ */
 
-  .shopify-section.duendes-home-v2-cartas-bosque-section > section.dh2-cb.section,
-  .shopify-section.duendes-home-v2-recien-llegados-section > section.dh2-new.section,
-  .shopify-section.duendes-home-v2-linajes-section > section.dh2-lin.section,
-  .shopify-section.duendes-home-v2-social-proof-section > section.dh2-sp.section,
-  .shopify-section.duendes-home-v2-editorial-section > section.dh2-ed.section,
-  .shopify-section.duendes-home-v2-rito-pasos-section > section.dh2-rito.section,
-  .shopify-section.duendes-home-v2-lectura-test-section > section.dh2-read.section,
-  .shopify-section.duendes-home-v2-tribu-newsletter-section > section.dh2-tribu.section {
-    padding-block: 6px !important;
-  }
+.dh2-cb,
+.dh2-hero,
+.dh2-new,
+.dh2-lin,
+.dh2-be,
+.dh2-sp,
+.dh2-ed,
+.dh2-rito,
+.dh2-lt,
+.dh2-read,
+.dh2-tribu {
+  padding-block: 32px !important;
+}
 
-  .shopify-section.duendes-home-v2-hero-section > section.dh2-hero.section .dh2-hero__inner {
-    padding-block: 6px !important;
-  }
+.dh2-new__title,
+.dh2-lin__title,
+.dh2-cb__title {
+  margin-block: 8px !important;
+}
 
-  .shopify-section.duendes-home-v2-buscador-elemental-section section.dh2-be.section .dh2-be__inner {
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-  }
+.dh2-new__head,
+.dh2-lin__head,
+.dh2-cb__head {
+  margin-bottom: 20px !important;
+}
 
-  .shopify-section.duendes-home-v2-buscador-elemental-section section.dh2-be.section .dh2-be__results {
-    padding-bottom: 6px !important;
-  }
+.dh2-new__foot,
+.dh2-lin__foot {
+  margin-top: 16px !important;
+}
 
-  .shopify-section.duendes-home-v2-buscador-elemental-section
-    section.dh2-be.section.dh2-be--has-results
-    .dh2-be__results {
-    padding-top: 6px !important;
+/* Mobile aún más compacto */
+@media (max-width: 768px) {
+  .dh2-cb,
+  .dh2-hero,
+  .dh2-new,
+  .dh2-lin,
+  .dh2-be,
+  .dh2-sp,
+  .dh2-ed,
+  .dh2-rito,
+  .dh2-lt,
+  .dh2-read,
+  .dh2-tribu {
+    padding-block: 24px !important;
   }
+}
+
+/* Neutraliza el padding-block: 0 del wrapper que matabamos antes */
+.shopify-section.duendes-home-v2-cartas-bosque-section,
+.shopify-section.duendes-home-v2-hero-section,
+.shopify-section.duendes-home-v2-recien-llegados-section,
+.shopify-section.duendes-home-v2-linajes-section,
+.shopify-section.duendes-home-v2-buscador-elemental-section,
+.shopify-section.duendes-home-v2-social-proof-section,
+.shopify-section.duendes-home-v2-editorial-section,
+.shopify-section.duendes-home-v2-rito-pasos-section,
+.shopify-section.duendes-home-v2-lectura-test-section,
+.shopify-section.duendes-home-v2-tribu-newsletter-section {
+  margin-block: 0 !important;
 }

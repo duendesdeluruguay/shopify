@@ -19,7 +19,7 @@
       * Robots policy — index,follow para páginas reales; noindex para
         carrito/checkout/cuenta (lo maneja Shopify nativo).
     {%- endcomment -%}
-    <meta name="ddu-theme-version" content="v9-seo-2026-05-01">
+    <meta name="ddu-theme-version" content="v9.1-blog-mi-magia-2026-05-13">
     <!-- DDU Build: {{ 'now' | date: '%Y-%m-%d %H:%M %Z' }} | Theme V9 SEO | LIVE info@ -->
 
     {%- comment -%}
@@ -276,6 +276,7 @@
     {{ content_for_header }}
 
   {{ 'custom-cinzel.css' | asset_url | stylesheet_tag }}
+  {{ 'duendes-home-v2-mobile-spacing.css' | asset_url | stylesheet_tag }}
 
 
 <!-- DDU Performance 2026-04-25: dns-prefetch + preconnect a CDNs críticos (reduce latencia inicial 100-300ms en mobile lento) -->
