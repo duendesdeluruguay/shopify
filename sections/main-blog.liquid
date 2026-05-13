@@ -36,7 +36,7 @@
             continue
           endif
           assign ddu_at = article.title | strip | downcase
-          if ddu_at contains 'canalización álmica' or ddu_at contains 'canalizacion almica'
+          if ddu_at contains 'canalización álmica' or ddu_at contains 'canalizacion almica' or ddu_at contains 'lmica' and ddu_at contains 'canaliz'
             continue
           endif
           assign ddu_visible_total = ddu_visible_total | plus: 1
@@ -54,7 +54,7 @@
             continue
           endif
           assign ddu_at = article.title | strip | downcase
-          if ddu_at contains 'canalización álmica' or ddu_at contains 'canalizacion almica'
+          if ddu_at contains 'canalización álmica' or ddu_at contains 'canalizacion almica' or ddu_at contains 'lmica' and ddu_at contains 'canaliz'
             continue
           endif
           assign ddu_vis_i = ddu_vis_i | plus: 1

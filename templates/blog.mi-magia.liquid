@@ -193,7 +193,7 @@
   {%- if _dduh == 'canalizacion-almica' or _dduh contains 'canalizacion-almica' -%}{%- continue -%}{%- endif -%}
   {%- if _dduh contains 'almica' and _dduh contains 'canaliz' -%}{%- continue -%}{%- endif -%}
   {%- assign ddu_bt = article.title | strip | downcase -%}
-  {%- if ddu_bt contains 'canalización álmica' or ddu_bt contains 'canalizacion almica' -%}{%- continue -%}{%- endif -%}
+  {%- if ddu_bt contains 'canalización álmica' or ddu_bt contains 'canalizacion almica' or ddu_bt contains 'lmica' and ddu_bt contains 'canaliz' -%}{%- continue -%}{%- endif -%}
   {%- if article.tags contains 'destacado' or article.tags contains 'Destacado' -%}
     {%- assign destacado = article -%}
     {%- break -%}
@@ -205,7 +205,7 @@
     {%- if _dduh == 'canalizacion-almica' or _dduh contains 'canalizacion-almica' -%}{%- continue -%}{%- endif -%}
     {%- if _dduh contains 'almica' and _dduh contains 'canaliz' -%}{%- continue -%}{%- endif -%}
     {%- assign ddu_bt = article.title | strip | downcase -%}
-    {%- if ddu_bt contains 'canalización álmica' or ddu_bt contains 'canalizacion almica' -%}{%- continue -%}{%- endif -%}
+    {%- if ddu_bt contains 'canalización álmica' or ddu_bt contains 'canalizacion almica' or ddu_bt contains 'lmica' and ddu_bt contains 'canaliz' -%}{%- continue -%}{%- endif -%}
     {%- assign destacado = article -%}
     {%- break -%}
   {%- endfor -%}
@@ -246,7 +246,7 @@
     {%- assign ddu_show_blog_tag = true -%}
     {%- if tag_lower == 'destacado' -%}{%- assign ddu_show_blog_tag = false -%}{%- endif -%}
     {%- if tag_handle == 'canalizacion-almica' -%}{%- assign ddu_show_blog_tag = false -%}{%- endif -%}
-    {%- if tag_lower contains 'almica' and tag_lower contains 'canaliz' -%}{%- assign ddu_show_blog_tag = false -%}{%- endif -%}
+    {%- if tag_lower contains 'lmica' and tag_lower contains 'canaliz' -%}{%- assign ddu_show_blog_tag = false -%}{%- endif -%}
     {%- if ddu_show_blog_tag -%}
       <a href="{{ blog.url }}/tagged/{{ tag_handle }}" {% if current_tags contains tag %}class="active"{% endif %}>{{ tag }}</a>
     {%- endif -%}
@@ -262,7 +262,7 @@
         {%- if _dduh == 'canalizacion-almica' or _dduh contains 'canalizacion-almica' -%}{%- continue -%}{%- endif -%}
         {%- if _dduh contains 'almica' and _dduh contains 'canaliz' -%}{%- continue -%}{%- endif -%}
         {%- assign ddu_bt = article.title | strip | downcase -%}
-        {%- if ddu_bt contains 'canalización álmica' or ddu_bt contains 'canalizacion almica' -%}{%- continue -%}{%- endif -%}
+        {%- if ddu_bt contains 'canalización álmica' or ddu_bt contains 'canalizacion almica' or ddu_bt contains 'lmica' and ddu_bt contains 'canaliz' -%}{%- continue -%}{%- endif -%}
         {%- if destacado and article.id == destacado.id and current_tags == blank -%}{%- continue -%}{%- endif -%}
         <a href="{{ article.url }}" class="article-card">
           <div class="img-wrap">
