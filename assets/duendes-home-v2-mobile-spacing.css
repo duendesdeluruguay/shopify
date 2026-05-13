@@ -1,0 +1,30 @@
+/* Home v2 — reduce vertical rhythm on small screens (one connected scroll) */
+@media (max-width: 768px) {
+  section.dh2-cb.section,
+  section.dh2-new.section,
+  section.dh2-lin.section,
+  section.dh2-sp.section,
+  section.dh2-ed.section,
+  section.dh2-rito.section,
+  section.dh2-read.section,
+  section.dh2-tribu.section {
+    padding-block: 40px !important;
+  }
+
+  section.dh2-hero.section .dh2-hero__inner {
+    padding-block: 40px !important;
+  }
+
+  section.dh2-be.section .dh2-be__inner {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+
+  section.dh2-be.section .dh2-be__results {
+    padding-bottom: 40px !important;
+  }
+
+  section.dh2-be.section.dh2-be--has-results .dh2-be__results {
+    padding-top: 40px !important;
+  }
+}

@@ -35,69 +35,57 @@
     position: relative;
     overflow: hidden;
   }
-  .dh2-be__atmos {
+  .dh2-be__glow {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(201, 169, 97, 0.14) 0%, transparent 72%);
     pointer-events: none;
+    z-index: 0;
+  }
+  .dh2-be__noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.09;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+  .dh2-be__particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
     overflow: hidden;
   }
-  .dh2-be__atmos-radial {
-    position: absolute;
-    inset: -20% -10% -10% -10%;
-    background: radial-gradient(ellipse at center, rgba(201, 169, 97, 0.08) 0%, transparent 60%);
-  }
-  .dh2-be__atmos-noise {
-    position: absolute;
-    inset: 0;
-    opacity: 0.08;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E");
-    background-size: 180px 180px;
-  }
-  .dh2-be__dust {
+  .dh2-be__dot {
     position: absolute;
     width: 3px;
     height: 3px;
     border-radius: 50%;
-    background: rgba(201, 169, 97, 0.45);
-    box-shadow: 0 0 8px rgba(201, 169, 97, 0.35);
-    animation: dh2-be-dust 5.5s ease-in-out infinite;
+    background: #c9a961;
+    opacity: 0;
+    box-shadow: 0 0 10px rgba(201, 169, 97, 0.65);
+    animation: dh2-be-float 8s ease-in-out infinite;
   }
-  .dh2-be__dust--1 {
-    left: 12%;
-    top: 22%;
-    animation-delay: 0s;
-  }
-  .dh2-be__dust--2 {
-    left: 78%;
-    top: 18%;
-    animation-delay: 1.1s;
-  }
-  .dh2-be__dust--3 {
-    left: 52%;
-    top: 38%;
-    animation-delay: 2.3s;
-  }
-  .dh2-be__dust--4 {
-    left: 28%;
-    top: 62%;
-    animation-delay: 0.7s;
-  }
-  .dh2-be__dust--5 {
-    left: 88%;
-    top: 55%;
-    animation-delay: 3.2s;
-  }
-  @keyframes dh2-be-dust {
+  @keyframes dh2-be-float {
     0%,
     100% {
+      opacity: 0;
       transform: translateY(0);
-      opacity: 0.25;
+    }
+    20%,
+    80% {
+      opacity: 0.75;
     }
     50% {
-      transform: translateY(-10px);
-      opacity: 0.65;
+      opacity: 1;
+      transform: translateY(-22px);
     }
+  }
+  .dh2-be__content {
+    position: relative;
+    z-index: 5;
   }
   .dh2-be--has-results .dh2-be__inner {
     position: absolute;
@@ -123,24 +111,24 @@
   }
   .dh2-be__eyebrow {
     font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     text-align: center;
-    color: rgba(201, 169, 97, 0.82);
+    color: #c9a961;
     margin: 0 0 16px;
   }
   .dh2-be__title {
-    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-family: var(--font-heading--family, 'Cinzel', serif);
     font-weight: 400;
-    font-style: italic;
-    font-size: clamp(24px, 4.2vw, 32px);
+    font-style: normal;
+    font-size: 36px;
     letter-spacing: 0.02em;
     text-transform: none;
     text-align: center;
-    color: rgba(244, 241, 236, 0.94);
+    color: #faf9f7;
     margin: 0 0 28px;
-    line-height: 1.28;
+    line-height: 1.22;
   }
   .dh2-be__sub {
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
@@ -167,10 +155,9 @@
     border-radius: 0;
   }
   .dh2-be__input-wrap:focus-within {
-    border-color: rgba(201, 169, 97, 0.95);
-    box-shadow:
-      0 0 0 1px rgba(201, 169, 97, 0.12),
-      0 4px 28px rgba(201, 169, 97, 0.18);
+    border-bottom-color: #c9a961;
+    border-bottom-width: 2px;
+    box-shadow: 0 4px 12px rgba(201, 169, 97, 0.15);
   }
   .dh2-be__input {
     width: 100%;
@@ -277,7 +264,7 @@
   }
   .dh2-be__results {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     opacity: 0;
     transition: opacity 0.35s ease;
     max-width: 1180px;
@@ -402,17 +389,17 @@
       align-items: flex-end;
     }
   }
-  /* Theme wrapper overrides (OS 2.0): forzar ritual oscuro */
+  /* Theme wrapper overrides (OS 2.0): ritual oscuro; capas viven en hijos */
   section.dh2-be.section {
     background-color: #15110d !important;
-    background-image: none !important;
     color: #f4f1ec !important;
+    isolation: isolate;
   }
   .dh2-be__results {
     background-color: #15110d !important;
   }
   .dh2-be__title {
-    color: rgba(244, 241, 236, 0.96) !important;
+    color: #faf9f7 !important;
   }
   .dh2-be__sub,
   .dh2-be__foot {
@@ -444,14 +431,14 @@
     }
     h2.dh2-be__title,
     .dh2-be__title {
-      font-size: 24px !important;
+      font-size: 26px !important;
       line-height: 1.25 !important;
       letter-spacing: 0.02em !important;
       max-width: 100% !important;
     }
     .dh2-be__eyebrow {
-      font-size: 11px !important;
-      letter-spacing: 0.32em !important;
+      font-size: 12px !important;
+      letter-spacing: 0.3em !important;
     }
     .dh2-be__sub {
       font-size: 18px !important;
@@ -471,22 +458,25 @@
     }
   }
 </style>
+{{ 'duendes-home-v2-mobile-spacing.css' | asset_url | stylesheet_tag }}
 
 <section
   class="dh2-be section"
   id="dh2-be-{{ section.id }}"
   data-section-id="{{ section.id }}"
+  style="background:#15110d;position:relative;overflow:hidden;"
   {{ section.shopify_attributes }}
 >
-  <div class="dh2-be__atmos" aria-hidden="true">
-    <span class="dh2-be__atmos-radial"></span>
-    <span class="dh2-be__atmos-noise"></span>
-    <span class="dh2-be__dust dh2-be__dust--1"></span>
-    <span class="dh2-be__dust dh2-be__dust--2"></span>
-    <span class="dh2-be__dust dh2-be__dust--3"></span>
-    <span class="dh2-be__dust dh2-be__dust--4"></span>
-    <span class="dh2-be__dust dh2-be__dust--5"></span>
+  <div class="dh2-be__glow" aria-hidden="true"></div>
+  <div class="dh2-be__noise" aria-hidden="true"></div>
+  <div class="dh2-be__particles" aria-hidden="true">
+    <span class="dh2-be__dot" style="left:15%; top:30%; animation-delay:0s"></span>
+    <span class="dh2-be__dot" style="left:78%; top:25%; animation-delay:1.5s"></span>
+    <span class="dh2-be__dot" style="left:32%; top:65%; animation-delay:3s"></span>
+    <span class="dh2-be__dot" style="left:85%; top:75%; animation-delay:4.5s"></span>
+    <span class="dh2-be__dot" style="left:50%; top:88%; animation-delay:6s"></span>
   </div>
+  <div class="dh2-be__content">
   <div class="dh2-be__inner">
     <div class="dh2-be__panel" data-dh2-be-panel="search">
       {% if dh2_be_eyebrow != blank %}
@@ -574,6 +564,7 @@
     <p class="dh2-be__results-lead" data-dh2-be-lead></p>
     <div class="dh2-be__deck" data-dh2-be-deck></div>
     <button type="button" class="dh2-be__again" data-dh2-be-reset>{{ 'duendes.home_v2.elemental_search.search_again' | t }}</button>
+  </div>
   </div>
 
   <script type="application/json" data-dh2-be-data>
