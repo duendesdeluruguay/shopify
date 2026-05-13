@@ -25,7 +25,8 @@
         assign _use_magic_shop_title = true
       endif
       if _use_magic_shop_title
-        assign effective_block_text = '<h2>' | append: ('duendes.collection_all_title' | t) | append: '</h2>'
+        assign _ddu_shop_title = 'duendes.collection_all_title' | t
+        assign effective_block_text = '<h2>' | append: _ddu_shop_title | append: '</h2>'
       else
         assign effective_block_text = '<h2>' | append: collection.title | escape | append: '</h2>'
       endif
@@ -40,7 +41,8 @@
         assign _use_magic_shop_title = true
       endif
       if _use_magic_shop_title
-        assign effective_block_text = '<h2>' | append: ('duendes.collection_all_title' | t) | append: '</h2>'
+        assign _ddu_shop_title = 'duendes.collection_all_title' | t
+        assign effective_block_text = '<h2>' | append: _ddu_shop_title | append: '</h2>'
       else
         assign effective_block_text = '<h2>' | append: collection.title | escape | append: '</h2>'
       endif
