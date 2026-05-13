@@ -38,9 +38,7 @@
   .dh2-be__glow {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(85% 60% at 50% 32%, rgba(201, 169, 97, 0.55) 0%, rgba(0, 0, 0, 0) 62%),
-      radial-gradient(60% 40% at 50% 70%, rgba(201, 169, 97, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
+    background: radial-gradient(70% 50% at 50% 35%, rgba(201, 169, 97, 0.65) 0%, rgba(201, 169, 97, 0.18) 35%, rgba(0, 0, 0, 0) 75%);
     pointer-events: none;
     z-index: 0;
     animation: dh2-be-glow-pulse 10s ease-in-out infinite;
@@ -59,7 +57,7 @@
   .dh2-be__noise {
     position: absolute;
     inset: 0;
-    opacity: 0.28 !important;
+    opacity: 0.35;
     pointer-events: none;
     z-index: 1;
     mix-blend-mode: overlay;
@@ -82,23 +80,25 @@
   }
   .dh2-be__dot {
     position: absolute;
-    width: 4px !important;
-    height: 4px !important;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
-    opacity: 0 !important;
-    background: radial-gradient(circle at 30% 30%, #fff6d4, #c9a961 45%, #6a5428 100%) !important;
+    background: radial-gradient(circle at 30% 30%, #fff6d4, #c9a961 45%, #6a5428 100%);
     box-shadow:
-      0 0 12px rgba(201, 169, 97, 0.9),
-      0 0 24px rgba(201, 169, 97, 0.45) !important;
+      0 0 14px rgba(201, 169, 97, 1),
+      0 0 28px rgba(201, 169, 97, 0.55);
     filter: blur(0.3px);
-    animation: dh2-be-float 6.5s ease-in-out infinite;
+    opacity: 0;
+    animation: dh2-be-float 5s ease-in-out infinite;
+    z-index: 2;
+    pointer-events: none;
   }
   .dh2-be__dot--sm {
-    width: 3px !important;
-    height: 3px !important;
+    width: 3.5px;
+    height: 3.5px;
     box-shadow:
-      0 0 10px rgba(201, 169, 97, 0.85),
-      0 0 20px rgba(201, 169, 97, 0.4) !important;
+      0 0 10px rgba(201, 169, 97, 0.9),
+      0 0 22px rgba(201, 169, 97, 0.45);
   }
   @keyframes dh2-be-float {
     0%,
@@ -106,13 +106,13 @@
       opacity: 0;
       transform: translateY(0);
     }
-    15%,
-    85% {
-      opacity: 0.85;
+    18%,
+    82% {
+      opacity: 0.95;
     }
     50% {
       opacity: 1;
-      transform: translateY(-22px);
+      transform: translateY(-26px);
     }
   }
   .dh2-be__content {
