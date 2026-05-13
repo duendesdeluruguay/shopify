@@ -238,6 +238,7 @@
 
 {%- if blog.all_tags.size > 0 -%}
 <nav class="tag-bar">
+  <!-- ddu-blog-tags-v4 -->
   <p class="tag-bar-title">Filtrar por etiqueta</p>
   <a href="{{ blog.url }}" {% if current_tags == blank %}class="active"{% endif %}>Todos</a>
   {%- for tag in blog.all_tags -%}
