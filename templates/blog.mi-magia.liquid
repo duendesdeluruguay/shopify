@@ -243,9 +243,13 @@
   {%- for tag in blog.all_tags -%}
     {%- assign tag_lower = tag | downcase -%}
     {%- assign tag_handle = tag | handleize -%}
-    {%- unless tag_lower == 'destacado' or tag_handle == 'canalizacion-almica' -%}
+    {%- assign ddu_show_blog_tag = true -%}
+    {%- if tag_lower == 'destacado' -%}{%- assign ddu_show_blog_tag = false -%}{%- endif -%}
+    {%- if tag_handle == 'canalizacion-almica' -%}{%- assign ddu_show_blog_tag = false -%}{%- endif -%}
+    {%- if tag_lower contains 'almica' and tag_lower contains 'canaliz' -%}{%- assign ddu_show_blog_tag = false -%}{%- endif -%}
+    {%- if ddu_show_blog_tag -%}
       <a href="{{ blog.url }}/tagged/{{ tag_handle }}" {% if current_tags contains tag %}class="active"{% endif %}>{{ tag }}</a>
-    {%- endunless -%}
+    {%- endif -%}
   {%- endfor -%}
 </nav>
 {%- endif -%}
