@@ -26,18 +26,10 @@
       endif
       if _use_magic_shop_title
         assign _ddu_shop_title = 'duendes.collection_all_title' | t
-        capture effective_block_text
-          echo '<h2>'
-          echo _ddu_shop_title
-          echo '</h2>'
-        endcapture
+        assign effective_block_text = _ddu_shop_title | prepend: '<h2>' | append: '</h2>'
       else
         assign _ddu_col_h2 = collection.title | escape
-        capture effective_block_text
-          echo '<h2>'
-          echo _ddu_col_h2
-          echo '</h2>'
-        endcapture
+        assign effective_block_text = _ddu_col_h2 | prepend: '<h2>' | append: '</h2>'
       endif
     endif
   elsif raw_block_text contains 'duendes.collection_all_title' and raw_block_text contains 'append:'
@@ -51,18 +43,10 @@
       endif
       if _use_magic_shop_title
         assign _ddu_shop_title = 'duendes.collection_all_title' | t
-        capture effective_block_text
-          echo '<h2>'
-          echo _ddu_shop_title
-          echo '</h2>'
-        endcapture
+        assign effective_block_text = _ddu_shop_title | prepend: '<h2>' | append: '</h2>'
       else
         assign _ddu_col_h2 = collection.title | escape
-        capture effective_block_text
-          echo '<h2>'
-          echo _ddu_col_h2
-          echo '</h2>'
-        endcapture
+        assign effective_block_text = _ddu_col_h2 | prepend: '<h2>' | append: '</h2>'
       endif
     endif
   endif
