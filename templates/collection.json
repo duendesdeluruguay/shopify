@@ -7,7 +7,7 @@
           "type": "text",
           "name": "Title",
           "settings": {
-            "text": "<h1>{{ closest.collection.title }}<\/h1>",
+            "text": "[ddu:collection_heading_h1]",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
