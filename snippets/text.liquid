@@ -4,12 +4,16 @@
   @param {string} [class] - custom class to define in addition to text-block classes
   @param {string} [fallback_text] - fallback text if settings.text does not exist
   @param {object} [block] - The block object
-  @param {string} [width] - width of the text block
+  @param {boolean} [ignore_block_text] - if true, ignore block.settings.text (use with fallback_text only)
 {%- enddoc -%}
 
 {% liquid
   assign block_settings = block.settings
-  assign raw_block_text = block_settings.text | strip_newlines | strip
+  if ignore_block_text
+    assign raw_block_text = ''
+  else
+    assign raw_block_text = block_settings.text | strip_newlines | strip
+  endif
   assign effective_block_text = raw_block_text
   if raw_block_text contains '[ddu:footer_newsletter_h2]'
     assign effective_block_text = 'duendes.global.footer_newsletter_h2_html' | t

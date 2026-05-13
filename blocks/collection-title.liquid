@@ -2,11 +2,12 @@
 
 {% if closest.collection == blank %}
   {% assign text = 'placeholders.collection_title' | t %}
-  {% assign collection_title = '<p>' | append: text | append: '</p>' %}
-  {% render 'text', fallback_text: collection_title, block: block %}
+  {% assign collection_title = text | prepend: '<p>' | append: '</p>' %}
+  {% render 'text', fallback_text: collection_title, block: block, ignore_block_text: true %}
 {% elsif closest.collection != blank %}
-  {% assign collection_title = '<p>' | append: closest.collection.title | append: '</p>' %}
-  {% render 'text', fallback_text: collection_title, block: block %}
+  {% assign _ddu_ct = closest.collection.title | escape %}
+  {% assign collection_title = _ddu_ct | prepend: '<p>' | append: '</p>' %}
+  {% render 'text', fallback_text: collection_title, block: block, ignore_block_text: true %}
 {% endif %}
 
 {% schema %}
