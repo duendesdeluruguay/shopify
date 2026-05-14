@@ -1,8 +1,8 @@
 {%- liquid
-  assign dh2_cb_card_count = 0
+  assign dh2_cb_carta_blocks = 0
   for block in section.blocks
-    if block.type == 'carta' and block.settings.product != blank
-      assign dh2_cb_card_count = dh2_cb_card_count | plus: 1
+    if block.type == 'carta'
+      assign dh2_cb_carta_blocks = dh2_cb_carta_blocks | plus: 1
     endif
   endfor
   assign dh2_cb_tag = section.settings.tag | strip
@@ -59,7 +59,7 @@
     assign dh2_cb_modal_cta = 'duendes.home_v2.cartas_bosque.modal_cta' | t
   endif
 -%}
-{% if dh2_cb_card_count > 0 %}
+{% if dh2_cb_carta_blocks > 0 %}
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
 <style>
   .dh2-cb {
@@ -191,6 +191,9 @@
   .dh2-cb__media {
     position: absolute;
     inset: 0;
+  }
+  .dh2-cb__media--placeholder {
+    background: linear-gradient(145deg, #2a241c 0%, #15110d 45%, #1e1812 100%);
   }
   .dh2-cb__media img {
     width: 100%;
@@ -499,22 +502,25 @@
     <div class="dh2-cb__deck">
       {%- assign dh2_cb_slot = 0 -%}
       {% for block in section.blocks %}
-        {% if block.type == 'carta' and block.settings.product != blank %}
-          {%- assign dh2_cb_slot = dh2_cb_slot | plus: 1 -%}
-          {%- assign dh2_cb_pos = dh2_cb_slot | minus: 1 -%}
+        {% if block.type != 'carta' %}
+          {% continue %}
+        {% endif %}
+        {%- assign dh2_cb_slot = dh2_cb_slot | plus: 1 -%}
+        {%- assign dh2_cb_pos = dh2_cb_slot | minus: 1 -%}
+        {% assign dh2_cb_roman = block.settings.roman | strip %}
+        {% if dh2_cb_roman == blank %}
+          {% case dh2_cb_slot %}
+            {% when 1 %}
+              {% assign dh2_cb_roman = 'I' %}
+            {% when 2 %}
+              {% assign dh2_cb_roman = 'II' %}
+            {% else %}
+              {% assign dh2_cb_roman = 'III' %}
+          {% endcase %}
+        {% endif %}
+        {% capture card_class %}dh2-cb__card{% if dh2_cb_pos == 1 %} dh2-cb__card--center{% elsif dh2_cb_pos == 2 %} dh2-cb__card--right{% else %} dh2-cb__card--left{% endif %}{% endcapture %}
+        {% if block.settings.product != blank %}
           {% assign product = block.settings.product %}
-          {% assign dh2_cb_roman = block.settings.roman | strip %}
-          {% if dh2_cb_roman == blank %}
-            {% case dh2_cb_slot %}
-              {% when 1 %}
-                {% assign dh2_cb_roman = 'I' %}
-              {% when 2 %}
-                {% assign dh2_cb_roman = 'II' %}
-              {% else %}
-                {% assign dh2_cb_roman = 'III' %}
-            {% endcase %}
-          {% endif %}
-          {% capture card_class %}dh2-cb__card{% if dh2_cb_pos == 1 %} dh2-cb__card--center{% elsif dh2_cb_pos == 2 %} dh2-cb__card--right{% else %} dh2-cb__card--left{% endif %}{% endcapture %}
           <a
             href="{{ product.url }}"
             class="{{ card_class | strip }}"
@@ -543,6 +549,28 @@
           <script type="application/json" data-dh2-cb-gallery="{{ block.id }}">
             [{% for image in product.images limit: 8 %}{{ image | image_url: width: 1000 | json }}{% unless forloop.last %},{% endunless %}{% endfor %}]
           </script>
+        {% else %}
+          <a
+            href="{{ dh2_cb_cta_url }}"
+            class="{{ card_class | strip }}"
+            aria-label="{{ block.settings.display_title | default: block.settings.essence | default: dh2_cb_title | escape }}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="dh2-cb__media dh2-cb__media--placeholder" aria-hidden="true"></div>
+            <div class="dh2-cb__shade" aria-hidden="true"></div>
+            <div class="dh2-cb__top">
+              <p class="dh2-cb__roman" aria-hidden="true">{{ dh2_cb_roman }}</p>
+              <span class="dh2-cb__badge">{{ dh2_cb_badge }}</span>
+            </div>
+            <div class="dh2-cb__meta">
+              {% if block.settings.display_title != blank %}
+                <p class="dh2-cb__name">{{ block.settings.display_title }}</p>
+              {% endif %}
+              {% if block.settings.essence != blank %}
+                <p class="dh2-cb__essence">{{ block.settings.essence }}</p>
+              {% endif %}
+            </div>
+          </a>
         {% endif %}
       {% endfor %}
     </div>
@@ -694,7 +722,7 @@
   {{ section.shopify_attributes }}
 >
   <p style="margin:0;max-width:520px;margin-inline:auto;">
-    <strong>Cartas del Bosque</strong> — Asigná un producto a cada bloque «carta» para que esta sección se muestre en la tienda.
+    <strong>Cartas del Bosque</strong> — Agregá bloques «carta». Podés asignar un <strong>producto</strong> a cada uno (foto, precio y modal en móvil) o dejar solo <strong>romano + esencia</strong> como cartas decorativas que enlazan al CTA de la sección.
   </p>
 </section>
 {% endif %}
