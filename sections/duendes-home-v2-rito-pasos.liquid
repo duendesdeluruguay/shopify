@@ -11,6 +11,25 @@
   if dh2_rito_title == blank
     assign dh2_rito_title = 'duendes.home_v2.rito.title' | t
   endif
+  assign dh2_rito_fb = blank
+  assign dh2_rito_ng = collections['nuevos-guardianes']
+  if dh2_rito_ng != blank
+    if dh2_rito_ng.featured_image != blank
+      assign dh2_rito_fb = dh2_rito_ng.featured_image
+    endif
+    if dh2_rito_fb == blank
+      for dh2_rito_p in dh2_rito_ng.products limit: 8
+        if dh2_rito_p.featured_image != blank
+          assign dh2_rito_fb = dh2_rito_p.featured_image
+          break
+        endif
+        if dh2_rito_p.images.size > 0
+          assign dh2_rito_fb = dh2_rito_p.images[0]
+          break
+        endif
+      endfor
+    endif
+  endif
 -%}
 <style>
   .dh2-rito {
@@ -53,6 +72,7 @@
     box-shadow: 0 4px 22px rgba(0, 0, 0, 0.05);
   }
   .dh2-rito__photo {
+    position: relative;
     aspect-ratio: 4 / 3;
     background: #e8e4dc;
   }
@@ -60,6 +80,18 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  .dh2-rito__photo--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
+  .dh2-rito__glyph-ph {
+    font-size: clamp(32px, 8vw, 44px);
+    line-height: 1;
+    color: rgba(168, 139, 66, 0.55);
+    letter-spacing: 0.2em;
   }
   .dh2-rito__body {
     padding: 18px 16px 20px;
@@ -172,10 +204,22 @@
               endcase
             endif
           %}
+          {% liquid
+            assign dh2_rp_img = block.settings.image
+            if dh2_rp_img == blank and dh2_rito_fb != blank
+              assign dh2_rp_img = dh2_rito_fb
+            endif
+            assign dh2_rp_glyph = block.settings.glyph | strip
+            if dh2_rp_glyph == blank
+              assign dh2_rp_glyph = '✦'
+            endif
+          %}
           <article class="dh2-rito__card" {{ block.shopify_attributes }}>
-            <div class="dh2-rito__photo">
-              {% if block.settings.image != blank %}
-                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width:750px) 33vw, 100vw', widths: '400,600,900' }}
+            <div class="dh2-rito__photo{% if dh2_rp_img == blank %} dh2-rito__photo--empty{% endif %}">
+              {% if dh2_rp_img != blank %}
+                {{ dh2_rp_img | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width:750px) 33vw, 100vw', widths: '400,600,900' }}
+              {% else %}
+                <span class="dh2-rito__glyph-ph" aria-hidden="true">{{ dh2_rp_glyph }}</span>
               {% endif %}
             </div>
             <div class="dh2-rito__body">
@@ -220,7 +264,19 @@
           "label": "Texto",
           "default": "Elegís en la tienda o te leemos en el test. El vínculo empieza cuando uno te llama."
         },
-        { "type": "image_picker", "id": "image", "label": "Foto real" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Foto real",
+          "info": "Si está vacío: imagen destacada de la colección «nuevos-guardianes», o la primera foto del primer producto con imagen. Si no hay nada, se muestra el glifo."
+        },
+        {
+          "type": "text",
+          "id": "glyph",
+          "label": "Glifo si no hay foto",
+          "default": "✦",
+          "info": "Solo cuando no hay imagen en el bloque ni fallback desde la colección."
+        }
       ]
     }
   ],

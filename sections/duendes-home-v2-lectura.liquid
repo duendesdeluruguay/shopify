@@ -1,0 +1,358 @@
+{{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign dh2_lect_img = section.settings.bg_image
+  assign dh2_lect_cine = false
+  if dh2_lect_img != blank
+    assign dh2_lect_cine = true
+  endif
+
+  assign dh2_lect_glyph = section.settings.glyph | strip
+  if dh2_lect_glyph == blank
+    assign dh2_lect_glyph = 'duendes.home_v2.lectura_test.glyph' | t
+    if dh2_lect_glyph contains 'translation missing'
+      assign dh2_lect_glyph = '✦'
+    endif
+  endif
+
+  assign dh2_lect_eyebrow = section.settings.eyebrow | strip
+  if dh2_lect_eyebrow == blank
+    assign dh2_lect_eyebrow = 'duendes.home_v2.lectura.eyebrow' | t
+    if dh2_lect_eyebrow contains 'translation missing'
+      assign dh2_lect_eyebrow = ''
+    endif
+  endif
+
+  assign dh2_lect_title = section.settings.title | strip
+  if dh2_lect_title == blank
+    assign dh2_lect_title = 'duendes.home_v2.lectura.title' | t
+    if dh2_lect_title contains 'translation missing'
+      assign dh2_lect_title = 'duendes.home_v2.lectura_test.title' | t
+    endif
+  endif
+
+  assign dh2_lect_sub = section.settings.subtitle | strip
+  if dh2_lect_sub == blank
+    assign dh2_lect_sub = 'duendes.home_v2.lectura.sub' | t
+    if dh2_lect_sub contains 'translation missing'
+      assign dh2_lect_sub = 'duendes.home_v2.lectura_test.subtitle' | t
+    endif
+  endif
+
+  assign dh2_lect_cta = section.settings.cta_label | strip
+  if dh2_lect_cta == blank
+    assign dh2_lect_cta = 'duendes.home_v2.lectura.cta' | t
+    if dh2_lect_cta contains 'translation missing'
+      assign dh2_lect_cta = 'duendes.home_v2.lectura_test.cta_label' | t
+    endif
+  endif
+
+  assign dh2_lect_url = section.settings.cta_url | default: '/pages/test-del-guardian'
+-%}
+
+<style>
+  /* —— Modo claro (Aesop): sin imagen de fondo —— */
+  .dh2-lect.dh2-lect--light {
+    background: #faf9f6;
+    color: #15110d;
+    padding: 28px 20px 32px;
+    border-top: 1px solid rgba(21, 17, 13, 0.08);
+    border-bottom: 1px solid rgba(21, 17, 13, 0.06);
+  }
+  .dh2-lect--light .dh2-lect__inner {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    justify-content: center;
+  }
+  .dh2-lect--light .dh2-lect__glyph {
+    font-size: 40px;
+    line-height: 1;
+    color: #a88b42;
+    opacity: 0.88;
+  }
+  .dh2-lect--light .dh2-lect__text {
+    flex: 1 1 260px;
+    max-width: 540px;
+    text-align: left;
+  }
+  .dh2-lect--light .dh2-lect__eyebrow {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(168, 139, 66, 0.95);
+    margin: 0 0 10px;
+  }
+  .dh2-lect--light .dh2-lect__title {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: clamp(22px, 2.6vw, 30px);
+    margin: 0 0 10px;
+    color: #15110d;
+    font-weight: 400;
+  }
+  .dh2-lect--light .dh2-lect__sub {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 0 0 18px;
+    color: rgba(21, 17, 13, 0.72);
+    font-style: italic;
+  }
+  .dh2-lect--light .dh2-lect__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 22px;
+    border: 1px solid rgba(21, 17, 13, 0.22);
+    color: #15110d;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .dh2-lect--light .dh2-lect__cta:hover {
+    background: rgba(168, 139, 66, 0.12);
+    border-color: rgba(168, 139, 66, 0.45);
+    color: #0f0d0a;
+  }
+
+  /* —— Modo cinemático: solo con foto —— */
+  .dh2-lect.dh2-lect--cinematic {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #15110d;
+    color: #f4f1ec;
+    padding-block: 0 !important;
+  }
+  .dh2-lect--cinematic .dh2-lect__stage {
+    position: relative;
+    min-height: clamp(400px, 68vh, 640px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+  }
+  .dh2-lect--cinematic .dh2-lect__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .dh2-lect--cinematic .dh2-lect__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.03);
+    filter: saturate(0.9) contrast(1.03);
+  }
+  .dh2-lect--cinematic .dh2-lect__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(12, 10, 8, 0.35) 0%, rgba(12, 10, 8, 0.72) 55%, rgba(8, 7, 5, 0.88) 100%);
+  }
+  .dh2-lect--cinematic .dh2-lect__grain {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+    background-size: 160px 160px;
+  }
+  .dh2-lect--cinematic .dh2-lect__inner {
+    position: relative;
+    z-index: 3;
+    max-width: 620px;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .dh2-lect--cinematic .dh2-lect__eyebrow {
+    margin: 0 0 14px;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #c9a961;
+  }
+  .dh2-lect--cinematic .dh2-lect__rule {
+    display: inline-block;
+    width: 36px;
+    height: 1px;
+    background: rgba(201, 169, 97, 0.5);
+    margin: 0 0 18px;
+  }
+  .dh2-lect--cinematic .dh2-lect__title {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.12;
+    margin: 0 0 14px;
+    color: #f4f1ec;
+  }
+  .dh2-lect--cinematic .dh2-lect__sub {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-style: italic;
+    font-size: clamp(16px, 1.45vw, 18px);
+    line-height: 1.55;
+    margin: 0 auto 26px;
+    max-width: 500px;
+    color: rgba(244, 241, 236, 0.86);
+  }
+  .dh2-lect--cinematic .dh2-lect__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 0 28px;
+    border: 1px solid rgba(201, 169, 97, 0.65);
+    border-radius: 2px;
+    color: #c9a961;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+  }
+  .dh2-lect--cinematic .dh2-lect__cta:hover {
+    background: rgba(201, 169, 97, 0.12);
+    color: #fff;
+  }
+  .dh2-lect--cinematic .dh2-lect__cta-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .dh2-lect--cinematic .dh2-lect__cta:hover .dh2-lect__cta-arrow {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 600px) {
+    .dh2-lect--light .dh2-lect__inner {
+      text-align: center;
+    }
+    .dh2-lect--light .dh2-lect__text {
+      text-align: center;
+    }
+  }
+  @media (max-width: 768px) {
+    .dh2-lect--cinematic .dh2-lect__stage {
+      min-height: clamp(360px, 72vh, 520px);
+    }
+    .dh2-lect--cinematic .dh2-lect__inner {
+      padding: 40px 18px;
+    }
+    .dh2-lect.section.dh2-lect--light,
+    .dh2-lect.section.dh2-lect--cinematic {
+      overflow-x: hidden;
+    }
+    .dh2-cb, .dh2-hero, .dh2-new, .dh2-lin, .dh2-be, .dh2-sp, .dh2-ed, .dh2-rito, .dh2-lt, .dh2-tribu {
+      padding: 6px 0 6px !important;
+    }
+    .dh2-lect--light {
+      padding: 6px max(18px, env(safe-area-inset-left, 0px)) 6px max(18px, env(safe-area-inset-right, 0px)) !important;
+    }
+  }
+</style>
+
+<section class="dh2-lect section{% if dh2_lect_cine %} dh2-lect--cinematic{% else %} dh2-lect--light{% endif %}">
+  {% if dh2_lect_cine %}
+    <div class="dh2-lect__stage">
+      <div class="dh2-lect__media" aria-hidden="true">
+        {{ dh2_lect_img | image_url: width: 2200 | image_tag:
+          loading: 'lazy',
+          sizes: '100vw',
+          widths: '600,900,1200,1600,2000,2200',
+          alt: ''
+        }}
+      </div>
+      <div class="dh2-lect__veil" aria-hidden="true"></div>
+      <div class="dh2-lect__grain" aria-hidden="true"></div>
+      <div class="dh2-lect__inner">
+        {% if dh2_lect_eyebrow != blank %}
+          <p class="dh2-lect__eyebrow">{{ dh2_lect_eyebrow }}</p>
+        {% endif %}
+        <span class="dh2-lect__rule" aria-hidden="true"></span>
+        <h2 class="dh2-lect__title">{{ dh2_lect_title }}</h2>
+        <p class="dh2-lect__sub">{{ dh2_lect_sub }}</p>
+        <a class="dh2-lect__cta" href="{{ dh2_lect_url }}">
+          <span>{{ dh2_lect_cta }}</span>
+          <span class="dh2-lect__cta-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  {% else %}
+    <div class="dh2-lect__inner">
+      <div class="dh2-lect__glyph" aria-hidden="true">{{ dh2_lect_glyph }}</div>
+      <div class="dh2-lect__text">
+        {% if dh2_lect_eyebrow != blank %}
+          <p class="dh2-lect__eyebrow">{{ dh2_lect_eyebrow }}</p>
+        {% endif %}
+        <h2 class="dh2-lect__title">{{ dh2_lect_title }}</h2>
+        <p class="dh2-lect__sub">{{ dh2_lect_sub }}</p>
+        <a class="dh2-lect__cta" href="{{ dh2_lect_url }}">{{ dh2_lect_cta }}</a>
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "DDU v2 · Lectura",
+  "tag": "section",
+  "class": "duendes-home-v2-lectura-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Imagen de fondo (modo cinemático)",
+      "info": "Vacío = bloque claro tipo editorial (crema). Con imagen = modo oscuro con foto a pantalla completa."
+    },
+    {
+      "type": "text",
+      "id": "glyph",
+      "label": "Glifo (solo modo claro)",
+      "default": "✦"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto del CTA"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL del test"
+    }
+  ],
+  "presets": [{ "name": "DDU v2 · Lectura" }]
+}
+{% endschema %}

@@ -13,6 +13,7 @@
 .dh2-rito,
 .dh2-lt,
 .dh2-read,
+.dh2-lect,
 .dh2-tribu {
   padding-block: 32px !important;
 }
@@ -46,6 +47,7 @@
   .dh2-rito,
   .dh2-lt,
   .dh2-read,
+  .dh2-lect,
   .dh2-tribu {
     padding-block: 24px !important;
   }
@@ -61,6 +63,7 @@
 .shopify-section.duendes-home-v2-editorial-section,
 .shopify-section.duendes-home-v2-rito-pasos-section,
 .shopify-section.duendes-home-v2-lectura-test-section,
+.shopify-section.duendes-home-v2-lectura-section,
 .shopify-section.duendes-home-v2-tribu-newsletter-section {
   margin-block: 0 !important;
 }

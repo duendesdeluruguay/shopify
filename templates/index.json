@@ -302,9 +302,11 @@
       }
     },
     "duendes-home-v2-lectura-test": {
-      "type": "duendes-home-v2-lectura-test",
+      "type": "duendes-home-v2-lectura",
       "settings": {
+        "bg_image": "",
         "glyph": "",
+        "eyebrow": "",
         "title": "",
         "subtitle": "",
         "cta_label": "",
