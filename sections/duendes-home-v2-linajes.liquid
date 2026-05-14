@@ -63,6 +63,8 @@
     scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
+    touch-action: pan-x pinch-zoom;
+    overscroll-behavior-x: contain;
   }
   .dh2-lin__rail::-webkit-scrollbar {
     height: 6px;
@@ -84,6 +86,7 @@
     border: 1px solid rgba(201, 169, 97, 0.45);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    touch-action: pan-x pinch-zoom;
   }
   .dh2-lin__card:hover {
     transform: translateY(-3px);
@@ -105,6 +108,7 @@
     inset: 0;
     background: linear-gradient(180deg, transparent 20%, rgba(5, 4, 2, 0.88));
     z-index: 1;
+    pointer-events: none;
   }
   .dh2-lin__body {
     position: absolute;
@@ -134,9 +138,6 @@
     .dh2-lin {
       padding: 6px 0 6px !important;
     }
-    .dh2-lin.section {
-      overflow-x: hidden;
-    }
     .dh2-lin__inner {
       padding-left: max(20px, env(safe-area-inset-left, 0px));
       padding-right: max(24px, env(safe-area-inset-right, 0px));
@@ -147,6 +148,14 @@
     .dh2-lin__rail {
       gap: 12px;
       padding-top: 2px;
+      margin-left: calc(-1 * max(20px, env(safe-area-inset-left, 0px)));
+      margin-right: calc(-1 * max(24px, env(safe-area-inset-right, 0px)));
+      padding-left: max(12px, env(safe-area-inset-left, 0px));
+      padding-right: max(12px, env(safe-area-inset-right, 0px));
+      width: calc(100% + max(20px, env(safe-area-inset-left, 0px)) + max(24px, env(safe-area-inset-right, 0px)));
+      max-width: none;
+      box-sizing: border-box;
+      scroll-padding-inline: 8px;
     }
     .dh2-lin__card {
       flex: 0 0 clamp(148px, 44vw, 190px);

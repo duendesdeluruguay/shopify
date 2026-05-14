@@ -411,7 +411,8 @@
       -webkit-overflow-scrolling: touch;
       scroll-padding-inline: 32px;
       scrollbar-width: none;
-      touch-action: pan-x;
+      touch-action: pan-x pinch-zoom;
+      overscroll-behavior-x: contain;
     }
     .dh2-cb__deck::-webkit-scrollbar {
       display: none;
@@ -429,6 +430,7 @@
       opacity: 0.88;
       filter: brightness(0.96);
       transition: transform 0.28s ease, opacity 0.28s ease, filter 0.28s ease, box-shadow 0.28s ease;
+      touch-action: pan-x pinch-zoom;
     }
     .dh2-cb__card--focal {
       transform: scale(1.07);

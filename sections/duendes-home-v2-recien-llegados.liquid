@@ -63,6 +63,8 @@
     -webkit-overflow-scrolling: touch;
     padding-bottom: 8px;
     scrollbar-width: thin;
+    touch-action: pan-x pinch-zoom;
+    overscroll-behavior-x: contain;
   }
   .dh2-new__track::-webkit-scrollbar {
     height: 6px;
@@ -84,6 +86,7 @@
     color: inherit;
     display: block;
     position: relative;
+    touch-action: pan-x pinch-zoom;
   }
   .dh2-new__badge {
     position: absolute;
@@ -145,15 +148,20 @@
     .dh2-new {
       padding: 6px 0 6px !important;
     }
-    .dh2-new.section {
-      overflow-x: hidden;
-    }
     .dh2-new__inner {
       padding-left: max(20px, env(safe-area-inset-left, 0px));
       padding-right: max(24px, env(safe-area-inset-right, 0px));
     }
     .dh2-new__track {
       gap: 11px;
+      margin-left: calc(-1 * max(20px, env(safe-area-inset-left, 0px)));
+      margin-right: calc(-1 * max(24px, env(safe-area-inset-right, 0px)));
+      padding-left: max(20px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+      width: calc(100% + max(20px, env(safe-area-inset-left, 0px)) + max(24px, env(safe-area-inset-right, 0px)));
+      max-width: none;
+      box-sizing: border-box;
+      scroll-padding-inline: 12px;
     }
     .dh2-new__card {
       flex: 0 0 clamp(152px, 46vw, 198px);
