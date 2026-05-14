@@ -221,6 +221,20 @@
             if _lin_photo == blank and _lin_col != blank and _lin_col.featured_image != blank
               assign _lin_photo = _lin_col.featured_image
             endif
+            if _lin_photo == blank and _lin_col != blank
+              for _lin_p in _lin_col.products limit: 20
+                if _lin_p.featured_image != blank
+                  assign _lin_photo = _lin_p.featured_image
+                  break
+                elsif _lin_p.featured_media != blank
+                  assign _lin_photo = _lin_p.featured_media.preview_image
+                  break
+                elsif _lin_p.images.size > 0
+                  assign _lin_photo = _lin_p.images[0]
+                  break
+                endif
+              endfor
+            endif
           %}
           <a class="dh2-lin__card" href="{{ block.settings.url }}" role="listitem" {{ block.shopify_attributes }}>
             <div class="dh2-lin__bg" aria-hidden="true">
@@ -268,7 +282,7 @@
       "name": "Linaje",
       "settings": [
         { "type": "text", "id": "title", "label": "Nombre", "default": "Hadas" },
-        { "type": "image_picker", "id": "image", "label": "Foto del linaje", "info": "Opcional: si está vacío, se usa la imagen destacada de la colección del enlace." },
+        { "type": "image_picker", "id": "image", "label": "Foto del linaje", "info": "Opcional: si está vacío, se usa la imagen destacada de la colección; si tampoco hay, la primera foto de un producto disponible en esa colección." },
         { "type": "text", "id": "count_label", "label": "Guardianes / contador (texto)", "default": "Ver colección" },
         { "type": "url", "id": "url", "label": "Enlace a colección" },
         { "type": "text", "id": "glyph", "label": "Marcador si no hay foto", "default": "✦", "info": "Solo se muestra si no cargás imagen." }

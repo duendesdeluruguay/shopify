@@ -11,23 +11,38 @@
   if dh2_rito_title == blank
     assign dh2_rito_title = 'duendes.home_v2.rito.title' | t
   endif
-  assign dh2_rito_fb = blank
+  assign dh2_rito_fb1 = blank
+  assign dh2_rito_fb2 = blank
+  assign dh2_rito_fb3 = blank
   assign dh2_rito_ng = collections['nuevos-guardianes']
   if dh2_rito_ng != blank
-    if dh2_rito_ng.featured_image != blank
-      assign dh2_rito_fb = dh2_rito_ng.featured_image
-    endif
-    if dh2_rito_fb == blank
-      for dh2_rito_p in dh2_rito_ng.products limit: 8
-        if dh2_rito_p.featured_image != blank
-          assign dh2_rito_fb = dh2_rito_p.featured_image
+    assign dh2_rito_nimg = 0
+    for dh2_rito_p in dh2_rito_ng.products limit: 24
+      assign dh2_rito_im = blank
+      if dh2_rito_p.featured_image != blank
+        assign dh2_rito_im = dh2_rito_p.featured_image
+      elsif dh2_rito_p.featured_media != blank
+        assign dh2_rito_im = dh2_rito_p.featured_media
+      elsif dh2_rito_p.images.size > 0
+        assign dh2_rito_im = dh2_rito_p.images[0]
+      endif
+      if dh2_rito_im != blank
+        assign dh2_rito_nimg = dh2_rito_nimg | plus: 1
+        case dh2_rito_nimg
+          when 1
+            assign dh2_rito_fb1 = dh2_rito_im
+          when 2
+            assign dh2_rito_fb2 = dh2_rito_im
+          when 3
+            assign dh2_rito_fb3 = dh2_rito_im
+        endcase
+        if dh2_rito_nimg >= 3
           break
         endif
-        if dh2_rito_p.images.size > 0
-          assign dh2_rito_fb = dh2_rito_p.images[0]
-          break
-        endif
-      endfor
+      endif
+    endfor
+    if dh2_rito_fb1 == blank and dh2_rito_ng.featured_image != blank
+      assign dh2_rito_fb1 = dh2_rito_ng.featured_image
     endif
   endif
 -%}
@@ -163,8 +178,10 @@
     <p class="dh2-rito__tag">{{ dh2_rito_tag }}</p>
     <h2 class="dh2-rito__title">{{ dh2_rito_title }}</h2>
     <div class="dh2-rito__row">
+      {%- assign dh2_rito_step_i = 0 -%}
       {% for block in section.blocks %}
         {% if block.type == 'paso' %}
+          {%- assign dh2_rito_step_i = dh2_rito_step_i | plus: 1 -%}
           {% liquid
             assign dh2_rs = block.settings.step_label | strip
             assign dh2_rh = block.settings.heading | strip
@@ -206,8 +223,27 @@
           %}
           {% liquid
             assign dh2_rp_img = block.settings.image
-            if dh2_rp_img == blank and dh2_rito_fb != blank
-              assign dh2_rp_img = dh2_rito_fb
+            if dh2_rp_img == blank
+              case dh2_rito_step_i
+                when 1
+                  if dh2_rito_fb1 != blank
+                    assign dh2_rp_img = dh2_rito_fb1
+                  endif
+                when 2
+                  if dh2_rito_fb2 != blank
+                    assign dh2_rp_img = dh2_rito_fb2
+                  elsif dh2_rito_fb1 != blank
+                    assign dh2_rp_img = dh2_rito_fb1
+                  endif
+                else
+                  if dh2_rito_fb3 != blank
+                    assign dh2_rp_img = dh2_rito_fb3
+                  elsif dh2_rito_fb2 != blank
+                    assign dh2_rp_img = dh2_rito_fb2
+                  elsif dh2_rito_fb1 != blank
+                    assign dh2_rp_img = dh2_rito_fb1
+                  endif
+              endcase
             endif
             assign dh2_rp_glyph = block.settings.glyph | strip
             if dh2_rp_glyph == blank
@@ -268,7 +304,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Foto real",
-          "info": "Si está vacío: imagen destacada de la colección «nuevos-guardianes», o la primera foto del primer producto con imagen. Si no hay nada, se muestra el glifo."
+          "info": "Si está vacío: se toman hasta 3 fotos distintas de productos en «nuevos-guardianes» (una por paso). Si no hay, glifo."
         },
         {
           "type": "text",

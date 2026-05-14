@@ -58,6 +58,37 @@
   if dh2_cb_modal_cta == blank
     assign dh2_cb_modal_cta = 'duendes.home_v2.cartas_bosque.modal_cta' | t
   endif
+  assign dh2_cb_fb1 = blank
+  assign dh2_cb_fb2 = blank
+  assign dh2_cb_fb3 = blank
+  assign dh2_cb_fb_col = collections['nuevos-guardianes']
+  if dh2_cb_fb_col != blank
+    assign dh2_cb_nb = 0
+    for dh2_cb_p in dh2_cb_fb_col.products limit: 30
+      assign dh2_cb_has_vis = false
+      if dh2_cb_p.featured_media != blank
+        assign dh2_cb_has_vis = true
+      elsif dh2_cb_p.featured_image != blank
+        assign dh2_cb_has_vis = true
+      elsif dh2_cb_p.images.size > 0
+        assign dh2_cb_has_vis = true
+      endif
+      if dh2_cb_has_vis
+        assign dh2_cb_nb = dh2_cb_nb | plus: 1
+        case dh2_cb_nb
+          when 1
+            assign dh2_cb_fb1 = dh2_cb_p
+          when 2
+            assign dh2_cb_fb2 = dh2_cb_p
+          when 3
+            assign dh2_cb_fb3 = dh2_cb_p
+        endcase
+        if dh2_cb_nb >= 3
+          break
+        endif
+      endif
+    endfor
+  endif
 -%}
 {% if dh2_cb_carta_blocks > 0 %}
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
@@ -193,7 +224,7 @@
     inset: 0;
   }
   .dh2-cb__media--placeholder {
-    background: linear-gradient(145deg, #3d3428 0%, #221c16 50%, #2a2218 100%);
+    background: linear-gradient(145deg, #4a3f32 0%, #2a2218 45%, #1a1510 100%);
   }
   .dh2-cb__media img {
     width: 100%;
@@ -257,7 +288,7 @@
     right: 0;
     bottom: 0;
     padding: 18px 12px 16px;
-    z-index: 2;
+    z-index: 4;
     text-align: center;
   }
   .dh2-cb__name {
@@ -525,9 +556,21 @@
               {% assign dh2_cb_roman = 'III' %}
           {% endcase %}
         {% endif %}
+        {% liquid
+          assign product = block.settings.product
+          if product == blank
+            case dh2_cb_slot
+              when 1
+                assign product = dh2_cb_fb1
+              when 2
+                assign product = dh2_cb_fb2
+              else
+                assign product = dh2_cb_fb3
+            endcase
+          endif
+        %}
         {% capture card_class %}dh2-cb__card{% if dh2_cb_pos == 1 %} dh2-cb__card--center{% elsif dh2_cb_pos == 2 %} dh2-cb__card--right{% else %} dh2-cb__card--left{% endif %}{% endcapture %}
-        {% if block.settings.product != blank %}
-          {% assign product = block.settings.product %}
+        {% if product != blank %}
           <a
             href="{{ product.url }}"
             class="{{ card_class | strip }}"
@@ -540,6 +583,10 @@
             <div class="dh2-cb__media">
               {% if product.featured_media %}
                 {{ product.featured_media | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '30vw', widths: '400,600,800' }}
+              {% elsif product.featured_image %}
+                {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '30vw', widths: '400,600,800' }}
+              {% elsif product.images.size > 0 %}
+                {{ product.images[0] | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '30vw', widths: '400,600,800' }}
               {% endif %}
             </div>
             <div class="dh2-cb__shade" aria-hidden="true"></div>
@@ -794,7 +841,7 @@
       "type": "carta",
       "name": "Carta",
       "settings": [
-        { "type": "product", "id": "product", "label": "Guardián / producto" },
+        { "type": "product", "id": "product", "label": "Guardián / producto", "info": "Opcional: si está vacío, la carta usa automáticamente el 1.º, 2.º o 3.º Guardián con foto de la colección «nuevos-guardianes» (en orden)." },
         { "type": "text", "id": "roman", "label": "Número romano (opcional)", "info": "Vacío: I, II o III según posición de la carta." },
         {
           "type": "text",
