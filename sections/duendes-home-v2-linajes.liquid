@@ -192,10 +192,28 @@
     <div class="dh2-lin__rail" role="list">
       {% for block in section.blocks %}
         {% if block.type == 'linaje' %}
+          {% liquid
+            assign _lin_url = block.settings.url | default: '' | strip
+            assign _lin_handle = ''
+            if _lin_url contains 'shopify://collections/'
+              assign _lin_handle = _lin_url | remove: 'shopify://collections/' | split: '/' | first | split: '?' | first
+            elsif _lin_url contains '/collections/'
+              assign _lin_tail = _lin_url | split: '/collections/' | last
+              assign _lin_handle = _lin_tail | split: '/' | first | split: '?' | first
+            endif
+            assign _lin_col = blank
+            if _lin_handle != blank
+              assign _lin_col = collections[_lin_handle]
+            endif
+            assign _lin_photo = block.settings.image
+            if _lin_photo == blank and _lin_col != blank and _lin_col.featured_image != blank
+              assign _lin_photo = _lin_col.featured_image
+            endif
+          %}
           <a class="dh2-lin__card" href="{{ block.settings.url }}" role="listitem" {{ block.shopify_attributes }}>
             <div class="dh2-lin__bg" aria-hidden="true">
-              {% if block.settings.image != blank %}
-                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: '', widths: '200,400,600' }}
+              {% if _lin_photo != blank %}
+                {{ _lin_photo | image_url: width: 600 | image_tag: loading: 'lazy', alt: '', widths: '200,400,600' }}
               {% else %}
                 <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:32px;color:rgba(201,169,97,0.55);">{{ block.settings.glyph | default: '✦' }}</span>
               {% endif %}
@@ -238,7 +256,7 @@
       "name": "Linaje",
       "settings": [
         { "type": "text", "id": "title", "label": "Nombre", "default": "Hadas" },
-        { "type": "image_picker", "id": "image", "label": "Foto del linaje" },
+        { "type": "image_picker", "id": "image", "label": "Foto del linaje", "info": "Opcional: si está vacío, se usa la imagen destacada de la colección del enlace." },
         { "type": "text", "id": "count_label", "label": "Guardianes / contador (texto)", "default": "Ver colección" },
         { "type": "url", "id": "url", "label": "Enlace a colección" },
         { "type": "text", "id": "glyph", "label": "Marcador si no hay foto", "default": "✦", "info": "Solo se muestra si no cargás imagen." }
