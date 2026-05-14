@@ -89,6 +89,16 @@
     height: 100%;
     object-fit: cover;
   }
+  .dh2-sp__photo--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: clamp(28px, 5vw, 40px);
+    color: rgba(201, 169, 97, 0.42);
+    letter-spacing: 0.12em;
+    background: linear-gradient(155deg, rgba(58, 46, 26, 0.12), rgba(232, 228, 220, 0.95));
+  }
   .dh2-sp__quote {
     padding: 16px 16px 20px;
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
@@ -157,7 +167,6 @@
     <div class="dh2-sp__grid">
     {% for block in section.blocks %}
         {% if block.type == 'testimonial' %}
-          {% unless block.settings.photo == blank %}
           {% liquid
             assign dh2_sp_quote = block.settings.quote | strip
             if dh2_sp_quote == blank
@@ -174,12 +183,15 @@
             endif
           %}
           <article class="dh2-sp__card" {{ block.shopify_attributes }}>
-            <div class="dh2-sp__photo">
-              {{ block.settings.photo | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(min-width:990px) 25vw, (min-width:550px) 50vw, 100vw', widths: '200,400,600' }}
+            <div class="dh2-sp__photo{% if block.settings.photo == blank %} dh2-sp__photo--placeholder{% endif %}">
+              {% if block.settings.photo != blank %}
+                {{ block.settings.photo | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(min-width:990px) 25vw, (min-width:550px) 50vw, 100vw', widths: '200,400,600' }}
+              {% else %}
+                <span aria-hidden="true">✦</span>
+              {% endif %}
             </div>
             <p class="dh2-sp__quote">{{ dh2_sp_quote }}</p>
           </article>
-          {% endunless %}
         {% endif %}
       {% endfor %}
     </div>
@@ -223,7 +235,7 @@
       "type": "testimonial",
       "name": "Testimonio",
       "settings": [
-        { "type": "image_picker", "id": "photo", "label": "Foto", "info": "Cargá foto real del cliente con su Guardián. Si está vacío, el testimonio no aparece." },
+        { "type": "image_picker", "id": "photo", "label": "Foto", "info": "Opcional: si no cargás foto, se muestra la frase con un marcador elegante. Ideal si perdés referencias al sincronizar el tema." },
         { "type": "textarea", "id": "quote", "label": "Frase", "default": "Cuando lo abrí, sentí que alguien me había elegido de verdad." }
       ]
     }
