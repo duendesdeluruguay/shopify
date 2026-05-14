@@ -1,0 +1,124 @@
+{%- comment -%}
+  Cinta bajo el header: envío / confianza (marquee). Tema → Duendes → «Cinta de contexto».
+  Texto: locales duendes.market_hint_marquee (+ cierre duendes.market_hint_close).
+{%- endcomment -%}
+
+{%- liquid
+  assign ddu_mh_on = settings.duendes_enable_market_hint_banner
+  if ddu_mh_on == nil
+    assign ddu_mh_on = true
+  endif
+  assign ddu_mh_text = 'duendes.market_hint_marquee' | t
+  if ddu_mh_text contains 'translation missing'
+    assign ddu_mh_text = 'duendes.global.announcement_bar' | t
+  endif
+  assign ddu_mh_close = 'duendes.market_hint_close' | t
+-%}
+
+{%- if ddu_mh_on == false -%}
+{%- elsif request.design_mode -%}
+{%- elsif ddu_mh_text == blank -%}
+{%- else -%}
+
+<style>
+  .ddu-mh {
+    position: relative;
+    z-index: 5;
+    background: #0a0908;
+    color: rgba(250, 249, 247, 0.88);
+    border-bottom: 1px solid rgba(201, 169, 97, 0.22);
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    overflow: hidden;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+  }
+  .ddu-mh__viewport {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    padding: 8px 44px 8px 14px;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 2%, #000 98%, transparent 100%);
+  }
+  .ddu-mh__track {
+    display: flex;
+    width: max-content;
+    gap: 3rem;
+    animation: ddu-mh-scroll 38s linear infinite;
+  }
+  @keyframes ddu-mh-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ddu-mh__track {
+      animation: none;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+      gap: 0.5rem;
+    }
+  }
+  .ddu-mh__seg {
+    white-space: nowrap;
+  }
+  .ddu-mh__close {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(201, 169, 97, 0.55);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 6px 10px;
+    z-index: 2;
+  }
+  .ddu-mh__close:hover {
+    color: rgba(250, 249, 247, 0.95);
+  }
+</style>
+
+<div class="ddu-mh" id="ddu-market-hint" role="region" aria-label="{{ 'duendes.market_hint_aria' | t | escape }}">
+  <div class="ddu-mh__viewport">
+    <div class="ddu-mh__track" id="ddu-mh-track">
+      <span class="ddu-mh__seg">{{ ddu_mh_text | escape }}</span>
+      <span class="ddu-mh__seg" aria-hidden="true">{{ ddu_mh_text | escape }}</span>
+    </div>
+  </div>
+  <button type="button" class="ddu-mh__close" id="ddu-mh-close" aria-label="{{ ddu_mh_close | escape }}">&times;</button>
+</div>
+
+<script>
+  (function () {
+    try {
+      var KEY = 'dduMarketHintDismissed';
+      var root = document.getElementById('ddu-market-hint');
+      if (!root) return;
+      if (sessionStorage.getItem(KEY) === '1') {
+        root.remove();
+        return;
+      }
+      var btn = document.getElementById('ddu-mh-close');
+      if (btn)
+        btn.addEventListener('click', function () {
+          try {
+            sessionStorage.setItem(KEY, '1');
+          } catch (e) {}
+          root.remove();
+        });
+    } catch (e) {}
+  })();
+</script>
+
+{%- endif -%}

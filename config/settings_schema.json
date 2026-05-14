@@ -2307,6 +2307,13 @@
         "info": "Encendido: si el visitante ve precios en una moneda y su país usa otra, puede aparecer una barra informativa con un equivalente aproximado (es orientativo, no cambia el cobro real de Shopify). Apagado: no se muestra esa barra. Ejemplo: tienda en dólares y visitante de México puede ver una referencia en pesos aproximados."
       },
       {
+        "type": "checkbox",
+        "id": "duendes_enable_market_hint_banner",
+        "label": "Cinta de contexto (envío / confianza)",
+        "default": true,
+        "info": "Muestra debajo del encabezado una franja oscura con mensajes de envío y confianza. Apagala si no la querés. En el editor del tema no se muestra para no estorbar."
+      },
+      {
         "type": "text",
         "id": "duendes_api_worker_url",
         "label": "URL del API (Cloudflare Worker)",
