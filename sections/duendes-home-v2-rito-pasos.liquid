@@ -45,6 +45,32 @@
       assign dh2_rito_fb1 = dh2_rito_ng.featured_image
     endif
   endif
+  assign dh2_rito_tlg = collections['todos-los-guardianes']
+  if dh2_rito_tlg != blank
+    for dh2_rito_p in dh2_rito_tlg.products limit: 30
+      assign dh2_rito_im = blank
+      if dh2_rito_p.featured_image != blank
+        assign dh2_rito_im = dh2_rito_p.featured_image
+      elsif dh2_rito_p.featured_media != blank
+        assign dh2_rito_im = dh2_rito_p.featured_media
+      elsif dh2_rito_p.images.size > 0
+        assign dh2_rito_im = dh2_rito_p.images[0]
+      endif
+      if dh2_rito_im != blank
+        if dh2_rito_fb1 == blank
+          assign dh2_rito_fb1 = dh2_rito_im
+        elsif dh2_rito_fb2 == blank
+          assign dh2_rito_fb2 = dh2_rito_im
+        elsif dh2_rito_fb3 == blank
+          assign dh2_rito_fb3 = dh2_rito_im
+          break
+        endif
+      endif
+    endfor
+    if dh2_rito_fb1 == blank and dh2_rito_tlg.featured_image != blank
+      assign dh2_rito_fb1 = dh2_rito_tlg.featured_image
+    endif
+  endif
 -%}
 <style>
   .dh2-rito {
@@ -102,11 +128,27 @@
     justify-content: center;
     min-height: 0;
   }
+  .dh2-rito__photo-fallback {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    z-index: 1;
+  }
   .dh2-rito__glyph-ph {
-    font-size: clamp(32px, 8vw, 44px);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
     line-height: 1;
-    color: rgba(168, 139, 66, 0.55);
+    color: rgba(201, 169, 97, 0.55);
     letter-spacing: 0.2em;
+    pointer-events: none;
+    z-index: 0;
   }
   .dh2-rito__body {
     padding: 18px 16px 20px;
@@ -256,6 +298,14 @@
                 {{ dh2_rp_img | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width:750px) 33vw, 100vw', widths: '400,600,900' }}
               {% else %}
                 <span class="dh2-rito__glyph-ph" aria-hidden="true">{{ dh2_rp_glyph }}</span>
+                <img
+                  class="dh2-rito__photo-fallback"
+                  src="{{ 'duendes-rito-paso-fallback.svg' | asset_url }}"
+                  width="800"
+                  height="600"
+                  alt=""
+                  loading="lazy"
+                >
               {% endif %}
             </div>
             <div class="dh2-rito__body">

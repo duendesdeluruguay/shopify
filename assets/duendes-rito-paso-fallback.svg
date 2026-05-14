@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="dh2rito-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#faf6ee"/>
+      <stop offset="100%" stop-color="#e8e0d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#dh2rito-bg)"/>
+  <text x="400" y="335" text-anchor="middle" font-size="140" fill="rgba(201,169,97,0.45)" font-family="Georgia, 'Times New Roman', serif">&</text>
+</svg>

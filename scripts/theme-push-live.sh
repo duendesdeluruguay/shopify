@@ -6,7 +6,12 @@
 #   ./scripts/theme-push-live.sh
 #   ./scripts/theme-push-live.sh --only sections/mi-seccion.liquid
 #
-# Para SUBIR cambios de plantilla (orden de secciones, index, etc.):
+# Antes de tocar o versionar JSON del tema (templates/index*.json,
+# config/settings_data.json): hacé shopify theme pull, mergeá con lo remoto
+# y recién ahí editá/pusheá esos archivos a propósito — este script los ignora
+# a propósito para no pisar el customizer en pushes rutinarios.
+#
+# Para SUBIR cambios de plantilla (orden de secciones, index, etc.) a propósito:
 #   shopify theme pull …   # traer lo del editor y mergear en git si hace falta
 #   shopify theme push …   # sin este script, o quitá los --ignore de abajo.
 #
@@ -20,10 +25,6 @@ exec shopify theme push \
   --theme "$THEME_ID" \
   --allow-live \
   --nodelete \
+  --ignore "templates/index*.json" \
   --ignore "config/settings_data.json" \
-  --ignore "templates/index.json" \
-  --ignore "templates/index.es-uy.json" \
-  --ignore "templates/index.es.json" \
-  --ignore "templates/index.es-MX.json" \
-  --ignore "templates/index.es-419.json" \
   "$@"
