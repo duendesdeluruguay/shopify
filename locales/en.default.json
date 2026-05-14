@@ -411,7 +411,8 @@
         "title": "You don't choose them. They choose you.",
         "subtitle": "Each one is unique in the world.",
         "cta_primary": "Find my Guardian",
-        "cta_secondary": "Have them read me (2 min)"
+        "cta_secondary": "The Guardian reading",
+        "cta_secondary_hint": "A short ritual — in two minutes the forest answers who matches you now."
       },
       "cartas_bosque": {
         "tag": "THE PORTAL SHOWS YOU",

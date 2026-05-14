@@ -417,7 +417,8 @@
         "title": "No los elegís vos. Ellos te eligen a vos.",
         "subtitle": "Cada uno es único en el mundo.",
         "cta_primary": "Encontrar mi Guardián",
-        "cta_secondary": "Que me lean (2 min)"
+        "cta_secondary": "Test del Guardián",
+        "cta_secondary_hint": "Un ritual breve — en dos minutos el bosque te dice quién combina con vos ahora."
       },
       "cartas_bosque": {
         "tag": "EL PORTAL TE MUESTRA",

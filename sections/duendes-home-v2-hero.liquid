@@ -20,6 +20,13 @@
   if dh2_hero_cta2 == blank
     assign dh2_hero_cta2 = 'duendes.home_v2.hero.cta_secondary' | t
   endif
+  assign dh2_hero_ritual_hint = section.settings.cta_secondary_hint | strip
+  if dh2_hero_ritual_hint == blank
+    assign dh2_hero_ritual_hint = 'duendes.home_v2.hero.cta_secondary_hint' | t
+  endif
+  if dh2_hero_ritual_hint contains 'translation missing'
+    assign dh2_hero_ritual_hint = ''
+  endif
 -%}
 <style>
   .dh2-hero {
@@ -134,6 +141,120 @@
     border-color: var(--dh2-gold);
     color: #fff;
   }
+  .dh2-hero__ritual {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 22px 12px 14px;
+    max-width: min(440px, 100%);
+    text-decoration: none;
+    text-align: left;
+    color: rgba(248, 246, 240, 0.96);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(12, 10, 8, 0.72) 0%, rgba(22, 18, 14, 0.55) 100%);
+    border: 1px solid rgba(201, 169, 97, 0.42);
+    box-shadow:
+      0 1px 0 rgba(255, 250, 245, 0.07) inset,
+      0 18px 48px rgba(0, 0, 0, 0.42),
+      0 0 36px rgba(201, 169, 97, 0.1);
+    overflow: hidden;
+    transition:
+      transform 0.28s ease,
+      border-color 0.28s ease,
+      box-shadow 0.28s ease;
+    animation: dh2-hero-ritual-breathe 5.5s ease-in-out infinite;
+  }
+  @keyframes dh2-hero-ritual-breathe {
+    0%,
+    100% {
+      box-shadow:
+        0 1px 0 rgba(255, 250, 245, 0.07) inset,
+        0 18px 48px rgba(0, 0, 0, 0.42),
+        0 0 28px rgba(201, 169, 97, 0.08);
+    }
+    50% {
+      box-shadow:
+        0 1px 0 rgba(255, 250, 245, 0.09) inset,
+        0 22px 56px rgba(0, 0, 0, 0.48),
+        0 0 48px rgba(201, 169, 97, 0.16);
+    }
+  }
+  .dh2-hero__ritual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(80% 120% at 10% 0%, rgba(201, 169, 97, 0.12), transparent 55%);
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.85;
+  }
+  .dh2-hero__ritual:hover {
+    transform: translateY(-2px) scale(1.01);
+    border-color: rgba(214, 186, 120, 0.75);
+  }
+  .dh2-hero__ritual__orb {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(201, 169, 97, 0.55);
+    box-shadow: 0 0 22px rgba(201, 169, 97, 0.22);
+  }
+  .dh2-hero__ritual__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .dh2-hero__ritual__glyph-ring {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(201, 169, 97, 0.45);
+    background: radial-gradient(circle at 35% 30%, rgba(255, 250, 245, 0.12), rgba(12, 10, 8, 0.85));
+    box-shadow: 0 0 24px rgba(201, 169, 97, 0.2);
+    font-size: 20px;
+    color: var(--dh2-gold);
+    line-height: 1;
+  }
+  .dh2-hero__ritual__core {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+  .dh2-hero__ritual__label {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #faf9f7;
+    line-height: 1.35;
+  }
+  .dh2-hero__ritual__hint {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: clamp(14px, 1.8vw, 16px);
+    font-style: italic;
+    line-height: 1.35;
+    color: rgba(248, 246, 240, 0.78);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dh2-hero__ritual {
+      animation: none;
+    }
+  }
   @media (max-width: 768px) {
     .dh2-hero {
       min-height: min(70vh, 620px);
@@ -171,6 +292,17 @@
       max-width: min(340px, 100%);
       padding-inline: 24px;
     }
+    .dh2-hero__ritual {
+      width: 100%;
+      max-width: min(380px, 100%);
+      justify-content: flex-start;
+      padding: 12px 18px;
+    }
+    .dh2-hero__ritual__orb,
+    .dh2-hero__ritual__glyph-ring {
+      width: 48px;
+      height: 48px;
+    }
     .dh2-cb, .dh2-hero, .dh2-new, .dh2-lin, .dh2-be, .dh2-sp, .dh2-ed, .dh2-rito, .dh2-lt, .dh2-tribu {
       padding: 6px 0 6px !important;
     }
@@ -201,7 +333,33 @@
     <p class="dh2-hero__sub">{{ dh2_hero_sub }}</p>
     <div class="dh2-hero__ctas">
       <a class="dh2-hero__btn dh2-hero__btn--primary" href="{{ section.settings.cta_primary_url }}">{{ dh2_hero_cta1 }}</a>
-      <a class="dh2-hero__btn dh2-hero__btn--ghost" href="{{ section.settings.cta_secondary_url }}">{{ dh2_hero_cta2 }}</a>
+      <a
+        class="dh2-hero__ritual"
+        href="{{ section.settings.cta_secondary_url }}"
+        {% if dh2_hero_ritual_hint != blank %}
+          aria-label="{{ dh2_hero_cta2 | escape }} — {{ dh2_hero_ritual_hint | strip_html | escape }}"
+        {% else %}
+          aria-label="{{ dh2_hero_cta2 | escape }}"
+        {% endif %}
+      >
+        {% if section.settings.cta_secondary_image != blank %}
+          <span class="dh2-hero__ritual__orb">
+            {{
+              section.settings.cta_secondary_image
+              | image_url: width: 180
+              | image_tag: loading: 'lazy', class: 'dh2-hero__ritual__img', alt: ''
+            }}
+          </span>
+        {% else %}
+          <span class="dh2-hero__ritual__glyph-ring" aria-hidden="true">✦</span>
+        {% endif %}
+        <span class="dh2-hero__ritual__core">
+          <span class="dh2-hero__ritual__label">{{ dh2_hero_cta2 }}</span>
+          {% if dh2_hero_ritual_hint != blank %}
+            <span class="dh2-hero__ritual__hint">{{ dh2_hero_ritual_hint }}</span>
+          {% endif %}
+        </span>
+      </a>
     </div>
   </div>
 </section>
@@ -264,12 +422,24 @@
       "type": "text",
       "id": "cta_secondary_label",
       "label": "CTA secundario (texto)",
-      "default": "Que me lean (2 min)"
+      "default": "Test del Guardián"
     },
     {
       "type": "url",
       "id": "cta_secondary_url",
       "label": "CTA secundario (enlace)"
+    },
+    {
+      "type": "image_picker",
+      "id": "cta_secondary_image",
+      "label": "Test del Guardián · imagen (opcional)",
+      "info": "Pequeña foto ritual junto al acceso. Si está vacía, se muestra un glifo dorado."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_secondary_hint",
+      "label": "Test del Guardián · invitación (opcional)",
+      "info": "Línea bajo el título del CTA. Vacío = texto por idioma (locales)."
     }
   ],
   "presets": [{ "name": "DDU v2 · Hero" }]

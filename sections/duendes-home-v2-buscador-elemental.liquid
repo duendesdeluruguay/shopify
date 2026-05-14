@@ -38,10 +38,10 @@
   .dh2-be__glow {
     position: absolute;
     inset: 0;
-    background: radial-gradient(70% 50% at 50% 35%, rgba(201, 169, 97, 0.65) 0%, rgba(201, 169, 97, 0.18) 35%, rgba(0, 0, 0, 0) 75%);
+    background: radial-gradient(65% 48% at 50% 28%, rgba(201, 169, 97, 0.22) 0%, rgba(201, 169, 97, 0.06) 42%, rgba(0, 0, 0, 0) 72%);
     pointer-events: none;
     z-index: 0;
-    animation: dh2-be-glow-pulse 10s ease-in-out infinite;
+    animation: dh2-be-glow-pulse 14s ease-in-out infinite;
   }
   @keyframes dh2-be-glow-pulse {
     0%,
@@ -50,26 +50,26 @@
       filter: brightness(1);
     }
     50% {
-      opacity: 0.92;
-      filter: brightness(1.12);
+      opacity: 0.88;
+      filter: brightness(1.06);
     }
   }
   .dh2-be__noise {
     position: absolute;
     inset: 0;
-    opacity: 0.35;
+    opacity: 0.12;
     pointer-events: none;
     z-index: 1;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 180px 180px;
+    background-size: 200px 200px;
   }
   .dh2-be__vignette {
     position: absolute;
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    background: radial-gradient(ellipse 75% 65% at 50% 45%, transparent 25%, rgba(5, 4, 2, 0.55) 100%);
+    background: radial-gradient(ellipse 80% 70% at 50% 42%, transparent 35%, rgba(5, 4, 2, 0.38) 100%);
   }
   .dh2-be__particles {
     position: absolute;
@@ -80,25 +80,21 @@
   }
   .dh2-be__dot {
     position: absolute;
-    width: 5px;
-    height: 5px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #fff6d4, #c9a961 45%, #6a5428 100%);
-    box-shadow:
-      0 0 14px rgba(201, 169, 97, 1),
-      0 0 28px rgba(201, 169, 97, 0.55);
-    filter: blur(0.3px);
+    background: radial-gradient(circle at 30% 30%, rgba(255, 246, 212, 0.9), rgba(201, 169, 97, 0.5) 50%, transparent 100%);
+    box-shadow: 0 0 12px rgba(201, 169, 97, 0.45);
+    filter: blur(0.4px);
     opacity: 0;
-    animation: dh2-be-float 5s ease-in-out infinite;
+    animation: dh2-be-float 7s ease-in-out infinite;
     z-index: 2;
     pointer-events: none;
   }
   .dh2-be__dot--sm {
-    width: 3.5px;
-    height: 3.5px;
-    box-shadow:
-      0 0 10px rgba(201, 169, 97, 0.9),
-      0 0 22px rgba(201, 169, 97, 0.45);
+    width: 3px;
+    height: 3px;
+    box-shadow: 0 0 8px rgba(201, 169, 97, 0.35);
   }
   @keyframes dh2-be-float {
     0%,
@@ -106,20 +102,20 @@
       opacity: 0;
       transform: translateY(0);
     }
-    18%,
-    82% {
-      opacity: 0.95;
+    22%,
+    78% {
+      opacity: 0.45;
     }
     50% {
-      opacity: 1;
-      transform: translateY(-26px);
+      opacity: 0.55;
+      transform: translateY(-18px);
     }
   }
   .dh2-be__content {
     position: relative;
     z-index: 10;
   }
-  .dh2-be--has-results .dh2-be__inner {
+  .dh2-be--has-results .dh2-be__shell {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -133,63 +129,121 @@
   .dh2-be--has-results .dh2-be__results {
     padding-top: 28px;
   }
+  .dh2-be__shell {
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 22px 36px;
+    box-sizing: border-box;
+    display: grid;
+    gap: 28px;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .dh2-be__shell:has(.dh2-be__figure) {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+      gap: 44px;
+      padding-inline: 28px;
+    }
+  }
+  .dh2-be__figure {
+    margin: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 169, 97, 0.28);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    aspect-ratio: 4 / 5;
+    max-height: 380px;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    max-width: 320px;
+  }
+  .dh2-be__figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.94;
+  }
   .dh2-be__inner {
     position: relative;
     z-index: 1;
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 28px 20px 28px;
+    min-width: 0;
+    width: 100%;
     box-sizing: border-box;
   }
   .dh2-be__eyebrow {
     font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 14px;
-    letter-spacing: 0.35em;
+    font-size: 12px;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
     text-align: center;
-    color: #c9a961;
-    margin: 0 0 16px;
+    color: rgba(201, 169, 97, 0.88);
+    margin: 0 0 12px;
   }
   .dh2-be__title {
     font-family: var(--font-heading--family, 'Cinzel', serif);
     font-weight: 400;
     font-style: normal;
-    font-size: 36px;
-    letter-spacing: 0.02em;
+    font-size: clamp(30px, 3.6vw, 40px);
+    letter-spacing: 0.04em;
     text-transform: none;
     text-align: center;
     color: #faf9f7;
-    margin: 0 0 28px;
-    line-height: 1.22;
+    margin: 0 0 16px;
+    line-height: 1.18;
   }
   .dh2-be__sub {
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
-    font-size: clamp(17px, 2.2vw, 20px);
+    font-size: clamp(17px, 2.1vw, 19px);
     font-style: italic;
     text-align: center;
-    color: rgba(244, 241, 236, 0.55);
-    margin: 0 0 40px;
-    line-height: 1.4;
+    color: rgba(244, 241, 236, 0.62);
+    margin: 0 auto 26px;
+    line-height: 1.45;
+    max-width: 34em;
+  }
+  .dh2-be__panel {
+    transition: opacity 0.3s ease;
+    padding: 28px 22px 26px;
+    border-radius: 20px;
+    background: linear-gradient(165deg, rgba(255, 250, 245, 0.06) 0%, rgba(12, 10, 8, 0.45) 100%);
+    border: 1px solid rgba(201, 169, 97, 0.22);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.04) inset,
+      0 28px 70px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
   .dh2-be__form {
     display: flex;
-    align-items: stretch;
-    gap: 12px;
-    margin-bottom: 28px;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    padding: 5px 6px 5px 18px;
+    border-radius: 999px;
+    background: rgba(8, 7, 5, 0.55);
+    border: 1px solid rgba(201, 169, 97, 0.28);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+  }
+  .dh2-be__form:focus-within {
+    border-color: rgba(201, 169, 97, 0.48);
+    box-shadow: 0 8px 32px rgba(201, 169, 97, 0.08);
   }
   .dh2-be__input-wrap {
     flex: 1;
     min-width: 0;
-    border-bottom: 2px solid rgba(201, 169, 97, 0.55);
-    padding-bottom: 3px;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 6px 22px rgba(201, 169, 97, 0.06);
+    border: 0;
+    padding: 0;
+    box-shadow: none;
     border-radius: 0;
+    background: transparent;
   }
   .dh2-be__input-wrap:focus-within {
-    border-bottom-color: #c9a961;
-    border-bottom-width: 2px;
-    box-shadow: 0 4px 12px rgba(201, 169, 97, 0.15);
+    border: 0;
+    box-shadow: none;
   }
   .dh2-be__input {
     width: 100%;
@@ -197,52 +251,53 @@
     background: transparent;
     color: #fff;
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
-    font-size: clamp(18px, 2.6vw, 22px);
-    padding: 10px 0 8px;
+    font-size: clamp(17px, 2.3vw, 21px);
+    padding: 10px 0;
     outline: none;
     line-height: 1.3;
   }
   .dh2-be__input::placeholder {
-    color: rgba(244, 241, 236, 0.32);
+    color: rgba(244, 241, 236, 0.34);
   }
   .dh2-be__submit {
     flex-shrink: 0;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: none;
-    background: var(--dh2-be-gold);
+    background: linear-gradient(145deg, #d4b56e, #b8934f);
     color: var(--dh2-be-bg);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    align-self: flex-end;
-    margin-bottom: 4px;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    font-size: 18px;
+    align-self: center;
+    margin: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 17px;
     line-height: 1;
     padding: 0;
+    box-shadow: 0 4px 16px rgba(201, 169, 97, 0.25);
   }
   .dh2-be__submit:hover {
-    opacity: 0.92;
-    transform: scale(1.04);
+    opacity: 0.95;
+    transform: scale(1.03);
+    box-shadow: 0 6px 22px rgba(201, 169, 97, 0.32);
   }
   .dh2-be__chips {
     text-align: center;
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
-    font-size: 15px;
-    line-height: 1.85;
+    font-size: 14px;
+    line-height: 1.6;
     color: rgba(244, 241, 236, 0.78);
-    margin-bottom: 48px;
+    margin-bottom: 20px;
   }
   .dh2-be__chips-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 0 6px;
-    row-gap: 6px;
+    gap: 8px;
   }
   .dh2-be__chips-extra {
     max-height: 0;
@@ -252,36 +307,47 @@
     margin-top: 0;
   }
   .dh2-be__chips-extra.is-open {
-    max-height: 4rem;
+    max-height: 220px;
     opacity: 1;
     margin-top: 10px;
   }
   .dh2-be__sep {
-    color: rgba(201, 169, 97, 0.45);
-    user-select: none;
-    padding: 0 2px;
+    display: none;
   }
   .dh2-be__chip {
-    background: none;
-    border: none;
-    padding: 2px 0;
+    display: inline-block;
+    background: rgba(255, 250, 245, 0.04);
+    border: 1px solid rgba(201, 169, 97, 0.26);
+    padding: 8px 14px;
     margin: 0;
+    border-radius: 999px;
     font: inherit;
-    color: inherit;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: rgba(244, 241, 236, 0.88);
     cursor: pointer;
     text-decoration: none;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      background 0.2s ease;
   }
   .dh2-be__chip:hover {
-    text-decoration: underline;
-    color: rgba(244, 241, 236, 0.95);
+    text-decoration: none;
+    border-color: rgba(201, 169, 97, 0.5);
+    background: rgba(201, 169, 97, 0.1);
+    color: #faf9f7;
   }
   .dh2-be__chip--muted {
-    color: rgba(201, 169, 97, 0.75);
+    color: rgba(201, 169, 97, 0.88);
+    border-style: dashed;
+    border-color: rgba(201, 169, 97, 0.35);
+    background: transparent;
   }
   .dh2-be__chip--muted:hover {
     color: var(--dh2-be-gold);
+    border-color: rgba(201, 169, 97, 0.55);
+    background: rgba(201, 169, 97, 0.06);
   }
   .dh2-be__foot {
     text-align: center;
@@ -290,9 +356,6 @@
     color: rgba(244, 241, 236, 0.38);
     margin: 0;
     line-height: 1.5;
-  }
-  .dh2-be__panel {
-    transition: opacity 0.3s ease;
   }
   .dh2-be__results {
     position: relative;
@@ -413,12 +476,24 @@
     color: var(--dh2-be-gold);
     text-decoration-color: rgba(201, 169, 97, 0.6);
   }
+  @media (max-width: 899px) {
+    .dh2-be__figure {
+      max-height: 200px;
+      aspect-ratio: 16 / 9;
+      max-width: 100%;
+    }
+  }
   @media (max-width: 749px) {
-    .dh2-be__inner {
-      padding: 6px 20px 6px !important;
+    .dh2-be__shell {
+      padding: 18px 16px 22px;
+    }
+    .dh2-be__panel {
+      padding: 22px 16px 20px;
     }
     .dh2-be__form {
-      align-items: flex-end;
+      padding-inline: 14px;
+      border-radius: 16px;
+      flex-wrap: nowrap;
     }
   }
   /* Theme wrapper overrides (OS 2.0): ritual oscuro; capas viven en hijos */
@@ -457,9 +532,9 @@
     section.dh2-be.section {
       overflow-x: hidden;
     }
-    .dh2-be__inner {
-      padding-left: max(20px, env(safe-area-inset-left, 0px));
-      padding-right: max(24px, env(safe-area-inset-right, 0px));
+    .dh2-be__shell {
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
     }
     h2.dh2-be__title,
     .dh2-be__title {
@@ -488,10 +563,20 @@
     .dh2-be__input {
       font-size: 16px !important;
     }
-  }
-  @media (max-width: 768px) {
     .dh2-cb, .dh2-hero, .dh2-new, .dh2-lin, .dh2-be, .dh2-sp, .dh2-ed, .dh2-rito, .dh2-lt, .dh2-tribu {
       padding: 6px 0 6px !important;
+    }
+    section.dh2-be.section {
+      padding-block: 20px 24px !important;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dh2-be__glow {
+      animation: none;
+    }
+    .dh2-be__dot {
+      animation: none;
+      opacity: 0.35;
     }
   }
 </style>
@@ -507,19 +592,29 @@
   <div class="dh2-be__noise" aria-hidden="true"></div>
   <div class="dh2-be__vignette" aria-hidden="true"></div>
   <div class="dh2-be__particles" aria-hidden="true">
-    <span class="dh2-be__dot" style="left:15%; top:30%; animation-delay:0s"></span>
-    <span class="dh2-be__dot dh2-be__dot--sm" style="left:22%; top:48%; animation-delay:0.8s"></span>
-    <span class="dh2-be__dot" style="left:78%; top:25%; animation-delay:1.5s"></span>
-    <span class="dh2-be__dot dh2-be__dot--sm" style="left:68%; top:42%; animation-delay:2.2s"></span>
-    <span class="dh2-be__dot" style="left:32%; top:65%; animation-delay:3s"></span>
-    <span class="dh2-be__dot dh2-be__dot--sm" style="left:44%; top:18%; animation-delay:3.8s"></span>
-    <span class="dh2-be__dot" style="left:85%; top:75%; animation-delay:4.5s"></span>
-    <span class="dh2-be__dot dh2-be__dot--sm" style="left:8%; top:62%; animation-delay:5.2s"></span>
-    <span class="dh2-be__dot" style="left:50%; top:88%; animation-delay:6s"></span>
-    <span class="dh2-be__dot dh2-be__dot--sm" style="left:92%; top:52%; animation-delay:6.8s"></span>
+    <span class="dh2-be__dot" style="left:18%; top:32%; animation-delay:0s"></span>
+    <span class="dh2-be__dot dh2-be__dot--sm" style="left:72%; top:28%; animation-delay:1.2s"></span>
+    <span class="dh2-be__dot" style="left:48%; top:72%; animation-delay:2.4s"></span>
+    <span class="dh2-be__dot dh2-be__dot--sm" style="left:88%; top:58%; animation-delay:3.6s"></span>
+    <span class="dh2-be__dot" style="left:10%; top:68%; animation-delay:4.8s"></span>
   </div>
   <div class="dh2-be__content">
-  <div class="dh2-be__inner">
+  <div class="dh2-be__shell">
+    {% if section.settings.editorial_image != blank %}
+      <figure class="dh2-be__figure">
+        {{
+          section.settings.editorial_image
+          | image_url: width: 800
+          | image_tag:
+            loading: 'lazy',
+            class: 'dh2-be__figure-img',
+            sizes: '(min-width: 900px) 320px, 100vw',
+            widths: '400,560,720,800',
+            alt: ''
+        }}
+      </figure>
+    {% endif %}
+    <div class="dh2-be__inner">
     <div class="dh2-be__panel" data-dh2-be-panel="search">
       {% if dh2_be_eyebrow != blank %}
         <p class="dh2-be__eyebrow">{{ dh2_be_eyebrow }}</p>
@@ -599,6 +694,7 @@
       </div>
 
       <p class="dh2-be__foot">{{ dh2_be_foot }}</p>
+    </div>
     </div>
   </div>
 
@@ -995,6 +1091,12 @@
   "tag": "section",
   "class": "duendes-home-v2-buscador-elemental-section",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "editorial_image",
+      "label": "Imagen editorial (opcional)",
+      "info": "Se muestra al lado del buscador en escritorio; refuerza el tono cinematográfico. Dejala vacía para solo el panel."
+    },
     {
       "type": "collection",
       "id": "collection",

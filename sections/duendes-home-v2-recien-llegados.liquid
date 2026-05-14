@@ -30,7 +30,7 @@
 <style>
   .dh2-new {
     background: #faf9f6;
-    padding: 24px 0 28px;
+    padding: 14px 0 18px;
     color: #15110d;
     border-top: 1px solid rgba(21, 17, 13, 0.06);
   }
@@ -46,18 +46,18 @@
     text-transform: uppercase;
     color: rgba(21, 17, 13, 0.45);
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .dh2-new__title {
     font-family: var(--font-heading--family, 'Cinzel', serif);
     font-weight: 400;
-    font-size: clamp(24px, 3vw, 36px);
+    font-size: clamp(26px, 3.4vw, 40px);
     text-align: center;
-    margin: 0 0 28px;
+    margin: 0 0 20px;
   }
   .dh2-new__track {
     display: flex;
-    gap: 18px;
+    gap: 20px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -74,8 +74,8 @@
     border-radius: 4px;
   }
   .dh2-new__card {
-    flex: 0 0 calc(25% - 14px);
-    min-width: 220px;
+    flex: 0 0 calc(25% - 15px);
+    min-width: 252px;
     scroll-snap-align: start;
     background: #fff;
     border-radius: 14px;
@@ -164,8 +164,8 @@
       scroll-padding-inline: 12px;
     }
     .dh2-new__card {
-      flex: 0 0 clamp(152px, 46vw, 198px);
-      width: clamp(152px, 46vw, 198px);
+      flex: 0 0 clamp(168px, 48vw, 216px);
+      width: clamp(168px, 48vw, 216px);
       min-width: 0;
     }
     .dh2-new__img {
@@ -190,6 +190,9 @@
   @media (max-width: 768px) {
     .dh2-cb, .dh2-hero, .dh2-new, .dh2-lin, .dh2-be, .dh2-sp, .dh2-ed, .dh2-rito, .dh2-lt, .dh2-tribu {
       padding: 6px 0 6px !important;
+    }
+    section.dh2-new.section {
+      padding: 10px 0 14px !important;
     }
   }
 </style>
