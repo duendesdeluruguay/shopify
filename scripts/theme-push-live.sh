@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 # Push al tema en vivo SIN pisar lo que configurás en el editor de Shopify
-# (fotos, productos en bloques, textos del home en JSON).
+# (fotos en bloques del home, imágenes en cabecera/pie, productos en cartas,
+# textos y ajustes que viven en los JSON listados abajo con --ignore).
 #
 # Uso (desde la raíz del tema):
 #   ./scripts/theme-push-live.sh
 #   ./scripts/theme-push-live.sh --only sections/mi-seccion.liquid
 #
-# Antes de tocar o versionar JSON del tema (templates/index*.json,
-# config/settings_data.json): hacé shopify theme pull, mergeá con lo remoto
-# y recién ahí editá/pusheá esos archivos a propósito — este script los ignora
-# a propósito para no pisar el customizer en pushes rutinarios.
+# Antes de tocar o versionar en git los JSON que el editor modifica (home,
+# settings globales, grupo de cabecera/pie): shopify theme pull, mergeá con lo
+# remoto y recién ahí editá/pusheá a propósito — este script los ignora en el
+# push rutinario para que NO desaparezcan las fotos ni textos del customizer.
 #
 # Para SUBIR cambios de plantilla (orden de secciones, index, etc.) a propósito:
 #   shopify theme pull …   # traer lo del editor y mergear en git si hace falta
@@ -27,4 +28,6 @@ exec shopify theme push \
   --nodelete \
   --ignore "templates/index*.json" \
   --ignore "config/settings_data.json" \
+  --ignore "sections/header-group.json" \
+  --ignore "sections/footer-group.json" \
   "$@"

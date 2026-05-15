@@ -1,8 +1,8 @@
 ## Shopify theme deploy (Duendes / tema en vivo)
 
-Los ajustes del **editor de tema** (fotos en bloques, productos en cartas, textos en JSON del home) viven en `config/settings_data.json` y `templates/index*.json`.
+Los ajustes del **editor de tema** (fotos en bloques, productos en cartas, textos en JSON del home, anuncios/logo en cabecera, pie) viven en `config/settings_data.json`, `templates/index*.json`, `sections/header-group.json` y `sections/footer-group.json`.
 
-- **No ejecutar** `shopify theme push` a producción sin proteger esos archivos: pisa lo que la dueña configuró en Admin y obliga a volver a elegir fotos.
-- **Sí usar** `./scripts/theme-push-live.sh` (o el mismo conjunto de `--ignore` + `--nodelete`) para subir solo código (Liquid, CSS, sections, snippets, assets).
+- **No ejecutar** `shopify theme push` a producción sin proteger esos archivos: pisa lo que la dueña configuró en Admin y puede hacer **desaparecer fotos** u obligar a volver a cargarlas.
+- **Sí usar** `./scripts/theme-push-live.sh` (mismos `--ignore` que en el script + `--nodelete`) para subir solo código (Liquid, CSS, sections, snippets, assets).
 - Si hace falta **versionar** cambios del editor en git: `shopify theme pull` de esos JSON, merge, commit.
-- Solo hacer push de `templates/index*.json` o `settings_data.json` cuando el usuario pida explícitamente desplegar plantilla o tras pull+merge consciente.
+- Solo hacer push de esos JSON cuando el usuario pida explícitamente desplegar plantilla o tras pull+merge consciente.
