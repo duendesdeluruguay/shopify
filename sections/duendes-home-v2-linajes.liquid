@@ -1,392 +1,416 @@
 {{ 'duendes-base.css' | asset_url | stylesheet_tag }}
+
 {%- liquid
   assign dh2_lin_tag = section.settings.tag | strip
   if dh2_lin_tag == blank
-    assign dh2_lin_tag = 'duendes.home_v2.linajes.eyebrow' | t
+    assign dh2_lin_tag = 'duendes.home_v2.linajes.tag' | t
     if dh2_lin_tag contains 'translation missing'
-      assign dh2_lin_tag = 'duendes.home_v2.linajes.tag' | t
+      assign dh2_lin_tag = 'POR LINAJE'
     endif
   endif
+
   assign dh2_lin_title = section.settings.title | strip
   if dh2_lin_title == blank
     assign dh2_lin_title = 'duendes.home_v2.linajes.title' | t
+    if dh2_lin_title contains 'translation missing'
+      assign dh2_lin_title = 'Encontrá tu familia.'
+    endif
   endif
-  assign dh2_lin_sub = 'duendes.home_v2.linajes.sub' | t
-  if dh2_lin_sub contains 'translation missing'
-    assign dh2_lin_sub = ''
+
+  assign dh2_lin_sub = section.settings.subtitle | strip
+  if dh2_lin_sub == blank
+    assign dh2_lin_sub = 'duendes.home_v2.linajes.subtitle' | t
+    if dh2_lin_sub contains 'translation missing'
+      assign dh2_lin_sub = ''
+    endif
   endif
 -%}
+
 <style>
   .dh2-lin {
-    background: #faf9f6;
-    padding: 14px 0 18px;
+    position: relative;
+    background: #faf9f7;
     color: #15110d;
+    padding: 22px 14px 6px;
   }
-  .dh2-lin__inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
+  .dh2-lin__head { text-align: center; margin: 0 0 14px; }
   .dh2-lin__tag {
     font-family: var(--font-heading--family, 'Cinzel', serif);
     font-size: 10px;
     letter-spacing: 0.26em;
+    color: #8a7657;
     text-transform: uppercase;
-    color: rgba(21, 17, 13, 0.45);
-    text-align: center;
-    margin-bottom: 8px;
+    margin: 0 0 4px;
   }
   .dh2-lin__title {
     font-family: var(--font-heading--family, 'Cinzel', serif);
     font-weight: 400;
-    font-size: clamp(26px, 3.4vw, 40px);
-    text-align: center;
-    margin: 0 0 8px;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.18;
+    color: #15110d;
+    margin: 0 0 4px;
   }
   .dh2-lin__sub {
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
-    font-size: clamp(15px, 1.9vw, 18px);
-    text-align: center;
-    margin: 0 auto 14px;
-    max-width: 520px;
-    line-height: 1.45;
-    color: rgba(21, 17, 13, 0.58);
     font-style: italic;
-  }
-  .dh2-lin__frame {
-    margin-top: 6px;
-    padding: 16px 12px 18px;
-    border: 1px solid rgba(201, 169, 97, 0.38);
-    border-radius: 18px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(250, 249, 246, 0.95) 100%);
-    box-shadow: 0 4px 28px rgba(21, 17, 13, 0.06);
-  }
-  .dh2-lin__frame-head {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-  .dh2-lin__frame-line {
-    flex: 1;
-    height: 1px;
-    max-width: 100px;
-    background: linear-gradient(90deg, transparent, rgba(168, 139, 66, 0.55), transparent);
-  }
-  .dh2-lin__frame-kicker {
-    font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 11px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: #a88b42;
+    font-size: 13px;
+    color: #6b5d4f;
     margin: 0;
-    text-align: center;
-    white-space: nowrap;
   }
-  .dh2-lin__rail {
-    display: flex;
-    gap: clamp(10px, 1.8vw, 14px);
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 4px 4px 12px;
-    margin: 0 -8px;
-    scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    touch-action: pan-x pinch-zoom;
-    overscroll-behavior-x: contain;
-  }
-  .dh2-lin__rail::-webkit-scrollbar {
-    height: 6px;
-  }
-  .dh2-lin__rail::-webkit-scrollbar-thumb {
-    background: rgba(21, 17, 13, 0.18);
-    border-radius: 99px;
-  }
-  .dh2-lin__card {
+
+  /* Cada bloque de linaje */
+  .dh2-lin__group { margin-bottom: 14px; }
+
+  /* Banner horizontal del linaje */
+  .dh2-lin__banner {
     position: relative;
-    flex: 0 0 clamp(156px, 13.2vw, 188px);
-    width: clamp(156px, 13.2vw, 188px);
-    aspect-ratio: 2 / 3;
-    border-radius: 12px;
+    height: 86px;
+    border-radius: 6px;
     overflow: hidden;
     text-decoration: none;
-    color: #f4f1ec;
-    scroll-snap-align: start;
-    border: 1px solid rgba(201, 169, 97, 0.45);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: block;
+    background: #2a1810;
   }
-  .dh2-lin__card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
-  }
-  .dh2-lin__bg {
+  .dh2-lin__banner-img {
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, #3a2e1a, #15110d);
-  }
-  .dh2-lin__bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.92;
+    opacity: 0.5;
   }
-  .dh2-lin__shade {
+  .dh2-lin__banner-veil {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 20%, rgba(5, 4, 2, 0.88));
-    z-index: 1;
-    pointer-events: none;
+    background: linear-gradient(90deg, rgba(10, 8, 6, 0.78) 0%, rgba(10, 8, 6, 0.32) 100%);
   }
-  .dh2-lin__body {
+  .dh2-lin__banner-body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    height: 100%;
+    color: #faf9f6;
+  }
+  .dh2-lin__banner-name {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.15em;
+    margin: 0;
+    color: #faf9f6;
+  }
+  .dh2-lin__banner-count {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: #c9a961;
+    margin: 4px 0 0;
+  }
+  .dh2-lin__banner-chev {
+    color: #c9a961;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  /* Modo Oportunidades — terracota */
+  .dh2-lin__group--oferta .dh2-lin__banner {
+    background: linear-gradient(90deg, #a85b1a 0%, #3a1c08 100%);
+  }
+  .dh2-lin__group--oferta .dh2-lin__banner-img { opacity: 0.32; mix-blend-mode: multiply; }
+  .dh2-lin__group--oferta .dh2-lin__banner-veil { background: linear-gradient(90deg, rgba(168, 91, 26, 0.55) 0%, rgba(58, 28, 8, 0.4) 100%); }
+  .dh2-lin__group--oferta .dh2-lin__banner-count { color: #ffe6b0; }
+  .dh2-lin__group--oferta .dh2-lin__banner-chev {
+    background: #fff;
+    color: #a85b1a;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  /* Modo Vacío — apagado */
+  .dh2-lin__group--empty .dh2-lin__banner { filter: grayscale(0.55) brightness(0.85); }
+  .dh2-lin__group--empty .dh2-lin__banner-count { color: rgba(201, 169, 97, 0.7); }
+
+  /* Carrusel de productos por familia */
+  .dh2-lin__rail {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 8px 0 4px;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .dh2-lin__rail::-webkit-scrollbar { display: none; }
+
+  .dh2-lin__pcard {
+    flex: 0 0 38%;
+    max-width: 168px;
+    background: #fff;
+    border: 0.5px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #15110d;
+    scroll-snap-align: start;
+    position: relative;
+  }
+  .dh2-lin__pcard-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(180deg, #3a2820, #1a0f08);
+    object-fit: cover;
+    display: block;
+  }
+  .dh2-lin__pcard-info {
+    padding: 7px 9px;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+  }
+  .dh2-lin__pcard-name {
+    font-size: 12px;
+    color: #15110d;
+    margin: 0 0 2px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dh2-lin__pcard-price {
+    font-size: 10px;
+    color: #6b5d4f;
+    margin: 0;
+  }
+  .dh2-lin__pcard-price s { color: #b5ab9c; margin-right: 4px; }
+  .dh2-lin__pcard-price .now-oferta { color: #a85b1a; font-weight: 500; }
+  .dh2-lin__pcard-discount {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 6px;
+    right: 6px;
+    background: #a85b1a;
+    color: #fff;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    padding: 2px 6px;
+    border-radius: 2px;
     z-index: 2;
-    padding: 12px 10px 14px;
+  }
+
+  /* Última card: VER TODAS */
+  .dh2-lin__see-all {
+    flex: 0 0 38%;
+    max-width: 168px;
+    background: #15110d;
+    border-radius: 6px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 8px;
+    color: #c9a961;
+    border: 0.5px solid rgba(201, 169, 97, 0.4);
+    aspect-ratio: 3 / 4;
+    scroll-snap-align: start;
+    font-family: var(--font-heading--family, 'Cinzel', serif);
     text-align: center;
   }
-  .dh2-lin__name {
-    font-family: var(--font-heading--family, 'Cinzel', serif);
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin: 0 0 6px;
-    line-height: 1.25;
+  .dh2-lin__see-all-star {
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .dh2-lin__see-all-lbl {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    margin: 0;
+  }
+  .dh2-lin__see-all-qty {
+    font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-style: italic;
+    font-size: 10px;
+    color: rgba(244, 241, 236, 0.6);
+    margin: 4px 0 0;
+  }
+  .dh2-lin__group--oferta .dh2-lin__see-all {
+    background: #a85b1a;
+    border-color: rgba(255, 255, 255, 0.3);
     color: #fff;
   }
-  .dh2-lin__count {
+  .dh2-lin__group--oferta .dh2-lin__see-all-qty { color: rgba(255, 255, 255, 0.7); }
+
+  /* Estado vacío */
+  .dh2-lin__empty {
+    background: rgba(21, 17, 13, 0.04);
+    border: 0.5px dashed rgba(21, 17, 13, 0.18);
+    border-radius: 6px;
+    padding: 18px 16px;
+    text-align: center;
+    margin: 8px 0 0;
+  }
+  .dh2-lin__empty-msg {
     font-family: var(--font-body--family, 'Cormorant Garamond', Georgia, serif);
+    font-style: italic;
     font-size: 13px;
-    letter-spacing: 0.04em;
-    color: rgba(244, 241, 236, 0.82);
+    color: #6b5d4f;
+    margin: 0 0 4px;
+    line-height: 1.4;
   }
-  @media (max-width: 768px) {
-    .dh2-lin {
-      padding: 2px 0 8px !important;
-      margin-top: -6px;
-    }
-    .dh2-lin__inner {
-      padding-left: max(20px, env(safe-area-inset-left, 0px));
-      padding-right: max(20px, env(safe-area-inset-right, 0px));
-    }
-    .dh2-lin__sub {
-      margin-bottom: 6px !important;
-    }
-    .dh2-lin__title {
-      margin-bottom: 4px !important;
-    }
-    /* El marco dorado encogía el carril y rompía el swipe; en móvil el frame no genera caja
-       (los hijos pasan al inner) y el rail hace bleed como recién llegados. */
-    .dh2-lin__frame {
-      display: contents;
-    }
-    .dh2-lin__frame-head {
-      margin-bottom: 6px;
-      gap: 8px;
-    }
-    .dh2-lin__frame-line {
-      max-width: 72px;
-    }
-    .dh2-lin__frame-kicker {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      white-space: normal;
-      text-align: center;
-      line-height: 1.3;
-      max-width: min(300px, 85vw);
-    }
-    .dh2-lin__rail {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 10px;
-      padding: 4px 16px 10px;
-      margin: 0;
-      width: 100vw;
-      max-width: 100vw;
-      box-sizing: border-box;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      touch-action: pan-x pan-y;
-      overscroll-behavior-x: contain;
-      scroll-snap-type: x mandatory;
-      scroll-padding-inline: 16px;
-    }
-    .dh2-lin__rail::-webkit-scrollbar { display: none; }
-    .dh2-lin__card { scroll-snap-align: start; }
-    /* romper el rail del contenedor para que ocupe todo el ancho del viewport */
-    .dh2-lin__rail-wrap, .dh2-lin__frame {
-      width: 100vw;
-      max-width: 100vw;
-      margin-left: 50%;
-      transform: translateX(-50%);
-    }
-    .dh2-lin__card {
-      flex: 0 0 clamp(158px, 46vw, 204px);
-      width: clamp(158px, 46vw, 204px);
-      flex-shrink: 0;
-    }
-    .dh2-lin__body {
-      padding: 14px 10px 16px;
-    }
-    .dh2-lin__name {
-      font-size: 15px !important;
-      letter-spacing: 0.08em !important;
-    }
-    .dh2-lin__count {
-      font-size: 12px !important;
-      letter-spacing: 0.06em !important;
-    }
-    h2.dh2-lin__title,
-    .dh2-lin__title {
-      font-size: 26px !important;
-      line-height: 1.15 !important;
-      max-width: 100% !important;
-      margin-bottom: 8px !important;
-    }
-    .dh2-lin__tag {
-      font-size: 9px !important;
-      margin-bottom: 8px !important;
-    }
+  .dh2-lin__empty-tag {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    color: #a88b42;
+    letter-spacing: 0.18em;
+    margin: 0;
   }
-  @media (max-width: 768px) {
-    .dh2-cb, .dh2-hero, .dh2-be, .dh2-sp, .dh2-ed, .dh2-rito, .dh2-lt, .dh2-tribu {
-      padding: 6px 0 6px !important;
-    }
-    section.dh2-lin.section {
-      padding: 0 0 6px !important;
-    }
+
+  /* Desktop */
+  @media (min-width: 769px) {
+    .dh2-lin { padding: 36px 24px; }
+    .dh2-lin__inner { max-width: 1080px; margin: 0 auto; }
+    .dh2-lin__banner { height: 96px; }
+    .dh2-lin__banner-name { font-size: 18px; }
+    .dh2-lin__pcard, .dh2-lin__see-all { flex: 0 0 22%; max-width: 220px; }
   }
 </style>
 
 <section class="dh2-lin section">
   <div class="dh2-lin__inner">
-    <p class="dh2-lin__tag">{{ dh2_lin_tag }}</p>
-    <h2 class="dh2-lin__title">{{ dh2_lin_title }}</h2>
-    {% if dh2_lin_sub != blank %}
-      <p class="dh2-lin__sub">{{ dh2_lin_sub }}</p>
-    {% endif %}
-    <div class="dh2-lin__frame">
-      <div class="dh2-lin__frame-head">
-        <span class="dh2-lin__frame-line" aria-hidden="true"></span>
-        <p class="dh2-lin__frame-kicker">{{ 'duendes.home_v2.linajes.tipos_title' | t }}</p>
-        <span class="dh2-lin__frame-line" aria-hidden="true"></span>
-      </div>
-      <div class="dh2-lin__rail" role="list">
-      {% for block in section.blocks %}
-        {% if block.type == 'linaje' %}
-          {% liquid
-            assign _lin_url = block.settings.url | default: '' | strip
-            assign _lin_handle = ''
-            if _lin_url contains 'shopify://collections/'
-              assign _lin_handle = _lin_url | remove: 'shopify://collections/' | split: '/' | first | split: '?' | first
-            elsif _lin_url contains '/collections/'
-              assign _lin_tail = _lin_url | split: '/collections/' | last
-              assign _lin_handle = _lin_tail | split: '/' | first | split: '?' | first
+    <header class="dh2-lin__head">
+      <p class="dh2-lin__tag">{{ dh2_lin_tag }}</p>
+      <h2 class="dh2-lin__title">{{ dh2_lin_title }}</h2>
+      {% if dh2_lin_sub != blank %}<p class="dh2-lin__sub">{{ dh2_lin_sub }}</p>{% endif %}
+    </header>
+
+    {% for block in section.blocks %}
+      {%- liquid
+        assign _url = block.settings.url | default: '' | strip
+        assign _handle = ''
+        if _url contains 'shopify://collections/'
+          assign _handle = _url | remove: 'shopify://collections/' | split: '/' | first | split: '?' | first
+        elsif _url contains '/collections/'
+          assign _tail = _url | split: '/collections/' | last
+          assign _handle = _tail | split: '/' | first | split: '?' | first
+        endif
+        assign _col = collections[_handle]
+        assign _count = 0
+        if _col != blank
+          assign _count = _col.products_count | default: _col.all_products_count
+        endif
+        assign _photo = block.settings.image
+        if _photo == blank and _col != blank and _col.featured_image != blank
+          assign _photo = _col.featured_image
+        endif
+        if _photo == blank and _col != blank
+          for _p in _col.products limit: 5
+            if _p.featured_image != blank
+              assign _photo = _p.featured_image
+              break
             endif
-            assign _lin_col = blank
-            if _lin_handle != blank
-              assign _lin_col = collections[_lin_handle]
-            endif
-            assign _lin_photo = block.settings.image
-            if _lin_photo == blank and _lin_col != blank and _lin_col.featured_image != blank
-              assign _lin_photo = _lin_col.featured_image
-            endif
-            if _lin_photo == blank and _lin_col != blank
-              for _lin_p in _lin_col.products limit: 20
-                if _lin_p.featured_image != blank
-                  assign _lin_photo = _lin_p.featured_image
-                  break
-                elsif _lin_p.featured_media != blank
-                  assign _lin_photo = _lin_p.featured_media.preview_image
-                  break
-                elsif _lin_p.images.size > 0
-                  assign _lin_photo = _lin_p.images[0]
-                  break
-                endif
-              endfor
-            endif
-            assign _lin_title = block.settings.title | strip
-            assign _hkw = _lin_handle | downcase | strip
-            if _hkw == 'elves' or _hkw == 'elfos'
-              assign _tx = 'duendes.home_v2.linajes.collections.elves' | t
-              unless _tx contains 'translation missing'
-                assign _lin_title = _tx
-              endunless
-            elsif _hkw == 'mediums' or _hkw == 'medianos'
-              assign _tx = 'duendes.home_v2.linajes.collections.duendes' | t
-              unless _tx contains 'translation missing'
-                assign _lin_title = _tx
-              endunless
-            elsif _hkw == 'hadas'
-              assign _tx = 'duendes.home_v2.linajes.collections.hadas' | t
-              unless _tx contains 'translation missing'
-                assign _lin_title = _tx
-              endunless
-            elsif _hkw == 'pixies'
-              assign _tx = 'duendes.home_v2.linajes.collections.pixies' | t
-              unless _tx contains 'translation missing'
-                assign _lin_title = _tx
-              endunless
-            elsif _hkw == 'maestros'
-              assign _tx = 'duendes.home_v2.linajes.collections.maestros' | t
-              unless _tx contains 'translation missing'
-                assign _lin_title = _tx
-              endunless
-            elsif _hkw == 'deluxe'
-              assign _tx = 'duendes.home_v2.linajes.collections.deluxe' | t
-              unless _tx contains 'translation missing'
-                assign _lin_title = _tx
-              endunless
-            elsif _hkw == 'brujas'
-              assign _tx = 'duendes.home_v2.linajes.collections.brujas' | t
-              unless _tx contains 'translation missing'
-                assign _lin_title = _tx
-              endunless
-            elsif _hkw == 'grandes'
-              assign _tx = 'duendes.home_v2.linajes.collections.grandes' | t
-              unless _tx contains 'translation missing'
-                assign _lin_title = _tx
-              endunless
-            elsif _hkw == 'gigantes'
-              assign _tx = 'duendes.home_v2.linajes.collections.gigantes' | t
-              unless _tx contains 'translation missing'
-                assign _lin_title = _tx
-              endunless
-            elsif _hkw == 'historicos'
-              assign _tx = 'duendes.home_v2.linajes.collections.historicos' | t
-              unless _tx contains 'translation missing'
-                assign _lin_title = _tx
-              endunless
-            endif
-            assign _lin_count = block.settings.count_label | strip
-            assign _cl = _lin_count | downcase
-            if _lin_count == blank or _cl == 'view collection'
-              assign _lin_count = 'duendes.home_v2.linajes.view_collection' | t
-            endif
-          %}
-          <a class="dh2-lin__card" href="{{ block.settings.url }}" role="listitem" {{ block.shopify_attributes }}>
-            <div class="dh2-lin__bg" aria-hidden="true">
-              {% if _lin_photo != blank %}
-                {{ _lin_photo | image_url: width: 600 | image_tag: loading: 'lazy', alt: '', widths: '200,400,600' }}
-              {% else %}
-                <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:32px;color:rgba(201,169,97,0.55);">{{ block.settings.glyph | default: '✦' }}</span>
-              {% endif %}
+          endfor
+        endif
+        assign _mode = block.settings.mode | default: 'normal'
+        assign _empty_msg = block.settings.empty_msg | default: 'Todos fueron adoptados por ahora.'
+        assign _empty_tag = block.settings.empty_tag | default: 'VUELVEN PRONTO ✦'
+        assign _is_empty = false
+        if _count == 0
+          assign _is_empty = true
+        endif
+
+        assign _public_url = '/collections/'
+        if _handle != blank
+          assign _public_url = '/collections/' | append: _handle
+        endif
+
+        assign _group_cls = 'dh2-lin__group'
+        if _mode == 'oferta'
+          assign _group_cls = _group_cls | append: ' dh2-lin__group--oferta'
+        endif
+        if _is_empty
+          assign _group_cls = _group_cls | append: ' dh2-lin__group--empty'
+        endif
+      -%}
+
+      <div class="{{ _group_cls }}" {{ block.shopify_attributes }}>
+        <a class="dh2-lin__banner" href="{{ _public_url }}" aria-label="{{ block.settings.title }}">
+          {% if _photo != blank %}
+            <img class="dh2-lin__banner-img" src="{{ _photo | image_url: width: 800 }}" alt="" loading="lazy">
+          {% endif %}
+          <div class="dh2-lin__banner-veil"></div>
+          <div class="dh2-lin__banner-body">
+            <div>
+              <p class="dh2-lin__banner-name">{{ block.settings.title }}</p>
+              <p class="dh2-lin__banner-count">
+                {%- if _is_empty -%}
+                  EN ESPERA
+                {%- elsif _mode == 'oferta' -%}
+                  {{ _count }} CON DESCUENTO
+                {%- else -%}
+                  {{ _count }} EN EL BOSQUE
+                {%- endif -%}
+              </p>
             </div>
-            <div class="dh2-lin__shade" aria-hidden="true"></div>
-            <div class="dh2-lin__body">
-              <h3 class="dh2-lin__name">{{ _lin_title }}</h3>
-              <span class="dh2-lin__count">{{ _lin_count }}</span>
-            </div>
-          </a>
+            <span class="dh2-lin__banner-chev" aria-hidden="true">
+              {%- if _mode == 'oferta' and block.settings.discount_label != blank -%}
+                {{ block.settings.discount_label }}
+              {%- elsif _is_empty -%}
+                ✦
+              {%- else -%}
+                ›
+              {%- endif -%}
+            </span>
+          </div>
+        </a>
+
+        {% if _is_empty %}
+          <div class="dh2-lin__empty">
+            <p class="dh2-lin__empty-msg">{{ _empty_msg }}</p>
+            <p class="dh2-lin__empty-tag">{{ _empty_tag }}</p>
+          </div>
+        {% else %}
+          <div class="dh2-lin__rail" role="list">
+            {% for product in _col.products limit: 4 %}
+              <a class="dh2-lin__pcard" href="{{ product.url }}" role="listitem">
+                {% if _mode == 'oferta' and product.compare_at_price > product.price %}
+                  {%- assign _disc = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | round -%}
+                  <span class="dh2-lin__pcard-discount">−{{ _disc }}%</span>
+                {% endif %}
+                {% if product.featured_image != blank %}
+                  <img class="dh2-lin__pcard-img" src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+                {% else %}
+                  <div class="dh2-lin__pcard-img"></div>
+                {% endif %}
+                <div class="dh2-lin__pcard-info">
+                  <p class="dh2-lin__pcard-name">{{ product.title | escape }}</p>
+                  <p class="dh2-lin__pcard-price">
+                    {% if _mode == 'oferta' and product.compare_at_price > product.price %}
+                      <s>{{ product.compare_at_price | money }}</s><span class="now-oferta">{{ product.price | money }}</span>
+                    {% else %}
+                      {{ product.price | money }}
+                    {% endif %}
+                  </p>
+                </div>
+              </a>
+            {% endfor %}
+            <a class="dh2-lin__see-all" href="{{ _public_url }}">
+              <span class="dh2-lin__see-all-star">✦</span>
+              <p class="dh2-lin__see-all-lbl">VER TODAS</p>
+              <p class="dh2-lin__see-all-qty">{{ _count }} {{ block.settings.title | downcase }}</p>
+            </a>
+          </div>
         {% endif %}
-      {% endfor %}
       </div>
-    </div>
+    {% endfor %}
   </div>
 </section>
 
@@ -395,31 +419,33 @@
   "name": "DDU v2 · Linajes",
   "tag": "section",
   "class": "duendes-home-v2-linajes-section",
-  "max_blocks": 10,
+  "max_blocks": 12,
   "settings": [
-    {
-      "type": "text",
-      "id": "tag",
-      "label": "Etiqueta",
-      "default": "POR LINAJE"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Título",
-      "default": "Cada Guardián viene de un linaje."
-    }
+    { "type": "text", "id": "tag", "label": "Etiqueta superior", "default": "POR LINAJE" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Encontrá tu familia." },
+    { "type": "textarea", "id": "subtitle", "label": "Subtítulo (opcional)", "default": "" }
   ],
   "blocks": [
     {
       "type": "linaje",
-      "name": "Linaje",
+      "name": "Familia",
       "settings": [
-        { "type": "text", "id": "title", "label": "Nombre", "default": "Hadas" },
-        { "type": "image_picker", "id": "image", "label": "Foto del linaje", "info": "Opcional: si está vacío, se usa la imagen destacada de la colección; si tampoco hay, la primera foto de un producto disponible en esa colección." },
-        { "type": "text", "id": "count_label", "label": "Guardianes / contador (texto)", "default": "Ver colección" },
-        { "type": "url", "id": "url", "label": "Enlace a colección" },
-        { "type": "text", "id": "glyph", "label": "Marcador si no hay foto", "default": "✦", "info": "Solo se muestra si no cargás imagen." }
+        { "type": "text", "id": "title", "label": "Nombre de la familia", "default": "HADAS" },
+        { "type": "url", "id": "url", "label": "Colección" },
+        { "type": "image_picker", "id": "image", "label": "Foto del banner (opcional · sino usa imagen destacada de la colección)" },
+        {
+          "type": "select",
+          "id": "mode",
+          "label": "Modo",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "oferta", "label": "Oportunidades (con descuento)" }
+          ]
+        },
+        { "type": "text", "id": "discount_label", "label": "Etiqueta de descuento (solo modo oferta)", "default": "−25%" },
+        { "type": "text", "id": "empty_msg", "label": "Mensaje si está vacía", "default": "Todos fueron adoptados por ahora." },
+        { "type": "text", "id": "empty_tag", "label": "Cierre cuando está vacía", "default": "VUELVEN PRONTO ✦" }
       ]
     }
   ],
@@ -427,16 +453,13 @@
     {
       "name": "DDU v2 · Linajes",
       "blocks": [
-        { "type": "linaje", "settings": { "title": "Hadas", "url": "shopify://collections/hadas" } },
-        { "type": "linaje", "settings": { "title": "Pixies", "url": "shopify://collections/pixies" } },
-        { "type": "linaje", "settings": { "title": "Elfos", "url": "shopify://collections/elfos" } },
-        { "type": "linaje", "settings": { "title": "Medianos", "url": "shopify://collections/medianos" } },
-        { "type": "linaje", "settings": { "title": "Maestros", "url": "shopify://collections/maestros" } },
-        { "type": "linaje", "settings": { "title": "Deluxe", "url": "shopify://collections/deluxe" } },
-        { "type": "linaje", "settings": { "title": "Brujas", "url": "shopify://collections/brujas" } },
-        { "type": "linaje", "settings": { "title": "Grandes", "url": "shopify://collections/grandes" } },
-        { "type": "linaje", "settings": { "title": "Gigantes", "url": "shopify://collections/gigantes" } },
-        { "type": "linaje", "settings": { "title": "Históricos", "url": "shopify://collections/historicos" } }
+        { "type": "linaje", "settings": { "title": "HADAS", "url": "shopify://collections/hadas", "mode": "normal" } },
+        { "type": "linaje", "settings": { "title": "DUENDES", "url": "shopify://collections/duendes-todos", "mode": "normal" } },
+        { "type": "linaje", "settings": { "title": "PIXIES", "url": "shopify://collections/pixies", "mode": "normal" } },
+        { "type": "linaje", "settings": { "title": "BRUJAS", "url": "shopify://collections/brujas", "mode": "normal" } },
+        { "type": "linaje", "settings": { "title": "GUARDIANES MAYORES", "url": "shopify://collections/guardianes-mayores", "mode": "normal" } },
+        { "type": "linaje", "settings": { "title": "OPORTUNIDADES MÁGICAS", "url": "shopify://collections/oportunidades-magicas", "mode": "oferta", "discount_label": "−25%" } },
+        { "type": "linaje", "settings": { "title": "ACCESORIOS", "url": "shopify://collections/accesorios", "mode": "normal" } }
       ]
     }
   ]
