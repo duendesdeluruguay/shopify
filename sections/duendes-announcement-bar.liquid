@@ -12,7 +12,7 @@
   .duendes-announce__track {
     display: flex;
     white-space: nowrap;
-    animation: duendesAnnounceScroll 95s linear infinite;
+    animation: duendesAnnounceScroll 140s linear infinite;
   }
   .duendes-announce__track span {
     font-family: var(--serif);
@@ -33,34 +33,22 @@
   }
 </style>
 
-<div class="duendes-announce">
+<div class="duendes-announce" id="duendes-announce-{{ section.id }}">
   <div class="duendes-announce__track">
-    {%- if section.settings.use_block_messages and section.blocks.size > 0 -%}
-      {%- for i in (1..2) -%}
-        {%- for block in section.blocks -%}
-          <span>
-            {%- assign _du_an = block.settings.text | strip -%}
-            {%- if _du_an contains '[ddu:announcement_intl]' -%}
-              {{- 'duendes.global.announcement_bar' | t -}}
-            {%- else -%}
-              {{- block.settings.text -}}
-            {%- endif -%}
-          </span>
-          <span class="duendes-announce__diamond">&#10022;</span>
-        {%- endfor -%}
-      {%- endfor -%}
-    {%- else -%}
-      {%- assign _du_brand = section.settings.brand_message | strip -%}
-      {%- if _du_brand == blank -%}
-        {%- assign _du_brand = 'Duendes del Uruguay - Canalizados para Vos' -%}
-      {%- endif -%}
-      {%- for i in (1..2) -%}
-        {%- for rep in (1..12) -%}
-          <span>{{ _du_brand }}</span>
-          <span class="duendes-announce__diamond">&#10022;</span>
-        {%- endfor -%}
-      {%- endfor -%}
+    {%- comment -%}
+      Siempre un solo mensaje de marca (lento). El modo “bloques” del editor
+      reintroducía el ticker largo/rápido; se ignora a propósito.
+    {%- endcomment -%}
+    {%- assign _du_brand = section.settings.brand_message | strip -%}
+    {%- if _du_brand == blank -%}
+      {%- assign _du_brand = 'Duendes del Uruguay - Canalizados para Vos' -%}
     {%- endif -%}
+    {%- for i in (1..2) -%}
+      {%- for rep in (1..14) -%}
+        <span>{{ _du_brand }}</span>
+        <span class="duendes-announce__diamond">&#10022;</span>
+      {%- endfor -%}
+    {%- endfor -%}
   </div>
 </div>
 
@@ -75,7 +63,7 @@
       "id": "use_block_messages",
       "label": "Usar bloques de mensajes (modo avanzado)",
       "default": false,
-      "info": "Desactivado: solo se muestra el texto de marca en bucle. Activado: se usan los bloques de abajo."
+      "info": "Obsoleto: en tienda solo se muestra «Texto del ticker (marca)» (un mensaje lento). Los bloques no se renderizan."
     },
     {
       "type": "text",

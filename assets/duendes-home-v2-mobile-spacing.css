@@ -63,7 +63,8 @@
 
 /* Barra Horizon (SSL, “Hechos a mano…”, cruz): oculta en toda la tienda.
    El mensaje de marca va en la sección duendes-announcement-bar (sin cruz). */
-html body aside.announcement-bar.section.spacing-style {
+html body aside.announcement-bar.section.spacing-style,
+html body aside.announcement-bar.section {
   display: none !important;
   height: 0 !important;
   min-height: 0 !important;
@@ -73,4 +74,11 @@ html body aside.announcement-bar.section.spacing-style {
   overflow: hidden !important;
   visibility: hidden !important;
   pointer-events: none !important;
+}
+
+@media (max-width: 768px) {
+  .shopify-section.duendes-home-v2-linajes-section,
+  .shopify-section.duendes-home-v2-recien-llegados-section {
+    overflow-x: visible !important;
+  }
 }

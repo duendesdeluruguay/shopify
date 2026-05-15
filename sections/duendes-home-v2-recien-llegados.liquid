@@ -2,6 +2,13 @@
 {%- liquid
   assign col = section.settings.collection
   assign limit = section.settings.limit | default: 12
+  assign limit = limit | plus: 0
+  if limit < 12
+    assign limit = 12
+  endif
+  if limit > 20
+    assign limit = 20
+  endif
   assign dh2_new_tag = section.settings.tag | strip
   if dh2_new_tag == blank
     assign dh2_new_tag = 'duendes.home_v2.recien_llegados.tag' | t
