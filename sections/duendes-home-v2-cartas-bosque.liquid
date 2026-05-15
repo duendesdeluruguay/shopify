@@ -411,57 +411,71 @@
     text-transform: uppercase;
     color: var(--dh2-gold);
   }
-  /* Móvil: las 3 cartas visibles juntas, lado a lado (sin carrusel ni swipe) */
+  /* Móvil: carrusel con carta focal centrada (~85vw), swipe + snap */
   @media (max-width: 767px) {
     .dh2-cb__inner {
-      overflow: visible;
+      overflow-x: visible;
     }
     .dh2-cb__swipe-hint {
-      display: none;
+      display: block;
     }
     .dh2-cb__badge {
+      display: none;
+    }
+    .dh2-cb__card--focal .dh2-cb__badge {
       display: block;
     }
     .dh2-cb__deck {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      margin: 18px 0 0;
-      padding: 0 12px;
-      width: 100%;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 16px;
+      margin-top: 24px;
+      padding: 12px 32px 16px;
+      margin-left: -20px;
+      margin-right: -20px;
+      width: calc(100% + 40px);
       max-width: none;
       box-sizing: border-box;
-      overflow: visible;
-      scroll-snap-type: none;
-      touch-action: auto;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-padding-inline: 32px;
+      scrollbar-width: none;
+      touch-action: pan-x pan-y;
+      overscroll-behavior-x: contain;
+    }
+    .dh2-cb__deck::-webkit-scrollbar {
+      display: none;
     }
     .dh2-cb__card,
     .dh2-cb__card--center,
     .dh2-cb__card--left,
     .dh2-cb__card--right {
-      flex: none;
-      width: 100%;
+      flex: 0 0 calc(85vw - 64px);
       max-width: none;
-      transform: none;
-      opacity: 1;
-      filter: none;
-      scroll-snap-align: none;
+      scroll-snap-align: center;
       order: 0;
+      transform: scale(0.88);
+      transform-origin: center center;
+      opacity: 0.88;
+      filter: brightness(0.96);
+      transition: transform 0.28s ease, opacity 0.28s ease, filter 0.28s ease, box-shadow 0.28s ease;
     }
     .dh2-cb__card--focal {
-      transform: scale(1.04);
+      transform: scale(1.07);
+      opacity: 1;
+      filter: none;
       z-index: 3;
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
+      box-shadow: 0 22px 56px rgba(0, 0, 0, 0.4);
     }
-    .dh2-cb__card--focal:active,
+    .dh2-cb__card--focal:active {
+      transform: scale(0.98) !important;
+    }
     .dh2-cb__card:not(.dh2-cb__card--focal):active {
-      transform: scale(0.97) !important;
+      transform: scale(0.82) !important;
     }
-    /* Texto interno más chico para que entre */
-    .dh2-cb__card-title { font-size: 12px !important; line-height: 1.15 !important; }
-    .dh2-cb__card-essence { font-size: 9px !important; letter-spacing: 0.08em !important; }
-    .dh2-cb__card-price { font-size: 11px !important; }
-    .dh2-cb__badge { font-size: 7px !important; padding: 3px 6px !important; }
   }
   /* Theme wrapper overrides (OS 2.0): fondo crema */
   section.dh2-cb.section {
