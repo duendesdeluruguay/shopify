@@ -145,19 +145,21 @@
   }
   @media (max-width: 768px) {
     .dh2-new {
-      padding: 6px 0 6px !important;
+      padding: 4px 0 2px !important;
     }
     .dh2-new__inner {
       padding-left: max(20px, env(safe-area-inset-left, 0px));
-      padding-right: max(24px, env(safe-area-inset-right, 0px));
+      padding-right: max(20px, env(safe-area-inset-right, 0px));
     }
     .dh2-new__track {
       gap: 11px;
       margin-left: calc(-1 * max(20px, env(safe-area-inset-left, 0px)));
-      margin-right: calc(-1 * max(24px, env(safe-area-inset-right, 0px)));
-      padding-left: max(20px, env(safe-area-inset-left, 0px));
-      padding-right: max(24px, env(safe-area-inset-right, 0px));
-      width: calc(100% + max(20px, env(safe-area-inset-left, 0px)) + max(24px, env(safe-area-inset-right, 0px)));
+      margin-right: calc(-1 * max(20px, env(safe-area-inset-right, 0px)));
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+      width: calc(100% + max(20px, env(safe-area-inset-left, 0px)) + max(20px, env(safe-area-inset-right, 0px)));
+      overflow-x: scroll;
+      scroll-snap-type: none;
       max-width: none;
       box-sizing: border-box;
       scroll-padding-inline: 12px;
@@ -166,6 +168,7 @@
       flex: 0 0 clamp(168px, 48vw, 216px);
       width: clamp(168px, 48vw, 216px);
       min-width: 0;
+      flex-shrink: 0;
     }
     .dh2-new__img {
       aspect-ratio: 3 / 4;
@@ -175,7 +178,7 @@
       font-size: 26px !important;
       line-height: 1.15 !important;
       max-width: 100% !important;
-      margin-bottom: 18px !important;
+      margin-bottom: 8px !important;
     }
     .dh2-new__tag {
       font-size: 9px !important;
@@ -187,11 +190,11 @@
     }
   }
   @media (max-width: 768px) {
-    .dh2-cb, .dh2-hero, .dh2-new, .dh2-lin, .dh2-be, .dh2-sp, .dh2-ed, .dh2-rito, .dh2-lt, .dh2-tribu {
+    .dh2-cb, .dh2-hero, .dh2-be, .dh2-sp, .dh2-ed, .dh2-rito, .dh2-lt, .dh2-tribu {
       padding: 6px 0 6px !important;
     }
     section.dh2-new.section {
-      padding: 4px 0 8px !important;
+      padding: 0 0 2px !important;
     }
   }
 </style>

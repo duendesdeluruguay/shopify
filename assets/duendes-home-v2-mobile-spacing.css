@@ -18,20 +18,15 @@
   padding-block: 32px !important;
 }
 
-.dh2-new__title,
-.dh2-lin__title,
 .dh2-cb__title {
   margin-block: 8px !important;
 }
 
-.dh2-new__head,
-.dh2-lin__head,
 .dh2-cb__head {
   margin-bottom: 20px !important;
 }
 
-.dh2-new__foot,
-.dh2-lin__foot {
+.dh2-cb__foot {
   margin-top: 16px !important;
 }
 
