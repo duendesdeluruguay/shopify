@@ -411,95 +411,71 @@
     text-transform: uppercase;
     color: var(--dh2-gold);
   }
-  /* Móvil: las 3 cartas visibles a la vez (~30% viewport c/u), sin carrusel ni zoom focal */
+  /* Móvil: carrusel con carta focal centrada (~85vw), swipe + snap (versión anterior) */
   @media (max-width: 767px) {
     .dh2-cb__inner {
       overflow-x: visible;
     }
     .dh2-cb__swipe-hint {
-      display: none;
+      display: block;
     }
     .dh2-cb__badge {
       display: none;
     }
-    .dh2-cb__card--center .dh2-cb__badge {
+    .dh2-cb__card--focal .dh2-cb__badge {
       display: block;
     }
     .dh2-cb__deck {
       flex-wrap: nowrap;
-      justify-content: center;
-      align-items: flex-end;
-      gap: clamp(4px, 1.2vw, 8px);
-      margin-top: 22px;
-      margin-left: 0;
-      margin-right: 0;
-      width: 100%;
-      max-width: 100%;
-      padding: 8px 4px 12px;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 16px;
+      margin-top: 24px;
+      padding: 12px 32px 16px;
+      margin-left: -20px;
+      margin-right: -20px;
+      width: calc(100% + 40px);
+      max-width: none;
       box-sizing: border-box;
       overflow-x: auto;
       overflow-y: visible;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      scroll-padding-inline: 6px;
-      scrollbar-width: thin;
+      scroll-padding-inline: 32px;
+      scrollbar-width: none;
       touch-action: pan-x pinch-zoom;
       overscroll-behavior-x: contain;
+    }
+    .dh2-cb__deck::-webkit-scrollbar {
+      display: none;
     }
     .dh2-cb__card,
     .dh2-cb__card--center,
     .dh2-cb__card--left,
     .dh2-cb__card--right {
-      flex: 0 0 calc(30vw - 2px);
-      width: calc(30vw - 2px);
-      min-width: 88px;
-      max-width: calc(33.333vw - 3px);
+      flex: 0 0 calc(85vw - 64px);
+      max-width: none;
       scroll-snap-align: center;
       order: 0;
-      transform: none;
-      opacity: 1;
-      filter: none;
-      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      transform: scale(0.88);
+      transform-origin: center center;
+      opacity: 0.88;
+      filter: brightness(0.96);
+      transition: transform 0.28s ease, opacity 0.28s ease, filter 0.28s ease, box-shadow 0.28s ease;
       touch-action: pan-x pinch-zoom;
     }
-    .dh2-cb__card--center {
-      flex: 0 0 calc(30vw - 2px);
-      width: calc(30vw - 2px);
-      max-width: calc(33.333vw - 3px);
-      transform: none;
-      z-index: 2;
-    }
     .dh2-cb__card--focal {
-      transform: none !important;
-      opacity: 1 !important;
-      filter: none !important;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      transform: scale(1.07);
+      opacity: 1;
+      filter: none;
+      z-index: 3;
+      box-shadow: 0 22px 56px rgba(0, 0, 0, 0.4);
     }
-    .dh2-cb__roman {
-      font-size: clamp(10px, 2.8vw, 13px);
-      letter-spacing: 0.18em;
+    .dh2-cb__card--focal:active {
+      transform: scale(0.98) !important;
     }
-    .dh2-cb__badge {
-      font-size: 7px;
-      padding: 3px 7px;
-      margin-top: 4px;
-    }
-    .dh2-cb__meta {
-      padding: 8px 4px 9px;
-    }
-    .dh2-cb__name {
-      font-size: clamp(11px, 3.1vw, 14px);
-      margin-bottom: 3px;
-      line-height: 1.15;
-    }
-    .dh2-cb__essence {
-      font-size: clamp(6px, 1.8vw, 8px);
-      letter-spacing: 0.12em;
-      margin-bottom: 4px;
-    }
-    .dh2-cb__price {
-      font-size: clamp(8px, 2.2vw, 10px);
-      letter-spacing: 0.06em;
+    .dh2-cb__card:not(.dh2-cb__card--focal):active {
+      transform: scale(0.82) !important;
     }
   }
   /* Theme wrapper overrides (OS 2.0): fondo crema */
@@ -595,6 +571,18 @@
           endif
         %}
         {% capture card_class %}dh2-cb__card{% if dh2_cb_pos == 1 %} dh2-cb__card--center{% elsif dh2_cb_pos == 2 %} dh2-cb__card--right{% else %} dh2-cb__card--left{% endif %}{% endcapture %}
+        {% liquid
+          assign dh2_cb_essence_show = block.settings.essence | strip
+          if product != blank
+            if dh2_cb_essence_show == blank
+              assign dh2_cb_essence_show = 'duendes.home_v2.cartas_bosque.essence_fallback' | t
+            endif
+          endif
+          assign dh2_cb_essence_low = dh2_cb_essence_show | downcase | strip
+          if dh2_cb_essence_low == 'quiet wisdom'
+            assign dh2_cb_essence_show = 'duendes.home_v2.cartas_bosque.essence_quiet_wisdom' | t
+          endif
+        %}
         {% if product != blank %}
           <a
             href="{{ product.url }}"
@@ -607,11 +595,11 @@
           >
             <div class="dh2-cb__media">
               {% if product.featured_media %}
-                {{ product.featured_media | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '30vw', widths: '400,600,800' }}
+                {{ product.featured_media | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(max-width:767px) 85vw, 30vw', widths: '400,600,800' }}
               {% elsif product.featured_image %}
-                {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '30vw', widths: '400,600,800' }}
+                {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(max-width:767px) 85vw, 30vw', widths: '400,600,800' }}
               {% elsif product.images.size > 0 %}
-                {{ product.images[0] | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '30vw', widths: '400,600,800' }}
+                {{ product.images[0] | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(max-width:767px) 85vw, 30vw', widths: '400,600,800' }}
               {% endif %}
             </div>
             <div class="dh2-cb__shade" aria-hidden="true"></div>
@@ -621,7 +609,7 @@
             </div>
             <div class="dh2-cb__meta">
               <p class="dh2-cb__name">{{ block.settings.display_title | default: product.title }}</p>
-              <p class="dh2-cb__essence">{{ block.settings.essence }}</p>
+              <p class="dh2-cb__essence">{{ dh2_cb_essence_show }}</p>
               <p class="dh2-cb__price">{{ product.price | money }}</p>
             </div>
           </a>
@@ -645,8 +633,8 @@
               {% if block.settings.display_title != blank %}
                 <p class="dh2-cb__name">{{ block.settings.display_title }}</p>
               {% endif %}
-              {% if block.settings.essence != blank %}
-                <p class="dh2-cb__essence">{{ block.settings.essence }}</p>
+              {% if dh2_cb_essence_show != blank %}
+                <p class="dh2-cb__essence">{{ dh2_cb_essence_show }}</p>
               {% endif %}
             </div>
           </a>
@@ -741,9 +729,22 @@
         });
         return;
       }
-      /* Tres cartas fijas en móvil: sin “carrusel” ni carta focal según scroll */
-      cards.forEach(function (c) {
-        c.classList.remove('dh2-cb__card--focal');
+      if (!cards.length) return;
+      var deckRect = deck.getBoundingClientRect();
+      var mid = deckRect.left + deckRect.width * 0.5;
+      var best = null;
+      var bestDist = Infinity;
+      cards.forEach(function (card) {
+        var r = card.getBoundingClientRect();
+        var cx = r.left + r.width * 0.5;
+        var d = Math.abs(cx - mid);
+        if (d < bestDist) {
+          bestDist = d;
+          best = card;
+        }
+      });
+      cards.forEach(function (card) {
+        card.classList.toggle('dh2-cb__card--focal', card === best);
       });
     }
     function scheduleFocal() {

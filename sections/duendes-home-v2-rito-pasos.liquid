@@ -111,6 +111,8 @@
     overflow: hidden;
     border: 1px solid rgba(21, 17, 13, 0.08);
     box-shadow: 0 4px 22px rgba(0, 0, 0, 0.05);
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .dh2-rito__photo {
     position: relative;
@@ -173,6 +175,8 @@
     line-height: 1.5;
     color: rgba(21, 17, 13, 0.72);
     margin: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
   @media (max-width: 749px) {
     .dh2-rito__row {
@@ -185,7 +189,7 @@
     }
     .dh2-rito__inner {
       padding-left: max(20px, env(safe-area-inset-left, 0px));
-      padding-right: max(24px, env(safe-area-inset-right, 0px));
+      padding-right: max(20px, env(safe-area-inset-right, 0px));
     }
     h2.dh2-rito__title,
     .dh2-rito__title {

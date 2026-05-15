@@ -422,7 +422,9 @@
         "hint": "Swipe · The cards turn when one calls you",
         "modal_aria": "Guardian gallery",
         "close_aria": "Close",
-        "modal_cta": "View full profile"
+        "modal_cta": "View full profile",
+        "essence_fallback": "Quiet wisdom",
+        "essence_quiet_wisdom": "Quiet wisdom"
       },
       "recien_llegados": {
         "tag": "JUST IN · THIS MONTH",
@@ -436,7 +438,21 @@
         "eyebrow": "BY LINEAGE",
         "tag": "BY LINEAGE",
         "title": "Every Guardian comes from a lineage.",
-        "sub": "Tap a lineage to see all the Guardians in that family."
+        "sub": "Tap a lineage to see all the Guardians in that family.",
+        "tipos_title": "Types of beings",
+        "view_collection": "View collection",
+        "collections": {
+          "elves": "Elves",
+          "duendes": "Duendes",
+          "hadas": "Fairies",
+          "pixies": "Pixies",
+          "maestros": "Masters",
+          "deluxe": "Deluxe",
+          "brujas": "Witches",
+          "grandes": "Large",
+          "gigantes": "Giants",
+          "historicos": "Historic"
+        }
       },
       "social_proof": {
         "tag": "WHAT THOSE WHO ARRIVED BEFORE SAY",

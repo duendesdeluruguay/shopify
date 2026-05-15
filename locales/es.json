@@ -428,7 +428,9 @@
         "hint": "Pasá el dedo · Las cartas se giran cuando una te llama",
         "modal_aria": "Galería del guardián",
         "close_aria": "Cerrar",
-        "modal_cta": "Ver ficha completa"
+        "modal_cta": "Ver ficha completa",
+        "essence_fallback": "Sabiduría silenciosa",
+        "essence_quiet_wisdom": "Sabiduría silenciosa"
       },
       "recien_llegados": {
         "tag": "RECIÉN LLEGADOS · este mes",
@@ -442,7 +444,21 @@
         "eyebrow": "POR LINAJE",
         "tag": "POR LINAJE",
         "title": "Cada Guardián viene de un linaje.",
-        "sub": "Tocá un linaje para ver todos los guardianes de esa familia."
+        "sub": "Tocá un linaje para ver todos los guardianes de esa familia.",
+        "tipos_title": "Tipos de Seres",
+        "view_collection": "Ver colección",
+        "collections": {
+          "elves": "Elfos",
+          "duendes": "Duendes",
+          "hadas": "Hadas",
+          "pixies": "Pixies",
+          "maestros": "Maestros",
+          "deluxe": "Deluxe",
+          "brujas": "Brujas",
+          "grandes": "Grandes",
+          "gigantes": "Gigantes",
+          "historicos": "Históricos"
+        }
       },
       "social_proof": {
         "tag": "LO QUE CUENTAN LOS QUE LLEGARON ANTES",

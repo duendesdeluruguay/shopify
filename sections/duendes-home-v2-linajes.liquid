@@ -53,6 +53,37 @@
     color: rgba(21, 17, 13, 0.58);
     font-style: italic;
   }
+  .dh2-lin__frame {
+    margin-top: 6px;
+    padding: 16px 12px 18px;
+    border: 1px solid rgba(201, 169, 97, 0.38);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(250, 249, 246, 0.95) 100%);
+    box-shadow: 0 4px 28px rgba(21, 17, 13, 0.06);
+  }
+  .dh2-lin__frame-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .dh2-lin__frame-line {
+    flex: 1;
+    height: 1px;
+    max-width: 100px;
+    background: linear-gradient(90deg, transparent, rgba(168, 139, 66, 0.55), transparent);
+  }
+  .dh2-lin__frame-kicker {
+    font-family: var(--font-heading--family, 'Cinzel', serif);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #a88b42;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
   .dh2-lin__rail {
     display: flex;
     gap: clamp(10px, 1.8vw, 14px);
@@ -145,8 +176,22 @@
     .dh2-lin__sub {
       margin-bottom: 14px !important;
     }
+    .dh2-lin__frame {
+      padding: 14px 8px 16px;
+      border-radius: 14px;
+    }
+    .dh2-lin__frame-line {
+      max-width: 56px;
+    }
+    .dh2-lin__frame-kicker {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.35;
+      max-width: min(280px, 78vw);
+    }
     .dh2-lin__rail {
-      gap: 12px;
       padding-top: 2px;
       margin-left: calc(-1 * max(20px, env(safe-area-inset-left, 0px)));
       margin-right: calc(-1 * max(24px, env(safe-area-inset-right, 0px)));
@@ -201,7 +246,13 @@
     {% if dh2_lin_sub != blank %}
       <p class="dh2-lin__sub">{{ dh2_lin_sub }}</p>
     {% endif %}
-    <div class="dh2-lin__rail" role="list">
+    <div class="dh2-lin__frame">
+      <div class="dh2-lin__frame-head">
+        <span class="dh2-lin__frame-line" aria-hidden="true"></span>
+        <p class="dh2-lin__frame-kicker">{{ 'duendes.home_v2.linajes.tipos_title' | t }}</p>
+        <span class="dh2-lin__frame-line" aria-hidden="true"></span>
+      </div>
+      <div class="dh2-lin__rail" role="list">
       {% for block in section.blocks %}
         {% if block.type == 'linaje' %}
           {% liquid
@@ -235,6 +286,64 @@
                 endif
               endfor
             endif
+            assign _lin_title = block.settings.title | strip
+            assign _hkw = _lin_handle | downcase | strip
+            if _hkw == 'elves' or _hkw == 'elfos'
+              assign _tx = 'duendes.home_v2.linajes.collections.elves' | t
+              unless _tx contains 'translation missing'
+                assign _lin_title = _tx
+              endunless
+            elsif _hkw == 'mediums' or _hkw == 'medianos'
+              assign _tx = 'duendes.home_v2.linajes.collections.duendes' | t
+              unless _tx contains 'translation missing'
+                assign _lin_title = _tx
+              endunless
+            elsif _hkw == 'hadas'
+              assign _tx = 'duendes.home_v2.linajes.collections.hadas' | t
+              unless _tx contains 'translation missing'
+                assign _lin_title = _tx
+              endunless
+            elsif _hkw == 'pixies'
+              assign _tx = 'duendes.home_v2.linajes.collections.pixies' | t
+              unless _tx contains 'translation missing'
+                assign _lin_title = _tx
+              endunless
+            elsif _hkw == 'maestros'
+              assign _tx = 'duendes.home_v2.linajes.collections.maestros' | t
+              unless _tx contains 'translation missing'
+                assign _lin_title = _tx
+              endunless
+            elsif _hkw == 'deluxe'
+              assign _tx = 'duendes.home_v2.linajes.collections.deluxe' | t
+              unless _tx contains 'translation missing'
+                assign _lin_title = _tx
+              endunless
+            elsif _hkw == 'brujas'
+              assign _tx = 'duendes.home_v2.linajes.collections.brujas' | t
+              unless _tx contains 'translation missing'
+                assign _lin_title = _tx
+              endunless
+            elsif _hkw == 'grandes'
+              assign _tx = 'duendes.home_v2.linajes.collections.grandes' | t
+              unless _tx contains 'translation missing'
+                assign _lin_title = _tx
+              endunless
+            elsif _hkw == 'gigantes'
+              assign _tx = 'duendes.home_v2.linajes.collections.gigantes' | t
+              unless _tx contains 'translation missing'
+                assign _lin_title = _tx
+              endunless
+            elsif _hkw == 'historicos'
+              assign _tx = 'duendes.home_v2.linajes.collections.historicos' | t
+              unless _tx contains 'translation missing'
+                assign _lin_title = _tx
+              endunless
+            endif
+            assign _lin_count = block.settings.count_label | strip
+            assign _cl = _lin_count | downcase
+            if _lin_count == blank or _cl == 'view collection'
+              assign _lin_count = 'duendes.home_v2.linajes.view_collection' | t
+            endif
           %}
           <a class="dh2-lin__card" href="{{ block.settings.url }}" role="listitem" {{ block.shopify_attributes }}>
             <div class="dh2-lin__bg" aria-hidden="true">
@@ -246,12 +355,13 @@
             </div>
             <div class="dh2-lin__shade" aria-hidden="true"></div>
             <div class="dh2-lin__body">
-              <h3 class="dh2-lin__name">{{ block.settings.title }}</h3>
-              <span class="dh2-lin__count">{{ block.settings.count_label }}</span>
+              <h3 class="dh2-lin__name">{{ _lin_title }}</h3>
+              <span class="dh2-lin__count">{{ _lin_count }}</span>
             </div>
           </a>
         {% endif %}
       {% endfor %}
+      </div>
     </div>
   </div>
 </section>
