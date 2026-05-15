@@ -3,10 +3,10 @@
    Cargado desde layout/theme.liquid antes de </head>
    ════════════════════════════════════════════════════════ */
 
+/* Nota: .dh2-new y .dh2-lin NO van acá — sus propias secciones controlan padding;
+   sumar 32px aquí duplicaba espacio y “inflaba” recién llegados + linajes en móvil. */
 .dh2-cb,
 .dh2-hero,
-.dh2-new,
-.dh2-lin,
 .dh2-be,
 .dh2-sp,
 .dh2-ed,
@@ -39,8 +39,6 @@
 @media (max-width: 768px) {
   .dh2-cb,
   .dh2-hero,
-  .dh2-new,
-  .dh2-lin,
   .dh2-be,
   .dh2-sp,
   .dh2-ed,
@@ -66,4 +64,18 @@
 .shopify-section.duendes-home-v2-lectura-section,
 .shopify-section.duendes-home-v2-tribu-newsletter-section {
   margin-block: 0 !important;
+}
+
+/* Barra Horizon (SSL, “Hechos a mano…”, cruz): oculta en toda la tienda.
+   El mensaje de marca va en la sección duendes-announcement-bar (sin cruz). */
+html body aside.announcement-bar.section.spacing-style {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
