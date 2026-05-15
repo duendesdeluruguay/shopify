@@ -42,7 +42,13 @@
   .dh2-read,
   .dh2-lect,
   .dh2-tribu {
-    padding-block: 24px !important;
+    padding-block: 12px !important;
+  }
+  /* Wrapper externo de Recién Llegados y Linajes: cero padding, así el carrusel queda pegado a las secciones de alrededor */
+  .shopify-section.duendes-home-v2-recien-llegados-section,
+  .shopify-section.duendes-home-v2-linajes-section {
+    padding-block: 0 !important;
+    margin-block: 0 !important;
   }
 }
 

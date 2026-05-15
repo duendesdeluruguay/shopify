@@ -202,22 +202,28 @@
     .dh2-lin__rail {
       display: flex;
       flex-wrap: nowrap;
-      padding: 4px 0 10px;
-      margin-top: 0;
-      margin-left: calc(-1 * max(20px, env(safe-area-inset-left, 0px)));
-      margin-right: calc(-1 * max(20px, env(safe-area-inset-right, 0px)));
-      padding-left: max(16px, env(safe-area-inset-left, 0px));
-      padding-right: max(16px, env(safe-area-inset-right, 0px));
-      width: calc(100% + max(20px, env(safe-area-inset-left, 0px)) + max(20px, env(safe-area-inset-right, 0px)));
-      max-width: none;
+      gap: 10px;
+      padding: 4px 16px 10px;
+      margin: 0;
+      width: 100vw;
+      max-width: 100vw;
       box-sizing: border-box;
-      scroll-padding-inline: 12px;
-      overflow-x: scroll;
+      overflow-x: auto;
       overflow-y: hidden;
       -webkit-overflow-scrolling: touch;
-      touch-action: pan-x pinch-zoom;
+      touch-action: pan-x;
       overscroll-behavior-x: contain;
-      scroll-snap-type: none;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 16px;
+    }
+    .dh2-lin__rail::-webkit-scrollbar { display: none; }
+    .dh2-lin__card { scroll-snap-align: start; }
+    /* romper el rail del contenedor para que ocupe todo el ancho del viewport */
+    .dh2-lin__rail-wrap, .dh2-lin__frame {
+      width: 100vw;
+      max-width: 100vw;
+      margin-left: 50%;
+      transform: translateX(-50%);
     }
     .dh2-lin__card {
       flex: 0 0 clamp(158px, 46vw, 204px);
