@@ -21,8 +21,8 @@
         <h1 class="du-el-portal__title">{{ section.settings.gate_title | escape }}</h1>
         <p class="du-el-portal__lead">{{ section.settings.gate_lead | escape }}</p>
         <div class="du-el-portal__actions">
-          <a class="button" href="{{ routes.account_login_url }}">{{ section.settings.gate_cta_login | escape }}</a>
-          <a class="button button--secondary" href="{{ routes.account_register_url }}">{{ section.settings.gate_cta_register | escape }}</a>
+          <a class="button" href="{{ routes.account_login_url }}?return_url=%2Fpages%2Fel-portal">{{ section.settings.gate_cta_login | escape }}</a>
+          <a class="button button--secondary" href="{{ routes.account_register_url }}?return_url=%2Fpages%2Fel-portal">{{ section.settings.gate_cta_register | escape }}</a>
         </div>
       </header>
     {% else %}
@@ -34,6 +34,72 @@
         <h1 class="du-el-portal__title">{{ _portal_wt | escape }}</h1>
         <p class="du-el-portal__lead">{{ section.settings.welcome_lead | escape }}</p>
       </header>
+
+      <section class="du-portal-biblio" aria-label="Biblioteca de los Elegidos">
+        <p class="du-portal-biblio__eyebrow">— Biblioteca de los Elegidos —</p>
+        <h2 class="du-portal-biblio__title">Los 7 Libros canalizados</h2>
+        <p class="du-portal-biblio__lead">Cada libro abre como un grimorio. Animación real de pasaje de página, paleta propia por linaje, lectura íntima en cualquier dispositivo.</p>
+
+        <div class="du-portal-biblio__grid">
+
+          <a class="du-portal-biblio__card du-portal-biblio__card--bible" href="/pages/libro-elemental">
+            <span class="du-portal-biblio__spine"></span>
+            <span class="du-portal-biblio__eyebrow-card">La Biblia</span>
+            <span class="du-portal-biblio__name">La Guía de los Duendes del Uruguay</span>
+            <span class="du-portal-biblio__meta">50 páginas · negro &amp; oro</span>
+            <span class="du-portal-biblio__cta">Abrir el libro →</span>
+          </a>
+
+          <a class="du-portal-biblio__card du-portal-biblio__card--hadas" href="/pages/guia-hadas">
+            <span class="du-portal-biblio__spine"></span>
+            <span class="du-portal-biblio__eyebrow-card">Linaje del agua</span>
+            <span class="du-portal-biblio__name">La Guía de las Hadas</span>
+            <span class="du-portal-biblio__meta">50 páginas · rosa &amp; perla</span>
+            <span class="du-portal-biblio__cta">Abrir el libro →</span>
+          </a>
+
+          <a class="du-portal-biblio__card du-portal-biblio__card--pixies" href="/pages/guia-pixies">
+            <span class="du-portal-biblio__spine"></span>
+            <span class="du-portal-biblio__eyebrow-card">Linaje del aire</span>
+            <span class="du-portal-biblio__name">La Guía de las Pixies</span>
+            <span class="du-portal-biblio__meta">46 páginas · menta &amp; oro</span>
+            <span class="du-portal-biblio__cta">Abrir el libro →</span>
+          </a>
+
+          <a class="du-portal-biblio__card du-portal-biblio__card--elfos" href="/pages/guia-elfos">
+            <span class="du-portal-biblio__spine"></span>
+            <span class="du-portal-biblio__eyebrow-card">Linaje vegetal</span>
+            <span class="du-portal-biblio__name">La Guía de los Elfos</span>
+            <span class="du-portal-biblio__meta">46 páginas · azul &amp; plata</span>
+            <span class="du-portal-biblio__cta">Abrir el libro →</span>
+          </a>
+
+          <a class="du-portal-biblio__card du-portal-biblio__card--gigantes" href="/pages/guia-gigantes">
+            <span class="du-portal-biblio__spine"></span>
+            <span class="du-portal-biblio__eyebrow-card">Únicos · Irrepetibles</span>
+            <span class="du-portal-biblio__name">La Guía de los Maestros Gigantes</span>
+            <span class="du-portal-biblio__meta">46 páginas · bordó &amp; oro</span>
+            <span class="du-portal-biblio__cta">Abrir el libro →</span>
+          </a>
+
+          <a class="du-portal-biblio__card du-portal-biblio__card--deluxe" href="/pages/guia-seres-deluxe">
+            <span class="du-portal-biblio__spine"></span>
+            <span class="du-portal-biblio__eyebrow-card">Ultra mágica</span>
+            <span class="du-portal-biblio__name">La Guía de los Seres Deluxe</span>
+            <span class="du-portal-biblio__meta">46 páginas · púrpura &amp; cobre</span>
+            <span class="du-portal-biblio__cta">Abrir el libro →</span>
+          </a>
+
+          <a class="du-portal-biblio__card du-portal-biblio__card--bruja" href="/pages/guia-alma-de-bruja">
+            <span class="du-portal-biblio__spine"></span>
+            <span class="du-portal-biblio__eyebrow-card">Línea por venir</span>
+            <span class="du-portal-biblio__name">Alma de Bruja</span>
+            <span class="du-portal-biblio__meta">42 páginas · negro &amp; violeta</span>
+            <span class="du-portal-biblio__cta">Abrir el libro →</span>
+          </a>
+
+        </div>
+      </section>
 
       <div class="du-el-portal__grid">
         <section class="du-el-portal__card">
@@ -159,6 +225,66 @@
     max-width: 520px;
     font-size: 0.95rem;
   }
+
+  /* ========= Biblioteca de los Elegidos · 7 flipbooks ========= */
+  .du-portal-biblio { margin: 36px 0 28px; text-align: center; }
+  .du-portal-biblio__eyebrow { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: #876a36; margin: 0 0 8px; }
+  .du-portal-biblio__title { font-family: 'Great Vibes', cursive, var(--font-heading--family, serif); font-weight: 400; font-size: clamp(2rem, 4.2vw, 2.8rem); line-height: 1.1; margin: 0 0 10px; }
+  .du-portal-biblio__lead { font-style: italic; opacity: 0.78; max-width: 560px; margin: 0 auto 28px; line-height: 1.6; }
+  .du-portal-biblio__grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .du-portal-biblio__card {
+    position: relative;
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 28px 22px 26px 32px;
+    text-decoration: none;
+    border-radius: 4px 8px 8px 4px;
+    color: #f5f0e1;
+    overflow: hidden;
+    min-height: 200px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.25), inset -2px 0 0 rgba(0,0,0,0.18);
+  }
+  .du-portal-biblio__card:hover { transform: translateY(-3px) rotate(-0.3deg); box-shadow: 0 14px 34px rgba(0,0,0,0.4), inset -2px 0 0 rgba(0,0,0,0.2); }
+  .du-portal-biblio__spine { position: absolute; left: 0; top: 0; bottom: 0; width: 10px; background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(0,0,0,0.25)); border-right: 1px solid rgba(0,0,0,0.25); }
+  .du-portal-biblio__eyebrow-card { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; opacity: 0.78; }
+  .du-portal-biblio__name { font-family: 'Great Vibes', cursive, var(--font-heading--family, serif); font-weight: 400; font-size: 1.6rem; line-height: 1.1; margin-top: 4px; }
+  .du-portal-biblio__meta { font-family: 'Cinzel', serif; font-size: 9.5px; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.72; margin-top: auto; }
+  .du-portal-biblio__cta { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; opacity: 0.92; padding-top: 6px; border-top: 0.5px solid rgba(245,240,225,0.22); }
+
+  .du-portal-biblio__card--bible    { background: radial-gradient(ellipse at top, #1a120a 0%, #050505 70%); }
+  .du-portal-biblio__card--bible    .du-portal-biblio__eyebrow-card,
+  .du-portal-biblio__card--bible    .du-portal-biblio__cta { color: #d6b370; }
+
+  .du-portal-biblio__card--hadas    { background: linear-gradient(160deg, #4a1d28 0%, #6b3a44 60%, #2a0e14 100%); }
+  .du-portal-biblio__card--hadas    .du-portal-biblio__eyebrow-card,
+  .du-portal-biblio__card--hadas    .du-portal-biblio__cta { color: #e8c7c8; }
+
+  .du-portal-biblio__card--pixies   { background: linear-gradient(160deg, #1f3a2c 0%, #3a5c47 60%, #0e1d16 100%); }
+  .du-portal-biblio__card--pixies   .du-portal-biblio__eyebrow-card,
+  .du-portal-biblio__card--pixies   .du-portal-biblio__cta { color: #d6b370; }
+
+  .du-portal-biblio__card--elfos    { background: linear-gradient(160deg, #14264a 0%, #2b4670 55%, #08121f 100%); }
+  .du-portal-biblio__card--elfos    .du-portal-biblio__eyebrow-card,
+  .du-portal-biblio__card--elfos    .du-portal-biblio__cta { color: #c8d4e0; }
+
+  .du-portal-biblio__card--gigantes { background: linear-gradient(160deg, #4a1822 0%, #6b1f2c 55%, #1a0810 100%); }
+  .du-portal-biblio__card--gigantes .du-portal-biblio__eyebrow-card,
+  .du-portal-biblio__card--gigantes .du-portal-biblio__cta { color: #d6b370; }
+
+  .du-portal-biblio__card--deluxe   { background: linear-gradient(160deg, #2c1a4a 0%, #4a2c5c 55%, #120a1f 100%); }
+  .du-portal-biblio__card--deluxe   .du-portal-biblio__eyebrow-card,
+  .du-portal-biblio__card--deluxe   .du-portal-biblio__cta { color: #d4a86b; }
+
+  .du-portal-biblio__card--bruja    { background: linear-gradient(160deg, #1a0e22 0%, #2a1838 55%, #080414 100%); }
+  .du-portal-biblio__card--bruja    .du-portal-biblio__eyebrow-card,
+  .du-portal-biblio__card--bruja    .du-portal-biblio__cta { color: #b08bd6; }
+
+  @media (max-width: 600px) {
+    .du-portal-biblio__grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .du-portal-biblio__card { padding: 20px 14px 18px 24px; min-height: 170px; }
+    .du-portal-biblio__name { font-size: 1.3rem; }
+    .du-portal-biblio__meta, .du-portal-biblio__cta { font-size: 8.5px; }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -181,13 +307,13 @@
       "type": "text",
       "id": "gate_title",
       "label": "Título",
-      "default": "El Portal ✦"
+      "default": "Mi Magia ✦"
     },
     {
       "type": "textarea",
       "id": "gate_lead",
       "label": "Texto",
-      "default": "Este espacio es para quienes ya caminan con un Guardián. Iniciá sesión con el mismo correo que usaste al adoptar."
+      "default": "Mi Magia es el portal privado para Elegidos. Si tu Guardián ya te eligió, entrá con la cuenta que usaste para adoptarlo. Si todavía no, recorré el bosque — alguno te está esperando."
     },
     {
       "type": "text",
