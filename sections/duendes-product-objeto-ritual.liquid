@@ -1,0 +1,539 @@
+{%- comment -%}
+  Página de objeto ritual — universal para Talismanes, Varitas, Libros, Otros.
+  Color del marco varía según custom.tipo_objeto.
+{%- endcomment -%}
+
+{%- liquid
+  assign p = product
+  assign current_variant = p.selected_or_first_available_variant
+
+  assign tipo = p.metafields.custom.tipo_objeto.value | default: 'Otro'
+  assign altura = p.metafields.duende.altura_cm.value | default: p.metafields.custom.altura_cm.value
+  assign ancho = p.metafields.custom.ancho_cm.value
+  assign elemento = p.metafields.custom.elemento.value
+  assign que_incluye = p.metafields.custom.que_incluye.value
+  assign como_se_usa = p.metafields.custom.como_se_usa.value
+  assign creacion = p.metafields.custom.creacion_y_origen.value
+  assign tiempo_custom = p.metafields.custom.tiempo_canalizacion.value
+  assign material = p.metafields.duende.material.value
+
+  case tipo
+    when 'Talismán'
+      assign frame_color = '#1f4a52'
+      assign frame_label = 'Objeto Ritual · Talismán'
+    when 'Varita'
+      assign frame_color = '#4a2c5c'
+      assign frame_label = 'Objeto Ritual · Varita'
+    when 'Libro'
+      assign frame_color = '#4a1822'
+      assign frame_label = 'Grimorio · Libro'
+    else
+      assign frame_color = '#1a1410'
+      assign frame_label = 'Objeto Ritual'
+  endcase
+
+  assign elem_color = '#8b7355'
+  assign elem_icon = 'sparkles'
+  case elemento
+    when 'Tierra'
+      assign elem_color = '#4a6b3c'
+    when 'Aire'
+      assign elem_color = '#b8c5cc'
+    when 'Fuego'
+      assign elem_color = '#a85b1a'
+    when 'Agua'
+      assign elem_color = '#3c5a7a'
+    when 'Éter'
+      assign elem_color = '#6b4a7a'
+  endcase
+-%}
+
+<style>
+  .dpo {
+    background: #ffffff;
+    color: #1a1410;
+    padding: 28px 0 48px;
+    --frame-color: {{ frame_color }};
+    --elem-color: {{ elem_color }};
+  }
+  .dpo__inner { max-width: 720px; margin: 0 auto; padding: 0 22px; }
+
+  .dpo__eyebrow {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic; font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #8b7355; text-align: center; margin: 0 0 14px;
+  }
+
+  .dpo__media {
+    position: relative; width: 100%;
+    background: var(--frame-color);
+    border: 1px solid #c9a96b;
+    border-radius: 4px;
+    padding: 24px 16px 18px;
+    margin: 0 0 24px;
+    box-sizing: border-box;
+  }
+  .dpo__media-cnr { position: absolute; width: 12px; height: 12px; border-color: #c9a96b; border-style: solid; border-width: 0; }
+  .dpo__media-cnr--tl { top: 6px; left: 6px; border-top-width: 1px; border-left-width: 1px; }
+  .dpo__media-cnr--tr { top: 6px; right: 6px; border-top-width: 1px; border-right-width: 1px; }
+  .dpo__media-cnr--bl { bottom: 6px; left: 6px; border-bottom-width: 1px; border-left-width: 1px; }
+  .dpo__media-cnr--br { bottom: 6px; right: 6px; border-bottom-width: 1px; border-right-width: 1px; }
+  .dpo__media-photo {
+    width: 100%; aspect-ratio: 1/1;
+    border: 0.5px solid #c9a96b;
+    border-radius: 3px; overflow: hidden;
+    background: rgba(0,0,0,0.18);
+  }
+  .dpo__media-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dpo__thumbs { display: flex; gap: 8px; margin-top: 20px; overflow-x: auto; padding-bottom: 6px; }
+  .dpo__thumb { flex: 0 0 64px; aspect-ratio: 1/1; border: 0.5px solid rgba(26,20,16,0.2); border-radius: 4px; overflow: hidden; cursor: pointer; padding: 0; background: none; }
+  .dpo__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .dpo__thumb.is-active { border-color: #1a1410; }
+
+  .dpo__seal-row {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    margin: 0 0 16px;
+  }
+  .dpo__seal {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--elem-color);
+    border: 2px solid #1a1410;
+    box-shadow:
+      inset 0 -3px 6px rgba(0,0,0,0.22),
+      inset 0 3px 6px rgba(255,255,255,0.22),
+      0 3px 8px rgba(0,0,0,0.12);
+    position: relative;
+  }
+  .dpo__seal::before {
+    content: ''; position: absolute; inset: 5px;
+    border: 0.5px solid rgba(255,255,255,0.35);
+    border-radius: 50%;
+  }
+  .dpo__seal svg { width: 20px; height: 20px; color: #1a1410; z-index: 1; }
+  .dpo__seal-label {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic; font-size: 14px;
+    color: #1a1410; letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  .dpo__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 5vw, 38px);
+    color: #1a1410; line-height: 1.15;
+    text-align: center; margin: 0; font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .dpo__rule { display: block; width: 32px; height: 1px; background: #1a1410; margin: 14px auto; }
+
+  .dpo__form { margin: 12px 0 14px; }
+  .dpo__variants {
+    width: 100%; padding: 12px 14px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px; color: #1a1410;
+    background: #fff;
+    border: 0.5px solid #1a1410;
+    border-radius: 2px; margin-bottom: 12px;
+  }
+  .dpo__buy-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 0;
+    border-top: 0.5px solid rgba(26,20,16,0.18);
+    border-bottom: 0.5px solid rgba(26,20,16,0.18);
+  }
+  .dpo__buy-price { flex: 1; text-align: left; }
+  .dpo__price {
+    font-family: 'Cinzel', serif;
+    font-size: 20px; font-weight: 600; color: #000;
+    letter-spacing: 0.12em; margin: 0;
+  }
+  .dpo__price s { color: rgba(26,20,16,0.45); font-weight: 400; margin-right: 8px; }
+  .dpo__price-code {
+    font-family: 'Lato', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: rgba(26,20,16,0.55);
+    margin-left: 8px;
+    font-weight: 500;
+  }
+  .dpo__delivery {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic; font-size: 12px;
+    color: #5a4828; margin: 4px 0 0;
+  }
+  .dpo__delivery a { color: inherit; text-decoration: underline; text-decoration-thickness: 0.5px; text-underline-offset: 3px; }
+  .dpo__cta {
+    flex: 0 0 auto;
+    padding: 16px 24px;
+    background: #1a1410; color: #f4e8d0;
+    border: none;
+    font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.25s;
+  }
+  .dpo__cta:hover { background: #000; }
+  .dpo__cta[disabled] { background: rgba(26,20,16,0.4); cursor: not-allowed; }
+
+  .dpo__ficha {
+    display: flex; justify-content: center; gap: 10px;
+    margin: 16px 0; padding: 12px 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 13px; color: #3a2818;
+    flex-wrap: wrap; text-align: center;
+  }
+  .dpo__ficha b { font-weight: 600; color: #1a1410; }
+  .dpo__ficha-sep { color: #8b7355; }
+
+  .dpo__ornament {
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    color: var(--frame-color);
+    opacity: 0.6;
+    letter-spacing: 0.5em;
+    margin: 22px 0 14px;
+    line-height: 1;
+  }
+  .dpo__hint {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #5a4828;
+    text-align: center;
+    margin: 0 0 14px;
+    letter-spacing: 0.04em;
+  }
+  .dpo__hint::before, .dpo__hint::after {
+    content: '✦'; color: #c9a96b; margin: 0 8px; font-size: 10px; vertical-align: middle;
+  }
+
+  .dpo__accordion summary {
+    list-style: none;
+    font-family: 'Cinzel', serif;
+    font-size: 12px; letter-spacing: 0.22em;
+    font-weight: 600;
+    text-transform: uppercase; color: #1a1410;
+    padding: 16px 38px 16px 0; cursor: pointer;
+    border-bottom: 0.5px solid rgba(26,20,16,0.22);
+    position: relative;
+  }
+  .dpo__accordion summary::-webkit-details-marker { display: none; }
+  .dpo__accordion summary::after {
+    content: ''; position: absolute; right: 4px; top: 50%;
+    width: 22px; height: 22px;
+    transform: translateY(-50%);
+    border: 1px solid #c9a96b;
+    border-radius: 50%;
+    background:
+      linear-gradient(#c9a96b, #c9a96b) center / 9px 1.5px no-repeat,
+      linear-gradient(#c9a96b, #c9a96b) center / 1.5px 9px no-repeat,
+      #fff;
+    transition: transform 0.3s, background 0.3s;
+  }
+  .dpo__accordion[open] summary::after {
+    background:
+      linear-gradient(#c9a96b, #c9a96b) center / 9px 1.5px no-repeat,
+      #fff;
+    transform: translateY(-50%) rotate(180deg);
+  }
+  .dpo__accordion-body {
+    padding: 14px 0; font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px; line-height: 1.7; color: #3a2818;
+  }
+
+  .dpo__disclaimer {
+    font-family: 'Lato', sans-serif;
+    font-size: 10px; line-height: 1.55;
+    color: rgba(26,20,16,0.42);
+    text-align: center; margin: 32px auto 0;
+    max-width: 540px;
+  }
+
+  /* Sticky bar mobile */
+  .dpo__sticky {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #0a0805; padding: 9px 12px;
+    display: flex; align-items: center; gap: 10px;
+    z-index: 100; border-top: 1px solid #c9a96b;
+    transform: translateY(110%);
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    pointer-events: none;
+  }
+  .dpo__sticky.is-visible { transform: translateY(0); pointer-events: auto; }
+  .dpo__sticky-photo { width: 38px; height: 38px; background: #0a0805; border: 0.5px solid #c9a96b; border-radius: 3px; overflow: hidden; flex-shrink: 0; }
+  .dpo__sticky-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .dpo__sticky-info { flex: 1; min-width: 0; }
+  .dpo__sticky-name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; color: #f4e8d0; margin: 0; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dpo__sticky-price { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600; color: #c9a96b; margin: 2px 0 0; letter-spacing: 0.08em; }
+  .dpo__sticky-cta { background: #c9a96b; color: #1a1410; border: none; padding: 10px 14px; font-family: 'Cinzel', serif; font-size: 10px; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; cursor: pointer; }
+  @media (min-width: 769px) { .dpo__sticky { display: none !important; } }
+
+  @media (min-width: 900px) {
+    .dpo__inner { max-width: 1080px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .dpo__col-media { position: sticky; top: 24px; }
+  }
+
+  /* Duendes 2026-05-17 — mensaje_personal unlock */
+  .dpo__locked {
+    margin: 18px 0;
+    padding: 22px 20px;
+    background: linear-gradient(180deg, rgba(201,169,110,0.05), rgba(201,169,110,0.02));
+    border: 1px solid rgba(201,169,110,0.32);
+    border-radius: 12px;
+    text-align: center;
+  }
+  .dpo__locked--abierto {
+    background: linear-gradient(180deg, #faf7ed 0%, #f5f0e1 100%);
+    border-color: rgba(201,169,110,0.55);
+    text-align: left;
+  }
+  .dpo__locked-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin: 0 0 10px;
+    text-align: center;
+  }
+  .dpo__locked-celtic {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    color: #6b5d4f;
+    font-size: 15px;
+    margin: 0 0 6px;
+    line-height: 1.5;
+  }
+  .dpo__locked-letter {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.65;
+    color: #15110d;
+    white-space: pre-line;
+  }
+  .dpo__locked-hint {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 12px;
+    color: #8a7657;
+    text-align: center;
+    margin: 12px 0 0;
+  }
+  .dpo__locked-hint a { color: #c9a96e; text-decoration: underline; }
+</style>
+
+<section class="dpo">
+  <div class="dpo__inner">
+
+    <div class="dpo__col-media">
+      <p class="dpo__eyebrow">{{ frame_label }}</p>
+      <div class="dpo__media">
+        <span class="dpo__media-cnr dpo__media-cnr--tl"></span>
+        <span class="dpo__media-cnr dpo__media-cnr--tr"></span>
+        <span class="dpo__media-cnr dpo__media-cnr--bl"></span>
+        <span class="dpo__media-cnr dpo__media-cnr--br"></span>
+        <div class="dpo__media-photo">
+          {%- if p.featured_image -%}
+            <img class="dpo__media-img" id="dpo-main-img" src="{{ p.featured_image | image_url: width: 1000 }}" alt="{{ p.title | escape }}">
+          {%- endif -%}
+        </div>
+      </div>
+      {%- if p.images.size > 1 -%}
+        <div class="dpo__thumbs">
+          {%- for img in p.images limit: 8 -%}
+            <button type="button" class="dpo__thumb{% if forloop.first %} is-active{% endif %}" data-src="{{ img | image_url: width: 1000 }}" aria-label="Imagen {{ forloop.index }}">
+              <img src="{{ img | image_url: width: 200 }}" alt="">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="dpo__col-info">
+
+      {%- if elemento != blank -%}
+        <div class="dpo__seal-row">
+          <span class="dpo__seal" aria-hidden="true">
+            {%- case elemento -%}
+              {%- when 'Tierra' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 22c0-7 4-11 9-12-1 8-5 12-9 12z"/><path d="M11 22c0-5-2-9-7-10 0 6 3 10 7 10z"/><path d="M11 22V8"/></svg>
+              {%- when 'Aire' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h12a3 3 0 1 0-3-3"/><path d="M3 12h17a3 3 0 1 1-3 3"/><path d="M3 16h9"/></svg>
+              {%- when 'Fuego' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3 1-5-2 1-3 3-3 5a7 7 0 1 0 14 0c0-6-7-7-7-11z"/></svg>
+              {%- when 'Agua' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s-7 7-7 13a7 7 0 1 0 14 0c0-6-7-13-7-13z"/></svg>
+              {%- when 'Éter' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 6h6l-5 4 2 7-5-4-5 4 2-7-5-4h6z"/></svg>
+              {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/></svg>
+            {%- endcase -%}
+          </span>
+          <span class="dpo__seal-label">Elemento {{ elemento }}</span>
+        </div>
+      {%- endif -%}
+
+      <h1 class="dpo__title">{{ p.title }}</h1>
+      <span class="dpo__rule" aria-hidden="true"></span>
+
+      <form action="/cart/add" method="post" enctype="multipart/form-data" class="dpo__form" id="dpo-form">
+        {%- if p.variants.size > 1 -%}
+          <select name="id" class="dpo__variants">
+            {%- for v in p.variants -%}
+              <option value="{{ v.id }}" {% if v == current_variant %}selected{% endif %} {% unless v.available %}disabled{% endunless %}>{{ v.title }} — {{ v.price | money_without_trailing_zeros }}{% unless v.available %} · Agotado{% endunless %}</option>
+            {%- endfor -%}
+          </select>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {%- endif -%}
+        <div class="dpo__buy-row">
+          <div class="dpo__buy-price">
+            <p class="dpo__price">
+              {%- if current_variant.compare_at_price > current_variant.price -%}<s>{{ current_variant.compare_at_price | money_without_trailing_zeros }}</s>{%- endif -%}
+              {{ current_variant.price | money_without_trailing_zeros }}
+              <span class="dpo__price-code">{{ cart.currency.iso_code | default: shop.currency }}</span>
+            </p>
+            <p class="dpo__delivery">Envío con tracking · <a href="#dpo-acc-envio">tiempo de entrega</a></p>
+          </div>
+          <button type="submit" class="dpo__cta" id="dpo-main-cta" {% unless current_variant.available %}disabled{% endunless %}>
+            {%- if current_variant.available -%}Comprar{%- else -%}Agotado{%- endif -%}
+          </button>
+        </div>
+      </form>
+
+      {%- if altura != blank or material != blank -%}
+        {%- assign ficha_first = true -%}
+        <p class="dpo__ficha">
+          {%- if altura != blank -%}
+            <span>Medida <b>{{ altura }} cm{% if ancho != blank %} × {{ ancho }} cm{% endif %}</b></span>
+            {%- assign ficha_first = false -%}
+          {%- endif -%}
+          {%- if material != blank -%}
+            {%- unless ficha_first -%}<span class="dpo__ficha-sep">·</span>{%- endunless -%}
+            <span>Material <b>{{ material }}</b></span>
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+
+      <div class="dpo__ornament" aria-hidden="true">— ✦ —</div>
+
+      {%- comment -%} Duendes 2026-05-17: mensaje_personal unlock (post-adopción) {%- endcomment -%}
+      {%- assign dpo_mensaje = p.metafields.custom.mensaje_personal.value | default: p.metafields.custom.mensaje_personal -%}
+      {%- if dpo_mensaje != blank -%}
+        {%- assign dpo_elegido = false -%}
+        {%- if customer -%}
+          {%- for o in customer.orders limit: 100 -%}
+            {%- for li in o.line_items -%}
+              {%- if li.product_id == product.id -%}{%- assign dpo_elegido = true -%}{%- break -%}{%- endif -%}
+            {%- endfor -%}
+            {%- if dpo_elegido -%}{%- break -%}{%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+        <div class="dpo__locked{% if dpo_elegido %} dpo__locked--abierto{% endif %}">
+          {%- if dpo_elegido -%}
+            <p class="dpo__locked-eyebrow">— Mensaje personal · para vos —</p>
+            <div class="dpo__locked-letter">{{ dpo_mensaje | newline_to_br }}</div>
+            <p class="dpo__locked-hint">— Guardalo. Es entre vos y él. —</p>
+          {%- else -%}
+            <p class="dpo__locked-eyebrow">— Mensaje sellado —</p>
+            <p class="dpo__locked-celtic">El sello solo se rompe en manos de su Elegido. Adoptalo y la carta se abre.</p>
+            {%- unless customer -%}
+              <p class="dpo__locked-hint"><a href="{{ routes.account_login_url }}?return_url={{ product.url }}">¿Ya lo adoptaste? Iniciá sesión</a></p>
+            {%- endunless -%}
+          {%- endif -%}
+        </div>
+        <div class="dpo__ornament" aria-hidden="true">— ✦ —</div>
+      {%- endif -%}
+
+      <p class="dpo__hint">Tocá cada sección para conocer más</p>
+
+      <details class="dpo__accordion">
+        <summary>Su esencia</summary>
+        <div class="dpo__accordion-body">{{ p.description }}</div>
+      </details>
+
+      {%- if que_incluye != blank -%}
+        <details class="dpo__accordion">
+          <summary>Qué incluye</summary>
+          <div class="dpo__accordion-body">{{ que_incluye | newline_to_br }}</div>
+        </details>
+      {%- endif -%}
+
+      {%- if como_se_usa != blank -%}
+        <details class="dpo__accordion">
+          <summary>Cómo se usa</summary>
+          <div class="dpo__accordion-body">{{ como_se_usa | newline_to_br }}</div>
+        </details>
+      {%- endif -%}
+
+      {%- if creacion != blank -%}
+        <details class="dpo__accordion">
+          <summary>Materiales y origen</summary>
+          <div class="dpo__accordion-body">{{ creacion | newline_to_br }}</div>
+        </details>
+      {%- endif -%}
+
+      <details class="dpo__accordion" id="dpo-acc-envio">
+        <summary>Tiempo de envío</summary>
+        <div class="dpo__accordion-body">
+          {%- if tiempo_custom != blank -%}{{ tiempo_custom | newline_to_br }}
+          {%- else -%}<p>Tu pedido sale en el siguiente lote de envíos. Cuando despacha, recibís el tracking. Tiempo total estimado: 7 a 15 días según destino.</p>{%- endif -%}
+        </div>
+      </details>
+
+      <p class="dpo__disclaimer">Los objetos rituales son piezas simbólicas artesanales. No reemplazan acompañamiento profesional. Si transitás un proceso psicológico o médico consultá con tus terapeutas.</p>
+
+    </div>
+
+  </div>
+</section>
+
+{%- if current_variant.available -%}
+<div class="dpo__sticky" id="dpo-sticky">
+  <span class="dpo__sticky-photo">
+    {%- if p.featured_image -%}<img src="{{ p.featured_image | image_url: width: 120 }}" alt="">{%- endif -%}
+  </span>
+  <div class="dpo__sticky-info">
+    <p class="dpo__sticky-name">{{ p.title }}</p>
+    <p class="dpo__sticky-price">{{ current_variant.price | money_without_trailing_zeros }} {{ cart.currency.iso_code | default: shop.currency }}</p>
+  </div>
+  <button type="button" class="dpo__sticky-cta" id="dpo-sticky-cta">Comprar</button>
+</div>
+{%- endif -%}
+
+<script>
+  (function(){
+    var main = document.getElementById('dpo-main-img');
+    if (main) {
+      document.querySelectorAll('.dpo__thumb').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          document.querySelectorAll('.dpo__thumb').forEach(function(b){ b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          var src = btn.getAttribute('data-src');
+          if (src) main.src = src;
+        });
+      });
+    }
+    var stickyBar = document.getElementById('dpo-sticky');
+    var mainCta = document.getElementById('dpo-main-cta');
+    if (stickyBar && mainCta && 'IntersectionObserver' in window) {
+      var sio = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) stickyBar.classList.remove('is-visible');
+          else stickyBar.classList.add('is-visible');
+        });
+      }, { threshold: 0 });
+      sio.observe(mainCta);
+    }
+    var sCta = document.getElementById('dpo-sticky-cta');
+    if (sCta) sCta.addEventListener('click', function(){
+      var f = document.getElementById('dpo-form');
+      if (f) f.requestSubmit ? f.requestSubmit() : f.submit();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Producto Ritual",
+  "settings": [],
+  "presets": [{ "name": "Producto Ritual" }]
+}
+{% endschema %}

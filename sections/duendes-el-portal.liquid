@@ -101,6 +101,72 @@
         </div>
       </section>
 
+      {%- comment -%}
+        Duendes 2026-05-17 — Cartas de tus Guardianes.
+        Muestra todos los guardianes adoptados por este cliente con su mensaje
+        personal revelable (tap-to-reveal vía <details>). Dedup por product.id.
+      {%- endcomment -%}
+      {%- if customer -%}
+        {%- assign seen_ids = ',' -%}
+        {%- assign adopted_count = 0 -%}
+        {%- capture cartas_html -%}
+          {%- for o in customer.orders limit: 50 -%}
+            {%- for li in o.line_items -%}
+              {%- assign p = li.product -%}
+              {%- if p != blank -%}
+                {%- assign mensaje = p.metafields.custom.mensaje_personal.value -%}
+                {%- if mensaje == nil -%}{%- assign mensaje = p.metafields.custom.mensaje_personal -%}{%- endif -%}
+                {%- if mensaje != blank -%}
+                  {%- assign id_key = ',' | append: p.id | append: ',' -%}
+                  {%- unless seen_ids contains id_key -%}
+                    {%- assign seen_ids = seen_ids | append: p.id | append: ',' -%}
+                    {%- assign adopted_count = adopted_count | plus: 1 -%}
+                    {%- assign clean_name = p.title | split: ' - ' | first | strip -%}
+                    {%- assign esencia = p.metafields.custom.esencia.value | default: p.metafields.custom.esencia -%}
+                    <details class="du-portal-carta">
+                      <summary class="du-portal-carta__face">
+                        <div class="du-portal-carta__media">
+                          {%- if p.featured_image -%}
+                            <img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ clean_name | escape }}" loading="lazy" width="600" height="800">
+                          {%- endif -%}
+                          <span class="du-portal-carta__seal" aria-hidden="true">✦</span>
+                        </div>
+                        <div class="du-portal-carta__body">
+                          <span class="du-portal-carta__eyebrow">Tu Guardián</span>
+                          <h3 class="du-portal-carta__name">{{ clean_name }}</h3>
+                          {%- if esencia != blank -%}
+                            <span class="du-portal-carta__chip">{{ esencia }}</span>
+                          {%- endif -%}
+                          <span class="du-portal-carta__cta">Tocá para abrir su carta →</span>
+                        </div>
+                      </summary>
+                      <div class="du-portal-carta__inner">
+                        <p class="du-portal-carta__hello">— Mensaje personal de {{ clean_name }} · para vos —</p>
+                        <div class="du-portal-carta__letter">{{ mensaje | newline_to_br }}</div>
+                        <p class="du-portal-carta__hint">— Guardalo. Es entre vos y {{ clean_name }}. —</p>
+                      </div>
+                    </details>
+                  {%- endunless -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- if adopted_count > 0 -%}
+          <section class="du-portal-cartas" aria-label="Cartas de tus Guardianes">
+            <header class="du-portal-cartas__head">
+              <p class="du-portal-cartas__eyebrow">✦ {{ adopted_count }} {% if adopted_count == 1 %}Guardián te adoptó{% else %}Guardianes te adoptaron{% endif %} ✦</p>
+              <h2 class="du-portal-cartas__title">Cartas de tus Guardianes</h2>
+              <p class="du-portal-cartas__sub">Cada uno tejió su mensaje en silencio antes de llegar. Tocá una carta para abrir la suya.</p>
+            </header>
+            <div class="du-portal-cartas__grid">
+              {{ cartas_html }}
+            </div>
+          </section>
+        {%- endif -%}
+      {%- endif -%}
+
       <div class="du-el-portal__grid">
         <section class="du-el-portal__card">
           <h2>{{ section.settings.block_guides_title | escape }}</h2>
@@ -284,6 +350,206 @@
     .du-portal-biblio__card { padding: 20px 14px 18px 24px; min-height: 170px; }
     .du-portal-biblio__name { font-size: 1.3rem; }
     .du-portal-biblio__meta, .du-portal-biblio__cta { font-size: 8.5px; }
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     Duendes 2026-05-17 — Cartas de tus Guardianes (post-adopción)
+     ════════════════════════════════════════════════════════════════ */
+  .du-portal-cartas {
+    margin: 56px 0 48px;
+    position: relative;
+  }
+  .du-portal-cartas__head {
+    text-align: center;
+    margin: 0 0 32px;
+  }
+  .du-portal-cartas__eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: #c9a96e;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .du-portal-cartas__title {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: clamp(28px, 4vw, 42px);
+    color: #15110d;
+    margin: 0 0 12px;
+    letter-spacing: 0.02em;
+  }
+  .du-portal-cartas__sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(15px, 1.4vw, 18px);
+    color: #6b5d4f;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  .du-portal-cartas__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 22px;
+  }
+
+  /* CARTA */
+  .du-portal-carta {
+    background: linear-gradient(180deg, #1a1612 0%, #15110d 100%);
+    border: 1px solid rgba(201,169,110,0.32);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+    box-shadow: 0 6px 22px -8px rgba(0,0,0,0.4);
+  }
+  .du-portal-carta[open] {
+    border-color: rgba(201,169,110,0.65);
+    box-shadow: 0 10px 32px -10px rgba(201,169,110,0.4), 0 0 0 1px rgba(201,169,110,0.25) inset;
+  }
+  .du-portal-carta__face {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .du-portal-carta__face::-webkit-details-marker { display: none; }
+  .du-portal-carta__face::marker { display: none; }
+
+  .du-portal-carta__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(201,169,110,0.38);
+    background: #0e0a07;
+  }
+  .du-portal-carta__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease, filter 0.6s ease;
+    filter: brightness(0.85) saturate(0.95);
+  }
+  .du-portal-carta:hover .du-portal-carta__media img,
+  .du-portal-carta[open] .du-portal-carta__media img {
+    filter: brightness(1) saturate(1);
+    transform: scale(1.03);
+  }
+  .du-portal-carta__seal {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c9a96e, #8b6f3f);
+    color: #15110d;
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(201,169,110,0.4);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .du-portal-carta[open] .du-portal-carta__seal {
+    opacity: 0;
+    transform: scale(0.6) rotate(180deg);
+  }
+
+  .du-portal-carta__body {
+    text-align: center;
+  }
+  .du-portal-carta__eyebrow {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: #c9a96e;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .du-portal-carta__name {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: #f5f0e1;
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+  }
+  .du-portal-carta__chip {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    padding: 3px 10px;
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 999px;
+    margin: 0 0 10px;
+  }
+  .du-portal-carta__cta {
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(245,240,225,0.7);
+    margin-top: 4px;
+  }
+  .du-portal-carta[open] .du-portal-carta__cta { display: none; }
+
+  /* CONTENIDO REVELADO */
+  .du-portal-carta__inner {
+    padding: 0 22px 26px;
+    animation: cartaIn 0.7s ease;
+  }
+  @keyframes cartaIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .du-portal-carta__hello {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: #c9a96e;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 18px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(201,169,110,0.2);
+  }
+  .du-portal-carta__letter {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.65;
+    color: #f5f0e1;
+    white-space: pre-line;
+  }
+  .du-portal-carta__letter p,
+  .du-portal-carta__letter br + br {
+    margin-bottom: 10px;
+  }
+  .du-portal-carta__hint {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 12px;
+    color: rgba(245,240,225,0.55);
+    text-align: center;
+    margin: 18px 0 0;
+  }
+
+  @media (max-width: 600px) {
+    .du-portal-cartas { margin: 40px 0 36px; }
+    .du-portal-cartas__grid { grid-template-columns: 1fr; gap: 16px; }
+    .du-portal-carta__name { font-size: 19px; }
+    .du-portal-carta__letter { font-size: 15px; }
   }
 {% endstylesheet %}
 
