@@ -333,11 +333,12 @@
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }} template-{{ template.name | handleize }}">
+    <style>html, body { overflow-x: hidden; overflow-x: clip; }</style>
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
     <div id="header-group">
       {% sections 'header-group' %}
     </div>
-    {%- render 'duendes-market-hint-banner' -%}
+    {%- comment -%} duendes-market-hint-banner removido — duplicaba con duendes-announcement-bar {%- endcomment -%}
 
     <script>
       // Inline header height and menu style calculations to prevent layout shift
@@ -415,6 +416,10 @@
       data-product-transition="{{ settings.transition_to_main_product }}"
       data-template="{{ template }}"
     >
+      {%- comment -%} Duendes 2026-05-15: inyectar Promociones Hero arriba del home en TODOS los mercados (no tocamos templates/index*.json que son del Customizer). {%- endcomment -%}
+      {%- if template.name == 'index' -%}
+        {% section 'duendes-home-v2-promociones-hero' %}
+      {%- endif -%}
       {{ content_for_layout }}
     </main>
 

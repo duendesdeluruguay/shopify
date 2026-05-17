@@ -1,5 +1,16 @@
 {
   "sections": {
+    "duendes-home-v2-promociones-hero": {
+      "type": "duendes-home-v2-promociones-hero",
+      "settings": {
+        "kicker": "",
+        "title": "",
+        "subtitle": "",
+        "badge_text": "",
+        "cta_text": "",
+        "collection_handle": "oportunidades-magicas"
+      }
+    },
     "announcement-bar": {
       "type": "duendes-announcement-bar",
       "blocks": {
@@ -49,17 +60,6 @@
         "msg-5"
       ],
       "settings": {}
-    },
-    "duendes-home-v2-promociones-hero": {
-      "type": "duendes-home-v2-promociones-hero",
-      "settings": {
-        "kicker": "",
-        "title": "",
-        "subtitle": "",
-        "badge_text": "",
-        "cta_text": "",
-        "collection_handle": "oportunidades-magicas"
-      }
     },
     "hero": {
       "type": "duendes-hero",
