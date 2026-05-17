@@ -1,4 +1,7 @@
 {
+  "accessibility": {
+    "menu_label_button": "MENÚ"
+  },
   "blocks": {
     "load_video": "Cargar video: {{ description }}",
     "sold_out": "Agotado",
@@ -379,6 +382,13 @@
       "sending": "Enviando…"
     },
     "home_v2": {
+      "promociones": {
+        "kicker": "RECIÉN LANZADAS",
+        "title": "Las 8 Tribus",
+        "subtitle": "Tres guardianes que trabajan en equipo. Por primera vez, disponibles juntos.",
+        "badge": "NUEVO",
+        "cta": "Conocer las 8 Tribus"
+      },
       "cartas": {
         "eyebrow": "LOS DESTACADOS DE MAYO",
         "title": "Tres Guardianes elegidos para esta semana.",

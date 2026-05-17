@@ -6,6 +6,7 @@
     "cart_count": "Total items in cart",
     "close_dialog": "Close dialog",
     "country_region": "Country\/Region",
+    "menu_label_button": "MENU",
     "country_results_count": "{{ count }} results",
     "product_details": "Product details",
     "show_product_details": "Show product details for {{ product_name }}",
@@ -373,6 +374,13 @@
       "sending": "Sending…"
     },
     "home_v2": {
+      "promociones": {
+        "kicker": "JUST LAUNCHED",
+        "title": "The 8 Tribes",
+        "subtitle": "Three guardians working as a team. For the first time, available together.",
+        "badge": "NEW",
+        "cta": "See all 8 Tribes"
+      },
       "cartas": {
         "eyebrow": "MAY HIGHLIGHTS",
         "title": "Three Guardians chosen for this week.",

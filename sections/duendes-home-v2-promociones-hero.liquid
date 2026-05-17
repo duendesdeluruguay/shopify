@@ -1,0 +1,496 @@
+{%- comment -%}
+  ──────────────────────────────────────────────────────────────────────
+  Duendes 2026-05-15 — Promociones Hero (Cinematic)
+  Sección destacada arriba del home, presentando las 8 Tribus
+  recién lanzadas. Pulls live desde la colección "promotions"
+  (handle: promotions / promociones en es).
+  Estética: cinematográfica, dorada, premium, slow reveal.
+  ──────────────────────────────────────────────────────────────────────
+{%- endcomment -%}
+
+{%- liquid
+  assign dh2p_tag = section.settings.kicker | strip
+  if dh2p_tag == blank
+    assign dh2p_tag = 'duendes.home_v2.promociones.kicker' | t
+    if dh2p_tag contains 'translation missing'
+      assign dh2p_tag = 'JUST LAUNCHED'
+    endif
+  endif
+
+  assign dh2p_title = section.settings.title | strip
+  if dh2p_title == blank
+    assign dh2p_title = 'duendes.home_v2.promociones.title' | t
+    if dh2p_title contains 'translation missing'
+      assign dh2p_title = 'The 8 Tribes'
+    endif
+  endif
+
+  assign dh2p_sub = section.settings.subtitle | strip
+  if dh2p_sub == blank
+    assign dh2p_sub = 'duendes.home_v2.promociones.subtitle' | t
+    if dh2p_sub contains 'translation missing'
+      assign dh2p_sub = 'Three guardians working as a team. For the first time, available together.'
+    endif
+  endif
+
+  assign dh2p_cta = section.settings.cta_text | strip
+  if dh2p_cta == blank
+    assign dh2p_cta = 'duendes.home_v2.promociones.cta' | t
+    if dh2p_cta contains 'translation missing'
+      assign dh2p_cta = 'See all 8 Tribes'
+    endif
+  endif
+
+  assign dh2p_badge = section.settings.badge_text | strip
+  if dh2p_badge == blank
+    assign dh2p_badge = 'duendes.home_v2.promociones.badge' | t
+    if dh2p_badge contains 'translation missing'
+      assign dh2p_badge = 'NEW'
+    endif
+  endif
+
+  assign dh2p_handle = section.settings.collection_handle | default: 'oportunidades-magicas'
+  assign dh2p_collection = collections[dh2p_handle]
+-%}
+
+<section class="dh2-promo" data-section-id="{{ section.id }}">
+  <div class="dh2-promo__inner">
+
+    <header class="dh2-promo__head">
+      <span class="dh2-promo__kicker">
+        <span class="dh2-promo__star">✦</span>
+        {{ dh2p_tag }}
+        <span class="dh2-promo__star">✦</span>
+      </span>
+      <h2 class="dh2-promo__title">{{ dh2p_title }}</h2>
+      <p class="dh2-promo__sub">{{ dh2p_sub }}</p>
+      <div class="dh2-promo__rule" aria-hidden="true"></div>
+    </header>
+
+    {%- if dh2p_collection.products.size > 0 -%}
+      <div class="dh2-promo__scroll" role="list">
+        {%- for product in dh2p_collection.products limit: 12 -%}
+          {%- liquid
+            assign p_esencia = product.metafields.custom.esencia
+            assign p_esencia_str = ''
+            if p_esencia != blank
+              assign p_esencia_str = p_esencia.value | default: p_esencia
+            endif
+
+            assign p_image = product.featured_image
+            assign p_title = product.title | split: ' - ' | first | strip
+          -%}
+          <a
+            href="{{ product.url }}"
+            class="dh2-promo__card"
+            role="listitem"
+            data-anim-index="{{ forloop.index }}"
+          >
+            <span class="dh2-promo__badge">{{ dh2p_badge }}</span>
+            <div class="dh2-promo__media">
+              {%- if p_image -%}
+                <img
+                  src="{{ p_image | image_url: width: 600 }}"
+                  srcset="{{ p_image | image_url: width: 300 }} 300w, {{ p_image | image_url: width: 600 }} 600w, {{ p_image | image_url: width: 900 }} 900w"
+                  sizes="(min-width: 750px) 22vw, 72vw"
+                  alt="{{ p_title | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+              {%- endif -%}
+              <span class="dh2-promo__ring" aria-hidden="true"></span>
+            </div>
+            <div class="dh2-promo__body">
+              <h3 class="dh2-promo__cardtitle">{{ p_title }}</h3>
+              {%- if p_esencia_str != blank -%}
+                <span class="dh2-promo__chip">{{ p_esencia_str }}</span>
+              {%- endif -%}
+              <span class="dh2-promo__price">{{ product.price | money }}</span>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p class="dh2-promo__empty">
+        No products in the <code>{{ dh2p_handle }}</code> collection yet.
+      </p>
+    {%- endif -%}
+
+    <div class="dh2-promo__cta-wrap">
+      <a href="/collections/{{ dh2p_handle }}" class="dh2-promo__cta">
+        {{ dh2p_cta }}
+        <span class="dh2-promo__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ── Duendes Promociones Hero — Cinematic ─────────────────────────── */
+  .dh2-promo {
+    position: relative;
+    isolation: isolate;
+    background:
+      radial-gradient(ellipse at top, rgba(201,169,110,0.10), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(201,169,110,0.06), transparent 50%),
+      linear-gradient(180deg, #1a1612 0%, #15110d 100%);
+    color: #f5f0e1;
+    padding: 56px 16px 64px;
+    overflow: hidden;
+  }
+  .dh2-promo::before,
+  .dh2-promo::after {
+    /* letterbox top/bottom thin gold lines */
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,169,110,0.4), transparent);
+    z-index: 2;
+  }
+  .dh2-promo::before { top: 0; }
+  .dh2-promo::after  { bottom: 0; }
+
+  .dh2-promo__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* HEADER */
+  .dh2-promo__head {
+    text-align: center;
+    margin: 0 0 36px;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: dh2p-fadein 0.9s ease 0.1s forwards;
+  }
+  .dh2-promo__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    color: #c9a96e;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .dh2-promo__star {
+    color: #c9a96e;
+    font-size: 10px;
+    opacity: 0.7;
+  }
+  .dh2-promo__title {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: clamp(32px, 5.5vw, 64px);
+    line-height: 1.05;
+    color: #f5f0e1;
+    margin: 0 0 14px;
+    letter-spacing: 0.02em;
+  }
+  .dh2-promo__sub {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(15px, 1.6vw, 19px);
+    color: rgba(245,240,225,0.78);
+    margin: 0 auto;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+  .dh2-promo__rule {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,169,110,0.55), transparent);
+    margin: 22px auto 0;
+  }
+
+  /* CAROUSEL / GRID */
+  .dh2-promo__scroll {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 18px;
+    margin: 0 0 32px;
+  }
+  @media (max-width: 1200px) {
+    .dh2-promo__scroll { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 749px) {
+    .dh2-promo__scroll {
+      display: flex;
+      grid-template-columns: none;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 8px 18px;
+      margin: 0 -16px 24px;
+      gap: 14px;
+      scrollbar-width: none;
+    }
+    .dh2-promo__scroll::-webkit-scrollbar { display: none; }
+  }
+
+  /* CARD */
+  .dh2-promo__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 18px 12px 16px;
+    background: linear-gradient(180deg, rgba(245,240,225,0.04), rgba(245,240,225,0.02));
+    border: 1px solid rgba(201,169,110,0.18);
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+    opacity: 0;
+    transform: translateY(16px);
+    animation: dh2p-cardin 0.7s ease forwards;
+    animation-delay: calc(0.3s + (var(--idx, 0) * 0.06s));
+  }
+  .dh2-promo__card:nth-child(1) { --idx: 1; }
+  .dh2-promo__card:nth-child(2) { --idx: 2; }
+  .dh2-promo__card:nth-child(3) { --idx: 3; }
+  .dh2-promo__card:nth-child(4) { --idx: 4; }
+  .dh2-promo__card:nth-child(5) { --idx: 5; }
+  .dh2-promo__card:nth-child(6) { --idx: 6; }
+  .dh2-promo__card:nth-child(7) { --idx: 7; }
+  .dh2-promo__card:nth-child(8) { --idx: 8; }
+
+  @media (max-width: 749px) {
+    .dh2-promo__card {
+      flex: 0 0 70vw;
+      max-width: 240px;
+      scroll-snap-align: start;
+    }
+  }
+
+  .dh2-promo__card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(201,169,110,0.55);
+    background: linear-gradient(180deg, rgba(245,240,225,0.07), rgba(245,240,225,0.03));
+    box-shadow:
+      0 8px 28px -10px rgba(201,169,110,0.35),
+      0 2px 0 rgba(201,169,110,0.15) inset;
+  }
+  .dh2-promo__card:hover .dh2-promo__ring {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+
+  /* NEW BADGE */
+  .dh2-promo__badge {
+    position: absolute;
+    top: -8px;
+    right: 14px;
+    background: linear-gradient(135deg, #c9a96e, #a88550);
+    color: #15110d;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(201,169,110,0.4);
+    z-index: 2;
+  }
+
+  /* MEDIA */
+  .dh2-promo__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    margin: 6px 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .dh2-promo__media img {
+    width: 86%;
+    height: 86%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+  }
+  .dh2-promo__ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(201,169,110,0.4), rgba(201,169,110,0.12), rgba(201,169,110,0.5), rgba(201,169,110,0.15), rgba(201,169,110,0.4));
+    padding: 2px;
+    transform: scale(1);
+    opacity: 0.7;
+    transition: all 0.5s ease;
+    z-index: 0;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* BODY */
+  .dh2-promo__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+  }
+  .dh2-promo__cardtitle {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: #f5f0e1;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .dh2-promo__chip {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    padding: 3px 9px;
+    border: 1px solid rgba(201,169,110,0.35);
+    border-radius: 999px;
+    margin: 2px 0;
+  }
+  .dh2-promo__price {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 14px;
+    color: rgba(245,240,225,0.72);
+    margin-top: 2px;
+  }
+
+  /* CTA */
+  .dh2-promo__cta-wrap {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: dh2p-fadein 0.7s ease 0.9s forwards;
+  }
+  .dh2-promo__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #15110d;
+    background: linear-gradient(135deg, #d4b97f, #c9a96e);
+    padding: 14px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 18px -2px rgba(201,169,110,0.4);
+  }
+  .dh2-promo__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px -4px rgba(201,169,110,0.55);
+    background: linear-gradient(135deg, #e2c891, #d4b97f);
+  }
+  .dh2-promo__arrow {
+    transition: transform 0.3s ease;
+  }
+  .dh2-promo__cta:hover .dh2-promo__arrow {
+    transform: translateX(4px);
+  }
+
+  /* EMPTY STATE */
+  .dh2-promo__empty {
+    text-align: center;
+    color: rgba(245,240,225,0.5);
+    font-style: italic;
+    padding: 40px 0;
+  }
+  .dh2-promo__empty code {
+    color: #c9a96e;
+    background: rgba(201,169,110,0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes dh2p-fadein {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes dh2p-cardin {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* MOBILE TYPOGRAPHY adjustments */
+  @media (max-width: 749px) {
+    .dh2-promo { padding: 40px 14px 48px; }
+    .dh2-promo__head { margin-bottom: 24px; }
+    .dh2-promo__kicker { font-size: 10px; letter-spacing: 0.32em; }
+    .dh2-promo__rule { margin-top: 16px; }
+    .dh2-promo__cta { font-size: 11px; padding: 12px 22px; letter-spacing: 0.24em; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Promociones · Hero Tribus",
+  "tag": "section",
+  "class": "dh2-promo-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker (small caps)",
+      "info": "Leave blank to use the translation file values (EN + ES)."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Leave blank to use the translation file values."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle (italic)",
+      "info": "Leave blank to use the translation file values."
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Card badge",
+      "info": "Leave blank to use the translation file values."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "info": "Leave blank to use the translation file values."
+    },
+    {
+      "type": "text",
+      "id": "collection_handle",
+      "label": "Collection handle",
+      "default": "oportunidades-magicas",
+      "info": "The collection handle that contains the products (default: oportunidades-magicas)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promociones · Hero Tribus"
+    }
+  ]
+}
+{% endschema %}

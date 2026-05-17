@@ -50,6 +50,17 @@
       ],
       "settings": {}
     },
+    "duendes-home-v2-promociones-hero": {
+      "type": "duendes-home-v2-promociones-hero",
+      "settings": {
+        "kicker": "",
+        "title": "",
+        "subtitle": "",
+        "badge_text": "",
+        "cta_text": "",
+        "collection_handle": "oportunidades-magicas"
+      }
+    },
     "hero": {
       "type": "duendes-hero",
       "settings": {
@@ -896,6 +907,7 @@
   },
   "order": [
     "announcement-bar",
+    "duendes-home-v2-promociones-hero",
     "hero",
     "mi-magia-home",
     "ddu-nuevos-guardianes",

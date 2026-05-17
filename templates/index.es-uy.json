@@ -11,16 +11,22 @@
   "sections": {
     "announcement-bar": {
       "type": "duendes-announcement-bar",
-      "blocks": {
-        "msg-1": { "type": "message", "settings": { "text": "Envío internacional con tracking · 5 a 10 días hábiles" } },
-        "msg-2": { "type": "message", "settings": { "text": "Envíos en Uruguay con DAC · 5 a 7 días" } },
-        "msg-3": { "type": "message", "settings": { "text": "Pago 100 % seguro · Todas las tarjetas · Cifrado SSL" } },
-        "msg-4": { "type": "message", "settings": { "text": "Hecho a mano sin moldes · Cada pieza existe una sola vez" } },
-        "msg-5": { "type": "message", "settings": { "text": "+15.000 Guardianes adoptados en 45 países · 10 años de magia" } },
-        "msg-elegidos": { "type": "message", "settings": { "text": "Si alguna vez un Guardián te frenó en seco, sos de los Elegidos · descubrí qué significa" } }
-      },
-      "block_order": ["msg-elegidos","msg-1","msg-2","msg-3","msg-4","msg-5"],
-      "settings": {}
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "brand_message": "Duendes del Uruguay · Tienda Internacional · Envíos a todo el Mundo"
+      }
+    },
+    "duendes-home-v2-promociones-hero": {
+      "type": "duendes-home-v2-promociones-hero",
+      "settings": {
+        "kicker": "",
+        "title": "",
+        "subtitle": "",
+        "badge_text": "",
+        "cta_text": "",
+        "collection_handle": "oportunidades-magicas"
+      }
     },
     "duendes-home-v2-cartas-bosque": {
       "type": "duendes-home-v2-cartas-bosque",
@@ -38,7 +44,7 @@
     },
     "duendes-home-v2-recien-llegados": {
       "type": "duendes-home-v2-recien-llegados",
-      "settings": {"collection":"nuevos-guardianes","limit":12,"hide_sold_out":true,"tag":"","title":"","badge":"","cta_label":"","essence_fallback":"","empty_state":""}
+      "settings": {"collection":"nuevos-guardianes","limit":20,"hide_sold_out":true,"tag":"","title":"","badge":"","cta_label":"","essence_fallback":"","empty_state":""}
     },
     "duendes-home-v2-linajes": {
       "type": "duendes-home-v2-linajes",
@@ -94,6 +100,7 @@
   },
   "order": [
     "announcement-bar",
+    "duendes-home-v2-promociones-hero",
     "duendes-home-v2-cartas-bosque",
     "duendes-home-v2-hero",
     "duendes-home-v2-recien-llegados",

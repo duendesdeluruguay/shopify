@@ -2,336 +2,94 @@
   "sections": {
     "announcement-bar": {
       "type": "duendes-announcement-bar",
-      "blocks": {
-        "msg-1": {
-          "type": "message",
-          "settings": {
-            "text": "[ddu:announcement_intl]"
-          }
-        },
-        "msg-2": {
-          "type": "message",
-          "settings": {
-            "text": "Uruguay shipping via DAC · 5 to 7 days"
-          }
-        },
-        "msg-3": {
-          "type": "message",
-          "settings": {
-            "text": "100% secure checkout · All cards · SSL encrypted"
-          }
-        },
-        "msg-4": {
-          "type": "message",
-          "settings": {
-            "text": "Made by hand without molds · Each piece exists only once"
-          }
-        },
-        "msg-5": {
-          "type": "message",
-          "settings": {
-            "text": "+15,000 Guardians adopted in 45 countries · 10 years of magic"
-          }
-        },
-        "msg-elegidos": {
-          "type": "message",
-          "settings": {
-            "text": "If a Guardian ever stopped you, you are one of The Chosen · find out what it means"
-          }
-        }
-      },
-      "block_order": [
-        "msg-elegidos",
-        "msg-1",
-        "msg-2",
-        "msg-3",
-        "msg-4",
-        "msg-5"
-      ],
-      "settings": {}
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "brand_message": "Duendes del Uruguay · Tienda Internacional · Envíos a todo el Mundo"
+      }
+    },
+    "duendes-home-v2-promociones-hero": {
+      "type": "duendes-home-v2-promociones-hero",
+      "settings": {
+        "kicker": "",
+        "title": "",
+        "subtitle": "",
+        "badge_text": "",
+        "cta_text": "",
+        "collection_handle": "oportunidades-magicas"
+      }
     },
     "duendes-home-v2-cartas-bosque": {
       "type": "duendes-home-v2-cartas-bosque",
       "blocks": {
-        "cb1": {
-          "type": "carta",
-          "settings": {
-            "roman": "I",
-            "essence": "Quiet wisdom"
-          }
-        },
-        "cb2": {
-          "type": "carta",
-          "settings": {
-            "roman": "II",
-            "essence": "Quiet wisdom"
-          }
-        },
-        "cb3": {
-          "type": "carta",
-          "settings": {
-            "roman": "III",
-            "essence": "Quiet wisdom"
-          }
-        }
+        "cb1": { "type": "carta", "settings": { "product": "", "roman": "I", "display_title": "", "essence": "Quiet wisdom" } },
+        "cb2": { "type": "carta", "settings": { "product": "bodhi-mediano", "roman": "II", "display_title": "", "essence": "Quiet wisdom" } },
+        "cb3": { "type": "carta", "settings": { "product": "12-guardianes", "roman": "III", "display_title": "", "essence": "Quiet wisdom" } }
       },
-      "block_order": ["cb1", "cb2", "cb3"],
-      "settings": {
-        "tag": "",
-        "title": "",
-        "badge_destacado": "",
-        "hint": "",
-        "modal_aria": "",
-        "close_aria": "",
-        "modal_cta": "",
-        "cta_url": ""
-      }
+      "block_order": ["cb1","cb2","cb3"],
+      "settings": { "tag": "", "title": "", "badge_destacado": "", "hint": "", "modal_aria": "", "close_aria": "", "modal_cta": "", "cta_url": "" }
     },
     "duendes-home-v2-hero": {
       "type": "duendes-home-v2-hero",
-      "settings": {
-        "video_url": "",
-        "poster": "shopify://shop_images/2319.jpg",
-        "badges_line": "",
-        "title": "",
-        "subtitle": "",
-        "cta_primary_label": "",
-        "cta_primary_url": "shopify://collections/tienda-magica",
-        "cta_secondary_label": "",
-        "cta_secondary_url": "shopify://pages/test-del-guardian"
-      }
-    },
-    "duendes-home-v2-recien-llegados": {
-      "type": "duendes-home-v2-recien-llegados",
-      "settings": {
-        "collection": "nuevos-guardianes",
-        "limit": 12,
-        "hide_sold_out": true,
-        "tag": "",
-        "title": "",
-        "badge": "",
-        "cta_label": "",
-        "essence_fallback": "",
-        "empty_state": ""
-      }
+      "settings": { "video_url": "", "poster": "shopify://shop_images/2319.jpg", "badges_line": "", "title": "", "subtitle": "", "cta_primary_label": "", "cta_primary_url": "shopify://collections/tienda-magica", "cta_secondary_label": "", "cta_secondary_url": "shopify://pages/test-del-guardian", "cta_secondary_hint": "" }
     },
     "duendes-home-v2-linajes": {
       "type": "duendes-home-v2-linajes",
       "blocks": {
-        "lin1": {
-          "type": "linaje",
-          "settings": {
-            "title": "Fairies",
-            "url": "shopify://collections/hadas",
-            "count_label": "View collection",
-            "glyph": "✦"
-          }
-        },
-        "lin2": {
-          "type": "linaje",
-          "settings": {
-            "title": "Pixies",
-            "url": "shopify://collections/pixies",
-            "count_label": "View collection",
-            "glyph": "✦"
-          }
-        },
-        "lin3": {
-          "type": "linaje",
-          "settings": {
-            "title": "Elves",
-            "url": "shopify://collections/elfos",
-            "count_label": "View collection",
-            "glyph": "✦"
-          }
-        },
-        "lin4": {
-          "type": "linaje",
-          "settings": {
-            "title": "Mediums",
-            "url": "shopify://collections/medianos",
-            "count_label": "View collection",
-            "glyph": "✦"
-          }
-        },
-        "lin5": {
-          "type": "linaje",
-          "settings": {
-            "title": "Masters",
-            "url": "shopify://collections/maestros",
-            "count_label": "View collection",
-            "glyph": "✦"
-          }
-        },
-        "lin6": {
-          "type": "linaje",
-          "settings": {
-            "title": "Deluxe",
-            "url": "shopify://collections/deluxe",
-            "count_label": "View collection",
-            "glyph": "✦"
-          }
-        },
-        "lin7": {
-          "type": "linaje",
-          "settings": {
-            "title": "Witches",
-            "url": "shopify://collections/brujas",
-            "count_label": "View collection",
-            "glyph": "✦"
-          }
-        },
-        "lin8": {
-          "type": "linaje",
-          "settings": {
-            "title": "Great ones",
-            "url": "shopify://collections/grandes",
-            "count_label": "View collection",
-            "glyph": "✦"
-          }
-        },
-        "lin9": {
-          "type": "linaje",
-          "settings": {
-            "title": "Giants",
-            "url": "shopify://collections/gigantes",
-            "count_label": "View collection",
-            "glyph": "✦"
-          }
-        },
-        "lin10": {
-          "type": "linaje",
-          "settings": {
-            "title": "Historic",
-            "url": "shopify://collections/historicos",
-            "count_label": "View collection",
-            "glyph": "✦"
-          }
-        }
+        "lin_hadas": { "type": "linaje", "settings": { "title": "HADAS", "url": "shopify://collections/hadas", "mode": "normal" } },
+        "lin_duendes": { "type": "linaje", "settings": { "title": "DUENDES", "url": "shopify://collections/duendes-todos", "mode": "normal" } },
+        "lin_pixies": { "type": "linaje", "settings": { "title": "PIXIES", "url": "shopify://collections/pixies", "mode": "normal" } },
+        "lin_brujas": { "type": "linaje", "settings": { "title": "BRUJAS", "url": "shopify://collections/brujas", "mode": "normal" } },
+        "lin_mayores": { "type": "linaje", "settings": { "title": "GUARDIANES MAYORES", "url": "shopify://collections/guardianes-mayores", "mode": "normal" } },
+        "lin_oferta": { "type": "linaje", "settings": { "title": "OPORTUNIDADES MÁGICAS", "url": "shopify://collections/oportunidades-magicas", "mode": "normal" } },
+        "lin_accesorios": { "type": "linaje", "settings": { "title": "ACCESORIOS", "url": "shopify://collections/accesorios", "mode": "normal" } }
       },
-      "block_order": ["lin1", "lin2", "lin3", "lin4", "lin5", "lin6", "lin7", "lin8", "lin9", "lin10"],
-      "settings": {
-        "tag": "",
-        "title": ""
-      }
+      "block_order": ["lin_hadas","lin_duendes","lin_pixies","lin_brujas","lin_mayores","lin_oferta","lin_accesorios"],
+      "settings": { "tag": "POR LINAJE", "title": "Encontrá tu familia." }
     },
     "duendes-home-v2-buscador-elemental": {
       "type": "duendes-home-v2-buscador-elemental",
-      "settings": {
-        "collection": "all",
-        "grace_collection_handle": "all"
-      }
+      "settings": { "collection": "all", "grace_collection_handle": "all", "fallback_1": "", "fallback_2": "", "fallback_3": "" }
     },
     "duendes-home-v2-social-proof": {
       "type": "duendes-home-v2-social-proof",
       "blocks": {
-        "sp1": {
-          "type": "testimonial",
-          "settings": {
-            "quote": ""
-          }
-        },
-        "sp2": {
-          "type": "testimonial",
-          "settings": {
-            "quote": ""
-          }
-        },
-        "sp3": {
-          "type": "testimonial",
-          "settings": {
-            "quote": ""
-          }
-        },
-        "sp4": {
-          "type": "testimonial",
-          "settings": {
-            "quote": ""
-          }
-        }
+        "sp1": { "type": "testimonial", "settings": { "photo": "shopify://shop_images/ChatGPT_Image_14_may_2026_08_10_44_p.m..png", "quote": "" } },
+        "sp2": { "type": "testimonial", "settings": { "photo": "shopify://shop_images/ChatGPT_Image_14_may_2026_07_27_40_p.m._1.png", "quote": "" } },
+        "sp3": { "type": "testimonial", "settings": { "photo": "shopify://shop_images/ChatGPT_Image_14_may_2026_07_27_40_p.m._2.png", "quote": "" } },
+        "sp4": { "type": "testimonial", "settings": { "photo": "shopify://shop_images/ChatGPT_Image_14_may_2026_08_02_47_p.m._6.png", "quote": "" } }
       },
-      "block_order": ["sp1", "sp2", "sp3", "sp4"],
-      "settings": {
-        "tag": "",
-        "title": "",
-        "number": "",
-        "subtitle": ""
-      }
+      "block_order": ["sp1","sp2","sp3","sp4"],
+      "settings": { "tag": "", "title": "", "number": "", "subtitle": "" }
     },
     "duendes-home-v2-editorial": {
       "type": "duendes-home-v2-editorial",
-      "settings": {
-        "quote": "",
-        "signature": "",
-        "link_label": "",
-        "link_url": "shopify://blogs/comunidad-elemental"
-      }
+      "settings": { "quote": "", "signature": "", "link_label": "", "link_url": "shopify://blogs/comunidad-elemental" }
     },
     "duendes-home-v2-rito-pasos": {
       "type": "duendes-home-v2-rito-pasos",
       "blocks": {
-        "rp1": {
-          "type": "paso",
-          "settings": {
-            "step_label": "",
-            "heading": "",
-            "text": ""
-          }
-        },
-        "rp2": {
-          "type": "paso",
-          "settings": {
-            "step_label": "",
-            "heading": "",
-            "text": ""
-          }
-        },
-        "rp3": {
-          "type": "paso",
-          "settings": {
-            "step_label": "",
-            "heading": "",
-            "text": ""
-          }
-        }
+        "rp1": { "type": "paso", "settings": { "step_label": "", "heading": "", "text": "", "image": "shopify://shop_images/1653.jpg", "glyph": "✦" } },
+        "rp2": { "type": "paso", "settings": { "step_label": "", "heading": "", "text": "", "image": "shopify://shop_images/1373.jpg", "glyph": "✦" } },
+        "rp3": { "type": "paso", "settings": { "step_label": "", "heading": "", "text": "", "image": "shopify://shop_images/ChatGPT_Image_13_may_2026_04_32_33_p.m..png", "glyph": "✦" } }
       },
-      "block_order": ["rp1", "rp2", "rp3"],
-      "settings": {
-        "tag": "",
-        "title": ""
-      }
+      "block_order": ["rp1","rp2","rp3"],
+      "settings": { "tag": "", "title": "" }
     },
     "duendes-home-v2-lectura-test": {
       "type": "duendes-home-v2-lectura",
-      "settings": {
-        "bg_image": "",
-        "glyph": "",
-        "eyebrow": "",
-        "title": "",
-        "subtitle": "",
-        "cta_label": "",
-        "cta_url": "shopify://pages/test-del-guardian"
-      }
+      "settings": { "glyph": "", "eyebrow": "", "title": "", "subtitle": "", "cta_label": "", "cta_url": "shopify://pages/test-del-guardian" }
     },
     "duendes-home-v2-tribu-newsletter": {
       "type": "duendes-home-v2-tribu-newsletter",
-      "settings": {
-        "title": "",
-        "subtitle": "",
-        "placeholder": "",
-        "submit_label": "",
-        "micro": "",
-        "success": "",
-        "customer_tag": "newsletter, duendes-home-v2-tribu",
-        "error_copy": ""
-      }
+      "settings": { "title": "", "subtitle": "", "placeholder": "", "submit_label": "", "micro": "", "success": "", "customer_tag": "newsletter, duendes-home-v2-tribu", "error_copy": "" }
     }
   },
   "order": [
     "announcement-bar",
+    "duendes-home-v2-promociones-hero",
     "duendes-home-v2-cartas-bosque",
     "duendes-home-v2-hero",
-    "duendes-home-v2-recien-llegados",
     "duendes-home-v2-linajes",
     "duendes-home-v2-buscador-elemental",
     "duendes-home-v2-social-proof",
