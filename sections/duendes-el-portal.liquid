@@ -35,68 +35,174 @@
         <p class="du-el-portal__lead">{{ section.settings.welcome_lead | escape }}</p>
       </header>
 
+      {%- comment -%}
+        Duendes 2026-05-17 — Biblioteca con GATING por linaje comprado.
+        Lee customer.orders y arma string con los linajes adoptados.
+        Cada libro se muestra abierto (si lo tiene) o sellado (si no).
+      {%- endcomment -%}
+      {%- assign owned_lineages = ',' -%}
+      {%- if customer -%}
+        {%- for o in customer.orders limit: 100 -%}
+          {%- for li in o.line_items -%}
+            {%- assign lin = li.product.metafields.custom.linaje.value | default: li.product.metafields.custom.linaje -%}
+            {%- if lin != blank -%}
+              {%- assign lin_key = ',' | append: lin | append: ',' -%}
+              {%- unless owned_lineages contains lin_key -%}
+                {%- assign owned_lineages = owned_lineages | append: lin | append: ',' -%}
+              {%- endunless -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
+
+      {%- assign has_duende = false -%}
+      {%- assign has_hada = false -%}
+      {%- assign has_pixie = false -%}
+      {%- assign has_elfo = false -%}
+      {%- assign has_mayor = false -%}
+      {%- assign has_deluxe = false -%}
+      {%- assign has_bruja = false -%}
+      {%- if owned_lineages contains ',Duende,' -%}{%- assign has_duende = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Hada,' -%}{%- assign has_hada = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Pixie,' -%}{%- assign has_pixie = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Elfo,' -%}{%- assign has_elfo = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Mayor,' -%}{%- assign has_mayor = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Deluxe,' -%}{%- assign has_deluxe = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Bruja,' -%}{%- assign has_bruja = true -%}{%- endif -%}
+
       <section class="du-portal-biblio" aria-label="Biblioteca de los Elegidos">
         <p class="du-portal-biblio__eyebrow">— Biblioteca de los Elegidos —</p>
         <h2 class="du-portal-biblio__title">Los 7 Libros canalizados</h2>
-        <p class="du-portal-biblio__lead">Cada libro abre como un grimorio. Animación real de pasaje de página, paleta propia por linaje, lectura íntima en cualquier dispositivo.</p>
+        <p class="du-portal-biblio__lead">Cada libro se abre solo en las manos de su Elegido. Adoptás un guardián, se desbloquea su linaje.</p>
 
         <div class="du-portal-biblio__grid">
 
-          <a class="du-portal-biblio__card du-portal-biblio__card--bible" href="/pages/libro-elemental">
-            <span class="du-portal-biblio__spine"></span>
-            <span class="du-portal-biblio__eyebrow-card">La Biblia</span>
-            <span class="du-portal-biblio__name">La Guía de los Duendes del Uruguay</span>
-            <span class="du-portal-biblio__meta">50 páginas · negro &amp; oro</span>
-            <span class="du-portal-biblio__cta">Abrir el libro →</span>
-          </a>
+          {%- comment -%} La Biblia: la abre quien tenga CUALQUIER duende o maestro {%- endcomment -%}
+          {%- if has_duende or has_mayor -%}
+            <a class="du-portal-biblio__card du-portal-biblio__card--bible" href="/pages/libro-elemental">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">La Biblia</span>
+              <span class="du-portal-biblio__name">La Guía de los Duendes del Uruguay</span>
+              <span class="du-portal-biblio__meta">50 páginas · negro &amp; oro</span>
+              <span class="du-portal-biblio__cta">Abrir el libro →</span>
+            </a>
+          {%- else -%}
+            <div class="du-portal-biblio__card du-portal-biblio__card--bible du-portal-biblio__card--locked" aria-disabled="true">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">La Biblia</span>
+              <span class="du-portal-biblio__name">La Guía de los Duendes del Uruguay</span>
+              <span class="du-portal-biblio__meta">Sellado · solo Elegidos del linaje</span>
+              <span class="du-portal-biblio__lock">🔒 Adoptá un Duende para abrirlo</span>
+            </div>
+          {%- endif -%}
 
-          <a class="du-portal-biblio__card du-portal-biblio__card--hadas" href="/pages/guia-hadas">
-            <span class="du-portal-biblio__spine"></span>
-            <span class="du-portal-biblio__eyebrow-card">Linaje del agua</span>
-            <span class="du-portal-biblio__name">La Guía de las Hadas</span>
-            <span class="du-portal-biblio__meta">50 páginas · rosa &amp; perla</span>
-            <span class="du-portal-biblio__cta">Abrir el libro →</span>
-          </a>
+          {%- if has_hada -%}
+            <a class="du-portal-biblio__card du-portal-biblio__card--hadas" href="/pages/guia-hadas">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Linaje del agua</span>
+              <span class="du-portal-biblio__name">La Guía de las Hadas</span>
+              <span class="du-portal-biblio__meta">50 páginas · rosa &amp; perla</span>
+              <span class="du-portal-biblio__cta">Abrir el libro →</span>
+            </a>
+          {%- else -%}
+            <div class="du-portal-biblio__card du-portal-biblio__card--hadas du-portal-biblio__card--locked" aria-disabled="true">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Linaje del agua</span>
+              <span class="du-portal-biblio__name">La Guía de las Hadas</span>
+              <span class="du-portal-biblio__meta">Sellado · solo Elegidos del linaje</span>
+              <span class="du-portal-biblio__lock">🔒 Adoptá una Hada para abrirlo</span>
+            </div>
+          {%- endif -%}
 
-          <a class="du-portal-biblio__card du-portal-biblio__card--pixies" href="/pages/guia-pixies">
-            <span class="du-portal-biblio__spine"></span>
-            <span class="du-portal-biblio__eyebrow-card">Linaje del aire</span>
-            <span class="du-portal-biblio__name">La Guía de las Pixies</span>
-            <span class="du-portal-biblio__meta">46 páginas · menta &amp; oro</span>
-            <span class="du-portal-biblio__cta">Abrir el libro →</span>
-          </a>
+          {%- if has_pixie -%}
+            <a class="du-portal-biblio__card du-portal-biblio__card--pixies" href="/pages/guia-pixies">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Linaje del aire</span>
+              <span class="du-portal-biblio__name">La Guía de las Pixies</span>
+              <span class="du-portal-biblio__meta">46 páginas · menta &amp; oro</span>
+              <span class="du-portal-biblio__cta">Abrir el libro →</span>
+            </a>
+          {%- else -%}
+            <div class="du-portal-biblio__card du-portal-biblio__card--pixies du-portal-biblio__card--locked" aria-disabled="true">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Linaje del aire</span>
+              <span class="du-portal-biblio__name">La Guía de las Pixies</span>
+              <span class="du-portal-biblio__meta">Sellado · solo Elegidos del linaje</span>
+              <span class="du-portal-biblio__lock">🔒 Adoptá una Pixie para abrirlo</span>
+            </div>
+          {%- endif -%}
 
-          <a class="du-portal-biblio__card du-portal-biblio__card--elfos" href="/pages/guia-elfos">
-            <span class="du-portal-biblio__spine"></span>
-            <span class="du-portal-biblio__eyebrow-card">Linaje vegetal</span>
-            <span class="du-portal-biblio__name">La Guía de los Elfos</span>
-            <span class="du-portal-biblio__meta">46 páginas · azul &amp; plata</span>
-            <span class="du-portal-biblio__cta">Abrir el libro →</span>
-          </a>
+          {%- if has_elfo -%}
+            <a class="du-portal-biblio__card du-portal-biblio__card--elfos" href="/pages/guia-elfos">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Linaje vegetal</span>
+              <span class="du-portal-biblio__name">La Guía de los Elfos</span>
+              <span class="du-portal-biblio__meta">46 páginas · azul &amp; plata</span>
+              <span class="du-portal-biblio__cta">Abrir el libro →</span>
+            </a>
+          {%- else -%}
+            <div class="du-portal-biblio__card du-portal-biblio__card--elfos du-portal-biblio__card--locked" aria-disabled="true">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Linaje vegetal</span>
+              <span class="du-portal-biblio__name">La Guía de los Elfos</span>
+              <span class="du-portal-biblio__meta">Sellado · solo Elegidos del linaje</span>
+              <span class="du-portal-biblio__lock">🔒 Adoptá un Elfo para abrirlo</span>
+            </div>
+          {%- endif -%}
 
-          <a class="du-portal-biblio__card du-portal-biblio__card--gigantes" href="/pages/guia-gigantes">
-            <span class="du-portal-biblio__spine"></span>
-            <span class="du-portal-biblio__eyebrow-card">Únicos · Irrepetibles</span>
-            <span class="du-portal-biblio__name">La Guía de los Maestros Gigantes</span>
-            <span class="du-portal-biblio__meta">46 páginas · bordó &amp; oro</span>
-            <span class="du-portal-biblio__cta">Abrir el libro →</span>
-          </a>
+          {%- if has_mayor -%}
+            <a class="du-portal-biblio__card du-portal-biblio__card--gigantes" href="/pages/guia-gigantes">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Únicos · Irrepetibles</span>
+              <span class="du-portal-biblio__name">La Guía de los Maestros Gigantes</span>
+              <span class="du-portal-biblio__meta">46 páginas · bordó &amp; oro</span>
+              <span class="du-portal-biblio__cta">Abrir el libro →</span>
+            </a>
+          {%- else -%}
+            <div class="du-portal-biblio__card du-portal-biblio__card--gigantes du-portal-biblio__card--locked" aria-disabled="true">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Únicos · Irrepetibles</span>
+              <span class="du-portal-biblio__name">La Guía de los Maestros Gigantes</span>
+              <span class="du-portal-biblio__meta">Sellado · solo Elegidos del linaje</span>
+              <span class="du-portal-biblio__lock">🔒 Adoptá un Maestro Gigante para abrirlo</span>
+            </div>
+          {%- endif -%}
 
-          <a class="du-portal-biblio__card du-portal-biblio__card--deluxe" href="/pages/guia-seres-deluxe">
-            <span class="du-portal-biblio__spine"></span>
-            <span class="du-portal-biblio__eyebrow-card">Ultra mágica</span>
-            <span class="du-portal-biblio__name">La Guía de los Seres Deluxe</span>
-            <span class="du-portal-biblio__meta">46 páginas · púrpura &amp; cobre</span>
-            <span class="du-portal-biblio__cta">Abrir el libro →</span>
-          </a>
+          {%- if has_deluxe -%}
+            <a class="du-portal-biblio__card du-portal-biblio__card--deluxe" href="/pages/guia-seres-deluxe">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Ultra mágica</span>
+              <span class="du-portal-biblio__name">La Guía de los Seres Deluxe</span>
+              <span class="du-portal-biblio__meta">46 páginas · púrpura &amp; cobre</span>
+              <span class="du-portal-biblio__cta">Abrir el libro →</span>
+            </a>
+          {%- else -%}
+            <div class="du-portal-biblio__card du-portal-biblio__card--deluxe du-portal-biblio__card--locked" aria-disabled="true">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Ultra mágica</span>
+              <span class="du-portal-biblio__name">La Guía de los Seres Deluxe</span>
+              <span class="du-portal-biblio__meta">Sellado · solo Elegidos del linaje</span>
+              <span class="du-portal-biblio__lock">🔒 Adoptá un Ser Deluxe para abrirlo</span>
+            </div>
+          {%- endif -%}
 
-          <a class="du-portal-biblio__card du-portal-biblio__card--bruja" href="/pages/guia-alma-de-bruja">
-            <span class="du-portal-biblio__spine"></span>
-            <span class="du-portal-biblio__eyebrow-card">Línea por venir</span>
-            <span class="du-portal-biblio__name">Alma de Bruja</span>
-            <span class="du-portal-biblio__meta">42 páginas · negro &amp; violeta</span>
-            <span class="du-portal-biblio__cta">Abrir el libro →</span>
-          </a>
+          {%- if has_bruja -%}
+            <a class="du-portal-biblio__card du-portal-biblio__card--bruja" href="/pages/guia-alma-de-bruja">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Línea por venir</span>
+              <span class="du-portal-biblio__name">Alma de Bruja</span>
+              <span class="du-portal-biblio__meta">42 páginas · negro &amp; violeta</span>
+              <span class="du-portal-biblio__cta">Abrir el libro →</span>
+            </a>
+          {%- else -%}
+            <div class="du-portal-biblio__card du-portal-biblio__card--bruja du-portal-biblio__card--locked" aria-disabled="true">
+              <span class="du-portal-biblio__spine"></span>
+              <span class="du-portal-biblio__eyebrow-card">Línea por venir</span>
+              <span class="du-portal-biblio__name">Alma de Bruja</span>
+              <span class="du-portal-biblio__meta">Sellado · solo Elegidos del linaje</span>
+              <span class="du-portal-biblio__lock">🔒 Adoptá una Bruja para abrirlo</span>
+            </div>
+          {%- endif -%}
 
         </div>
       </section>
@@ -177,6 +283,84 @@
           <div class="rte">{{ section.settings.block_meditaciones_body }}</div>
         </section>
       </div>
+
+      {%- comment -%}
+        Duendes 2026-05-17 — Bloques de contenido adicional Mi Magia
+        (para que el portal no se vea vacío)
+      {%- endcomment -%}
+
+      <section class="du-portal-luna">
+        <p class="du-portal-luna__eyebrow">— Calendario lunar —</p>
+        <h2 class="du-portal-luna__title">La luna y tu Guardián</h2>
+        <p class="du-portal-luna__lead">Tu Guardián se carga con la luna. Cada fase activa una intención distinta. Sincronizá tus rituales con el cielo.</p>
+        <div class="du-portal-luna__grid">
+          <div class="du-portal-luna__fase">
+            <span class="du-portal-luna__icon">🌑</span>
+            <h3>Luna Nueva</h3>
+            <p>Momento de sembrar. Pediles a tus Guardianes una intención clara — la que quieras que crezca en los próximos 28 días.</p>
+          </div>
+          <div class="du-portal-luna__fase">
+            <span class="du-portal-luna__icon">🌓</span>
+            <h3>Cuarto Creciente</h3>
+            <p>Energía de acción. Ponéles cristales arriba para que potencien lo que ya empezó a moverse en tu vida.</p>
+          </div>
+          <div class="du-portal-luna__fase">
+            <span class="du-portal-luna__icon">🌕</span>
+            <h3>Luna Llena</h3>
+            <p>Carga máxima. Dejá a tus Guardianes en la ventana toda la noche bajo la luna. Despiertan con toda la energía del ciclo.</p>
+          </div>
+          <div class="du-portal-luna__fase">
+            <span class="du-portal-luna__icon">🌗</span>
+            <h3>Cuarto Menguante</h3>
+            <p>Tiempo de soltar. Decíles qué querés dejar atrás. Ellos se llevan lo que ya cumplió su función.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="du-portal-cuidados">
+        <p class="du-portal-cuidados__eyebrow">— Cuidados esenciales —</p>
+        <h2 class="du-portal-cuidados__title">Cómo convivir con tu Guardián</h2>
+        <div class="du-portal-cuidados__grid">
+          <article>
+            <span class="du-portal-cuidados__num">01</span>
+            <h3>El primer día</h3>
+            <p>Abrí la caja en un momento de calma, no apurada. Sostené a tu Guardián con ambas manos. Cerrá los ojos. Respirá profundo tres veces. Decí su nombre en voz alta. Ese primer contacto es el más importante de todos.</p>
+          </article>
+          <article>
+            <span class="du-portal-cuidados__num">02</span>
+            <h3>Dónde ponerlo</h3>
+            <p>Lugar fijo, no de paso. Mesa de luz, escritorio, repisa con luz natural. Lejos de baños y cocinas. Cerca de un cristal si tenés. No lo escondas — necesita ver y ser visto.</p>
+          </article>
+          <article>
+            <span class="du-portal-cuidados__num">03</span>
+            <h3>Limpieza energética</h3>
+            <p>Cada luna llena, pasale una pluma o humo de palo santo. No lo mojes nunca. Si lo sentís cargado después de visitas pesadas, dejalo afuera 10 minutos.</p>
+          </article>
+          <article>
+            <span class="du-portal-cuidados__num">04</span>
+            <h3>Cuándo hablarle</h3>
+            <p>Antes de dormir, antes de decisiones importantes, en momentos densos. No necesita ritual largo — solo tu intención clara y tu voz. Lo demás lo hace él.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="du-portal-aniversario">
+        <p class="du-portal-aniversario__eyebrow">— Aniversario y ciclos —</p>
+        <h2>El día que llegó es sagrado</h2>
+        <p class="du-portal-aniversario__lead">Anotá la fecha en que adoptaste a tu Guardián. Cada año en ese día, hacé un ritual mínimo: una vela, una respiración, decirle gracias. El vínculo se renueva.</p>
+        <p class="du-portal-aniversario__hint">El día que llegó está en tu correo de confirmación de Shopify.</p>
+      </section>
+
+      <section class="du-portal-comunidad">
+        <p class="du-portal-comunidad__eyebrow">— Comunidad Elemental —</p>
+        <h2>No estás sola en esto</h2>
+        <p class="du-portal-comunidad__lead">Más de 15.000 Elegidos en 45 países ya recibieron a sus Guardianes. Compartimos experiencias, sueños y señales en nuestro blog y redes.</p>
+        <div class="du-portal-comunidad__links">
+          <a href="/blogs/comunidad-elemental">Leer historias →</a>
+          <a href="https://instagram.com/duendesdeluruguay" target="_blank" rel="noopener">Instagram</a>
+          <a href="/pages/test-del-guardian">Test del Guardián</a>
+        </div>
+      </section>
 
       {% if show_premium %}
         <section class="du-el-portal__premium">
@@ -550,6 +734,220 @@
     .du-portal-cartas__grid { grid-template-columns: 1fr; gap: 16px; }
     .du-portal-carta__name { font-size: 19px; }
     .du-portal-carta__letter { font-size: 15px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     Duendes 2026-05-17 — Card LOCKED (libro no adoptado aún)
+     ═══════════════════════════════════════════════════════════ */
+  .du-portal-biblio__card--locked {
+    position: relative;
+    cursor: not-allowed;
+    filter: grayscale(0.6) brightness(0.55);
+    transition: filter 0.4s ease;
+  }
+  .du-portal-biblio__card--locked:hover {
+    filter: grayscale(0.4) brightness(0.7);
+  }
+  .du-portal-biblio__card--locked::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .du-portal-biblio__lock {
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin-top: 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    font-weight: 500;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     Duendes 2026-05-17 — Nuevos bloques de contenido
+     Calendario lunar · Cuidados · Aniversario · Comunidad
+     ═══════════════════════════════════════════════════════════ */
+  .du-portal-luna,
+  .du-portal-cuidados,
+  .du-portal-aniversario,
+  .du-portal-comunidad {
+    margin: 48px 0;
+    padding: 32px 24px;
+    background: linear-gradient(180deg, #faf7ed 0%, #f5f0e1 100%);
+    border-radius: 18px;
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+  .du-portal-luna__eyebrow,
+  .du-portal-cuidados__eyebrow,
+  .du-portal-aniversario__eyebrow,
+  .du-portal-comunidad__eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: #c9a96e;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 10px;
+  }
+  .du-portal-luna__title,
+  .du-portal-cuidados__title,
+  .du-portal-aniversario h2,
+  .du-portal-comunidad h2 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: clamp(24px, 3vw, 32px);
+    color: #15110d;
+    text-align: center;
+    margin: 0 0 12px;
+  }
+  .du-portal-luna__lead,
+  .du-portal-cuidados__lead,
+  .du-portal-aniversario__lead,
+  .du-portal-comunidad__lead {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #6b5d4f;
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto 28px;
+    line-height: 1.55;
+  }
+
+  /* Calendario lunar */
+  .du-portal-luna__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .du-portal-luna__fase {
+    background: white;
+    border: 1px solid rgba(201,169,110,0.18);
+    border-radius: 12px;
+    padding: 22px 18px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .du-portal-luna__fase:hover {
+    border-color: rgba(201,169,110,0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px -8px rgba(201,169,110,0.3);
+  }
+  .du-portal-luna__icon {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .du-portal-luna__fase h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #15110d;
+    margin: 0 0 8px;
+    letter-spacing: 0.04em;
+  }
+  .du-portal-luna__fase p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 14px;
+    color: #6b5d4f;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Cuidados */
+  .du-portal-cuidados__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    margin-top: 24px;
+  }
+  .du-portal-cuidados__grid article {
+    background: white;
+    border: 1px solid rgba(201,169,110,0.18);
+    border-radius: 12px;
+    padding: 24px 22px;
+    position: relative;
+  }
+  .du-portal-cuidados__num {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: #c9a96e;
+    font-weight: 600;
+  }
+  .du-portal-cuidados__grid article h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: #15110d;
+    margin: 6px 0 10px;
+    letter-spacing: 0.02em;
+  }
+  .du-portal-cuidados__grid article p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4a4035;
+    margin: 0;
+  }
+
+  /* Aniversario */
+  .du-portal-aniversario {
+    text-align: center;
+  }
+  .du-portal-aniversario__hint {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #8a7657;
+    margin: 12px 0 0;
+  }
+
+  /* Comunidad */
+  .du-portal-comunidad {
+    text-align: center;
+  }
+  .du-portal-comunidad__links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 18px;
+  }
+  .du-portal-comunidad__links a {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #15110d;
+    border-bottom: 1px solid rgba(201,169,110,0.4);
+    padding: 4px 2px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+  .du-portal-comunidad__links a:hover {
+    color: #c9a96e;
+    border-bottom-color: #c9a96e;
+  }
+
+  @media (max-width: 600px) {
+    .du-portal-luna, .du-portal-cuidados, .du-portal-aniversario, .du-portal-comunidad {
+      margin: 32px 0;
+      padding: 24px 18px;
+    }
+    .du-portal-luna__grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .du-portal-luna__fase { padding: 18px 12px; }
+    .du-portal-luna__fase h3 { font-size: 13px; }
+    .du-portal-luna__fase p { font-size: 13px; }
+    .du-portal-cuidados__grid { grid-template-columns: 1fr; }
+    .du-portal-comunidad__links { gap: 14px; font-size: 11px; }
   }
 {% endstylesheet %}
 

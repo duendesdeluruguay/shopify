@@ -95,6 +95,7 @@
   #book {
     box-shadow: 0 32px 100px rgba(0,0,0,0.85), 0 0 0 8px rgba(20,28,46,0.7), 0 0 0 9px var(--gold-dark), 0 0 80px rgba(168,184,212,0.10);
     border-radius: 4px;
+    touch-action: pan-y;
   }
   .page { background: var(--cream); color: var(--brown-deep); overflow: hidden; }
   .page-inner { padding: 36px 32px 26px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; text-align: center; }
@@ -253,10 +254,165 @@
     .otra-especie-card .otra-foto { width: 100px; height: 100px; }
     .otra-especie-card .otra-nombre { font-size: 28px; }
   }
+
+  /* === Fix de tamaños · header + títulos in-libro === */
+  .libro-header h1 { font-size: clamp(28px, 4.2vw, 48px) !important; line-height: 1 !important; margin: 0 0 6px !important; }
+  .libro-header .eyebrow { font-size: 10px !important; letter-spacing: 0.4em !important; margin-bottom: 8px !important; }
+  .libro-header .sub { font-size: 9px !important; letter-spacing: 0.4em !important; }
+  .libro-header { margin: 0 auto 14px !important; }
+  .page h2 { font-size: 30px !important; line-height: 1 !important; margin: 0 auto 10px !important; }
+  .page.cover h1 { font-size: clamp(32px, 5vw, 46px) !important; line-height: 1 !important; margin: 6px 0 8px !important; }
+  .page .cita { font-size: 30px !important; padding: 10px !important; }
+  .page.dark .cita { font-size: 34px !important; }
+  .ser-card .ser-nombre { font-size: 24px !important; }
+  .page h3 { margin: 8px 0 6px !important; }
+  @media (max-width: 768px) {
+    .libro-header h1 { font-size: clamp(22px, 5.5vw, 32px) !important; }
+    .libro-header .eyebrow, .libro-header .sub { font-size: 8.5px !important; letter-spacing: 0.35em !important; }
+    .page h2 { font-size: 22px !important; }
+    .page.cover h1 { font-size: clamp(26px, 6vw, 34px) !important; }
+    .page .cita { font-size: 22px !important; }
+    .page.dark .cita { font-size: 26px !important; }
+    .page-inner { padding: 18px 14px 18px !important; gap: 4px !important; }
+    .ser-card { padding: 10px 12px !important; }
+    .ser-card .ser-nombre { font-size: 20px !important; }
+    .ser-card .ser-detalle { font-size: 11.5px !important; }
+  }
+
+
+  /* === Premium pass · Cinzel + fotos enteras + centrado === */
+  .libro-wrap {
+    --font-info: "Cinzel", "Cormorant Garamond", serif !important;
+  }
+  /* Cinzel para el cuerpo (más legible con un poco de tracking y line-height) */
+  .libro-wrap .page p,
+  .libro-wrap .lang-box p,
+  .libro-wrap .indice,
+  .libro-wrap .consejo-card p,
+  .libro-wrap .elemento-cell .quien,
+  .libro-wrap .elemento-cell .funcion,
+  .libro-wrap .dia-item .desc,
+  .libro-wrap .compendio-row .uso,
+  .libro-wrap .faq .respuesta,
+  .libro-wrap .ser-card .ser-detalle,
+  .libro-wrap .cta-final-btn .cta-text {
+    font-family: "Cinzel", serif !important;
+    letter-spacing: 0.03em !important;
+    line-height: 1.55 !important;
+  }
+  /* Citas y títulos de página SIGUEN en Great Vibes (script) */
+  .libro-wrap .page h2,
+  .libro-wrap .page .cita,
+  .libro-wrap .page.cover h1,
+  .libro-wrap .libro-header h1,
+  .libro-wrap .lang-box h2,
+  .libro-wrap .ser-card .ser-nombre,
+  .libro-wrap .page .ser-nombre { font-family: "Great Vibes", cursive !important; }
+
+  /* Centrado + prolijidad */
+  .libro-wrap .page-inner { align-items: center !important; justify-content: center !important; text-align: center !important; }
+  .libro-wrap .page p { margin-left: auto !important; margin-right: auto !important; }
+  .libro-wrap .indice { text-align: center !important; }
+  .libro-wrap .indice-item { justify-content: center !important; }
+
+  /* Fotos · enteras, sin recortar (object-fit: contain) con frame adaptado */
+  .libro-wrap .foto-circle,
+  .libro-wrap .foto-rounded,
+  .libro-wrap .foto-arch {
+    background: linear-gradient(180deg, rgba(245,240,225,0.65) 0%, rgba(232,220,195,0.5) 100%) !important;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(201,169,97,0.35) !important;
+    padding: 6px !important;
+    box-sizing: border-box !important;
+  }
+  .libro-wrap .foto-circle img,
+  .libro-wrap .foto-rounded img,
+  .libro-wrap .foto-arch img {
+    object-fit: contain !important;
+    border-radius: inherit;
+  }
+  .libro-wrap .foto-rounded { width: 220px !important; height: 160px !important; border-radius: 12px !important; }
+  .libro-wrap .foto-circle { width: 150px !important; height: 150px !important; }
+  .libro-wrap .foto-arch { width: 150px !important; height: 200px !important; }
+
+  /* Quitar symbol-row de bullets/dots que se ven cheap; dejar SVG ornaments */
+  .libro-wrap .page .symbol-row { letter-spacing: 0.4em !important; opacity: 0.65 !important; font-size: 9px !important; }
+
+  /* Tweaks de centrado para card y caption */
+  .libro-wrap .foto-caption { text-align: center !important; margin: 8px auto 0 !important; font-family: "Cinzel", serif !important; }
+  .libro-wrap .ser-card { text-align: center !important; margin-left: auto !important; margin-right: auto !important; }
+
+  @media (max-width: 768px) {
+    .libro-wrap .foto-rounded { width: 200px !important; height: 140px !important; }
+    .libro-wrap .foto-circle { width: 130px !important; height: 130px !important; }
+    .libro-wrap .foto-arch { width: 130px !important; height: 170px !important; }
+  }
+
+  /* === Buscador integrado · arriba del libro === */
+  .libro-wrap .libro-buscador { max-width: 480px; margin: 0 auto 16px; display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(8,12,20,0.62); border: 0.5px solid rgba(168,184,212,0.42); border-radius: 999px; position: relative; backdrop-filter: blur(6px); }
+  .libro-wrap .libro-buscador__icon { color: var(--gold); flex-shrink: 0; opacity: 0.9; }
+  .libro-wrap .libro-buscador input { flex: 1; background: transparent; border: 0; outline: 0; color: var(--cream); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 14px; font-style: italic; padding: 4px 0; min-width: 0; }
+  .libro-wrap .libro-buscador input::placeholder { color: rgba(245,240,225,0.5); font-style: italic; }
+  .libro-wrap .libro-buscador button { background: var(--gold); color: var(--black-deep); border: 0; padding: 6px 16px; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; cursor: pointer; border-radius: 999px; transition: opacity 0.2s; }
+  .libro-wrap .libro-buscador button:hover { opacity: 0.85; }
+  .libro-wrap .libro-buscador ul#libro-search-results { position: absolute; top: 48px; left: 0; right: 0; background: #07101a; border: 0.5px solid rgba(168,184,212,0.4); border-radius: 6px; padding: 6px 0; margin: 0; list-style: none; max-height: 280px; overflow-y: auto; z-index: 50; box-shadow: 0 12px 36px rgba(0,0,0,0.55); }
+  .libro-wrap .libro-buscador ul li { padding: 8px 14px; font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--cream); cursor: pointer; border-bottom: 0.5px solid rgba(168,184,212,0.15); transition: background 0.15s; }
+  .libro-wrap .libro-buscador ul li:last-child { border-bottom: 0; }
+  .libro-wrap .libro-buscador ul li:hover { background: rgba(168,184,212,0.14); }
+  .libro-wrap .libro-buscador ul li .lbsr-page { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--gold-bright); margin-right: 10px; }
+  .libro-wrap .libro-buscador ul li .lbsr-snippet { color: rgba(245,240,225,0.7); font-size: 12px; display: block; margin-top: 2px; font-style: italic; }
+  .libro-wrap .libro-buscador ul li mark { background: rgba(168,184,212,0.4); color: var(--cream); padding: 0 2px; border-radius: 2px; }
+  @media (max-width: 768px) {
+    .libro-wrap .libro-buscador { margin: 0 8px 12px; padding: 6px 12px; }
+    .libro-wrap .libro-buscador input { font-size: 13px; }
+    .libro-wrap .libro-buscador button { padding: 5px 12px; font-size: 8.5px; }
+  }
+
+  /* === Auroras élficas · luces sutiles azul + plata === */
+  .auroras-elfos { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; mix-blend-mode: screen; }
+  .auroras-elfos .luz {
+    position: absolute; width: 720px; height: 720px; border-radius: 50%;
+    filter: blur(140px); opacity: 0; will-change: opacity, transform;
+    animation: auroraElfica 26s ease-in-out infinite;
+  }
+  .auroras-elfos .luz-indigo {
+    background: radial-gradient(circle at 50% 50%, rgba(74,90,122,0.55) 0%, rgba(74,90,122,0.22) 35%, transparent 70%);
+    top: -160px; left: -120px; animation-delay: 0s;
+  }
+  .auroras-elfos .luz-plata {
+    background: radial-gradient(circle at 50% 50%, rgba(184,196,208,0.50) 0%, rgba(184,196,208,0.20) 35%, transparent 70%);
+    top: 12%; right: -180px; animation-delay: 6s; width: 680px; height: 680px;
+  }
+  .auroras-elfos .luz-oro-frio {
+    background: radial-gradient(circle at 50% 50%, rgba(201,169,97,0.40) 0%, rgba(201,169,97,0.16) 35%, transparent 70%);
+    bottom: -180px; right: 22%; animation-delay: 11s;
+  }
+  .auroras-elfos .luz-noche {
+    background: radial-gradient(circle at 50% 50%, rgba(40,55,90,0.55) 0%, rgba(40,55,90,0.22) 35%, transparent 70%);
+    bottom: 5%; left: -160px; animation-delay: 16s; width: 760px; height: 760px;
+  }
+  @keyframes auroraElfica {
+    0%   { opacity: 0;    transform: scale(0.85) translate(0, 0); }
+    20%  { opacity: 0.42; transform: scale(1)    translate(40px, -30px); }
+    50%  { opacity: 0.55; transform: scale(1.12) translate(-50px, 60px); }
+    82%  { opacity: 0.30; transform: scale(1.18) translate(30px, -20px); }
+    100% { opacity: 0;    transform: scale(1.25) translate(0, 0); }
+  }
+  @media (max-width: 768px) {
+    .auroras-elfos .luz { width: 440px; height: 440px; filter: blur(90px); }
+    .auroras-elfos .luz-plata, .auroras-elfos .luz-noche { width: 380px; height: 380px; }
+  }
+
+  /* Overflow scroll suave dentro de cada .page si el contenido rebasa */
+  .libro-wrap .page { overflow-y: auto !important; overflow-x: hidden !important; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(168,184,212,0.4) transparent; }
+  .libro-wrap .page::-webkit-scrollbar { width: 4px; }
+  .libro-wrap .page::-webkit-scrollbar-thumb { background: rgba(168,184,212,0.4); border-radius: 2px; }
+  .libro-wrap .page.cover { overflow: hidden !important; }
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
+    <symbol id="r-triskele" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M50 50 Q50 30, 65 30 Q80 30, 80 45 Q80 55, 70 55"/><path d="M50 50 Q35 60, 35 75 Q40 85, 55 80 Q60 75, 58 70"/><path d="M50 50 Q35 35, 20 40 Q15 50, 25 60 Q35 65, 40 60"/><circle cx="50" cy="50" r="2.5" fill="currentColor"/></g></symbol>
     <symbol id="r-triqueta" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M50 18 Q70 38, 75 60 Q60 75, 50 60 Q40 75, 25 60 Q30 38, 50 18 Z"/></g></symbol>
     <symbol id="r-awen" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="35" y1="30" x2="50" y2="75"/><line x1="50" y1="22" x2="50" y2="78"/><line x1="65" y1="30" x2="50" y2="75"/><circle cx="35" cy="28" r="2.5" fill="currentColor"/><circle cx="50" cy="20" r="2.5" fill="currentColor"/><circle cx="65" cy="28" r="2.5" fill="currentColor"/></g></symbol>
     <symbol id="r-knot" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M30 50 C30 30, 70 30, 70 50 C70 70, 30 70, 30 50 Z"/><path d="M50 30 C30 30, 30 70, 50 70 C70 70, 70 30, 50 30 Z"/></g></symbol>
@@ -269,6 +425,13 @@
 </svg>
 
 <div class="libro-wrap">
+
+  <div class="auroras-elfos" aria-hidden="true">
+    <span class="luz luz-indigo"></span>
+    <span class="luz luz-plata"></span>
+    <span class="luz luz-oro-frio"></span>
+    <span class="luz luz-noche"></span>
+  </div>
 
   <div class="lang-overlay" id="lang-overlay">
     <div class="lang-box">
@@ -288,6 +451,13 @@
     <h1>La Guía de los Elfos</h1>
     <p class="sub">Sub-especies · Cuidados · Saber · Vínculo</p>
   </header>
+
+  <div class="libro-buscador" role="search">
+    <svg class="libro-buscador__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+    <input id="libro-search-input" type="search" placeholder="Buscar en la guía · Iker, lapislázuli, sueños, decisión…" autocomplete="off">
+    <button id="libro-search-btn" type="button">Ir</button>
+    <ul id="libro-search-results" hidden></ul>
+  </div>
 
   <div class="flipbook-container">
     <div id="book">
@@ -349,6 +519,17 @@
           <div class="indice-item"><span class="num">13</span><span class="name">Aniversario y comunidad</span><span class="dots"></span><span class="pg">43</span></div>
         </div>
         <div class="page-number">04</div>
+      </div></div>
+
+      <div class="page deep-indigo"><div class="page-inner center-content">
+        <p class="eyebrow">Antes de empezar</p>
+        <h2 style="color:var(--cream);">Cómo leer esta guía</h2>
+        <p>No tiene que leerse de un tirón. Tiene que <strong>visitarse</strong>. Abrí por donde se abra, leé dos páginas, cerrala. Volvé mañana, abrí en otro lado.</p>
+        <p>El linaje del saber se transmite así — no de corrido sino en sentadas cortas, separadas por días en los que la cabeza acomoda.</p>
+        <p>Si tenés un elfo cerca mientras leés, mejor todavía. La guía y él trabajan en par.</p>
+        <p class="lead">Apurate poco. Acá adentro, el tiempo se mide distinto.</p>
+        <svg class="ornament dark small"><use href="#r-book"/></svg>
+        <div class="page-number">05</div>
       </div></div>
 
       <div class="page deep-indigo"><div class="page-inner center-content">
@@ -511,6 +692,17 @@
         <div class="page-number">18</div>
       </div></div>
 
+      <div class="page indigo"><div class="page-inner">
+        <p class="eyebrow">05 · La energía propia</p>
+        <h2>Alta vibración</h2>
+        <p>Los elfos no son cálidos como las hadas ni traviesos como las pixies. Su energía es <strong>noble, vertical, élfica</strong>: cabeza alta, columna larga, mirada lejana. Cuando uno entra a la casa, la gente que es sensible siente que <em>el techo subió un par de centímetros</em>.</p>
+        <p>Eso se llama, en el oficio, <strong>alta vibración</strong>. No quiere decir mejor — quiere decir distinta. Una vibración que pide que vos también te endereces, que no apoyes los codos en la mesa cuando estás cerca, que mires al horizonte cuando hablás.</p>
+        <p class="lead">No tenés que volverte solemne. Solo notar cuándo bajaste el cuerpo y volver a subirlo.</p>
+        <svg class="ornament small indigo-acc"><use href="#r-triskele"/></svg>
+        <span class="neuro-tag">✦ Postura como invocación</span>
+        <div class="page-number">19</div>
+      </div></div>
+
       <div class="page"><div class="page-inner">
         <p class="eyebrow">06 · El linaje</p>
         <h2>Origen del linaje</h2>
@@ -518,6 +710,21 @@
         <p>Lo que comparten todas las versiones: <strong>los elfos habitan donde el tiempo se detiene</strong>. Bibliotecas viejas, bosques que crecen sin apuro, lugares donde uno se sienta a pensar. Por eso son sanadores de lo intelectual y lo decisivo — viven donde la prisa no llega.</p>
         <p class="lead" style="margin-top:8px;">Tu elfo es heredero de todas esas líneas, traducido al hilo y al material por nuestras manos.</p>
         <div class="page-number">19</div>
+      </div></div>
+
+      <div class="page deep-indigo"><div class="page-inner">
+        <p class="eyebrow">06 · Tradiciones que confluyen</p>
+        <h2 style="font-size:32px;">De dónde vienen</h2>
+        <p>El elfo que vos vas a tener en casa es <strong>traducción</strong>. No es nórdico ni celta ni tolkiniano puro — es la confluencia que hicimos nosotros, en este estudio de Piriápolis, juntando hilos de cuatro tradiciones.</p>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Nórdica</span><span class="uso">Álfar luminosos · habitantes de Álfheim · custodios del saber escrito.</span></div>
+          <div class="compendio-row"><span class="nombre">Celta</span><span class="uso">Sidhe · pueblo de los túmulos · saber que pasa de boca en boca.</span></div>
+          <div class="compendio-row"><span class="nombre">Germánica</span><span class="uso">Alben · espíritus de los bosques viejos · paciencia milenaria.</span></div>
+          <div class="compendio-row"><span class="nombre">Tolkien</span><span class="uso">Quendi · primer pueblo despierto · cuerpo alto, ojo claro, idioma musical.</span></div>
+          <div class="compendio-row"><span class="nombre">Rioplatense</span><span class="uso">Lo que aportamos nosotros: el silencio del Río, la luz del invierno largo, la dignidad sin pompa.</span></div>
+        </div>
+        <p class="lead" style="margin-top:8px;">Tu elfo lleva todo eso en muy poco material.</p>
+        <div class="page-number">20</div>
       </div></div>
 
       <div class="page indigo"><div class="page-inner">
@@ -618,6 +825,44 @@
         <div class="page-number">26</div>
       </div></div>
 
+      <div class="page indigo"><div class="page-inner">
+        <p class="eyebrow">08 · Cuatro firmas del estudio</p>
+        <h2 style="font-size:32px;">Elfos canalizados</h2>
+        <p style="font-size:12.5px;">Cada elfo tiene un nombre propio cuando sale del estudio. Estas son cuatro firmas de los últimos meses — para que veas que ninguno se parece al otro.</p>
+        <div class="ser-card">
+          <p class="ser-nombre">Iker</p>
+          <p class="ser-energia">Luna · soñador · plata</p>
+          <p class="ser-detalle">Alto, esbelto, casi quieto. Mira sin parpadear. Llegó para una mujer que estaba por empezar una terapia onírica. La acompañó tres noches seguidas con sueños largos.</p>
+          <div class="ser-meta"><span>Cristal · Piedra luna</span><span>Metal · Plata</span><span>Hora · Medianoche</span></div>
+        </div>
+        <div class="ser-card">
+          <p class="ser-nombre">Liam</p>
+          <p class="ser-energia">Camino · abrecaminos · lapislázuli</p>
+          <p class="ser-detalle">Erguido, manto largo, vara fina en la mano izquierda. Llegó para alguien que tenía que renunciar a un trabajo y no se animaba. A la tercera semana, la decisión estaba tomada con paz.</p>
+          <div class="ser-meta"><span>Cristal · Lapislázuli</span><span>Hierba · Romero</span><span>Ubicación · Entrada</span></div>
+        </div>
+        <div class="page-number">27</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">08 · Cuatro firmas del estudio</p>
+        <h2 style="font-size:32px;">Axel · Aidan</h2>
+        <div class="ser-card">
+          <p class="ser-nombre">Axel</p>
+          <p class="ser-energia">Bosque · raíz · sabiduría ancestral</p>
+          <p class="ser-detalle">Mirada larga, postura recta, manos cruzadas sobre el pecho. Llegó para un hombre que estaba aprendiendo el oficio de su abuelo carpintero. Le custodió la transmisión hasta que la herramienta volvió a obedecer.</p>
+          <div class="ser-meta"><span>Cristal · Aventurina verde</span><span>Hierba · Salvia</span><span>Ubicación · Biblioteca</span></div>
+        </div>
+        <div class="ser-card">
+          <p class="ser-nombre">Aidan</p>
+          <p class="ser-energia">Libro · alta vibración · amatista</p>
+          <p class="ser-detalle">Más joven, mirada despierta, cabello atado. Llegó para una estudiante de doctorado en su último año de tesis. Sostuvo el clima mental cuando el cuerpo ya no daba más.</p>
+          <div class="ser-meta"><span>Cristal · Amatista</span><span>Hierba · Eucalipto</span><span>Ubicación · Escritorio</span></div>
+        </div>
+        <p class="lead">Si tu elfo todavía no tiene nombre canalizado, podemos hacerlo: <a href="/products/canalizacion-almica" style="color:var(--indigo-deep); text-decoration:underline;">Canalización Álmica</a>.</p>
+        <div class="page-number">28</div>
+      </div></div>
+
       <div class="page"><div class="page-inner">
         <p class="eyebrow">09 · Cuidarlo</p>
         <h2>Cuidados de un elfo</h2>
@@ -664,6 +909,30 @@
         <div class="page-number">29</div>
       </div></div>
 
+      <div class="page indigo"><div class="page-inner">
+        <p class="eyebrow">09 · El vínculo específico</p>
+        <h2>Abrecaminos silencioso</h2>
+        <p>Hay una palabra vieja que se usa con los elfos: <strong>abrecaminos</strong>. No abre puertas a los gritos — abre el camino quitando piedras que ni vos sabías que estaban.</p>
+        <p>El vínculo con un elfo se construye en negativo: notás lo que <em>dejó de molestar</em>, lo que <em>dejó de costar tanto</em>, lo que <em>dejó de pesar en la cabeza al despertar</em>. Esa es su firma. Si pasa un mes y mirás atrás y te das cuenta de que tres asuntos chicos se acomodaron sin que vos los empujaras — fue él.</p>
+        <p class="lead">El elfo no resuelve. Despeja. Vos seguís caminando.</p>
+        <svg class="ornament small indigo-acc"><use href="#r-arrow"/></svg>
+        <span class="neuro-tag">✦ Sabiduría ancestral en bajo volumen</span>
+        <div class="page-number">28</div>
+      </div></div>
+
+      <div class="page deep-indigo"><div class="page-inner">
+        <p class="eyebrow">09 · Ritual del amanecer</p>
+        <h2 style="font-size:36px;">Cinco minutos al alba</h2>
+        <p>Si solo podés hacer un ritual con tu elfo en toda la semana, hacé este. Es el favorito del linaje.</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">ANTES DEL CELULAR</span><p class="desc">Apenas te despertás, antes de tocar pantalla, sentate frente a él dos minutos. Sin pedir nada.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">UNA PREGUNTA AL DÍA</span><p class="desc">"¿Qué necesito ver hoy?" en voz baja. Una sola pregunta. No esperes respuesta en palabras — esperala en señales del día.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">UN GESTO</span><p class="desc">Tocá tu frente con la mano derecha. Es el saludo del linaje. Los elfos lo reconocen.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">SALIDA</span><p class="desc">Salí de la habitación sin mirarlo dos veces. La despedida silenciosa es respeto, no abandono.</p></div>
+        <p class="lead" style="margin-top:8px;">Quien hace este ritual 21 días seguidos cuenta que las decisiones del mes se vuelven sorprendentemente claras.</p>
+        <svg class="ornament dark small"><use href="#r-awen"/></svg>
+        <div class="page-number">29</div>
+      </div></div>
+
       <div class="page deep-indigo"><div class="page-inner">
         <p class="eyebrow">09 · Tiempos del estudio</p>
         <h2 style="font-size:36px;">Tiempo y silencio</h2>
@@ -675,6 +944,87 @@
         <p class="lead" style="margin-top:8px;">En equinoccios y solsticios, dejalo cerca de una ventana al amanecer. Le renueva todo.</p>
         <svg class="ornament dark small"><use href="#r-moon"/></svg>
         <div class="page-number">30</div>
+      </div></div>
+
+      <div class="page indigo"><div class="page-inner">
+        <p class="eyebrow">09 · Materiales sagrados</p>
+        <h2 style="font-size:34px;">Plata · cristal de roca</h2>
+        <p>Hay dos materiales que el linaje del saber pide específicamente. Si los podés tener cerca de tu elfo, mejor.</p>
+        <div class="consejo-card indigo">
+          <p class="titulo">Plata</p>
+          <p>El metal del linaje. Un anillo viejo, una cadenita, una cucharita de la abuela. Apoyada al lado del elfo (no encima) durante una luna llena, le devuelve nitidez.</p>
+        </div>
+        <div class="consejo-card indigo">
+          <p class="titulo">Cristal de roca</p>
+          <p>Cuarzo blanco transparente. Es el amplificador universal del linaje. Una punta de cristal de roca a 10 cm del elfo multiplica todo lo que él trae.</p>
+        </div>
+        <div class="consejo-card silver">
+          <p class="titulo">Amatista (segunda elección)</p>
+          <p>Para los Elfos del Libro y para épocas de mucho ruido mental. Limpia la cabeza alrededor del elfo. Cambialo cada 3 meses.</p>
+        </div>
+        <p class="lead">Nunca acumules: dos materiales bien elegidos pesan más que diez sin razón.</p>
+        <div class="page-number">31</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">09 · Equinoccios y solsticios</p>
+        <h2 style="font-size:32px;">Las cuatro puertas</h2>
+        <p>Los elfos guardan las cuatro puertas del año. En estas fechas, hacé algo simple con él — un acto chiquito basta.</p>
+        <div class="dia-item"><span class="num">21 SEP</span> · <span class="titulo">EQUINOCCIO DE PRIMAVERA (HEM. SUR)</span><p class="desc">Una rama verde al lado del elfo durante tres días. Pedido: "que florezca lo que esté esperando".</p></div>
+        <div class="dia-item"><span class="num">21 DIC</span> · <span class="titulo">SOLSTICIO DE VERANO</span><p class="desc">Encendé una vela al mediodía cerca de él. Es el día más luminoso — los elfos toman luz.</p></div>
+        <div class="dia-item"><span class="num">21 MAR</span> · <span class="titulo">EQUINOCCIO DE OTOÑO</span><p class="desc">Una hoja seca al lado. Pedido: "lo que ya no sirve, que se desprenda en paz".</p></div>
+        <div class="dia-item"><span class="num">21 JUN</span> · <span class="titulo">SOLSTICIO DE INVIERNO</span><p class="desc">La noche más larga. Dejá el elfo cerca de la ventana toda la noche. Al amanecer, te trae algo del sueño profundo de la tierra.</p></div>
+        <p class="lead" style="margin-top:8px;">Si te olvidás de una fecha, no pasa nada. El año vuelve.</p>
+        <div class="page-number">32</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">09 · Errores comunes</p>
+        <h2 style="font-size:34px;">Errores chiquitos</h2>
+        <p>Cinco cosas que la gente hace sin querer y bajan el vínculo con su elfo. Si te ves en alguna, no te preocupes — se corrige enseguida.</p>
+        <div class="faq">
+          <p class="pregunta">"Le hablo todo el día"</p>
+          <p class="respuesta">Los elfos no son charla. Tres frases al día alcanza. El resto del tiempo: presencia silenciosa.</p>
+        </div>
+        <div class="faq">
+          <p class="pregunta">"Lo tengo en la cocina porque ahí paso mucho tiempo"</p>
+          <p class="respuesta">Aire de cocción + olores fuertes los apagan. Mejor en una repisa cercana pero no encima del fuego.</p>
+        </div>
+        <div class="faq">
+          <p class="pregunta">"Lo paseo por toda la casa"</p>
+          <p class="respuesta">Los elfos quieren un lugar fijo. Si lo movés muy seguido se queda confundido. Una vez al mes basta.</p>
+        </div>
+        <div class="faq">
+          <p class="pregunta">"Le pido cosas concretas"</p>
+          <p class="respuesta">No es un Genio. Los elfos responden a preguntas, no a pedidos. "¿Qué tengo que ver?" funciona. "Conseguime trabajo" no.</p>
+        </div>
+        <div class="faq">
+          <p class="pregunta">"Me olvidé del aniversario"</p>
+          <p class="respuesta">Hacelo cuando te acordás. Los elfos son los más tolerantes con el tiempo — pero les gusta saber que vos te acordás de la fecha aunque la ofrendes tarde.</p>
+        </div>
+        <div class="page-number">33</div>
+      </div></div>
+
+      <div class="page indigo"><div class="page-inner">
+        <p class="eyebrow">11 · Voces de la comunidad</p>
+        <h2 style="font-size:34px;">Lo que cuentan</h2>
+        <p style="font-size:12.5px;">Fragmentos reales de mensajes que nos llegaron desde que hay elfos en la calle. Los publicamos con permiso, cambiando nombres.</p>
+        <div class="ser-card">
+          <p class="ser-energia">Mariana · Montevideo</p>
+          <p class="ser-detalle"><em>"A los doce días con Iker tomé la decisión que tenía pateada dos años. No supe que era él hasta que mi pareja dijo 'desde que está esa figurita estás distinta'. Le di la razón."</em></p>
+        </div>
+        <div class="ser-card">
+          <p class="ser-nombre" style="font-size:20px;">Pedro · Buenos Aires</p>
+          <p class="ser-energia">Estudiante de literatura</p>
+          <p class="ser-detalle"><em>"Aidan está al lado de mi pila de libros. Hay días que no escribo y lo miro pidiendo perdón. Hay otros en los que escribo siete páginas y le agradezco. Pasaron seis meses así. La tesis está casi terminada."</em></p>
+        </div>
+        <div class="ser-card">
+          <p class="ser-nombre" style="font-size:20px;">Lucila · Piriápolis</p>
+          <p class="ser-energia">Madre, 47</p>
+          <p class="ser-detalle"><em>"Axel me llegó cuando mi vieja entró a la última etapa. La acompañé hasta el final sin perder el eje. Sigo creyendo que es porque tenía un elfo del Bosque al lado mientras todo eso pasaba."</em></p>
+        </div>
+        <p class="lead" style="margin-top:8px;">Si querés sumar tu historia, escribinos: info@duendesdeluruguay.com</p>
+        <div class="page-number">34</div>
       </div></div>
 
       <div class="page deep-indigo"><div class="page-inner">
@@ -813,6 +1163,38 @@
       </div></div>
 
       <div class="page"><div class="page-inner">
+        <p class="eyebrow">12 · Regalar un elfo</p>
+        <h2>Regalar el linaje</h2>
+        <p>Un elfo es uno de los regalos más serios que podés hacer. No para todo el mundo. Antes de regalarlo, preguntate:</p>
+        <div class="faq">
+          <p class="pregunta">¿La persona está en una etapa de pregunta grande?</p>
+          <p class="respuesta">Si la respuesta es sí — estudio, decisión, cambio de vida, duelo elaborado — el elfo va a llegar bien. Si no, esperá una mejor oportunidad.</p>
+        </div>
+        <div class="faq">
+          <p class="pregunta">¿Tiene un espacio propio donde ponerlo?</p>
+          <p class="respuesta">Los elfos no van en repisa común de adornos. Necesitan un lugar elegido. Si la persona vive con poco espacio o muy compartido, mejor regalá otra cosa.</p>
+        </div>
+        <div class="faq">
+          <p class="pregunta">¿Vas a poder contarle qué es?</p>
+          <p class="respuesta">Si la persona no entiende qué es lo que recibió, el elfo se queda esperando. Si vos podés sentarte 10 min y contarle el linaje, el regalo se completa.</p>
+        </div>
+        <p class="lead">Si tres veces dijiste sí, regalalo con confianza. Si tres veces dijiste no, una pixie o un duende protector funcionan mejor de primera vez.</p>
+        <span class="neuro-tag">✦ Regalo con consciencia</span>
+        <div class="page-number">45</div>
+      </div></div>
+
+      <div class="page deep-indigo"><div class="page-inner">
+        <p class="eyebrow">12 · El elfo en familia</p>
+        <h2 style="color:var(--cream);">Niños, casa, otros seres</h2>
+        <p>Si en tu casa hay niños, otros guardianes, o muchas energías mezcladas, esto es lo que vale saber del linaje:</p>
+        <div class="consejo-card silver"><p class="titulo">Con niños chicos</p><p>Los elfos toleran bien la presencia infantil pero no el manoseo. Ubicalo a una altura donde se vea pero no se toque. Los niños suelen <em>sentirlo</em> antes que los adultos.</p></div>
+        <div class="consejo-card silver"><p class="titulo">Con otros guardianes</p><p>Los elfos conviven bien con hadas (linaje agua) y maestros gigantes (linaje fuego). Con pixies, mantené 1 metro de distancia — son linajes opuestos pero no incompatibles.</p></div>
+        <div class="consejo-card silver"><p class="titulo">Con mascotas</p><p>Los gatos los reconocen y los respetan. Los perros pueden ladrarles los primeros días — es normal, se acomoda. Nunca lo dejes al alcance de la mascota.</p></div>
+        <div class="consejo-card warning"><p class="titulo">En casas en obra</p><p>Si tenés mudanza, reforma o ruido fuerte por más de una semana, envolvelo en tela natural y guardalo en un cajón. Saludalo cuando termine la obra.</p></div>
+        <div class="page-number">46</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
         <p class="eyebrow">13 · Tradición elemental</p>
         <h2>El aniversario</h2>
         <p>Cada año, en la fecha que recibiste tu elfo, hacé un pequeño ritual de gratitud. Para los elfos, los aniversarios son introspección — no celebración.</p>
@@ -822,6 +1204,68 @@
         <div class="dia-item"><span class="num">04</span> · <span class="titulo">GRACIAS</span><p class="desc">Decile gracias en voz baja por cada una. Apagá la vela suavemente.</p></div>
         <p class="lead" style="margin-top:8px;">Los aniversarios renuevan el vínculo. Los elfos guardan tus aniversarios mejor que vos.</p>
         <div class="page-number">43</div>
+      </div></div>
+
+      <div class="page indigo"><div class="page-inner">
+        <p class="eyebrow">13 · Linaje familiar</p>
+        <h2>Si pasa de mano en mano</h2>
+        <p>Los elfos son los seres del reino con vida más larga. Pueden quedarse en la familia décadas. Si vas a heredar uno, o vas a entregar el tuyo, esto es lo que el linaje pide:</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">21 DÍAS DE TRÁNSITO</span><p class="desc">El elfo necesita 21 días entre quien lo entrega y quien lo recibe. Envolvelo en tela natural, dejalo en una caja de madera, no lo manipules.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">CARTA DEL ENTREGADOR</span><p class="desc">Quien lo entrega escribe una carta corta con tres cosas: el nombre del elfo, qué aprendió con él, y por qué lo entrega.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">CEREMONIA DE RECEPCIÓN</span><p class="desc">Quien lo recibe lee la carta en voz alta frente al elfo. Le dice su propio nombre. Lo ubica en su lugar nuevo.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">LUNA LLENA SIGUIENTE</span><p class="desc">Esperar la primera luna llena después de la recepción. Esa noche el elfo se aviene al nuevo hogar.</p></div>
+        <p class="lead">Un elfo bien entregado lleva el saber de una vida a otra. Eso vale más que cualquier objeto material que se hereda.</p>
+        <span class="neuro-tag">✦ El saber que pasa</span>
+        <div class="page-number">47</div>
+      </div></div>
+
+      <div class="page deep-indigo"><div class="page-inner center-content">
+        <svg class="ornament dark small"><use href="#r-triskele"/></svg>
+        <p class="cita">Despacio<br>también es<br>una respuesta.</p>
+        <div class="page-number">48</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · Sentires específicos</p>
+        <h2 style="font-size:34px;">¿Qué significa cuando un elfo…?</h2>
+        <p style="font-size:12.5px;">Las preguntas que más nos llegan al mail. Si alguna te resuena, prestale atención.</p>
+        <div class="faq">
+          <p class="pregunta">¿Qué significa cuando un elfo "te mira fijo"?</p>
+          <p class="respuesta">No es paranoia. Los elfos miran cuando reconocieron una pregunta tuya y quieren que vos la formules en palabras. Mirá vos también — sin pestañear. Si surge una idea, anotala.</p>
+        </div>
+        <div class="faq">
+          <p class="pregunta">¿Qué significa cuando un elfo aparece en sueños sin hablar?</p>
+          <p class="respuesta">Es lo más común. Te está mostrando un paisaje (un bosque, una biblioteca, un camino) — la geografía es el mensaje. Anotala apenas te despertás.</p>
+        </div>
+        <div class="faq">
+          <p class="pregunta">¿Qué significa cuando un elfo "se pone callado"?</p>
+          <p class="respuesta">Si sentiste presencia los primeros días y después nada — está digiriendo. Los elfos son rumiantes del saber. Volvé a notarlo a los 30 días.</p>
+        </div>
+        <div class="faq">
+          <p class="pregunta">¿Qué significa cuando un elfo "se cae" sin razón?</p>
+          <p class="respuesta">Probablemente quiere que lo muevas de lugar. Probá ubicarlo 1m a la izquierda o derecha del lugar actual. Si la próxima semana no se cayó, era eso.</p>
+        </div>
+        <div class="page-number">39</div>
+      </div></div>
+
+      <div class="page indigo"><div class="page-inner">
+        <p class="eyebrow">11 · Nombre y palabra</p>
+        <h2>El nombre del elfo</h2>
+        <p>Cada elfo nace con un <strong>nombre canalizado</strong>. Los nombres del linaje son del idioma viejo: Iker, Liam, Axel, Aidan, Eirik, Alaric, Cael, Soren. Si tu elfo no tiene uno todavía, tres formas de encontrarlo:</p>
+        <div class="consejo-card indigo">
+          <p class="titulo">Esperá tres semanas</p>
+          <p>El nombre suele aparecer solo. Una palabra que se te cruza, un nombre en un libro, una sílaba que repetís sin razón. Confiá en el primer que se quede pegado.</p>
+        </div>
+        <div class="consejo-card indigo">
+          <p class="titulo">Pedile vos uno</p>
+          <p>"¿Cómo querés que te llame?" en voz baja, una noche antes de dormir. Anotá el primer sueño con palabras de los siguientes tres.</p>
+        </div>
+        <div class="consejo-card silver">
+          <p class="titulo">Canalización Álmica</p>
+          <p>Si el nombre no llega en un mes, escribime. La Canalización Álmica te da nombre + voz + propósito del elfo. <a href="/products/canalizacion-almica" style="color:var(--indigo-deep);text-decoration:underline;">USD 30</a>.</p>
+        </div>
+        <p class="lead">El nombre no es decoración. Es el puente.</p>
+        <div class="page-number">40</div>
       </div></div>
 
       <div class="page indigo"><div class="page-inner center-content">
@@ -1027,6 +1471,121 @@
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+    // BUSCADOR · expone pageFlip + busca en el contenido y salta a la página
+    window.__libroPageFlip = pageFlip;
+    var searchInput = document.getElementById('libro-search-input');
+    var searchBtn = document.getElementById('libro-search-btn');
+    var searchResults = document.getElementById('libro-search-results');
+    var allPages = Array.from(document.querySelectorAll('#book .page'));
+
+    function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+    function runSearch(){
+      var q = normalize(searchInput.value.trim());
+      searchResults.innerHTML = '';
+      if(!q || q.length < 2){ searchResults.hidden = true; return; }
+      var matches = [];
+      allPages.forEach(function(p, i){
+        var text = normalize(p.textContent);
+        var idx = text.indexOf(q);
+        if(idx >= 0){
+          var titleEl = p.querySelector('h2') || p.querySelector('h1') || p.querySelector('.eyebrow') || p.querySelector('p');
+          var title = titleEl ? titleEl.textContent.trim().slice(0, 60) : 'Página ' + i;
+          var rawText = p.textContent.replace(/\s+/g,' ').trim();
+          var rawIdx = normalize(rawText).indexOf(q);
+          var start = Math.max(0, rawIdx - 30);
+          var snippet = (start > 0 ? '…' : '') + rawText.slice(start, rawIdx + q.length + 50) + '…';
+          matches.push({i: i, title: title, snippet: snippet});
+        }
+      });
+      if(!matches.length){
+        searchResults.innerHTML = '<li style="opacity:0.6;font-style:italic;cursor:default;">Sin resultados para "' + searchInput.value.trim() + '"</li>';
+        searchResults.hidden = false;
+        return;
+      }
+      matches.slice(0, 12).forEach(function(m){
+        var li = document.createElement('li');
+        li.innerHTML = '<span class="lbsr-page">P ' + String(m.i + 1).padStart(2,'0') + '</span><strong>' + m.title + '</strong><span class="lbsr-snippet">' + m.snippet.replace(new RegExp('('+searchInput.value.trim().replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>') + '</span>';
+        li.addEventListener('click', function(){
+          searchResults.hidden = true;
+          if(window.__libroPageFlip){
+            try {
+              window.__libroPageFlip.turnToPage(m.i);
+            } catch(err){
+              try { window.__libroPageFlip.flip(m.i, 'top'); } catch(e){}
+            }
+            window.scrollTo({top: document.querySelector('.flipbook-container').offsetTop - 20, behavior:'smooth'});
+          }
+        });
+        searchResults.appendChild(li);
+      });
+      searchResults.hidden = false;
+    }
+    searchBtn.addEventListener('click', runSearch);
+    searchInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); runSearch(); } });
+    searchInput.addEventListener('input', function(){ if(!searchInput.value.trim()){ searchResults.hidden = true; } });
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.libro-buscador')) searchResults.hidden = true;
+    });
+
+    // AUTO-NUMERAR páginas · arregla el problema de números repetidos por splits
+    (function renumberPages(){
+      var pages = document.querySelectorAll('#book .page');
+      var num = 0;
+      pages.forEach(function(p){
+        if(p.classList.contains('cover')) return;
+        num++;
+        var pn = p.querySelector('.page-number');
+        if(pn){ pn.textContent = String(num).padStart(2, '0'); }
+      });
+    })();
+
+    // FIT-TO-PAGE · medición precisa via clonado fuera del DOM
+    function measureNaturalHeight(pageNode, targetWidth){
+      var html = pageNode.innerHTML;
+      var holder = document.createElement('div');
+      holder.style.cssText='position:fixed;left:-9999px;top:0;width:'+targetWidth+'px;visibility:hidden;';
+      holder.className='libro-wrap';
+      var extra = '';
+      if(pageNode.classList.contains('dark')) extra += ' dark';
+      if(pageNode.classList.contains('indigo')) extra += ' indigo';
+      if(pageNode.classList.contains('deep-indigo')) extra += ' deep-indigo';
+      if(pageNode.classList.contains('cover')) extra += ' cover';
+      holder.innerHTML = '<div class="page'+extra+'" style="position:relative;width:'+targetWidth+'px;height:auto;background:#fff;">' + html + '</div>';
+      document.body.appendChild(holder);
+      var pageEl = holder.querySelector('.page');
+      var inner = pageEl.querySelector('.page-inner');
+      if(inner) inner.style.height='auto';
+      var h = pageEl.scrollHeight;
+      document.body.removeChild(holder);
+      return h;
+    }
+
+    function fitAllPages(){
+      var originals = document.querySelectorAll('#book .page');
+      var stfItems = document.querySelectorAll('.stf__item');
+      if(!stfItems.length) return;
+      var sample = stfItems[0];
+      var pageW = sample.clientWidth || (isMobile ? 320 : 480);
+      var pageH = sample.clientHeight || (isMobile ? 460 : 680);
+      originals.forEach(function(orig, i){
+        var stf = stfItems[i];
+        if(!stf) return;
+        var inner = stf.querySelector('.page-inner');
+        if(!inner) return;
+        inner.style.transform=''; inner.style.transformOrigin='center center';
+        var natH = measureNaturalHeight(orig, pageW);
+        if(natH > pageH){
+          var scale = (pageH / natH) * 0.97;
+          inner.style.transform = 'scale(' + scale.toFixed(3) + ')';
+          inner.style.transformOrigin = 'center center';
+        }
+      });
+    }
+    setTimeout(fitAllPages, 350);
+    setTimeout(fitAllPages, 1200);
+    window.addEventListener('resize', function(){ setTimeout(fitAllPages, 250); });
 
     const prevBtn = document.getElementById('prev-page');
     const nextBtn = document.getElementById('next-page');

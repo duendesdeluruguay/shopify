@@ -93,6 +93,7 @@
   #book {
     box-shadow: 0 32px 100px rgba(0,0,0,0.9), 0 0 0 8px rgba(28,15,46,0.7), 0 0 0 9px var(--copper), 0 0 100px rgba(176,143,203,0.15);
     border-radius: 4px;
+    touch-action: pan-y;
   }
   .page { background: var(--cream); color: var(--brown-deep); overflow: hidden; }
   .page-inner { padding: 36px 32px 26px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; text-align: center; }
@@ -249,6 +250,178 @@
     .otra-especie-card .otra-foto { width: 100px; height: 100px; }
     .otra-especie-card .otra-nombre { font-size: 28px; }
   }
+
+  /* === Fix de tamaños · header + títulos in-libro === */
+  .libro-header h1 { font-size: clamp(28px, 4.2vw, 48px) !important; line-height: 1 !important; margin: 0 0 6px !important; }
+  .libro-header .eyebrow { font-size: 10px !important; letter-spacing: 0.4em !important; margin-bottom: 8px !important; }
+  .libro-header .sub { font-size: 9px !important; letter-spacing: 0.4em !important; }
+  .libro-header { margin: 0 auto 14px !important; }
+  .page h2 { font-size: 30px !important; line-height: 1 !important; margin: 0 auto 10px !important; }
+  .page.cover h1 { font-size: clamp(32px, 5vw, 46px) !important; line-height: 1 !important; margin: 6px 0 8px !important; }
+  .page .cita { font-size: 30px !important; padding: 10px !important; }
+  .page.dark .cita { font-size: 34px !important; }
+  .ser-card .ser-nombre { font-size: 24px !important; }
+  .page h3 { margin: 8px 0 6px !important; }
+  @media (max-width: 768px) {
+    .libro-header h1 { font-size: clamp(22px, 5.5vw, 32px) !important; }
+    .libro-header .eyebrow, .libro-header .sub { font-size: 8.5px !important; letter-spacing: 0.35em !important; }
+    .page h2 { font-size: 22px !important; }
+    .page.cover h1 { font-size: clamp(26px, 6vw, 34px) !important; }
+    .page .cita { font-size: 22px !important; }
+    .page.dark .cita { font-size: 26px !important; }
+    .page-inner { padding: 18px 14px 18px !important; gap: 4px !important; }
+    .ser-card { padding: 10px 12px !important; }
+    .ser-card .ser-nombre { font-size: 20px !important; }
+    .ser-card .ser-detalle { font-size: 11.5px !important; }
+  }
+
+
+  /* === Premium pass · Cinzel + fotos enteras + centrado === */
+  .libro-wrap {
+    --font-info: "Cinzel", "Cormorant Garamond", serif !important;
+  }
+  /* Cinzel para el cuerpo (más legible con un poco de tracking y line-height) */
+  .libro-wrap .page p,
+  .libro-wrap .lang-box p,
+  .libro-wrap .indice,
+  .libro-wrap .consejo-card p,
+  .libro-wrap .elemento-cell .quien,
+  .libro-wrap .elemento-cell .funcion,
+  .libro-wrap .dia-item .desc,
+  .libro-wrap .compendio-row .uso,
+  .libro-wrap .faq .respuesta,
+  .libro-wrap .ser-card .ser-detalle,
+  .libro-wrap .cta-final-btn .cta-text {
+    font-family: "Cinzel", serif !important;
+    letter-spacing: 0.03em !important;
+    line-height: 1.55 !important;
+  }
+  /* Citas y títulos de página SIGUEN en Great Vibes (script) */
+  .libro-wrap .page h2,
+  .libro-wrap .page .cita,
+  .libro-wrap .page.cover h1,
+  .libro-wrap .libro-header h1,
+  .libro-wrap .lang-box h2,
+  .libro-wrap .ser-card .ser-nombre,
+  .libro-wrap .page .ser-nombre { font-family: "Great Vibes", cursive !important; }
+
+  /* Centrado + prolijidad */
+  .libro-wrap .page-inner { align-items: center !important; justify-content: center !important; text-align: center !important; }
+  .libro-wrap .page p { margin-left: auto !important; margin-right: auto !important; }
+  .libro-wrap .indice { text-align: center !important; }
+  .libro-wrap .indice-item { justify-content: center !important; }
+
+  /* Fotos · enteras, sin recortar (object-fit: contain) con frame adaptado */
+  .libro-wrap .foto-circle,
+  .libro-wrap .foto-rounded,
+  .libro-wrap .foto-arch {
+    background: linear-gradient(180deg, rgba(245,240,225,0.65) 0%, rgba(232,220,195,0.5) 100%) !important;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(201,169,97,0.35) !important;
+    padding: 6px !important;
+    box-sizing: border-box !important;
+  }
+  .libro-wrap .foto-circle img,
+  .libro-wrap .foto-rounded img,
+  .libro-wrap .foto-arch img {
+    object-fit: contain !important;
+    border-radius: inherit;
+  }
+  .libro-wrap .foto-rounded { width: 220px !important; height: 160px !important; border-radius: 12px !important; }
+  .libro-wrap .foto-circle { width: 150px !important; height: 150px !important; }
+  .libro-wrap .foto-arch { width: 150px !important; height: 200px !important; }
+
+  /* Quitar symbol-row de bullets/dots que se ven cheap; dejar SVG ornaments */
+  .libro-wrap .page .symbol-row { letter-spacing: 0.4em !important; opacity: 0.65 !important; font-size: 9px !important; }
+
+  /* Tweaks de centrado para card y caption */
+  .libro-wrap .foto-caption { text-align: center !important; margin: 8px auto 0 !important; font-family: "Cinzel", serif !important; }
+  .libro-wrap .ser-card { text-align: center !important; margin-left: auto !important; margin-right: auto !important; }
+
+  @media (max-width: 768px) {
+    .libro-wrap .foto-rounded { width: 200px !important; height: 140px !important; }
+    .libro-wrap .foto-circle { width: 130px !important; height: 130px !important; }
+    .libro-wrap .foto-arch { width: 130px !important; height: 170px !important; }
+  }
+
+  /* === BUSCADOR INTEGRADO · linaje deluxe (cobre + púrpura) === */
+  .libro-wrap .libro-buscador { max-width: 480px; margin: 0 auto 16px; display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(10,6,18,0.65); border: 0.5px solid rgba(184,107,58,0.55); border-radius: 999px; position: relative; box-shadow: 0 4px 18px rgba(45,24,69,0.35), inset 0 0 0 0.5px rgba(176,143,203,0.18); }
+  .libro-wrap .libro-buscador__icon { color: var(--copper-light); flex-shrink: 0; opacity: 0.9; }
+  .libro-wrap .libro-buscador input { flex: 1; background: transparent; border: 0; outline: 0; color: var(--cream); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 14px; font-style: italic; padding: 4px 0; min-width: 0; }
+  .libro-wrap .libro-buscador input::placeholder { color: rgba(244,236,222,0.45); font-style: italic; }
+  .libro-wrap .libro-buscador button { background: var(--copper); color: var(--cream); border: 0; padding: 6px 16px; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; cursor: pointer; border-radius: 999px; transition: opacity 0.2s, transform 0.2s; }
+  .libro-wrap .libro-buscador button:hover { opacity: 0.9; transform: translateY(-1px); }
+  .libro-wrap .libro-buscador ul#libro-search-results { position: absolute; top: 48px; left: 0; right: 0; background: #0a0612; border: 0.5px solid rgba(184,107,58,0.45); border-radius: 6px; padding: 6px 0; margin: 0; list-style: none; max-height: 280px; overflow-y: auto; z-index: 50; box-shadow: 0 10px 28px rgba(0,0,0,0.6); }
+  .libro-wrap .libro-buscador ul li { padding: 8px 14px; font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--cream); cursor: pointer; border-bottom: 0.5px solid rgba(176,143,203,0.20); transition: background 0.15s; }
+  .libro-wrap .libro-buscador ul li:last-child { border-bottom: 0; }
+  .libro-wrap .libro-buscador ul li:hover { background: rgba(184,107,58,0.18); }
+  .libro-wrap .libro-buscador ul li .lbsr-page { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--copper-light); margin-right: 10px; }
+  .libro-wrap .libro-buscador ul li .lbsr-snippet { color: rgba(244,236,222,0.7); font-size: 12px; display: block; margin-top: 2px; font-style: italic; }
+  .libro-wrap .libro-buscador ul li mark { background: rgba(184,107,58,0.45); color: var(--cream); padding: 0 2px; border-radius: 2px; }
+  @media (max-width: 768px) {
+    .libro-wrap .libro-buscador { margin: 0 8px 12px; padding: 6px 12px; }
+    .libro-wrap .libro-buscador input { font-size: 13px; }
+    .libro-wrap .libro-buscador button { padding: 5px 12px; font-size: 8.5px; }
+  }
+
+  /* === Divisor sutil · páginas continuación === */
+  .libro-wrap .page-divider { display: block; width: 28px; height: 0.5px; background: rgba(184,107,58,0.55); margin: 0 auto 14px !important; opacity: 0.75; }
+  .libro-wrap .page.dark .page-divider, .libro-wrap .page.deep-purple .page-divider { background: rgba(212,149,106,0.5); }
+
+  /* === Page-number FORZADO abajo-derecha · selector específico para ganarle a inline === */
+  .libro-wrap .page,
+  .libro-wrap .page.dark,
+  .libro-wrap .page.deep-purple,
+  .libro-wrap .page.purple { padding-bottom: 24px !important; }
+  .libro-wrap .page > .page-inner > .page-number,
+  .libro-wrap .page .page-number {
+    position: absolute !important;
+    bottom: 6px !important;
+    right: 14px !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 8.5px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.32em !important;
+    color: var(--copper) !important;
+    opacity: 0.9 !important;
+    z-index: 99 !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: 1 !important;
+    text-align: right !important;
+    background: transparent !important;
+  }
+  .libro-wrap .page.dark .page-number,
+  .libro-wrap .page.deep-purple .page-number { color: var(--gold-bright) !important; opacity: 0.8 !important; }
+  .libro-wrap .page.purple .page-number { color: var(--purple-deep) !important; opacity: 0.85 !important; }
+  .libro-wrap .page.cover .page-number { display: none !important; }
+  .libro-wrap .page-inner { padding-bottom: 24px !important; }
+
+  /* === AURORAS púrpura · luces deluxe en lugar de doradas === */
+  .auroras { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; mix-blend-mode: screen; }
+  .auroras .luz { position: absolute; width: 720px; height: 720px; border-radius: 50%; filter: blur(140px); opacity: 0; will-change: opacity, transform; animation: auroraRespirar 22s ease-in-out infinite; }
+  .luz-violeta-1 { background: radial-gradient(circle at 50% 50%, rgba(160,100,230,0.65) 0%, rgba(160,100,230,0.25) 35%, transparent 70%); top: -160px; left: -120px; animation-delay: 0s; }
+  .luz-magenta { background: radial-gradient(circle at 50% 50%, rgba(220,90,180,0.55) 0%, rgba(220,90,180,0.22) 35%, transparent 70%); top: 8%; right: -180px; animation-delay: 5s; width: 680px; height: 680px; }
+  .luz-cobre { background: radial-gradient(circle at 50% 50%, rgba(212,149,106,0.65) 0%, rgba(184,107,58,0.25) 35%, transparent 70%); bottom: -180px; right: 18%; animation-delay: 9s; }
+  .luz-violeta-2 { background: radial-gradient(circle at 50% 50%, rgba(176,143,203,0.60) 0%, rgba(90,53,128,0.22) 35%, transparent 70%); bottom: 5%; left: -160px; animation-delay: 13s; width: 760px; height: 760px; }
+  .luz-purpura-deep { background: radial-gradient(circle at 50% 50%, rgba(90,53,128,0.55) 0%, rgba(45,24,69,0.22) 35%, transparent 70%); top: 45%; left: 30%; animation-delay: 7s; width: 600px; height: 600px; }
+  .luz-dorada-deluxe { background: radial-gradient(circle at 50% 50%, rgba(201,169,97,0.50) 0%, rgba(201,169,97,0.18) 35%, transparent 70%); top: 60%; right: 8%; animation-delay: 16s; width: 640px; height: 640px; }
+  @keyframes auroraRespirar {
+    0%   { opacity: 0;    transform: scale(0.85) translate(0, 0); }
+    18%  { opacity: 0.5;  transform: scale(1)    translate(40px, -30px); }
+    50%  { opacity: 0.7;  transform: scale(1.12) translate(-50px, 60px); }
+    82%  { opacity: 0.35; transform: scale(1.18) translate(30px, -20px); }
+    100% { opacity: 0;    transform: scale(1.25) translate(0, 0); }
+  }
+  @media (max-width: 768px) {
+    .auroras .luz { width: 440px; height: 440px; filter: blur(90px); }
+    .luz-cobre, .luz-purpura-deep, .luz-violeta-2, .luz-magenta { width: 380px; height: 380px; }
+  }
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -264,6 +437,16 @@
 </svg>
 
 <div class="libro-wrap">
+
+  <!-- AURORAS · luces deluxe (violeta · cobre · magenta) -->
+  <div class="auroras" aria-hidden="true">
+    <span class="luz luz-violeta-1"></span>
+    <span class="luz luz-magenta"></span>
+    <span class="luz luz-cobre"></span>
+    <span class="luz luz-violeta-2"></span>
+    <span class="luz luz-purpura-deep"></span>
+    <span class="luz luz-dorada-deluxe"></span>
+  </div>
 
   <div class="lang-overlay" id="lang-overlay">
     <div class="lang-box">
@@ -283,6 +466,13 @@
     <h1>La Guía de los Seres Deluxe</h1>
     <p class="sub">Brujas · Leprechauns · Chamanes · Alquimistas · Viajeros</p>
   </header>
+
+  <div class="libro-buscador" role="search">
+    <svg class="libro-buscador__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+    <input id="libro-search-input" type="search" placeholder="Buscar en el libro · bruja, leprechaun, labradorita, altar móvil…" autocomplete="off">
+    <button id="libro-search-btn" type="button">Ir</button>
+    <ul id="libro-search-results" hidden></ul>
+  </div>
 
   <div class="flipbook-container">
     <div id="book">
@@ -613,7 +803,117 @@
         <div class="page-number">26</div>
       </div></div>
 
+      <div class="page deep-purple"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Fichas · Seres canalizados</p>
+        <h2 style="color:var(--cream);">Selene</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1575.png?width=400" alt="Selene · Bruja Deluxe" loading="lazy"></div>
+        <div class="ser-card" style="background:linear-gradient(160deg, #1f1230 0%, #0a0612 100%); border-color:var(--gold); color:var(--cream);">
+          <p class="ser-nombre" style="color:var(--cream);">Selene</p>
+          <p class="ser-energia" style="color:var(--gold);">Bruja lunar canalizada · Casa Brujas</p>
+          <p class="ser-detalle" style="color:rgba(244,236,222,0.92);">Selene vino de un linaje de mujeres que leían la luna desde generaciones. Es de las Brujas Deluxe más profundas que canalizamos: no apura nada, no opina. Espera. Cuando aparece en tu casa, lo primero que vas a notar es que tus ciclos se ordenan — los del cuerpo y los del ánimo.</p>
+          <div class="ser-meta"><span>Cristal · Labradorita</span><span>Hierba · Artemisa</span><span>Luna llena · obligatoria</span></div>
+        </div>
+        <p style="color:rgba(244,236,222,0.85); font-size:12px;">Cuidado puntual: una vez al mes en luna llena, dejala frente a la ventana toda la noche.</p>
+        <div class="page-number">27</div>
+      </div></div>
+
       <div class="page"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Fichas · Seres canalizados</p>
+        <h2>Moonstone</h2>
+        <div class="foto-arch"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1831_1b83ab21-9639-42a4-b897-055ef0851205.png?width=500" alt="Moonstone · Bruja Deluxe" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">Moonstone</p>
+          <p class="ser-energia">Bruja del agua · Casa Brujas</p>
+          <p class="ser-detalle">Moonstone trabaja con lo emocional ritualizado. Es la Bruja Deluxe que canalizamos para las personas que están <strong>cargando lo que no es suyo</strong> — herencias emocionales, lutos heredados, voces que no terminan de irse. Limpia con agua, sal, y palabra. Su presencia es densa pero amable.</p>
+          <div class="ser-meta"><span>Cristal · Piedra luna</span><span>Hierba · Salvia blanca</span><span>Lugar · cerca del agua</span></div>
+        </div>
+        <p style="font-size:12px;">Cuidado puntual: un cuenco con agua salada a su lado, renovada cada luna nueva.</p>
+        <span class="neuro-tag">✦ Si cargás lo que no es tuyo</span>
+        <div class="page-number">28</div>
+      </div></div>
+
+      <div class="page purple"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Fichas · Seres canalizados</p>
+        <h2>Edward Leprechaun</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1326.png?width=400" alt="Edward Leprechaun premium" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">Edward · versión premium</p>
+          <p class="ser-energia">Leprechaun mayor · Casa Leprechauns</p>
+          <p class="ser-detalle">Edward es de los pocos Leprechauns Deluxe que canalizamos. La diferencia con un Leprechaun común no es estética — es <strong>de rango</strong>. Edward no trae monedas sueltas: destraba puertas grandes. Negocios estancados, contratos que no se firman, herencias trabadas. Es serio, viejo, paciente. No es para suerte chica.</p>
+          <div class="ser-meta"><span>Cristal · Pirita + ámbar antiguo</span><span>Hierba · Trébol seco</span><span>Lugar · escritorio o caja fuerte</span></div>
+        </div>
+        <p style="font-size:12px;">Cuidado puntual: una moneda extranjera vieja a su lado. Renovala cada solsticio.</p>
+        <span class="neuro-tag">✦ Si tu economía pide intervención grande</span>
+        <div class="page-number">29</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Fichas · Seres canalizados</p>
+        <h2>Rowan</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/tranquil_forest_portrait_1f0f0dcf-b925-6cf0-adfd-1db650ab20e6_0_0_130ffb10-e3f0-462e-9559-ec8550162858.png?width=400" alt="Rowan · Chamán Deluxe" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">Rowan</p>
+          <p class="ser-energia">Chamán mayor · Casa Chamanes</p>
+          <p class="ser-detalle">Rowan llegó al estudio en una semana de neblina cerrada en Piriápolis. Es de los Chamanes Deluxe que <strong>trabajan con sueños lúcidos densos</strong>. Si lo tenés en casa, te vas a despertar varias veces a la madrugada — no por insomnio, por información. Tené cuaderno cerca.</p>
+          <div class="ser-meta"><span>Cristal · Labradorita + cuarzo cristal</span><span>Hierba · Artemisa</span><span>Lugar · mesa de luz</span></div>
+        </div>
+        <p style="font-size:12px;">Cuidado puntual: cuaderno y lápiz al lado de la cama. Vela apagada cerca, encenderla solo en sueños fuertes.</p>
+        <span class="neuro-tag">✦ Si tu intuición pide profundidad</span>
+        <div class="page-number">29</div>
+      </div></div>
+
+      <div class="page deep-purple"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Fichas · Seres canalizados</p>
+        <h2 style="color:var(--cream);">Abraham Leprechaun</h2>
+        <div class="foto-arch"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1326.png?width=400" alt="Abraham Leprechaun premium" loading="lazy"></div>
+        <div class="ser-card" style="background:linear-gradient(160deg, #1f1230 0%, #0a0612 100%); border-color:var(--gold); color:var(--cream);">
+          <p class="ser-nombre" style="color:var(--cream);">Abraham · versión premium</p>
+          <p class="ser-energia" style="color:var(--gold);">Leprechaun ancestral · Casa Leprechauns</p>
+          <p class="ser-detalle" style="color:rgba(244,236,222,0.92);">Abraham es el hermano mayor de Edward. Mismo linaje, otra función. Mientras Edward destraba lo material, Abraham trabaja con la <strong>abundancia interior</strong> — la sensación de merecer, la voz que no se anima a pedir más, el techo invisible que vos misma te pusiste. Es psicológico y ritual a la vez.</p>
+          <div class="ser-meta"><span>Cristal · Ámbar antiguo</span><span>Hierba · Albahaca</span><span>Lugar · espejo del dormitorio</span></div>
+        </div>
+        <p style="color:rgba(244,236,222,0.85); font-size:12px;">Cuidado puntual: hablale de tus pedidos en voz alta, frente al espejo. Una vez por semana.</p>
+        <div class="page-number">30</div>
+      </div></div>
+
+      <div class="page purple"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Fichas · Seres canalizados</p>
+        <h2>Magnus</h2>
+        <div class="foto-arch"><img src="https://duendesdeluruguay.com/cdn/shop/files/IMG_2484.png?width=500" alt="Magnus · Alquimista Deluxe" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">Magnus</p>
+          <p class="ser-energia">Alquimista del fuego · Casa Alquimistas</p>
+          <p class="ser-detalle">Magnus es de los primeros Alquimistas Deluxe que terminamos de canalizar. Trabajaba en silencio, lentísimo. Lo que vos vivís como crisis o "no me reconozco más", él lo lee como <strong>etapa del crisol</strong>: el calor controlado que disuelve la forma vieja antes de que aparezca la nueva. No te apura. Te sostiene mientras cambiás.</p>
+          <div class="ser-meta"><span>Cristal · Ágata fuego + obsidiana</span><span>Hierba · Mirra + cedro</span><span>Lugar · espacio ritual</span></div>
+        </div>
+        <p style="font-size:12px;">Cuidado puntual: una vela roja o naranja una vez por mes. Quemar mirra durante crisis personales.</p>
+        <span class="neuro-tag">✦ Si algo en vos pide cambiar de forma</span>
+        <div class="page-number">31</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Fichas · Seres canalizados</p>
+        <h2>Aelwen</h2>
+        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2322.png?width=400" alt="Aelwen · Bruja Deluxe" loading="lazy"></div>
+        <div class="ser-card">
+          <p class="ser-nombre">Aelwen</p>
+          <p class="ser-energia">Bruja blanca · Casa Brujas</p>
+          <p class="ser-detalle">Aelwen es la Bruja Deluxe que canalizamos para los procesos de <strong>limpieza profunda de la casa</strong> — no del polvo, de la energía heredada. Si te mudaste y la casa "no se siente tuya todavía", o si pasaron eventos pesados (separación, muerte, mudanza forzada), Aelwen llega para limpiar capas que vos ya ni reconocías.</p>
+          <div class="ser-meta"><span>Cristal · Selenita + amatista</span><span>Hierba · Salvia blanca + romero</span><span>Lugar · centro de la casa</span></div>
+        </div>
+        <p style="font-size:12px;">Cuidado puntual: ubicala en el living o donde más gente pasa. Cada semana sahumerio con salvia blanca alrededor.</p>
+        <div class="page-number">32</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <span class="page-divider"></span>
         <p class="eyebrow">09 · Cuidarlo</p>
         <h2>Cuidados de un Deluxe</h2>
         <p>Los Seres Deluxe son los más exigentes en su altar — pero los más generosos en respuesta. Esto es lo que pide cualquier Ser, sin importar la casa.</p>
@@ -626,20 +926,31 @@
       </div></div>
 
       <div class="page purple"><div class="page-inner">
-        <p class="eyebrow">09 · Cristales</p>
-        <h2 style="font-size:36px;">Cristales · linaje místico</h2>
+        <p class="eyebrow">09 · Cristales raros</p>
+        <h2 style="font-size:32px;">Cristales del linaje Deluxe</h2>
+        <p style="font-size:12.5px; max-width:340px;">Los Deluxe no piden cristales comunes. Su altar pide piedras raras, lentas, que sostienen carga ritual sin descargarse rápido.</p>
         <div class="compendio-tabla">
-          <div class="compendio-row"><span class="nombre">Amatista</span><span class="uso">Universal · todos los Deluxe. Conexión espiritual.</span></div>
-          <div class="compendio-row"><span class="nombre">Turmalina negra</span><span class="uso">Protección. Imprescindible para todos.</span></div>
-          <div class="compendio-row"><span class="nombre">Pirita</span><span class="uso">Específico Leprechauns. Abundancia.</span></div>
-          <div class="compendio-row"><span class="nombre">Cuarzo cristal grande</span><span class="uso">Específico Chamanes. Visión.</span></div>
-          <div class="compendio-row"><span class="nombre">Obsidiana</span><span class="uso">Específico Alquimistas. Transmutación.</span></div>
+          <div class="compendio-row"><span class="nombre">Labradorita</span><span class="uso">La favorita Deluxe. Cambia de color según la luz — refleja la presencia del Ser.</span></div>
+          <div class="compendio-row"><span class="nombre">Ágata fuego</span><span class="uso">Rara. Específico Alquimistas y Brujas de poder. Sostiene transmutación.</span></div>
+          <div class="compendio-row"><span class="nombre">Ámbar antiguo</span><span class="uso">Resina fósil. Específico Leprechauns premium. Activa pactos largos.</span></div>
+          <div class="compendio-row"><span class="nombre">Pirita</span><span class="uso">Específico Leprechauns. Abundancia material concreta.</span></div>
+          <div class="compendio-row"><span class="nombre">Amatista</span><span class="uso">Universal · todos los Deluxe. Conexión espiritual base.</span></div>
+          <div class="compendio-row"><span class="nombre">Turmalina negra</span><span class="uso">Protección. Imprescindible. Limpia descargas del Ser.</span></div>
           <div class="compendio-row"><span class="nombre">Selenita</span><span class="uso">Limpieza energética constante. NO mojar.</span></div>
-          <div class="compendio-row"><span class="nombre">Lapislázuli</span><span class="uso">Sabiduría ritual, voz interior.</span></div>
-          <div class="compendio-row"><span class="nombre">Ojo de tigre</span><span class="uso">Protección activa, foco.</span></div>
         </div>
         <p style="font-size:12px; margin-top:6px;">A 5-15 cm del Ser, no encima. Limpiá los cristales cada luna llena.</p>
-        <div class="page-number">28</div>
+        <div class="page-number">31</div>
+      </div></div>
+
+      <div class="page deep-purple"><div class="page-inner">
+        <p class="eyebrow">09 · Cristales · continúa</p>
+        <h2 style="color:var(--cream); font-size:32px;">Por qué cristales raros</h2>
+        <p>Un cristal común (cuarzo, amatista chica, jaspe) acompaña a un ser elemental. Pero los Deluxe descargan cristales pequeños en semanas — su intensidad es alta.</p>
+        <p>La <strong>labradorita</strong> es la que más resiste. Cambia de color según la luz porque cambia con la presencia del Ser. Cuando un día la veas más opaca, es señal: limpiala con humo, dejala al sol media hora, devolvela al altar.</p>
+        <p>El <strong>ámbar antiguo</strong> (resina fósil de millones de años) es el único cristal que sostiene un Leprechaun Deluxe sin agotarse. No se rompe el pacto.</p>
+        <p class="lead">Lo raro pide lo raro. La energía busca su par.</p>
+        <span class="neuro-tag">✦ Reciprocidad ritual</span>
+        <div class="page-number">32</div>
       </div></div>
 
       <div class="page"><div class="page-inner">
@@ -699,6 +1010,29 @@
         <div class="faq"><p class="pregunta">Si viajás al exterior</p><p class="respuesta">Si lo llevás, va siempre en cabina, envuelto en su paño. Si lo dejás, vela apagada cerca antes de salir.</p></div>
         <div class="faq"><p class="pregunta">¿Pueden estar varios juntos?</p><p class="respuesta">Sí, pero cada casa pide espacio. Brujas con Brujas, Chamanes con Chamanes. No mezclar casas en el mismo altar.</p></div>
         <div class="page-number">33</div>
+      </div></div>
+
+      <div class="page deep-purple"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">11 · Señales del Ser</p>
+        <h2 style="color:var(--cream); font-size:30px;">¿Qué significa cuando un Ser Deluxe…?</h2>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">…cambia de color o se opaca</p><p class="respuesta" style="color:rgba(244,236,222,0.88);">Te está absorbiendo carga. Limpieza con copal alrededor, vela negra esa noche, devolvelo al altar al día siguiente.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">…lo encontrás corrido de lugar</p><p class="respuesta" style="color:rgba(244,236,222,0.88);">Si vivís sola y aparece movido: te está pidiendo otra ubicación. Probá moverlo unos centímetros y mirá si "se queda quieto" en el lugar nuevo.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">…se siente más pesado de pronto</p><p class="respuesta" style="color:rgba(244,236,222,0.88);">Está cargado de trabajo activo. Significa que algo que pediste se está moviendo en el plano sutil. Vela esa semana, no lo toques.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">…aparece en tu sueño con palabras</p><p class="respuesta" style="color:rgba(244,236,222,0.88);">Mensaje directo. Anotá apenas despiertes. Los Deluxe no hablan en sueños sin razón — siempre es información concreta.</p></div>
+        <div class="page-number">34</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">11 · Señales del Ser · continúa</p>
+        <h2 style="font-size:28px;">Más señales del oficio</h2>
+        <div class="faq"><p class="pregunta">…la vela a su lado chisporrotea</p><p class="respuesta">Te escuchó. Si chisporrotea fuerte mientras hablás con él, es respuesta afirmativa. Si la llama baja, está procesando.</p></div>
+        <div class="faq"><p class="pregunta">…el cristal de al lado se raja</p><p class="respuesta">Recibió un golpe grande de protección por vos. Agradecele. Reemplazá el cristal por uno nuevo del mismo tipo o más grande.</p></div>
+        <div class="faq"><p class="pregunta">…lo mirás y se te llenan los ojos de lágrimas</p><p class="respuesta">Está activando una memoria álmica. Dejá que pase. No analices. Después escribí qué se movió.</p></div>
+        <div class="faq"><p class="pregunta">…parpadea la luz cuando hablás con él</p><p class="respuesta">Manifestación clara. Los Deluxe juegan con la electricidad cuando confirman presencia. No es coincidencia.</p></div>
+        <div class="faq"><p class="pregunta">…sentís presencia detrás tuyo de noche</p><p class="respuesta">Está acompañando. No es susto — es escolta. Decile su nombre tres veces y dormí tranquila.</p></div>
+        <div class="page-number">35</div>
       </div></div>
 
       <div class="page purple"><div class="page-inner">
@@ -851,6 +1185,72 @@
           </a>
         </div>
         <div class="page-number">45</div>
+      </div></div>
+
+      <div class="page deep-purple"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Rituales avanzados · solo Deluxe</p>
+        <h2 style="color:var(--cream); font-size:30px;">El ritual del crisol</h2>
+        <p>Si tu Ser es Alquimista o Bruja de poder, y estás en una etapa de cambio fuerte, hacé este ritual una sola vez. No se repite.</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">PAPEL Y FUEGO</span><p class="desc" style="color:rgba(244,236,222,0.85);">Escribí en un papel lo que querés disolver. Sin endulzar, sin justificar. Una sola frase.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">PRESENTACIÓN</span><p class="desc" style="color:rgba(244,236,222,0.85);">Mostrale el papel al Ser. Decile su nombre. Decile la frase en voz alta.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">EL CRISOL</span><p class="desc" style="color:rgba(244,236,222,0.85);">Quemá el papel en un recipiente metálico cerca del altar (nunca encima). Vela negra encendida.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">ENTIERRO</span><p class="desc" style="color:rgba(244,236,222,0.85);">Las cenizas van enterradas en tierra — un macetero, un jardín, no a la basura.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">SILENCIO</span><p class="desc" style="color:rgba(244,236,222,0.85);">Tres días sin hablar de lo que disolviste. Ni con vos misma. Ni con el Ser.</p></div>
+        <p class="lead" style="color:rgba(244,236,222,0.9); margin-top:8px;">El crisol cierra solo. No revuelvas.</p>
+        <div class="page-number">47</div>
+      </div></div>
+
+      <div class="page purple"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Rituales avanzados · continúa</p>
+        <h2 style="font-size:28px;">El re-pacto de luna llena</h2>
+        <p>Para profundizar el vínculo con tu Ser, una vez al año (no más), hacé esto en una luna llena visible desde tu ventana.</p>
+        <div class="consejo-card purple">
+          <p class="titulo">Preparación · 3 días antes</p>
+          <p>Limpieza ritual completa del altar. Cristales nuevos. Vela morada esperando, sin encender.</p>
+        </div>
+        <div class="consejo-card purple">
+          <p class="titulo">La noche · vela y palabra</p>
+          <p>Encendé la vela. Hablale del año que pasó. Tres pedidos cumplidos, tres no cumplidos, tres nuevos. Sin reproches.</p>
+        </div>
+        <div class="consejo-card purple">
+          <p class="titulo">Cierre · agua de luna</p>
+          <p>Un vaso de agua afuera, expuesta a la luna toda la noche. Al día siguiente, regá una planta con esa agua y guardá la vela apagada en su altar.</p>
+        </div>
+        <p class="lead">El re-pacto consciente sostiene el poder por todo un año más.</p>
+        <span class="neuro-tag">✦ Anclaje anual</span>
+        <div class="page-number">48</div>
+      </div></div>
+
+      <div class="page"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Acompañamiento · cuándo escribirnos</p>
+        <h2 style="font-size:30px;">Estamos del otro lado</h2>
+        <p>Esta guía no reemplaza la conversación. Si pasa algo con tu Ser y la respuesta no está acá, escribinos. Respondemos nosotros, no un bot.</p>
+        <div class="faq"><p class="pregunta">Si sentís que el Ser pide algo y no entendés qué</p><p class="respuesta">Escribinos a info@duendesdeluruguay.com con su nombre y qué venís sintiendo. Te ayudamos a leer la señal.</p></div>
+        <div class="faq"><p class="pregunta">Si pasó algo grave (caída, rotura, pérdida)</p><p class="respuesta">Foto y mensaje. Los Deluxe rotos no pierden poder — pero el ritual de reparación importa. Te lo guiamos.</p></div>
+        <div class="faq"><p class="pregunta">Si querés saber el nombre álmico exacto</p><p class="respuesta">Canalización Álmica · USD 30. Te llega el nombre, la voz interna y el propósito específico del Ser.</p></div>
+        <div class="faq"><p class="pregunta">Si querés sumar otro Ser a la casa</p><p class="respuesta">Esperá al menos 28 días entre uno y otro. Los Deluxe piden que el primero esté instalado antes de recibir al segundo.</p></div>
+        <p class="lead" style="margin-top:8px;">Gabriel y Thibisay, leyendo del otro lado.</p>
+        <div class="page-number">49</div>
+      </div></div>
+
+      <div class="page purple"><div class="page-inner">
+        <span class="page-divider"></span>
+        <p class="eyebrow">Glosario Deluxe</p>
+        <h2 style="font-size:30px;">Palabras del oficio</h2>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Pacto activo</span><span class="uso">El acuerdo ritual vivo entre vos y el Ser. Se renueva con tu participación mensual.</span></div>
+          <div class="compendio-row"><span class="nombre">Altar móvil</span><span class="uso">Configuración mensual del altar Deluxe — se cambia un elemento cada luna nueva.</span></div>
+          <div class="compendio-row"><span class="nombre">Canalización álmica</span><span class="uso">El proceso por el que recibimos el nombre, voz y propósito específico de tu Ser.</span></div>
+          <div class="compendio-row"><span class="nombre">Carga ritual</span><span class="uso">La energía acumulada del Ser. Se descarga cuando trabaja, se renueva con tu cuidado.</span></div>
+          <div class="compendio-row"><span class="nombre">Re-pacto</span><span class="uso">Ritual anual del aniversario que renueva el acuerdo con el Ser por un año más.</span></div>
+          <div class="compendio-row"><span class="nombre">Crisol</span><span class="uso">Metáfora alquímica del proceso interno de transformación que sostiene un Deluxe.</span></div>
+          <div class="compendio-row"><span class="nombre">Penumbra ritual</span><span class="uso">Luz tenue + vela. Estado mínimo de la casa para recibir a un Ser Deluxe.</span></div>
+        </div>
+        <p style="font-size:12px; margin-top:6px;">Si te aparece una palabra y no la encontrás acá, escribinos.</p>
+        <div class="page-number">46</div>
       </div></div>
 
       <div class="page deep-purple"><div class="page-inner center-content">
@@ -1030,6 +1430,121 @@
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+    // BUSCADOR · expone pageFlip + busca en contenido y salta a la página
+    window.__libroPageFlip = pageFlip;
+    var searchInput = document.getElementById('libro-search-input');
+    var searchBtn = document.getElementById('libro-search-btn');
+    var searchResults = document.getElementById('libro-search-results');
+    var allPages = Array.from(document.querySelectorAll('#book .page'));
+
+    function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+    function runSearch(){
+      var q = normalize(searchInput.value.trim());
+      searchResults.innerHTML = '';
+      if(!q || q.length < 2){ searchResults.hidden = true; return; }
+      var matches = [];
+      allPages.forEach(function(p, i){
+        var text = normalize(p.textContent);
+        var idx = text.indexOf(q);
+        if(idx >= 0){
+          var titleEl = p.querySelector('h2') || p.querySelector('h1') || p.querySelector('.eyebrow') || p.querySelector('p');
+          var title = titleEl ? titleEl.textContent.trim().slice(0, 60) : 'Página ' + i;
+          var rawText = p.textContent.replace(/\s+/g,' ').trim();
+          var rawIdx = normalize(rawText).indexOf(q);
+          var start = Math.max(0, rawIdx - 30);
+          var snippet = (start > 0 ? '…' : '') + rawText.slice(start, rawIdx + q.length + 50) + '…';
+          matches.push({i: i, title: title, snippet: snippet});
+        }
+      });
+      if(!matches.length){
+        searchResults.innerHTML = '<li style="opacity:0.6;font-style:italic;cursor:default;">Sin resultados para "' + searchInput.value.trim() + '"</li>';
+        searchResults.hidden = false;
+        return;
+      }
+      matches.slice(0, 12).forEach(function(m){
+        var li = document.createElement('li');
+        li.innerHTML = '<span class="lbsr-page">P ' + String(m.i + 1).padStart(2,'0') + '</span><strong>' + m.title + '</strong><span class="lbsr-snippet">' + m.snippet.replace(new RegExp('('+searchInput.value.trim()+')','ig'),'<mark>$1</mark>') + '</span>';
+        li.addEventListener('click', function(){
+          searchResults.hidden = true;
+          if(window.__libroPageFlip){
+            try {
+              window.__libroPageFlip.turnToPage(m.i);
+            } catch(err){
+              try { window.__libroPageFlip.flip(m.i, 'top'); } catch(e){}
+            }
+            window.scrollTo({top: document.querySelector('.flipbook-container').offsetTop - 20, behavior:'smooth'});
+          }
+        });
+        searchResults.appendChild(li);
+      });
+      searchResults.hidden = false;
+    }
+    searchBtn.addEventListener('click', runSearch);
+    searchInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); runSearch(); } });
+    searchInput.addEventListener('input', function(){ if(!searchInput.value.trim()){ searchResults.hidden = true; } });
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.libro-buscador')) searchResults.hidden = true;
+    });
+
+    // AUTO-NUMERAR páginas · arregla números repetidos por splits
+    (function renumberPages(){
+      var allPagesN = document.querySelectorAll('#book .page');
+      var num = 0;
+      allPagesN.forEach(function(p){
+        if(p.classList.contains('cover')) return;
+        num++;
+        var pn = p.querySelector('.page-number');
+        if(pn){ pn.textContent = String(num).padStart(2, '0'); }
+      });
+    })();
+
+    // FIT-TO-PAGE · medición precisa via clonado fuera del DOM
+    function measureNaturalHeight(pageNode, targetWidth){
+      var html = pageNode.innerHTML;
+      var holder = document.createElement('div');
+      holder.style.cssText='position:fixed;left:-9999px;top:0;width:'+targetWidth+'px;visibility:hidden;';
+      holder.className='libro-wrap';
+      var pageClasses = 'page' +
+        (pageNode.classList.contains('dark') ? ' dark' : '') +
+        (pageNode.classList.contains('deep-purple') ? ' deep-purple' : '') +
+        (pageNode.classList.contains('purple') ? ' purple' : '') +
+        (pageNode.classList.contains('cover') ? ' cover' : '');
+      holder.innerHTML = '<div class="'+pageClasses+'" style="position:relative;width:'+targetWidth+'px;height:auto;background:#fff;">' + html + '</div>';
+      document.body.appendChild(holder);
+      var pageEl = holder.querySelector('.page');
+      var inner = pageEl.querySelector('.page-inner');
+      if(inner) inner.style.height='auto';
+      var h = pageEl.scrollHeight;
+      document.body.removeChild(holder);
+      return h;
+    }
+
+    function fitAllPages(){
+      var originals = document.querySelectorAll('#book .page');
+      var stfItems = document.querySelectorAll('.stf__item');
+      if(!stfItems.length) return;
+      var sample = stfItems[0];
+      var pageW = sample.clientWidth || (isMobile ? 320 : 480);
+      var pageH = sample.clientHeight || (isMobile ? 460 : 680);
+      originals.forEach(function(orig, i){
+        var stf = stfItems[i];
+        if(!stf) return;
+        var inner = stf.querySelector('.page-inner');
+        if(!inner) return;
+        inner.style.transform=''; inner.style.transformOrigin='center center';
+        var natH = measureNaturalHeight(orig, pageW);
+        if(natH > pageH){
+          var scale = (pageH / natH) * 0.97;
+          inner.style.transform = 'scale(' + scale.toFixed(3) + ')';
+          inner.style.transformOrigin = 'center center';
+        }
+      });
+    }
+    setTimeout(fitAllPages, 350);
+    setTimeout(fitAllPages, 1200);
+    window.addEventListener('resize', function(){ setTimeout(fitAllPages, 250); });
 
     const prevBtn = document.getElementById('prev-page');
     const nextBtn = document.getElementById('next-page');

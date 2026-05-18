@@ -1,9 +1,12 @@
 {% comment %}
-  La Guía de las Hadas · Duendes del Uruguay · v1.0
-  · Especializada · 50 páginas · flipbook PageFlip.js
+  La Guía de las Hadas · Duendes del Uruguay · v2.0
+  · Especializada · ~52 páginas · flipbook PageFlip.js v2.0.7
   · Paleta tonal: rosa pastel + dorado + crema + acentos agua/perla
   · Sub-especies: Ondinas · Nereidas · Melusinas · Driádas
   · Foco: sanación emocional · ciclos · agua · linaje femenino del agua
+  · Buscador full-text integrado (#libro-search-input · turnToPage)
+  · Audio procedural Web API (campanilla cristalina)
+  · Lang-overlay ES/EN · auto-renumber · responsive <768px
 {% endcomment %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,6 +103,7 @@
   #book {
     box-shadow: 0 32px 100px rgba(0,0,0,0.85), 0 0 0 8px rgba(40,16,22,0.7), 0 0 0 9px var(--gold-dark), 0 0 80px rgba(232,199,200,0.10);
     border-radius: 4px;
+    touch-action: pan-y;
   }
   .page { background: var(--cream); color: var(--brown-deep); overflow: hidden; }
   .page-inner { padding: 36px 32px 26px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; text-align: center; }
@@ -267,6 +271,21 @@
   .libro-footer { margin-top: 36px; text-align: center; font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.4em; color: rgba(201,169,97,0.7); text-transform: uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
   .libro-footer a { color: var(--gold); text-decoration: none; margin: 0 12px; }
 
+  /* BUSCADOR · adaptado a paleta hadas (rosa + dorado) */
+  .libro-wrap .libro-buscador { max-width: 480px; margin: 0 auto 16px; display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(20,10,14,0.55); border: 0.5px solid rgba(232,199,200,0.4); border-radius: 999px; position: relative; backdrop-filter: blur(6px); box-shadow: 0 4px 20px rgba(0,0,0,0.45); }
+  .libro-wrap .libro-buscador__icon { color: var(--rose-light); flex-shrink: 0; opacity: 0.9; }
+  .libro-wrap .libro-buscador input { flex: 1; background: transparent; border: 0; outline: 0; color: var(--cream); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 14px; font-style: italic; padding: 4px 0; min-width: 0; }
+  .libro-wrap .libro-buscador input::placeholder { color: rgba(245,220,226,0.55); font-style: italic; }
+  .libro-wrap .libro-buscador button { background: var(--gold); color: var(--black-deep); border: 0; padding: 6px 16px; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; cursor: pointer; border-radius: 999px; transition: opacity 0.2s, background 0.2s; }
+  .libro-wrap .libro-buscador button:hover { background: var(--rose-light); opacity: 0.95; }
+  .libro-wrap .libro-buscador ul#libro-search-results { position: absolute; top: 48px; left: 0; right: 0; background: #100608; border: 0.5px solid rgba(232,199,200,0.35); border-radius: 6px; padding: 6px 0; margin: 0; list-style: none; max-height: 300px; overflow-y: auto; z-index: 50; box-shadow: 0 12px 32px rgba(0,0,0,0.7); }
+  .libro-wrap .libro-buscador ul li { padding: 9px 14px; font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--cream); cursor: pointer; border-bottom: 0.5px solid rgba(232,199,200,0.15); transition: background 0.15s; }
+  .libro-wrap .libro-buscador ul li:last-child { border-bottom: 0; }
+  .libro-wrap .libro-buscador ul li:hover { background: rgba(232,199,200,0.14); }
+  .libro-wrap .libro-buscador ul li .lbsr-page { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--gold-bright); margin-right: 10px; }
+  .libro-wrap .libro-buscador ul li .lbsr-snippet { color: rgba(245,220,226,0.75); font-size: 12px; display: block; margin-top: 2px; font-style: italic; }
+  .libro-wrap .libro-buscador ul li mark { background: rgba(232,199,200,0.35); color: var(--cream); padding: 0 2px; border-radius: 2px; }
+
   @media (max-width: 768px) {
     .libro-wrap { padding: 18px 6px 36px; }
     .page-inner { padding: 22px 16px 22px; }
@@ -278,7 +297,103 @@
     .lang-box h2 { font-size: 42px; }
     .otra-especie-card .otra-foto { width: 100px; height: 100px; }
     .otra-especie-card .otra-nombre { font-size: 28px; }
+    .libro-wrap .libro-buscador { margin: 0 8px 12px; padding: 6px 12px; }
+    .libro-wrap .libro-buscador input { font-size: 13px; }
+    .libro-wrap .libro-buscador button { padding: 5px 12px; font-size: 8.5px; }
   }
+
+  /* === Fix de tamaños · header + títulos in-libro === */
+  .libro-header h1 { font-size: clamp(28px, 4.2vw, 48px) !important; line-height: 1 !important; margin: 0 0 6px !important; }
+  .libro-header .eyebrow { font-size: 10px !important; letter-spacing: 0.4em !important; margin-bottom: 8px !important; }
+  .libro-header .sub { font-size: 9px !important; letter-spacing: 0.4em !important; }
+  .libro-header { margin: 0 auto 14px !important; }
+  .page h2 { font-size: 30px !important; line-height: 1 !important; margin: 0 auto 10px !important; }
+  .page.cover h1 { font-size: clamp(32px, 5vw, 46px) !important; line-height: 1 !important; margin: 6px 0 8px !important; }
+  .page .cita { font-size: 30px !important; padding: 10px !important; }
+  .page.dark .cita { font-size: 34px !important; }
+  .ser-card .ser-nombre { font-size: 24px !important; }
+  .page h3 { margin: 8px 0 6px !important; }
+  @media (max-width: 768px) {
+    .libro-header h1 { font-size: clamp(22px, 5.5vw, 32px) !important; }
+    .libro-header .eyebrow, .libro-header .sub { font-size: 8.5px !important; letter-spacing: 0.35em !important; }
+    .page h2 { font-size: 22px !important; }
+    .page.cover h1 { font-size: clamp(26px, 6vw, 34px) !important; }
+    .page .cita { font-size: 22px !important; }
+    .page.dark .cita { font-size: 26px !important; }
+    .page-inner { padding: 18px 14px 18px !important; gap: 4px !important; }
+    .ser-card { padding: 10px 12px !important; }
+    .ser-card .ser-nombre { font-size: 20px !important; }
+    .ser-card .ser-detalle { font-size: 11.5px !important; }
+  }
+
+
+  /* === Premium pass · Cinzel + fotos enteras + centrado === */
+  .libro-wrap {
+    --font-info: "Cinzel", "Cormorant Garamond", serif !important;
+  }
+  /* Cinzel para el cuerpo (más legible con un poco de tracking y line-height) */
+  .libro-wrap .page p,
+  .libro-wrap .lang-box p,
+  .libro-wrap .indice,
+  .libro-wrap .consejo-card p,
+  .libro-wrap .elemento-cell .quien,
+  .libro-wrap .elemento-cell .funcion,
+  .libro-wrap .dia-item .desc,
+  .libro-wrap .compendio-row .uso,
+  .libro-wrap .faq .respuesta,
+  .libro-wrap .ser-card .ser-detalle,
+  .libro-wrap .cta-final-btn .cta-text {
+    font-family: "Cinzel", serif !important;
+    letter-spacing: 0.03em !important;
+    line-height: 1.55 !important;
+  }
+  /* Citas y títulos de página SIGUEN en Great Vibes (script) */
+  .libro-wrap .page h2,
+  .libro-wrap .page .cita,
+  .libro-wrap .page.cover h1,
+  .libro-wrap .libro-header h1,
+  .libro-wrap .lang-box h2,
+  .libro-wrap .ser-card .ser-nombre,
+  .libro-wrap .page .ser-nombre { font-family: "Great Vibes", cursive !important; }
+
+  /* Centrado + prolijidad */
+  .libro-wrap .page-inner { align-items: center !important; justify-content: center !important; text-align: center !important; }
+  .libro-wrap .page p { margin-left: auto !important; margin-right: auto !important; }
+  .libro-wrap .indice { text-align: center !important; }
+  .libro-wrap .indice-item { justify-content: center !important; }
+
+  /* Fotos · enteras, sin recortar (object-fit: contain) con frame adaptado */
+  .libro-wrap .foto-circle,
+  .libro-wrap .foto-rounded,
+  .libro-wrap .foto-arch {
+    background: linear-gradient(180deg, rgba(245,240,225,0.65) 0%, rgba(232,220,195,0.5) 100%) !important;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(201,169,97,0.35) !important;
+    padding: 6px !important;
+    box-sizing: border-box !important;
+  }
+  .libro-wrap .foto-circle img,
+  .libro-wrap .foto-rounded img,
+  .libro-wrap .foto-arch img {
+    object-fit: contain !important;
+    border-radius: inherit;
+  }
+  .libro-wrap .foto-rounded { width: 220px !important; height: 160px !important; border-radius: 12px !important; }
+  .libro-wrap .foto-circle { width: 150px !important; height: 150px !important; }
+  .libro-wrap .foto-arch { width: 150px !important; height: 200px !important; }
+
+  /* Quitar symbol-row de bullets/dots que se ven cheap; dejar SVG ornaments */
+  .libro-wrap .page .symbol-row { letter-spacing: 0.4em !important; opacity: 0.65 !important; font-size: 9px !important; }
+
+  /* Tweaks de centrado para card y caption */
+  .libro-wrap .foto-caption { text-align: center !important; margin: 8px auto 0 !important; font-family: "Cinzel", serif !important; }
+  .libro-wrap .ser-card { text-align: center !important; margin-left: auto !important; margin-right: auto !important; }
+
+  @media (max-width: 768px) {
+    .libro-wrap .foto-rounded { width: 200px !important; height: 140px !important; }
+    .libro-wrap .foto-circle { width: 130px !important; height: 130px !important; }
+    .libro-wrap .foto-arch { width: 130px !important; height: 170px !important; }
+  }
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -317,6 +432,13 @@
     <h1>La Guía de las Hadas</h1>
     <p class="sub">Sub-especies · Cuidados · Rituales · Vínculo</p>
   </header>
+
+  <div class="libro-buscador" role="search">
+    <svg class="libro-buscador__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+    <input id="libro-search-input" type="search" placeholder="Buscar en el libro · ondina, cuarzo rosa, sueños, agua…" autocomplete="off">
+    <button id="libro-search-btn" type="button">Ir</button>
+    <ul id="libro-search-results" hidden></ul>
+  </div>
 
   <div class="flipbook-container">
     <div id="book">
@@ -377,9 +499,11 @@
           <div class="indice-item"><span class="num">09</span><span class="name">Cuidados · cristales · hierbas · luna</span><span class="dots"></span><span class="pg">27</span></div>
           <div class="indice-item"><span class="num">10</span><span class="name">Lo que jamás se hace con una hada</span><span class="dots"></span><span class="pg">31</span></div>
           <div class="indice-item"><span class="num">11</span><span class="name">FAQs · señales · sueños</span><span class="dots"></span><span class="pg">32</span></div>
+          <div class="indice-section">¿Qué significa cuando una hada…?</div>
+          <div class="indice-item"><span class="num">12</span><span class="name">Caídas, sueños, brillos, presencia</span><span class="dots"></span><span class="pg">37</span></div>
           <div class="indice-section">El resto del reino</div>
-          <div class="indice-item"><span class="num">12</span><span class="name">También existen</span><span class="dots"></span><span class="pg">37</span></div>
-          <div class="indice-item"><span class="num">13</span><span class="name">Aniversario y comunidad</span><span class="dots"></span><span class="pg">43</span></div>
+          <div class="indice-item"><span class="num">13</span><span class="name">También existen · Pixies · Elfos · Brujas</span><span class="dots"></span><span class="pg">44</span></div>
+          <div class="indice-item"><span class="num">14</span><span class="name">Aniversario y comunidad</span><span class="dots"></span><span class="pg">49</span></div>
         </div>
         <div class="page-number">04</div>
       </div></div>
@@ -803,6 +927,71 @@
         <div class="page-number">36</div>
       </div></div>
 
+      <!-- QS-A QUÉ SIGNIFICA · INTRO -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">12 · ¿Qué significa cuando una hada…?</p>
+        <h2 style="font-size:34px;">Lo que ella te dice</h2>
+        <p>Las hadas no hablan como nosotras. Hablan con gestos pequeños: una caída, un brillo distinto, un sueño con agua, un olor que aparece sin causa. Esta sección es el diccionario íntimo del oficio — lo que con los años fuimos aprendiendo a leer.</p>
+        <p class="lead">No es superstición. Es atención sostenida.</p>
+        <svg class="ornament small rose-acc"><use href="#r-water"/></svg>
+        <div class="page-number">QS</div>
+      </div></div>
+
+      <!-- QS-B CAÍDAS Y ROTURAS -->
+      <div class="page rose"><div class="page-inner">
+        <p class="eyebrow">12 · ¿Qué significa cuando una hada…?</p>
+        <h2 style="font-size:34px;">Se cae o se daña</h2>
+        <div class="faq"><p class="pregunta">Se cae sin razón</p><p class="respuesta">El agua te está señalando ese día. Pará y preguntate: ¿qué emoción vengo postergando? La caída es un golpecito amable — nunca es castigo.</p></div>
+        <div class="faq"><p class="pregunta">Pierde un pétalo o un cristal</p><p class="respuesta">Esa piedra o ese pétalo cumplió su ciclo con vos. Guardalo en un sobre, no lo tires. Si era cuarzo rosa o piedra luna, te podemos canalizar uno nuevo.</p></div>
+        <div class="faq"><p class="pregunta">Se rompe una parte específica</p><p class="respuesta">Mirá qué parte: las <strong>alas</strong> = algo que querés iniciar y no te das permiso. La <strong>cabeza</strong> = pensamiento dando vueltas que pide ser hablado. Las <strong>manos</strong> = una entrega o un soltar pendiente.</p></div>
+        <div class="faq"><p class="pregunta">Aparece una grietita fina</p><p class="respuesta">El linaje agua se está reacomodando. No es ruptura — es expansión. Pasala con dos dedos suaves y agradecele.</p></div>
+        <div class="page-number">QS</div>
+      </div></div>
+
+      <!-- QS-C SUEÑOS CON HADAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">12 · ¿Qué significa cuando una hada…?</p>
+        <h2 style="font-size:34px;">Soñás con ella</h2>
+        <div class="faq"><p class="pregunta">La soñás cerca de un río</p><p class="respuesta">Ondina trabajando. Algo emocional que estás procesando despacio se está dando vuelta abajo. Anotá cómo te despertás — alegre, triste, en paz: ese es el termómetro.</p></div>
+        <div class="faq"><p class="pregunta">La soñás en el mar abierto</p><p class="respuesta">Nereida hablando. Hay una decisión grande que se está cocinando en vos. No la apures: el mar tarda en bajar.</p></div>
+        <div class="faq"><p class="pregunta">Te habla en sueños</p><p class="respuesta">Anotá las palabras apenas abrís los ojos — antes del primer pensamiento del día. Esas frases tienen instrucción concreta para tu semana.</p></div>
+        <div class="faq"><p class="pregunta">La soñás llorando</p><p class="respuesta">Está descargando algo viejo que absorbió por vos. No te preocupes — es función, no daño. Al despertar, llenale el cuenco con agua nueva.</p></div>
+        <div class="page-number">QS</div>
+      </div></div>
+
+      <!-- QS-D CAMBIOS VISIBLES -->
+      <div class="page rose"><div class="page-inner">
+        <p class="eyebrow">12 · ¿Qué significa cuando una hada…?</p>
+        <h2 style="font-size:34px;">La ves distinta</h2>
+        <div class="faq"><p class="pregunta">Le cambia el brillo de los ojos</p><p class="respuesta">No es tu imaginación. La mirada del hada se ajusta a tu humor — más opaca cuando atravesás algo, más viva cuando empezás a salir. Es espejo emocional.</p></div>
+        <div class="faq"><p class="pregunta">La encontrás movida de lugar</p><p class="respuesta">Si vivís sola y no fue ni el viento ni la mascota: te está pidiendo cambio de ubicación. Probá el lugar nuevo donde la encontraste — generalmente acierta.</p></div>
+        <div class="faq"><p class="pregunta">El agua del cuenco se enturbia rápido</p><p class="respuesta">Está limpiando algo. Cambiá el agua sin asco, agradecele, y dejá el cuenco vacío hasta el día siguiente. El siguiente vaso vuelve a durar lo normal.</p></div>
+        <div class="faq"><p class="pregunta">Le brilla un cristal de repente</p><p class="respuesta">Activación. El cristal recibió luna o sol indirecto y se prendió. Coincide casi siempre con un día en el que necesitabas saber que estás acompañada.</p></div>
+        <div class="page-number">QS</div>
+      </div></div>
+
+      <!-- QS-E SEÑALES EXTERNAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">12 · ¿Qué significa cuando una hada…?</p>
+        <h2 style="font-size:34px;">El mundo la nombra</h2>
+        <div class="faq"><p class="pregunta">Aparece una flor donde no había</p><p class="respuesta">Es saludo. Las hadas dejan flores en los caminos de las personas a las que están entrando. Una rosa, un jazmín, una flor del campo. Recogela si querés — o dejala vivir.</p></div>
+        <div class="faq"><p class="pregunta">Escuchás agua sin haber agua cerca</p><p class="respuesta">El elemento está activo. No es alucinación: las hadas usan el agua como portal y a veces el portal se abre antes de que vos lo notes con los ojos.</p></div>
+        <div class="faq"><p class="pregunta">Una visita la mira fijo</p><p class="respuesta">Esa persona es sensible al linaje agua — probablemente está atravesando algo emocional ella también. El hada la está leyendo, no hay peligro.</p></div>
+        <div class="faq"><p class="pregunta">Aparece en una foto sin enfocarla</p><p class="respuesta">Te quería en esa imagen. Guardala. Son las fotos donde el vínculo se hace visible.</p></div>
+        <div class="page-number">QS</div>
+      </div></div>
+
+      <!-- QS-F LO QUE SENTÍS VOS -->
+      <div class="page deep-rose"><div class="page-inner">
+        <p class="eyebrow">12 · ¿Qué significa cuando una hada…?</p>
+        <h2 style="color:var(--cream); font-size:34px;">Lo que sentís vos</h2>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">Se siente más pesada al levantarla</p><p class="respuesta" style="color:rgba(248,239,232,0.85);">Está cargada con algo que absorbió por vos. Limpiala con humo de lavanda o luz de luna llena — vuelve a su peso original en una o dos noches.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">Te dan ganas de llorar al mirarla</p><p class="respuesta" style="color:rgba(248,239,232,0.85);">Función exacta del linaje agua. Algo se está abriendo. No la cortes — dejá que el llanto pase. Después poné las dos manos sobre ella y agradecé.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">Pasás días sin mirarla</p><p class="respuesta" style="color:rgba(248,239,232,0.85);">Normal. Las hadas no piden ritual diario — piden ritual real. Cuando volvés, te recibe igual. No te exijas presencia constante.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--gold);">De repente la querés mover al baño</p><p class="respuesta" style="color:rgba(248,239,232,0.85);">El baño es el espacio más acuoso de la casa. Si la intuición lo pide, hacelo — pero lejos del vapor de la ducha. Una repisa alta funciona.</p></div>
+        <div class="page-number">QS</div>
+      </div></div>
+
       <!-- 37 TAMBIÉN EXISTEN · INTRO -->
       <div class="page"><div class="page-inner center-content">
         <p class="eyebrow">12 · El resto del reino</p>
@@ -946,7 +1135,7 @@
 
   <div class="libro-controls">
     <button id="prev-page">← Atrás</button>
-    <span class="page-indicator" id="page-indicator">01 · 46</span>
+    <span class="page-indicator" id="page-indicator">01 · 52</span>
     <button id="next-page">Adelante →</button>
     <button class="sound-toggle" id="sound-toggle">🔊 Sonido</button>
   </div>
@@ -1101,6 +1290,77 @@
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+    // BUSCADOR · expone pageFlip + busca en el contenido y salta a la página
+    window.__libroPageFlip = pageFlip;
+    var searchInput = document.getElementById('libro-search-input');
+    var searchBtn = document.getElementById('libro-search-btn');
+    var searchResults = document.getElementById('libro-search-results');
+    var allPages = Array.from(document.querySelectorAll('#book .page'));
+
+    function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+    function runSearch(){
+      var q = normalize(searchInput.value.trim());
+      searchResults.innerHTML = '';
+      if(!q || q.length < 2){ searchResults.hidden = true; return; }
+      var matches = [];
+      allPages.forEach(function(p, i){
+        var text = normalize(p.textContent);
+        var idx = text.indexOf(q);
+        if(idx >= 0){
+          var titleEl = p.querySelector('h2') || p.querySelector('h1') || p.querySelector('.eyebrow') || p.querySelector('p');
+          var title = titleEl ? titleEl.textContent.trim().slice(0, 60) : 'Página ' + i;
+          var rawText = p.textContent.replace(/\s+/g,' ').trim();
+          var rawIdx = normalize(rawText).indexOf(q);
+          var start = Math.max(0, rawIdx - 30);
+          var snippet = (start > 0 ? '…' : '') + rawText.slice(start, rawIdx + q.length + 50) + '…';
+          matches.push({i: i, title: title, snippet: snippet});
+        }
+      });
+      if(!matches.length){
+        searchResults.innerHTML = '<li style="opacity:0.6;font-style:italic;cursor:default;">Sin resultados para "' + searchInput.value.trim() + '"</li>';
+        searchResults.hidden = false;
+        return;
+      }
+      matches.slice(0, 12).forEach(function(m){
+        var li = document.createElement('li');
+        var safeQ = searchInput.value.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        li.innerHTML = '<span class="lbsr-page">P ' + String(m.i + 1).padStart(2,'0') + '</span><strong>' + m.title + '</strong><span class="lbsr-snippet">' + m.snippet.replace(new RegExp('('+safeQ+')','ig'),'<mark>$1</mark>') + '</span>';
+        li.addEventListener('click', function(){
+          searchResults.hidden = true;
+          if(window.__libroPageFlip){
+            try {
+              window.__libroPageFlip.turnToPage(m.i);
+            } catch(err){
+              try { window.__libroPageFlip.flip(m.i, 'top'); } catch(e){}
+            }
+            var fc = document.querySelector('.flipbook-container');
+            if(fc) window.scrollTo({top: fc.offsetTop - 20, behavior:'smooth'});
+          }
+        });
+        searchResults.appendChild(li);
+      });
+      searchResults.hidden = false;
+    }
+    searchBtn.addEventListener('click', runSearch);
+    searchInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); runSearch(); } });
+    searchInput.addEventListener('input', function(){ if(!searchInput.value.trim()){ searchResults.hidden = true; } });
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.libro-buscador')) searchResults.hidden = true;
+    });
+
+    // AUTO-NUMERAR páginas · evita que páginas con la misma sección compartan número
+    (function renumberPages(){
+      var pages = document.querySelectorAll('#book .page');
+      var num = 0;
+      pages.forEach(function(p){
+        if(p.classList.contains('cover')) return;
+        num++;
+        var pn = p.querySelector('.page-number');
+        if(pn){ pn.textContent = String(num).padStart(2, '0'); }
+      });
+    })();
 
     const prevBtn = document.getElementById('prev-page');
     const nextBtn = document.getElementById('next-page');

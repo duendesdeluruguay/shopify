@@ -1,8 +1,9 @@
 {% comment %}
-  La Guía de las Pixies · Duendes del Uruguay · v1.0
-  · 46 páginas · flipbook PageFlip.js
-  · Paleta tonal: verde menta + dorado + crema · linaje aire
-  · Sub-especies: Pixies de la Luz · del Viento · del Juego · del Hogar
+  La Guía de las Pixies · Duendes del Uruguay · v2.0 ESPEJO BIBLIA
+  · Tipografía: Cinzel (títulos) + Great Vibes (display) + Cormorant Garamond (body)
+  · Linaje vegetal/floral · Pixies del Bosque · del Jardín · de las Hierbas
+  · 46 páginas · flipbook PageFlip v2.0.7 · buscador integrado · auroras pixies
+  · Paleta menta/verde aire — NO usar paleta dorada de duendes
 {% endcomment %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +19,8 @@
     --mint-blush: #ecf3e7;
     --air-blue: #cfe1d7;
     --pearl: #f4ede0;
+    --rose-pixie: #d99fb5;
+    --jasmin: #f4ecd6;
 
     --black-deep: #0e160f;
     --cream: #F8F4E4;
@@ -34,40 +37,37 @@
     --wood-mid: #1c2f24;
     --wood-light: #25402f;
     --wood-dark: #0a140d;
-    --font-info: 'Agency FB', 'Saira Condensed', 'Trebuchet MS', sans-serif;
+    --font-info: 'Cormorant Garamond', Georgia, serif;
 
     color: var(--cream); font-family: 'Cormorant Garamond', Georgia, serif;
     min-height: 100vh; padding: 28px 16px 60px; text-align: center;
     background-color: var(--wood-dark);
     background-image:
-      radial-gradient(ellipse at 50% 35%, rgba(107,155,124,0.20) 0%, rgba(0,0,0,0.95) 78%),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'><defs><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.035' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.10 0 0 0 0 0.16 0 0 0 0 0.12 0 0 0 0.65 0'/></filter></defs><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
-      repeating-linear-gradient(91deg, var(--wood-dark) 0px, var(--wood-base) 2px, var(--wood-mid) 5px, var(--wood-base) 9px, var(--wood-light) 14px, var(--wood-mid) 22px, var(--wood-base) 30px, var(--wood-dark) 40px);
-    background-attachment: fixed; position: relative; min-height: 100vh;
-  }
-  .libro-wrap::before {
-    content:''; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.10;
-    background-image:
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><g fill='none' stroke='%23C9A961' stroke-width='1.4' opacity='0.85'><circle cx='90' cy='90' r='42'/><path d='M90 48 L90 132 M48 90 L132 90' /><circle cx='90' cy='90' r='6' fill='%23C9A961'/></g></svg>"),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><g fill='none' stroke='%23B6D4BF' stroke-width='1.2' opacity='0.7'><path d='M110 40 C110 70, 70 70, 70 110 C70 150, 110 150, 110 110 C110 70, 150 70, 150 110 C150 150, 110 150, 110 110 Z'/><circle cx='110' cy='110' r='3' fill='%23B6D4BF'/></g></svg>"),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='none' stroke='%23C9A961' stroke-width='1.2' opacity='0.85'><path d='M80 25 L70 60 L40 65 L65 85 L55 120 L80 100 L105 120 L95 85 L120 65 L90 60 Z'/></g></svg>"),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><g fill='none' stroke='%236B9B7C' stroke-width='1.2' opacity='0.7'><path d='M30 100 Q90 60, 170 100' /><path d='M30 130 Q90 90, 170 130'/><path d='M30 70 Q90 30, 170 70'/></g></svg>");
-    background-position: 8% 12%, 78% 22%, 18% 72%, 88% 78%;
-    background-repeat: no-repeat;
-    background-size: 180px, 220px, 160px, 200px;
-  }
-  .libro-wrap::after {
-    content:''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
-    background:
-      radial-gradient(ellipse at 22% 28%, rgba(182,212,191,0.12), transparent 38%),
-      radial-gradient(ellipse at 78% 70%, rgba(220,235,217,0.10), transparent 45%),
-      radial-gradient(ellipse at 50% 92%, rgba(201,169,97,0.06), transparent 50%);
+      radial-gradient(ellipse at 50% 35%, rgba(107,155,124,0.22) 0%, rgba(0,0,0,0.95) 78%),
+      radial-gradient(circle at 12% 84%, rgba(182,212,191,0.10) 0%, transparent 42%),
+      radial-gradient(circle at 86% 18%, rgba(201,169,97,0.10) 0%, transparent 42%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'><g fill='none' stroke='%23B6D4BF' stroke-width='1.4' opacity='0.07'><text x='300' y='180' text-anchor='middle' font-family='serif' font-style='italic' font-size='42' fill='%23B6D4BF' opacity='0.9'>Pixies del Aire</text><text x='300' y='460' text-anchor='middle' font-family='serif' font-style='italic' font-size='42' fill='%23B6D4BF' opacity='0.9'>Pixies del Aire</text></g></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><defs><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.61 0 0 0 0 0.49 0 0 0 0.05 0'/></filter></defs><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-size: cover, cover, cover, 600px 600px, 400px 400px;
+    background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat;
+    background-attachment: fixed; position: relative; min-height: 100vh; overflow-x: hidden;
   }
 
-  .particula { position: fixed; pointer-events: none; z-index: 0; border-radius: 50%; opacity: 0; }
-  .particula.gold { background: radial-gradient(circle, rgba(216,184,114,0.85) 0%, rgba(201,169,97,0) 70%); width: 5px; height: 5px; box-shadow: 0 0 8px rgba(216,184,114,0.6); }
-  .particula.mint { background: radial-gradient(circle, rgba(182,212,191,0.7) 0%, rgba(107,155,124,0) 70%); width: 6px; height: 6px; box-shadow: 0 0 10px rgba(182,212,191,0.5); }
-  .particula.spark { background: radial-gradient(circle, rgba(255,238,180,0.85) 0%, rgba(216,184,114,0) 70%); width: 3px; height: 3px; box-shadow: 0 0 12px rgba(255,238,180,0.7); }
+  /* GLOW menta sutil en esquinas */
+  .libro-wrap::before {
+    content:''; position: fixed; top: -100px; right: -100px; width: 500px; height: 500px; pointer-events: none; z-index: 0;
+    background: radial-gradient(circle at center, rgba(182,212,191,0.20) 0%, rgba(182,212,191,0.06) 40%, transparent 70%);
+    animation: glowPulse 9s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+  .libro-wrap::after {
+    content:''; position: fixed; bottom: -80px; left: -80px; width: 400px; height: 400px; pointer-events: none; z-index: 0;
+    background: radial-gradient(circle at center, rgba(201,169,97,0.12) 0%, rgba(201,169,97,0.04) 50%, transparent 75%);
+    animation: glowPulse 11s ease-in-out infinite reverse;
+  }
 
   .libro-wrap > * { position: relative; z-index: 1; }
   .libro-wrap * { box-sizing: border-box; }
@@ -94,30 +94,34 @@
   #book {
     box-shadow: 0 32px 100px rgba(0,0,0,0.85), 0 0 0 8px rgba(20,32,22,0.7), 0 0 0 9px var(--gold-dark), 0 0 80px rgba(182,212,191,0.10);
     border-radius: 4px;
+    touch-action: pan-y;
   }
   .page { background: var(--cream); color: var(--brown-deep); overflow: hidden; }
-  .page-inner { padding: 36px 32px 26px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; text-align: center; }
+  .page-inner { padding: 32px 30px 28px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; text-align: center; gap: 6px; }
   .page.dark { background: var(--black-deep); color: var(--cream); }
   .page.dark .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(182,212,191,0.25); pointer-events: none; }
   .page.mint { background: linear-gradient(160deg, var(--mint-pastel) 0%, var(--mint-blush) 70%, var(--cream-light) 100%); color: var(--brown-deep); }
   .page.mint .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid var(--line-mint); pointer-events: none; }
+  .page.green-soft { background: linear-gradient(160deg, var(--mint-blush) 0%, #f3f7ee 100%); color: var(--brown-deep); }
+  .page.green-soft .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(107,155,124,0.20); pointer-events: none; }
   .page.deep-mint { background: linear-gradient(160deg, #18301e 0%, #0c180f 100%); color: var(--cream); }
   .page.deep-mint .page-inner::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(182,212,191,0.32); pointer-events: none; }
 
   .page .eyebrow { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.5em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 14px; text-align: center; width: 100%; }
   .page.dark .eyebrow, .page.deep-mint .eyebrow { color: var(--gold); }
-  .page.mint .eyebrow { color: var(--mint-deep); letter-spacing: 0.5em; }
+  .page.mint .eyebrow, .page.green-soft .eyebrow { color: var(--mint-deep); letter-spacing: 0.5em; }
   .page h2 { font-family: 'Great Vibes', cursive; font-size: 48px; margin: 0 auto 14px; line-height: 1; font-weight: 400; color: var(--brown-deep); text-align: center; width: 100%; }
   .page.dark h2, .page.deep-mint h2 { color: var(--cream); }
-  .page.mint h2 { color: var(--mint-deep); }
+  .page.mint h2, .page.green-soft h2 { color: var(--mint-deep); }
   .page h3 { font-family: 'Cinzel', serif; font-weight: 400; font-size: 10.5px; letter-spacing: 0.3em; color: var(--gold-dark); text-transform: uppercase; margin: 12px 0 8px; text-align: center; width: 100%; }
   .page.dark h3, .page.deep-mint h3 { color: var(--gold); }
+  .page.mint h3, .page.green-soft h3 { color: var(--mint-deep); }
 
   .page p { font-family: var(--font-info); font-weight: 400; font-size: 14px; line-height: 1.55; margin: 0 auto 10px; color: var(--brown-deep); text-align: center; max-width: 380px; letter-spacing: 0.01em; }
   .page.dark p, .page.deep-mint p { color: var(--cream); }
   .page p.lead { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; color: var(--brown-soft); font-size: 14.5px; }
   .page.dark p.lead, .page.deep-mint p.lead { color: rgba(248,244,228,0.85); }
-  .page.mint p.lead { color: var(--mint-deep); }
+  .page.mint p.lead, .page.green-soft p.lead { color: var(--mint-deep); }
   .page strong { color: var(--brown-deep); font-weight: 600; }
   .page.dark strong, .page.deep-mint strong { color: var(--cream); }
   .page em { font-style: italic; }
@@ -128,6 +132,7 @@
   .page .page-number { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); font-family: 'Cinzel', serif; font-weight: 400; font-size: 9px; letter-spacing: 0.35em; color: var(--gold-dark); }
   .page.dark .page-number, .page.deep-mint .page-number { color: var(--gold); opacity: 0.6; }
 
+  /* TAPA */
   .page.cover {
     background:
       radial-gradient(ellipse at 30% 30%, rgba(40,80,55,0.45), transparent 60%),
@@ -189,14 +194,14 @@
   .elemento-cell .quien { font-family: var(--font-info); font-size: 12px; color: var(--brown-deep); margin-bottom: 4px; font-weight: 500; text-align: center; }
   .elemento-cell .funcion { font-family: var(--font-info); font-size: 11.5px; color: var(--brown-soft); line-height: 1.45; text-align: center; }
 
-  .dia-item { padding: 6px 8px; border-bottom: 1px solid var(--line-gold); text-align: center; max-width: 360px; margin: 0 auto; }
+  .dia-item { padding: 6px 8px; border-bottom: 1px solid var(--line-mint); text-align: center; max-width: 360px; margin: 0 auto; }
   .dia-item:last-child { border-bottom: none; }
   .dia-item .num { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.3em; color: var(--gold-dark); }
   .dia-item .titulo { font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; letter-spacing: 0.2em; color: var(--brown-deep); }
   .dia-item .desc { font-family: var(--font-info); font-size: 12.5px; color: var(--brown-soft); line-height: 1.5; margin-top: 2px; text-align: center; }
 
   .compendio-tabla { font-size: 11px; max-width: 380px; margin: 0 auto; }
-  .compendio-row { display: flex; padding: 7px 0; border-bottom: 1px solid var(--line-gold); align-items: baseline; text-align: left; }
+  .compendio-row { display: flex; padding: 7px 0; border-bottom: 1px solid var(--line-mint); align-items: baseline; text-align: left; }
   .compendio-row:last-child { border-bottom: none; }
   .compendio-row .nombre { flex: 0 0 110px; color: var(--mint-deep); letter-spacing: 0.18em; text-transform: uppercase; font-family: 'Cinzel', serif; font-weight: 400; font-size: 9.5px; }
   .compendio-row .uso { flex: 1; color: var(--brown-soft); font-family: var(--font-info); font-size: 12.5px; }
@@ -258,6 +263,202 @@
   .libro-footer { margin-top: 36px; text-align: center; font-family: 'Cinzel', serif; font-weight: 400; font-size: 10px; letter-spacing: 0.4em; color: rgba(201,169,97,0.7); text-transform: uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
   .libro-footer a { color: var(--gold); text-decoration: none; margin: 0 12px; }
 
+  /* AURORAS PIXIE · luces florales / verde-rosa */
+  .auroras {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    mix-blend-mode: screen;
+  }
+  .auroras .luz {
+    position: absolute; width: 720px; height: 720px; border-radius: 50%;
+    filter: blur(140px); opacity: 0; will-change: opacity, transform;
+    animation: auroraRespirar 22s ease-in-out infinite;
+  }
+  .luz-menta {
+    background: radial-gradient(circle at 50% 50%, rgba(150,210,170,0.70) 0%, rgba(110,180,140,0.30) 35%, transparent 70%);
+    top: -160px; left: -120px; animation-delay: 0s;
+  }
+  .luz-rosa-pixie {
+    background: radial-gradient(circle at 50% 50%, rgba(230,170,200,0.55) 0%, rgba(220,140,180,0.22) 35%, transparent 70%);
+    top: 8%; right: -180px; animation-delay: 5s; width: 680px; height: 680px;
+  }
+  .luz-dorada {
+    background: radial-gradient(circle at 50% 50%, rgba(255,210,130,0.55) 0%, rgba(255,200,110,0.22) 35%, transparent 70%);
+    bottom: -180px; right: 18%; animation-delay: 9s;
+  }
+  .luz-lila {
+    background: radial-gradient(circle at 50% 50%, rgba(190,160,220,0.55) 0%, rgba(160,130,210,0.22) 35%, transparent 70%);
+    bottom: 5%; left: -160px; animation-delay: 13s; width: 760px; height: 760px;
+  }
+  .luz-jazmin {
+    background: radial-gradient(circle at 50% 50%, rgba(250,240,210,0.55) 0%, rgba(230,210,160,0.22) 35%, transparent 70%);
+    top: 45%; left: 30%; animation-delay: 7s; width: 600px; height: 600px;
+  }
+  .luz-aqua {
+    background: radial-gradient(circle at 50% 50%, rgba(140,220,200,0.55) 0%, rgba(120,200,190,0.22) 35%, transparent 70%);
+    top: 60%; right: 8%; animation-delay: 16s; width: 640px; height: 640px;
+  }
+  @keyframes auroraRespirar {
+    0%   { opacity: 0;    transform: scale(0.85) translate(0, 0); }
+    18%  { opacity: 0.55; transform: scale(1)    translate(40px, -30px); }
+    50%  { opacity: 0.7;  transform: scale(1.12) translate(-50px, 60px); }
+    82%  { opacity: 0.4;  transform: scale(1.18) translate(30px, -20px); }
+    100% { opacity: 0;    transform: scale(1.25) translate(0, 0); }
+  }
+
+  /* Partículas (polen pixie) */
+  .particulas { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .particulas span {
+    position: absolute; width: 5px; height: 5px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(220,235,210,0.9), rgba(182,212,191,0.3) 60%, transparent 100%);
+    box-shadow: 0 0 8px rgba(220,235,210,0.7);
+    animation: flotar 12s linear infinite;
+    bottom: -20px;
+  }
+  .particulas span:nth-child(1) { left: 8%; animation-delay: 0s; animation-duration: 14s; }
+  .particulas span:nth-child(2) { left: 18%; animation-delay: 1s; animation-duration: 11s; width: 4px; height: 4px; }
+  .particulas span:nth-child(3) { left: 28%; animation-delay: 4s; animation-duration: 13s; width: 6px; height: 6px; }
+  .particulas span:nth-child(4) { left: 38%; animation-delay: 2s; animation-duration: 12s; }
+  .particulas span:nth-child(5) { left: 48%; animation-delay: 6s; animation-duration: 15s; width: 3px; height: 3px; }
+  .particulas span:nth-child(6) { left: 58%; animation-delay: 3s; animation-duration: 10s; }
+  .particulas span:nth-child(7) { left: 68%; animation-delay: 5s; animation-duration: 13s; width: 5px; height: 5px; }
+  .particulas span:nth-child(8) { left: 78%; animation-delay: 7s; animation-duration: 14s; }
+  .particulas span:nth-child(9) { left: 88%; animation-delay: 0.5s; animation-duration: 12s; width: 4px; height: 4px; }
+  .particulas span:nth-child(10) { left: 92%; animation-delay: 8s; animation-duration: 16s; }
+  .particulas span:nth-child(11) { left: 12%; animation-delay: 9s; animation-duration: 11s; width: 3px; height: 3px; }
+  .particulas span:nth-child(12) { left: 32%; animation-delay: 10s; animation-duration: 13s; }
+  .particulas span:nth-child(13) { left: 52%; animation-delay: 11s; animation-duration: 12s; width: 5px; height: 5px; }
+  .particulas span:nth-child(14) { left: 72%; animation-delay: 4.5s; animation-duration: 14s; }
+  .particulas span:nth-child(15) { left: 84%; animation-delay: 7.5s; animation-duration: 13s; width: 4px; height: 4px; }
+  @keyframes flotar {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    8% { opacity: 1; }
+    92% { opacity: 1; }
+    100% { transform: translateY(-110vh) translateX(40px); opacity: 0; }
+  }
+
+  /* BUSCADOR · arriba del libro */
+  .libro-wrap .libro-buscador { max-width: 480px; margin: 0 auto 16px; display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(8,18,12,0.5); border: 0.5px solid rgba(201,169,97,0.4); border-radius: 999px; position: relative; }
+  .libro-wrap .libro-buscador__icon { color: var(--gold); flex-shrink: 0; opacity: 0.85; }
+  .libro-wrap .libro-buscador input { flex: 1; background: transparent; border: 0; outline: 0; color: var(--cream); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 14px; font-style: italic; padding: 4px 0; min-width: 0; }
+  .libro-wrap .libro-buscador input::placeholder { color: rgba(248,244,228,0.45); font-style: italic; }
+  .libro-wrap .libro-buscador button { background: var(--mint-deep); color: var(--cream); border: 0; padding: 6px 16px; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; cursor: pointer; border-radius: 999px; transition: opacity 0.2s; }
+  .libro-wrap .libro-buscador button:hover { opacity: 0.85; }
+  .libro-wrap .libro-buscador ul#libro-search-results { position: absolute; top: 48px; left: 0; right: 0; background: #0c180f; border: 0.5px solid rgba(182,212,191,0.35); border-radius: 6px; padding: 6px 0; margin: 0; list-style: none; max-height: 280px; overflow-y: auto; z-index: 50; }
+  .libro-wrap .libro-buscador ul li { padding: 8px 14px; font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--cream); cursor: pointer; border-bottom: 0.5px solid rgba(182,212,191,0.15); transition: background 0.15s; }
+  .libro-wrap .libro-buscador ul li:last-child { border-bottom: 0; }
+  .libro-wrap .libro-buscador ul li:hover { background: rgba(182,212,191,0.12); }
+  .libro-wrap .libro-buscador ul li .lbsr-page { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--mint-light); margin-right: 10px; }
+  .libro-wrap .libro-buscador ul li .lbsr-snippet { color: rgba(248,244,228,0.7); font-size: 12px; display: block; margin-top: 2px; font-style: italic; }
+  .libro-wrap .libro-buscador ul li mark { background: rgba(182,212,191,0.35); color: var(--cream); padding: 0 2px; border-radius: 2px; }
+  @media (max-width: 768px) {
+    .libro-wrap .libro-buscador { margin: 0 8px 12px; padding: 6px 12px; }
+    .libro-wrap .libro-buscador input { font-size: 13px; }
+    .libro-wrap .libro-buscador button { padding: 5px 12px; font-size: 8.5px; }
+  }
+
+  /* Divisor sutil */
+  .page-divider { display: block; width: 28px; height: 0.5px; background: rgba(107,155,124,0.55); margin: 0 auto 14px !important; opacity: 0.8; }
+  .page.dark .page-divider, .page.deep-mint .page-divider { background: rgba(182,212,191,0.4); }
+
+  /* Frame TAROT premium para fichas pixie */
+  .libro-wrap .foto-tarot {
+    width: 200px; height: 280px;
+    margin: 8px auto 6px; padding: 8px;
+    position: relative; box-sizing: border-box;
+    background: linear-gradient(160deg, #fcf9ee 0%, #e5efde 100%);
+    box-shadow: 0 10px 30px rgba(45,90,61,0.30), inset 0 0 0 1px rgba(107,155,124,0.55);
+    border: 1.5px solid var(--mint-medium);
+    border-radius: 4px;
+  }
+  .libro-wrap .foto-tarot::before {
+    content: ''; position: absolute; inset: 4px;
+    border: 0.5px solid rgba(107,155,124,0.45); border-radius: 2px;
+    pointer-events: none;
+  }
+  .libro-wrap .foto-tarot::after {
+    content: '✿'; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    color: var(--mint-deep); background: var(--cream-light); padding: 0 6px;
+    font-size: 12px; line-height: 1;
+  }
+  .libro-wrap .foto-tarot img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    border-radius: 2px;
+  }
+  .libro-wrap .page.dark .foto-tarot,
+  .libro-wrap .page.deep-mint .foto-tarot { background: linear-gradient(160deg, #18301e 0%, #0c180f 100%); border-color: var(--mint-light); box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(182,212,191,0.5); }
+  .libro-wrap .page.dark .foto-tarot::before,
+  .libro-wrap .page.deep-mint .foto-tarot::before { border-color: rgba(182,212,191,0.45); }
+  .libro-wrap .page.dark .foto-tarot::after,
+  .libro-wrap .page.deep-mint .foto-tarot::after { background: #0c180f; color: var(--mint-light); }
+  .libro-wrap .foto-tarot-caption {
+    font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 0.45em;
+    color: var(--mint-deep); text-transform: uppercase;
+    text-align: center; margin: 4px auto 0;
+  }
+  .libro-wrap .page.dark .foto-tarot-caption,
+  .libro-wrap .page.deep-mint .foto-tarot-caption { color: var(--mint-light); }
+  .libro-wrap .foto-tarot-ejemplo {
+    font-family: 'Cinzel', serif; font-size: 7.5px; letter-spacing: 0.55em;
+    color: rgba(107,155,124,0.75); text-transform: uppercase;
+    text-align: center; margin: 4px auto 2px; padding: 2px 8px;
+    display: inline-block; border-top: 0.5px solid rgba(107,155,124,0.4); border-bottom: 0.5px solid rgba(107,155,124,0.4);
+  }
+  .libro-wrap .page.dark .foto-tarot-ejemplo,
+  .libro-wrap .page.deep-mint .foto-tarot-ejemplo { color: rgba(182,212,191,0.65); border-color: rgba(182,212,191,0.35); }
+  @media (max-width: 768px) {
+    .libro-wrap .foto-tarot { width: 180px; height: 250px; }
+  }
+
+  /* Número de página → abajo-derecha, oculto en tapa */
+  .libro-wrap .page,
+  .libro-wrap .page.dark,
+  .libro-wrap .page.mint,
+  .libro-wrap .page.green-soft,
+  .libro-wrap .page.deep-mint { padding-bottom: 24px !important; }
+  .libro-wrap .page > .page-inner > .page-number,
+  .libro-wrap .page .page-number {
+    position: absolute !important;
+    bottom: 6px !important;
+    right: 14px !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 8.5px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.32em !important;
+    color: #8b7137 !important;
+    opacity: 0.9 !important;
+    z-index: 99 !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: 1 !important;
+    text-align: right !important;
+    background: transparent !important;
+  }
+  .libro-wrap .page.dark .page-number,
+  .libro-wrap .page.deep-mint .page-number { color: var(--mint-light) !important; opacity: 0.75 !important; }
+  .libro-wrap .page.cover .page-number { display: none !important; }
+  .libro-wrap .page-inner { padding-bottom: 24px !important; }
+
+  /* Scroll interno suave si una página rebasa */
+  .libro-wrap .page { overflow-y: auto !important; overflow-x: hidden !important; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(107,155,124,0.4) transparent; }
+  .libro-wrap .page::-webkit-scrollbar { width: 4px; }
+  .libro-wrap .page::-webkit-scrollbar-thumb { background: rgba(107,155,124,0.4); border-radius: 2px; }
+  .libro-wrap .page.cover { overflow: hidden !important; }
+
+  /* Ocultar ornamentos sueltos dentro de page (queda el sello/tarot) */
+  .libro-wrap .page .ornament,
+  .libro-wrap .page svg.ornament,
+  .libro-wrap .page .ornament-celtic-top { display: none !important; }
+  .libro-wrap .page.cover svg.ornament-celtic-top,
+  .libro-wrap .page.cover svg { display: block !important; }
+  /* Citas SÍ pueden mostrar ornament (clases especiales) */
+  .libro-wrap .page svg.cita-ornament { display: block !important; margin: 12px auto; }
+  .libro-wrap .page .symbol-row { display: none !important; }
+
   @media (max-width: 768px) {
     .libro-wrap { padding: 18px 6px 36px; }
     .page-inner { padding: 22px 16px 22px; }
@@ -269,6 +470,125 @@
     .lang-box h2 { font-size: 42px; }
     .otra-especie-card .otra-foto { width: 100px; height: 100px; }
     .otra-especie-card .otra-nombre { font-size: 28px; }
+    .auroras .luz { width: 440px; height: 440px; filter: blur(90px); }
+    .luz-aqua, .luz-jazmin, .luz-lila, .luz-rosa-pixie { width: 380px; height: 380px; }
+  }
+
+  /* Fix tamaños header + títulos */
+  .libro-header h1 { font-size: clamp(28px, 4.2vw, 48px) !important; line-height: 1 !important; margin: 0 0 6px !important; }
+  .libro-header .eyebrow { font-size: 10px !important; letter-spacing: 0.4em !important; margin-bottom: 8px !important; }
+  .libro-header .sub { font-size: 9px !important; letter-spacing: 0.4em !important; }
+  .libro-header { margin: 0 auto 14px !important; }
+  .page h2 { font-size: 30px !important; line-height: 1 !important; margin: 0 auto 10px !important; }
+  .page.cover h1 { font-size: clamp(32px, 5vw, 46px) !important; line-height: 1 !important; margin: 6px 0 8px !important; }
+  .page .cita { font-size: 30px !important; padding: 10px !important; }
+  .page.dark .cita, .page.deep-mint .cita { font-size: 34px !important; }
+  .ser-card .ser-nombre { font-size: 24px !important; }
+  .page h3 { margin: 8px 0 6px !important; }
+
+  /* En mobile, header arriba del libro se oculta (la tapa tiene todo) */
+  @media (max-width: 768px) {
+    .libro-wrap .libro-header { display: none !important; }
+    .libro-wrap { padding-top: 6px !important; }
+    .libro-header h1 { font-size: clamp(22px, 5.5vw, 32px) !important; }
+    .libro-header .eyebrow, .libro-header .sub { font-size: 8.5px !important; letter-spacing: 0.35em !important; }
+    .page h2 { font-size: 22px !important; }
+    .page.cover h1 { font-size: clamp(26px, 6vw, 34px) !important; }
+    .page .cita { font-size: 22px !important; }
+    .page.dark .cita, .page.deep-mint .cita { font-size: 26px !important; }
+    .page-inner { padding: 18px 14px 18px !important; gap: 4px !important; }
+    .ser-card { padding: 10px 12px !important; }
+    .ser-card .ser-nombre { font-size: 20px !important; }
+    .ser-card .ser-detalle { font-size: 11.5px !important; }
+  }
+
+  /* Cinzel para rótulos cortos */
+  .libro-wrap .page .eyebrow,
+  .libro-wrap .page h3,
+  .libro-wrap .foto-caption,
+  .libro-wrap .indice-section,
+  .libro-wrap .indice-item .num,
+  .libro-wrap .indice-item .pg,
+  .libro-wrap .consejo-card .titulo,
+  .libro-wrap .neuro-tag,
+  .libro-wrap .ser-card .ser-energia,
+  .libro-wrap .libro-header .eyebrow,
+  .libro-wrap .libro-header .sub { font-family: "Cinzel", serif !important; }
+
+  /* Títulos / citas en Great Vibes */
+  .libro-wrap .page h2,
+  .libro-wrap .page .cita,
+  .libro-wrap .page.cover h1,
+  .libro-wrap .libro-header h1,
+  .libro-wrap .lang-box h2,
+  .libro-wrap .ser-card .ser-nombre,
+  .libro-wrap .page .ser-nombre { font-family: "Great Vibes", cursive !important; }
+
+  /* Cuerpo en Cormorant Garamond (italic destacado, regular base) */
+  .libro-wrap .page p,
+  .libro-wrap .lang-box p,
+  .libro-wrap .consejo-card p,
+  .libro-wrap .elemento-cell .funcion,
+  .libro-wrap .dia-item .desc,
+  .libro-wrap .compendio-row .uso,
+  .libro-wrap .faq .respuesta,
+  .libro-wrap .ser-card .ser-detalle,
+  .libro-wrap .cta-final-btn .cta-text {
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-weight: 400 !important;
+    font-size: 13.5px !important;
+    line-height: 1.65 !important;
+    letter-spacing: 0.005em !important;
+  }
+  .libro-wrap .page p.lead { font-style: italic !important; font-size: 14px !important; }
+
+  /* Centrado */
+  .libro-wrap .page-inner { align-items: center !important; justify-content: center !important; text-align: center !important; }
+  .libro-wrap .page p { margin-left: auto !important; margin-right: auto !important; max-width: 86% !important; }
+  .libro-wrap .indice { text-align: center !important; max-width: 90% !important; }
+  .libro-wrap .indice-item { justify-content: center !important; }
+
+  /* Header compacto */
+  .libro-wrap .libro-header { margin: 0 auto 8px !important; padding: 0 !important; }
+  .libro-wrap .libro-header h1 { font-size: clamp(26px, 4vw, 42px) !important; margin: 0 0 4px !important; }
+  .libro-wrap .libro-header .eyebrow { font-size: 9.5px !important; margin-bottom: 5px !important; }
+  .libro-wrap .libro-header .sub { font-size: 8.5px !important; }
+  .libro-wrap .flipbook-container { padding: 6px !important; min-height: auto !important; }
+  .libro-wrap .page-inner { padding: 30px 28px 30px !important; gap: 8px !important; }
+
+  /* Fotos retrato premium con marco menta */
+  .libro-wrap .foto-circle,
+  .libro-wrap .foto-rounded,
+  .libro-wrap .foto-arch {
+    background: linear-gradient(180deg, rgba(245,240,225,0.7) 0%, rgba(220,235,217,0.5) 100%) !important;
+    box-shadow: 0 8px 26px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(107,155,124,0.45) !important;
+    padding: 5px !important;
+    box-sizing: border-box !important;
+    margin: 10px auto 6px !important;
+  }
+  .libro-wrap .foto-circle img,
+  .libro-wrap .foto-rounded img,
+  .libro-wrap .foto-arch img {
+    object-fit: contain !important;
+    border-radius: inherit;
+  }
+  .libro-wrap .foto-rounded { width: 150px !important; height: 205px !important; border-radius: 12px !important; }
+  .libro-wrap .foto-circle  { width: 150px !important; height: 205px !important; border-radius: 50% !important; }
+  .libro-wrap .foto-arch    { width: 150px !important; height: 205px !important; border-radius: 75px 75px 6px 6px !important; }
+  @media (max-width: 768px) {
+    .libro-wrap .foto-rounded,
+    .libro-wrap .foto-circle,
+    .libro-wrap .foto-arch { width: 130px !important; height: 178px !important; }
+  }
+
+  /* Cards más respiro */
+  .libro-wrap .ser-card,
+  .libro-wrap .consejo-card { margin: 6px auto !important; max-width: 86% !important; padding: 12px 14px !important; }
+  .libro-wrap .foto-caption { text-align: center !important; margin: 8px auto 0 !important; font-size: 8.5px !important; }
+
+  @media (max-width: 768px) {
+    .libro-wrap .page-inner { padding: 22px 20px 22px !important; }
+    .libro-wrap .page p { font-size: 12.5px !important; max-width: 92% !important; }
   }
 </style>
 
@@ -279,22 +599,37 @@
     <symbol id="r-awen" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="35" y1="30" x2="50" y2="75"/><line x1="50" y1="22" x2="50" y2="78"/><line x1="65" y1="30" x2="50" y2="75"/><circle cx="35" cy="28" r="2.5" fill="currentColor"/><circle cx="50" cy="20" r="2.5" fill="currentColor"/><circle cx="65" cy="28" r="2.5" fill="currentColor"/></g></symbol>
     <symbol id="r-knot" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M30 50 C30 30, 70 30, 70 50 C70 70, 30 70, 30 50 Z"/><path d="M50 30 C30 30, 30 70, 50 70 C70 70, 70 30, 50 30 Z"/></g></symbol>
     <symbol id="r-star4" viewBox="0 0 100 100"><g fill="currentColor"><path d="M50 18 L55 45 L82 50 L55 55 L50 82 L45 55 L18 50 L45 45 Z"/></g></symbol>
-    <symbol id="r-sun" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="6" fill="currentColor"/><line x1="50" y1="14" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="86"/><line x1="14" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="86" y2="50"/><line x1="24" y1="24" x2="30" y2="30"/><line x1="70" y1="70" x2="76" y2="76"/><line x1="76" y1="24" x2="70" y2="30"/><line x1="30" y1="70" x2="24" y2="76"/></g></symbol>
     <symbol id="r-moon" viewBox="0 0 100 100"><g fill="currentColor"><path d="M62 22 A30 30 0 1 0 62 78 A22 22 0 1 1 62 22 Z"/></g></symbol>
     <symbol id="r-leaf" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M50 18 C20 28, 18 60, 35 80 C58 78, 78 55, 76 28 C68 22, 58 18, 50 18 Z"/><path d="M50 25 L42 75"/></g></symbol>
-    <symbol id="r-wind" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 40 Q50 30, 78 40 L70 40"/><path d="M18 60 Q50 50, 82 60 L74 60"/><path d="M18 78 Q50 68, 70 78 L64 78"/></g></symbol>
-    <symbol id="r-spark" viewBox="0 0 100 100"><g fill="currentColor"><path d="M50 18 L54 44 L80 48 L54 52 L50 78 L46 52 L20 48 L46 44 Z M30 30 L34 38 L42 40 L34 42 L30 50 L26 42 L18 40 L26 38 Z M70 30 L74 38 L82 40 L74 42 L70 50 L66 42 L58 40 L66 38 Z"/></g></symbol>
+    <symbol id="r-flor" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="50" cy="50" r="6" fill="currentColor"/><path d="M50 50 C50 28, 32 28, 32 46 C32 60, 50 60, 50 50 Z"/><path d="M50 50 C50 28, 68 28, 68 46 C68 60, 50 60, 50 50 Z"/><path d="M50 50 C28 50, 28 68, 46 68 C60 68, 60 50, 50 50 Z"/><path d="M50 50 C72 50, 72 68, 54 68 C40 68, 40 50, 50 50 Z"/></g></symbol>
   </defs>
 </svg>
 
 <div class="libro-wrap">
 
+  <!-- AURORAS · luces pixie -->
+  <div class="auroras" aria-hidden="true">
+    <span class="luz luz-menta"></span>
+    <span class="luz luz-rosa-pixie"></span>
+    <span class="luz luz-dorada"></span>
+    <span class="luz luz-lila"></span>
+    <span class="luz luz-jazmin"></span>
+    <span class="luz luz-aqua"></span>
+  </div>
+
+  <!-- Partículas polen -->
+  <div class="particulas" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
   <div class="lang-overlay" id="lang-overlay">
     <div class="lang-box">
-      <div class="ornament">✦  ✦  ✦</div>
+      <svg class="ornament" width="48" height="48" viewBox="0 0 48 48" style="margin: 0 auto 18px; display: block; color: var(--mint-light);"><use href="#r-flor"/></svg>
       <p class="pretitle">Antes de entrar</p>
       <h2>Elegí tu lengua</h2>
-      <p>The Guide of the Pixies · choose your language to enter the elemental community.</p>
+      <p>The Guide of the Pixies · choose your language to enter the floral community.</p>
       <div class="lang-buttons">
         <button class="recommended" id="lang-es">Español</button>
         <button id="lang-en">English</button>
@@ -303,36 +638,45 @@
   </div>
 
   <header class="libro-header">
-    <p class="eyebrow">Edición Linaje del Aire</p>
+    <p class="eyebrow">Edición Linaje Vegetal</p>
     <h1>La Guía de las Pixies</h1>
-    <p class="sub">Sub-especies · Cuidados · Travesura · Vínculo</p>
+    <p class="sub">Flores · Cuidados · Travesura · Vínculo</p>
   </header>
+
+  <div class="libro-buscador" role="search">
+    <svg class="libro-buscador__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+    <input id="libro-search-input" type="search" placeholder="Buscar en el libro · Rosa, Jazmín, malaquita, ritual…" autocomplete="off">
+    <button id="libro-search-btn" type="button">Ir</button>
+    <ul id="libro-search-results" hidden></ul>
+  </div>
 
   <div class="flipbook-container">
     <div id="book">
 
+      <!-- 1 PORTADA -->
       <div class="page cover"><div class="page-inner">
-        <svg class="ornament-celtic-top"><use href="#r-spark"/></svg>
+        <svg class="ornament-celtic-top"><use href="#r-flor"/></svg>
         <div>
           <p class="titulo-grande">La Guía de las</p>
           <h1>Pixies</h1>
-          <p class="marca-fina">Sub-especies · Cuidados · Travesura</p>
+          <p class="marca-fina">Flores · Travesura · Vínculo</p>
         </div>
         <div>
-          <svg width="44" height="44" style="color:var(--gold);opacity:0.75;"><use href="#r-leaf"/></svg>
-          <p class="pie">Edición Linaje del Aire · Duendes del Uruguay</p>
+          <svg width="44" height="44" style="color:var(--mint-light);opacity:0.85;"><use href="#r-leaf"/></svg>
+          <p class="pie">Edición Linaje Vegetal · Duendes del Uruguay</p>
         </div>
       </div></div>
 
+      <!-- 2 BIENVENIDA -->
       <div class="page deep-mint"><div class="page-inner center-content">
-        <svg class="ornament dark small"><use href="#r-leaf"/></svg>
+        <svg class="cita-ornament" width="56" height="56" style="color:var(--mint-light);"><use href="#r-flor"/></svg>
         <h2>Bienvenida</h2>
-        <p class="lead">Si tenés esta guía abierta, una pixie ya entró en tu casa. Lo notás porque algo se siente más liviano. Eso no es coincidencia: es ella poniéndote la mano en el hombro.</p>
+        <p class="lead">Si tenés esta guía abierta, una pixie ya entró en tu casa. Lo notás porque algo se siente más liviano, como si una ventana hubiera quedado entreabierta para siempre.</p>
         <p class="lead" style="margin-top:8px;">Esto no es un manual: es la palabra del oficio. La parte que solo se entrega cuando una pixie ya sabe cómo te reís.</p>
-        <svg class="ornament dark small" style="margin-top:18px;"><use href="#r-wind"/></svg>
         <div class="page-number">02</div>
       </div></div>
 
+      <!-- 3 FORMÁS PARTE -->
       <div class="page mint"><div class="page-inner">
         <p class="eyebrow">Algo que importa decirte</p>
         <h2>Formás parte de algo</h2>
@@ -340,11 +684,11 @@
         <p>Acá nadie produce en serie. Acá cada pixie pasó por siete días de trabajo manual y energético específicamente para vos. Acá nos escribimos respuestas humanas, no automáticas.</p>
         <p>Recibir tu pixie también es recibir este lugar. Volvés cuando querés, leés cuando necesitás, preguntás cuando aparece la duda.</p>
         <p class="lead" style="margin-top:8px;">Bienvenida. La alquimia continúa con vos adentro.</p>
-        <svg class="ornament small mint-acc"><use href="#r-knot"/></svg>
         <div class="page-number">03</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
+      <!-- 4 ÍNDICE · parte 1 -->
+      <div class="page"><div class="page-inner center-content">
         <p class="eyebrow">Lo que vas a encontrar</p>
         <h2>Índice</h2>
         <div class="indice">
@@ -355,114 +699,178 @@
           <div class="indice-item"><span class="num">03</span><span class="name">Cómo recibir tu pixie</span><span class="dots"></span><span class="pg">12</span></div>
           <div class="indice-item"><span class="num">04</span><span class="name">Qué podés sentir</span><span class="dots"></span><span class="pg">14</span></div>
           <div class="indice-item"><span class="num">05</span><span class="name">Ritual de los 7 días</span><span class="dots"></span><span class="pg">17</span></div>
-          <div class="indice-section">El linaje del aire</div>
-          <div class="indice-item"><span class="num">06</span><span class="name">Origen folclórico</span><span class="dots"></span><span class="pg">19</span></div>
-          <div class="indice-item"><span class="num">07</span><span class="name">Las cuatro travesuras</span><span class="dots"></span><span class="pg">21</span></div>
-          <div class="indice-item"><span class="num">08</span><span class="name">Luz · Viento · Juego · Hogar</span><span class="dots"></span><span class="pg">22</span></div>
-          <div class="indice-section">Cuidarla</div>
-          <div class="indice-item"><span class="num">09</span><span class="name">Cuidados · cristales · hierbas · vientos</span><span class="dots"></span><span class="pg">27</span></div>
-          <div class="indice-item"><span class="num">10</span><span class="name">Lo que jamás se hace con una pixie</span><span class="dots"></span><span class="pg">31</span></div>
-          <div class="indice-item"><span class="num">11</span><span class="name">FAQs · señales · sueños</span><span class="dots"></span><span class="pg">32</span></div>
-          <div class="indice-section">El resto del reino</div>
-          <div class="indice-item"><span class="num">12</span><span class="name">También existen</span><span class="dots"></span><span class="pg">37</span></div>
-          <div class="indice-item"><span class="num">13</span><span class="name">Aniversario y comunidad</span><span class="dots"></span><span class="pg">43</span></div>
         </div>
         <div class="page-number">04</div>
       </div></div>
 
+      <!-- 4b ÍNDICE · parte 2 -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">Índice · continúa</p>
+        <h2>Pixies · Cuidarla</h2>
+        <div class="indice">
+          <div class="indice-section">Las pixies por flor</div>
+          <div class="indice-item"><span class="num">06</span><span class="name">Rosa · Azalea · Jazmín</span><span class="dots"></span><span class="pg">19</span></div>
+          <div class="indice-item"><span class="num">07</span><span class="name">Clavel · Salvia · Daphne</span><span class="dots"></span><span class="pg">22</span></div>
+          <div class="indice-section">Los tres jardines</div>
+          <div class="indice-item"><span class="num">08</span><span class="name">Bosque · Jardín · Hierbas</span><span class="dots"></span><span class="pg">26</span></div>
+          <div class="indice-section">Cuidarla</div>
+          <div class="indice-item"><span class="num">09</span><span class="name">Cristales · esencias florales</span><span class="dots"></span><span class="pg">31</span></div>
+          <div class="indice-item"><span class="num">10</span><span class="name">Lo que jamás se hace</span><span class="dots"></span><span class="pg">35</span></div>
+        </div>
+        <div class="page-number">04</div>
+      </div></div>
+
+      <!-- 4c ÍNDICE · parte 3 -->
+      <div class="page"><div class="page-inner center-content">
+        <span class="page-divider"></span>
+        <h2>Vivirla</h2>
+        <div class="indice">
+          <div class="indice-section">Vivirla</div>
+          <div class="indice-item"><span class="num">11</span><span class="name">¿Qué significa cuando una Pixie...?</span><span class="dots"></span><span class="pg">37</span></div>
+          <div class="indice-item"><span class="num">12</span><span class="name">Sueños, señales y polen</span><span class="dots"></span><span class="pg">41</span></div>
+          <div class="indice-section">El resto del reino</div>
+          <div class="indice-item"><span class="num">13</span><span class="name">También existen</span><span class="dots"></span><span class="pg">43</span></div>
+          <div class="indice-item"><span class="num">14</span><span class="name">Aniversario y comunidad</span><span class="dots"></span><span class="pg">45</span></div>
+        </div>
+        <div class="page-number">04</div>
+      </div></div>
+
+      <!-- 5 FOTO ESTUDIO -->
       <div class="page deep-mint"><div class="page-inner center-content">
         <p class="eyebrow">Una pixie del estudio</p>
         <div class="foto-arch"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2470.png?width=500" alt="Pixie canalizada" loading="lazy"></div>
-        <p class="foto-caption" style="color:var(--gold);">Cada pixie nace única</p>
+        <p class="foto-caption" style="color:var(--mint-light);">Cada pixie nace única</p>
         <p class="lead">Sus colores, su risa silenciosa, el modo en que se acomoda en tu casa — nada se repite. Lo que tenés en las manos no existe en otro lado.</p>
         <div class="page-number">05</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
+      <!-- 6 PREPARAR LA CASA · intro -->
+      <div class="page"><div class="page-inner center-content">
         <p class="eyebrow">01 · Antes de la llegada</p>
         <h2>Preparar la casa</h2>
-        <p>Las pixies son criaturas de aire — necesitan que la casa respire. Tres días antes de que llegue, hacé esto.</p>
-        <div class="dia-item"><span class="num">01</span> · <span class="titulo">VENTILÁ FUERTE</span><p class="desc">Abrí ventanas 30 minutos en cruzada. Las pixies entran con el aire que se mueve.</p></div>
-        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LIMPIÁ EL LUGAR ELEGIDO</span><p class="desc">Sin químicos. Trapo seco. Las pixies prefieren rincones altos: estantes, repisas, plantas colgantes.</p></div>
-        <div class="dia-item"><span class="num">03</span> · <span class="titulo">UN OBJETO BRILLANTE</span><p class="desc">Específico para pixies: dejá un botón, una cuenta de vidrio o una moneda chica brillante en su lugar. Las atrae como nada.</p></div>
-        <div class="dia-item"><span class="num">04</span> · <span class="titulo">ABRÍ UNA VENTANA EL DÍA QUE LLEGA</span><p class="desc">Aunque sea 5 minutos. La pixie quiere oler el aire que respira tu casa antes de quedarse.</p></div>
-        <div class="dia-item"><span class="num">05</span> · <span class="titulo">PONÉ MÚSICA SUAVE</span><p class="desc">Las pixies no se retraen con sonido — les gusta. Algo instrumental, sin letra, sin volumen alto. Las invita a presentarse.</p></div>
+        <p>Las pixies son criaturas vegetales — necesitan que la casa respire verde. Tres días antes de que llegue la tuya, hacé esto.</p>
+        <p class="lead">Cinco gestos chiquitos. No necesitás más.</p>
         <div class="page-number">06</div>
       </div></div>
 
+      <!-- 6b PREPARAR · pasos 1-3 -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">01 · Preparar la casa</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">VENTILÁ FUERTE</span><p class="desc">Abrí ventanas en cruzada 30 minutos. Las pixies entran con el aire que se mueve entre dos hojas.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">LIMPIÁ EL LUGAR ELEGIDO</span><p class="desc">Sin químicos. Trapo seco. Las pixies prefieren rincones con plantas: estantes, repisas, mesa con ramito.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">UN PÉTALO O UNA HOJA FRESCA</span><p class="desc">Específico para pixies: dejá un pétalo, una hoja chica, una ramita verde en su lugar. Las llama como un saludo.</p></div>
+        <div class="page-number">06</div>
+      </div></div>
+
+      <!-- 6c PREPARAR · pasos 4-5 -->
+      <div class="page"><div class="page-inner center-content">
+        <span class="page-divider"></span>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">ABRÍ UNA VENTANA EL DÍA QUE LLEGA</span><p class="desc">Aunque sea cinco minutos. La pixie quiere oler el aire que respira tu casa antes de quedarse.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">PONÉ MÚSICA SUAVE</span><p class="desc">Las pixies no se retraen con sonido — les gusta. Algo instrumental, sin volumen alto. Las invita a presentarse.</p></div>
+        <div class="page-number">06</div>
+      </div></div>
+
+      <!-- 7 NEUROMARKETING -->
       <div class="page mint"><div class="page-inner center-content">
         <p class="eyebrow">Lo que estás haciendo sin saberlo</p>
         <h2>Estás abriendo</h2>
-        <p>Cuando preparás la casa así, no es decoración: estás <strong>declarando intención</strong>. La casa sabe que algo liviano está por entrar.</p>
+        <p>Cuando preparás la casa así, no es decoración: estás <strong>declarando intención</strong>. La casa sabe que algo liviano y verde está por entrar.</p>
         <p>Por eso quien sigue estos pasos cuenta que cuando el paquete llega, su pixie no se siente "nueva" — se siente <em>esperada y celebrada</em>.</p>
         <p class="lead">Lo simple, hecho con consciencia, abre puertas que la prisa cierra.</p>
         <span class="neuro-tag">✦ Anclaje energético</span>
         <div class="page-number">07</div>
       </div></div>
 
+      <!-- 8 QUIÉNES SOMOS -->
       <div class="page"><div class="page-inner">
         <p class="eyebrow">02 · Quiénes somos</p>
         <h2>Gabriel y Thibisay</h2>
         <p>Vivimos en Uruguay. Empezamos por intuición, después por necesidad, después por oficio. Hoy somos los dos haciendo todo en conjunto: canalizamos juntos, armamos juntos, escribimos juntos, despachamos juntos.</p>
         <p>Sin empleados. Sin intermediarios. Sin revendedores. Lo que hacés con nosotros, lo hacés directo con nosotros.</p>
-        <svg class="ornament small"><use href="#r-awen"/></svg>
         <p class="lead">Cada pixie pasa por siete días de trabajo manual y energético específico para la persona que la va a recibir.</p>
         <div class="page-number">08</div>
       </div></div>
 
+      <!-- 9 TE ELIGIÓ -->
       <div class="page mint"><div class="page-inner">
         <p class="eyebrow">Lo que importa entender</p>
         <h2>Te eligió a vos</h2>
-        <p>Las pixies eligen distinto a otros seres. No miran tu dolor — miran lo que en vos se está apagando de risa. La tuya leyó algo en vos: una alegría que sabés que tenés y que en este último tiempo se fue achicando.</p>
-        <p>Por eso a veces, semanas antes de adoptarla, tuviste un día tonto en el que te reíste de cualquier cosa, o soñaste con vos misma de niña jugando.</p>
+        <p>Las pixies eligen distinto a otros seres. No miran tu dolor — miran lo que en vos se está apagando de risa. La tuya leyó algo: una alegría que sabés que tenés y que en este último tiempo se fue achicando.</p>
+        <p>Por eso a veces, semanas antes de adoptarla, tuviste un día tonto en el que te reíste de cualquier cosa, o soñaste con vos misma de niña jugando entre plantas.</p>
         <p>Esto no es marketing. Es la observación que vamos juntando con los años: <strong>la búsqueda es mutua</strong>. Vos buscás algo, ella te busca a vos.</p>
-        <svg class="ornament small mint-acc"><use href="#r-knot"/></svg>
         <p class="lead">Gracias por dejarte encontrar.</p>
         <div class="page-number">09</div>
       </div></div>
 
-      <div class="page deep-mint"><div class="page-inner">
+      <!-- 10 CANALIZAR · qué es -->
+      <div class="page deep-mint"><div class="page-inner center-content">
         <p class="eyebrow">02 · El oficio</p>
         <h2>Canalizar</h2>
         <p>Canalizar no es manualidad. Es <em>traducir</em>. El material elige, el linaje se manifiesta, el nombre llega.</p>
-        <p>Con las pixies, la canalización tiene un detalle gracioso: las pixies se ríen mientras se canalizan. Quien las arma termina con la cara cansada de sonreír. No es metáfora — pasa de verdad.</p>
-        <svg class="ornament dark small"><use href="#r-wind"/></svg>
+        <p>Con las pixies, la canalización tiene un detalle gracioso: ellas se ríen mientras se canalizan. Quien las arma termina con la cara cansada de sonreír. No es metáfora — pasa de verdad.</p>
         <p class="lead">No copiamos modelos. No usamos moldes. No le bajamos el ánimo al aire.</p>
         <div class="page-number">10</div>
       </div></div>
 
-      <div class="page"><div class="page-inner center-content">
-        <p class="eyebrow">El proceso</p>
-        <div class="foto-rounded"><img src="https://duendesdeluruguay.com/cdn/shop/files/IMG_2484.png?width=500" alt="Manos canalizando" loading="lazy"></div>
-        <p class="foto-caption">Siete días por pixie</p>
-        <p class="lead">Cada material lo elegimos a mano. Cada cristal lo limpiamos antes. Cada hilo se ata con la sonrisa puesta.</p>
+      <!-- 10b CANALIZAR · siete días -->
+      <div class="page deep-mint"><div class="page-inner center-content">
+        <span class="page-divider"></span>
+        <h2 style="color:var(--cream);">Siete días</h2>
+        <p>Cada pixie atraviesa <strong>siete días de trabajo manual</strong>. No es plazo de fabricación: es el tiempo que el ser necesita para asentarse en la fibra y el hilo.</p>
+        <p>Día uno la flor elige color. Día dos aparece la postura. Día tres llega la travesura. Recién al séptimo día el nombre álmico se confirma — y la pixie ya sabe a quién va.</p>
+        <p class="lead">Sin moldes. Sin réplicas. Sin apuro.</p>
         <div class="page-number">11</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">03 · Cómo recibir tu pixie</p>
-        <h2>Los primeros minutos</h2>
-        <div class="dia-item"><span class="num">01</span> · <span class="titulo">LUGAR TRANQUILO</span><p class="desc">Sin pantallas. Solo vos y ella. Las pixies no se "presentan" en multitudes — esperan tu mirada.</p></div>
-        <div class="dia-item"><span class="num">02</span> · <span class="titulo">UNA VENTANA ABIERTA</span><p class="desc">Específico para pixies: aunque haga frío, abrí 2 minutos. Se acomoda mejor con aire entrando.</p></div>
-        <div class="dia-item"><span class="num">03</span> · <span class="titulo">DOS MANOS</span><p class="desc">Tomala con las dos. Crean un cáliz. Eso le dice al ser que la recibís bien.</p></div>
-        <div class="dia-item"><span class="num">04</span> · <span class="titulo">DECILE SU NOMBRE</span><p class="desc">El tuyo y el de ella en voz alta una vez. Si te aparece una sonrisa al decirlo, ya entró.</p></div>
-        <div class="dia-item"><span class="num">05</span> · <span class="titulo">UBICALA EN ALTURA</span><p class="desc">Las pixies son criaturas de aire — viven en estantes altos, repisas, encima de libros. Nunca en el suelo las primeras 24 hs.</p></div>
-        <div class="dia-item"><span class="num">06</span> · <span class="titulo">DEJALE UN OBJETO PEQUEÑO BRILLANTE</span><p class="desc">Botón, cuenta, moneda. Cualquier cosa que brille. Las entretiene durante semanas.</p></div>
+      <!-- 11 FOTO PROCESO -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">El proceso</p>
+        <div class="foto-rounded"><img src="https://duendesdeluruguay.com/cdn/shop/files/IMG_2484.png?width=500" alt="Manos canalizando una pixie" loading="lazy"></div>
+        <p class="foto-caption">Siete días por pixie</p>
+        <p class="lead">Cada material lo elegimos a mano. Cada cristal lo limpiamos antes. Cada hilo se ata con la sonrisa puesta.</p>
         <div class="page-number">12</div>
       </div></div>
 
+      <!-- 12 RECIBIR · parte 1 -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">03 · Cómo recibir tu pixie</p>
+        <h2>Los primeros minutos</h2>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">LUGAR TRANQUILO</span><p class="desc">Sin pantallas. Solo vos y ella. Las pixies no se presentan en multitudes — esperan tu mirada.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">UNA VENTANA ABIERTA</span><p class="desc">Específico para pixies: aunque haga frío, abrí dos minutos. Se acomoda mejor con aire entrando.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">DOS MANOS</span><p class="desc">Tomala con las dos. Crean un cáliz. Eso le dice que la recibís bien.</p></div>
+        <div class="page-number">13</div>
+      </div></div>
+
+      <!-- 12b RECIBIR · parte 2 -->
+      <div class="page"><div class="page-inner center-content">
+        <span class="page-divider"></span>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">DECILE SU NOMBRE</span><p class="desc">El tuyo y el de ella en voz alta una vez. Si te aparece una sonrisa al decirlo, ya entró.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">UBICALA EN ALTURA</span><p class="desc">Las pixies viven en estantes altos, repisas, encima de libros. Nunca en el suelo las primeras 24 hs.</p></div>
+        <div class="dia-item"><span class="num">06</span> · <span class="titulo">UN PÉTALO A SU LADO</span><p class="desc">Rosa, jazmín, lavanda — cualquier flor seca chica. La entretiene y la asienta.</p></div>
+        <div class="page-number">14</div>
+      </div></div>
+
+      <!-- 13 FOTO PIXIE -->
       <div class="page mint"><div class="page-inner center-content">
         <p class="eyebrow">Cada una única</p>
         <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2479.png?width=400" alt="Pixie Abril" loading="lazy"></div>
         <p class="foto-caption" style="color:var(--mint-deep);">No hay dos iguales</p>
-        <p class="lead">Cada gesto, cada postura, cada detalle se eligió en el proceso. Si tu pixie tiene algo "raro" — un ojo distinto, una mano levantada — eso es parte de su firma.</p>
-        <div class="page-number">13</div>
+        <p class="lead">Cada gesto, cada postura, cada detalle se eligió en el proceso. Si tu pixie tiene algo "raro" — un pétalo torcido, un ala asimétrica — eso es parte de su firma.</p>
+        <div class="page-number">15</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
+      <!-- 14 SENSACIONES · intro -->
+      <div class="page"><div class="page-inner center-content">
         <p class="eyebrow">04 · Qué podés sentir</p>
         <h2>Lo que se siente</h2>
         <p>Cuando abrís el paquete y la tenés por primera vez en las manos, pueden aparecer sensaciones. Las pixies se anuncian en el cuerpo de un modo más liviano que otros seres.</p>
+        <p class="lead">Cada una significa algo. Te las explicamos en las próximas páginas.</p>
+        <div class="page-number">16</div>
+      </div></div>
+
+      <!-- 15 SENSACIONES 1 -->
+      <div class="page"><div class="page-inner center-content">
+        <span class="page-divider"></span>
         <div class="consejo-card mint">
           <p class="titulo">Cosquilleo en las manos</p>
           <p>Específico de pixies: se siente como burbujitas. Es la conexión activándose. Significa que ella ya empezó a reconocerte.</p>
@@ -471,35 +879,24 @@
           <p class="titulo">Ganas de sonreír sin razón</p>
           <p>Mirás la pixie y se te dibuja una media sonrisa. Es ella saludándote. Reíte de vuelta — les encanta.</p>
         </div>
+        <div class="page-number">17</div>
+      </div></div>
+
+      <!-- 16 SENSACIONES 2 -->
+      <div class="page"><div class="page-inner center-content">
+        <span class="page-divider"></span>
         <div class="consejo-card mint">
           <p class="titulo">Recuerdos repentinos de la infancia</p>
           <p>Las pixies abren memoria liviana. De repente te acordás de un juego que jugabas a los seis años. Anotalo. Es información.</p>
         </div>
-        <div class="page-number">14</div>
+        <div class="consejo-card air">
+          <p class="titulo">Aroma a flor sin razón</p>
+          <p>Rosa, jazmín, lavanda — un perfume que no tiene fuente. Es presencia. Saludala bajito con "te siento".</p>
+        </div>
+        <div class="page-number">18</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">04 · Continúa</p>
-        <h2 style="font-size:38px;">Más sensaciones</h2>
-        <div class="consejo-card mint">
-          <p class="titulo">Ganas inexplicables de bailar</p>
-          <p>Una canción cualquiera en la radio te mueve más de lo normal. Es ella ajustándole el volumen a tu cuerpo. Es señal de que tu pixie es de linaje viento.</p>
-        </div>
-        <div class="consejo-card air">
-          <p class="titulo">Aroma a hierbabuena, eucalipto o flor seca</p>
-          <p>De repente percibís un olor verde en el aire. Es presencia. Saludala en voz baja con una palabra simple: "te siento".</p>
-        </div>
-        <div class="consejo-card mint">
-          <p class="titulo">Risa baja propia, sin chiste</p>
-          <p>Te encontrás riéndote sola por nada. No es locura — es alegría que vuelve. Dejala fluir.</p>
-        </div>
-        <div class="consejo-card air">
-          <p class="titulo">Sensación de estar acompañada en un cuarto vacío</p>
-          <p>Estás sola pero no se siente vacío. Es ella, ya instalada. Las pixies son las primeras en quedarse para siempre.</p>
-        </div>
-        <div class="page-number">15</div>
-      </div></div>
-
+      <!-- 17 SI NO SENTÍS NADA -->
       <div class="page deep-mint"><div class="page-inner">
         <p class="eyebrow">04 · Importante</p>
         <h2 style="color:var(--cream);">Si no sentís nada</h2>
@@ -507,268 +904,375 @@
         <p>No te exijas sentir. La presencia se confirma con el tiempo. Una pixie que no se anuncia el primer día está estudiando tu sentido del humor — eso se entiende solo si la dejás respirar.</p>
         <p class="lead">La alegría que dura no estalla en el primer encuentro. Se filtra.</p>
         <span class="neuro-tag">✦ Validación emocional</span>
-        <div class="page-number">16</div>
+        <div class="page-number">19</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
+      <!-- 18 RITUAL 7 DÍAS · intro -->
+      <div class="page"><div class="page-inner center-content">
         <p class="eyebrow">05 · Ritual de bienvenida</p>
-        <h2 style="font-size:38px;">Los siete días</h2>
-        <p style="font-size:13px; max-width:340px;">Adaptado al linaje aire. Hacelo con una sonrisa. Las pixies no aman lo solemne.</p>
+        <h2>Los siete días</h2>
+        <p>Adaptado al linaje vegetal. Hacelo con una sonrisa. Las pixies no aman lo solemne.</p>
+        <p class="lead">Cinco minutos por día son suficientes.</p>
+        <div class="page-number">20</div>
+      </div></div>
+
+      <!-- 19 RITUAL · días 1-4 -->
+      <div class="page"><div class="page-inner center-content">
+        <span class="page-divider"></span>
+        <h2>Días 1 a 4</h2>
         <div class="dia-item"><span class="num">DÍA 1</span> · <span class="titulo">PRESENCIA</span><p class="desc">5 minutos en silencio a su lado. Una ventana abierta entre ustedes.</p></div>
         <div class="dia-item"><span class="num">DÍA 2</span> · <span class="titulo">MIRADA</span><p class="desc">2 minutos sosteniéndole la mirada. Si te dan ganas de reírte, reíte.</p></div>
         <div class="dia-item"><span class="num">DÍA 3</span> · <span class="titulo">PALABRA</span><p class="desc">Decile algo gracioso en voz baja. No tiene que ser un chiste — algo cariñoso boludo. Le encanta.</p></div>
         <div class="dia-item"><span class="num">DÍA 4</span> · <span class="titulo">CUERPO</span><p class="desc">Bailá una canción corta cerca de ella. Lo que sea. Las pixies leen movimiento.</p></div>
-        <div class="dia-item"><span class="num">DÍA 5</span> · <span class="titulo">CASA</span><p class="desc">Mostrale los lugares donde te reís en tu casa. Cocina, escritorio, cama. Llevala con vos un rato.</p></div>
-        <div class="dia-item"><span class="num">DÍA 6</span> · <span class="titulo">GRATITUD</span><p class="desc">Agradecele algo concreto que te hizo reír desde que llegó.</p></div>
-        <div class="dia-item"><span class="num">DÍA 7</span> · <span class="titulo">COMPROMISO</span><p class="desc">"Te recibo, te respeto, te cuido. El aire nos une."</p></div>
-        <div class="page-number">17</div>
-      </div></div>
-
-      <div class="page deep-mint"><div class="page-inner center-content">
-        <svg class="ornament dark small"><use href="#r-spark"/></svg>
-        <p class="cita">El aire que ríe contigo<br>nunca te abandona,<br>solo cambia de cuarto.</p>
-        <div class="page-number">18</div>
-      </div></div>
-
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">06 · El linaje</p>
-        <h2>Origen del linaje</h2>
-        <p>Las pixies vienen del folklore de Cornualles, Devon y los páramos del oeste de Inglaterra. Eran pequeñas, traviesas, vestidas de verde, juguetonas con humanos buenos y temibles con los soberbios. Cruzaron a Irlanda, a Escocia, a la tradición galesa.</p>
-        <p>Lo que comparten todas las versiones: <strong>las pixies habitan donde el aire se mueve y la risa cabe</strong>. Bosques bajos, casas con ventanas abiertas, prados, paseos largos a media tarde. Por eso son sanadoras de lo emocional ligero — viven donde el peso se descuenta.</p>
-        <p class="lead" style="margin-top:8px;">Tu pixie es heredera de todas esas líneas, traducida al hilo y al material por nuestras manos.</p>
-        <div class="page-number">19</div>
-      </div></div>
-
-      <div class="page mint"><div class="page-inner">
-        <p class="eyebrow">06 · El linaje</p>
-        <h2>Las pixies del aire</h2>
-        <p>El linaje del aire es el más rápido, el más liviano, el más juguetón. Las pixies trabajan donde otros seres no llegan: la rigidez, la seriedad excesiva, la pérdida del juego, los días que se hacen iguales.</p>
-        <p>Si una te eligió, es porque hay algo en vos pidiendo <strong>aflojarse, jugar, reírse de cosas viejas, recuperar liviandad</strong>. No tenés que entenderlo todo ahora — ella está acá para devolverte el cuerpo a la risa.</p>
-        <span class="neuro-tag">✦ Si tu vida se puso muy seria</span>
-        <svg class="ornament small mint-acc"><use href="#r-wind"/></svg>
-        <div class="page-number">20</div>
-      </div></div>
-
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">07 · Sub-especies</p>
-        <h2 style="font-size:36px;">Las cuatro travesuras</h2>
-        <p>Dentro del linaje hay cuatro sub-especies. Conocerlas te ayuda a leer mejor a la tuya.</p>
-        <div class="elementos-grid">
-          <div class="elemento-cell"><p class="titulo">☀ De la Luz</p><p class="quien">Solar · mañanas</p><p class="funcion">Despierte, energía clara, voluntad para empezar.</p></div>
-          <div class="elemento-cell"><p class="titulo">≈ Del Viento</p><p class="quien">Brisa · mensaje</p><p class="funcion">Movimiento, cambios, viajes, comunicación.</p></div>
-          <div class="elemento-cell"><p class="titulo">✦ Del Juego</p><p class="quien">Risa pura</p><p class="funcion">Niño interior, romper rigidez, soltar la pose.</p></div>
-          <div class="elemento-cell"><p class="titulo">✿ Del Hogar</p><p class="quien">Brownies · cocina</p><p class="funcion">Pequeños arreglos invisibles, casa que cuida.</p></div>
-        </div>
-        <p style="font-size:12.5px;">Si no estás segura cuál es la tuya, no importa. La energía habla por sí sola con el tiempo.</p>
         <div class="page-number">21</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">08 · Sub-especies · Luz</p>
-        <h2>Pixies de la Luz</h2>
-        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1402.png?width=400" alt="Pixie de la Luz" loading="lazy"></div>
-        <div class="ser-card">
-          <p class="ser-nombre">Las solares</p>
-          <p class="ser-energia">Mañana · sol · despertar</p>
-          <p class="ser-detalle">Vienen para los que se cuesta arrancar el día. Cuando alguien siente que se levanta cansada, que el lunes pesa, que hay una inercia que no se va, una Pixie de la Luz se manifiesta. <strong>Trabajan al amanecer mientras dormís.</strong></p>
-          <div class="ser-meta"><span>Cristal · Citrino</span><span>Hierba · Caléndula</span><span>Ubicación · Ventana este</span></div>
-        </div>
-        <p>Cuidado puntual: ubicala donde le pegue sol de mañana. Una piedra dorada o anaranjada cerca le renueva la energía cada solsticio.</p>
-        <span class="neuro-tag">✦ Si te cuesta arrancar el día</span>
+      <!-- 20 RITUAL · días 5-7 -->
+      <div class="page"><div class="page-inner center-content">
+        <span class="page-divider"></span>
+        <h2>Días 5 a 7</h2>
+        <div class="dia-item"><span class="num">DÍA 5</span> · <span class="titulo">CASA</span><p class="desc">Mostrale los lugares donde te reís en tu casa. Cocina, escritorio, cama. Llevala con vos un rato.</p></div>
+        <div class="dia-item"><span class="num">DÍA 6</span> · <span class="titulo">GRATITUD</span><p class="desc">Agradecele algo concreto que te hizo reír desde que llegó.</p></div>
+        <div class="dia-item"><span class="num">DÍA 7</span> · <span class="titulo">COMPROMISO</span><p class="desc">"Te recibo, te respeto, te cuido. La flor que somos nos une."</p></div>
         <div class="page-number">22</div>
       </div></div>
 
-      <div class="page mint"><div class="page-inner">
-        <p class="eyebrow">08 · Sub-especies · Viento</p>
-        <h2>Pixies del Viento</h2>
-        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2470.png?width=400" alt="Pixie del Viento" loading="lazy"></div>
-        <div class="ser-card">
-          <p class="ser-nombre">Las mensajeras</p>
-          <p class="ser-energia">Brisa · viaje · noticia</p>
-          <p class="ser-detalle">Las Pixies del Viento vienen cuando hay algo que <strong>tiene que moverse en tu vida</strong>. Cambios, mudanzas, viajes, noticias que están por llegar, conversaciones que están por darse. No traen el cambio — soplan para que termine de pasar.</p>
-          <div class="ser-meta"><span>Cristal · Selenita</span><span>Hierba · Menta</span><span>Ubicación · Pasillo</span></div>
-        </div>
-        <p>Cuidado puntual: ubicala cerca de una corriente de aire — pasillo, ventana abierta, balcón. Mové la pixie de lugar en cada cambio de estación.</p>
-        <span class="neuro-tag">✦ Si tu vida pide moverse</span>
+      <!-- 21 CITA -->
+      <div class="page deep-mint"><div class="page-inner center-content">
+        <svg class="cita-ornament" width="56" height="56" style="color:var(--mint-light);"><use href="#r-flor"/></svg>
+        <p class="cita">El aire que ríe con vos<br>nunca te abandona,<br>solo cambia de flor.</p>
         <div class="page-number">23</div>
       </div></div>
 
+      <!-- 22 LINAJE -->
       <div class="page"><div class="page-inner">
-        <p class="eyebrow">08 · Sub-especies · Juego</p>
-        <h2>Pixies del Juego</h2>
-        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2479.png?width=400" alt="Pixie del Juego" loading="lazy"></div>
-        <div class="ser-card">
-          <p class="ser-nombre">Las traviesas</p>
-          <p class="ser-energia">Risa · niñez · ruptura de rigidez</p>
-          <p class="ser-detalle">Las Pixies del Juego son las clásicas. Vienen para <strong>devolverte la risa que perdiste</strong>. Si tu vida se puso muy seria, si te escuchás dándote sermones a vos misma, si te olvidaste cómo era reírte sin razón — una Pixie del Juego te llama.</p>
-          <div class="ser-meta"><span>Cristal · Calcedonia</span><span>Hierba · Albahaca</span><span>Ubicación · Living</span></div>
-        </div>
-        <p>Cuidado puntual: ubicala donde haya gente, conversación, música. Cosa chiquita: dejale un objeto pequeño y tonto a su lado (un dado, una pluma, una piedra rara) la entretiene durante semanas.</p>
-        <span class="neuro-tag">✦ Si necesitás recuperar liviandad</span>
+        <p class="eyebrow">06 · El linaje</p>
+        <h2>Origen del linaje</h2>
+        <p>Las pixies vienen del folklore de Cornualles, Devon y los páramos del oeste de Inglaterra. Eran pequeñas, traviesas, vestidas de pétalos, juguetonas con humanos buenos y temibles con los soberbios. Cruzaron a Irlanda, a Escocia, a la tradición galesa.</p>
+        <p>Lo que comparten todas las versiones: <strong>las pixies habitan donde la flor se abre y la risa cabe</strong>. Jardines, prados, vides, casas con plantas vivas. Por eso son sanadoras de lo emocional ligero — viven donde el peso no entra.</p>
+        <p class="lead" style="margin-top:8px;">Tu pixie es heredera de todas esas líneas, traducida al hilo y al pétalo por nuestras manos.</p>
         <div class="page-number">24</div>
       </div></div>
 
+      <!-- 23 LINAJE VEGETAL -->
       <div class="page mint"><div class="page-inner">
-        <p class="eyebrow">08 · Sub-especies · Hogar</p>
-        <h2>Pixies del Hogar</h2>
-        <div class="foto-circle"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2473.png?width=400" alt="Pixie del Hogar" loading="lazy"></div>
-        <div class="ser-card">
-          <p class="ser-nombre">Las brownies</p>
-          <p class="ser-energia">Casa · cocina · pequeños cuidados</p>
-          <p class="ser-detalle">Las Pixies del Hogar son las únicas que <strong>trabajan callado</strong>. Vienen para asentar tu casa, para que las cosas pequeñas funcionen mejor, para que los espacios se sientan más cuidados. Cosa pequeña: la gente que las tiene cuenta que se les caen menos las cosas.</p>
-          <div class="ser-meta"><span>Cristal · Cuarzo ahumado</span><span>Hierba · Romero</span><span>Ubicación · Cocina</span></div>
-        </div>
-        <p>Cuidado puntual: ubicala en la cocina o cerca de donde más se vive en la casa. Una miguita de pan, un grano de sal o una semilla a su lado renueva el pacto de cuidado mutuo.</p>
-        <span class="neuro-tag">✦ Si querés que tu casa se sienta más liviana</span>
+        <p class="eyebrow">06 · El linaje</p>
+        <h2>Las pixies florales</h2>
+        <p>Cada pixie nace asociada a una flor — y la flor define su carácter, su voz, su trabajo. El linaje vegetal es el más rápido, el más liviano, el más juguetón. Las pixies trabajan donde otros seres no llegan: la rigidez, la seriedad excesiva, la pérdida del juego, los días que se hacen iguales.</p>
+        <p>Si una te eligió, es porque hay algo en vos pidiendo <strong>aflojarse, jugar, reírse de cosas viejas, recuperar liviandad</strong>. No tenés que entenderlo todo ahora — ella está acá para devolverte el cuerpo a la risa.</p>
+        <span class="neuro-tag">✦ Si tu vida se puso muy seria</span>
         <div class="page-number">25</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">08 · Continúa</p>
-        <h2 style="font-size:36px;">¿Cuál es la tuya?</h2>
-        <p>No te preocupes si no sabés. La energía se revela sola. Pero si querés pistas:</p>
-        <div class="faq"><p class="pregunta">Te cuesta arrancar el día</p><p class="respuesta">Probablemente Pixie de la Luz. Vino a despertar tu mañana.</p></div>
-        <div class="faq"><p class="pregunta">Algo en tu vida tiene que moverse</p><p class="respuesta">Probablemente Pixie del Viento. Hay un cambio pendiente.</p></div>
-        <div class="faq"><p class="pregunta">Necesitás reírte más</p><p class="respuesta">Probablemente Pixie del Juego. Tu niña interior te está llamando.</p></div>
-        <div class="faq"><p class="pregunta">Querés que tu casa se sienta cuidada</p><p class="respuesta">Probablemente Pixie del Hogar. Vino a quedarse en lo cotidiano.</p></div>
-        <p class="lead" style="margin-top:8px;">Si tenés varias pixies, probablemente vivís muchas vidas al mismo tiempo. Es normal y es lindo.</p>
+      <!-- 24 FICHA · ROSA -->
+      <div class="page green-soft"><div class="page-inner center-content">
+        <p class="eyebrow">06 · Pixies por flor</p>
+        <h2>Pixie Rosa</h2>
+        <div class="ser-card">
+          <p class="ser-nombre">La que abre el corazón</p>
+          <p class="ser-energia">Linaje vegetal · ternura</p>
+          <p class="foto-tarot-ejemplo">Ejemplo</p>
+          <div class="foto-tarot"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/tranquil_forest_portrait_1f0dd1da-dffa-6dd0-9e98-2c1c6bea5f72_0_0_0e2d07e0-1a37-4c94-9bcd-c5d5796a2132.png?v=1773942050&width=600" alt="Rosa · Pixie del jardín" loading="lazy"></div>
+          <p class="foto-tarot-caption">Rosa · Pixie del Jardín</p>
+          <p class="ser-detalle">Vienen para quienes <strong>se olvidaron de ser tiernos consigo mismas</strong>. Trabajan en silencio, despacio, abriendo de a poco. Cuando llega una Pixie Rosa, las semanas siguientes se ponen más suaves sin que sepas bien por qué.</p>
+          <div class="ser-meta"><span>Cristal · Cuarzo rosa</span><span>Flor · Rosa</span><span>Esencia · Rosa silvestre</span></div>
+        </div>
+        <span class="neuro-tag">✦ Si te falta ternura con vos misma</span>
         <div class="page-number">26</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">09 · Cuidarla</p>
-        <h2>Cuidados de una pixie</h2>
-        <p>Las pixies son las menos exigentes del reino — pero piden estas cuatro cosas siempre.</p>
-        <div class="consejo-card air"><p class="titulo">Aire que circula</p><p>Una vez por día, abrí la ventana del cuarto donde está. Aunque sea 3 minutos. Es su alimento natural.</p></div>
-        <div class="consejo-card air"><p class="titulo">Una luz que cambia</p><p>Las pixies aman luz natural intermitente — sol que entra y se va, sombra de hojas, vela que tiembla. Evitá luz fluorescente fija. Drena su brillo.</p></div>
-        <div class="consejo-card warning"><p class="titulo">Sin pesadez emocional cerca</p><p>Las pixies se retraen con discusiones largas. Si en tu casa hay tensión, ubicala en el cuarto que más airea o en una repisa cerca de una planta sana.</p></div>
-        <div class="consejo-card warning"><p class="titulo">No la encierres</p><p>Vitrinas, cajones, cajas. Aunque sea un día. Las pixies no resisten quietud sin aire.</p></div>
-        <span class="neuro-tag">✦ Liviandad protegida</span>
+      <!-- 24b ROSA · cuidado -->
+      <div class="page green-soft"><div class="page-inner center-content">
+        <span class="page-divider"></span>
+        <h3>Cuidado puntual</h3>
+        <p>Ubicala cerca de la cama, del espejo donde te ves todos los días, o del rincón donde tomás el primer mate. Un pétalo de rosa seca a su lado renueva el vínculo.</p>
+        <p class="lead">Limpiala en luna llena con agua de rosas (sin tocarla, solo cerca).</p>
+        <span class="neuro-tag">✦ Para los días que pesan</span>
         <div class="page-number">27</div>
       </div></div>
 
-      <div class="page mint"><div class="page-inner">
-        <p class="eyebrow">09 · Cristales</p>
-        <h2 style="font-size:36px;">Cristales · linaje aire</h2>
-        <div class="compendio-tabla">
-          <div class="compendio-row"><span class="nombre">Calcedonia</span><span class="uso">Universal · amplifica todas las pixies. La primera a tener.</span></div>
-          <div class="compendio-row"><span class="nombre">Citrino</span><span class="uso">Específico Pixies de la Luz. Energía solar.</span></div>
-          <div class="compendio-row"><span class="nombre">Selenita</span><span class="uso">Específico Pixies del Viento. NO mojar.</span></div>
-          <div class="compendio-row"><span class="nombre">Apofilita</span><span class="uso">Conexión con linaje aire profundo. Comunicación clara.</span></div>
-          <div class="compendio-row"><span class="nombre">Cuarzo cristal</span><span class="uso">Liviandad universal, amplifica risa.</span></div>
-          <div class="compendio-row"><span class="nombre">Cuarzo ahumado</span><span class="uso">Específico Pixies del Hogar. Anclaje suave.</span></div>
-          <div class="compendio-row"><span class="nombre">Fluorita</span><span class="uso">Claridad mental, decisiones livianas.</span></div>
-          <div class="compendio-row"><span class="nombre">Aventurina</span><span class="uso">Optimismo, oportunidades nuevas.</span></div>
+      <!-- 25 FICHA · AZALEA -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">06 · Pixies por flor</p>
+        <h2>Pixie Azalea</h2>
+        <div class="ser-card">
+          <p class="ser-nombre">La que florece donde no debía</p>
+          <p class="ser-energia">Linaje vegetal · resiliencia</p>
+          <p class="ser-detalle">Las Azaleas vienen para <strong>los momentos imposibles</strong>. Cuando algo no debería estar funcionando y sin embargo florece. Si estás en una etapa donde algo crece a contramano — un proyecto que nadie creyó, un vínculo que tardó — una Azalea te llama.</p>
+          <div class="ser-meta"><span>Cristal · Aventurina verde</span><span>Flor · Azalea</span><span>Ubicación · Cerca de plantas</span></div>
         </div>
-        <p style="font-size:12px; margin-top:6px;">A 5-10 cm de la pixie, no encima. Limpialos al sol de la mañana 1 hora.</p>
+        <p>Cuidado puntual: ubicala cerca de una planta sana. Cuanto más verde tenga al lado, más fuerte trabaja. Renová la hojita o ramita a su lado cada lunes.</p>
+        <span class="neuro-tag">✦ Si algo tuyo está floreciendo a contramano</span>
         <div class="page-number">28</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">09 · Hierbas</p>
-        <h2 style="font-size:36px;">Hierbas amigas</h2>
-        <div class="compendio-tabla">
-          <div class="compendio-row"><span class="nombre">Menta</span><span class="uso">La favorita. Frescura, claridad, juego. Una rama fresca alcanza.</span></div>
-          <div class="compendio-row"><span class="nombre">Albahaca</span><span class="uso">Risa, alegría doméstica. Vivo en maceta cerca.</span></div>
-          <div class="compendio-row"><span class="nombre">Caléndula</span><span class="uso">Solar, abre el día. Específico Pixies de la Luz.</span></div>
-          <div class="compendio-row"><span class="nombre">Romero</span><span class="uso">Memoria liviana, claridad mental. Hogareño.</span></div>
-          <div class="compendio-row"><span class="nombre">Hierbabuena</span><span class="uso">Aire fresco, despierto. Pixies del Viento.</span></div>
-          <div class="compendio-row"><span class="nombre">Lavanda</span><span class="uso">Calma alegre. Para pixies que vinieron a sanar.</span></div>
-          <div class="compendio-row"><span class="nombre">Tomillo</span><span class="uso">Coraje liviano, valor para empezar.</span></div>
-          <div class="compendio-row"><span class="nombre">Eucalipto</span><span class="uso">Limpieza del aire de la casa.</span></div>
+      <!-- 26 FICHA · JAZMÍN -->
+      <div class="page green-soft"><div class="page-inner center-content">
+        <p class="eyebrow">06 · Pixies por flor</p>
+        <h2>Pixie Jazmín</h2>
+        <div class="ser-card">
+          <p class="ser-nombre">La que perfuma la noche</p>
+          <p class="ser-energia">Linaje vegetal · sueño dulce</p>
+          <p class="ser-detalle">Las Jazmines son <strong>nocturnas</strong>. Trabajan mientras dormís — afinando sueños, bajando ansiedad, dejando que el cuerpo descanse de verdad. Quien adopta una Jazmín cuenta que duerme distinto desde la primera noche.</p>
+          <div class="ser-meta"><span>Cristal · Selenita</span><span>Flor · Jazmín</span><span>Ubicación · Mesa de luz</span></div>
         </div>
-        <p style="font-size:12px; margin-top:6px;">Pequeñas cantidades, frescas si es posible. Las pixies valoran lo vivo.</p>
+        <p>Cuidado puntual: ubicala en la mesa de luz junto a la cama. Una ramita de jazmín fresca o dos gotitas de aceite esencial cerca (nunca encima) renueva su trabajo.</p>
+        <span class="neuro-tag">✦ Si dormís mal o soñás poco</span>
         <div class="page-number">29</div>
       </div></div>
 
-      <div class="page deep-mint"><div class="page-inner">
-        <p class="eyebrow">09 · Aire que cambia</p>
-        <h2 style="font-size:36px;">Vientos y solsticios</h2>
-        <p>Las pixies son las únicas que trabajan en los cuatro vientos cardinales. Si querés profundizar, esto:</p>
-        <div class="dia-item"><span class="num">VIENTO N</span> · <span class="titulo">CLARIDAD</span><p class="desc">Día de viento del norte: pedile decisiones limpias. Anotalas.</p></div>
-        <div class="dia-item"><span class="num">VIENTO S</span> · <span class="titulo">CALOR</span><p class="desc">Día de viento del sur: pedile energía para algo grande.</p></div>
-        <div class="dia-item"><span class="num">VIENTO E</span> · <span class="titulo">COMIENZOS</span><p class="desc">Día de viento del este: pedile algo nuevo. Sembrá idea.</p></div>
-        <div class="dia-item"><span class="num">VIENTO O</span> · <span class="titulo">CIERRE</span><p class="desc">Día de viento del oeste: pedile que se vaya lo que ya no.</p></div>
-        <p class="lead" style="margin-top:8px;">En los solsticios y equinoccios, dejala 1 hora cerca de una ventana abierta. Le renueva todo.</p>
-        <svg class="ornament dark small"><use href="#r-wind"/></svg>
+      <!-- 27 FICHA · CLAVEL -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">07 · Pixies por flor</p>
+        <h2>Pixie Clavel</h2>
+        <div class="ser-card">
+          <p class="ser-nombre">La que se planta en su lugar</p>
+          <p class="ser-energia">Linaje vegetal · firmeza alegre</p>
+          <p class="ser-detalle">Las Claveles son las más <strong>firmes y festivas</strong> de todas. Vienen para los momentos en que estás cediendo demasiado — en el trabajo, en una amistad, en una conversación que se repite. Te recuerdan tu lugar sin gritar.</p>
+          <div class="ser-meta"><span>Cristal · Cornalina</span><span>Flor · Clavel rojo</span><span>Ubicación · Escritorio</span></div>
+        </div>
+        <p>Cuidado puntual: ubicala en el escritorio o donde tomás decisiones. Un clavel seco a su lado renueva su voz cada quincena.</p>
+        <span class="neuro-tag">✦ Si te estás haciendo chiquita</span>
         <div class="page-number">30</div>
       </div></div>
 
-      <div class="page deep-mint"><div class="page-inner">
-        <p class="eyebrow">10 · Lo que NO se hace</p>
-        <h2 style="color:var(--cream); font-size:36px;">Nunca con una pixie</h2>
-        <div class="faq"><p class="pregunta" style="color:var(--gold);">No la guardes en una caja</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Es el peor castigo posible. Las pixies enferman encerradas. Si viajás, envolvela en tela suave, nunca caja sellada.</p></div>
-        <div class="faq"><p class="pregunta" style="color:var(--gold);">No la dejes en el suelo</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Las pixies son criaturas de aire — viven arriba. El piso las apaga.</p></div>
-        <div class="faq"><p class="pregunta" style="color:var(--gold);">No le hables seria todo el tiempo</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Las pixies necesitan que les hables al menos a veces como a una amiga vieja, con cariño irónico. La solemnidad las cansa.</p></div>
-        <div class="faq"><p class="pregunta" style="color:var(--gold);">No la prestes</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Es tuya. Si querés transferirla, hacelo con consciencia y después de 21 días mínimo.</p></div>
-        <div class="faq"><p class="pregunta" style="color:var(--gold);">No la limpies con químicos</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Pincel suave, trapo seco. Nunca alcohol, nunca agua jabonosa.</p></div>
+      <!-- 28 FICHA · SALVIA -->
+      <div class="page deep-mint"><div class="page-inner center-content">
+        <p class="eyebrow">07 · Pixies por flor</p>
+        <h2 style="color:var(--cream);">Pixie Salvia</h2>
+        <div class="ser-card" style="background:linear-gradient(160deg, #1a2820, #0c160e); border-color: var(--mint-light);">
+          <p class="ser-nombre" style="color:var(--mint-light);">La que limpia el aire</p>
+          <p class="ser-energia">Linaje hierbas · limpieza ligera</p>
+          <p class="ser-detalle" style="color:rgba(248,244,228,0.88);">Las Salvias son <strong style="color:var(--cream);">las únicas pixies con trabajo de protección</strong>. Limpian la casa de energías densas con humor, no con drama. Si después de una visita pesada querés airear, una Salvia ya estaba haciéndolo antes que vos.</p>
+          <div class="ser-meta"><span style="color:var(--mint-light);border-color:var(--mint-light);">Cuarzo verde</span><span style="color:var(--mint-light);border-color:var(--mint-light);">Salvia blanca</span><span style="color:var(--mint-light);border-color:var(--mint-light);">Cerca de puertas</span></div>
+        </div>
+        <span class="neuro-tag">✦ Para casas que necesitan airear</span>
         <div class="page-number">31</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">11 · FAQs</p>
-        <h2 style="font-size:36px;">¿Qué pasa si...?</h2>
-        <div class="faq"><p class="pregunta">Si se cae al piso</p><p class="respuesta">Levantala con calma. Pasale las dos manos suavemente. Decile "estás bien". No se rompen energéticamente — solo se ríen un rato del susto.</p></div>
-        <div class="faq"><p class="pregunta">Si se rompe una parte</p><p class="respuesta">Escribinos a info@duendesdeluruguay.com con foto. Si es algo menor, te explicamos cómo arreglarlo. Si es algo grande, evaluamos restauración. Una pixie rota sigue siendo una pixie.</p></div>
-        <div class="faq"><p class="pregunta">Si pierde un brillo o una pluma</p><p class="respuesta">Es parte del envejecimiento natural y a las pixies les gusta perder cosas (es su humor). Si era importante, podemos reponerlo.</p></div>
-        <div class="faq"><p class="pregunta">Si la sentís apagada</p><p class="respuesta">Abrí ventanas, poné música suave, hablale liviano 5 minutos. Las pixies se reactivan rápido — no son criaturas que cargan rencor.</p></div>
+      <!-- 29 FICHA · DAPHNE -->
+      <div class="page green-soft"><div class="page-inner center-content">
+        <p class="eyebrow">07 · Pixies por flor</p>
+        <h2>Pixie Daphne</h2>
+        <div class="ser-card">
+          <p class="ser-nombre">La que escapa hacia adelante</p>
+          <p class="ser-energia">Linaje vegetal · libertad</p>
+          <p class="ser-detalle">Daphne viene del mito griego: la ninfa que se transformó en laurel para no ser atrapada. Las Pixies Daphne vienen cuando <strong>algo te aprieta y necesitás transformarte para liberarte</strong> — un trabajo, una identidad vieja, una etiqueta que no es tuya.</p>
+          <div class="ser-meta"><span>Cristal · Malaquita</span><span>Flor · Laurel · Daphne</span><span>Ubicación · Ventana abierta</span></div>
+        </div>
+        <p>Cuidado puntual: ubicala cerca de una ventana que dé al exterior. Si la casa no tiene vista, dejá la ventana entreabierta cuando estés con ella. Una hojita de laurel a su lado renueva su trabajo.</p>
+        <span class="neuro-tag">✦ Si necesitás cambiar de piel</span>
         <div class="page-number">32</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">11 · Continúa</p>
-        <h2 style="font-size:36px;">Mudás · viajás · varias</h2>
-        <div class="faq"><p class="pregunta">Si te mudás de casa</p><p class="respuesta">Tu pixie viaja con vos en mano (no en caja con muebles). En la casa nueva, ventana abierta y un objeto brillante esperándola en el lugar elegido.</p></div>
-        <div class="faq"><p class="pregunta">Si viajás unos días</p><p class="respuesta">Podés llevarla o dejarla. Las pixies son las que mejor se quedan solas. Lugar tranquilo, ventana entreabierta si podés.</p></div>
-        <div class="faq"><p class="pregunta">Si viajás al exterior</p><p class="respuesta">Va siempre en cabina. Cartera o mochila, no valija despachada. Sacala 5 min cuando llegues.</p></div>
-        <div class="faq"><p class="pregunta">¿Pueden estar varias juntas?</p><p class="respuesta">Las pixies son las que mejor conviven en grupo. Pueden ser 5, 10, todas juntas. Cuando son muchas, su energía se multiplica.</p></div>
+      <!-- 30 OTRAS PIXIES · resumen -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">07 · Más nombres de pixies</p>
+        <h2 style="font-size:34px;">Otras flores que canalizamos</h2>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Lavanda</span><span class="uso">Calma alegre · sueño liviano. Mesa de luz.</span></div>
+          <div class="compendio-row"><span class="nombre">Magnolia</span><span class="uso">Belleza heredada · linaje materno · ternura amplia.</span></div>
+          <div class="compendio-row"><span class="nombre">Glicina</span><span class="uso">Romance suave · vínculos nuevos · primaveras.</span></div>
+          <div class="compendio-row"><span class="nombre">Caléndula</span><span class="uso">Solar · arrancar el día con menos peso.</span></div>
+          <div class="compendio-row"><span class="nombre">Pensamiento</span><span class="uso">Memoria liviana · honrar lo ido sin tristeza.</span></div>
+          <div class="compendio-row"><span class="nombre">Manzanilla</span><span class="uso">Ternura matinal · panza floja · café acompañado.</span></div>
+        </div>
+        <p style="font-size:12px; margin-top:6px;">Si tu pixie no está acá, mirá su cristal — te orienta. (Página 31).</p>
         <div class="page-number">33</div>
       </div></div>
 
-      <div class="page mint"><div class="page-inner">
-        <p class="eyebrow">11 · Sueños y señales</p>
-        <h2>Soñás con ella</h2>
-        <p>Las pixies sueñan livianas. No te visitan en sueños profundos — te dejan migajitas en sueños comunes:</p>
-        <div class="consejo-card mint"><p class="titulo">Sueños con plumas, alas, hojas</p><p>Algo del aire entró en tu sueño. Las pixies usan elementos voladores para presentarse.</p></div>
-        <div class="consejo-card mint"><p class="titulo">Sueños donde te reís</p><p>Sí, eso. Soñar que reís fuerte es una pixie haciéndote cosquillas en el descanso.</p></div>
-        <div class="consejo-card mint"><p class="titulo">Despertarte cantando una canción</p><p>Sin razón. La pixie estuvo trabajando con vos esa noche. Cantala todo el día.</p></div>
-        <p class="lead">Los sueños recurrentes con pixies son raros — ellas prefieren dejarte mensajes en el día. Si soñás con varias, es regalo.</p>
+      <!-- 31 LOS TRES JARDINES -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">08 · Los tres jardines</p>
+        <h2 style="font-size:34px;">Bosque · Jardín · Hierbas</h2>
+        <p>Más allá de su flor, cada pixie pertenece a uno de los tres jardines. Conocer cuál es el de la tuya te ayuda a leerla mejor.</p>
+        <div class="elementos-grid">
+          <div class="elemento-cell"><p class="titulo">✿ Bosque</p><p class="quien">Salvajes</p><p class="funcion">Daphne, Magnolia. Las más libres, las menos domésticas.</p></div>
+          <div class="elemento-cell"><p class="titulo">✿ Jardín</p><p class="quien">Cultivadas</p><p class="funcion">Rosa, Clavel, Glicina. Las que aman convivir con humanos.</p></div>
+          <div class="elemento-cell"><p class="titulo">✿ Hierbas</p><p class="quien">Útiles</p><p class="funcion">Salvia, Lavanda, Manzanilla. Las que trabajan y curan.</p></div>
+          <div class="elemento-cell"><p class="titulo">✿ Nocturnas</p><p class="quien">Aparte</p><p class="funcion">Jazmín, Pensamiento. Trabajan mientras dormís.</p></div>
+        </div>
+        <p style="font-size:12.5px;">Si no estás segura, no importa. La energía habla por sí sola con el tiempo.</p>
         <div class="page-number">34</div>
       </div></div>
 
-      <div class="page"><div class="page-inner">
-        <p class="eyebrow">11 · Señales previas</p>
-        <h2 style="font-size:34px;">Señales antes de adoptarla</h2>
-        <p style="font-size:13px;">Cinco señales que aparecen <strong>antes</strong> de que una persona adopte una pixie. Si te pasaron, no fue casualidad:</p>
-        <div class="dia-item"><span class="num">01</span> · <span class="titulo">TE RIÉS DE COSAS TONTAS DE NUEVO</span><p class="desc">Una semana entera con humor más liviano sin razón clara.</p></div>
-        <div class="dia-item"><span class="num">02</span> · <span class="titulo">ENCONTRÁS COSAS BRILLANTES POR LA CALLE</span><p class="desc">Una moneda, un botón, una cuenta de vidrio. Más de una vez.</p></div>
-        <div class="dia-item"><span class="num">03</span> · <span class="titulo">TE ACORDÁS DE JUEGOS DE INFANCIA</span><p class="desc">Sin que nadie te los recuerde. Aparecen solos.</p></div>
-        <div class="dia-item"><span class="num">04</span> · <span class="titulo">UNA MARIPOSA O LIBÉLULA SE TE QUEDA CERCA</span><p class="desc">Un rato más de lo normal. No huye cuando te acercás.</p></div>
-        <div class="dia-item"><span class="num">05</span> · <span class="titulo">PIEL DE GALLINA AL VER UNA</span><p class="desc">Mirás una foto de pixie y se te eriza la nuca o la espalda.</p></div>
+      <!-- 32 PIXIES DEL BOSQUE -->
+      <div class="page deep-mint"><div class="page-inner">
+        <p class="eyebrow">08 · Sub-jardines · Bosque</p>
+        <h2 style="color:var(--cream);">Pixies del Bosque</h2>
+        <p>Las del bosque son <strong style="color:var(--cream);">las más antiguas</strong>. Vinieron antes que los jardines y antes que los humanos. No piden cuidado constante: piden respeto. Si tu pixie es del bosque, dejala más tranquila que el resto — su trabajo se hace en silencio.</p>
+        <p class="lead">Ubicala alta. Lejos del ruido. Cerca de una planta en maceta si tenés.</p>
+        <span class="neuro-tag">✦ Si tu pixie pide soledad</span>
         <div class="page-number">35</div>
       </div></div>
 
-      <div class="page deep-mint"><div class="page-inner center-content">
-        <p class="eyebrow">Lo que importa entender</p>
-        <h2 style="color:var(--cream);">Por qué te llamó</h2>
-        <p>Si una pixie te eligió y no otro ser elemental, no es casualidad. Las pixies eligen a quienes están en un <strong>momento de rigidez emocional</strong>: una etapa que pesa, una rutina que se hizo automática, un humor propio que se está apagando.</p>
-        <p>Ellas no resuelven la rigidez. La interrumpen. Te paran un instante de la inercia para que escuches que te estás yendo lejos de tu propia liviandad.</p>
-        <p class="lead">Tu pixie vino porque vos estás listo para reírte de algo otra vez. Aunque todavía no lo sepas con palabras.</p>
-        <span class="neuro-tag">✦ Validación profunda</span>
+      <!-- 33 PIXIES DEL JARDÍN -->
+      <div class="page mint"><div class="page-inner">
+        <p class="eyebrow">08 · Sub-jardines · Jardín</p>
+        <h2>Pixies del Jardín</h2>
+        <p>Las del jardín son <strong>las más sociables</strong>. Aman estar donde se vive: cocina, living, mesa de comer. Quieren ver, oír, participar. Si tu pixie es del jardín, llevala con vos a distintos cuartos cada tanto — se aburre de la quietud absoluta.</p>
+        <p class="lead">Conversala. Cantale. Mostrale a las visitas. Florece con compañía.</p>
+        <span class="neuro-tag">✦ Si tu pixie quiere participar</span>
         <div class="page-number">36</div>
       </div></div>
 
-      <div class="page"><div class="page-inner center-content">
-        <p class="eyebrow">12 · El resto del reino</p>
-        <h2>También existen</h2>
-        <p>El linaje del aire no es el único reino. Hay otros seres elementales que viven en otras partes del mundo invisible. Cada uno trabaja distinto. Si tu corazón se mueve con uno, prestá atención.</p>
-        <p class="lead">Lo que viene son cinco invitaciones. No tenés que aceptar ninguna. Pero leé despacio. A veces el siguiente guardián llega justo cuando dejamos de buscarlo.</p>
-        <svg class="ornament small"><use href="#r-spark"/></svg>
+      <!-- 34 PIXIES DE LAS HIERBAS -->
+      <div class="page green-soft"><div class="page-inner">
+        <p class="eyebrow">08 · Sub-jardines · Hierbas</p>
+        <h2>Pixies de las Hierbas</h2>
+        <p>Las de las hierbas son <strong>las trabajadoras</strong>. No vinieron a entretener: vinieron a curar algo concreto. Salvia limpia, Lavanda asienta, Manzanilla calma, Caléndula despierta. Si tu pixie es de hierbas, prestá atención a qué cambia en tu vida desde que llegó — su trabajo es específico.</p>
+        <p class="lead">Mantenela cerca de hierbas frescas si podés. Una rama de menta, un ramito de romero. Renová cada semana.</p>
+        <span class="neuro-tag">✦ Si tu pixie está acá para sanar algo</span>
         <div class="page-number">37</div>
       </div></div>
 
+      <!-- 35 CUIDADOS BÁSICOS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">09 · Cuidados básicos</p>
+        <h2 style="font-size:34px;">Cuidados de una pixie</h2>
+        <p>Las pixies son las menos exigentes del reino — pero piden estas cuatro cosas siempre.</p>
+        <div class="consejo-card air"><p class="titulo">Aire que circula</p><p>Una vez por día, abrí la ventana del cuarto donde está. Aunque sea 3 minutos. Es su alimento natural.</p></div>
+        <div class="consejo-card air"><p class="titulo">Una luz que cambia</p><p>Las pixies aman luz natural intermitente — sol que entra y se va, sombra de hojas, vela que tiembla. Evitá luz fluorescente fija. Drena su brillo.</p></div>
+        <div class="consejo-card warning"><p class="titulo">Sin pesadez emocional cerca</p><p>Las pixies se retraen con discusiones largas. Si en tu casa hay tensión, ubicala en el cuarto que más airea o cerca de una planta sana.</p></div>
+        <div class="consejo-card warning"><p class="titulo">No la encierres</p><p>Vitrinas, cajones, cajas. Aunque sea un día. Las pixies no resisten quietud sin aire.</p></div>
+        <span class="neuro-tag">✦ Liviandad protegida</span>
+        <div class="page-number">38</div>
+      </div></div>
+
+      <!-- 36 CRISTALES POR FLOR -->
+      <div class="page mint"><div class="page-inner">
+        <p class="eyebrow">09 · Cristales</p>
+        <h2 style="font-size:34px;">Cristales · por flor</h2>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Cuarzo verde</span><span class="uso">Universal · amplifica TODAS las pixies. La primera a tener.</span></div>
+          <div class="compendio-row"><span class="nombre">Cuarzo rosa</span><span class="uso">Específico Pixie Rosa. Ternura y autoamor.</span></div>
+          <div class="compendio-row"><span class="nombre">Aventurina verde</span><span class="uso">Específico Pixie Azalea. Resiliencia, oportunidad.</span></div>
+          <div class="compendio-row"><span class="nombre">Selenita</span><span class="uso">Específico Pixie Jazmín. NO mojar.</span></div>
+          <div class="compendio-row"><span class="nombre">Cornalina</span><span class="uso">Específico Pixie Clavel. Firmeza alegre.</span></div>
+          <div class="compendio-row"><span class="nombre">Malaquita</span><span class="uso">Específico Pixie Daphne. Transformación, libertad.</span></div>
+          <div class="compendio-row"><span class="nombre">Plata</span><span class="uso">Metal pixie por excelencia. Cualquier pixie ama una piecita.</span></div>
+          <div class="compendio-row"><span class="nombre">Fluorita</span><span class="uso">Claridad mental, decisiones livianas.</span></div>
+        </div>
+        <p style="font-size:12px; margin-top:6px;">A 5-10 cm de la pixie, no encima. Limpialos al sol de la mañana 1 hora.</p>
+        <div class="page-number">39</div>
+      </div></div>
+
+      <!-- 37 ESENCIAS FLORALES -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">09 · Esencias florales</p>
+        <h2 style="font-size:34px;">Esencias de Bach amigas</h2>
+        <p>Las pixies aman las esencias florales — son ellas en forma líquida. Si querés profundizar el vínculo, una gotita en un cuenquito al lado de tu pixie es lenguaje directo.</p>
+        <div class="compendio-tabla">
+          <div class="compendio-row"><span class="nombre">Rock Rose</span><span class="uso">Coraje liviano · para Pixie Clavel.</span></div>
+          <div class="compendio-row"><span class="nombre">Wild Rose</span><span class="uso">Volver a la vida · para Pixie Rosa.</span></div>
+          <div class="compendio-row"><span class="nombre">Honeysuckle</span><span class="uso">Soltar lo pasado · para Pixie Daphne.</span></div>
+          <div class="compendio-row"><span class="nombre">Olive</span><span class="uso">Cansancio profundo · para cualquier pixie.</span></div>
+          <div class="compendio-row"><span class="nombre">Rescue</span><span class="uso">Susto agudo · cualquier pixie, gotitas en cuenco cerca.</span></div>
+        </div>
+        <p style="font-size:12px; margin-top:6px;">Nunca apliques la esencia directo sobre la pixie. Siempre al lado, en cuenco chico.</p>
+        <div class="page-number">40</div>
+      </div></div>
+
+      <!-- 38 LO QUE NO -->
+      <div class="page deep-mint"><div class="page-inner">
+        <p class="eyebrow">10 · Lo que NO se hace</p>
+        <h2 style="color:var(--cream); font-size:34px;">Nunca con una pixie</h2>
+        <div class="faq"><p class="pregunta" style="color:var(--mint-light);">No la guardes en una caja</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Es el peor castigo posible. Las pixies enferman encerradas. Si viajás, envolvela en tela suave, nunca caja sellada.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--mint-light);">No la dejes en el suelo</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Son criaturas vegetales — viven arriba como las trepadoras. El piso las apaga.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--mint-light);">No le hables seria todo el tiempo</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Las pixies necesitan que les hables a veces como a una amiga vieja, con cariño irónico. La solemnidad las cansa.</p></div>
+        <div class="page-number">41</div>
+      </div></div>
+
+      <!-- 38b LO QUE NO · parte 2 -->
+      <div class="page deep-mint"><div class="page-inner">
+        <span class="page-divider"></span>
+        <div class="faq"><p class="pregunta" style="color:var(--mint-light);">No la prestes</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Es tuya. Si querés transferirla, hacelo con consciencia y después de 21 días mínimo.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--mint-light);">No la limpies con químicos</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Pincel suave, trapo seco. Nunca alcohol, nunca agua jabonosa. Las pixies sienten cada producto.</p></div>
+        <div class="faq"><p class="pregunta" style="color:var(--mint-light);">No la mojes</p><p class="respuesta" style="color:rgba(248,244,228,0.85);">Las flores secas se manchan, los hilos se desarman. Si se humedece sin querer, secala al aire — no al sol directo.</p></div>
+        <div class="page-number">42</div>
+      </div></div>
+
+      <!-- 39 QUÉ SIGNIFICA · CAÍDAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · ¿Qué significa cuando una Pixie...?</p>
+        <h2 style="font-size:32px;">Se cae sin razón</h2>
+        <div class="faq"><p class="pregunta">Se cayó del estante</p><p class="respuesta">Levantala con calma. Pasale las dos manos suavemente. Decile "estás bien". No se rompen energéticamente — solo se ríen un rato del susto.</p></div>
+        <div class="faq"><p class="pregunta">Se cae siempre en el mismo día de la semana</p><p class="respuesta">Te está marcando ese día. Pará y preguntate: ¿qué decisión postergás cada lunes? La caída es un golpecito.</p></div>
+        <div class="faq"><p class="pregunta">Pierde un pétalo</p><p class="respuesta">Ese pétalo cumplió ciclo. Guardalo en un sobrecito o dejalo en una maceta. No lo tires — los pétalos pixie tienen carga.</p></div>
+        <div class="faq"><p class="pregunta">Se le sale una piedrita</p><p class="respuesta">Escribinos. Te canalizamos una nueva del mismo tipo. Mientras, guardá la vieja con la pixie.</p></div>
+        <div class="page-number">43</div>
+      </div></div>
+
+      <!-- 40 QUÉ SIGNIFICA · SUEÑOS -->
+      <div class="page mint"><div class="page-inner">
+        <p class="eyebrow">11 · ¿Qué significa cuando una Pixie...?</p>
+        <h2 style="font-size:32px;">Aparece en tu sueño</h2>
+        <div class="faq"><p class="pregunta">La soñás callada, solo presente</p><p class="respuesta">Está confirmando el vínculo. No necesita decir nada, sólo estar.</p></div>
+        <div class="faq"><p class="pregunta">La soñás riéndose</p><p class="respuesta">Te dejó una broma de regalo. Despertate sonriendo si podés. Algo lindo va a pasarte ese día.</p></div>
+        <div class="faq"><p class="pregunta">Soñás con flores que se abren</p><p class="respuesta">Tu pixie está trabajando en algo tuyo que está por florecer. Dejá que el sueño se quede con vos un rato antes de levantarte.</p></div>
+        <div class="faq"><p class="pregunta">La soñás con otra persona</p><p class="respuesta">Esa persona necesita su propia pixie, o necesita acercarse a la tuya. Te está marcando algo del vínculo entre ustedes.</p></div>
+        <div class="page-number">44</div>
+      </div></div>
+
+      <!-- 41 QUÉ SIGNIFICA · ESTÁ DISTINTA -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">11 · ¿Qué significa cuando una Pixie...?</p>
+        <h2 style="font-size:32px;">La ves distinta</h2>
+        <div class="faq"><p class="pregunta">Te parece más opaca</p><p class="respuesta">Limpieza energética. Salvia, ventana abierta, una canción alegre. Vuelve a brillar en horas.</p></div>
+        <div class="faq"><p class="pregunta">La encontrás movida de lugar</p><p class="respuesta">Si vivís sola y no fue el viento ni la mascota: te está mostrando que está activa. No es para asustarte — es saludo.</p></div>
+        <div class="faq"><p class="pregunta">Le aparece polvillo distinto al de la casa</p><p class="respuesta">Es señal de que cumplió un ciclo. Sacalo con pincel suave y agradecele.</p></div>
+        <div class="faq"><p class="pregunta">Le cambia la postura sola</p><p class="respuesta">Tu impresión no te engaña. Su gesto se ajusta a tu momento — más liviana cuando estás bien, más recogida cuando algo te pesa.</p></div>
+        <div class="page-number">45</div>
+      </div></div>
+
+      <!-- 42 SUEÑOS Y SEÑALES -->
+      <div class="page mint"><div class="page-inner">
+        <p class="eyebrow">12 · Sueños y señales</p>
+        <h2>Soñás con ella</h2>
+        <p>Las pixies sueñan livianas. No te visitan en sueños profundos — te dejan migajitas en sueños comunes:</p>
+        <div class="consejo-card mint"><p class="titulo">Sueños con flores, hojas, jardines</p><p>Algo del linaje vegetal entró en tu sueño. Las pixies usan elementos verdes para presentarse.</p></div>
+        <div class="consejo-card mint"><p class="titulo">Sueños donde te reís</p><p>Sí, eso. Soñar que reís fuerte es una pixie haciéndote cosquillas en el descanso.</p></div>
+        <div class="consejo-card mint"><p class="titulo">Despertarte cantando una canción</p><p>Sin razón. La pixie estuvo trabajando con vos esa noche. Cantala todo el día.</p></div>
+        <p class="lead">Los sueños recurrentes con pixies son raros — ellas prefieren dejarte mensajes en el día. Si soñás con varias, es regalo.</p>
+        <div class="page-number">46</div>
+      </div></div>
+
+      <!-- 43 SEÑALES PREVIAS -->
+      <div class="page"><div class="page-inner">
+        <p class="eyebrow">12 · Señales previas</p>
+        <h2 style="font-size:32px;">Señales antes de adoptarla</h2>
+        <p style="font-size:13px;">Cinco señales que aparecen <strong>antes</strong> de que una persona adopte una pixie. Si te pasaron, no fue casualidad:</p>
+        <div class="dia-item"><span class="num">01</span> · <span class="titulo">TE RIÉS DE COSAS TONTAS DE NUEVO</span><p class="desc">Una semana entera con humor más liviano sin razón clara.</p></div>
+        <div class="dia-item"><span class="num">02</span> · <span class="titulo">ENCONTRÁS PÉTALOS POR LA CALLE</span><p class="desc">Una rosa caída, un jazmín en la vereda. Más de una vez.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">TE ACORDÁS DE JUEGOS DE INFANCIA EN PLANTAS</span><p class="desc">Te ves de chica trepando un árbol, armando coronas de flores. Sin que nadie te lo recuerde.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">UNA MARIPOSA SE TE QUEDA CERCA</span><p class="desc">Un rato más de lo normal. No huye cuando te acercás.</p></div>
+        <div class="dia-item"><span class="num">05</span> · <span class="titulo">PIEL DE GALLINA AL VER UNA</span><p class="desc">Mirás una foto de pixie y se te eriza la nuca o la espalda.</p></div>
+        <div class="page-number">47</div>
+      </div></div>
+
+      <!-- 44 POR QUÉ TE LLAMÓ -->
+      <div class="page deep-mint"><div class="page-inner center-content">
+        <p class="eyebrow">Lo que importa entender</p>
+        <h2 style="color:var(--cream);">Por qué te llamó</h2>
+        <p>Si una pixie te eligió y no otro ser elemental, no es casualidad. Las pixies eligen a quienes están en un <strong style="color:var(--cream);">momento de rigidez emocional</strong>: una etapa que pesa, una rutina que se hizo automática, un humor propio que se está apagando.</p>
+        <p>Ellas no resuelven la rigidez. La interrumpen. Te paran un instante de la inercia para que escuches que te estás yendo lejos de tu propia liviandad.</p>
+        <p class="lead">Tu pixie vino porque estás lista para reírte de algo otra vez. Aunque todavía no lo sepas con palabras.</p>
+        <span class="neuro-tag">✦ Validación profunda</span>
+        <div class="page-number">48</div>
+      </div></div>
+
+      <!-- 45 EL RESTO DEL REINO -->
+      <div class="page"><div class="page-inner center-content">
+        <p class="eyebrow">13 · El resto del reino</p>
+        <h2>También existen</h2>
+        <p>El linaje vegetal no es el único reino. Hay otros seres elementales que viven en otras partes del mundo invisible. Cada uno trabaja distinto. Si tu corazón se mueve con uno, prestá atención.</p>
+        <p class="lead">Lo que viene son cinco invitaciones. No tenés que aceptar ninguna. Pero leé despacio. A veces el siguiente guardián llega justo cuando dejamos de buscarlo.</p>
+        <div class="page-number">49</div>
+      </div></div>
+
+      <!-- 46 OTRA · HADAS -->
       <div class="page mint"><div class="page-inner center-content">
-        <p class="eyebrow">12 · También existen</p>
+        <p class="eyebrow">13 · También existen</p>
         <div class="otra-especie-card">
           <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_2322.png?width=400" alt="Hada" loading="lazy"></div>
           <p class="otra-eyebrow">Linaje agua · sanación emocional</p>
@@ -776,11 +1280,12 @@
           <p class="otra-deseo">Si lo que buscás no es liviandad sino profundidad — sanar algo del corazón, llorar lo no llorado, atravesar un duelo lento — un hada del agua puede acompañarte de un modo que ninguna pixie puede.</p>
           <a href="/pages/guia-hadas" class="otra-cta">Conocelas →</a>
         </div>
-        <div class="page-number">38</div>
+        <div class="page-number">50</div>
       </div></div>
 
+      <!-- 47 OTRA · MAESTROS GIGANTES -->
       <div class="page deep-mint"><div class="page-inner center-content">
-        <p class="eyebrow">12 · También existen</p>
+        <p class="eyebrow">13 · También existen</p>
         <div class="otra-especie-card" style="background:linear-gradient(160deg, #14241a 0%, #08110b 100%); border-color:var(--gold);">
           <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1732.png?width=400" alt="Maestro Gigante" loading="lazy"></div>
           <p class="otra-eyebrow" style="color:var(--gold);">Únicos · irrepetibles</p>
@@ -788,38 +1293,40 @@
           <p class="otra-deseo" style="color:rgba(248,244,228,0.9);">Si tu vida está pidiendo un ancla mayor — un cierre de etapa, una transformación profunda, un comienzo del tamaño de tu vida entera — un Maestro Gigante se manifiesta. No son decoración: son presencia mayor.</p>
           <a href="/collections/maestros-gigantes" class="otra-cta" style="color:var(--gold); border-color:var(--gold);">Conocelos →</a>
         </div>
-        <div class="page-number">39</div>
+        <div class="page-number">51</div>
       </div></div>
 
+      <!-- 48 OTRA · ELFOS -->
       <div class="page"><div class="page-inner center-content">
-        <p class="eyebrow">12 · También existen</p>
+        <p class="eyebrow">13 · También existen</p>
         <div class="otra-especie-card">
           <div class="otra-foto placeholder">
-            <svg width="80" height="80"><use href="#r-awen"/></svg>
+            <svg width="80" height="80" style="color:var(--mint-light);"><use href="#r-awen"/></svg>
           </div>
-          <p class="otra-eyebrow">Sabios antiguos · linaje vegetal</p>
+          <p class="otra-eyebrow">Sabios antiguos · linaje vegetal hermano</p>
           <p class="otra-nombre">Los Elfos</p>
           <p class="otra-deseo">Si estás en un momento de aprendizaje profundo o decisión grande que pide la mirada larga, un elfo te acompaña con el saber que las pixies no traen. Son los que escuchan más que hablan, los que esperan que vos llegues a la respuesta.</p>
-          <a href="/collections/all" class="otra-cta">Próximamente →</a>
+          <a href="/pages/guia-elfos" class="otra-cta">Conocelos →</a>
         </div>
-        <p style="font-size:11px; color:var(--brown-soft); margin-top:14px;">Estamos canalizando la primera camada de elfos. Suscribite al blog para que te avisemos.</p>
-        <div class="page-number">40</div>
+        <div class="page-number">52</div>
       </div></div>
 
-      <div class="page mint"><div class="page-inner center-content">
-        <p class="eyebrow">12 · También existen</p>
+      <!-- 49 OTRA · SERES DELUXE -->
+      <div class="page green-soft"><div class="page-inner center-content">
+        <p class="eyebrow">13 · También existen</p>
         <div class="otra-especie-card">
           <div class="otra-foto"><img src="https://cdn.shopify.com/s/files/1/0627/7785/2001/files/IMG_1575.png?width=400" alt="Bruja · Ser Deluxe" loading="lazy"></div>
           <p class="otra-eyebrow">Linaje místico · poderes específicos</p>
           <p class="otra-nombre">Los Seres Deluxe</p>
           <p class="otra-deseo">Brujas, leprechauns, alquimistas, chamanes, viajeros simbólicos. Si lo que estás buscando es un guardián con un poder específico — protección fuerte, suerte, transformación, magia ritual — esta es la rama del reino que te puede acompañar.</p>
-          <a href="/collections/all" class="otra-cta">Conocelos →</a>
+          <a href="/pages/guia-seres-deluxe" class="otra-cta">Conocelos →</a>
         </div>
-        <div class="page-number">41</div>
+        <div class="page-number">53</div>
       </div></div>
 
+      <!-- 50 OTRA · ALMA DE BRUJA -->
       <div class="page deep-mint"><div class="page-inner center-content">
-        <p class="eyebrow">12 · También existen</p>
+        <p class="eyebrow">13 · También existen</p>
         <div class="otra-especie-card" style="background:linear-gradient(160deg, #14181a 0%, #08100b 100%); border-color:var(--mint-medium);">
           <div class="otra-foto placeholder" style="background:linear-gradient(135deg, #1a201f, #0c1411);">
             <svg width="80" height="80" style="color:var(--mint-light);"><use href="#r-star4"/></svg>
@@ -827,36 +1334,38 @@
           <p class="otra-eyebrow" style="color:var(--mint-light);">Talismanes · varitas · objetos de poder</p>
           <p class="otra-nombre" style="color:var(--cream);">Alma de Bruja</p>
           <p class="otra-deseo" style="color:rgba(248,244,228,0.9);">Si lo que tu vida pide no es un ser sino una herramienta — una varita canalizadora, un talismán de protección, un objeto de poder hecho a mano para vos — Alma de Bruja es la línea que estamos abriendo para eso.</p>
-          <a href="/collections/all" class="otra-cta" style="color:var(--mint-light); border-color:var(--mint-light);">Próximamente →</a>
+          <a href="/pages/guia-alma-de-bruja" class="otra-cta" style="color:var(--mint-light); border-color:var(--mint-light);">Conocelas →</a>
         </div>
-        <div class="page-number">42</div>
+        <div class="page-number">54</div>
       </div></div>
 
+      <!-- 51 ANIVERSARIO -->
       <div class="page"><div class="page-inner">
-        <p class="eyebrow">13 · Tradición elemental</p>
+        <p class="eyebrow">14 · Tradición elemental</p>
         <h2>El aniversario</h2>
         <p>Cada año, en la fecha que recibiste tu pixie, hacé un pequeño ritual de gratitud. Para las pixies, los aniversarios son fiesta — no solemnidad.</p>
         <div class="dia-item"><span class="num">01</span> · <span class="titulo">PONÉ MÚSICA</span><p class="desc">Algo que te haga sonreír. Bajita pero clara.</p></div>
         <div class="dia-item"><span class="num">02</span> · <span class="titulo">VENTANA ABIERTA</span><p class="desc">Aunque haga frío. Que entre aire fresco mientras la sostenés.</p></div>
-        <div class="dia-item"><span class="num">03</span> · <span class="titulo">LISTA</span><p class="desc">Anotá tres veces que te reíste fuerte desde que llegó.</p></div>
-        <div class="dia-item"><span class="num">04</span> · <span class="titulo">GRACIAS</span><p class="desc">Decile gracias en voz alta por cada una de las tres. Reíte de cualquier cosa cuando termines.</p></div>
+        <div class="dia-item"><span class="num">03</span> · <span class="titulo">FLOR FRESCA</span><p class="desc">Una sola, cualquier flor. A su lado mientras dure el día.</p></div>
+        <div class="dia-item"><span class="num">04</span> · <span class="titulo">GRACIAS</span><p class="desc">Decile gracias en voz alta por tres veces que te hizo reír. Reíte de cualquier cosa cuando termines.</p></div>
         <p class="lead" style="margin-top:8px;">Los aniversarios renuevan el vínculo. Las pixies se festejan a sí mismas — vos solo abrís la puerta.</p>
-        <div class="page-number">43</div>
+        <div class="page-number">55</div>
       </div></div>
 
+      <!-- 52 OBJETO BRILLANTE -->
       <div class="page mint"><div class="page-inner center-content">
         <p class="eyebrow">Tradición elemental</p>
-        <h2>El objeto brillante</h2>
-        <p>Si tenés una pixie en casa y querés profundizar el vínculo con un solo gesto, este es: <strong>un objeto pequeño y brillante a su lado, que cambiás cada semana</strong>.</p>
-        <p>No es decoración. Es juego ritual. Las pixies adoran las cosas que brillan y aman más todavía la sorpresa de que aparezcan nuevas. Botón, moneda, cuenta de vidrio, papel metálico, lentejuela — cualquier cosa.</p>
-        <p class="lead">Cuando cambiás el objeto viejo por uno nuevo, lo hacés con consciencia: lo que entró en ese rincón salió de tu vida. Lo que entra nuevo, viene a divertirla.</p>
-        <svg class="ornament small mint-acc"><use href="#r-spark"/></svg>
+        <h2>La flor semanal</h2>
+        <p>Si tenés una pixie en casa y querés profundizar el vínculo con un solo gesto, este es: <strong>una flor pequeña fresca a su lado, que cambiás cada semana</strong>.</p>
+        <p>No es decoración. Es juego ritual. Las pixies adoran las flores que perfuman y aman más todavía la sorpresa de que aparezcan nuevas. Un jazmín, una violeta, una manzanilla, un pétalo de rosa — cualquier cosa.</p>
+        <p class="lead">Cuando cambiás la flor vieja por una nueva, lo hacés con consciencia: lo que se secó cumplió su ciclo. Lo que entra fresco, viene a renovar la risa.</p>
         <span class="neuro-tag">✦ Ritual mínimo viable</span>
-        <div class="page-number">44</div>
+        <div class="page-number">56</div>
       </div></div>
 
+      <!-- 53 CTAs -->
       <div class="page"><div class="page-inner">
-        <p class="eyebrow">13 · Comunidad y accesos</p>
+        <p class="eyebrow">14 · Comunidad y accesos</p>
         <h2>Seguí adentro</h2>
         <p>Esta guía es la base. La comunidad elemental está viva en estos lugares — vos elegís por dónde seguís.</p>
         <div class="cta-final">
@@ -877,15 +1386,16 @@
             <p class="cta-text">El libro madre con todos los linajes</p>
           </a>
         </div>
-        <div class="page-number">45</div>
+        <div class="page-number">57</div>
       </div></div>
 
+      <!-- 54 CIERRE -->
       <div class="page deep-mint"><div class="page-inner center-content">
-        <svg class="ornament dark med"><use href="#r-leaf"/></svg>
-        <p class="cita" style="font-size:50px;">Donde el aire ríe<br>tu casa<br>se vuelve mundo.</p>
+        <svg class="cita-ornament" width="100" height="100" style="color:var(--mint-light);"><use href="#r-flor"/></svg>
+        <p class="cita" style="font-size:50px;">Donde la flor ríe<br>tu casa<br>se vuelve mundo.</p>
         <div style="position:absolute;bottom:48px;left:0;right:0;text-align:center;">
           <p style="font-family:'Cinzel',serif;font-weight:400;font-size:10px;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;text-align:center;">Duendes del Uruguay</p>
-          <p style="font-family:'Cinzel',serif;font-weight:400;font-size:9px;letter-spacing:0.4em;color:var(--gold-dark);text-transform:uppercase;margin-top:6px;text-align:center;">Edición Linaje del Aire · 2026</p>
+          <p style="font-family:'Cinzel',serif;font-weight:400;font-size:9px;letter-spacing:0.4em;color:var(--mint-light);text-transform:uppercase;margin-top:6px;text-align:center;">Edición Linaje Vegetal · 2026</p>
         </div>
       </div></div>
 
@@ -945,6 +1455,7 @@
     noise.connect(filter); filter.connect(lowpass); lowpass.connect(gain); gain.connect(ctx.destination);
     noise.start(); noise.stop(ctx.currentTime + duration);
 
+    // Campanita aguda · firma pixie (chime corto, más suave que la biblia)
     [2093, 2637, 3136].forEach((freq, i) => {
       const osc = ctx.createOscillator(); osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, ctx.currentTime + i*0.05);
@@ -956,29 +1467,6 @@
     });
   }
 
-  function spawnParticles() {
-    const types = ['gold','mint','spark','spark'];
-    const total = 24;
-    for (let i = 0; i < total; i++) {
-      const p = document.createElement('div');
-      const type = types[Math.floor(Math.random()*types.length)];
-      p.className = 'particula ' + type;
-      const startX = Math.random() * 100;
-      const drift = (Math.random() - 0.5) * 35;
-      const duration = 12 + Math.random() * 10;
-      const delay = Math.random() * 14;
-      const startY = 100 + Math.random() * 20;
-      p.style.left = startX + 'vw';
-      p.style.top = startY + 'vh';
-      p.style.animation = 'particula-rise ' + duration + 's linear ' + delay + 's infinite';
-      p.style.setProperty('--drift', drift + 'vw');
-      document.body.appendChild(p);
-    }
-  }
-  const styleEl = document.createElement('style');
-  styleEl.textContent = '@keyframes particula-rise { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translate(var(--drift), -120vh); opacity: 0; } }';
-  document.head.appendChild(styleEl);
-
   document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.getElementById('lang-overlay');
     const btnES = document.getElementById('lang-es');
@@ -988,7 +1476,6 @@
       overlay.classList.add('hide');
       ensureAudioCtx();
       initFlipbook();
-      spawnParticles();
     }
 
     const currentPath = window.location.pathname;
@@ -1015,8 +1502,8 @@
 
     try {
       const saved = localStorage.getItem('guia_pixies_lang');
-      if (saved === 'es' && alreadyInES) { startBook(); }
-      else if (saved === 'en_pending' && alreadyInEN) { startBook(); }
+      if (saved === 'es' && alreadyInES) { overlay.classList.add('hide'); initFlipbook(); }
+      else if (saved === 'en_pending' && alreadyInEN) { overlay.classList.add('hide'); initFlipbook(); }
     } catch(e) {}
   });
 
@@ -1026,8 +1513,8 @@
 
     const isMobile = window.innerWidth < 768;
     const pageFlip = new St.PageFlip(bookEl, {
-      width: isMobile ? 320 : 480,
-      height: isMobile ? 460 : 680,
+      width: isMobile ? 340 : 480,
+      height: isMobile ? Math.min(window.innerHeight - 120, 760) : 760,
       size: 'fixed',
       minWidth: 280, maxWidth: 600,
       minHeight: 400, maxHeight: 800,
@@ -1036,7 +1523,7 @@
       usePortrait: isMobile,
       startZIndex: 0,
       autoSize: false,
-      maxShadowOpacity: 0.55,
+      maxShadowOpacity: 0.5,
       showCover: true,
       mobileScrollSupport: true,
       swipeDistance: 30,
@@ -1047,6 +1534,123 @@
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+    // BUSCADOR · expone pageFlip + busca en el contenido y salta a la página
+    window.__libroPageFlip = pageFlip;
+    var searchInput = document.getElementById('libro-search-input');
+    var searchBtn = document.getElementById('libro-search-btn');
+    var searchResults = document.getElementById('libro-search-results');
+    var allPages = Array.from(document.querySelectorAll('#book .page'));
+
+    function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+    function runSearch(){
+      var q = normalize(searchInput.value.trim());
+      searchResults.innerHTML = '';
+      if(!q || q.length < 2){ searchResults.hidden = true; return; }
+      var matches = [];
+      allPages.forEach(function(p, i){
+        var text = normalize(p.textContent);
+        var idx = text.indexOf(q);
+        if(idx >= 0){
+          var titleEl = p.querySelector('h2') || p.querySelector('h1') || p.querySelector('.eyebrow') || p.querySelector('p');
+          var title = titleEl ? titleEl.textContent.trim().slice(0, 60) : 'Página ' + i;
+          var rawText = p.textContent.replace(/\s+/g,' ').trim();
+          var rawIdx = normalize(rawText).indexOf(q);
+          var start = Math.max(0, rawIdx - 30);
+          var snippet = (start > 0 ? '…' : '') + rawText.slice(start, rawIdx + q.length + 50) + '…';
+          matches.push({i: i, title: title, snippet: snippet});
+        }
+      });
+      if(!matches.length){
+        searchResults.innerHTML = '<li style="opacity:0.6;font-style:italic;cursor:default;">Sin resultados para "' + searchInput.value.trim() + '"</li>';
+        searchResults.hidden = false;
+        return;
+      }
+      matches.slice(0, 12).forEach(function(m){
+        var li = document.createElement('li');
+        li.innerHTML = '<span class="lbsr-page">P ' + String(m.i + 1).padStart(2,'0') + '</span><strong>' + m.title + '</strong><span class="lbsr-snippet">' + m.snippet.replace(new RegExp('('+searchInput.value.trim()+')','ig'),'<mark>$1</mark>') + '</span>';
+        li.addEventListener('click', function(){
+          searchResults.hidden = true;
+          if(window.__libroPageFlip){
+            try {
+              window.__libroPageFlip.turnToPage(m.i);
+            } catch(err){
+              try { window.__libroPageFlip.flip(m.i, 'top'); } catch(e){}
+            }
+            window.scrollTo({top: document.querySelector('.flipbook-container').offsetTop - 20, behavior:'smooth'});
+          }
+        });
+        searchResults.appendChild(li);
+      });
+      searchResults.hidden = false;
+    }
+    searchBtn.addEventListener('click', runSearch);
+    searchInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); runSearch(); } });
+    searchInput.addEventListener('input', function(){ if(!searchInput.value.trim()){ searchResults.hidden = true; } });
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.libro-buscador')) searchResults.hidden = true;
+    });
+
+    // AUTO-NUMERAR páginas · arregla números repetidos por splits
+    (function renumberPages(){
+      var allPagesNum = document.querySelectorAll('#book .page');
+      var num = 0;
+      allPagesNum.forEach(function(p){
+        if(p.classList.contains('cover')) return;
+        num++;
+        var pn = p.querySelector('.page-number');
+        if(pn){ pn.textContent = String(num).padStart(2, '0'); }
+      });
+    })();
+
+    // FIT-TO-PAGE · escala el inner si una página rebasa la altura
+    function measureNaturalHeight(pageNode, targetWidth){
+      var html = pageNode.innerHTML;
+      var holder = document.createElement('div');
+      holder.style.cssText='position:fixed;left:-9999px;top:0;width:'+targetWidth+'px;visibility:hidden;';
+      holder.className='libro-wrap';
+      var pageClasses = 'page' +
+        (pageNode.classList.contains('dark') ? ' dark' : '') +
+        (pageNode.classList.contains('mint') ? ' mint' : '') +
+        (pageNode.classList.contains('green-soft') ? ' green-soft' : '') +
+        (pageNode.classList.contains('deep-mint') ? ' deep-mint' : '') +
+        (pageNode.classList.contains('cover') ? ' cover' : '');
+      holder.innerHTML = '<div class="'+pageClasses+'" style="position:relative;width:'+targetWidth+'px;height:auto;background:#fff;">' + html + '</div>';
+      document.body.appendChild(holder);
+      var pageEl = holder.querySelector('.page');
+      var inner = pageEl.querySelector('.page-inner');
+      if(inner) inner.style.height='auto';
+      var h = pageEl.scrollHeight;
+      document.body.removeChild(holder);
+      return h;
+    }
+
+    function fitAllPages(){
+      var originals = document.querySelectorAll('#book .page');
+      var stfItems = document.querySelectorAll('.stf__item');
+      if(!stfItems.length) return;
+      var sample = stfItems[0];
+      var pageW = sample.clientWidth || (isMobile ? 340 : 480);
+      var pageH = sample.clientHeight || (isMobile ? 600 : 760);
+
+      originals.forEach(function(orig, i){
+        var stf = stfItems[i];
+        if(!stf) return;
+        var inner = stf.querySelector('.page-inner');
+        if(!inner) return;
+        inner.style.transform=''; inner.style.transformOrigin='center center';
+        var natH = measureNaturalHeight(orig, pageW);
+        if(natH > pageH){
+          var scale = (pageH / natH) * 0.97;
+          inner.style.transform = 'scale(' + scale.toFixed(3) + ')';
+          inner.style.transformOrigin = 'center center';
+        }
+      });
+    }
+    setTimeout(fitAllPages, 350);
+    setTimeout(fitAllPages, 1200);
+    window.addEventListener('resize', function(){ setTimeout(fitAllPages, 250); });
 
     const prevBtn = document.getElementById('prev-page');
     const nextBtn = document.getElementById('next-page');

@@ -95,6 +95,7 @@
   #book {
     box-shadow: 0 32px 100px rgba(0,0,0,0.92), 0 0 0 8px rgba(20,16,26,0.7), 0 0 0 9px var(--silver-old), 0 0 100px rgba(176,138,203,0.18);
     border-radius: 4px;
+    touch-action: pan-y;
   }
   .page { background: var(--cream); color: var(--brown-deep); overflow: hidden; }
   .page-inner { padding: 36px 32px 26px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; text-align: center; }
@@ -249,6 +250,158 @@
     .otra-especie-card .otra-foto { width: 100px; height: 100px; }
     .otra-especie-card .otra-nombre { font-size: 28px; }
   }
+
+  /* === Fix de tamaños · header + títulos in-libro === */
+  .libro-header h1 { font-size: clamp(28px, 4.2vw, 48px) !important; line-height: 1 !important; margin: 0 0 6px !important; }
+  .libro-header .eyebrow { font-size: 10px !important; letter-spacing: 0.4em !important; margin-bottom: 8px !important; }
+  .libro-header .sub { font-size: 9px !important; letter-spacing: 0.4em !important; }
+  .libro-header { margin: 0 auto 14px !important; }
+  .page h2 { font-size: 30px !important; line-height: 1 !important; margin: 0 auto 10px !important; }
+  .page.cover h1 { font-size: clamp(32px, 5vw, 46px) !important; line-height: 1 !important; margin: 6px 0 8px !important; }
+  .page .cita { font-size: 30px !important; padding: 10px !important; }
+  .page.dark .cita { font-size: 34px !important; }
+  .ser-card .ser-nombre { font-size: 24px !important; }
+  .page h3 { margin: 8px 0 6px !important; }
+  @media (max-width: 768px) {
+    .libro-header h1 { font-size: clamp(22px, 5.5vw, 32px) !important; }
+    .libro-header .eyebrow, .libro-header .sub { font-size: 8.5px !important; letter-spacing: 0.35em !important; }
+    .page h2 { font-size: 22px !important; }
+    .page.cover h1 { font-size: clamp(26px, 6vw, 34px) !important; }
+    .page .cita { font-size: 22px !important; }
+    .page.dark .cita { font-size: 26px !important; }
+    .page-inner { padding: 18px 14px 18px !important; gap: 4px !important; }
+    .ser-card { padding: 10px 12px !important; }
+    .ser-card .ser-nombre { font-size: 20px !important; }
+    .ser-card .ser-detalle { font-size: 11.5px !important; }
+  }
+
+
+  /* === Premium pass · Cinzel + fotos enteras + centrado === */
+  .libro-wrap {
+    --font-info: "Cinzel", "Cormorant Garamond", serif !important;
+  }
+  /* Cinzel para el cuerpo (más legible con un poco de tracking y line-height) */
+  .libro-wrap .page p,
+  .libro-wrap .lang-box p,
+  .libro-wrap .indice,
+  .libro-wrap .consejo-card p,
+  .libro-wrap .elemento-cell .quien,
+  .libro-wrap .elemento-cell .funcion,
+  .libro-wrap .dia-item .desc,
+  .libro-wrap .compendio-row .uso,
+  .libro-wrap .faq .respuesta,
+  .libro-wrap .ser-card .ser-detalle,
+  .libro-wrap .cta-final-btn .cta-text {
+    font-family: "Cinzel", serif !important;
+    letter-spacing: 0.03em !important;
+    line-height: 1.55 !important;
+  }
+  /* Citas y títulos de página SIGUEN en Great Vibes (script) */
+  .libro-wrap .page h2,
+  .libro-wrap .page .cita,
+  .libro-wrap .page.cover h1,
+  .libro-wrap .libro-header h1,
+  .libro-wrap .lang-box h2,
+  .libro-wrap .ser-card .ser-nombre,
+  .libro-wrap .page .ser-nombre { font-family: "Great Vibes", cursive !important; }
+
+  /* Centrado + prolijidad */
+  .libro-wrap .page-inner { align-items: center !important; justify-content: center !important; text-align: center !important; }
+  .libro-wrap .page p { margin-left: auto !important; margin-right: auto !important; }
+  .libro-wrap .indice { text-align: center !important; }
+  .libro-wrap .indice-item { justify-content: center !important; }
+
+  /* Fotos · enteras, sin recortar (object-fit: contain) con frame adaptado */
+  .libro-wrap .foto-circle,
+  .libro-wrap .foto-rounded,
+  .libro-wrap .foto-arch {
+    background: linear-gradient(180deg, rgba(245,240,225,0.65) 0%, rgba(232,220,195,0.5) 100%) !important;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(201,169,97,0.35) !important;
+    padding: 6px !important;
+    box-sizing: border-box !important;
+  }
+  .libro-wrap .foto-circle img,
+  .libro-wrap .foto-rounded img,
+  .libro-wrap .foto-arch img {
+    object-fit: contain !important;
+    border-radius: inherit;
+  }
+  .libro-wrap .foto-rounded { width: 220px !important; height: 160px !important; border-radius: 12px !important; }
+  .libro-wrap .foto-circle { width: 150px !important; height: 150px !important; }
+  .libro-wrap .foto-arch { width: 150px !important; height: 200px !important; }
+
+  /* Quitar symbol-row de bullets/dots que se ven cheap; dejar SVG ornaments */
+  .libro-wrap .page .symbol-row { letter-spacing: 0.4em !important; opacity: 0.65 !important; font-size: 9px !important; }
+
+  /* Tweaks de centrado para card y caption */
+  .libro-wrap .foto-caption { text-align: center !important; margin: 8px auto 0 !important; font-family: "Cinzel", serif !important; }
+  .libro-wrap .ser-card { text-align: center !important; margin-left: auto !important; margin-right: auto !important; }
+
+  @media (max-width: 768px) {
+    .libro-wrap .foto-rounded { width: 200px !important; height: 140px !important; }
+    .libro-wrap .foto-circle { width: 130px !important; height: 130px !important; }
+    .libro-wrap .foto-arch { width: 130px !important; height: 170px !important; }
+  }
+
+  /* Buscador integrado · paleta violet + plata · arriba del libro */
+  .libro-wrap .libro-buscador { max-width: 480px; margin: 0 auto 16px; display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(6,4,10,0.6); border: 0.5px solid rgba(176,138,203,0.45); border-radius: 999px; position: relative; backdrop-filter: blur(6px); }
+  .libro-wrap .libro-buscador__icon { color: var(--violet-light); flex-shrink: 0; opacity: 0.9; }
+  .libro-wrap .libro-buscador input { flex: 1; background: transparent; border: 0; outline: 0; color: var(--cream); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 14px; font-style: italic; padding: 4px 0; min-width: 0; }
+  .libro-wrap .libro-buscador input::placeholder { color: rgba(236,230,224,0.45); font-style: italic; }
+  .libro-wrap .libro-buscador button { background: var(--violet-deep); color: var(--cream); border: 0; padding: 6px 16px; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; cursor: pointer; border-radius: 999px; transition: all 0.2s; }
+  .libro-wrap .libro-buscador button:hover { background: var(--violet-medium); }
+  .libro-wrap .libro-buscador ul#libro-search-results { position: absolute; top: 48px; left: 0; right: 0; background: #06040a; border: 0.5px solid rgba(176,138,203,0.4); border-radius: 6px; padding: 6px 0; margin: 0; list-style: none; max-height: 280px; overflow-y: auto; z-index: 50; box-shadow: 0 14px 40px rgba(0,0,0,0.7); }
+  .libro-wrap .libro-buscador ul li { padding: 8px 14px; font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--cream); cursor: pointer; border-bottom: 0.5px solid rgba(176,138,203,0.18); transition: background 0.15s; }
+  .libro-wrap .libro-buscador ul li:last-child { border-bottom: 0; }
+  .libro-wrap .libro-buscador ul li:hover { background: rgba(107,58,138,0.22); }
+  .libro-wrap .libro-buscador ul li .lbsr-page { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.3em; color: var(--violet-light); margin-right: 10px; }
+  .libro-wrap .libro-buscador ul li .lbsr-snippet { color: rgba(236,230,224,0.7); font-size: 12px; display: block; margin-top: 2px; font-style: italic; }
+  .libro-wrap .libro-buscador ul li mark { background: rgba(176,138,203,0.4); color: var(--cream); padding: 0 2px; border-radius: 2px; }
+  @media (max-width: 768px) {
+    .libro-wrap .libro-buscador { margin: 0 8px 12px; padding: 6px 12px; }
+    .libro-wrap .libro-buscador input { font-size: 13px; }
+    .libro-wrap .libro-buscador button { padding: 5px 12px; font-size: 8.5px; }
+  }
+
+  /* Page-number absoluto en cada .page (refuerzo · biblia-style abajo-derecha) */
+  .libro-wrap .page,
+  .libro-wrap .page.dark,
+  .libro-wrap .page.deep-violet,
+  .libro-wrap .page.silver { padding-bottom: 24px !important; }
+  .libro-wrap .page > .page-inner > .page-number,
+  .libro-wrap .page .page-number {
+    position: absolute !important;
+    bottom: 6px !important;
+    right: 14px !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 8.5px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.32em !important;
+    color: var(--silver-old) !important;
+    opacity: 0.9 !important;
+    z-index: 99 !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: 1 !important;
+    text-align: right !important;
+    background: transparent !important;
+  }
+  .libro-wrap .page.dark .page-number,
+  .libro-wrap .page.deep-violet .page-number { color: var(--silver-light) !important; opacity: 0.75 !important; }
+  .libro-wrap .page.silver .page-number { color: var(--violet-deep) !important; opacity: 0.85 !important; }
+  .libro-wrap .page.cover .page-number { display: none !important; }
+
+  /* Página NO corta contenido si rebasa: scroll interno suave */
+  .libro-wrap .page { overflow-y: auto !important; overflow-x: hidden !important; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(107,58,138,0.4) transparent; }
+  .libro-wrap .page::-webkit-scrollbar { width: 4px; }
+  .libro-wrap .page::-webkit-scrollbar-thumb { background: rgba(107,58,138,0.4); border-radius: 2px; }
+  .libro-wrap .page.cover { overflow: hidden !important; }
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -284,6 +437,13 @@
     <h1>Alma de Bruja</h1>
     <p class="sub">Talismanes · Varitas · Sigilos · Piedras de Poder</p>
   </header>
+
+  <div class="libro-buscador" role="search">
+    <svg class="libro-buscador__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+    <input id="libro-search-input" type="search" placeholder="Buscar en el libro · varita, talismán, luna llena, amatista…" autocomplete="off">
+    <button id="libro-search-btn" type="button">Ir</button>
+    <ul id="libro-search-results" hidden></ul>
+  </div>
 
   <div class="flipbook-container">
     <div id="book">
@@ -957,6 +1117,122 @@
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+    // BUSCADOR INTEGRADO · expone pageFlip + busca en el contenido y salta a la página
+    window.__libroPageFlip = pageFlip;
+    var searchInput = document.getElementById('libro-search-input');
+    var searchBtn = document.getElementById('libro-search-btn');
+    var searchResults = document.getElementById('libro-search-results');
+    var allPages = Array.from(document.querySelectorAll('#book .page'));
+
+    function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+    function runSearch(){
+      var q = normalize(searchInput.value.trim());
+      searchResults.innerHTML = '';
+      if(!q || q.length < 2){ searchResults.hidden = true; return; }
+      var matches = [];
+      allPages.forEach(function(p, i){
+        var text = normalize(p.textContent);
+        var idx = text.indexOf(q);
+        if(idx >= 0){
+          var titleEl = p.querySelector('h2') || p.querySelector('h1') || p.querySelector('.eyebrow') || p.querySelector('p');
+          var title = titleEl ? titleEl.textContent.trim().slice(0, 60) : 'Página ' + i;
+          var rawText = p.textContent.replace(/\s+/g,' ').trim();
+          var rawIdx = normalize(rawText).indexOf(q);
+          var start = Math.max(0, rawIdx - 30);
+          var snippet = (start > 0 ? '…' : '') + rawText.slice(start, rawIdx + q.length + 50) + '…';
+          matches.push({i: i, title: title, snippet: snippet});
+        }
+      });
+      if(!matches.length){
+        searchResults.innerHTML = '<li style="opacity:0.6;font-style:italic;cursor:default;">Sin resultados para "' + searchInput.value.trim() + '"</li>';
+        searchResults.hidden = false;
+        return;
+      }
+      matches.slice(0, 12).forEach(function(m){
+        var li = document.createElement('li');
+        li.innerHTML = '<span class="lbsr-page">P ' + String(m.i + 1).padStart(2,'0') + '</span><strong>' + m.title + '</strong><span class="lbsr-snippet">' + m.snippet.replace(new RegExp('('+searchInput.value.trim().replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>') + '</span>';
+        li.addEventListener('click', function(){
+          searchResults.hidden = true;
+          if(window.__libroPageFlip){
+            try {
+              window.__libroPageFlip.turnToPage(m.i);
+            } catch(err){
+              try { window.__libroPageFlip.flip(m.i, 'top'); } catch(e){}
+            }
+            window.scrollTo({top: document.querySelector('.flipbook-container').offsetTop - 20, behavior:'smooth'});
+          }
+        });
+        searchResults.appendChild(li);
+      });
+      searchResults.hidden = false;
+    }
+    searchBtn.addEventListener('click', runSearch);
+    searchInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); runSearch(); } });
+    searchInput.addEventListener('input', function(){ if(!searchInput.value.trim()){ searchResults.hidden = true; } });
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.libro-buscador')) searchResults.hidden = true;
+    });
+
+    // AUTO-NUMERAR páginas · arregla números repetidos por splits
+    (function renumberPages(){
+      var pages = document.querySelectorAll('#book .page');
+      var num = 0;
+      pages.forEach(function(p){
+        if(p.classList.contains('cover')) return;
+        num++;
+        var pn = p.querySelector('.page-number');
+        if(pn){ pn.textContent = String(num).padStart(2, '0'); }
+      });
+    })();
+
+    // FIT-TO-PAGE v2 · medición precisa via clonado fuera del DOM
+    function measureNaturalHeight(pageNode, targetWidth){
+      var html = pageNode.innerHTML;
+      var holder = document.createElement('div');
+      holder.style.cssText='position:fixed;left:-9999px;top:0;width:'+targetWidth+'px;visibility:hidden;';
+      holder.className='libro-wrap';
+      var extra = '';
+      if(pageNode.classList.contains('dark')) extra += ' dark';
+      if(pageNode.classList.contains('deep-violet')) extra += ' deep-violet';
+      if(pageNode.classList.contains('silver')) extra += ' silver';
+      if(pageNode.classList.contains('cover')) extra += ' cover';
+      var pageClasses = 'page' + extra;
+      holder.innerHTML = '<div class="'+pageClasses+'" style="position:relative;width:'+targetWidth+'px;height:auto;background:#fff;">' + html + '</div>';
+      document.body.appendChild(holder);
+      var pageEl = holder.querySelector('.page');
+      var inner = pageEl.querySelector('.page-inner');
+      if(inner) inner.style.height='auto';
+      var h = pageEl.scrollHeight;
+      document.body.removeChild(holder);
+      return h;
+    }
+
+    function fitAllPages(){
+      var originals = document.querySelectorAll('#book .page');
+      var stfItems = document.querySelectorAll('.stf__item');
+      if(!stfItems.length) return;
+      var sample = stfItems[0];
+      var pageW = sample.clientWidth || (isMobile ? 320 : 480);
+      var pageH = sample.clientHeight || (isMobile ? 460 : 680);
+      originals.forEach(function(orig, i){
+        var stf = stfItems[i];
+        if(!stf) return;
+        var inner = stf.querySelector('.page-inner');
+        if(!inner) return;
+        inner.style.transform=''; inner.style.transformOrigin='center center';
+        var natH = measureNaturalHeight(orig, pageW);
+        if(natH > pageH){
+          var scale = (pageH / natH) * 0.97;
+          inner.style.transform = 'scale(' + scale.toFixed(3) + ')';
+          inner.style.transformOrigin = 'center center';
+        }
+      });
+    }
+    setTimeout(fitAllPages, 350);
+    setTimeout(fitAllPages, 1200);
+    window.addEventListener('resize', function(){ setTimeout(fitAllPages, 250); });
 
     const prevBtn = document.getElementById('prev-page');
     const nextBtn = document.getElementById('next-page');

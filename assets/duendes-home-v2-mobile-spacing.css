@@ -69,11 +69,15 @@
 
 /* Barra Horizon (SSL, “Hechos a mano…”, cruz): oculta en toda la tienda.
    El mensaje de marca va en la sección duendes-announcement-bar (sin cruz). */
-html body aside.announcement-bar.section.spacing-style,
-html body aside.announcement-bar.section {
+/* Barra del header Horizon (texto largo / SSL / cruz) — fuera */
+html body aside.announcement-bar,
+html body .announcement-bar.spacing-style,
+html body announcement-bar-component,
+html body .shopify-section-group-header-group .announcement-bar {
   display: none !important;
   height: 0 !important;
   min-height: 0 !important;
+  max-height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
   border: none !important;
@@ -86,5 +90,104 @@ html body aside.announcement-bar.section {
   .shopify-section.duendes-home-v2-linajes-section,
   .shopify-section.duendes-home-v2-recien-llegados-section {
     overflow-x: visible !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+   DDU 2026-05-17 — Override switcher chunky → compacto
+   No tocar header.liquid (push silenciado). Solo CSS override.
+   ════════════════════════════════════════════════════════ */
+dropdown-localization-component .dropdown-localization__button.localization-selector {
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  letter-spacing: 0.3px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  font-family: inherit !important;
+  border: 1px solid rgba(201,169,110,0.4) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  gap: 4px !important;
+}
+dropdown-localization-component .dropdown-localization__button.localization-selector::before {
+  display: none !important;
+}
+dropdown-localization-component .dropdown-localization__button .currency-code,
+dropdown-localization-component .dropdown-localization__button span:not(.svg-wrapper):not(.icon-flag) {
+  font-size: 11px !important;
+  letter-spacing: 0.2px !important;
+}
+dropdown-localization-component .dropdown-localization__button .icon-flag {
+  width: 14px !important;
+  height: 14px !important;
+}
+dropdown-localization-component .dropdown-localization__button .icon-caret {
+  width: 9px !important;
+  height: 9px !important;
+}
+dropdown-localization-component .dropdown-localization__button.localization-selector:hover {
+  background: rgba(201,169,110,0.08) !important;
+  border-color: rgba(201,169,110,0.6) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+@media screen and (max-width: 749px) {
+  dropdown-localization-component .dropdown-localization__button.localization-selector {
+    padding: 3px 6px !important;
+    font-size: 10px !important;
+    gap: 3px !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════
+   Duendes 2026-05-17 — Switcher z-index + label IDIOMA·MONEDA
+   ════════════════════════════════════════════════════════ */
+dropdown-localization-component {
+  position: relative !important;
+  z-index: 9999 !important;
+}
+dropdown-localization-component .localization-wrapper {
+  z-index: 99999 !important;
+  position: absolute !important;
+  background: #faf9f6 !important;
+  border: 1px solid rgba(201,169,110,0.4) !important;
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,0.25) !important;
+  border-radius: 12px !important;
+  padding: 8px !important;
+  min-width: 220px !important;
+  right: 0 !important;
+  top: calc(100% + 6px) !important;
+}
+dropdown-localization-component .localization-wrapper * {
+  color: #15110d !important;
+}
+dropdown-localization-component::before {
+  content: "IDIOMA · MONEDA";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: rgba(201,169,110,0.85);
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+@media screen and (max-width: 749px) {
+  dropdown-localization-component::before {
+    font-size: 7px;
+    letter-spacing: 0.16em;
+  }
+  .header__columns > dropdown-localization-component {
+    margin-right: 10px !important;
+  }
+  header-actions {
+    gap: 8px !important;
   }
 }
