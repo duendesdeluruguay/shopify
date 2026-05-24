@@ -1,3 +1,9 @@
+{%- capture duendes_guide_access -%}
+  {%- render 'duendes-guide-access', required_lineages: 'Mayor,Mayores,Gigante,Gigantes' -%}
+{%- endcapture -%}
+{%- assign duendes_guide_access = duendes_guide_access | strip -%}
+{%- if duendes_guide_access == 'allowed' -%}
+
 {% comment %}
   La Guía de los Maestros Gigantes · Duendes del Uruguay · v4.0 BIBLIA
   · Anatomía técnica idéntica a page.libro-elemental.liquid (modelo canónico)
@@ -1364,7 +1370,7 @@
     }
 
     const currentPath = window.location.pathname;
-    const alreadyInES = currentPath.startsWith('/es/');
+    const alreadyInES = /^\/es(?:[-\/]|$)/.test(currentPath);
     const alreadyInEN = !alreadyInES;
 
     btnES.addEventListener('click', function() {
@@ -1571,3 +1577,6 @@
   }
 })();
 </script>
+{%- else -%}
+  {% render 'duendes-guide-locked', guide_title: 'La Guía de los Maestros Gigantes', required_lineage_label: 'Maestro Gigante' %}
+{%- endif -%}
