@@ -62,13 +62,13 @@
       {%- assign has_mayor = false -%}
       {%- assign has_deluxe = false -%}
       {%- assign has_bruja = false -%}
-      {%- if owned_lineages contains ',Duende,' -%}{%- assign has_duende = true -%}{%- endif -%}
-      {%- if owned_lineages contains ',Hada,' -%}{%- assign has_hada = true -%}{%- endif -%}
-      {%- if owned_lineages contains ',Pixie,' -%}{%- assign has_pixie = true -%}{%- endif -%}
-      {%- if owned_lineages contains ',Elfo,' -%}{%- assign has_elfo = true -%}{%- endif -%}
-      {%- if owned_lineages contains ',Mayor,' -%}{%- assign has_mayor = true -%}{%- endif -%}
-      {%- if owned_lineages contains ',Deluxe,' -%}{%- assign has_deluxe = true -%}{%- endif -%}
-      {%- if owned_lineages contains ',Bruja,' -%}{%- assign has_bruja = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Duende,' or owned_lineages contains ',Duendes,' -%}{%- assign has_duende = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Hada,' or owned_lineages contains ',Hadas,' -%}{%- assign has_hada = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Pixie,' or owned_lineages contains ',Pixies,' -%}{%- assign has_pixie = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Elfo,' or owned_lineages contains ',Elfos,' -%}{%- assign has_elfo = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Mayor,' or owned_lineages contains ',Mayores,' or owned_lineages contains ',Gigante,' or owned_lineages contains ',Gigantes,' -%}{%- assign has_mayor = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Deluxe,' or owned_lineages contains ',Ser Deluxe,' or owned_lineages contains ',Seres Deluxe,' -%}{%- assign has_deluxe = true -%}{%- endif -%}
+      {%- if owned_lineages contains ',Bruja,' or owned_lineages contains ',Brujas,' or owned_lineages contains ',Alma de Bruja,' -%}{%- assign has_bruja = true -%}{%- endif -%}
 
       <section class="du-portal-biblio" aria-label="Biblioteca de los Elegidos">
         <p class="du-portal-biblio__eyebrow">— Biblioteca de los Elegidos —</p>

@@ -1,0 +1,29 @@
+{%- liquid
+  assign access_granted = false
+  assign required_values = required_lineages | default: required_lineage | default: ''
+  assign required_values = required_values | downcase | replace: ' ', ''
+  assign required_tokens = required_values | split: ','
+-%}
+{%- if customer and required_values != blank -%}
+  {%- for order in customer.orders limit: 100 -%}
+    {%- for line_item in order.line_items -%}
+      {%- assign line_product = line_item.product -%}
+      {%- if line_product != blank -%}
+        {%- assign lineage = line_product.metafields.custom.linaje.value | default: line_product.metafields.custom.linaje -%}
+        {%- if lineage != blank -%}
+          {%- assign lineage_token = lineage | downcase | strip | replace: ' ', '' -%}
+          {%- for required_token in required_tokens -%}
+            {%- assign required_token = required_token | strip -%}
+            {%- if required_token != blank and lineage_token == required_token -%}
+              {%- assign access_granted = true -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endif -%}
+      {%- if access_granted -%}{%- break -%}{%- endif -%}
+    {%- endfor -%}
+    {%- if access_granted -%}{%- break -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- if access_granted -%}allowed{%- else -%}locked{%- endif -%}

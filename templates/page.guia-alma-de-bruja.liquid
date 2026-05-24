@@ -1,3 +1,9 @@
+{%- capture duendes_guide_access -%}
+  {%- render 'duendes-guide-access', required_lineages: 'Bruja,Brujas,Alma de Bruja' -%}
+{%- endcapture -%}
+{%- assign duendes_guide_access = duendes_guide_access | strip -%}
+{%- if duendes_guide_access == 'allowed' -%}
+
 {% comment %}
   La Guía del Alma de Bruja · Duendes del Uruguay · v3.0 BIBLIA
   · Tipografía: Cinzel (títulos) + Great Vibes (display) + Cormorant Garamond (body)
@@ -1203,7 +1209,7 @@
     }
 
     const currentPath = window.location.pathname;
-    const alreadyInES = currentPath.startsWith('/es/');
+    const alreadyInES = /^\/es(?:[-\/]|$)/.test(currentPath);
     const alreadyInEN = !alreadyInES;
 
     btnES.addEventListener('click', function() {
@@ -1405,3 +1411,6 @@
   }
 })();
 </script>
+{%- else -%}
+  {% render 'duendes-guide-locked', guide_title: 'Alma de Bruja', required_lineage_label: 'Bruja' %}
+{%- endif -%}

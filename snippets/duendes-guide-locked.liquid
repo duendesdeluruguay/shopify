@@ -1,0 +1,92 @@
+{%- liquid
+  assign portal_url = routes.root_url | append: 'pages/el-portal'
+  assign portal_return_url = portal_url | url_encode
+  assign login_url = routes.account_login_url | append: '?return_url=' | append: portal_return_url
+  assign locked_title = guide_title | default: 'Libro de los Elegidos'
+  assign locked_lineage = required_lineage_label | default: 'este linaje'
+-%}
+
+<style>
+  .du-guide-locked {
+    min-height: 70vh;
+    display: grid;
+    place-items: center;
+    padding: 64px 20px;
+    background: radial-gradient(circle at top, rgba(201, 169, 97, 0.18), transparent 42%), #120d0b;
+    color: #f8eed7;
+    text-align: center;
+  }
+
+  .du-guide-locked__card {
+    width: min(620px, 100%);
+    padding: clamp(32px, 7vw, 56px);
+    border: 1px solid rgba(201, 169, 97, 0.45);
+    background: rgba(20, 13, 9, 0.86);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+  }
+
+  .du-guide-locked__eyebrow {
+    margin: 0 0 12px;
+    color: #c9a961;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .du-guide-locked__title {
+    margin: 0 0 16px;
+    color: #fff7df;
+    font-size: clamp(32px, 6vw, 54px);
+    line-height: 1;
+  }
+
+  .du-guide-locked__text {
+    margin: 0 auto 28px;
+    max-width: 460px;
+    color: rgba(248, 238, 215, 0.82);
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  .du-guide-locked__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .du-guide-locked__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 22px;
+    border: 1px solid #c9a961;
+    color: #120d0b;
+    background: #c9a961;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .du-guide-locked__button--secondary {
+    color: #f8eed7;
+    background: transparent;
+  }
+</style>
+
+<section class="du-guide-locked" aria-label="Libro sellado">
+  <div class="du-guide-locked__card">
+    <p class="du-guide-locked__eyebrow">Libro sellado</p>
+    <h1 class="du-guide-locked__title">{{ locked_title | escape }}</h1>
+    <p class="du-guide-locked__text">
+      Este libro se abre solo para clientes con un guardián del linaje {{ locked_lineage | escape }}.
+      Iniciá sesión con el email de compra o volvé a El Portal para ver tus libros desbloqueados.
+    </p>
+    <div class="du-guide-locked__actions">
+      {% if customer == blank %}
+        <a class="du-guide-locked__button" href="{{ login_url }}">Iniciar sesión</a>
+      {% endif %}
+      <a class="du-guide-locked__button du-guide-locked__button--secondary" href="{{ portal_url }}">Ir a El Portal</a>
+    </div>
+  </div>
+</section>

@@ -1,3 +1,9 @@
+{%- capture duendes_guide_access -%}
+  {%- render 'duendes-guide-access', required_lineages: 'Elfo,Elfos' -%}
+{%- endcapture -%}
+{%- assign duendes_guide_access = duendes_guide_access | strip -%}
+{%- if duendes_guide_access == 'allowed' -%}
+
 {% comment %}
   La Guía de los Elfos · Duendes del Uruguay · v4.0 BIBLIA
   · Tipografía: Cinzel (títulos) + Great Vibes (display) + Cormorant Garamond (body)
@@ -1410,7 +1416,7 @@
     }
 
     const currentPath = window.location.pathname;
-    const alreadyInES = currentPath.startsWith('/es/');
+    const alreadyInES = /^\/es(?:[-\/]|$)/.test(currentPath);
     const alreadyInEN = !alreadyInES;
 
     btnES.addEventListener('click', function() {
@@ -1612,3 +1618,6 @@
   }
 })();
 </script>
+{%- else -%}
+  {% render 'duendes-guide-locked', guide_title: 'La Guía de los Elfos', required_lineage_label: 'Elfo' %}
+{%- endif -%}
