@@ -1,0 +1,23 @@
+{%- liquid
+  assign ddu_access = false
+  assign ddu_required_keys = ',' | append: required_lineages | append: ','
+
+  if customer and required_lineages != blank
+    for ddu_order in customer.orders limit: 100
+      for ddu_line_item in ddu_order.line_items
+        assign ddu_lineage = ddu_line_item.product.metafields.custom.linaje.value | default: ddu_line_item.product.metafields.custom.linaje
+        if ddu_lineage != blank
+          assign ddu_lineage_key = ',' | append: ddu_lineage | append: ','
+          if ddu_required_keys contains ddu_lineage_key
+            assign ddu_access = true
+            break
+          endif
+        endif
+      endfor
+      if ddu_access
+        break
+      endif
+    endfor
+  endif
+-%}
+{%- if ddu_access -%}allowed{%- else -%}denied{%- endif -%}
