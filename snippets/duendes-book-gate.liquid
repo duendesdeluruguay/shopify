@@ -1,0 +1,86 @@
+{%- liquid
+  assign ddu_book_title = book_title | default: 'este libro'
+  assign ddu_required_label = required_label | default: 'tu linaje'
+  assign ddu_return_path = return_path | default: '/pages/el-portal' | url_encode
+  assign ddu_collection_url = collection_url | default: '/collections/all'
+-%}
+<style>
+  .du-book-gate {
+    min-height: 70vh;
+    padding: 72px 20px;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 50% 20%, rgba(201,169,97,0.16), transparent 34%), #0a0806;
+    color: #f5f0e1;
+    text-align: center;
+  }
+  .du-book-gate__card {
+    width: min(560px, 100%);
+    padding: 42px 28px;
+    border: 1px solid rgba(201,169,97,0.42);
+    background: linear-gradient(180deg, rgba(26,20,16,0.96), rgba(8,7,5,0.96));
+    box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+  }
+  .du-book-gate__eyebrow {
+    margin: 0 0 12px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #c9a96e;
+  }
+  .du-book-gate__title {
+    margin: 0 0 16px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(30px, 6vw, 46px);
+    font-weight: 500;
+    line-height: 1.08;
+  }
+  .du-book-gate__text {
+    max-width: 440px;
+    margin: 0 auto 28px;
+    color: rgba(245,240,225,0.78);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .du-book-gate__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .du-book-gate__actions a {
+    padding: 13px 18px;
+    border: 1px solid #c9a96e;
+    color: #f5f0e1;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .du-book-gate__actions a:first-child {
+    background: #c9a96e;
+    color: #15110d;
+  }
+</style>
+<section class="du-book-gate" aria-labelledby="du-book-gate-title">
+  <div class="du-book-gate__card">
+    <p class="du-book-gate__eyebrow">Libro sellado</p>
+    <h1 class="du-book-gate__title" id="du-book-gate-title">{{ ddu_book_title | escape }}</h1>
+    {%- if customer -%}
+      <p class="du-book-gate__text">Este libro se abre solo para cuentas con un pedido del linaje {{ ddu_required_label | escape }}. Si ya lo adoptaste con otro correo, ingresá con esa cuenta o escribinos para ayudarte.</p>
+      <div class="du-book-gate__actions">
+        <a href="/pages/el-portal">Volver a Mi Magia</a>
+        <a href="{{ ddu_collection_url }}">Adoptar el linaje</a>
+      </div>
+    {%- else -%}
+      <p class="du-book-gate__text">Iniciá sesión para verificar si {{ ddu_book_title | escape }} ya está desbloqueado por tus adopciones.</p>
+      <div class="du-book-gate__actions">
+        <a href="{{ routes.account_login_url }}?return_url={{ ddu_return_path }}">Iniciar sesión</a>
+        <a href="/pages/el-portal">Ir a Mi Magia</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
