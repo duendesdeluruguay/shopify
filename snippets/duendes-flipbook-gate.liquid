@@ -1,0 +1,93 @@
+{%- liquid
+  assign du_book_title = book_title | default: 'este libro'
+  assign du_required_text = required_text | default: 'el linaje correspondiente'
+  assign du_login_return_url = request.path | url_encode
+-%}
+
+<div class="du-flipbook-gate">
+  <div class="du-flipbook-gate__card">
+    <p class="du-flipbook-gate__eyebrow">Biblioteca de los Elegidos</p>
+    <h1 class="du-flipbook-gate__title">{{ du_book_title | escape }}</h1>
+    <p class="du-flipbook-gate__text">
+      Este libro esta sellado para {{ du_required_text | escape }}. Ingresá con la cuenta que uso la adopcion para abrirlo desde El Portal.
+    </p>
+    <div class="du-flipbook-gate__actions">
+      {%- if customer == blank -%}
+        <a class="du-flipbook-gate__button" href="{{ routes.account_login_url }}?return_url={{ du_login_return_url }}">Ingresar</a>
+      {%- endif -%}
+      <a class="du-flipbook-gate__button du-flipbook-gate__button--secondary" href="/pages/el-portal">Volver a El Portal</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .du-flipbook-gate {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 18px;
+    background: radial-gradient(circle at 50% 20%, rgba(201, 169, 97, 0.18), transparent 42%), #0b0806;
+    color: #f8efe0;
+    text-align: center;
+  }
+
+  .du-flipbook-gate__card {
+    width: min(620px, 100%);
+    padding: clamp(28px, 6vw, 54px);
+    border: 1px solid rgba(201, 169, 97, 0.44);
+    background: linear-gradient(160deg, rgba(18, 13, 9, 0.96), rgba(44, 31, 20, 0.92));
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+  }
+
+  .du-flipbook-gate__eyebrow {
+    margin: 0 0 12px;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #d7b66c;
+  }
+
+  .du-flipbook-gate__title {
+    margin: 0 0 16px;
+    color: #fff6e8;
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: 1;
+  }
+
+  .du-flipbook-gate__text {
+    margin: 0 auto 26px;
+    max-width: 38rem;
+    color: rgba(248, 239, 224, 0.82);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .du-flipbook-gate__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .du-flipbook-gate__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 12px 22px;
+    border: 1px solid #d7b66c;
+    background: #d7b66c;
+    color: #130d08;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .du-flipbook-gate__button--secondary {
+    background: transparent;
+    color: #f8efe0;
+  }
+</style>
