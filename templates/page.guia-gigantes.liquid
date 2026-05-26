@@ -1,3 +1,31 @@
+{%- liquid
+  assign du_flipbook_allowed_lineages = 'Mayor' | split: '|'
+  assign du_flipbook_has_access = false
+  assign du_flipbook_owned_lineages = ','
+
+  if customer
+    for du_order in customer.orders limit: 100
+      for du_line_item in du_order.line_items
+        assign du_lineage = du_line_item.product.metafields.custom.linaje.value | default: du_line_item.product.metafields.custom.linaje
+        if du_lineage != blank
+          assign du_lineage_key = ',' | append: du_lineage | append: ','
+          unless du_flipbook_owned_lineages contains du_lineage_key
+            assign du_flipbook_owned_lineages = du_flipbook_owned_lineages | append: du_lineage | append: ','
+          endunless
+        endif
+      endfor
+    endfor
+
+    for du_allowed_lineage in du_flipbook_allowed_lineages
+      assign du_allowed_key = ',' | append: du_allowed_lineage | append: ','
+      if du_flipbook_owned_lineages contains du_allowed_key
+        assign du_flipbook_has_access = true
+      endif
+    endfor
+  endif
+-%}
+
+{%- if du_flipbook_has_access -%}
 {% comment %}
   La Guía de los Maestros Gigantes · Duendes del Uruguay · v4.0 BIBLIA
   · Anatomía técnica idéntica a page.libro-elemental.liquid (modelo canónico)
@@ -1571,3 +1599,6 @@
   }
 })();
 </script>
+{%- else -%}
+  {% render 'duendes-flipbook-gate', book_title: 'La Guia de los Maestros Gigantes', required_text: 'el linaje Maestro Gigante' %}
+{%- endif -%}
