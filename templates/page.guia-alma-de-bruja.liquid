@@ -1,3 +1,24 @@
+{%- liquid
+  assign duendes_guide_authorized = false
+  assign duendes_guide_required_lineages = ',Bruja,'
+  if customer
+    for order in customer.orders limit: 100
+      for line_item in order.line_items
+        assign duendes_lineage = line_item.product.metafields.custom.linaje.value | default: line_item.product.metafields.custom.linaje
+        assign duendes_lineage_key = ',' | append: duendes_lineage | append: ','
+        if duendes_guide_required_lineages contains duendes_lineage_key
+          assign duendes_guide_authorized = true
+          break
+        endif
+      endfor
+      if duendes_guide_authorized
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- if duendes_guide_authorized -%}
 {% comment %}
   La Guía del Alma de Bruja · Duendes del Uruguay · v3.0 BIBLIA
   · Tipografía: Cinzel (títulos) + Great Vibes (display) + Cormorant Garamond (body)
@@ -1405,3 +1426,6 @@
   }
 })();
 </script>
+{%- else -%}
+  {% render 'duendes-guide-gate-message', guide_title: 'Alma de Bruja', lineage_label: 'Bruja', return_path: '/pages/guia-alma-de-bruja' %}
+{%- endif -%}

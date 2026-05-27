@@ -1,0 +1,106 @@
+{% doc %}
+Renders the locked state for a lineage-gated guide page.
+
+@param {string} guide_title - The title of the guide being protected.
+@param {string} lineage_label - The lineage required to unlock the guide.
+@param {string} return_path - The page path to return to after login.
+{% enddoc %}
+
+{%- liquid
+  assign guide_title = guide_title | default: 'Guia canalizada'
+  assign lineage_label = lineage_label | default: 'tu linaje'
+  assign return_path = return_path | default: '/pages/el-portal'
+-%}
+
+<style>
+  .du-guide-gate {
+    min-height: 70vh;
+    display: grid;
+    place-items: center;
+    padding: 64px 18px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(201, 169, 97, 0.18), transparent 42%),
+      linear-gradient(180deg, #0b0806 0%, #17100c 100%);
+    color: #f7efe1;
+    text-align: center;
+  }
+
+  .du-guide-gate__card {
+    width: min(680px, 100%);
+    padding: clamp(30px, 6vw, 56px);
+    border: 1px solid rgba(201, 169, 97, 0.45);
+    background: rgba(12, 9, 7, 0.78);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  }
+
+  .du-guide-gate__eyebrow {
+    margin: 0 0 12px;
+    color: #d8b872;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+
+  .du-guide-gate__card h1 {
+    margin: 0 0 14px;
+    font-family: Georgia, serif;
+    font-size: clamp(32px, 6vw, 54px);
+    line-height: 1.05;
+    font-weight: 400;
+  }
+
+  .du-guide-gate__card p {
+    margin: 0 auto 24px;
+    max-width: 520px;
+    color: rgba(247, 239, 225, 0.82);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .du-guide-gate__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .du-guide-gate__actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 12px 22px;
+    border: 1px solid #d8b872;
+    color: #0b0806;
+    background: #d8b872;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+
+  .du-guide-gate__actions a.du-guide-gate__secondary {
+    color: #f7efe1;
+    background: transparent;
+  }
+</style>
+
+<section class="du-guide-gate" aria-labelledby="du-guide-gate-title">
+  <div class="du-guide-gate__card">
+    <p class="du-guide-gate__eyebrow">Libro sellado</p>
+    <h1 id="du-guide-gate-title">{{ guide_title | escape }}</h1>
+    {%- if customer == blank -%}
+      <p>Este libro se abre desde Mi Magia para quienes ya adoptaron un Guardian del linaje {{ lineage_label | escape }}. Inicia sesion con el correo de tu compra para verificarlo.</p>
+    {%- else -%}
+      <p>Tu cuenta esta activa, pero todavia no encontramos una adopcion del linaje {{ lineage_label | escape }} asociada a tus pedidos.</p>
+    {%- endif -%}
+    <div class="du-guide-gate__actions">
+      {%- if customer == blank -%}
+        <a href="{{ routes.account_login_url }}?return_url={{ return_path | url_encode }}">Iniciar sesion</a>
+      {%- else -%}
+        <a href="/pages/el-portal">Volver a Mi Magia</a>
+      {%- endif -%}
+      <a class="du-guide-gate__secondary" href="/collections/tienda-magica">Adoptar un Guardian</a>
+    </div>
+  </div>
+</section>
