@@ -1,7 +1,4 @@
 {
-  "accessibility": {
-    "menu_label_button": "MENÚ"
-  },
   "blocks": {
     "load_video": "Cargar video: {{ description }}",
     "sold_out": "Agotado",
@@ -23,6 +20,7 @@
     "slider_label": "Carrusel"
   },
   "accessibility": {
+    "menu_label_button": "MENÚ",
     "play_model": "Reproducir el modelo 3D",
     "play_video": "Reproducir el video",
     "unit_price": "Precio unitario",

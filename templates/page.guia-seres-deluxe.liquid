@@ -1408,7 +1408,7 @@
     }
 
     const currentPath = window.location.pathname;
-    const alreadyInES = currentPath.startsWith('/es/');
+    const alreadyInES = /^\/es(?:[-/]|$)/i.test(currentPath);
     const alreadyInEN = !alreadyInES;
 
     btnES.addEventListener('click', function() {
@@ -1472,6 +1472,7 @@
     var allPages = Array.from(document.querySelectorAll('#book .page'));
 
     function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+    function escapeRegExp(s){ return String(s || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
     function runSearch(){
       var q = normalize(searchInput.value.trim());
@@ -1498,7 +1499,7 @@
       }
       matches.slice(0, 12).forEach(function(m){
         var li = document.createElement('li');
-        li.innerHTML = '<span class="lbsr-page">P ' + String(m.i + 1).padStart(2,'0') + '</span><strong>' + m.title + '</strong><span class="lbsr-snippet">' + m.snippet.replace(new RegExp('('+searchInput.value.trim()+')','ig'),'<mark>$1</mark>') + '</span>';
+        li.innerHTML = '<span class="lbsr-page">P ' + String(m.i + 1).padStart(2,'0') + '</span><strong>' + m.title + '</strong><span class="lbsr-snippet">' + m.snippet.replace(new RegExp('(' + escapeRegExp(searchInput.value.trim()) + ')','ig'),'<mark>$1</mark>') + '</span>';
         li.addEventListener('click', function(){
           searchResults.hidden = true;
           if(window.__libroPageFlip){
