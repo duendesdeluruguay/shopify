@@ -1037,7 +1037,7 @@
     }
 
     const currentPath = window.location.pathname;
-    const alreadyInES = currentPath.startsWith('/es/');
+    const alreadyInES = /^\/es(?:[-/]|$)/i.test(currentPath);
     const alreadyInEN = !alreadyInES;
 
     btnES.addEventListener('click', function() {
