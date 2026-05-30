@@ -1,3 +1,27 @@
+{%- liquid
+  assign duendes_guide_has_access = false
+  if customer
+    for duendes_order in customer.orders limit: 100
+      unless duendes_order.cancelled
+        if duendes_order.financial_status == 'paid'
+          for duendes_line_item in duendes_order.line_items
+            assign duendes_lineage = duendes_line_item.product.metafields.custom.linaje.value | default: duendes_line_item.product.metafields.custom.linaje
+            if duendes_lineage == 'Mayor'
+              assign duendes_guide_has_access = true
+              break
+            endif
+          endfor
+        endif
+      endunless
+      if duendes_guide_has_access
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- if duendes_guide_has_access -%}
+
 {% comment %}
   La Guía de los Maestros Gigantes · Duendes del Uruguay · v4.0 BIBLIA
   · Anatomía técnica idéntica a page.libro-elemental.liquid (modelo canónico)
@@ -1571,3 +1595,8 @@
   }
 })();
 </script>
+
+
+{%- else -%}
+  {%- render 'duendes-guide-locked', guide_title: 'La Guia de los Maestros Gigantes', lineage_label: 'Maestro Gigante' -%}
+{%- endif -%}
