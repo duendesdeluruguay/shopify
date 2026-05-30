@@ -819,9 +819,13 @@
       {%- assign dpp_elegido = false -%}
       {%- if customer -%}
         {%- for o in customer.orders limit: 100 -%}
-          {%- for li in o.line_items -%}
-            {%- if li.product_id == product.id -%}{%- assign dpp_elegido = true -%}{%- break -%}{%- endif -%}
-          {%- endfor -%}
+          {%- unless o.cancelled -%}
+            {%- if o.financial_status == 'paid' -%}
+              {%- for li in o.line_items -%}
+                {%- if li.product_id == product.id -%}{%- assign dpp_elegido = true -%}{%- break -%}{%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endunless -%}
           {%- if dpp_elegido -%}{%- break -%}{%- endif -%}
         {%- endfor -%}
       {%- endif -%}

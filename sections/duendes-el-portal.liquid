@@ -43,15 +43,19 @@
       {%- assign owned_lineages = ',' -%}
       {%- if customer -%}
         {%- for o in customer.orders limit: 100 -%}
-          {%- for li in o.line_items -%}
-            {%- assign lin = li.product.metafields.custom.linaje.value | default: li.product.metafields.custom.linaje -%}
-            {%- if lin != blank -%}
-              {%- assign lin_key = ',' | append: lin | append: ',' -%}
-              {%- unless owned_lineages contains lin_key -%}
-                {%- assign owned_lineages = owned_lineages | append: lin | append: ',' -%}
-              {%- endunless -%}
+          {%- unless o.cancelled -%}
+            {%- if o.financial_status == 'paid' -%}
+              {%- for li in o.line_items -%}
+                {%- assign lin = li.product.metafields.custom.linaje.value | default: li.product.metafields.custom.linaje -%}
+                {%- if lin != blank -%}
+                  {%- assign lin_key = ',' | append: lin | append: ',' -%}
+                  {%- unless owned_lineages contains lin_key -%}
+                    {%- assign owned_lineages = owned_lineages | append: lin | append: ',' -%}
+                  {%- endunless -%}
+                {%- endif -%}
+              {%- endfor -%}
             {%- endif -%}
-          {%- endfor -%}
+          {%- endunless -%}
         {%- endfor -%}
       {%- endif -%}
 
@@ -217,45 +221,49 @@
         {%- assign adopted_count = 0 -%}
         {%- capture cartas_html -%}
           {%- for o in customer.orders limit: 50 -%}
-            {%- for li in o.line_items -%}
-              {%- assign p = li.product -%}
-              {%- if p != blank -%}
-                {%- assign mensaje = p.metafields.custom.mensaje_personal.value -%}
-                {%- if mensaje == nil -%}{%- assign mensaje = p.metafields.custom.mensaje_personal -%}{%- endif -%}
-                {%- if mensaje != blank -%}
-                  {%- assign id_key = ',' | append: p.id | append: ',' -%}
-                  {%- unless seen_ids contains id_key -%}
-                    {%- assign seen_ids = seen_ids | append: p.id | append: ',' -%}
-                    {%- assign adopted_count = adopted_count | plus: 1 -%}
-                    {%- assign clean_name = p.title | split: ' - ' | first | strip -%}
-                    {%- assign esencia = p.metafields.custom.esencia.value | default: p.metafields.custom.esencia -%}
-                    <details class="du-portal-carta">
-                      <summary class="du-portal-carta__face">
-                        <div class="du-portal-carta__media">
-                          {%- if p.featured_image -%}
-                            <img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ clean_name | escape }}" loading="lazy" width="600" height="800">
-                          {%- endif -%}
-                          <span class="du-portal-carta__seal" aria-hidden="true">✦</span>
-                        </div>
-                        <div class="du-portal-carta__body">
-                          <span class="du-portal-carta__eyebrow">Tu Guardián</span>
-                          <h3 class="du-portal-carta__name">{{ clean_name }}</h3>
-                          {%- if esencia != blank -%}
-                            <span class="du-portal-carta__chip">{{ esencia }}</span>
-                          {%- endif -%}
-                          <span class="du-portal-carta__cta">Tocá para abrir su carta →</span>
-                        </div>
-                      </summary>
-                      <div class="du-portal-carta__inner">
-                        <p class="du-portal-carta__hello">— Mensaje personal de {{ clean_name }} · para vos —</p>
-                        <div class="du-portal-carta__letter">{{ mensaje | newline_to_br }}</div>
-                        <p class="du-portal-carta__hint">— Guardalo. Es entre vos y {{ clean_name }}. —</p>
-                      </div>
-                    </details>
-                  {%- endunless -%}
-                {%- endif -%}
+            {%- unless o.cancelled -%}
+              {%- if o.financial_status == 'paid' -%}
+                {%- for li in o.line_items -%}
+                  {%- assign p = li.product -%}
+                  {%- if p != blank -%}
+                    {%- assign mensaje = p.metafields.custom.mensaje_personal.value -%}
+                    {%- if mensaje == nil -%}{%- assign mensaje = p.metafields.custom.mensaje_personal -%}{%- endif -%}
+                    {%- if mensaje != blank -%}
+                      {%- assign id_key = ',' | append: p.id | append: ',' -%}
+                      {%- unless seen_ids contains id_key -%}
+                        {%- assign seen_ids = seen_ids | append: p.id | append: ',' -%}
+                        {%- assign adopted_count = adopted_count | plus: 1 -%}
+                        {%- assign clean_name = p.title | split: ' - ' | first | strip -%}
+                        {%- assign esencia = p.metafields.custom.esencia.value | default: p.metafields.custom.esencia -%}
+                        <details class="du-portal-carta">
+                          <summary class="du-portal-carta__face">
+                            <div class="du-portal-carta__media">
+                              {%- if p.featured_image -%}
+                                <img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ clean_name | escape }}" loading="lazy" width="600" height="800">
+                              {%- endif -%}
+                              <span class="du-portal-carta__seal" aria-hidden="true">✦</span>
+                            </div>
+                            <div class="du-portal-carta__body">
+                              <span class="du-portal-carta__eyebrow">Tu Guardián</span>
+                              <h3 class="du-portal-carta__name">{{ clean_name }}</h3>
+                              {%- if esencia != blank -%}
+                                <span class="du-portal-carta__chip">{{ esencia }}</span>
+                              {%- endif -%}
+                              <span class="du-portal-carta__cta">Tocá para abrir su carta →</span>
+                            </div>
+                          </summary>
+                          <div class="du-portal-carta__inner">
+                            <p class="du-portal-carta__hello">— Mensaje personal de {{ clean_name }} · para vos —</p>
+                            <div class="du-portal-carta__letter">{{ mensaje | newline_to_br }}</div>
+                            <p class="du-portal-carta__hint">— Guardalo. Es entre vos y {{ clean_name }}. —</p>
+                          </div>
+                        </details>
+                      {%- endunless -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
               {%- endif -%}
-            {%- endfor -%}
+            {%- endunless -%}
           {%- endfor -%}
         {%- endcapture -%}
 

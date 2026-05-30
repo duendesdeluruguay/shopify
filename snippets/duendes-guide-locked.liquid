@@ -1,0 +1,95 @@
+{% doc %}
+  Renders the locked state for a linaje guide when the customer does not have access.
+
+  @param {string} guide_title - The guide title.
+  @param {string} lineage_label - The required lineage label.
+{% enddoc %}
+
+<div class="duendes-guide-locked">
+  <div class="duendes-guide-locked__card">
+    <p class="duendes-guide-locked__eyebrow">Biblioteca de los Elegidos</p>
+    <h1>{{ guide_title | escape }}</h1>
+    <p>
+      Este libro está sellado para el linaje {{ lineage_label | escape }}.
+      Iniciá sesión con la cuenta que usaste para adoptar tu guardián.
+    </p>
+    <div class="duendes-guide-locked__actions">
+      {% if customer %}
+        <a class="duendes-guide-locked__button" href="/pages/el-portal">Volver a Mi Magia</a>
+      {% else %}
+        <a class="duendes-guide-locked__button" href="{{ routes.account_login_url }}?return_url={{ request.path | url_encode }}">Iniciar sesión</a>
+      {% endif %}
+      <a class="duendes-guide-locked__button duendes-guide-locked__button--secondary" href="/collections/all">Ver guardianes</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .duendes-guide-locked {
+    min-height: 70vh;
+    display: grid;
+    place-items: center;
+    padding: 48px 18px;
+    color: #f8efe1;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(201, 169, 97, 0.22), transparent 42%),
+      #120d0a;
+    text-align: center;
+  }
+
+  .duendes-guide-locked__card {
+    max-width: 620px;
+    padding: 34px 24px;
+    border: 1px solid rgba(201, 169, 97, 0.45);
+    border-radius: 22px;
+    background: rgba(10, 8, 6, 0.78);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .duendes-guide-locked__eyebrow {
+    margin: 0 0 12px;
+    font-size: 0.75rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #d8b872;
+  }
+
+  .duendes-guide-locked h1 {
+    margin: 0 0 16px;
+    font-family: Cinzel, Georgia, serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+  }
+
+  .duendes-guide-locked p {
+    margin: 0 auto 22px;
+    max-width: 44rem;
+    font-size: 1.1rem;
+    line-height: 1.55;
+  }
+
+  .duendes-guide-locked__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .duendes-guide-locked__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: #d8b872;
+    color: #120d0a;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .duendes-guide-locked__button--secondary {
+    border: 1px solid rgba(216, 184, 114, 0.55);
+    background: transparent;
+    color: #f8efe1;
+  }
+</style>
