@@ -1,3 +1,6 @@
+{%- capture du_guide_access -%}{%- render 'duendes-guide-access', required_lineages: 'Duende,Mayor' -%}{%- endcapture -%}
+{%- assign du_guide_access = du_guide_access | strip -%}
+{%- if du_guide_access == 'true' -%}
 {% comment %}
   La Guía de los Duendes del Uruguay · v4.0 BIBLIA
   · Tipografía: Cinzel (títulos) + Great Vibes (display) + Agency FB / Saira Condensed (body)
@@ -1127,3 +1130,6 @@
   }
 })();
 </script>
+{%- else -%}
+  {%- render 'duendes-guide-locked', guide_title: 'La Guía de los Duendes del Uruguay', required_label: 'un guardián del linaje Duende o Maestro Gigante' -%}
+{%- endif -%}
