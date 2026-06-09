@@ -1,0 +1,54 @@
+{% doc %}
+Returns true when the current customer owns at least one of the required product lineages.
+
+@param {string} required_lineages - Comma-separated product lineage names that unlock the guide.
+
+@example
+{% render 'duendes-guide-access', required_lineages: 'Duende,Mayor' %}
+{% enddoc %}
+{%- liquid
+  assign access_allowed = false
+  assign required_lineages_text = required_lineages | default: '' | strip
+  assign required_lineages_list = required_lineages_text | split: ','
+
+  if customer and required_lineages_text != blank
+    for order in customer.orders limit: 100
+      assign order_grants_access = true
+
+      if order.cancelled
+        assign order_grants_access = false
+      endif
+
+      if order.financial_status == 'refunded' or order.financial_status == 'voided'
+        assign order_grants_access = false
+      endif
+
+      if order_grants_access
+        for line_item in order.line_items
+          assign lineage = line_item.product.metafields.custom.linaje.value | default: line_item.product.metafields.custom.linaje
+          assign lineage = lineage | strip
+
+          if lineage != blank
+            for required_lineage in required_lineages_list
+              assign required_lineage = required_lineage | strip
+
+              if lineage == required_lineage
+                assign access_allowed = true
+                break
+              endif
+            endfor
+          endif
+
+          if access_allowed
+            break
+          endif
+        endfor
+      endif
+
+      if access_allowed
+        break
+      endif
+    endfor
+  endif
+-%}
+{{- access_allowed -}}

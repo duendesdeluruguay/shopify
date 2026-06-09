@@ -1,3 +1,6 @@
+{%- capture du_guide_access -%}{%- render 'duendes-guide-access', required_lineages: 'Pixie' -%}{%- endcapture -%}
+{%- assign du_guide_access = du_guide_access | strip -%}
+{%- if du_guide_access == 'true' -%}
 {% comment %}
   La Guía de las Pixies · Duendes del Uruguay · v2.0 ESPEJO BIBLIA
   · Tipografía: Cinzel (títulos) + Great Vibes (display) + Cormorant Garamond (body)
@@ -1686,3 +1689,6 @@
   }
 })();
 </script>
+{%- else -%}
+  {%- render 'duendes-guide-locked', guide_title: 'La Guía de las Pixies', required_label: 'un guardián del linaje Pixie' -%}
+{%- endif -%}

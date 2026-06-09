@@ -1,3 +1,6 @@
+{%- capture du_guide_access -%}{%- render 'duendes-guide-access', required_lineages: 'Deluxe' -%}{%- endcapture -%}
+{%- assign du_guide_access = du_guide_access | strip -%}
+{%- if du_guide_access == 'true' -%}
 {% comment %}
   La Guía de los Seres Deluxe · Duendes del Uruguay · v4.0 BIBLIA
   · Tipografía: Cinzel (títulos) + Great Vibes (display) + Cormorant Garamond (body)
@@ -1610,3 +1613,6 @@
   }
 })();
 </script>
+{%- else -%}
+  {%- render 'duendes-guide-locked', guide_title: 'La Guía de los Seres Deluxe', required_label: 'un guardián del linaje Deluxe' -%}
+{%- endif -%}
