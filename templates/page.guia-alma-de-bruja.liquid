@@ -1,3 +1,23 @@
+{%- liquid
+  assign duendes_flipbook_allowed = false
+  if customer
+    for order in customer.orders limit: 100
+      for line_item in order.line_items
+        assign duendes_lineage = line_item.product.metafields.custom.linaje.value | default: line_item.product.metafields.custom.linaje
+        if duendes_lineage == 'Bruja'
+          assign duendes_flipbook_allowed = true
+          break
+        endif
+      endfor
+      if duendes_flipbook_allowed
+        break
+      endif
+    endfor
+  endif
+-%}
+{%- unless duendes_flipbook_allowed -%}
+  {% render 'duendes-flipbook-locked', title: 'La Guia del Alma de Bruja', required_label: 'una Bruja' %}
+{%- else -%}
 {% comment %}
   La Guía del Alma de Bruja · Duendes del Uruguay · v3.0 BIBLIA
   · Tipografía: Cinzel (títulos) + Great Vibes (display) + Cormorant Garamond (body)
@@ -1405,3 +1425,4 @@
   }
 })();
 </script>
+{%- endunless -%}
