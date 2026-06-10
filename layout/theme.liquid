@@ -416,10 +416,6 @@
       data-product-transition="{{ settings.transition_to_main_product }}"
       data-template="{{ template }}"
     >
-      {%- comment -%} Duendes 2026-05-15: inyectar Promociones Hero arriba del home en TODOS los mercados (no tocamos templates/index*.json que son del Customizer). {%- endcomment -%}
-      {%- if template.name == 'index' -%}
-        {% section 'duendes-home-v2-promociones-hero' %}
-      {%- endif -%}
       {{ content_for_layout }}
     </main>
 
