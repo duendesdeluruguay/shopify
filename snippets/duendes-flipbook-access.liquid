@@ -1,0 +1,21 @@
+{%- liquid
+  assign has_access = false
+  if customer
+    for order in customer.orders limit: 100
+      for line_item in order.line_items
+        assign lineage = line_item.product.metafields.custom.linaje.value | default: line_item.product.metafields.custom.linaje
+        if lineage == primary_lineage
+          assign has_access = true
+          break
+        elsif secondary_lineage != blank and lineage == secondary_lineage
+          assign has_access = true
+          break
+        endif
+      endfor
+      if has_access
+        break
+      endif
+    endfor
+  endif
+-%}
+{{- has_access -}}
