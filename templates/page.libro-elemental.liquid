@@ -1,3 +1,9 @@
+{%- capture du_book_access_token -%}{%- render 'duendes-flipbook-access', primary_lineage: 'Duende', secondary_lineage: 'Mayor' -%}{%- endcapture -%}
+{%- assign du_book_access_token = du_book_access_token | strip -%}
+{%- if du_book_access_token != 'true' -%}
+  {%- render 'duendes-flipbook-locked', book_title: 'La Guía de los Duendes del Uruguay', required_label: 'un Duende', collection_url: '/collections/duendes' -%}
+{%- else -%}
+
 {% comment %}
   La Guía de los Duendes del Uruguay · v4.0 BIBLIA
   · Tipografía: Cinzel (títulos) + Great Vibes (display) + Agency FB / Saira Condensed (body)
@@ -1127,3 +1133,4 @@
   }
 })();
 </script>
+{%- endif -%}

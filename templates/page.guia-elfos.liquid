@@ -1,3 +1,9 @@
+{%- capture du_book_access_token -%}{%- render 'duendes-flipbook-access', primary_lineage: 'Elfo' -%}{%- endcapture -%}
+{%- assign du_book_access_token = du_book_access_token | strip -%}
+{%- if du_book_access_token != 'true' -%}
+  {%- render 'duendes-flipbook-locked', book_title: 'La Guía de los Elfos', required_label: 'un Elfo', collection_url: '/collections/elfos' -%}
+{%- else -%}
+
 {% comment %}
   La Guía de los Elfos · Duendes del Uruguay · v4.0 BIBLIA
   · Tipografía: Cinzel (títulos) + Great Vibes (display) + Cormorant Garamond (body)
@@ -1612,3 +1618,4 @@
   }
 })();
 </script>
+{%- endif -%}
