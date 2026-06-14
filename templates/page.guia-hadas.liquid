@@ -1,3 +1,8 @@
+{%- capture duendes_libro_authorized -%}{%- render 'duendes-libro-authorized', required_lineages: 'Hada' -%}{%- endcapture -%}
+{%- assign duendes_libro_authorized = duendes_libro_authorized | strip -%}
+{%- if duendes_libro_authorized != 'true' -%}
+  {%- render 'duendes-libro-locked', book_title: 'La Guia de las Hadas', required_label: 'linaje Hada' -%}
+{%- else -%}
 {% comment %}
   La Guía de las Hadas · Duendes del Uruguay · v4.0 BIBLIA
   · Linaje del AGUA · femenino · etéreo · fluye como río
@@ -1820,3 +1825,4 @@
   }
 })();
 </script>
+{%- endif -%}

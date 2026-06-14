@@ -1,0 +1,101 @@
+{%- comment -%}
+  Pantalla segura para libros privados cuando el cliente no inicio sesion o no
+  tiene el linaje requerido.
+{%- endcomment -%}
+{%- liquid
+  assign duendes_locked_title = book_title | default: 'Libro privado'
+  assign duendes_locked_lineage = required_label | default: 'linaje correspondiente'
+  assign duendes_locked_return_url = request.path | url_encode
+-%}
+<style>
+  .du-libro-locked {
+    min-height: 70vh;
+    display: grid;
+    place-items: center;
+    padding: 48px 18px;
+    color: #f8f0df;
+    background:
+      radial-gradient(circle at 50% 15%, rgba(201, 169, 97, 0.22), transparent 36%),
+      linear-gradient(160deg, #17110b 0%, #070504 100%);
+    text-align: center;
+  }
+  .du-libro-locked__box {
+    width: min(560px, 100%);
+    padding: 38px 28px;
+    border: 1px solid rgba(201, 169, 97, 0.48);
+    background: rgba(10, 8, 6, 0.72);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  }
+  .du-libro-locked__seal {
+    display: block;
+    margin-bottom: 16px;
+    color: #c9a961;
+    font-size: 28px;
+    letter-spacing: 0.35em;
+  }
+  .du-libro-locked__eyebrow,
+  .du-libro-locked__actions a {
+    font-family: 'Cinzel', Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+  }
+  .du-libro-locked__eyebrow {
+    margin: 0 0 12px;
+    color: #c9a961;
+    font-size: 11px;
+  }
+  .du-libro-locked__title {
+    margin: 0 0 16px;
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 6vw, 48px);
+    font-weight: 400;
+    line-height: 1.08;
+  }
+  .du-libro-locked__text {
+    max-width: 430px;
+    margin: 0 auto 26px;
+    color: rgba(248, 240, 223, 0.84);
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .du-libro-locked__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .du-libro-locked__actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 12px 18px;
+    border: 1px solid #c9a961;
+    color: #070504;
+    background: #c9a961;
+    font-size: 10px;
+    text-decoration: none;
+  }
+  .du-libro-locked__actions a.du-libro-locked__secondary {
+    color: #f8f0df;
+    background: transparent;
+  }
+</style>
+<section class="du-libro-locked" aria-labelledby="du-libro-locked-title">
+  <div class="du-libro-locked__box">
+    <span class="du-libro-locked__seal" aria-hidden="true">***</span>
+    <p class="du-libro-locked__eyebrow">Biblioteca de los Elegidos</p>
+    <h1 class="du-libro-locked__title" id="du-libro-locked-title">{{ duendes_locked_title | escape }}</h1>
+    <p class="du-libro-locked__text">
+      Este libro se abre solo para clientes que iniciaron sesion y tienen una adopcion del {{ duendes_locked_lineage | escape }}.
+    </p>
+    <div class="du-libro-locked__actions">
+      {%- if customer -%}
+        <a href="/pages/el-portal">Volver al portal</a>
+      {%- else -%}
+        <a href="{{ routes.account_login_url }}?return_url={{ duendes_locked_return_url }}">Iniciar sesion</a>
+        <a class="du-libro-locked__secondary" href="/pages/el-portal">Volver al portal</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

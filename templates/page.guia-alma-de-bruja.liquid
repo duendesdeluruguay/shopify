@@ -1,3 +1,8 @@
+{%- capture duendes_libro_authorized -%}{%- render 'duendes-libro-authorized', required_lineages: 'Bruja' -%}{%- endcapture -%}
+{%- assign duendes_libro_authorized = duendes_libro_authorized | strip -%}
+{%- if duendes_libro_authorized != 'true' -%}
+  {%- render 'duendes-libro-locked', book_title: 'Alma de Bruja', required_label: 'linaje Bruja' -%}
+{%- else -%}
 {% comment %}
   La Guía del Alma de Bruja · Duendes del Uruguay · v3.0 BIBLIA
   · Tipografía: Cinzel (títulos) + Great Vibes (display) + Cormorant Garamond (body)
@@ -1405,3 +1410,4 @@
   }
 })();
 </script>
+{%- endif -%}
