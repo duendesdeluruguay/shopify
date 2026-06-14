@@ -1,0 +1,29 @@
+{%- comment -%}
+  Devuelve "true" si el cliente tiene una compra del linaje requerido para abrir
+  un libro privado. required_lineages acepta uno o varios linajes separados por coma.
+{%- endcomment -%}
+{%- liquid
+  assign duendes_libro_authorized = false
+  assign duendes_required_lineages = required_lineages | default: '' | split: ','
+-%}
+{%- if customer and required_lineages != blank -%}
+  {%- paginate customer.orders by 250 -%}
+    {%- for order in customer.orders -%}
+      {%- for line_item in order.line_items -%}
+        {%- assign lineage = line_item.product.metafields.custom.linaje.value | default: line_item.product.metafields.custom.linaje | strip -%}
+        {%- if lineage != blank -%}
+          {%- for required_lineage in duendes_required_lineages -%}
+            {%- assign required_key = required_lineage | strip -%}
+            {%- if lineage == required_key -%}
+              {%- assign duendes_libro_authorized = true -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- if duendes_libro_authorized -%}{%- break -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if duendes_libro_authorized -%}{%- break -%}{%- endif -%}
+    {%- endfor -%}
+  {%- endpaginate -%}
+{%- endif -%}
+{%- if duendes_libro_authorized -%}true{%- else -%}false{%- endif -%}
