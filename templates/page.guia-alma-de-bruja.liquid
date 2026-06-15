@@ -6,6 +6,12 @@
   · Paleta: negro profundo + violeta profundo + plata vieja (acentos)
 {% endcomment %}
 
+{%- capture duendes_owned_lineages -%}{%- render 'duendes-owned-lineages', override_tag: 'portal-servicios-premium' -%}{%- endcapture -%}
+{%- assign duendes_can_read_book = false -%}
+{%- if duendes_owned_lineages contains ',Bruja,' -%}{%- assign duendes_can_read_book = true -%}{%- endif -%}
+
+{%- if duendes_can_read_book -%}
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Saira+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1267,10 +1273,37 @@
     var allPages = Array.from(document.querySelectorAll('#book .page'));
 
     function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+    function appendHighlightedText(container, text, query){
+      var source = text || '';
+      var needle = normalize(query);
+      var normalizedSource = normalize(source);
+      var start = 0;
+
+      if(!needle){
+        container.appendChild(document.createTextNode(source));
+        return;
+      }
+
+      while(start < source.length){
+        var idx = normalizedSource.indexOf(needle, start);
+        if(idx < 0){
+          container.appendChild(document.createTextNode(source.slice(start)));
+          break;
+        }
+        if(idx > start){
+          container.appendChild(document.createTextNode(source.slice(start, idx)));
+        }
+        var mark = document.createElement('mark');
+        mark.textContent = source.slice(idx, idx + query.length);
+        container.appendChild(mark);
+        start = idx + query.length;
+      }
+    }
 
     function runSearch(){
       var q = normalize(searchInput.value.trim());
-      searchResults.innerHTML = '';
+      var rawQuery = searchInput.value.trim();
+      searchResults.textContent = '';
       if(!q || q.length < 2){ searchResults.hidden = true; return; }
       var matches = [];
       allPages.forEach(function(p, i){
@@ -1287,13 +1320,30 @@
         }
       });
       if(!matches.length){
-        searchResults.innerHTML = '<li style="opacity:0.6;font-style:italic;cursor:default;">Sin resultados para "' + searchInput.value.trim() + '"</li>';
+        var emptyLi = document.createElement('li');
+        emptyLi.style.opacity = '0.6';
+        emptyLi.style.fontStyle = 'italic';
+        emptyLi.style.cursor = 'default';
+        emptyLi.textContent = 'Sin resultados para "' + rawQuery + '"';
+        searchResults.appendChild(emptyLi);
         searchResults.hidden = false;
         return;
       }
       matches.slice(0, 12).forEach(function(m){
         var li = document.createElement('li');
-        li.innerHTML = '<span class="lbsr-page">P ' + String(m.i + 1).padStart(2,'0') + '</span><strong>' + m.title + '</strong><span class="lbsr-snippet">' + m.snippet.replace(new RegExp('('+searchInput.value.trim()+')','ig'),'<mark>$1</mark>') + '</span>';
+        var pageLabel = document.createElement('span');
+        var title = document.createElement('strong');
+        var snippet = document.createElement('span');
+
+        pageLabel.className = 'lbsr-page';
+        pageLabel.textContent = 'P ' + String(m.i + 1).padStart(2,'0');
+        title.textContent = m.title;
+        snippet.className = 'lbsr-snippet';
+        appendHighlightedText(snippet, m.snippet, rawQuery);
+
+        li.appendChild(pageLabel);
+        li.appendChild(title);
+        li.appendChild(snippet);
         li.addEventListener('click', function(){
           searchResults.hidden = true;
           if(window.__brujaPageFlip){
@@ -1405,3 +1455,6 @@
   }
 })();
 </script>
+{%- else -%}
+  {% render 'duendes-flipbook-locked', book_title: 'La Guia del Alma de Bruja', lineage_label: 'Bruja' %}
+{%- endif -%}

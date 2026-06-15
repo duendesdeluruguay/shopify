@@ -37,23 +37,10 @@
 
       {%- comment -%}
         Duendes 2026-05-17 — Biblioteca con GATING por linaje comprado.
-        Lee customer.orders y arma string con los linajes adoptados.
+        Lee compras activas y arma string con los linajes adoptados.
         Cada libro se muestra abierto (si lo tiene) o sellado (si no).
       {%- endcomment -%}
-      {%- assign owned_lineages = ',' -%}
-      {%- if customer -%}
-        {%- for o in customer.orders limit: 100 -%}
-          {%- for li in o.line_items -%}
-            {%- assign lin = li.product.metafields.custom.linaje.value | default: li.product.metafields.custom.linaje -%}
-            {%- if lin != blank -%}
-              {%- assign lin_key = ',' | append: lin | append: ',' -%}
-              {%- unless owned_lineages contains lin_key -%}
-                {%- assign owned_lineages = owned_lineages | append: lin | append: ',' -%}
-              {%- endunless -%}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endfor -%}
-      {%- endif -%}
+      {%- capture owned_lineages -%}{%- render 'duendes-owned-lineages', override_tag: override_tag -%}{%- endcapture -%}
 
       {%- assign has_duende = false -%}
       {%- assign has_hada = false -%}

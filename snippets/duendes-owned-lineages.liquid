@@ -1,0 +1,42 @@
+{% doc %}
+Returns a comma-delimited list of active customer lineage names.
+@param {string} [override_tag] - Customer tag that unlocks all lineages.
+{% enddoc %}
+
+{%- liquid
+  assign owned_lineages = ','
+  assign all_lineages = ',Duende,Hada,Pixie,Elfo,Mayor,Deluxe,Bruja,'
+  assign clean_override_tag = override_tag | default: 'portal-servicios-premium' | strip
+
+  if customer
+    if clean_override_tag != blank and customer.tags contains clean_override_tag
+      assign owned_lineages = all_lineages
+    else
+      for order in customer.orders limit: 100
+        assign order_financial_status = order.financial_status | default: ''
+        assign order_counts = false
+
+        unless order.cancelled
+          if order_financial_status == 'paid' or order_financial_status == 'partially_refunded'
+            assign order_counts = true
+          endif
+        endunless
+
+        if order_counts
+          for line_item in order.line_items
+            assign lineage = line_item.product.metafields.custom.linaje.value | default: line_item.product.metafields.custom.linaje | strip
+
+            if lineage != blank
+              assign lineage_key = ',' | append: lineage | append: ','
+              unless owned_lineages contains lineage_key
+                assign owned_lineages = owned_lineages | append: lineage | append: ','
+              endunless
+            endif
+          endfor
+        endif
+      endfor
+    endif
+  endif
+
+  echo owned_lineages
+-%}
