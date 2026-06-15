@@ -5,6 +5,12 @@
   · 50 páginas · tipos de seres + cuidados puntuales + sentires + preparar casa
 {% endcomment %}
 
+{%- capture duendes_owned_lineages -%}{%- render 'duendes-owned-lineages', override_tag: 'portal-servicios-premium' -%}{%- endcapture -%}
+{%- assign duendes_can_read_book = false -%}
+{%- if duendes_owned_lineages contains ',Duende,' or duendes_owned_lineages contains ',Mayor,' -%}{%- assign duendes_can_read_book = true -%}{%- endif -%}
+
+{%- if duendes_can_read_book -%}
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Saira+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1127,3 +1133,6 @@
   }
 })();
 </script>
+{%- else -%}
+  {% render 'duendes-flipbook-locked', book_title: 'La Guia de los Duendes del Uruguay', lineage_label: 'Duende o Mayor' %}
+{%- endif -%}

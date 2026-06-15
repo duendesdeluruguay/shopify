@@ -1,0 +1,72 @@
+{% doc %}
+Renders the locked state for protected flipbook pages.
+@param {string} [book_title] - Name of the protected book.
+@param {string} [lineage_label] - Lineage needed to unlock the book.
+{% enddoc %}
+
+<style>
+  .du-book-locked {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 56px 18px;
+    background: radial-gradient(circle at 50% 20%, rgba(201, 169, 97, 0.18), transparent 42%), #100d0a;
+    color: #f8f0dc;
+    text-align: center;
+  }
+
+  .du-book-locked__card {
+    max-width: 640px;
+    padding: 38px 28px;
+    border: 1px solid rgba(201, 169, 97, 0.46);
+    background: rgba(20, 16, 12, 0.88);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+  }
+
+  .du-book-locked__eyebrow {
+    margin: 0 0 12px;
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: #c9a961;
+  }
+
+  .du-book-locked__title {
+    margin: 0 0 14px;
+    font-size: clamp(34px, 6vw, 58px);
+    line-height: 1.02;
+    font-family: Georgia, serif;
+    font-weight: 400;
+  }
+
+  .du-book-locked__text {
+    margin: 0 auto 24px;
+    max-width: 500px;
+    color: rgba(248, 240, 220, 0.78);
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .du-book-locked__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>
+
+<section class="du-book-locked" aria-labelledby="du-book-locked-title">
+  <div class="du-book-locked__card">
+    <p class="du-book-locked__eyebrow">Biblioteca de los Elegidos</p>
+    <h1 class="du-book-locked__title" id="du-book-locked-title">{{ book_title | default: 'Libro sellado' | escape }}</h1>
+    <p class="du-book-locked__text">
+      Este libro se abre solo para clientes con una adopcion activa del linaje {{ lineage_label | default: 'correspondiente' | escape }}.
+      Entra al Portal para ver tus libros desbloqueados.
+    </p>
+    <div class="du-book-locked__actions">
+      <a class="button" href="{{ routes.account_login_url }}?return_url=%2Fpages%2Fel-portal">Iniciar sesion</a>
+      <a class="button button--secondary" href="/pages/el-portal">Ir al Portal</a>
+    </div>
+  </div>
+</section>
